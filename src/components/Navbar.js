@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { AiOutlineLogin } from "react-icons/ai";
 
 const Navbar = () => {
   return (
@@ -9,7 +8,7 @@ const Navbar = () => {
       <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
         <div class="container-fluid">
           <Link class="navbar-brand" to="/">
-            Uni<span class="text-danger">Chem</span>.
+            Uni<span class="text-danger fw-bold">Chem</span>.
           </Link>
           <button
             class="navbar-toggler"
@@ -29,72 +28,32 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="/"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Categories
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <Link class="dropdown-item" to="/">
-                      Action
-                    </Link>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
+              <li class="nav-item">
+                <Link class="nav-link" aria-current="page" to="/products">
+                  Products
+                </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link"  to="/about">
+                <Link class="nav-link" to="/about">
                   About
                 </Link>
               </li>
             </ul>
 
-            <div class="d-flex">
+            <div class="d-flex me-3">
               <Link to="/cart" class="text-decoration-none ">
-                <AiOutlineShoppingCart class="mt-1 h2 text-white rounded-circle bg-danger p-1" />
+                <AiOutlineShoppingCart class="mt-2 h4 text-danger" />
               </Link>
-              <div class="dropdown">
-                <AiOutlineLogin
-                  class="dropdown-toggle mt-1 h2 text-white rounded-circle bg-primary p-1 ms-2"
-                  id="dropdownMenuButton1"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                />
-    
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li>
-                    <Link class="dropdown-item text-center" to="/">
-                      Login Account
-                    </Link>
-                  </li>
-                  <hr class="dropdown-divider" />
-                  <li>
-                    <Link class="dropdown-item text-center" to="/">
-                      Create Account
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+            </div>
+
+            <div class="d-flex me-2">
+                <Link to="/login" class="text-decoration-none text-muted">LOG IN</Link>
+            </div>
+
+            <span class="me-2 text-muted">|</span>
+
+            <div class="d-flex me-2">
+                <Link to="/signup" class="text-decoration-none text-muted">SIGN UP</Link>
             </div>
           </div>
         </div>
