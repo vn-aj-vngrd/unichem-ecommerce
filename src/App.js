@@ -7,8 +7,6 @@ import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
-
-
 export const App = () => {
   return (
     <div className="App">
