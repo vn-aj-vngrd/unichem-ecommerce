@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import './assets/index.css';
+import './assets/css/main.css';
+import './assets/js/main.js';
+import './assets/js/glightbox.min.js';
+import './assets/js/tiny-slider.min.js';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
