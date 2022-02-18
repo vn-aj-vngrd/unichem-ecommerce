@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   if (true) {
     return (
-      <header className="header navbar-area">
+      <header className="header navbar-area sticky">
         <div className="topbar">
           <div className="container">
             <div className="top-end">
@@ -35,7 +35,11 @@ const Navbar = () => {
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
-                  <img className="w-25 h-25 p-2" src="assets/images/logo/logo.svg" alt="Logo" />
+                  <img
+                    className="w-25 h-25 p-2"
+                    src="assets/images/logo/logo.svg"
+                    alt="Logo"
+                  />
                   <span className="fw-bold text-danger">UniChem</span>
                 </Link>
               </div>
@@ -268,9 +272,60 @@ const Navbar = () => {
                       </li>
 
                       <li className="nav-item">
-                        <Link to="/contact" aria-label="Toggle navigation">
+                        <Link to="/"
+                          className="dd-menu collapsed"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#submenu-1-2"
+                          aria-controls="navbarSupportedContent"
+                          aria-expanded="false"
+                          aria-label="Toggle navigation"
+                        >
                           Category
                         </Link>
+                        <ul className="sub-menu collapse" id="submenu-1-2">
+                          <li className="nav-item">
+                            <Link to="/products">Adhesives</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Car Tints</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Construction</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Epoxies </Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Foam Sealants</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Housekeeping</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Industrial Oils</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Kitchen</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Laundry</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Restroom</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Sealants</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Tapes</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Threadlockers</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/products">Window Films</Link>
+                          </li>
+                        </ul>
                       </li>
 
                       <li className="nav-item">
