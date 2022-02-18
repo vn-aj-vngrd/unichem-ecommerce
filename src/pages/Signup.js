@@ -2,7 +2,7 @@ import React from 'react'
 
 const Signup = () => {
   return (
-    <div class="container">Signup</div>
+    <div className="container">Signup</div>
   )
 }
 

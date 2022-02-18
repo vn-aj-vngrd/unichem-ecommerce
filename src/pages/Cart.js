@@ -2,7 +2,7 @@ import React from 'react'
 
 const Cart = () => {
   return (
-    <div class="container">Cart</div>
+    <div className="container">Cart</div>
   )
 }
 
