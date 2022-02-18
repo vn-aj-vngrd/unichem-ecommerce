@@ -49,14 +49,14 @@ button:focus,
 }
 
 .form-check-input:checked {
-  background-color: #dc3545;
-  border-color: #dc3545;
+  background-color: #f44336;
+  border-color: #f44336;
 }
 
 select {
   -webkit-writing-mode: horizontal-tb !important;
   text-rendering: auto;
-  color: #757575;
+  color: #424242;
   letter-spacing: normal;
   word-spacing: normal;
   text-transform: none;
@@ -116,7 +116,7 @@ h5,
 h6 {
   font-weight: 600;
   margin: 0px;
-  color: #757575;
+  color: #424242;
 }
 
 h1 a,
@@ -923,7 +923,7 @@ ol {
 
 .breadcrumbs .breadcrumbs-content .page-title {
   font-size: 18px;
-  color: #757575;
+  color: #424242;
   font-weight: 600;
   position: relative;
   line-height: 28px;
@@ -1011,7 +1011,7 @@ ol {
 }
 
 .breadcrumbs .breadcrumb-nav li a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .section {
@@ -1060,7 +1060,7 @@ ol {
   left: 50%;
   bottom: 0;
   content: "";
-  background-color: #dc3545;
+  background-color: #f44336;
   height: 2px;
   width: 50px;
   margin-left: -25px;
@@ -1134,7 +1134,7 @@ ol {
   bottom: -1px;
   height: 2px;
   width: 50px;
-  background: #dc3545;
+  background: #f44336;
   content: "";
 }
 
@@ -1153,7 +1153,7 @@ ol {
   width: 40px;
   height: 40px;
   line-height: 40px;
-  background: #dc3545;
+  background: #f44336;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1180,7 +1180,7 @@ ol {
   box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
   -webkit-transform: translate3d(0, -5px, 0);
   transform: translate3d(0, -5px, 0);
-  background-color: #757575;
+  background-color: #424242;
 }
 
 /* Overlay */
@@ -1196,7 +1196,7 @@ ol {
   width: 100%;
   height: 100%;
   opacity: 0.4;
-  background: #757575;
+  background: #424242;
   content: "";
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -1239,7 +1239,7 @@ ol {
 
 .pagination .pagination-list li a {
   background: #fff;
-  color: #757575;
+  color: #424242;
   font-weight: 500;
   font-size: 14px;
   border-radius: 4px;
@@ -1250,7 +1250,7 @@ ol {
 
 .pagination .pagination-list li.active a,
 .pagination .pagination-list li:hover a {
-  background: #dc3545;
+  background: #f44336;
   color: #fff;
   border-color: transparent;
 }
@@ -1270,7 +1270,7 @@ ol {
   font-size: 14px;
   font-weight: 600;
   padding: 13px 30px;
-  background-color: #dc3545;
+  background-color: #f44336;
   color: #fff;
   border: none;
   -webkit-transition: 0.2s;
@@ -1309,13 +1309,13 @@ ol {
 
 .button .btn:hover {
   color: #fff;
-  background-color: #757575;
+  background-color: #424242;
   -webkit-box-shadow: 0px 4px 4px #0000000f;
   box-shadow: 0px 4px 4px #0000000f;
 }
 
 .button .btn-alt {
-  background-color: #757575 !important;
+  background-color: #424242 !important;
   color: #fff !important;
 }
 
@@ -1336,7 +1336,7 @@ ol {
 }
 
 .button .btn-alt:hover {
-  background-color: #dc3545 !important;
+  background-color: #f44336 !important;
   color: #fff !important;
 }
 
@@ -1385,7 +1385,7 @@ ol {
   width: 100px;
   height: 100px;
   border-radius: 100%;
-  background: #dc3545;
+  background: #f44336;
   -webkit-animation: preloader-fx 1.6s linear infinite;
   animation: preloader-fx 1.6s linear infinite;
 }
@@ -1432,7 +1432,7 @@ ol {
 }
 
 .header .topbar {
-  background-color: #dc3545;
+  background-color: #f44336;
   padding: 18px 0;
 }
 
@@ -1494,7 +1494,7 @@ ol {
 }
 
 .header .topbar .top-end .user-login li a:hover {
-  color: #dc3545;
+  color: #424242;
 }
 
 .header .header-middle {
@@ -1557,7 +1557,7 @@ ol {
 }
 
 .header .nav-hotline i {
-  color: #757575;
+  color: #424242;
   font-size: 18px;
   position: absolute;
   left: 0;
@@ -1576,7 +1576,7 @@ ol {
 .header .nav-hotline h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #757575;
+  color: #424242;
 }
 
 .header .nav-hotline h3 span {
@@ -1622,7 +1622,7 @@ ol {
 
 .header .navbar-cart .wishlist a:hover {
   color: #fff;
-  background-color: #dc3545;
+  background-color: #f44336;
   border-color: transparent;
 }
 
@@ -1633,7 +1633,7 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #757575;
+  background-color: #424242;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -1647,7 +1647,7 @@ ol {
 
 .header .navbar-cart .cart-items:hover .main-btn {
   color: #fff;
-  background-color: #dc3545;
+  background-color: #f44336;
   border-color: transparent;
 }
 
@@ -1671,7 +1671,7 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #757575;
+  background-color: #424242;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -1741,7 +1741,7 @@ ol {
 }
 
 .header .navbar-cart .cart-items .shopping-item .dropdown-cart-header a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .header .navbar-cart .cart-items .shopping-item .shopping-list li {
@@ -1780,7 +1780,7 @@ ol {
   .remove:hover {
   border-color: transparent;
   color: #fff;
-  background-color: #dc3545;
+  background-color: #f44336;
 }
 
 .header
@@ -1851,7 +1851,7 @@ ol {
   a {
   font-size: 14px;
   font-weight: 600;
-  color: #757575;
+  color: #424242;
 }
 
 @media (max-width: 767px) {
@@ -1877,7 +1877,7 @@ ol {
   .content
   h4
   a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .header
@@ -1945,8 +1945,8 @@ ol {
 }
 
 .header .main-menu-search .select-position:after {
-  border-bottom: 1.5px solid #757575;
-  border-right: 1.5px solid #757575;
+  border-bottom: 1.5px solid #424242;
+  border-right: 1.5px solid #424242;
   content: "";
   display: block;
   height: 8px;
@@ -2004,7 +2004,7 @@ ol {
 }
 
 .header .main-menu-search .search-btn button {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: #fff;
   width: 45px;
   height: 45px;
@@ -2020,12 +2020,12 @@ ol {
 
 .header .main-menu-search .search-btn button:hover {
   color: #fff;
-  background-color: #757575;
+  background-color: #424242;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #757575;
+    background-color: #424242;
   }
 
   .header .button {
@@ -2054,11 +2054,11 @@ ol {
   }
 
   .header .navbar .navbar-nav .nav-item a:hover {
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar .navbar-nav .nav-item a.active {
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar-nav .nav-item {
@@ -2066,7 +2066,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item:hover a {
-    color: #dc3545;
+    color: #f44336;
   }
 
   .header .navbar-nav .nav-item a {
@@ -2095,7 +2095,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item .sub-menu .nav-item a:hover {
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar-nav .nav-item a {
@@ -2116,7 +2116,7 @@ ol {
 
   .header .navbar-nav .nav-item .sub-menu li.active {
     background: #fff !important;
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar-nav .nav-item .sub-menu .nav-item {
@@ -2129,7 +2129,7 @@ ol {
 
   .header .navbar-nav .nav-item .sub-menu li:hover {
     background: #fff !important;
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar-nav .nav-item a {
@@ -2137,13 +2137,13 @@ ol {
   }
 
   .header .navbar-nav .nav-item a:hover {
-    color: #dc3545;
+    color: #f44336;
   }
 }
 
 @media (max-width: 767px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #757575;
+    background-color: #424242;
   }
 
   .header .button {
@@ -2172,11 +2172,11 @@ ol {
   }
 
   .header .navbar .navbar-nav .nav-item a:hover {
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar .navbar-nav .nav-item a.active {
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar-nav .nav-item {
@@ -2184,7 +2184,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item:hover a {
-    color: #dc3545;
+    color: #f44336;
   }
 
   .header .navbar-nav .nav-item a {
@@ -2213,7 +2213,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item .sub-menu .nav-item a:hover {
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar-nav .nav-item a {
@@ -2234,7 +2234,7 @@ ol {
 
   .header .navbar-nav .nav-item .sub-menu li.active {
     background: #fff !important;
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar-nav .nav-item .sub-menu .nav-item {
@@ -2247,7 +2247,7 @@ ol {
 
   .header .navbar-nav .nav-item .sub-menu li:hover {
     background: #fff !important;
-    color: #dc3545 !important;
+    color: #f44336 !important;
   }
 
   .header .navbar-nav .nav-item a {
@@ -2255,7 +2255,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item a:hover {
-    color: #dc3545;
+    color: #f44336;
   }
 }
 
@@ -2299,7 +2299,7 @@ ol {
 
 .header .mega-category-menu .cat-button {
   display: inline-block;
-  color: #757575;
+  color: #424242;
   font-size: 15px;
   font-weight: 600;
 }
@@ -2371,7 +2371,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category li a {
-  color: #757575;
+  color: #424242;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -2380,7 +2380,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category li a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .header .mega-category-menu .sub-category li:last-child {
@@ -2388,7 +2388,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li a {
-  color: #757575;
+  color: #424242;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -2404,7 +2404,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .header .nav-social {
@@ -2427,7 +2427,7 @@ ol {
 .header .nav-social .title {
   font-size: 14px;
   font-weight: 600;
-  color: #757575;
+  color: #424242;
   display: inline-block;
   margin-right: 15px;
 }
@@ -2461,7 +2461,7 @@ ol {
 
 .header .nav-social ul li a:hover {
   color: #fff;
-  background-color: #dc3545;
+  background-color: #f44336;
   border-color: transparent;
 }
 
@@ -2504,13 +2504,13 @@ ol {
 }
 
 .header.sticky .button .btn {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: #fff;
   border-color: transparent;
 }
 
 .header.sticky .button .btn:hover {
-  background-color: #757575;
+  background-color: #424242;
   color: #fff;
 }
 
@@ -2533,11 +2533,11 @@ ol {
 }
 
 .header .navbar .navbar-nav .nav-item a.active {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .sticky .navbar .navbar-nav .nav-item a.active {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .sticky .navbar .mobile-menu-btn .toggler-icon {
@@ -2557,7 +2557,7 @@ ol {
 .navbar-area.sticky {
   position: fixed;
   z-index: 99;
-  background: #dc3545;
+  background: #f44336;
   -webkit-box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
   -webkit-transition: all 0.3s ease-out 0s;
@@ -2627,16 +2627,16 @@ ol {
 }
 
 .navbar-nav .nav-item:hover a {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .sticky .navbar-nav .nav-item:hover a {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .navbar-nav .nav-item a {
   font-size: 14px;
-  color: #757575;
+  color: #424242;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   position: relative;
@@ -2654,12 +2654,12 @@ ol {
 }
 
 .navbar-nav .nav-item:hover .dd-menu::before {
-  border-bottom-color: #dc3545;
-  border-right-color: #dc3545;
+  border-bottom-color: #f44336;
+  border-right-color: #f44336;
 }
 
 .navbar-nav .nav-item a.active {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .navbar-nav .nav-item a.dd-menu::after {
@@ -2757,7 +2757,7 @@ ol {
 }
 
 .navbar-nav .nav-item .sub-menu .nav-item a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .navbar-nav .nav-item .sub-menu.left-menu {
@@ -2785,7 +2785,7 @@ ol {
 }
 
 .navbar-nav .nav-item .sub-menu > li.active > a {
-  color: #dc3545 !important;
+  color: #f44336 !important;
 }
 
 .navbar-nav .nav-item .sub-menu > li > a {
@@ -2866,7 +2866,7 @@ ol {
   z-index: 2;
   color: #fff;
   font-size: 17px;
-  background: #dc3545;
+  background: #f44336;
   border: none;
   padding: 2px 5px;
   border-radius: 4px;
@@ -2880,7 +2880,7 @@ ol {
 }
 
 .hero-area .tns-controls button:hover {
-  background-color: #757575;
+  background-color: #424242;
   color: #fff;
 }
 
@@ -2941,7 +2941,7 @@ ol {
 .hero-area .hero-slider .single-slider .content h2 {
   font-size: 30px;
   font-weight: 800;
-  color: #757575;
+  color: #424242;
 }
 
 .hero-area .hero-slider .single-slider .content h2 span {
@@ -2998,7 +2998,7 @@ ol {
   margin-top: 20px;
   font-size: 25px;
   font-weight: 800;
-  color: #757575;
+  color: #424242;
 }
 
 .hero-area .hero-slider .single-slider .content h3 span {
@@ -3082,7 +3082,7 @@ ol {
 }
 
 .hero-area .hero-small-banner .content h3 {
-  color: #dc3545;
+  color: #f44336;
   font-size: 20px;
   font-weight: 800;
   display: block;
@@ -3092,7 +3092,7 @@ ol {
 .hero-area .hero-small-banner.style2 {
   margin-top: 12px;
   /* background-image: url("../images/hero/small-banner-bg.png"); */
-  background-color: #757575;
+  background-color: #424242;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -3122,12 +3122,12 @@ ol {
 
 .hero-area .hero-small-banner.style2 .content .button .btn {
   background-color: #fff;
-  color: #dc3545;
+  color: #f44336;
   padding: 10px 25px;
 }
 
 .hero-area .hero-small-banner.style2 .content .button .btn:hover {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: #fff;
 }
 
@@ -3177,7 +3177,7 @@ ol {
 }
 
 .shipping-info .media-icon i {
-  color: #dc3545;
+  color: #f44336;
   font-size: 35px;
 }
 
@@ -3189,7 +3189,7 @@ ol {
   font-size: 15px;
   margin: 0px;
   font-weight: 600;
-  color: #757575;
+  color: #424242;
 }
 
 .shipping-info .media-body span {
@@ -3233,7 +3233,7 @@ ol {
 }
 
 .single-product .product-image .new-tag {
-  background: #dc3545;
+  background: #f44336;
   border-radius: 2px;
   font-size: 12px;
   color: #fff;
@@ -3302,7 +3302,7 @@ ol {
 .single-product .product-info .title a {
   font-size: 16px;
   font-weight: 700;
-  color: #757575;
+  color: #424242;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -3313,7 +3313,7 @@ ol {
 }
 
 .single-product .product-info .title a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .single-product .product-info .review {
@@ -3343,7 +3343,7 @@ ol {
 .single-product .product-info .price span {
   font-size: 17px;
   font-weight: 700;
-  color: #dc3545;
+  color: #f44336;
   display: inline-block;
 }
 
@@ -3425,7 +3425,7 @@ ol {
 }
 
 .single-banner .content .price span {
-  color: #757575;
+  color: #424242;
   display: block;
   margin-top: 10px;
   font-size: 22px;
@@ -3469,7 +3469,7 @@ ol {
     Call Action CSS
 ========================================*/
 .call-action {
-  background-color: #dc3545;
+  background-color: #f44336;
 }
 
 .call-action .content {
@@ -3511,12 +3511,12 @@ ol {
 
 .call-action .content .button .btn {
   background-color: #fff;
-  color: #757575;
+  color: #424242;
 }
 
 .call-action .content .button .btn:hover {
   color: #fff;
-  background: #757575;
+  background: #424242;
 }
 
 /*======================================
@@ -3616,11 +3616,11 @@ ol {
 }
 
 .item-details .product-info .category a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .item-details .product-info .price {
-  color: #757575;
+  color: #424242;
   display: block;
   font-size: 24px;
   font-weight: 600;
@@ -3697,7 +3697,7 @@ ol {
   input[type="checkbox"]
   + label
   span {
-  border-color: #dc3545;
+  border-color: #f44336;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -3727,7 +3727,7 @@ ol {
   transform: scale(0);
   font-size: 10px;
   line-height: 1.2;
-  background-color: #dc3545;
+  background-color: #f44336;
   font-family: "Lineicons";
   content: "\ea5b";
   padding-left: 0px;
@@ -3745,7 +3745,7 @@ ol {
   input[type="checkbox"]
   + label
   span {
-  border: 2px solid #757575;
+  border: 2px solid #424242;
 }
 
 .item-details
@@ -3755,7 +3755,7 @@ ol {
   input[type="checkbox"]
   + label
   span::before {
-  background-color: #757575;
+  background-color: #424242;
 }
 
 .item-details
@@ -3765,7 +3765,7 @@ ol {
   input[type="checkbox"]
   + label
   span {
-  border: 2px solid #dc3545;
+  border: 2px solid #f44336;
 }
 
 .item-details
@@ -3775,7 +3775,7 @@ ol {
   input[type="checkbox"]
   + label
   span::before {
-  background-color: #dc3545;
+  background-color: #f44336;
 }
 
 .item-details
@@ -3916,7 +3916,7 @@ ol {
 }
 
 .item-details .product-info .quantity .inner-content input.button:hover {
-  background-color: #dc3545;
+  background-color: #f44336;
   border-color: transparent;
   color: #fff;
 }
@@ -3959,7 +3959,7 @@ ol {
 
 .item-details .product-info .wish-button .btn:hover {
   color: #fff;
-  background-color: #dc3545;
+  background-color: #f44336;
   border-color: transparent;
 }
 
@@ -4063,7 +4063,7 @@ ol {
   border-radius: 4px;
   border: 1px solid #eee;
   background-color: #fff;
-  color: #dc3545;
+  color: #f44336;
   line-height: 30px;
   font-size: 12px;
 }
@@ -4158,7 +4158,7 @@ ol {
   top: 8px;
   height: 6px;
   width: 6px;
-  background-color: #dc3545;
+  background-color: #f44336;
   border-radius: 6px;
 }
 
@@ -4228,7 +4228,7 @@ ol {
 
 .product-details-info .give-review .review-btn:hover {
   color: #fff;
-  background-color: #757575;
+  background-color: #424242;
 }
 
 .product-details-info .reviews .title {
@@ -4438,7 +4438,7 @@ ol {
 	Footer CSS
 ========================================*/
 .footer {
-  background-color: #757575;
+  background-color: #424242;
   position: relative;
   /* Single Footer */
   /* End Single Footer */
@@ -4617,7 +4617,7 @@ ol {
 }
 
 .footer .footer-top .footer-newsletter .newsletter-form .button .btn:hover {
-  color: #757575;
+  color: #424242;
   background-color: #fff;
 }
 
@@ -4653,12 +4653,12 @@ ol {
 }
 
 .footer .footer-middle .newsletter-form .button .btn {
-  background-color: #757575;
+  background-color: #424242;
   color: #fff;
 }
 
 .footer .footer-middle .newsletter-form .button .btn:hover {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: #fff;
 }
 
@@ -4695,7 +4695,7 @@ ol {
   left: 0;
   width: 40px;
   height: 3px;
-  background-color: #dc3545;
+  background-color: #f44336;
   content: "";
 }
 
@@ -4725,7 +4725,7 @@ ol {
 
 .footer .single-footer.f-link ul li a:hover {
   padding-left: 5px;
-  color: #dc3545;
+  color: #f44336;
 }
 
 .footer .single-footer.f-contact .phone {
@@ -4759,7 +4759,7 @@ ol {
 }
 
 .footer .single-footer.f-contact .mail a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .footer .single-footer.our-app .app-btn li {
@@ -4816,7 +4816,7 @@ ol {
 }
 
 .footer .single-footer.our-app .app-btn li a:hover {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: #fff;
   border-color: transparent;
 }
@@ -4888,7 +4888,7 @@ ol {
 }
 
 .footer .footer-bottom .copyright p a:hover {
-  color: #dc3545;
+  color: #f44336;
 }
 
 .footer .footer-bottom .socila {
@@ -4926,7 +4926,7 @@ ol {
 }
 
 .footer .footer-bottom .socila li a:hover {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: #fff;
   border-color: transparent;
 }

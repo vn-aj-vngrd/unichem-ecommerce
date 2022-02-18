@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const Navbar = () => {
   if (true) {
@@ -35,9 +34,9 @@ const Navbar = () => {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-3 col-7">
-                <Link className="navbar-brand text-danger" to="/">
-                  <img className="w-25 h-25 p-3" src="assets/images/logo/logo.svg" alt="Logo" />
-                  <span>UniChem</span>
+                <Link className="navbar-brand" to="/">
+                  <img className="w-25 h-25 p-2" src="assets/images/logo/logo.svg" alt="Logo" />
+                  <span className="fw-bold text-danger">UniChem</span>
                 </Link>
               </div>
               <div className="col-lg-5 col-md-7 d-xs-none">
@@ -49,7 +48,7 @@ const Navbar = () => {
                     </div>
                     <div className="search-btn">
                       <button>
-                        <i className="lni lni-search-alt"></i>
+                        <i className="lni lni-search-alt disabled"></i>
                       </button>
                     </div>
                   </div>
