@@ -8,63 +8,25 @@ const Navbar = () => {
       <header className="header navbar-area">
         <div className="topbar">
           <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-4 col-md-4 col-12">
-                {/* <div className="top-left">
-                          <ul className="menu-top-link">
-                              <li>
-                                  <div className="select-position">
-                                      <select id="select4">
-                                          <option value="0" selected>$ USD</option>
-                                          <option value="1">€ EURO</option>
-                                          <option value="2">$ CAD</option>
-                                          <option value="3">₹ INR</option>
-                                          <option value="4">¥ CNY</option>
-                                          <option value="5">৳ BDT</option>
-                                      </select>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div className="select-position">
-                                      <select id="select5">
-                                          <option value="0" selected>English</option>
-                                          <option value="1">Español</option>
-                                          <option value="2">Filipino</option>
-                                          <option value="3">Français</option>
-                                          <option value="4">dasda</option>
-                                          <option value="5">हिन्दी</option>
-                                          <option value="6">বাংলা</option>
-                                      </select>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div> */}
-              </div>
-              <div className="col-lg-4 col-md-4 col-12">
-                <div className="top-middle"></div>
-              </div>
-              <div className="col-lg-4 col-md-4 col-12">
-                <div className="top-end">
-                  {false ? (
-                    <ul className="user-login">
-                      <li>
-                        <Link to="/" className="user">
-                          <i className="lni lni-user"></i> Hello
-                        </Link>
-                      </li>
-                    </ul>
-                  ) : (
-                    <ul className="user-login">
-                      <li>
-                        <Link to="/login">Log In</Link>
-                      </li>
-                      <li>
-                        <Link to="/signup">Sign Up</Link>
-                      </li>
-                    </ul>
-                  )}
-                </div>
-              </div>
+            <div className="top-end">
+              {false ? (
+                <ul className="user-login">
+                  <li>
+                    <Link to="/" className="user">
+                      <i className="lni lni-user"></i> Hello
+                    </Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul className="user-login">
+                  <li>
+                    <Link to="/login">Log In</Link>
+                  </li>
+                  <li>
+                    <Link to="/signup">Sign Up</Link>
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
         </div>
@@ -73,9 +35,9 @@ const Navbar = () => {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-3 col-7">
-                <Link className="navbar-brand" to="/">
-                  {/* <img src="assets/images/logo/logo.svg" alt="Logo" /> */}
-                  UniChem
+                <Link className="navbar-brand text-danger" to="/">
+                  <img className="w-25 h-25 p-3" src="assets/images/logo/logo.svg" alt="Logo" />
+                  <span>UniChem</span>
                 </Link>
               </div>
               <div className="col-lg-5 col-md-7 d-xs-none">
@@ -95,13 +57,7 @@ const Navbar = () => {
               </div>
               <div className="col-lg-4 col-md-2 col-5">
                 <div className="middle-right-area">
-                  <div className="nav-hotline">
-                    <i className="lni lni-phone"></i>
-                    <h3>
-                      Hotline:
-                      <span>(+100) 123 456 7890</span>
-                    </h3>
-                  </div>
+                  <div className="nav-hotline"></div>
                   <div className="navbar-cart">
                     <div className="wishlist">
                       <a href="/">
@@ -209,7 +165,7 @@ const Navbar = () => {
               <div className="nav-inner">
                 <div className="mega-category-menu">
                   <span className="cat-button">
-                    <i className="lni lni-menu"></i>All Products
+                    <i className="lni lni-menu"></i>Products
                   </span>
                   <ul className="sub-category">
                     <li>
@@ -307,11 +263,14 @@ const Navbar = () => {
                   >
                     <ul id="nav" className="navbar-nav ms-auto">
                       <li className="nav-item">
-                        <Link
-                          to="/"
-                          aria-label="Toggle navigation"
-                        >
+                        <Link to="/" aria-label="Toggle navigation">
                           Home
+                        </Link>
+                      </li>
+
+                      <li className="nav-item">
+                        <Link to="/contact" aria-label="Toggle navigation">
+                          Category
                         </Link>
                       </li>
 
@@ -326,6 +285,18 @@ const Navbar = () => {
                           Contact
                         </Link>
                       </li>
+
+                      <li className="nav-item">
+                        <Link to="/contact" aria-label="Toggle navigation">
+                          Wish List
+                        </Link>
+                      </li>
+
+                      <li className="nav-item">
+                        <Link to="/contact" aria-label="Toggle navigation">
+                          Cart
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 </nav>
@@ -333,7 +304,7 @@ const Navbar = () => {
             </div>
             <div className="col-lg-4 col-md-6 col-12">
               <div className="nav-social">
-                <h5 className="title">Connect With Us</h5>
+                <h5 className="title">Connect with us: </h5>
                 <ul>
                   <li>
                     <a href="/">
