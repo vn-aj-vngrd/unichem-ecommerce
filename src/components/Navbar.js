@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   if (true) {
     return (
-      <header className="header navbar-area sticky">
-        <div className="topbar">
+      <header className="header navbar-area">
+        {/* <div className="topbar">
           <div className="container">
             <div className="top-end">
               {false ? (
@@ -28,7 +28,7 @@ const Navbar = () => {
               )}
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="header-middle">
           <div className="container">
@@ -43,6 +43,7 @@ const Navbar = () => {
                   <span className="fw-bold text-danger">UniChem</span>
                 </Link>
               </div>
+
               <div className="col-lg-5 col-md-7 d-xs-none">
                 <div className="main-menu-search">
                   <div className="navbar-search search-style-5">
@@ -52,32 +53,35 @@ const Navbar = () => {
                     </div>
                     <div className="search-btn">
                       <button>
-                        <i className="lni lni-search-alt disabled"></i>
+                        <i className="lni lni-search-alt"></i>
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div className="col-lg-4 col-md-2 col-5">
                 <div className="middle-right-area">
                   <div className="nav-hotline"></div>
+
                   <div className="navbar-cart">
                     <div className="wishlist">
-                      <a href="/">
+                      <Link to="/wishlist">
                         <i className="lni lni-heart"></i>
                         <span className="total-items">0</span>
-                      </a>
+                      </Link>
                     </div>
+
                     <div className="cart-items">
-                      <a href="/" className="main-btn">
+                      <Link to="/cart" className="main-btn">
                         <i className="lni lni-cart"></i>
                         <span className="total-items">2</span>
-                      </a>
+                      </Link>
 
                       <div className="shopping-item">
                         <div className="dropdown-cart-header">
                           <span>2 Items</span>
-                          <a href="cart.html">View Cart</a>
+                          <Link to="cart.html">View Cart</Link>
                         </div>
                         <ul className="shopping-list">
                           <li>
@@ -161,7 +165,6 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-8 col-md-6 col-12">
@@ -272,7 +275,8 @@ const Navbar = () => {
                       </li>
 
                       <li className="nav-item">
-                        <Link to="/"
+                        <Link
+                          to="/"
                           className="dd-menu collapsed"
                           data-bs-toggle="collapse"
                           data-bs-target="#submenu-1-2"
@@ -341,13 +345,13 @@ const Navbar = () => {
                       </li>
 
                       <li className="nav-item">
-                        <Link to="/contact" aria-label="Toggle navigation">
-                          Wish List
+                        <Link to="/wishlist" aria-label="Toggle navigation">
+                          Wishlist
                         </Link>
                       </li>
 
                       <li className="nav-item">
-                        <Link to="/contact" aria-label="Toggle navigation">
+                        <Link to="/cart" aria-label="Toggle navigation">
                           Cart
                         </Link>
                       </li>
@@ -357,30 +361,21 @@ const Navbar = () => {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12">
-              <div className="nav-social">
-                <h5 className="title">Connect with us: </h5>
-                <ul>
-                  <li>
-                    <a href="/">
-                      <i className="lni lni-facebook-filled"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/">
-                      <i className="lni lni-twitter-original"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/">
-                      <i className="lni lni-instagram"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/">
-                      <i className="lni lni-skype"></i>
-                    </a>
-                  </li>
-                </ul>
+              <div className="account">
+                {false ? (
+                  <Link to="/" className="user text-dark h6">
+                    <i className="lni lni-user pe-2"></i> Account
+                  </Link>
+                ) : (
+                  <ul>
+                    <li className="border-end pe-2">
+                      <Link to="/login" >Login</Link>
+                    </li>
+                    <li className="ps-2">
+                      <Link to="/signup">Signup</Link>
+                    </li>
+                  </ul>
+                )}
               </div>
             </div>
           </div>

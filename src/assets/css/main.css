@@ -57,7 +57,7 @@ button:focus,
 select {
   -webkit-writing-mode: horizontal-tb !important;
   text-rendering: auto;
-  color: #424242;
+  color: #757575;
   letter-spacing: normal;
   word-spacing: normal;
   text-transform: none;
@@ -117,7 +117,7 @@ h5,
 h6 {
   font-weight: 600;
   margin: 0px;
-  color: #424242;
+  color: #757575;
 }
 
 h1 a,
@@ -924,7 +924,7 @@ ol {
 
 .breadcrumbs .breadcrumbs-content .page-title {
   font-size: 18px;
-  color: #424242;
+  color: #757575;
   font-weight: 600;
   position: relative;
   line-height: 28px;
@@ -1181,7 +1181,7 @@ ol {
   box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
   -webkit-transform: translate3d(0, -5px, 0);
   transform: translate3d(0, -5px, 0);
-  background-color: #424242;
+  background-color: #757575;
 }
 
 /* Overlay */
@@ -1197,7 +1197,7 @@ ol {
   width: 100%;
   height: 100%;
   opacity: 0.4;
-  background: #424242;
+  background: #757575;
   content: "";
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -1240,13 +1240,13 @@ ol {
 
 .pagination .pagination-list li a {
   background: #fff;
-  color: #424242;
+  color: #757575;
   font-weight: 500;
   font-size: 14px;
   border-radius: 4px;
   padding: 6px 18px;
   text-align: center;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
 }
 
 .pagination .pagination-list li.active a,
@@ -1310,13 +1310,13 @@ ol {
 
 .button .btn:hover {
   color: #fff;
-  background-color: #424242;
+  background-color: #757575;
   -webkit-box-shadow: 0px 4px 4px #0000000f;
   box-shadow: 0px 4px 4px #0000000f;
 }
 
 .button .btn-alt {
-  background-color: #424242 !important;
+  background-color: #757575 !important;
   color: #fff !important;
 }
 
@@ -1495,7 +1495,7 @@ ol {
 }
 
 .header .topbar .top-end .user-login li a:hover {
-  color: #424242;
+  color: #757575;
 }
 
 .header .header-middle {
@@ -1509,7 +1509,7 @@ ol {
   -ms-flex-align: center;
   align-items: center;
   padding: 25px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 @media (max-width: 767px) {
@@ -1558,7 +1558,7 @@ ol {
 }
 
 .header .nav-hotline i {
-  color: #424242;
+  color: #757575;
   font-size: 18px;
   position: absolute;
   left: 0;
@@ -1570,14 +1570,14 @@ ol {
   line-height: 40px;
   text-align: center;
   display: block;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   border-radius: 50%;
 }
 
 .header .nav-hotline h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #424242;
+  color: #757575;
 }
 
 .header .nav-hotline h3 span {
@@ -1614,7 +1614,7 @@ ol {
   line-height: 40px;
   display: inline-block;
   border-radius: 50%;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   color: #555;
   font-size: 18px;
   text-align: center;
@@ -1634,7 +1634,7 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #424242;
+  background-color: #757575;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -1658,7 +1658,7 @@ ol {
   line-height: 40px;
   display: inline-block;
   border-radius: 50%;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   color: #555;
   font-size: 18px;
   text-align: center;
@@ -1672,7 +1672,7 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #424242;
+  background-color: #757575;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -1852,7 +1852,7 @@ ol {
   a {
   font-size: 14px;
   font-weight: 600;
-  color: #424242;
+  color: #757575;
 }
 
 @media (max-width: 767px) {
@@ -1946,8 +1946,8 @@ ol {
 }
 
 .header .main-menu-search .select-position:after {
-  border-bottom: 1.5px solid #424242;
-  border-right: 1.5px solid #424242;
+  border-bottom: 1.5px solid #757575;
+  border-right: 1.5px solid #757575;
   content: "";
   display: block;
   height: 8px;
@@ -2021,12 +2021,12 @@ ol {
 
 .header .main-menu-search .search-btn button:hover {
   color: #fff;
-  background-color: #424242;
+  background-color: #757575;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #424242;
+    background-color: #757575;
   }
 
   .header .button {
@@ -2050,7 +2050,7 @@ ol {
     padding: 10px 20px;
     max-height: 350px;
     overflow-y: scroll;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #e0e0e0;
     border-radius: 6px;
   }
 
@@ -2144,7 +2144,7 @@ ol {
 
 @media (max-width: 767px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #424242;
+    background-color: #757575;
   }
 
   .header .button {
@@ -2168,7 +2168,7 @@ ol {
     padding: 10px 20px;
     max-height: 350px;
     overflow-y: scroll;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #e0e0e0;
     border-radius: 6px;
   }
 
@@ -2274,7 +2274,7 @@ ol {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-right: 1px solid #eee;
+  border-right: 1px solid #e0e0e0;
   margin-right: 40px;
   padding-right: 112px;
   cursor: pointer;
@@ -2300,7 +2300,7 @@ ol {
 
 .header .mega-category-menu .cat-button {
   display: inline-block;
-  color: #424242;
+  color: #757575;
   font-size: 15px;
   font-weight: 600;
 }
@@ -2325,7 +2325,7 @@ ol {
   top: 68px;
   width: 241px;
   height: auto;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   background-color: #fff;
   opacity: 0;
   visibility: hidden;
@@ -2352,7 +2352,7 @@ ol {
   top: 8px;
   width: 240px;
   height: auto;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   background-color: #fff;
   border-radius: 0;
   left: 239px;
@@ -2372,7 +2372,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category li a {
-  color: #424242;
+  color: #757575;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -2389,7 +2389,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li a {
-  color: #424242;
+  color: #757575;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -2408,7 +2408,7 @@ ol {
   color: #f44336;
 }
 
-.header .nav-social {
+.header .account {
   float: right;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2419,51 +2419,34 @@ ol {
 }
 
 @media (max-width: 767px) {
-  .header .nav-social {
+  .header .account {
     position: relative;
     margin-top: -50px;
   }
 }
 
-.header .nav-social .title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #424242;
-  display: inline-block;
-  margin-right: 15px;
-}
-
 @media (max-width: 767px) {
-  .header .nav-social .title {
+  .header .account .title {
     display: none;
   }
 }
 
-.header .nav-social ul li {
+.header .account ul li {
   display: inline-block;
-  margin-right: 5px;
 }
 
-.header .nav-social ul li:last-child {
-  margin: 0;
-}
-
-.header .nav-social ul li a {
+.header .account ul li a {
   height: 35px;
-  width: 35px;
+  width: 100%;
   line-height: 35px;
   text-align: center;
   display: block;
-  border: 1px solid #eee;
-  border-radius: 50%;
-  font-size: 13px;
+  font-size: 15px;
   color: #555;
 }
 
-.header .nav-social ul li a:hover {
-  color: #fff;
-  background-color: #f44336;
-  border-color: transparent;
+.header .account ul li a:hover {
+  color: #f44336;
 }
 
 .header .navbar-brand {
@@ -2511,7 +2494,7 @@ ol {
 }
 
 .header.sticky .button .btn:hover {
-  background-color: #424242;
+  background-color: #757575;
   color: #fff;
 }
 
@@ -2552,7 +2535,7 @@ ol {
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   padding: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .navbar-area.sticky {
@@ -2637,7 +2620,7 @@ ol {
 
 .navbar-nav .nav-item a {
   font-size: 14px;
-  color: #424242;
+  color: #757575;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   position: relative;
@@ -2717,7 +2700,7 @@ ol {
   padding: 30px;
   min-width: 240px;
   background: #fff;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   position: absolute;
   top: 110% !important;
   left: 0;
@@ -2881,7 +2864,7 @@ ol {
 }
 
 .hero-area .tns-controls button:hover {
-  background-color: #424242;
+  background-color: #757575;
   color: #fff;
 }
 
@@ -2942,7 +2925,7 @@ ol {
 .hero-area .hero-slider .single-slider .content h2 {
   font-size: 30px;
   font-weight: 800;
-  color: #424242;
+  color: #757575;
 }
 
 .hero-area .hero-slider .single-slider .content h2 span {
@@ -2999,7 +2982,7 @@ ol {
   margin-top: 20px;
   font-size: 25px;
   font-weight: 800;
-  color: #424242;
+  color: #757575;
 }
 
 .hero-area .hero-slider .single-slider .content h3 span {
@@ -3093,7 +3076,7 @@ ol {
 .hero-area .hero-small-banner.style2 {
   margin-top: 12px;
   /* background-image: url("../images/hero/small-banner-bg.png"); */
-  background-color: #424242;
+  background-color: #757575;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -3151,7 +3134,7 @@ ol {
   float: left;
   width: 25%;
   padding: 30px 40px;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   text-align: center;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -3190,7 +3173,7 @@ ol {
   font-size: 15px;
   margin: 0px;
   font-weight: 600;
-  color: #424242;
+  color: #757575;
 }
 
 .shipping-info .media-body span {
@@ -3204,7 +3187,7 @@ ol {
 ========================================*/
 /* Single Product*/
 .single-product {
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -3303,7 +3286,7 @@ ol {
 .single-product .product-info .title a {
   font-size: 16px;
   font-weight: 700;
-  color: #424242;
+  color: #757575;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -3426,7 +3409,7 @@ ol {
 }
 
 .single-banner .content .price span {
-  color: #424242;
+  color: #757575;
   display: block;
   margin-top: 10px;
   font-size: 22px;
@@ -3512,12 +3495,12 @@ ol {
 
 .call-action .content .button .btn {
   background-color: #fff;
-  color: #424242;
+  color: #757575;
 }
 
 .call-action .content .button .btn:hover {
   color: #fff;
-  background: #424242;
+  background: #757575;
 }
 
 /*======================================
@@ -3530,14 +3513,14 @@ ol {
 .item-details .top-area {
   background-color: #fff;
   padding: 30px;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
 }
 
 .item-details .product-images img {
   width: 100%;
   cursor: pointer;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   overflow: hidden;
   padding: 5px;
@@ -3621,7 +3604,7 @@ ol {
 }
 
 .item-details .product-info .price {
-  color: #424242;
+  color: #757575;
   display: block;
   font-size: 24px;
   font-weight: 600;
@@ -3652,7 +3635,7 @@ ol {
 .item-details .product-info .info-text {
   margin-bottom: 10px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .item-details .product-info .form-group {
@@ -3746,7 +3729,7 @@ ol {
   input[type="checkbox"]
   + label
   span {
-  border: 2px solid #424242;
+  border: 2px solid #757575;
 }
 
 .item-details
@@ -3756,7 +3739,7 @@ ol {
   input[type="checkbox"]
   + label
   span::before {
-  background-color: #424242;
+  background-color: #757575;
 }
 
 .item-details
@@ -3946,7 +3929,7 @@ ol {
 .item-details .product-info .wish-button .btn {
   display: inline-block;
   margin-right: 7px;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   color: #555;
   padding: 10px 18px;
@@ -3977,7 +3960,7 @@ ol {
 }
 
 .item-details .product-info .list-info {
-  border-top: 1px solid #eee;
+  border-top: 1px solid #e0e0e0;
   margin-top: 30px;
   padding-top: 30px;
 }
@@ -4062,7 +4045,7 @@ ol {
   text-align: center;
   display: block;
   border-radius: 4px;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   background-color: #fff;
   color: #f44336;
   line-height: 30px;
@@ -4123,7 +4106,7 @@ ol {
 .product-details-info .single-block {
   background-color: #fff;
   padding: 30px;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   margin-top: 30px;
 }
@@ -4229,7 +4212,7 @@ ol {
 
 .product-details-info .give-review .review-btn:hover {
   color: #fff;
-  background-color: #424242;
+  background-color: #757575;
 }
 
 .product-details-info .reviews .title {
@@ -4272,7 +4255,7 @@ ol {
 
 .product-details-info .reviews .single-review .review-info {
   position: relative;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   padding: 25px;
 }
@@ -4388,7 +4371,7 @@ ol {
 .review-modal .modal-body .form-group input {
   height: 45px;
   width: 100%;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
   padding: 0px 18px;
   font-size: 14px;
@@ -4439,7 +4422,7 @@ ol {
 	Footer CSS
 ========================================*/
 .footer {
-  background-color: #424242;
+  background-color: #757575;
   position: relative;
   /* Single Footer */
   /* End Single Footer */
@@ -4618,7 +4601,7 @@ ol {
 }
 
 .footer .footer-top .footer-newsletter .newsletter-form .button .btn:hover {
-  color: #424242;
+  color: #757575;
   background-color: #fff;
 }
 
@@ -4646,7 +4629,7 @@ ol {
   border-radius: 4px;
   padding: 0px 20px;
   height: 50px;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
 }
 
 .footer .footer-middle .newsletter-form .button {
@@ -4654,7 +4637,7 @@ ol {
 }
 
 .footer .footer-middle .newsletter-form .button .btn {
-  background-color: #424242;
+  background-color: #757575;
   color: #fff;
 }
 
@@ -4883,7 +4866,7 @@ ol {
 }
 
 .footer .footer-bottom .copyright p a {
-  color: #eee;
+  color: #e0e0e0;
   display: inline-block;
   margin-left: 4px;
 }
