@@ -1,5 +1,6 @@
 import React from "react";
 import { BsStarHalf, BsFillStarFill, BsStar } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 //array of 5 items
 const count = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -8,9 +9,7 @@ const star = 2;
 const Trending = () => {
   return (
     <div>
-      <section
-        className="trending-product section"
-      >
+      <section className="trending-product section">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -35,7 +34,7 @@ const Trending = () => {
                   <div className="product-info">
                     <span className="category">Test</span>
                     <h4 className="title">
-                      <a href="product-grids.html">Test</a>
+                      <Link to="/product-details">Test</Link>
                     </h4>
 
                     {star == 5 && (
