@@ -47,8 +47,7 @@ const Hero = () => {
                           </h2>
                           <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua.
+                            elit.
                           </p>
                           <h3>
                             <span>Now Only</span> $320.99
