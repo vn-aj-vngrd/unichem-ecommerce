@@ -64,14 +64,14 @@ const Footer = () => {
           <div class="container">
             <div class="inner-content">
               <div class="row align-items-center">
-                <div class="col-lg-6 col-12 ">
-                  <div class="copyright text-start">
+                <div class="col-lg-6 col-12">
+                  <div class="copyright">
                     <p>
                       © {new Date().getFullYear()} .<Link to="/">Unichem</Link>
                     </p>
                   </div>
                 </div>
-                <div class="col-lg-6 col-12 ">
+                <div class="col-lg-6 col-12">
                   <ul class="socila">
                     <li>
                       <span>Follow Us On:</span>
