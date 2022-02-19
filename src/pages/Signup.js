@@ -19,63 +19,63 @@ const Signup = () => {
           <form className="row g-3">
             <div className="fw-bold">Personal Information</div>
             <hr />
-            <div class="col-6 mb-3">
-              <label class="form-label">First Name</label>
-              <input type="text" class="form-control" />
+            <div className="col-6 mb-3">
+              <label className="form-label">First Name</label>
+              <input type="text" className="form-control" />
             </div>
-            <div class="col-6 mb-3">
-              <label class="form-label">Last Name</label>
-              <input type="text" class="form-control" />
+            <div className="col-6 mb-3">
+              <label className="form-label">Last Name</label>
+              <input type="text" className="form-control" />
             </div>
-            <div class="col-6 mb-3">
-              <label class="form-label">Email address</label>
-              <input type="email" class="form-control" />
+            <div className="col-6 mb-3">
+              <label className="form-label">Email address</label>
+              <input type="email" className="form-control" />
             </div>
-            <div class="col-3 mb-3">
-              <label class="form-label">Birthday</label>
-              <input type="date" class="form-control" />
+            <div className="col-3 mb-3">
+              <label className="form-label">Birthday</label>
+              <input type="date" className="form-control" />
             </div>
-            <div class="col-3 mb-3">
-              <label class="form-label">Sex</label>
-              <select class="form-select">
-                <option value="" selected disabled>Please select your sex.</option>
+            <div className="col-3 mb-3">
+              <label className="form-label">Sex</label>
+              <select className="form-select" defaultValue={'DEFAULT'}>
+                <option value="DEFAULT" disabled>Please select your sex.</option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>
               </select>
             </div>
-            <div class="col-6 mb-3">
-              <label class="form-label">Password</label>
-              <input type="password" class="form-control" />
+            <div className="col-6 mb-3">
+              <label className="form-label">Password</label>
+              <input type="password" className="form-control" />
             </div>
-            <div class="col-6 mb-3">
-              <label class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" />
+            <div className="col-6 mb-3">
+              <label className="form-label">Confirm Password</label>
+              <input type="password" className="form-control" />
             </div>
 
             <div className="fw-bold">Address Information</div>
             <hr />
 
-            <div class="col-6 mb-3">
-              <label class="form-label">
+            <div className="col-6 mb-3">
+              <label className="form-label">
                 House/Unit/Flr #, Bldg Name, Blk or Lot #
               </label>
-              <input type="text" class="form-control" />
+              <input type="text" className="form-control" />
             </div>
-            <div class="col-6 mb-3">
-              <label class="form-label">Province</label>
-              <input type="text" class="form-control" />
+            <div className="col-6 mb-3">
+              <label className="form-label">Province</label>
+              <input type="text" className="form-control" />
             </div>
-            <div class="col-6 mb-3">
-              <label class="form-label">City/Municipality</label>
-              <input type="text" class="form-control" />
+            <div className="col-6 mb-3">
+              <label className="form-label">City/Municipality</label>
+              <input type="text" className="form-control" />
             </div>
-            <div class="col-6 mb-3">
-              <label class="form-label">Barangay</label>
-              <input type="text" class="form-control" />
+            <div className="col-6 mb-3">
+              <label className="form-label">Barangay</label>
+              <input type="text" className="form-control" />
             </div>
 
             <div className="button text-center pt-2">
-              <button type="submit" class="btn">
+              <button type="submit" className="btn">
                 Sign Up
               </button>
             </div>

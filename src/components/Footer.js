@@ -4,28 +4,28 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <footer class="footer">
-        <div class="footer-middle">
-          <div class="container">
-            <div class="bottom-inner">
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
-                  <div class="single-footer f-contact">
+      <footer className="footer">
+        <div className="footer-middle">
+          <div className="container">
+            <div className="bottom-inner">
+              <div className="row">
+                <div className="col-lg-4 col-md-6 col-12">
+                  <div className="single-footer f-contact">
                     <h3>Stay In Touch</h3>
-                    <p class="phone">Phone: +1 (900) 33 169 7720</p>
+                    <p className="phone">Phone: +1 (900) 33 169 7720</p>
                     <ul>
                       <li>Monday-Friday: 9.00 am - 8.00 pm</li>
                       <li>Saturday: 10.00 am - 6.00 pm</li>
                     </ul>
-                    <p class="mail">
+                    <p className="mail">
                       <a href="mailto:unichem@test.com">
                         Email: unichem@test.com
                       </a>
                     </p>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                  <div class="single-footer f-link">
+                <div className="col-lg-4 col-md-6 col-12">
+                  <div className="single-footer f-link">
                     <h3>Information</h3>
                     <ul>
                       <li>
@@ -37,8 +37,8 @@ const Footer = () => {
                     </ul>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                  <div class="single-footer f-link">
+                <div className="col-lg-4 col-md-6 col-12">
+                  <div className="single-footer f-link">
                     <h3>Products</h3>
                     <ul>
                       <li>
@@ -60,19 +60,19 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div class="footer-bottom">
-          <div class="container">
-            <div class="inner-content">
-              <div class="row align-items-center">
-                <div class="col-lg-6 col-12">
-                  <div class="copyright">
+        <div className="footer-bottom">
+          <div className="container">
+            <div className="inner-content">
+              <div className="row align-items-center">
+                <div className="col-lg-6 col-12">
+                  <div className="copyright">
                     <p>
                       © {new Date().getFullYear()} .<Link to="/">Unichem</Link>
                     </p>
                   </div>
                 </div>
-                <div class="col-lg-6 col-12">
-                  <ul class="socila">
+                <div className="col-lg-6 col-12">
+                  <ul className="socila">
                     <li>
                       <span>Follow Us On:</span>
                     </li>
@@ -82,7 +82,7 @@ const Footer = () => {
                         rel="noreferrer"
                         target="_blank"
                       >
-                        <i class="lni lni-facebook-filled"></i>
+                        <i className="lni lni-facebook-filled"></i>
                       </a>
                     </li>
                     <li>
@@ -91,7 +91,7 @@ const Footer = () => {
                         rel="noreferrer"
                         target="_blank"
                       >
-                        <i class="lni lni-twitter"></i>
+                        <i className="lni lni-twitter"></i>
                       </a>
                     </li>
                     <li>
@@ -100,7 +100,7 @@ const Footer = () => {
                         rel="noreferrer"
                         target="_blank"
                       >
-                        <i class="lni lni-instagram"></i>
+                        <i className="lni lni-instagram"></i>
                       </a>
                     </li>
                   </ul>

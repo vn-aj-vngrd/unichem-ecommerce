@@ -14,26 +14,26 @@ const Login = () => {
           </div>
         </div>
         <form className="container border p-4 mb-5 w-75">
-          <div class="mb-3">
-            <label class="form-label">
+          <div className="mb-3">
+            <label className="form-label">
               Email address
             </label>
             <input
               type="email"
-              class="form-control"
+              className="form-control"
             />
           </div>
-          <div class="mb-3">
-            <label class="form-label">
+          <div className="mb-3">
+            <label className="form-label">
               Password
             </label>
             <input
               type="password"
-              class="form-control"
+              className="form-control"
             />
           </div>
           <div className="button text-center pt-2">
-            <button type="submit" class="btn">
+            <button type="submit" className="btn">
               LOG IN
             </button>
           </div>

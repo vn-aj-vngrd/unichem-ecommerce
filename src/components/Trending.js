@@ -10,7 +10,6 @@ const Trending = () => {
     <div>
       <section
         className="trending-product section"
-        style={{ marginTop: `12px` }}
       >
         <div className="container">
           <div className="row">
@@ -23,7 +22,7 @@ const Trending = () => {
           </div>
           <div className="row">
             {count.map((count, index) => (
-              <div className="col-lg-3 col-md-6 col-12">
+              <div key={index} className="col-lg-3 col-md-6 col-12">
                 <div className="single-product">
                   <div className="product-image">
                     <img src="assets/images/products/product-1.jpg" alt="#" />
