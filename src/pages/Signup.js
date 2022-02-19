@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
-    <div className="login">
+    <div className="signup">
       <div className="container">
         <div className="row">
           <div className="col-12">

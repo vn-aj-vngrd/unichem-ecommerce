@@ -11,6 +11,7 @@ import Contact from "./pages/Store/Contact";
 import Wishlist from "./pages/Store/Wishlist";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ProductDetails from "./pages/Product/ProductDetails";
 
 export const App = () => {
   return (
@@ -19,6 +20,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="products" element={<Products />} />
+        <Route path="product-details" element={<ProductDetails />} />
         <Route path="about" element={<About />} />
         <Route path="cart" element={<Cart />} />
         <Route path="contact" element={<Contact />} />
