@@ -1,35 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const loggedIn = true;
+
 const Navbar = () => {
   if (true) {
     return (
       <header className="header navbar-area sticky">
-        {/* <div className="topbar">
-          <div className="container">
-            <div className="top-end">
-              {false ? (
-                <ul className="user-login">
-                  <li>
-                    <Link to="/" className="user">
-                      <i className="lni lni-user"></i> Hello
-                    </Link>
-                  </li>
-                </ul>
-              ) : (
-                <ul className="user-login">
-                  <li>
-                    <Link to="/login">Log In</Link>
-                  </li>
-                  <li>
-                    <Link to="/signup">Sign Up</Link>
-                  </li>
-                </ul>
-              )}
-            </div>
-          </div>
-        </div> */}
-
         <div className="header-middle">
           <div className="container">
             <div className="row align-items-center">
@@ -362,10 +339,48 @@ const Navbar = () => {
             </div>
             <div className="col-lg-4 col-md-6 col-12">
               <div className="account">
-                {false ? (
-                  <Link to="/" className="user text-dark h6">
-                    <i className="lni lni-user pe-2"></i> Account
-                  </Link>
+                {loggedIn ? (
+                  <div className="dropdown">
+                    <i
+                      className="lni lni-user h5 dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    ></i>
+
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <li>
+                        <Link to="/" className="dropdown-item">
+                          Manage Account
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/" className="dropdown-item">
+                          My Orders
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/" className="dropdown-item">
+                          My Reviews
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/" className="dropdown-item">
+                          My Cancellations
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/" className="dropdown-item">
+                          Log out
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 ) : (
                   <ul>
                     <li className="border-end pe-2">
@@ -386,3 +401,28 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+//  <div className="topbar">
+//           <div className="container">
+//             <div className="top-end">
+//               {false ? (
+//                 <ul className="user-login">
+//                   <li>
+//                     <Link to="/" className="user">
+//                       <i className="lni lni-user"></i> Hello
+//                     </Link>
+//                   </li>
+//                 </ul>
+//               ) : (
+//                 <ul className="user-login">
+//                   <li>
+//                     <Link to="/login">Log In</Link>
+//                   </li>
+//                   <li>
+//                     <Link to="/signup">Sign Up</Link>
+//                   </li>
+//                 </ul>
+//               )}
+//             </div>
+//           </div>
+//         </div>
