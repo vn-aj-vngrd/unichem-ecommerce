@@ -1,6 +1,14 @@
 import React from "react";
 
+import { Swiper, SwiperSlide } from "swiper/react";
 
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import { Autoplay, Pagination, Navigation } from "swiper";
+
+import "swiper/css";
 const Hero = () => {
   return (
     <div>
@@ -10,59 +18,76 @@ const Hero = () => {
             <div className="col-lg-8 col-12 custom-padding-right">
               <div className="slider-head">
                 <div className="hero-slider">
-                  <div
-                    className="single-slider"
-                    style={{
-                      backgroundImage: `url(assets/images/hero/slider-bg1.jpg)`,
+                  <Swiper
+                    spaceBetween={30}
+                    centeredSlides={true}
+                    autoplay={{
+                      delay: 5500,
+                      disableOnInteraction: false,
                     }}
-                  >
-                    <div className="content">
-                      <h2>
-                        <span>No restocking fee ($35 savings)</span>
-                        M75 Sport Watch
-                      </h2>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                      </p>
-                      <h3>
-                        <span>Now Only</span> $320.99
-                      </h3>
-                      <div className="button">
-                        <a href="product-grids.html" className="btn">
-                          Shop Now
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className="single-slider"
-                    style={{
-                      backgroundImage: `url(assets/images/hero/slider-bg2.jpg)`,
+                    pagination={{
+                      clickable: true,
                     }}
+                    modules={[Autoplay, Pagination]}
+                    className="mySwiper"
                   >
-                    <div className="content">
-                      <h2>
-                        <span>Big Sale Offer</span>
-                        Get the Best Deal on CCTV Camera
-                      </h2>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                      </p>
-                      <h3>
-                        <span>Combo Only:</span> $590.00
-                      </h3>
-                      <div className="button">
-                        <a href="product-grids.html" className="btn">
-                          Shop Now
-                        </a>
+                    <SwiperSlide>
+                      <div
+                        className="single-slider"
+                        style={{
+                          backgroundImage: `url(assets/images/hero/slider-bg1.jpg)`,
+                        }}
+                      >
+                        <div className="content">
+                          <h2>
+                            <span>No restocking fee ($35 savings)</span>
+                            M75 Sport Watch
+                          </h2>
+                          <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua.
+                          </p>
+                          <h3>
+                            <span>Now Only</span> $320.99
+                          </h3>
+                          <div className="button">
+                            <a href="product-grids.html" className="btn">
+                              Shop Now
+                            </a>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div
+                        className="single-slider"
+                        style={{
+                          backgroundImage: `url(assets/images/hero/slider-bg2.jpg)`,
+                        }}
+                      >
+                        <div className="content">
+                          <h2>
+                            <span>Big Sale Offer</span>
+                            Get the Best Deal on CCTV Camera
+                          </h2>
+                          <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua.
+                          </p>
+                          <h3>
+                            <span>Combo Only:</span> $590.00
+                          </h3>
+                          <div className="button">
+                            <a href="product-grids.html" className="btn">
+                              Shop Now
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
                 </div>
               </div>
             </div>
