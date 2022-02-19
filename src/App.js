@@ -7,10 +7,10 @@ import Home from "./pages/Home";
 import Products from "./pages/Product/Products";
 import About from "./pages/Store/About";
 import Cart from "./pages/Store/Cart";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import Contact from "./pages/Store/Contact";
 import Wishlist from "./pages/Store/Wishlist";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 export const App = () => {
   return (
