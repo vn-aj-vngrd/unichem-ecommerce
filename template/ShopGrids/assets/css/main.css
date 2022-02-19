@@ -1,9 +1,3 @@
-/*======================================
-    Variables
-========================================*/
-/*======================================
-    Normalize CSS
-========================================*/
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 
 html {
@@ -1273,8 +1267,8 @@ top: -1px;
   background-color: #0167F3;
   color: #fff;
   border: none;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
   border-radius: 3px;
   position: relative;
   z-index: 1;

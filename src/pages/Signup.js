@@ -74,7 +74,7 @@ const Signup = () => {
               <input type="text" className="form-control" />
             </div>
 
-            <div className="button text-center pt-2">
+            <div className="button text-center pt-2 mb-3">
               <button type="submit" className="btn">
                 Sign Up
               </button>

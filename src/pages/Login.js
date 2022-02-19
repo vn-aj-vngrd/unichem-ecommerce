@@ -32,7 +32,7 @@ const Login = () => {
               className="form-control"
             />
           </div>
-          <div className="button text-center pt-2">
+          <div className="button text-center pt-1">
             <button type="submit" className="btn">
               LOG IN
             </button>
