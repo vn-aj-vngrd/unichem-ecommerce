@@ -369,7 +369,7 @@ const Navbar = () => {
                 ) : (
                   <ul>
                     <li className="border-end pe-2">
-                      <Link to="/login" >Login</Link>
+                      <Link to="/login">Login</Link>
                     </li>
                     <li className="ps-2">
                       <Link to="/signup">Signup</Link>
