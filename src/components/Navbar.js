@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   if (true) {
     return (
-      <header className="header navbar-area">
+      <header className="header navbar-area sticky">
         {/* <div className="topbar">
           <div className="container">
             <div className="top-end">

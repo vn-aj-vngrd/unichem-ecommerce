@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import Wishlist from "./pages/Wishlist";
+import Footer from "./components/Footer";
 
 export const App = () => {
   return (
@@ -23,6 +24,7 @@ export const App = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="wishlist" element={<Wishlist />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
