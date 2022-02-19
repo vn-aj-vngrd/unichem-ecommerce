@@ -12,7 +12,6 @@ import Signup from "./pages/Signup";
 import Contact from "./pages/Store/Contact";
 import Wishlist from "./pages/Store/Wishlist";
 
-
 export const App = () => {
   return (
     <div className="App">

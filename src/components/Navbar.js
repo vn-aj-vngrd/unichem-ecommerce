@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const loggedIn = true;
+const loggedIn = false;
+const cartCount = 5;
+const wishListCount = 5;
 
 const Navbar = () => {
   if (true) {
@@ -45,96 +47,15 @@ const Navbar = () => {
                     <div className="wishlist">
                       <Link to="/wishlist">
                         <i className="lni lni-heart"></i>
-                        <span className="total-items">0</span>
+                        <span className="total-items">{wishListCount}</span>
                       </Link>
                     </div>
 
                     <div className="cart-items">
                       <Link to="/cart" className="main-btn">
                         <i className="lni lni-cart"></i>
-                        <span className="total-items">2</span>
+                        <span className="total-items">{cartCount}</span>
                       </Link>
-
-                      <div className="shopping-item">
-                        <div className="dropdown-cart-header">
-                          <span>2 Items</span>
-                          <Link to="cart.html">View Cart</Link>
-                        </div>
-                        <ul className="shopping-list">
-                          <li>
-                            <a
-                              href="/"
-                              className="remove"
-                              title="Remove this item"
-                            >
-                              <i className="lni lni-close"></i>
-                            </a>
-                            <div className="cart-img-head">
-                              <a
-                                className="cart-img"
-                                href="product-details.html"
-                              >
-                                <img
-                                  src="assets/images/header/cart-items/item1.jpg"
-                                  alt="#"
-                                />
-                              </a>
-                            </div>
-
-                            <div className="content">
-                              <h4>
-                                <a href="product-details.html">
-                                  Apple Watch Series 6
-                                </a>
-                              </h4>
-                              <p className="quantity">
-                                1x - <span className="amount">$99.00</span>
-                              </p>
-                            </div>
-                          </li>
-                          <li>
-                            <a
-                              href="/"
-                              className="remove"
-                              title="Remove this item"
-                            >
-                              <i className="lni lni-close"></i>
-                            </a>
-                            <div className="cart-img-head">
-                              <a
-                                className="cart-img"
-                                href="product-details.html"
-                              >
-                                <img
-                                  src="assets/images/header/cart-items/item2.jpg"
-                                  alt="#"
-                                />
-                              </a>
-                            </div>
-                            <div className="content">
-                              <h4>
-                                <a href="product-details.html">
-                                  Wi-Fi Smart Camera
-                                </a>
-                              </h4>
-                              <p className="quantity">
-                                1x - <span className="amount">$35.00</span>
-                              </p>
-                            </div>
-                          </li>
-                        </ul>
-                        <div className="bottom">
-                          <div className="total">
-                            <span>Total</span>
-                            <span className="total-amount">$134.00</span>
-                          </div>
-                          <div className="button">
-                            <a href="checkout.html" className="btn animate">
-                              Checkout
-                            </a>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -401,28 +322,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-//  <div className="topbar">
-//           <div className="container">
-//             <div className="top-end">
-//               {false ? (
-//                 <ul className="user-login">
-//                   <li>
-//                     <Link to="/" className="user">
-//                       <i className="lni lni-user"></i> Hello
-//                     </Link>
-//                   </li>
-//                 </ul>
-//               ) : (
-//                 <ul className="user-login">
-//                   <li>
-//                     <Link to="/login">Log In</Link>
-//                   </li>
-//                   <li>
-//                     <Link to="/signup">Sign Up</Link>
-//                   </li>
-//                 </ul>
-//               )}
-//             </div>
-//           </div>
-//         </div>

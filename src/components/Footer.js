@@ -67,7 +67,7 @@ const Footer = () => {
                 <div className="col-lg-6 col-12">
                   <div className="copyright">
                     <p>
-                      © {new Date().getFullYear()} .<Link to="/">Unichem</Link>
+                      © {new Date().getFullYear()} | <Link to="/">Unichem</Link>
                     </p>
                   </div>
                 </div>
