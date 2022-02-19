@@ -37,7 +37,7 @@ const Trending = () => {
                       <Link to="/product-details">Test</Link>
                     </h4>
 
-                    {star == 5 && (
+                    {star === 5 && (
                       <ul className="review">
                         <li>
                           <BsFillStarFill className="text-warning" />
@@ -85,7 +85,7 @@ const Trending = () => {
                       </ul>
                     )}
 
-                    {star == 4 && (
+                    {star === 4 && (
                       <ul className="review">
                         <li>
                           <BsFillStarFill className="text-warning" />
@@ -133,7 +133,7 @@ const Trending = () => {
                       </ul>
                     )}
 
-                    {star == 3 && (
+                    {star === 3 && (
                       <ul className="review">
                         <li>
                           <BsFillStarFill className="text-warning" />
@@ -181,7 +181,7 @@ const Trending = () => {
                       </ul>
                     )}
 
-                    {star == 2 && (
+                    {star === 2 && (
                       <ul className="review">
                         <li>
                           <BsFillStarFill className="text-warning" />
@@ -229,7 +229,7 @@ const Trending = () => {
                       </ul>
                     )}
 
-                    {star == 1 && (
+                    {star === 1 && (
                       <ul className="review">
                         <li>
                           <BsFillStarFill className="text-warning" />
@@ -277,7 +277,7 @@ const Trending = () => {
                       </ul>
                     )}
 
-                    {star == 0 && (
+                    {star === 0 && (
                       <ul className="review">
                         <li>
                           <BsStar className="text-warning" />
