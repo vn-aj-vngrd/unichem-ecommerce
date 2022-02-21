@@ -19,7 +19,7 @@ const Navbar = () => {
                     src="assets/images/logo/logo.svg"
                     alt="Logo"
                   />
-                  <span className="fw-bold text-danger">UniChem</span>
+                  <span className="fw-bold text-danger">Unichem</span>
                 </Link>
               </div>
 

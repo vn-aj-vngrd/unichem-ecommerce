@@ -889,26 +889,15 @@ ol {
 
 /* Bread Crumbs */
 .breadcrumbs {
-  margin-top: 183px;
+  margin-top: 200px;
   position: relative;
-  padding: 5px;
+  padding: 10px;
   z-index: 2;
   text-align: left;
-  background-color: #9e9e9e;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
   -webkit-box-shadow: 0px 7px 30px rgba(0, 0, 0, 0.075);
   box-shadow: 0px 7px 30px rgba(0, 0, 0, 0.075);
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .breadcrumbs {
-    padding: 30px;
-  }
-}
-
-@media (max-width: 767px) {
-  .breadcrumbs {
-    padding: 30px;
-  }
 }
 
 .breadcrumbs .breadcrumbs-content {
@@ -918,7 +907,7 @@ ol {
 
 .breadcrumbs .breadcrumbs-content .page-title {
   font-size: 14px;
-  color: #ffffff;
+  color: #757575;
   font-weight: 600;
   position: relative;
   line-height: 28px;
@@ -955,7 +944,7 @@ ol {
 @media (max-width: 767px) {
   .breadcrumbs .breadcrumb-nav {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 5px;
   }
 }
 
@@ -987,7 +976,7 @@ ol {
 
 .breadcrumbs .breadcrumb-nav li,
 .breadcrumbs .breadcrumb-nav li a {
-  color: rgb(255, 255, 255);
+  color: #757575;
   font-size: 12px;
   font-weight: 500;
 }
@@ -3892,7 +3881,7 @@ ol {
   font-size: 14px;
   font-weight: 500;
   border: 1px solid #e1e1e1;
-  width: 200px;
+  width: 121px;
   border-radius: 4px;
 }
 
@@ -3952,14 +3941,15 @@ ol {
 
 .item-details .product-info .wish-button {
   display: inline-block;
-  width: 169px;
+  width: 121px;
   margin-top: 20px;
 }
 
 .item-details .product-info .cart-button {
   display: inline-block;
-  width: 169px;
+  width: 121px;
   margin-top: 20px;
+  margin-right: 7.6px;
 }
 
 @media (max-width: 767px) {
@@ -3980,12 +3970,11 @@ ol {
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   height: 46px;
-  width: 100%;
+  width: 121px;
 }
 
 .item-details .product-info .cart-button .btn {
   display: inline-block;
-  margin-right: 7px;
   border-radius: 4px;
   background-color: #f44336;
   color:white;
@@ -3995,7 +3984,7 @@ ol {
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   height: 46px;
-  width: 100%;
+  width: 121px;
 }
 
 .item-details .product-info .cart-button .btn:hover {

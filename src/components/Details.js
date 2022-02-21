@@ -20,8 +20,11 @@ const Details = () => {
   if (counter < max) increment = () => setCounter(counter + 1);
 
   return (
-    <div className="container">
-      <Breadcrumb />
+    <div>
+      <div className="container">
+        <Breadcrumb />
+      </div>
+
       <div className="item-details">
         <div className="container">
           <div className="top-area">
@@ -81,7 +84,7 @@ const Details = () => {
                     <div className="pe-2 bd-highlight">
                       <div className="form-group">
                         <label>Color / Type</label>
-                        <select className="form-control" id="color">
+                        <select className="form-control">
                           <option>test 1</option>
                           <option>test 2</option>
                           <option>test 3</option>
@@ -91,7 +94,7 @@ const Details = () => {
                     <div className="pe-2 bd-highlight">
                       <div className="form-group quantity">
                         <label>Quantity</label>
-                        <div className="quantity-control" data-quantity="">
+                        <div className="quantity-control">
                           <button className="quantity-btn" onClick={decrement}>
                             <svg viewBox="0 0 409.6 409.6">
                               <g>
@@ -124,12 +127,12 @@ const Details = () => {
                   <div className="d-flex flex-row bd-highlight w-100">
                     <div className="pe-2 bd-highlight cart-button">
                       <button className="btn">
-                        <i className="lni lni-cart"></i>Add to Cart
+                        <i className="lni lni-cart"></i> Cart
                       </button>
                     </div>
                     <div className="pe-2 bd-highlight wish-button">
                       <button className="btn">
-                        <i className="lni lni-heart"></i> To Wishlist
+                        <i className="lni lni-heart"></i> Wishlist
                       </button>
                     </div>
                   </div>
