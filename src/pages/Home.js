@@ -6,12 +6,12 @@ import Preview from "../components/Preview";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Feature />
       <Trending />
       <Preview />
       <Services />
-    </div>
+    </>
   );
 };
 

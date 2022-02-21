@@ -9,30 +9,28 @@ const reviews = 5;
 const Construction = () => {
   return (
     <div>
-      <div className="Construction-product">
-        <div className="product-grid">
-          <label className="sort-element" for="sorting">
-            Sort by:{" "}
-          </label>
-          <select className="form-control sort-element" id="sorting">
-            <option>Popularity</option>
-            <option>Low - High Price</option>
-            <option>High - Low Price</option>
-            <option>Average Rating</option>
-            <option>A - Z Order</option>
-            <option>Z - A Order</option>
-          </select>
-          Showing: 1 - 12 items
-        </div>
+      <div className="product-grid">
+        <label className="sort-element" for="sorting">
+          Sort by:{" "}
+        </label>
+        <select className="form-select sort-element" id="sorting">
+          <option>Popularity</option>
+          <option>Low - High Price</option>
+          <option>High - Low Price</option>
+          <option>Average Rating</option>
+          <option>A - Z Order</option>
+          <option>Z - A Order</option>
+        </select>
+        Showing: 1 - 12 items
       </div>
 
-      <section className="Construction-product">
+      <div className="product">
         <div className="row">
           {count.map((count, index) => (
             <div key={index} className="col-lg-3 col-md-6 col-12">
               <div className="single-product">
                 <div className="product-image">
-                  <img src="assets/images/products/product-1.jpg" alt="#" />
+                  <img src="assets/images/products/product-1.jpg" alt="/" />
                   <div className="button">
                     <Link to="/product-details" className="btn">
                       <i className="lni lni-eye"></i> View
@@ -58,12 +56,12 @@ const Construction = () => {
           ))}
         </div>
 
-        <nav aria-label="Page navigation example">
+        <nav>
           <ul className="product-pagination pagination justify-content-center">
             <li className="page-item disabled">
               <a
                 className="page-link"
-                href="#"
+                href="/"
                 tabindex="-1"
                 aria-disabled="true"
               >
@@ -71,28 +69,28 @@ const Construction = () => {
               </a>
             </li>
             <li className="page-item">
-              <a className="page-link" href="#">
+              <a className="page-link" href="/">
                 1
               </a>
             </li>
             <li className="page-item">
-              <a className="page-link" href="#">
+              <a className="page-link" href="/">
                 2
               </a>
             </li>
             <li className="page-item">
-              <a className="page-link" href="#">
+              <a className="page-link" href="/">
                 3
               </a>
             </li>
             <li className="page-item">
-              <a className="page-link" href="#">
+              <a className="page-link" href="/">
                 Next
               </a>
             </li>
           </ul>
         </nav>
-      </section>
+      </div>
     </div>
   );
 };

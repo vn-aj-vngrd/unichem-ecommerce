@@ -37,8 +37,10 @@ const Signup = () => {
             </div>
             <div className="col-3 mb-3">
               <label className="form-label">Sex</label>
-              <select className="form-select" defaultValue={'DEFAULT'}>
-                <option value="DEFAULT" disabled>Please select your sex.</option>
+              <select className="form-select" defaultValue={"DEFAULT"}>
+                <option value="DEFAULT" disabled>
+                  Please select your sex.
+                </option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>
               </select>
