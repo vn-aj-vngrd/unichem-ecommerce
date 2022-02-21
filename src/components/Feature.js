@@ -11,7 +11,7 @@ import { Autoplay, Pagination } from "swiper";
 
 const featureTest = [1, 2, 3, 4, 5];
 
-const Hero = () => {
+const Feature = () => {
   return (
     <div>
       <section className="hero-area">
@@ -71,4 +71,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Feature;

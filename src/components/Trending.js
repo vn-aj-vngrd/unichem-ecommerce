@@ -32,274 +32,276 @@ const Trending = () => {
                     </div>
                   </div>
                   <div className="product-info">
-                    <span className="category">Test</span>
+                    <span className="category">Category</span>
                     <h4 className="title">
-                      <Link to="/product-details">Test</Link>
+                      <Link to="/product-details">Title</Link>
                     </h4>
 
                     {star === 5 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star < 5 && star > 4 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <BsStarHalf className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star === 4 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star < 4 && star > 3 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <BsStarHalf className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star === 3 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star < 3 && star > 2 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <BsStarHalf className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star === 2 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star < 2 && star > 1 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <BsStarHalf className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star === 1 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <BsFillStarFill className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star < 1 && star > 0 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <BsStarHalf className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
 
                     {star === 0 && (
-                      <ul className="review">
+                      <ul className="review ">
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <BsStar className="text-warning pb-1" />
                         </li>
 
                         <li>
-                          <span>{star} Review(s)</span>
+                          <span className="ps-1">{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
+
+                    <hr />
 
                     <div className="price">
                       <span>₱199.00</span>
