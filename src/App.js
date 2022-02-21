@@ -13,6 +13,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProductDetails from "./pages/Product/ProductDetails";
 
+// Products
+import Construction from "./pages/Product/Construction";
+
 export const App = () => {
   return (
     <div className="App">
@@ -20,6 +23,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="products" element={<Products />} />
+        
         <Route path="product-details" element={<ProductDetails />} />
         <Route path="about" element={<About />} />
         <Route path="cart" element={<Cart />} />
@@ -27,6 +31,10 @@ export const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="wishlist" element={<Wishlist />} />
+
+
+        {/* Products */}
+        <Route path="construction" element={<Construction />} />
       </Routes>
       <Footer />
     </div>

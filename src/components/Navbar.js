@@ -78,7 +78,7 @@ const Navbar = () => {
                       </Link>
                       <ul className="inner-sub-category">
                         <li>
-                          <Link to="/products">Construction </Link>
+                          <Link to="/construction">Construction </Link>
                         </li>
                         <li>
                           <Link to="/products">Adhesives</Link>
@@ -316,7 +316,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+        
       </header>
+      
     );
   }
 };
