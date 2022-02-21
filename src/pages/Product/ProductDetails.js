@@ -65,8 +65,8 @@ const ProductDetails = () => {
                     aliqua.
                   </p>
 
-                  <div class="d-flex flex-row bd-highlight mb-3 w-100">
-                    <div class="p-2 bd-highlight">
+                  <div className="d-flex flex-row bd-highlight mb-3 w-100">
+                    <div className="p-2 bd-highlight">
                       <div className="form-group">
                         <label for="color">Color / Type</label>
                         <select className="form-control" id="color">
@@ -76,17 +76,17 @@ const ProductDetails = () => {
                         </select>
                       </div>
                     </div>
-                    <div class="p-2 bd-highlight">
+                    <div className="p-2 bd-highlight">
                       <div className="form-group quantity">
                         <label for="color">Quantity</label>
-                        <div class="d-flex flex-row bd-highlight mb-3">
-                          <div class="bd-highlight">
+                        <div className="d-flex flex-row bd-highlight mb-3">
+                          <div className="bd-highlight">
                             <button className="form-control">-</button>
                           </div>
-                          <div class="bd-highlight">
+                          <div className="bd-highlight">
                             <input type="number" className="form-control" />
                           </div>
-                          <div class="bd-highlight">
+                          <div className="bd-highlight">
                             <button className="form-control">+</button>
                           </div>
                         </div>
