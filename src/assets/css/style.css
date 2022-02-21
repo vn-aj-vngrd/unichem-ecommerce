@@ -1369,7 +1369,7 @@ ol {
 }
 
 .header .topbar {
-  background-color: #081828;
+  background-color: #757575;
   padding: 18px 0;
 }
 
@@ -1394,7 +1394,7 @@ ol {
   color: #fff !important;
   font-weight: 500;
   font-size: 14px;
-  background-color: #081828 !important;
+  background-color: #757575 !important;
 }
 
 .header .topbar .top-left .menu-top-link .select-position select:focus {
@@ -1585,7 +1585,7 @@ ol {
 }
 
 .header .nav-hotline i {
-  color: #081828;
+  color: #757575;
   font-size: 18px;
   position: absolute;
   left: 0;
@@ -1604,7 +1604,7 @@ ol {
 .header .nav-hotline h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #081828;
+  color: #757575;
 }
 
 .header .nav-hotline h3 span {
@@ -1661,7 +1661,7 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #081828;
+  background-color: #757575;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -1699,7 +1699,7 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #081828;
+  background-color: #757575;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -1853,7 +1853,7 @@ ol {
 .header .navbar-cart .cart-items .shopping-item .shopping-list li .content h4 a {
   font-size: 14px;
   font-weight: 600;
-  color: #081828;
+  color: #757575;
 }
 
 @media (max-width: 767px) {
@@ -1924,8 +1924,8 @@ ol {
 }
 
 .header .main-menu-search .select-position:after {
-  border-bottom: 1.5px solid #081828;
-  border-right: 1.5px solid #081828;
+  border-bottom: 1.5px solid #757575;
+  border-right: 1.5px solid #757575;
   content: '';
   display: block;
   height: 8px;
@@ -1999,12 +1999,12 @@ ol {
 
 .header .main-menu-search .search-btn button:hover {
   color: #fff;
-  background-color: #081828;
+  background-color: #757575;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #081828;
+    background-color: #757575;
   }
 
   .header .button {
@@ -2122,7 +2122,7 @@ ol {
 
 @media (max-width: 767px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #081828;
+    background-color: #757575;
   }
 
   .header .button {
@@ -2278,7 +2278,7 @@ ol {
 
 .header .mega-category-menu .cat-button {
   display: inline-block;
-  color: #081828;
+  color: #757575;
   font-size: 15px;
   font-weight: 600;
 }
@@ -2350,7 +2350,7 @@ top: 2px;
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category li a {
-  color: #081828;
+  color: #757575;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -2367,7 +2367,7 @@ top: 2px;
 }
 
 .header .mega-category-menu .sub-category li a {
-  color: #081828;
+  color: #757575;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -2475,7 +2475,7 @@ top: 2px;
 }
 
 .header.sticky .button .btn:hover {
-  background-color: #081828;
+  background-color: #757575;
   color: #fff;
 }
 
