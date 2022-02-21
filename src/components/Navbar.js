@@ -241,18 +241,6 @@ const Navbar = () => {
                           Contact
                         </Link>
                       </li>
-
-                      <li className="nav-item">
-                        <Link to="/wishlist" aria-label="Toggle navigation">
-                          Wishlist
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link to="/cart" aria-label="Toggle navigation">
-                          Cart
-                        </Link>
-                      </li>
                     </ul>
                   </div>
                 </nav>

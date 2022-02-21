@@ -2,7 +2,8 @@ import React from 'react'
 
 const Contact = () => {
   return (
-    <div className="container">Contact</div>
+    // margin-top 200 so that container may be visible
+    <div className="container mt-200">Contact</div>
   )
 }
 
