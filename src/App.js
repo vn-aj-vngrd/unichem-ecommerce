@@ -12,6 +12,9 @@ import Wishlist from "./pages/Store/Wishlist";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProductDetails from "./pages/Product/ProductDetails";
+import Manage from "./pages/Account/Manage";
+import Order from "./pages/Account/Order";
+import Reviews from "./pages/Account/Reviews";
 
 export const App = () => {
   return (
@@ -27,6 +30,9 @@ export const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="wishlist" element={<Wishlist />} />
+        <Route path="manage" element={<Manage />} />
+        <Route path="orders" element={<Order />} />
+        <Route path="reviews" element={<Reviews />} />
       </Routes>
       <Footer />
     </div>

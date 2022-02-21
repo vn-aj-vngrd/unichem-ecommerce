@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const loggedIn = false;
+const loggedIn = true;
 const cartCount = 5;
 const wishListCount = 5;
 
@@ -264,23 +264,18 @@ const Navbar = () => {
                       aria-labelledby="dropdownMenuLink"
                     >
                       <li>
-                        <Link to="/" className="dropdown-item">
+                        <Link to="/manage" className="dropdown-item">
                           Manage Account
                         </Link>
                       </li>
                       <li>
-                        <Link to="/" className="dropdown-item">
+                        <Link to="/orders" className="dropdown-item">
                           My Orders
                         </Link>
                       </li>
                       <li>
-                        <Link to="/" className="dropdown-item">
+                        <Link to="/reviews" className="dropdown-item">
                           My Reviews
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/" className="dropdown-item">
-                          My Cancellations
                         </Link>
                       </li>
                       <li>
