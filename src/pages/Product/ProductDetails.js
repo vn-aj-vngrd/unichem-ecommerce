@@ -1,11 +1,11 @@
 import React from "react";
-import Heading from "../../components/Heading";
+import Breadcrumb from "../../components/Breadcrumb";
 
 const ProductDetails = () => {
   return (
     <div classNameName="container">
-      <Heading />
-      <div className="item-details section">
+      <Breadcrumb />
+      <div className="item-details">
         <div className="container">
           <div className="top-area">
             <div className="row align-items-center">
@@ -51,13 +51,13 @@ const ProductDetails = () => {
               </div>
               <div className="col-lg-6 col-md-12 col-12">
                 <div className="product-info">
-                  <h2 className="title">GoPro Karma Camera Drone</h2>
+                  <h2 className="title">Product Title</h2>
                   <p className="category">
-                    <i className="lni lni-tag"></i> Drones:
-                    <a href="/">Action cameras</a>
+                    <i className="lni lni-package"></i> Category:
+                    <a href="/">Test</a>
                   </p>
                   <h3 className="price">
-                    $850<span>$945</span>
+                    ₱850
                   </h3>
                   <p className="info-text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed

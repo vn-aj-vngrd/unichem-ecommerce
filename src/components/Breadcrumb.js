@@ -1,6 +1,6 @@
 import React from "react";
 
-const Heading = () => {
+const Breadcrumb = () => {
   return (
     <div className="breadcrumbs">
       <div className="container">
@@ -17,9 +17,7 @@ const Heading = () => {
                   <i className="lni lni-home"></i> Home
                 </a>
               </li>
-              <li>
-                <a href="index.html">Shop</a>
-              </li>
+              <li>Category</li>
               <li>Single Product</li>
             </ul>
           </div>
@@ -29,4 +27,4 @@ const Heading = () => {
   );
 };
 
-export default Heading;
+export default Breadcrumb;
