@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const loggedIn = true;
+let loggedIn = true;
 const cartCount = 5;
 const wishListCount = 5;
 
 const Navbar = () => {
+  const login = () => {
+    loggedIn = true;
+  };
+  const logout = () => {
+    loggedIn = false;
+  };
   if (true) {
     return (
       <header className="header navbar-area sticky">
@@ -32,7 +38,10 @@ const Navbar = () => {
                     </div>
                     <div className="search-btn">
                       <button>
-                        <Link className="lni lni-search-alt" to="/products"></Link>
+                        <Link
+                          className="lni lni-search-alt"
+                          to="/products"
+                        ></Link>
                       </button>
                     </div>
                   </div>
@@ -279,7 +288,7 @@ const Navbar = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="/" className="dropdown-item">
+                        <Link to="/" className="dropdown-item" onClick={logout}>
                           Log out
                         </Link>
                       </li>
@@ -288,7 +297,9 @@ const Navbar = () => {
                 ) : (
                   <ul>
                     <li className="border-end pe-2">
-                      <Link to="/login">Login</Link>
+                      <Link to="/login" onClick={login}>
+                        Login
+                      </Link>
                     </li>
                     <li className="ps-2">
                       <Link to="/signup">Signup</Link>
@@ -299,9 +310,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        
       </header>
-      
     );
   }
 };
