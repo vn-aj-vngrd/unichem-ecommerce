@@ -2,7 +2,8 @@ import React from 'react'
 
 const Cart = () => {
   return (
-    <div className="container">Cart</div>
+    // margin-top 200 so that container may be visible
+    <div className="container mt-200">Cart</div>
   )
 }
 
