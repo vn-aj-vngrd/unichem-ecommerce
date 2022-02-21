@@ -56,9 +56,7 @@ const ProductDetails = () => {
                     <i className="lni lni-package"></i> Category:
                     <a href="/">Test</a>
                   </p>
-                  <h3 className="price">
-                    ₱850
-                  </h3>
+                  <h3 className="price">₱850</h3>
                   <p className="info-text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna

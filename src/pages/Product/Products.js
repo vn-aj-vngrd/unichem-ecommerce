@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Product from "../../components/Product";
+import Sidebar from "../../components/Sidebar";
 
 const Products = () => {
   return (
-    <div className="container">Products</div>
-  )
-}
+    <div class="container main-product-section mt-200">
+      <Sidebar />
+      <Product />
+    </div>
+  );
+};
 
-export default Products
+export default Products;
