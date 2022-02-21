@@ -1,103 +1,11 @@
 import React from "react";
-import Breadcrumb from "../../components/Breadcrumb";
+import Details from "../../components/Details";
 
 const ProductDetails = () => {
   return (
-    <div classNameName="container">
-      <Breadcrumb />
-      <div className="item-details">
-        <div className="container">
-          <div className="top-area">
-            <div className="row align-items-center">
-              <div className="col-lg-6 col-md-12 col-12">
-                <div className="product-images">
-                  <main id="gallery">
-                    <div className="main-img">
-                      <img
-                        src="assets/images/product-details/01.jpg"
-                        id="current"
-                        alt="#"
-                      />
-                    </div>
-                    <div className="images">
-                      <img
-                        src="assets/images/product-details/01.jpg"
-                        className="img"
-                        alt="#"
-                      />
-                      <img
-                        src="assets/images/product-details/02.jpg"
-                        className="img"
-                        alt="#"
-                      />
-                      <img
-                        src="assets/images/product-details/03.jpg"
-                        className="img"
-                        alt="#"
-                      />
-                      <img
-                        src="assets/images/product-details/04.jpg"
-                        className="img"
-                        alt="#"
-                      />
-                      <img
-                        src="assets/images/product-details/05.jpg"
-                        className="img"
-                        alt="#"
-                      />
-                    </div>
-                  </main>
-                </div>
-              </div>
-              <div className="col-lg-6 col-md-12 col-12">
-                <div className="product-info">
-                  <h2 className="title">Product Title</h2>
-                  <p className="category">
-                    <i className="lni lni-package"></i> Category:
-                    <a href="/">Test</a>
-                  </p>
-                  <h3 className="price">₱850</h3>
-                  <p className="info-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-
-                  <div className="d-flex flex-row bd-highlight mb-3 w-100">
-                    <div className="p-2 bd-highlight">
-                      <div className="form-group">
-                        <label for="color">Color / Type</label>
-                        <select className="form-control" id="color">
-                          <option>5100 mAh</option>
-                          <option>6200 mAh</option>
-                          <option>8000 mAh</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="p-2 bd-highlight">
-                      <div className="form-group quantity">
-                        <label for="color">Quantity</label>
-                        <div className="d-flex flex-row bd-highlight mb-3">
-                          <div className="bd-highlight">
-                            <button className="form-control">-</button>
-                          </div>
-                          <div className="bd-highlight">
-                            <input type="number" className="form-control" />
-                          </div>
-                          <div className="bd-highlight">
-                            <button className="form-control">+</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <Details />
+    </>
   );
 };
 

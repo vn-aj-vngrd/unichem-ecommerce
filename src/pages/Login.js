@@ -13,7 +13,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <form className="container border p-4 mb-5 w-75">
+        <form className="container border p-4 mb-5 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
           <div className="mb-3">
             <label className="form-label">
               Email address

@@ -32,7 +32,7 @@ const Navbar = () => {
                     </div>
                     <div className="search-btn">
                       <button>
-                        <i className="lni lni-search-alt"></i>
+                        <Link className="lni lni-search-alt" to="/products"></Link>
                       </button>
                     </div>
                   </div>
@@ -182,7 +182,7 @@ const Navbar = () => {
                           aria-expanded="false"
                           aria-label="Toggle navigation"
                         >
-                          Category
+                          Categories
                         </Link>
                         <ul className="sub-menu collapse" id="submenu-1-2">
                           <li className="nav-item">

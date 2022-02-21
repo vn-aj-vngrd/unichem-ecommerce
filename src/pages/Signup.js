@@ -15,7 +15,7 @@ const Signup = () => {
             </div>
           </div>
         </div>
-        <div className="container justify-content-center border p-5 mb-5">
+        <div className="col-lg-10 col-md-10 offset-md-1 col-12 border p-5 mb-5">
           <form className="row g-3">
             <div className="fw-bold">Personal Information</div>
             <hr />
