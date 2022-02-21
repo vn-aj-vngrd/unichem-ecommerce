@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Heading = () => {
+const Breadcrumb = () => {
   return (
-    <div className="breadcrumbs mt-180">
+    <div className="breadcrumbs">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-6 col-12">
@@ -13,13 +14,11 @@ const Heading = () => {
           <div className="col-lg-6 col-md-6 col-12">
             <ul className="breadcrumb-nav">
               <li>
-                <a href="index.html">
+                <Link to="/">
                   <i className="lni lni-home"></i> Home
-                </a>
+                </Link>
               </li>
-              <li>
-                <a href="index.html">Shop</a>
-              </li>
+              <li>Category</li>
               <li>Single Product</li>
             </ul>
           </div>
@@ -29,4 +28,4 @@ const Heading = () => {
   );
 };
 
-export default Heading;
+export default Breadcrumb;

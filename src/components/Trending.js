@@ -1,5 +1,5 @@
 import React from "react";
-import { BsStarHalf, BsFillStarFill, BsStar } from "react-icons/bs";
+import { MdStarHalf, MdStar, MdStarOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 //array of 5 items
@@ -26,36 +26,36 @@ const Trending = () => {
                   <div className="product-image">
                     <img src="assets/images/products/product-1.jpg" alt="#" />
                     <div className="button">
-                      <a href="product-details.html" className="btn">
-                        <i className="lni lni-cart"></i> Add to Cart
-                      </a>
+                      <Link to="/product-details" className="btn">
+                        <i className="lni lni-eye"></i> View
+                      </Link>
                     </div>
                   </div>
                   <div className="product-info">
-                    <span className="category">Test</span>
+                    <span className="category">Category</span>
                     <h4 className="title">
-                      <Link to="/product-details">Test</Link>
+                      <span>Title</span>
                     </h4>
 
                     {star === 5 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -64,22 +64,22 @@ const Trending = () => {
                     {star < 5 && star > 4 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <MdStarHalf className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -88,22 +88,22 @@ const Trending = () => {
                     {star === 4 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -112,22 +112,22 @@ const Trending = () => {
                     {star < 4 && star > 3 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <MdStarHalf className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -136,22 +136,22 @@ const Trending = () => {
                     {star === 3 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -160,22 +160,22 @@ const Trending = () => {
                     {star < 3 && star > 2 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <MdStarHalf className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -184,22 +184,22 @@ const Trending = () => {
                     {star === 2 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -208,22 +208,22 @@ const Trending = () => {
                     {star < 2 && star > 1 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <MdStarHalf className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -232,22 +232,22 @@ const Trending = () => {
                     {star === 1 && (
                       <ul className="review">
                         <li>
-                          <BsFillStarFill className="text-warning" />
+                          <MdStar className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -256,22 +256,22 @@ const Trending = () => {
                     {star < 1 && star > 0 && (
                       <ul className="review">
                         <li>
-                          <BsStarHalf className="text-warning" />
+                          <MdStarHalf className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
@@ -280,26 +280,28 @@ const Trending = () => {
                     {star === 0 && (
                       <ul className="review">
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
                         <li>
-                          <BsStar className="text-warning" />
+                          <MdStarOutline className="text-warning" />
                         </li>
 
-                        <li>
+                        <li className="ms-1">
                           <span>{star} Review(s)</span>
                         </li>
                       </ul>
                     )}
+
+                    <hr />
 
                     <div className="price">
                       <span>₱199.00</span>
