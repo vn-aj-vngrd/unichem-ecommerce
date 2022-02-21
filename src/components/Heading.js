@@ -2,7 +2,7 @@ import React from "react";
 
 const Heading = () => {
   return (
-    <div className="breadcrumbs mt-180">
+    <div className="breadcrumbs">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-6 col-12">
