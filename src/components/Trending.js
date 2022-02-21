@@ -26,15 +26,15 @@ const Trending = () => {
                   <div className="product-image">
                     <img src="assets/images/products/product-1.jpg" alt="#" />
                     <div className="button">
-                      <a href="product-details.html" className="btn">
-                        <i className="lni lni-cart"></i> Add to Cart
-                      </a>
+                      <Link to="/product-details" className="btn">
+                        <i className="lni lni-eye"></i> View
+                      </Link>
                     </div>
                   </div>
                   <div className="product-info">
                     <span className="category">Category</span>
                     <h4 className="title">
-                      <Link to="/product-details">Title</Link>
+                      <span>Title</span>
                     </h4>
 
                     {star === 5 && (
