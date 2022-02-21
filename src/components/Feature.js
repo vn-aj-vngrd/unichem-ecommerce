@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -53,9 +54,9 @@ const Feature = () => {
                             <span>Now Only</span> $320.99
                           </h3>
                           <div className="button">
-                            <a href="product-grids.html" className="btn">
+                            <Link to="/" className="btn">
                               Shop Now
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>

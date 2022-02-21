@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Breadcrumb = () => {
   return (
@@ -13,9 +14,9 @@ const Breadcrumb = () => {
           <div className="col-lg-6 col-md-6 col-12">
             <ul className="breadcrumb-nav">
               <li>
-                <a href="index.html">
+                <Link to="/">
                   <i className="lni lni-home"></i> Home
-                </a>
+                </Link>
               </li>
               <li>Category</li>
               <li>Single Product</li>
