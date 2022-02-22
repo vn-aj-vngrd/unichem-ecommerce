@@ -1631,7 +1631,7 @@ ol {
   line-height: 40px;
   display: inline-block;
   border-radius: 50%;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   color: #555;
   font-size: 18px;
   text-align: center;
@@ -1675,7 +1675,7 @@ ol {
   line-height: 40px;
   display: inline-block;
   border-radius: 50%;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
   color: #555;
   font-size: 18px;
   text-align: center;
@@ -2039,6 +2039,11 @@ ol {
 .header .main-menu-search .search-btn button:hover {
   color: #fff;
   background-color: #757575;
+}
+
+.header .main-menu-search .search-btn button a {
+  text-decoration: none;
+  color: #fff;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

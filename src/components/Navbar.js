@@ -39,8 +39,8 @@ const Navbar = () => {
                     <div className="search-btn">
                       <button>
                         <Link
-                          className="lni lni-search-alt"
                           to="/products"
+                          className="lni lni-search-alt"
                         ></Link>
                       </button>
                     </div>

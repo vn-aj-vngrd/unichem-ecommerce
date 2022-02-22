@@ -186,30 +186,6 @@ const Reviews = () => {
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="review-name">Your Name</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      id="review-name"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="review-email">Your Email</label>
-                    <input
-                      class="form-control"
-                      type="email"
-                      id="review-email"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
                     <label for="review-subject">Subject</label>
                     <input
                       class="form-control"
@@ -222,7 +198,7 @@ const Reviews = () => {
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="review-rating">Rating</label>
-                    <select class="form-control" id="review-rating">
+                    <select class="form-select" id="review-rating">
                       <option>5 Stars</option>
                       <option>4 Stars</option>
                       <option>3 Stars</option>

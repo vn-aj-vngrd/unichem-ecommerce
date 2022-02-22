@@ -2,6 +2,8 @@ import React from "react";
 import Breadcrumb from "../components/Breadcrumb";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -18,6 +20,38 @@ const Details = () => {
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
   if (counter < max) increment = () => setCounter(counter + 1);
+  let navigate = useNavigate();
+  let addToCart = (event) => {
+    event.preventDefault();
+    Swal.fire({
+      title: "Added to Cart!",
+      text: "To checkout please proceed to the cart page.",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
+      cancelButtonText: "Close",
+    }).then((result) => {
+      if (result.isConfirmed) navigate("/cart");
+    });
+  };
+
+  let addToWishlist = (event) => {
+    event.preventDefault();
+    Swal.fire({
+      title: "Added to Wishlist!",
+      text: "The item has been added to the wishlist.",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "<Link to='/cart'>View Wishlist</Link>",
+      cancelButtonText: "Close",
+    }).then((result) => {
+      if (result.isConfirmed) navigate("/wishlist");
+    });
+  };
 
   return (
     <div>
@@ -126,12 +160,12 @@ const Details = () => {
 
                   <div className="d-flex flex-row bd-highlight w-100">
                     <div className="pe-2 bd-highlight cart-button">
-                      <button className="btn">
+                      <button className="btn" onClick={addToCart}>
                         <i className="lni lni-cart"></i> Cart
                       </button>
                     </div>
                     <div className="pe-2 bd-highlight wish-button">
-                      <button className="btn">
+                      <button className="btn" onClick={addToWishlist}>
                         <i className="lni lni-heart"></i> Wishlist
                       </button>
                     </div>
