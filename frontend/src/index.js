@@ -11,18 +11,30 @@ import reportWebVitals from "./reportWebVitals";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
-const store = configureStore({
-  reducer: {
-    users: 
-  }
-})
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCdR7p2ofm3JMhieNLJ2PP_VxJwgf95fH0",
+  authDomain: "unichem-ecommerce.firebaseapp.com",
+  databaseURL:
+    "https://unichem-ecommerce-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "unichem-ecommerce",
+  storageBucket: "unichem-ecommerce.appspot.com",
+  messagingSenderId: "425079126476",
+  appId: "1:425079126476:web:f8448086b86ae3574b0569",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 ReactDOM.render(
-  <Provider store={}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
