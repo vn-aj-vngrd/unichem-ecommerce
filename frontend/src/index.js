@@ -20,21 +20,18 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyCdR7p2ofm3JMhieNLJ2PP_VxJwgf95fH0",
   authDomain: "unichem-ecommerce.firebaseapp.com",
-  databaseURL:
-    "https://unichem-ecommerce-default-rtdb.asia-southeast1.firebasedatabase.app",
+  databaseURL: "https://unichem-ecommerce-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "unichem-ecommerce",
   storageBucket: "unichem-ecommerce.appspot.com",
   messagingSenderId: "425079126476",
-  appId: "1:425079126476:web:f8448086b86ae3574b0569",
+  appId: "1:425079126476:web:f8448086b86ae3574b0569"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
   document.getElementById("root")
 );
 
