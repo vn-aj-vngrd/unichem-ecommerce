@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const cartCount = 5;
 const wishListCount = 5;
@@ -14,6 +15,16 @@ const Navbar = () => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
+    toast.error("User Logged Out", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   };
 
   // console.log(user);

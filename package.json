@@ -1,7 +1,7 @@
 {
   "name": "unichem-ecommerce",
   "version": "1.0.0",
-  "description": "to run app\r 1. open terminal\r 2. cd frontent\r 3. npm start",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node backend/server.js",
@@ -22,6 +22,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
+    "concurrently": "^7.0.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
