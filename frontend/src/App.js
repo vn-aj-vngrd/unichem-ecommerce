@@ -15,12 +15,14 @@ import ProductDetails from "./pages/Product/ProductDetails";
 import Manage from "./pages/Account/Manage";
 import Order from "./pages/Account/Order";
 import Reviews from "./pages/Account/Reviews";
+import ScrollToTop from "./components/ScrollToTop";
 
 import { ToastContainer } from "react-toastify";
 
 export const App = () => {
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
