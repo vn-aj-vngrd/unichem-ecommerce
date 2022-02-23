@@ -83,9 +83,9 @@ const Signup = () => {
     }
   };
 
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="signup">
@@ -151,7 +151,7 @@ const Signup = () => {
                 required
               >
                 <option value="" disabled>
-                  Please select your sex.
+                  Please select your sex
                 </option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>

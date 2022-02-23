@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login, reset } from "../features/auth/authSlice";
+import Spinner from "../components/Spinner";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +13,25 @@ const Login = () => {
   });
 
   const { email, password } = formData;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -18,7 +42,18 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="login">
@@ -31,7 +66,10 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <form onSubmit={onSubmit} className="container border p-4 mb-5 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+        <form
+          onSubmit={onSubmit}
+          className="container border p-4 mb-5 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12"
+        >
           <div className="mb-3">
             <label className="form-label">Email address</label>
             <input

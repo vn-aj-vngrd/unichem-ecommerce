@@ -1,16 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, reset } from "../features/auth/authSlice";
 
-let loggedIn = true;
 const cartCount = 5;
 const wishListCount = 5;
 
 const Navbar = () => {
-  const login = () => {
-    loggedIn = true;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
   };
-  const logout = () => {
-    loggedIn = false;
-  };
+
+  // console.log(user);
+
   if (true) {
     return (
       <header className="header navbar-area sticky">
@@ -256,7 +263,7 @@ const Navbar = () => {
             </div>
             <div className="col-lg-4 col-md-6 col-12">
               <div className="account">
-                {loggedIn ? (
+                {user ? (
                   <div className="dropdown">
                     <i
                       className="lni lni-user h5 dropdown-toggle"
@@ -287,21 +294,19 @@ const Navbar = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="/" className="dropdown-item" onClick={logout}>
+                        <button className="dropdown-item" onClick={onLogout}>
                           Log out
-                        </Link>
+                        </button>
                       </li>
                     </ul>
                   </div>
                 ) : (
                   <ul>
                     <li className="border-end pe-2">
-                      <Link to="/login" onClick={login}>
-                        Login
-                      </Link>
+                      <Link to="/login">Log In</Link>
                     </li>
                     <li className="ps-2">
-                      <Link to="/signup">Signup</Link>
+                      <Link to="/signup">Sign Up</Link>
                     </li>
                   </ul>
                 )}
