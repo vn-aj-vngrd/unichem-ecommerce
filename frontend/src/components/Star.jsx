@@ -1,4 +1,3 @@
-import React from "react";
 import { MdStarHalf, MdStar, MdStarOutline } from "react-icons/md";
 
 const Star = ({ star, reviews }) => {

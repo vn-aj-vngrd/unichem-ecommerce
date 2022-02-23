@@ -1,5 +1,3 @@
-import React from "react";
-
 const Reviews = () => {
   return <div className="container mt-200">Reviews</div>;
 };

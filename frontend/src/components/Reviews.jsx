@@ -1,5 +1,3 @@
-import React from "react";
-
 const Reviews = () => {
   return (
     <div className="container product-details-info mb-4">

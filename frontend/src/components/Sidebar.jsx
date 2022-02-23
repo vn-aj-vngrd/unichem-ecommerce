@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 //array of 5 items

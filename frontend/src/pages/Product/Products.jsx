@@ -1,4 +1,3 @@
-import React from "react";
 import Product from "../../components/Product";
 import Sidebar from "../../components/Sidebar";
 

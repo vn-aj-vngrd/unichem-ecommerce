@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../features/auth/authSlice";
+
 import { Link } from "react-router-dom";
 
 const Signup = () => {
@@ -30,6 +35,13 @@ const Signup = () => {
     confirmPassword,
   } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -37,10 +49,40 @@ const Signup = () => {
     }));
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault()
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
 
-  }
+    if (isSuccess || user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+    } else {
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        password,
+        bday,
+        sex,
+        address,
+        city_municipality,
+        province,
+        barangay,
+      };
+
+      dispatch(register(userData));
+    }
+  };
 
   return (
     <div className="signup">

@@ -1,5 +1,4 @@
-import React from "react";
-import Breadcrumb from "../components/Breadcrumb";
+import Breadcrumb from "./Breadcrumb";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Swal from "sweetalert2";
