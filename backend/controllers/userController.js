@@ -8,17 +8,8 @@ const Address = require("../models/addressModel");
 // @route   POST /api/users/
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const {
-    name,
-    birthday,
-    sex,
-    email,
-    phoneNumber,
-    password,
-    postalCode,
-    address1,
-    address2,
-  } = req.body;
+  const { name, birthday, sex, email, phoneNumber, address, password } =
+    req.body;
 
   if (
     !name ||
@@ -27,9 +18,7 @@ const registerUser = asyncHandler(async (req, res) => {
     !email ||
     !phoneNumber ||
     !password ||
-    !postalCode ||
-    !address1 ||
-    !address2
+    !address
   ) {
     res.status(400);
     throw new Error("Please fill in all fields");
@@ -54,15 +43,8 @@ const registerUser = asyncHandler(async (req, res) => {
     sex,
     email,
     phoneNumber,
+    address,
     password: hashedPassword,
-  });
-
-  // create user address
-  const address = await Address.create({
-    userAddress,
-    postalCode,
-    address1,
-    address2,
   });
 
   if (user && address) {
@@ -74,10 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       phoneNumber: user.phoneNumber,
       token: generateToken(user._id),
-      postalCode: address.postalCode,
-      address1: address.address1,
-      address2: address.address2,
-      userAddress: address.userAddress,
+      address: user.address,
     });
   } else {
     res.status(400);
@@ -96,9 +75,6 @@ const loginUser = asyncHandler(async (req, res) => {
   // check for user email
   const user = await User.findOne({ email });
 
-  // fetch user address
-  const address = await Address.findOne({ userAddress: user.id });
-
   if (user && address && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
@@ -108,10 +84,7 @@ const loginUser = asyncHandler(async (req, res) => {
       email: user.email,
       phoneNumber: user.phoneNumber,
       token: generateToken(user._id),
-      postalCode: address.postalCode,
-      address1: address.address1,
-      address2: address.address2,
-      userAddress: address.userAddress,
+      address: user.address,
     });
   } else {
     res.status(400);
@@ -125,13 +98,8 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/user
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
-  const { _id, name, email, birthday, sex, phoneNumber } = await User.findById(
-    req.user.id
-  );
-
-  const { address1, address2, postalCode } = await Address.findOne({
-    userAddress: req.user.id,
-  });
+  const { _id, name, email, birthday, sex, phoneNumber, address } =
+    await User.findById(req.user.id);
 
   res.status(200).json({
     id: _id,
@@ -140,9 +108,7 @@ const getUser = asyncHandler(async (req, res) => {
     birthday,
     sex,
     phoneNumber,
-    address1,
-    address2,
-    postalCode,
+    address,
   });
 });
 

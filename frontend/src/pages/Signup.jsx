@@ -90,16 +90,18 @@ const Signup = () => {
         birthday,
         sex,
         email,
-        address1,
-        address2,
-        postalCode,
+        address: {
+          address1,
+          address2,
+          postalCode,
+        },
         phoneNumber,
         password,
         confirmPassword,
       };
       console.log(userData);
 
-      dispatch(register(userData));
+      // dispatch(register(userData));
     }
   };
 
