@@ -1,7 +1,25 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="login">
       <div className="container">
@@ -13,23 +31,27 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <form className="container border p-4 mb-5 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+        <form onSubmit={onSubmit} className="container border p-4 mb-5 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
           <div className="mb-3">
-            <label className="form-label">
-              Email address
-            </label>
+            <label className="form-label">Email address</label>
             <input
               type="email"
               className="form-control"
+              id="email"
+              name="email"
+              value={email}
+              onChange={onChange}
             />
           </div>
           <div className="mb-3">
-            <label className="form-label">
-              Password
-            </label>
+            <label className="form-label">Password</label>
             <input
               type="password"
               className="form-control"
+              id="password"
+              name="password"
+              value={password}
+              onChange={onChange}
             />
           </div>
           <div className="button text-center pt-1">
