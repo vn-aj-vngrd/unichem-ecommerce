@@ -3,34 +3,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../features/auth/authSlice";
-
 import { Link } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    bday: "",
+    name: "",
+    birthday: "",
     sex: "",
     email: "",
-    address: "",
-    province: "",
-    city_municipality: "",
-    barangay: "",
+    address1: "",
+    address2: "",
+    postalCode: "",
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
   });
 
   const {
-    firstName,
-    lastName,
-    bday,
+    name,
+    birthday,
     sex,
     email,
-    address,
-    province,
-    city_municipality,
-    barangay,
+    address1,
+    address2,
+    postalCode,
+    phoneNumber,
     password,
     confirmPassword,
   } = formData;
@@ -68,21 +66,26 @@ const Signup = () => {
       toast.error("Passwords do not match");
     } else {
       const userData = {
-        firstName,
-        lastName,
-        email,
-        password,
-        bday,
+        name,
+        birthday,
         sex,
-        address,
-        city_municipality,
-        province,
-        barangay,
+        email,
+        address1,
+        address2,
+        postalCode,
+        phoneNumber,
+        password,
+        confirmPassword,
       };
+      console.log(userData);
 
       dispatch(register(userData));
     }
   };
+
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <div className="signup">
@@ -102,29 +105,19 @@ const Signup = () => {
             <div className="fw-bold">Personal Information</div>
             <hr />
             <div className="col-6 mb-3">
-              <label className="form-label">First Name</label>
+              <label className="form-label">Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="firstName"
-                name="firstName"
-                value={firstName}
+                id="name"
+                name="name"
+                value={name}
                 onChange={onChange}
+                required
               />
             </div>
             <div className="col-6 mb-3">
-              <label className="form-label">Last Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="lastName"
-                name="lastName"
-                value={lastName}
-                onChange={onChange}
-              />
-            </div>
-            <div className="col-6 mb-3">
-              <label className="form-label">Email address</label>
+              <label className="form-label">Email Address</label>
               <input
                 type="email"
                 className="form-control"
@@ -132,30 +125,32 @@ const Signup = () => {
                 name="email"
                 value={email}
                 onChange={onChange}
+                required
               />
             </div>
-            <div className="col-3 mb-3">
+            <div className="col-6 mb-3">
               <label className="form-label">Birthday</label>
               <input
                 type="date"
                 className="form-control"
-                id="bday"
-                name="bday"
-                value={bday}
+                id="birthday"
+                name="birthday"
+                value={birthday}
                 onChange={onChange}
+                required
               />
             </div>
-            <div className="col-3 mb-3">
-              <label className="form-label">Sex</label>
+            <div className="col-6 mb-3">
+              <label className="form-label">Birthday</label>
               <select
                 className="form-select"
-                defaultValue={"DEFAULT"}
                 id="sex"
                 name="sex"
                 value={sex}
                 onChange={onChange}
+                required
               >
-                <option value="DEFAULT" disabled>
+                <option value="" disabled>
                   Please select your sex.
                 </option>
                 <option value="M">Male</option>
@@ -171,6 +166,7 @@ const Signup = () => {
                 name="password"
                 value={password}
                 onChange={onChange}
+                required
               />
             </div>
             <div className="col-6 mb-3">
@@ -182,6 +178,7 @@ const Signup = () => {
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={onChange}
+                required
               />
             </div>
 
@@ -190,48 +187,56 @@ const Signup = () => {
 
             <div className="col-6 mb-3">
               <label className="form-label">
-                House/Unit/Flr #, Bldg Name, Blk or Lot #
+                Region, Province, City, Barangay
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="address"
-                name="address"
-                value={address}
+                id="address1"
+                name="address1"
+                value={address1}
                 onChange={onChange}
+                required
               />
             </div>
+
             <div className="col-6 mb-3">
-              <label className="form-label">Province</label>
+              <label className="form-label">
+                Street Name, Building, House No.
+              </label>
               <input
                 type="text"
                 className="form-control"
-                id="city_municipality"
-                name="city_municipality"
-                value={city_municipality}
+                id="address2"
+                name="address2"
+                value={address2}
                 onChange={onChange}
+                required
               />
             </div>
             <div className="col-6 mb-3">
-              <label className="form-label">City/Municipality</label>
+              <label className="form-label">Postal Code</label>
               <input
                 type="text"
                 className="form-control"
-                id="province"
-                name="province"
-                value={province}
+                id="postalCode"
+                name="postalCode"
+                value={postalCode}
                 onChange={onChange}
+                required
               />
             </div>
+
             <div className="col-6 mb-3">
-              <label className="form-label">Barangay</label>
+              <label className="form-label">Phone Number</label>
               <input
                 type="text"
                 className="form-control"
-                id="barangay"
-                name="barangay"
-                value={barangay}
+                id="phoneNumber"
+                name="phoneNumber"
+                value={phoneNumber}
                 onChange={onChange}
+                required
               />
             </div>
 

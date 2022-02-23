@@ -7,9 +7,9 @@ const User = require("../models/userModel");
 // @route   POST /api/users/
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { name, birthday, sex, email, phoneNumber, password } = req.body;
 
-  if (!firstName || !lastName || !email || !password) {
+  if (!name || !birthday || !sex || !email || !phoneNumber || !password) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
@@ -28,18 +28,22 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // create user
   const user = await User.create({
-    firstName,
-    lastName,
+    name,
+    birthday,
+    sex,
     email,
+    phoneNumber,
     password: hashedPassword,
   });
 
   if (user) {
     res.status(201).json({
       _id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      name: user.name,
+      birthday: user.birthday,
+      sex: user.sex,
       email: user.email,
+      phoneNumber: user.phoneNumber,
       token: generateToken(user._id),
     });
   } else {
@@ -62,9 +66,11 @@ const loginUser = asyncHandler(async (req, res) => {
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      name: user.name,
+      birthday: user.birthday,
+      sex: user.sex,
       email: user.email,
+      phoneNumber: user.phoneNumber,
       token: generateToken(user._id),
     });
   } else {
@@ -79,12 +85,11 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/user
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
-  const { _id, firstName, lastName, email } = await User.findById(req.user.id);
+  const { _id, name, email } = await User.findById(req.user.id);
 
   res.status(200).json({
     id: _id,
-    firstName,
-    lastName,
+    name,
     email,
   });
 });
