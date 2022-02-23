@@ -101,7 +101,7 @@ const Signup = () => {
       };
       console.log(userData);
 
-      // dispatch(register(userData));
+      dispatch(register(userData));
     }
   };
 
