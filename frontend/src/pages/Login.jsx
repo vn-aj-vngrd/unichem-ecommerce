@@ -23,8 +23,18 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
+
+    document.title = "Unichem | Log in";
 
     if (isSuccess || user) {
       navigate("/");
@@ -79,6 +89,7 @@ const Login = () => {
               name="email"
               value={email}
               onChange={onChange}
+              required
             />
           </div>
           <div className="mb-3">
@@ -90,6 +101,7 @@ const Login = () => {
               name="password"
               value={password}
               onChange={onChange}
+              required
             />
           </div>
           <div className="button text-center pt-1">

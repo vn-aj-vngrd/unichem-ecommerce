@@ -16,13 +16,24 @@ import Manage from "./pages/Account/Manage";
 import Order from "./pages/Account/Order";
 import Reviews from "./pages/Account/Reviews";
 import ScrollToTop from "./components/ScrollToTop";
-
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const App = () => {
   return (
     <>
       <ScrollToTop />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -39,7 +50,6 @@ export const App = () => {
         <Route path="reviews" element={<Reviews />} />
       </Routes>
       <Footer />
-      <ToastContainer />
     </>
   );
 };
