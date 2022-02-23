@@ -13,7 +13,7 @@ const Trending = () => {
           <div className="row">
             <div className="col-12">
               <div className="section-title">
-                <h2>Trending Product</h2>
+                <h2>Trending Products</h2>
                 <p>Here are the trending products of the month.</p>
               </div>
             </div>
