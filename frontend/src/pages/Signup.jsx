@@ -57,6 +57,7 @@ const Signup = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        theme: "colored",
       });
     }
 
@@ -81,6 +82,7 @@ const Signup = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        theme: "colored",
       });
     } else {
       const userData = {

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -18,9 +19,21 @@ import Reviews from "./pages/Account/Reviews";
 import ScrollToTop from "./components/ScrollToTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "./components/Spinner";
 
 export const App = () => {
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoading = () => {
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("load", handleLoading);
+    return () => window.removeEventListener("load", handleLoading);
+  }, []);
+
+  return !isLoading ? (
     <>
       <ScrollToTop />
       <ToastContainer
@@ -50,6 +63,10 @@ export const App = () => {
         <Route path="reviews" element={<Reviews />} />
       </Routes>
       <Footer />
+    </>
+  ) : (
+    <>
+      <Spinner />
     </>
   );
 };
