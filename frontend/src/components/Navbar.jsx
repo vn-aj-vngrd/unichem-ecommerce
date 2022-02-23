@@ -93,7 +93,7 @@ const Navbar = () => {
                       </Link>
                       <ul className="inner-sub-category">
                         <li>
-                          <Link to="/construction">Construction </Link>
+                          <Link to="/products">Construction</Link>
                         </li>
                         <li>
                           <Link to="/products">Adhesives</Link>
