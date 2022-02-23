@@ -4984,9 +4984,8 @@ ol {
   height: 50px;
 }
 
-/* Transparent Overlay */
 .loading:before {
-  content: '';
+  content: "";
   display: block;
   position: fixed;
   top: 0;

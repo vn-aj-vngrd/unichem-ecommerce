@@ -3180,7 +3180,7 @@ ol {
 
 .hero-area .hero-small-banner.style2 {
   margin-top: 12px;
-  background-image: url("../images/hero/small-banner-bg.png");
+  /* background-image: url("../images/hero/small-banner-bg.png"); */
   background-color: #081828;
 }
 
