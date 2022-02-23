@@ -9,7 +9,7 @@ const Construction = () => {
   return (
     <div>
       <div className="product-grid">
-        <label className="sort-element" for="sorting">
+        <label className="sort-element" >
           Sort by:{" "}
         </label>
         <select className="form-select sort-element" id="sorting">
@@ -61,7 +61,7 @@ const Construction = () => {
               <a
                 className="page-link"
                 href="/"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-disabled="true"
               >
                 Previous

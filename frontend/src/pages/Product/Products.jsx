@@ -8,7 +8,7 @@ const Products = () => {
   });
 
   return (
-    <div class="container main-product-section mt-200">
+    <div className="container main-product-section mt-200">
       <Sidebar />
       <Product />
     </div>

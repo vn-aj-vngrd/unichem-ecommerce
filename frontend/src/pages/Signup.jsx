@@ -99,7 +99,7 @@ const Signup = () => {
         password,
         confirmPassword,
       };
-      console.log(userData);
+      // console.log(userData);
 
       dispatch(register(userData));
     }

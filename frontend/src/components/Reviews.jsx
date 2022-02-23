@@ -161,42 +161,42 @@ const Reviews = () => {
       </div>
 
       <div
-        class="modal fade review-modal"
+        className="modal fade review-modal"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Leave a Review
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="review-subject">Subject</label>
+            <div className="modal-body">
+              <div className="row">
+                <div className="col-sm-6">
+                  <div className="form-group">
+                    <label>Subject</label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       id="review-subject"
                       required
                     />
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="review-rating">Rating</label>
-                    <select class="form-select" id="review-rating">
+                <div className="col-sm-6">
+                  <div className="form-group">
+                    <label>Rating</label>
+                    <select className="form-select" id="review-rating">
                       <option>5 Stars</option>
                       <option>4 Stars</option>
                       <option>3 Stars</option>
@@ -206,18 +206,18 @@ const Reviews = () => {
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="review-message">Review</label>
+              <div className="form-group">
+                <label>Review</label>
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   id="review-message"
                   rows="8"
                   required
                 ></textarea>
               </div>
             </div>
-            <div class="modal-footer button">
-              <button type="button" class="btn">
+            <div className="modal-footer button">
+              <button type="button" className="btn">
                 Submit Review
               </button>
             </div>
