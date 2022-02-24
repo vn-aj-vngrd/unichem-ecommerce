@@ -55,7 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user && userAddress) {
-    res.status(201).json({
+    return res.status(201).json({
       _id: user.id,
       name: user.name,
       birthday: user.birthday,
@@ -70,7 +70,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("User could not be created");
   }
 
-  res.json({ message: "User Registered" });
+  // res.json({ message: "User Registered" });
 });
 
 // @desc    Authenticate a user
@@ -83,7 +83,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    res.json({
+    return res.json({
       _id: user.id,
       name: user.name,
       email: user.email,
@@ -94,19 +94,20 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid credentials");
   }
 
-  res.json({ message: "User Logged In" });
+  // return res.json({ message: "User Logged In" });
 });
 
 // @desc    Get user data
 // @route   GET /api/users/user
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
-  const { _id, name, email, birthday, sex, phoneNumber } =
-    await User.findById(req.user.id);
+  const { _id, name, email, birthday, sex, phoneNumber } = await User.findById(
+    req.user.id
+  );
 
   const userAddress = await Address.find({ userAddress: req.user.id });
 
-  res.status(200).json({
+  return res.status(200).json({
     id: _id,
     name,
     email,
