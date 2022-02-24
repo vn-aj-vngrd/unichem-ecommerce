@@ -43,11 +43,18 @@ const registerUser = asyncHandler(async (req, res) => {
     sex,
     email,
     phoneNumber,
-    address,
     password: hashedPassword,
   });
 
-  if (user && address) {
+  const userAddress = await Address.create({
+    userAddress: user.id,
+    address1: address.address1,
+    address2: address.address2,
+    postalCode: address.postalCode,
+    addressType: address.addressType,
+  });
+
+  if (user && userAddress) {
     res.status(201).json({
       _id: user.id,
       name: user.name,
@@ -56,7 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       phoneNumber: user.phoneNumber,
       token: generateToken(user._id),
-      address: user.address,
+      address: [userAddress],
     });
   } else {
     res.status(400);
@@ -79,12 +86,8 @@ const loginUser = asyncHandler(async (req, res) => {
     res.json({
       _id: user.id,
       name: user.name,
-      birthday: user.birthday,
-      sex: user.sex,
       email: user.email,
-      phoneNumber: user.phoneNumber,
       token: generateToken(user._id),
-      address: user.address,
     });
   } else {
     res.status(400);
@@ -98,8 +101,10 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/user
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
-  const { _id, name, email, birthday, sex, phoneNumber, address } =
+  const { _id, name, email, birthday, sex, phoneNumber } =
     await User.findById(req.user.id);
+
+  const userAddress = await Address.find({ userAddress: req.user.id });
 
   res.status(200).json({
     id: _id,
@@ -108,7 +113,7 @@ const getUser = asyncHandler(async (req, res) => {
     birthday,
     sex,
     phoneNumber,
-    address,
+    userAddress,
   });
 });
 

@@ -85,6 +85,7 @@ const Signup = () => {
         theme: "colored",
       });
     } else {
+      const addressType = "default";
       const userData = {
         name,
         birthday,
@@ -94,6 +95,7 @@ const Signup = () => {
           address1,
           address2,
           postalCode,
+          addressType,
         },
         phoneNumber,
         password,
