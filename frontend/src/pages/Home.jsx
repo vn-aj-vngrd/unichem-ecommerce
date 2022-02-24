@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import Feature from "../components/Feature";
-import Trending from "../components/Trending";
+import Hero from "../components/Hero";
+import Featured from "../components/Featured";
 import Services from "../components/Services";
 import Preview from "../components/Preview";
 
@@ -11,8 +11,8 @@ const Home = () => {
 
   return (
     <>
-      <Feature />
-      <Trending />
+      <Hero />
+      <Featured />
       <Preview />
       <Services />
     </>

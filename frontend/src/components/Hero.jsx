@@ -8,9 +8,9 @@ import "swiper/css";
 
 import { Autoplay, Pagination } from "swiper";
 
-const featureTest = [1, 2, 3, 4, 5];
+const HeroTest = [1, 2, 3, 4, 5];
 
-const Feature = () => {
+const Hero = () => {
   return (
     <div>
       <section className="hero-area">
@@ -31,7 +31,7 @@ const Feature = () => {
                   modules={[Autoplay, Pagination]}
                   className="mySwiper"
                 >
-                  {featureTest.map((count, index) => (
+                  {HeroTest.map((count, index) => (
                     <SwiperSlide key={index}>
                       <div
                         className="single-slider"
@@ -70,4 +70,4 @@ const Feature = () => {
   );
 };
 
-export default Feature;
+export default Hero;

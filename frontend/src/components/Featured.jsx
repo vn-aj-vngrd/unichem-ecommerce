@@ -5,7 +5,7 @@ const count = [1, 2, 3, 4, 5, 6, 7, 8];
 const star = 4.5;
 const reviews = 5;
 
-const Trending = () => {
+const Featured = () => {
   return (
     <div>
       <section className="trending-product section">
@@ -13,8 +13,8 @@ const Trending = () => {
           <div className="row">
             <div className="col-12">
               <div className="section-title">
-                <h2>Trending Products</h2>
-                <p>Here are the trending products of the month.</p>
+                <h2>Featured Products</h2>
+                <p>Here are the Featured products of Unichem.</p>
               </div>
             </div>
           </div>
@@ -54,4 +54,4 @@ const Trending = () => {
   );
 };
 
-export default Trending;
+export default Featured;
