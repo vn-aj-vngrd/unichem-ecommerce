@@ -6,7 +6,7 @@ const Specifications = () => {
           <div className="row">
             <div className="col-lg-6 col-12">
               <div className="info-body custom-responsive-margin">
-                <h4>Details</h4>
+                <h4>Description</h4>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -15,14 +15,6 @@ const Specifications = () => {
                   irure dolor in reprehenderit in voluptate velit esse cillum
                   dolore eu fugiat.
                 </p>
-                <h4>Features</h4>
-                <ul className="features">
-                  <li>Capture 4K30 Video and 12MP Photos</li>
-                  <li>Game-Style Controller with Touchscreen</li>
-                  <li>View Live Camera Feed</li>
-                  <li>Full Control of HERO6 Black</li>
-                  <li>Use App for Dedicated Camera Operation</li>
-                </ul>
               </div>
             </div>
             <div className="col-lg-6 col-12">
@@ -43,21 +35,6 @@ const Specifications = () => {
                   </li>
                   <li>
                     <span>Manufacturer:</span> GoPro, USA
-                  </li>
-                </ul>
-                <h4>Shipping Options:</h4>
-                <ul className="normal-list">
-                  <li>
-                    <span>Courier:</span> 2 - 4 days, $22.50
-                  </li>
-                  <li>
-                    <span>Local Shipping:</span> up to one week, $10.00
-                  </li>
-                  <li>
-                    <span>UPS Ground Shipping:</span> 4 - 6 days, $18.00
-                  </li>
-                  <li>
-                    <span>Unishop Global Export:</span> 3 - 4 days, $25.00
                   </li>
                 </ul>
               </div>
