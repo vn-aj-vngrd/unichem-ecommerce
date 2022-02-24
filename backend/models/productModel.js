@@ -38,6 +38,10 @@ const productSchema = mongoose.Schema(
       type: Number,
       required: [true, "Product Quantity is required"],
     },
+    featured: {
+      type: Boolean,
+      defualt: false,
+    },
   },
   { timestamps: true }
 );

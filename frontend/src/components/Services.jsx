@@ -1,6 +1,6 @@
 const Services = () => {
   return (
-    <section className="shipping-info">
+    <section className="shipping-info section">
       <div className="section-title">
         <h2>Our Services</h2>
         <p>We present our online premium services.</p>
