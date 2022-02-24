@@ -54,7 +54,11 @@ const Featured = () => {
                     <div className="product-image">
                       <img src="assets/images/products/product-1.jpg" alt="#" />
                       <div className="button">
-                        <Link to="/product-details" className="btn">
+                        <Link
+                          to={"product-details"}
+                          state={{ product: product }}
+                          className="btn"
+                        >
                           <i className="lni lni-eye"></i> View
                         </Link>
                       </div>
@@ -65,7 +69,7 @@ const Featured = () => {
                         <span>{product.productName}</span>
                       </h4>
 
-                      <Star star={1} reviews={1} />
+                      <Star star={3} reviews={1} />
 
                       <hr />
 

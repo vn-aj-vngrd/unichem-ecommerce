@@ -10,15 +10,15 @@ import "swiper/css/navigation";
 import "swiper/css";
 
 import { Autoplay, Pagination } from "swiper";
+import Star from "./Star";
 
 const productImageTest = [1, 2, 3, 4, 5];
-const max = 10;
 
-const Details = () => {
+const Details = ({ product }) => {
   const [counter, setCounter] = useState(1);
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
-  if (counter < max) increment = () => setCounter(counter + 1);
+  if (counter < product.quantity) increment = () => setCounter(counter + 1);
   let navigate = useNavigate();
   let addToCart = (event) => {
     event.preventDefault();
@@ -53,11 +53,10 @@ const Details = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="container">
         <Breadcrumb />
       </div>
-
       <div className="item-details">
         <div className="container">
           <div className="top-area">
@@ -101,23 +100,31 @@ const Details = () => {
               </div>
               <div className="col-lg-6 col-md-12 col-12">
                 <div className="product-info">
-                  <h2 className="title">Product Title</h2>
+                  <h2 className="title">{product.productName}</h2>
                   <p className="category">
                     <i className="lni lni-package"></i> Category:
-                    <a href="/">Test</a>
+                    <a href="/">{product.category}</a>
+                    <Star star={1} reviews={1} />
                   </p>
-                  <h3 className="price">₱850</h3>
-                  <p className="info-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
+
+                  <h3 className="price mt-2">₱{product.price}</h3>
+                  {product.quantity === 1 && (
+                    <p>{product.quantity} item left</p>
+                  )}
+
+                  {product.quantity > 1 && (
+                    <p>{product.quantity} items available</p>
+                  )}
+
+                  {product.quantity === 0 && <p>Item is not available</p>}
+
+                  <hr className="mt-3" />
 
                   <div className="d-flex flex-row bd-highlight w-100">
                     <div className="pe-2 bd-highlight">
                       <div className="form-group">
                         <label>Color / Type</label>
-                        <select className="form-control">
+                        <select className="form-control text-muted">
                           <option>test 1</option>
                           <option>test 2</option>
                           <option>test 3</option>
@@ -175,7 +182,7 @@ const Details = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
