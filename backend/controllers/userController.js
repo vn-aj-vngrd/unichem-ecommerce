@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 const Address = require("../models/addressModel");
 
 // @desc    Register user
-// @route   POST /api/users/
+// @route   POST /api/users/signup
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, birthday, sex, email, phoneNumber, address, password } =

@@ -12,15 +12,19 @@ const productSchema = mongoose.Schema(
     },
     category: {
       type: String,
-      required: [true, "Product Brand is required"],
+      required: [true, "Product Category is required"],
+    },
+    type: {
+      type: Array,
+      required: [true, "Product Type is required"],
     },
     description: {
       type: String,
       required: [true, "Product Description is required"],
     },
-    type: {
+    specifications: {
       type: Array,
-      required: [true, "Product Type is required"],
+      required: [true, "Product Specifications is required"],
     },
     image: {
       type: String,
