@@ -79,17 +79,17 @@ const About = () => {
 
                     <ul class="dev-social">
                       <li>
-                        <a href="javascript:void(0)">
+                        <a href="https://www.facebook.com/niko.laiiift">
                           <i class="lni lni-facebook-filled"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="javascript:void(0)">
+                        <a href="https://github.com/nikolaiii01">
                           <i class="lni lni-github-original"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="javascript:void(0)">
+                        <a href="https://www.instagram.com/nikolaiiift/">
                           <i class="lni lni-instagram-filled"></i>
                         </a>
                       </li>
