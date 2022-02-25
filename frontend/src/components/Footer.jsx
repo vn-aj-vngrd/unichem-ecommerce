@@ -11,15 +11,21 @@ const Footer = () => {
                 <div className="col-lg-4 col-md-6 col-12">
                   <div className="single-footer f-contact">
                     <h3>Stay In Touch</h3>
-                    <p className="phone">Phone: +1 (900) 33 169 7720</p>
+                    <p className="phone">Phone: (032) 345 6589 / (032) 345 1672</p>
                     <ul>
                       <li>Monday-Friday: 9.00 am - 8.00 pm</li>
                       <li>Saturday: 10.00 am - 6.00 pm</li>
                     </ul>
                     <p className="mail">
-                      <a href="mailto:unichem@test.com">
-                        Email: unichem@test.com
+                      Yahoo:
+                      <a href="mailto:unichem_@yahoo.com">
+                         unichem_@yahoo.com
+                      </a><br></br>
+                      G-mail:
+                      <a href="mailto:unichemsales@gmail.com">
+                         unichemsales@gmail.com<br></br>
                       </a>
+                      
                     </p>
                   </div>
                 </div>
