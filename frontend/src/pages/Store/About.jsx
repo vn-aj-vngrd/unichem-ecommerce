@@ -74,7 +74,7 @@ const About = () => {
                 </div>
                 <div class="content">
                   <div class="info mt-20">
-                    <h6>Nikolai, Tumapon</h6>
+                    <h6>Tumapon, Nikolai Franz</h6>
                     <p>Founder, CEO</p>
 
                     <ul class="dev-social">
@@ -108,7 +108,7 @@ const About = () => {
                 </div>
                 <div class="content">
                   <div class="info mt-20">
-                    <h6>Gelacio Roque</h6>
+                    <h6>Gelacio, Roque</h6>
                     <p>Financial Director</p>
 
                     <ul class="dev-social">
