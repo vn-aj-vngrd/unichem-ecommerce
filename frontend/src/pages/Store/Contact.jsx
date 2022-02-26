@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   useEffect(() => {
-    document.title = "Unichem | Products";
+    document.title = "Unichem | Contact";
   });
 
   return (
