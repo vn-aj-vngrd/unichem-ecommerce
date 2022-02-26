@@ -19,6 +19,17 @@ const Details = ({ product }) => {
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
   if (counter < product.quantity) increment = () => setCounter(counter + 1);
+  let handleChange = (e) => {
+    setCounter(e.target.value);
+
+    if (e.target.value > product.quantity) {
+      setCounter(product.quantity);
+    }
+    if (e.target.value < 0) {
+      setCounter(1);
+    }
+  };
+
   let navigate = useNavigate();
   let addToCart = (event) => {
     event.preventDefault();
@@ -101,22 +112,22 @@ const Details = ({ product }) => {
               <div className="col-lg-6 col-md-12 col-12">
                 <div className="product-info">
                   <h2 className="title">{product.productName}</h2>
-                  <p className="category">
+                  <div className="category">
                     <i className="lni lni-package"></i> Category:
                     <a href="/">{product.category}</a>
                     <Star star={1} reviews={1} />
-                  </p>
+                  </div>
 
                   <h3 className="price mt-2">₱{product.price}</h3>
                   {product.quantity === 1 && (
-                    <p>{product.quantity} item left</p>
+                    <div>{product.quantity} item left</div>
                   )}
 
                   {product.quantity > 1 && (
-                    <p>{product.quantity} items available</p>
+                    <div>{product.quantity} items available</div>
                   )}
 
-                  {product.quantity === 0 && <p>Item is not available</p>}
+                  {product.quantity === 0 && <div>Item is not available</div>}
 
                   <hr className="mt-3" />
 
@@ -146,9 +157,9 @@ const Details = ({ product }) => {
                             value={counter}
                             step="0.1"
                             min="1"
-                            max=""
+                            max={product.quantity}
                             name="quantity"
-                            readOnly
+                            onChange={handleChange}
                           />
                           <button className="quantity-btn" onClick={increment}>
                             <svg viewBox="0 0 426.66667 426.66667">

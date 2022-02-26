@@ -2,10 +2,21 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
+  const quantity = 5; //test
   const [counter, setCounter] = useState(1);
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
-  if (counter < 6) increment = () => setCounter(counter + 1);
+  if (counter < quantity) increment = () => setCounter(counter + 1);
+  let handleChange = (e) => {
+    setCounter(e.target.value);
+
+    if (e.target.value > quantity) {
+      setCounter(quantity);
+    }
+    if (e.target.value < 0) {
+      setCounter(1);
+    }
+  };
 
   useEffect(() => {
     document.title = "Unichem | Cart";
@@ -21,7 +32,7 @@ const Cart = () => {
               <div className="col-lg-4 col-md-3 col-12">
                 <p>Product Name</p>
               </div>
-              <div className="col-lg-2 col-md-3 col-12 pe-4 ps-4">
+              <div className="col-lg-2 col-md-3 col-12">
                 <p>Quantity</p>
               </div>
               <div className="col-lg-2 col-md-2 col-12">
@@ -54,7 +65,7 @@ const Cart = () => {
                   </span>
                 </p>
               </div>
-              <div className="col-lg-2 col-md-3 col-12 pe-4 ps-4">
+              <div className="col-lg-2 col-md-3 col-12">
                 <div className="quantity-control text-center">
                   <button className="quantity-btn" onClick={decrement}>
                     <svg viewBox="0 0 409.6 409.6">
@@ -66,6 +77,9 @@ const Cart = () => {
                     className="quantity-input"
                     value={counter}
                     name="quantity"
+                    min="1"
+                    max={quantity}
+                    onChange={handleChange}
                   />
                   <button className="quantity-btn" onClick={increment}>
                     <svg viewBox="0 0 426.66667 426.66667">
