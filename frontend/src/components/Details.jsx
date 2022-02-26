@@ -93,12 +93,9 @@ const Details = ({ product }) => {
                           <SwiperSlide key={index}>
                             <div
                               className="single-slider"
-                              style={{
-                                backgroundImage: `url(assets/images/hero/slider-bg1.jpg)`,
-                              }}
                             ></div>
                             <img
-                              src="assets/images/product-details/01.jpg"
+                              src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
                               id="current"
                               alt="#"
                             />
@@ -136,9 +133,9 @@ const Details = ({ product }) => {
                       <div className="form-group">
                         <label>Color / Type</label>
                         <select className="form-control text-muted">
-                          <option>test 1</option>
-                          <option>test 2</option>
-                          <option>test 3</option>
+                          {product.types.map((type, index) => (
+                            <option key={index}>{type}</option>
+                          ))}
                         </select>
                       </div>
                     </div>

@@ -14,7 +14,7 @@ const productSchema = mongoose.Schema(
       type: String,
       required: [true, "Product Category is required"],
     },
-    type: {
+    types: {
       type: Array,
       required: [true, "Product Type is required"],
     },
@@ -30,7 +30,7 @@ const productSchema = mongoose.Schema(
       type: String,
       required: [true, "Product Image is required"],
     },
-    quantity: {
+    quantities: {
       type: Number,
       required: [true, "Product Quantity is required"],
     },

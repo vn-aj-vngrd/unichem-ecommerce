@@ -15,8 +15,8 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Details product={product}/>
-      <Specifications />
+      <Details product={product} />
+      <Specifications product={product} />
       <Reviews />
     </>
   );
