@@ -3371,6 +3371,7 @@ ol {
 /* End Single Product */
 .trending-product {
   background-color: #f9f9f9;
+  padding-top: 90px;
 }
 
 .trending-product .section-title {
@@ -6260,6 +6261,7 @@ ol {
 
 .featured-categories {
   padding-bottom: 90px;
+  padding-top: 90px;
 }
 
 .featured-categories .section-title {

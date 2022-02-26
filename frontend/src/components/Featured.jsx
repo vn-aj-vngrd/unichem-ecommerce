@@ -37,7 +37,7 @@ const Featured = () => {
   return (
     <>
       {featuredProducts.length > 0 ? (
-        <section className="trending-product section">
+        <section className="trending-product">
           <div className="container">
             <div className="row">
               <div className="col-12">
