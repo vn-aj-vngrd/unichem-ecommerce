@@ -67,7 +67,7 @@ const Login = () => {
   }
 
   return (
-    <div className="login">
+    <div className="body-content">
       <div className="container">
         <div className="row">
           <div className="col-12">

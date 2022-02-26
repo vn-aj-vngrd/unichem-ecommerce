@@ -6,72 +6,107 @@ const Cart = () => {
   });
 
   return (
-    // margin-top 200 so that container may be visible
-    // loop for x items in cart
-    <div className="container mt-200">
-      <div className="section-title">
-        <h2>Cart</h2>
-      </div>
-      
-      <div className="row mt-4">
-        <div className="col text-center">
-          <img src="assets/images/products/product-2.jpg" className="product-image w-50"></img>
-        </div>
-        <div className="col text-center mt-5">
-          <h6>Loctite 243</h6>
-        </div>
-        <div className="col text-center mt-5">
-          <h6>₱1,500</h6>
-        </div>
-        <div className="col text-center mt-5">
-        <button type="button" class="btn btn-outline-danger btn-sm">Remove</button>
-        </div>
-      </div>
-      <hr/>
+    <div class="shopping-cart body-content">
+      <div class="container">
+        <div class="cart-list-head">
+          <div class="cart-list-title">
+            <div class="row">
+              <div class="col-lg-1 col-md-1 col-12"></div>
+              <div class="col-lg-4 col-md-3 col-12">
+                <p>Product Name</p>
+              </div>
+              <div class="col-lg-2 col-md-2 col-12">
+                <p>Quantity</p>
+              </div>
+              <div class="col-lg-2 col-md-2 col-12">
+                <p>Subtotal</p>
+              </div>
+              <div class="col-lg-1 col-md-2 col-12">
+                <p>Remove</p>
+              </div>
+            </div>
+          </div>
 
-      <div className="row mt-4">
-        <div className="col text-center">
-          <img src="assets/images/products/product-1.jpg" className="product-image w-50"></img>
+          <div class="cart-single-list">
+            <div class="row align-items-center">
+              <div class="col-lg-1 col-md-1 col-12">
+                <a href="product-details.html">
+                  <img
+                    src="https://dm.henkel-dam.com/is/image/henkel/Loctite_271_232077_APAC_50ml_2019_12.15_QRcode?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
+                    alt="#"
+                  />
+                </a>
+              </div>
+              <div class="col-lg-4 col-md-3 col-12">
+                <h5 class="product-name">
+                  <a href="product-details.html">Test</a>
+                </h5>
+                <p class="product-des">
+                  <span>
+                    <b>Type / Color:</b> test
+                  </span>
+                </p>
+              </div>
+              <div class="col-lg-2 col-md-2 col-12">
+                <div class="count-input">
+                  <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-12">
+                <p>$910.00</p>
+              </div>
+              <div class="col-lg-2 col-md-2 col-12">
+                <p>$29.00</p>
+              </div>
+              <div class="col-lg-1 col-md-2 col-12">
+                <a class="remove-item" href="/">
+                  <i class="lni lni-close"></i>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="col text-center mt-5">
-          <h6>Loctite 243</h6>
-        </div>
-        <div className="col text-center mt-5">
-          <h6>₱1,500</h6>
-        </div>
-        <div className="col text-center mt-5">
-        <button type="button" class="btn btn-outline-danger btn-sm">Remove</button>
+        <div class="row">
+          <div class="col-12">
+            <div class="total-amount">
+              <div class="row">
+                <div class="col-lg-8 col-md-6 col-12"></div>
+                <div class="col-lg-4 col-md-6 col-12">
+                  <div class="right">
+                    <ul>
+                      <li>
+                        Cart Subtotal<span>$2560.00</span>
+                      </li>
+                      <li>
+                        Shipping Fee<span>Free</span>
+                      </li>
+                      <li class="last">
+                        Total Payment<span>$2531.00</span>
+                      </li>
+                    </ul>
+                    <div class="button">
+                      <a href="checkout.html" class="btn">
+                        Checkout
+                      </a>
+                      <a href="product-grids.html" class="btn btn-alt">
+                        Continue shopping
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <hr/>
-
-      <div className="row mt-4">
-        <div className="col text-center">
-          <img src="assets/images/products/product-3.jpg" className="product-image w-50"></img>
-        </div>
-        <div className="col text-center mt-5">
-          <h6>Loctite 243</h6>
-        </div>
-        <div className="col text-center mt-5">
-          <h6>₱1,500</h6>
-        </div>
-        <div className="col text-center mt-5">
-        <button type="button" class="btn btn-outline-danger btn-sm">Remove</button>
-        </div>
-      </div>
-      <hr/>
-      
-      <div className="row mt-4 mb-5">
-        <div className="col text-center">
-          <h4>Total: ₱1</h4>
-        </div>
-        <div className="col text-center">
-        <button type="button" class="btn btn-outline-success">Checkout</button>
-        </div>
-      </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

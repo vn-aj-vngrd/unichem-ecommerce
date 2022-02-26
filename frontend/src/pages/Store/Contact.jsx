@@ -7,146 +7,143 @@ const Login = () => {
   });
 
   return (
-    <div className="mt-225 mb-110">
-      <div className="row">
-        <div className="col-12">
-          <div className="section-title">
-            <h2>Contact Us</h2>
-            <p>Our company is actively helping our customers drive results with transactions everyday. <br></br> Please call our toll free number or use the form on this page if you have any questions abou our product or services.</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="container main-product-section ">
-        <div className="contact-sidebar single-widget search">
-          <div class="">
-            <div class="single-info-head">
-              <div class="single-info">
-                <i class="lni lni-map"></i>
-                <h5 className="mb-10">Address</h5>
-
-                <ul>
-                  <li>Room 212 N & N Cortes Arcade A.C. Cortes Avenue, Ibabao Mandaue City, Cebu, 6014 Philippines</li>
-                </ul>
+    <>
+      <section id="contact-us" className="contact-us">
+        <div className="container">
+          <div className="contact-head">
+            <div className="row">
+              <div className="col-12">
+                <div className="section-title">
+                  <h2>Contact Us</h2>
+                  <p>
+                    Our company is actively helping our customers drive results
+                    with transactions everyday.
+                  </p>
+                </div>
               </div>
-              <hr></hr>
-              <div class="single-info">
-                <i class="lni lni-phone"></i>
-                <h5 className="mb-10">Call us on</h5>
+            </div>
+            <div className="contact-info">
+              <div className="row">
+                <div className="col-lg-4 col-md-12 col-12">
+                  <div className="single-info-head">
+                    <div className="single-info">
+                      <i className="lni lni-map text-danger"></i>
+                      <h6>Address</h6>
+                      <ul>
+                        <li>
+                          Room 212 N & N Cortes Arcade
+                          <br /> A.C. Cortes Avenue, Ibabao
+                          <br /> Mandaue City, Cebu, 6014 Philippines
+                        </li>
+                      </ul>
+                    </div>
 
-                <ul>
-                  <li>
-                    <Link to="" className="sidebar-nav">
-                      (032) 345 6589
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="" className="sidebar-nav">(032) 345 1672</Link>
-                  </li>
-                </ul>
-              </div>
-              <hr></hr>
-              <div class="single-info">
-                <i class="lni lni-envelope"></i>
-                <h5 className="mb-10">Mail at</h5>
+                    <div className="single-info">
+                      <i className="lni lni-phone text-danger"></i>
+                      <h6>Telephone</h6>
+                      <ul>
+                        <li>
+                          <a href="tel:+(032) 345 6589">(032) 345 6589</a>
+                        </li>
+                        <li>
+                          <a href="tel:+(032) 345 1672">(032) 345 1672</a>
+                        </li>
+                      </ul>
+                    </div>
 
-                <ul>
-                  <li>
-                    <Link to="" className="sidebar-nav">
-                      unichemsales@gmail.com
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="" className="sidebar-nav">
-                      unichem_@yahoo.com
-                    </Link>
-                  </li>
-                </ul>
+                    <div className="single-info">
+                      <i className="lni lni-envelope text-danger"></i>
+                      <h6>Email</h6>
+                      <ul>
+                        <li>
+                          <a href="mailto:unichemsales@gmail.com">
+                            unichemsales@gmail.com
+                          </a>
+                        </li>
+                        <li>
+                          <a href="mailto:unichem_@yahoo.com">
+                            unichem_@yahoo.com
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-8 col-md-12 col-12">
+                  <div className="contact-form-head">
+                    <div className="form-main">
+                      <form
+                        className="form"
+                        method="post"
+                        action="assets/mail/mail.php"
+                      >
+                        <div className="row">
+                          <div className="col-lg-6 col-md-6 col-12">
+                            <div className="form-group">
+                              <input
+                                name="name"
+                                type="text"
+                                placeholder="Your Name"
+                                required="required"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6 col-md-6 col-12">
+                            <div className="form-group">
+                              <input
+                                name="subject"
+                                type="text"
+                                placeholder="Your Subject"
+                                required="required"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6 col-md-6 col-12">
+                            <div className="form-group">
+                              <input
+                                name="email"
+                                type="email"
+                                placeholder="Your Email"
+                                required="required"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6 col-md-6 col-12">
+                            <div className="form-group">
+                              <input
+                                name="phone"
+                                type="text"
+                                placeholder="Your Phone"
+                                required="required"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-12">
+                            <div className="form-group message">
+                              <textarea
+                                name="message"
+                                placeholder="Your Message"
+                              ></textarea>
+                            </div>
+                          </div>
+                          <div className="col-12">
+                            <div className="form-group button text-center">
+                              <button type="submit" className="btn ">
+                                Submit Message
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="">
-          <div className="contact-form container">
-            <form className="row g-3">
-              <div className="fw-bold">Personal Information</div>
-              <hr />
-              <div className="col-6 mb-3">
-                <label className="form-label">Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  name="name"
-                  // value={name}
-                  // onChange={onChange}
-                  required
-                />
-              </div>
-              <div className="col-6 mb-3">
-                <label className="form-label">Email Address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  name="email"
-                  // value={email}
-                  // onChange={onChange}
-                  required
-                />
-              </div>
-              <div className="col-6 mb-3">
-                <label className="form-label">Subject</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="subject"
-                  name="subject"
-                  // value={birthday}
-                  // onChange={onChange}
-                  required
-                />
-              </div>
-              <div className="col-6 mb-3">
-                <label className="form-label">Phone Number</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  // value={phoneNumber}
-                  // onChange={onChange}
-                  required
-                />
-              </div>
-              {/* <div className="col-6 mb-3">
-                <label className="form-label">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  name="password"
-                  // value={password}
-                  // onChange={onChange}
-                  required
-                />
-              </div> */}
-              <div className="mb-3">
-                <label className="form-label">Your Message</label>
-                <textarea className="form-control" name="message"></textarea>
-              </div>
-
-              <div className="button text-center pt-2 mb-3">
-                <button type="submit" className="btn">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 

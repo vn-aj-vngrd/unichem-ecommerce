@@ -112,7 +112,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="signup">
+    <div className="body-content">
       <div className="container">
         <div className="row">
           <div className="col-12">
