@@ -114,20 +114,20 @@ const Details = ({ product }) => {
                   </div>
 
                   <h3 className="price mt-2">₱{product.price}</h3>
-                  {product.quantity === 1 && (
+                  {product.quantities === 1 && (
                     <div>{product.quantity} item left</div>
                   )}
 
-                  {product.quantity > 1 && (
+                  {product.quantities > 1 && (
                     <div>{product.quantity} items available</div>
                   )}
 
-                  {product.quantity === 0 && <div>Item is not available</div>}
+                  {product.quantities === 0 && <div>Item is not available</div>}
 
                   <hr className="mt-3" />
 
-                  <div class="row">
-                    <div class="col">
+                  <div className="row">
+                    <div className="col">
                       <div className="form-group">
                         <label>Color / Type</label>
                         <select className="form-control text-muted">
@@ -137,7 +137,7 @@ const Details = ({ product }) => {
                         </select>
                       </div>
                     </div>
-                    <div class="col">
+                    <div className="col">
                       <div className="form-group">
                         <label>Quantity</label>
                         <div className="quantity-control text-center">
@@ -166,15 +166,15 @@ const Details = ({ product }) => {
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col">
+                  <div className="row">
+                    <div className="col">
                       <div className="cart-button">
                         <button className="btn" onClick={addToCart}>
                           <i className="lni lni-cart"></i> Cart
                         </button>
                       </div>
                     </div>
-                    <div class="col">
+                    <div className="col">
                       <div className="wish-button">
                         <button className="btn" onClick={addToWishlist}>
                           <i className="lni lni-heart"></i> Wishlist
