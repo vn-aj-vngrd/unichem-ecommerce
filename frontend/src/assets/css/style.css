@@ -4789,7 +4789,7 @@ ol {
 
 .form-control:focus,
 .form-select:focus {
-  border-color: #1e88e5;
+  border-color: #f44336;
   box-shadow: none;
   -webkit-box-shadow: none;
 }
@@ -5373,7 +5373,7 @@ ol {
   width: 80px;
   line-height: 80px;
   text-align: center;
-  color: #0167f3;
+  color: #f44336;
   background-color: #fff;
   border-radius: 50%;
   left: 50%;
@@ -5388,7 +5388,7 @@ ol {
 
 .about-us .content-left .video:hover {
   color: #fff;
-  background-color: #0167f3;
+  background-color: #f44336;
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
@@ -5548,7 +5548,7 @@ ol {
 
 .contact-us .contact-info .single-info i {
   font-size: 30px;
-  color: #0167f3;
+  color: #f44336;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   margin-bottom: 11px;
@@ -5730,7 +5730,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group input:focus {
-  border-color: #0167f3;
+  border-color: #f44336;
 }
 
 .contact-form-head .form-main .form .form-group textarea {
@@ -5749,7 +5749,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group textarea:focus {
-  border-color: #0167f3;
+  border-color: #f44336;
 }
 
 .contact-form-head .form-main .form .form-group.button {
@@ -5818,13 +5818,13 @@ ol {
   border: 1px solid #e6e6e6;
   border-radius: 4px 4px 0 0;
   padding: 8px 25px;
-  color: #0167f3;
+  color: #f44336;
   background-color: #fff;
 }
 
 .checkout-steps-form-style-1 .title.collapsed {
   border-radius: 4px;
-  color: #081828;
+  color: #757575;
 }
 
 .checkout-steps-form-style-1 .title:before {
@@ -5881,7 +5881,7 @@ ol {
 
 .checkout-steps-form-style-1 .single-form .form-input textarea:focus,
 .checkout-steps-form-style-1 .single-form .form-input input:focus {
-  border-color: #0167f3;
+  border-color: #f44336;
 }
 
 .checkout-steps-form-style-1 .form-default label {
@@ -5936,7 +5936,7 @@ ol {
   input[type="checkbox"]
   + label
   span {
-  border-color: #0167f3;
+  border-color: #f44336;
   width: 20px;
   height: 20px;
   border-radius: 4px;
@@ -5964,7 +5964,7 @@ ol {
   transform: scale(0);
   font-size: 10px;
   line-height: 1.2;
-  background-color: #0167f3;
+  background-color: #f44336;
   font-family: "Lineicons";
   content: "\ea5b";
   padding-left: 4px;
@@ -6051,7 +6051,7 @@ ol {
 .checkout-steps-form-style-1 .single-payment-option label {
   text-align: center;
   padding: 12px;
-  border-radius: 5px;
+  border-radius: 1px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -6061,7 +6061,7 @@ ol {
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
   cursor: pointer;
-  border: 1px solid #eee;
+  border: 1px solid #e0e0e0;
 }
 
 .checkout-steps-form-style-1 .single-payment-option input[type="radio"] {
@@ -6072,7 +6072,7 @@ ol {
   .single-payment-option
   input[type="radio"]:checked
   + label {
-  border-color: #0167f3;
+  border-color: #f44336;
   background-color: #fff;
 }
 
@@ -6256,8 +6256,4 @@ ol {
 
 .checkout-sidebar-banner a img {
   width: 100%;
-}
-
-.col-lg-custom {
-  width: 150px;
 }
