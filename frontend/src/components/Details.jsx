@@ -91,9 +91,7 @@ const Details = ({ product }) => {
                       >
                         {productImageTest.map((count, index) => (
                           <SwiperSlide key={index}>
-                            <div
-                              className="single-slider"
-                            ></div>
+                            <div className="single-slider"></div>
                             <img
                               src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
                               id="current"
@@ -128,8 +126,8 @@ const Details = ({ product }) => {
 
                   <hr className="mt-3" />
 
-                  <div className="d-flex flex-row bd-highlight w-100">
-                    <div className="pe-2 bd-highlight">
+                  <div class="row">
+                    <div class="col">
                       <div className="form-group">
                         <label>Color / Type</label>
                         <select className="form-control text-muted">
@@ -139,10 +137,10 @@ const Details = ({ product }) => {
                         </select>
                       </div>
                     </div>
-                    <div className="pe-2 bd-highlight">
-                      <div className="form-group quantity">
+                    <div class="col">
+                      <div className="form-group">
                         <label>Quantity</label>
-                        <div className="quantity-control">
+                        <div className="quantity-control text-center">
                           <button className="quantity-btn" onClick={decrement}>
                             <svg viewBox="0 0 409.6 409.6">
                               <path d="M392.533,187.733H17.067C7.641,187.733,0,195.374,0,204.8s7.641,17.067,17.067,17.067h375.467 c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z" />
@@ -168,16 +166,20 @@ const Details = ({ product }) => {
                     </div>
                   </div>
 
-                  <div className="d-flex flex-row bd-highlight w-100">
-                    <div className="pe-2 bd-highlight cart-button">
-                      <button className="btn" onClick={addToCart}>
-                        <i className="lni lni-cart"></i> Cart
-                      </button>
+                  <div class="row">
+                    <div class="col">
+                      <div className="cart-button">
+                        <button className="btn" onClick={addToCart}>
+                          <i className="lni lni-cart"></i> Cart
+                        </button>
+                      </div>
                     </div>
-                    <div className="pe-2 bd-highlight wish-button">
-                      <button className="btn" onClick={addToWishlist}>
-                        <i className="lni lni-heart"></i> Wishlist
-                      </button>
+                    <div class="col">
+                      <div className="wish-button">
+                        <button className="btn" onClick={addToWishlist}>
+                          <i className="lni lni-heart"></i> Wishlist
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
