@@ -23,24 +23,11 @@ const Checkout = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="row">
-                      <div className="col-md-12">
-                        <div className="single-form form-default">
-                          <label>User Name</label>
-                          <div className="row">
-                            <div className="col-md-6 form-input form">
-                              <input type="text" placeholder="First Name" />
-                            </div>
-                            <div className="col-md-6 form-input form">
-                              <input type="text" placeholder="Last Name" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       <div className="col-md-6">
                         <div className="single-form form-default">
-                          <label>Email Address</label>
+                          <label>Name</label>
                           <div className="form-input form">
-                            <input type="text" placeholder="Email Address" />
+                            <input type="text" />
                           </div>
                         </div>
                       </div>
@@ -48,54 +35,39 @@ const Checkout = () => {
                         <div className="single-form form-default">
                           <label>Phone Number</label>
                           <div className="form-input form">
-                            <input type="text" placeholder="Phone Number" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-12">
-                        <div className="single-form form-default">
-                          <label>Mailing Address</label>
-                          <div className="form-input form">
-                            <input type="text" placeholder="Mailing Address" />
+                            <input type="text" />
                           </div>
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="single-form form-default">
-                          <label>City</label>
+                          <label>Email</label>
                           <div className="form-input form">
-                            <input type="text" placeholder="City" />
+                            <input type="text" />
                           </div>
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="single-form form-default">
-                          <label>Post Code</label>
+                          <label>Region, Province, City, Barangay</label>
                           <div className="form-input form">
-                            <input type="text" placeholder="Post Code" />
+                            <input type="text" />
                           </div>
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="single-form form-default">
-                          <label>Country</label>
+                          <label>Street Name, Building, House No.</label>
                           <div className="form-input form">
-                            <input type="text" placeholder="Country" />
+                            <input type="text" />
                           </div>
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="single-form form-default">
-                          <label>Region/State</label>
-                          <div className="select-items">
-                            <select className="form-control">
-                              <option value="0">select</option>
-                              <option value="1">select option 01</option>
-                              <option value="2">select option 02</option>
-                              <option value="3">select option 03</option>
-                              <option value="4">select option 04</option>
-                              <option value="5">select option 05</option>
-                            </select>
+                          <label>Postal Code</label>
+                          <div className="form-input form">
+                            <input type="text" />
                           </div>
                         </div>
                       </div>
@@ -211,9 +183,7 @@ const Checkout = () => {
                   </div>
                 </div>
                 <div className="price-table-btn button">
-                  <button className="btn">
-                    Checkout
-                  </button>
+                  <button className="btn">Checkout</button>
                 </div>
               </div>
             </div>
