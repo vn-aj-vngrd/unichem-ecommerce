@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Categories = () => {
   return (
-    <section className="featured-categories section">
+    <section className="featured-categories">
       <div className="container">
         <div className="row">
           <div className="col-12">

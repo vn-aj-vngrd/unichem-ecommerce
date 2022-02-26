@@ -6258,6 +6258,10 @@ ol {
   width: 100%;
 }
 
+.featured-categories {
+  padding-bottom: 90px;
+}
+
 .featured-categories .section-title {
   margin-bottom: 20px;
 }
