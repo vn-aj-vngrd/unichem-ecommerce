@@ -12,7 +12,7 @@ const Footer = () => {
                   <div className="single-footer f-contact">
                     <h3>Stay In Touch</h3>
                     <p className="phone">
-                      Phone: (032) 345 6589 / (032) 345 1672
+                      Hotline: (032) 345 6589 / (032) 345 1672
                     </p>
                     <ul>
                       <li>Monday-Friday: 9.00 am - 8.00 pm</li>
