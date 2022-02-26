@@ -124,12 +124,12 @@ const Signup = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-10 col-md-10 offset-md-1 col-12 border p-5 mb-5">
+        <div className="col-lg-10 col-md-10 offset-md-1 col-12 border p-5">
           <form onSubmit={onSubmit} className="row g-3">
             <div className="fw-bold">Personal Information</div>
             <hr />
             <div className="col-6 mb-3">
-              <label className="form-label">Name</label>
+            <label className="form-label">Name</label>
               <input
                 type="text"
                 className="form-control"

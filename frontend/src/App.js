@@ -17,6 +17,7 @@ import Manage from "./pages/Account/Manage";
 import Order from "./pages/Account/Order";
 import Reviews from "./pages/Account/Reviews";
 import ScrollToTop from "./components/ScrollToTop";
+import Checkout from "./pages/Store/Checkout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./components/Spinner";
@@ -61,6 +62,7 @@ export const App = () => {
         <Route path="manage" element={<Manage />} />
         <Route path="orders" element={<Order />} />
         <Route path="reviews" element={<Reviews />} />
+        <Route path="checkout" element={<Checkout />} />
       </Routes>
       <Footer />
     </>

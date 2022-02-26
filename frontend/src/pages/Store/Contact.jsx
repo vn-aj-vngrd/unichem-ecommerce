@@ -7,7 +7,7 @@ const Login = () => {
 
   return (
     <>
-      <section id="contact-us" className="contact-us">
+      <section  className="contact-us body-content">
         <div className="container">
           <div className="contact-head">
             <div className="row">

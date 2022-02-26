@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [counter, setCounter] = useState(1);
@@ -120,12 +121,9 @@ const Cart = () => {
                       </li>
                     </ul>
                     <div className="button">
-                      <a href="checkout.html" className="btn">
+                      <Link to="/checkout" className="btn">
                         Checkout
-                      </a>
-                      <a href="product-grids.html" className="btn btn-alt">
-                        Continue shopping
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
