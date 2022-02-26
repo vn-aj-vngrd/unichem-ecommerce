@@ -20,15 +20,13 @@ const Footer = () => {
                     </ul>
                     <ul className="mail">
                       <li>
-                        Yahoo:{" "}
                         <a href="mailto:unichem_@yahoo.com">
-                          unichem_@yahoo.com
+                        Yahoo: unichem_@yahoo.com
                         </a>
                       </li>
                       <li>
-                        Gmail:{" "}
                         <a href="mailto:unichemsales@gmail.com">
-                          unichemsales@gmail.com
+                        Gmail: unichemsales@gmail.com
                         </a>
                       </li>
                     </ul>
