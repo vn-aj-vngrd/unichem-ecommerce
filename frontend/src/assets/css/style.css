@@ -3954,6 +3954,9 @@ ol {
 }
 
 /* Product Details Info */
+.product-details {
+  padding-bottom: 55px;
+}
 .product-details-info .single-block {
   background-color: #fff;
   padding: 30px;
