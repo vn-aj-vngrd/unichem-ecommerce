@@ -6,22 +6,34 @@ const About = () => {
   });
 
   return (
-    <div className="container mt-200">
-      <section class="about-us section">
+    <div className="container mt-225">
+      <div className="row">
+        <div className="col-12">
+          <div className="section-title">
+            <h2>About Us</h2>
+            <p>
+              Read through the document to know more about Unichem Industrial
+              Sales Inc.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <section class="about-us mt-20 mb-40">
         <div class="container">
-          <div class="row align-items-center justify-content-between">
-            <div class="col-lg-6 col-md-12 col-12">
-              <div class="content-left">
+          <div class="row">
+            <div class="">
+              <div class="mb-50">
                 <img
                   src="https://images.unsplash.com/photo-1549194388-2469d59ec75c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80"
                   alt="#"
                 ></img>
               </div>
             </div>
-            <div class="col-lg-5">
-              <div class="content-right">
+            <div class="">
+              <div class="">
                 <h2>
-                  Unichem Industrial Sales Inc. - Nikolai's Best &amp; Partners.
+                  Unichem Industrial Sales Inc. - Nikolai's Best Partners.
                 </h2>
                 <br></br>
                 <p>
@@ -33,6 +45,77 @@ const About = () => {
                 </p>
                 <br></br>
                 <p>
+                  It is a small-sized enterprise based in the Philippines,
+                  specifically located in Mandaue City, Cebu. Its main operation
+                  is trading and distributing Loctite, 3M, Polymer, and Phoenix
+                  products. The company consists of around 15 employees, which
+                  covers delivery, accounting, management, and administration.
+                  Unichem's annual gross profit is estimated to be around P5
+                  million. It continues to grow and expand its services
+                  throughout the country.
+                </p>
+                <br></br>
+                <p>
+                  <p>
+                    The "Unichem E-Commerce System" project proposal seeks to
+                    modernize the company's commercial processes by developing
+                    an e-commerce platform through a web application that aims
+                    to improve product scalability, marketing opportunities, and
+                    sales. Unichem Industrial Sales Inc. will not be converting
+                    from physical to digital storefronts as a result of the
+                    proposed solution, however, considering the constraints of
+                    the current pandemic, it will provide a streamlined
+                    interface for customers that does not require any physical
+                    interaction.
+                  </p><br></br>
+                  <br></br>
+                  <p>
+                    The platform aims to accomplish the advantages of a faster
+                    buying process, cost reductions, affordable marketing,
+                    flexibility, and multiple payment modes. Discussion of each
+                    are as follows:
+                  </p>
+                  <br></br>
+                  <p>
+                    <b>Faster buying process.</b> Customers will be able to spend less
+                    time shopping for what they want. They may easily search or
+                    browse for various items at the same time and purchase what
+                    they require. When shopping online, customers can find items
+                    that may not be available in their nearby locations.
+                  </p>
+                  <br></br>
+                  <p>
+                  <b>Cost Reduction.</b> The client may no longer be required to
+                    operate a physical store, avoiding payments for services
+                    such as rent, repairs, and store design, thereby
+                    significantly reducing their expenses.
+                  </p>
+                  <br></br>
+                  <p>
+                  <b>Affordable Marketing.</b> The client may not need to spend extra
+                    funds on marketing to physically promote their products.
+                    Having their own e-commerce web application is already a
+                    visual channel in and of itself. The client can freely
+                    advertise their products on the application's top page.
+                  </p>
+                  <br></br>
+                  <p>
+                    <b>Flexibility.</b> The products are available on the web
+                    application 24/7. This provides customers the freedom to
+                    order them at any time from any location, without having to
+                    worry about store hours. Additionally, product information
+                    such as specifications and availability are displayed, which
+                    helps customers{" "}
+                  </p>
+                  <br></br>
+                  determine which items are in their best interests.
+                  <p>
+                  <b>Multiplayer payment modes.</b> Customers can pay using whatever
+                    method that is most convenient for them. They have the
+                    option of using a digital wallet or manually entering their
+                    credit or debit card information.
+                  </p>
+                  <br></br>
                   <b>Key Principal:</b> Demosthenes S. Arbiol <br></br>
                   <b>Industry:</b> Chemical and Allied Products Merchant
                   Wholesalers , Merchant Wholesalers, Nondurable Goods ,
@@ -80,17 +163,17 @@ const About = () => {
                     <ul class="dev-social">
                       <li>
                         <a href="https://www.facebook.com/niko.laiiift">
-                          <i class="lni lni-facebook-filled"></i>
+                          <i class="lni dev-lni lni-facebook-filled"></i>
                         </a>
                       </li>
                       <li>
                         <a href="https://github.com/nikolaiii01">
-                          <i class="lni lni-github-original"></i>
+                          <i class="lni dev-lni lni-github-original"></i>
                         </a>
                       </li>
                       <li>
                         <a href="https://www.instagram.com/nikolaiiift/">
-                          <i class="lni lni-instagram-filled"></i>
+                          <i class="lni dev-lni lni-instagram-filled"></i>
                         </a>
                       </li>
                     </ul>
@@ -114,17 +197,17 @@ const About = () => {
                     <ul class="dev-social">
                       <li>
                         <a href="javascript:void(0)">
-                          <i class="lni lni-facebook-filled"></i>
+                          <i class="lni dev-lni lni-facebook-filled"></i>
                         </a>
                       </li>
                       <li>
                         <a href="javascript:void(0)">
-                          <i class="lni lni-github-original"></i>
+                          <i class="lni dev-lni lni-github-original"></i>
                         </a>
                       </li>
                       <li>
                         <a href="javascript:void(0)">
-                          <i class="lni lni-instagram-filled"></i>
+                          <i class="lni dev-lni lni-instagram-filled"></i>
                         </a>
                       </li>
                     </ul>
@@ -147,17 +230,17 @@ const About = () => {
                     <ul class="dev-social">
                       <li>
                         <a href="javascript:void(0)">
-                          <i class="lni lni-facebook-filled"></i>
+                          <i class="lni dev-lni lni-facebook-filled"></i>
                         </a>
                       </li>
                       <li>
                         <a href="javascript:void(0)">
-                          <i class="lni lni-github-original"></i>
+                          <i class="lni dev-lni lni-github-original"></i>
                         </a>
                       </li>
                       <li>
                         <a href="javascript:void(0)">
-                          <i class="lni lni-instagram-filled"></i>
+                          <i class="lni dev-lni lni-instagram-filled"></i>
                         </a>
                       </li>
                     </ul>
@@ -180,17 +263,17 @@ const About = () => {
                     <ul class="dev-social">
                       <li>
                         <a href="https://www.facebook.com/Brrga.Hrb/">
-                          <i class="lni lni-facebook-filled"></i>
+                          <i class="lni dev-lni lni-facebook-filled"></i>
                         </a>
                       </li>
                       <li>
                         <a href="https://github.com/Barr1ga">
-                          <i class="lni lni-github-original"></i>
+                          <i class="lni dev-lni lni-github-original"></i>
                         </a>
                       </li>
                       <li>
                         <a href="https://www.instagram.com/horebb_/">
-                          <i class="lni lni-instagram-filled"></i>
+                          <i class="lni dev-lni lni-instagram-filled"></i>
                         </a>
                       </li>
                     </ul>

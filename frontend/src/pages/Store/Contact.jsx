@@ -139,7 +139,7 @@ const Login = () => {
 
               <div className="button text-center pt-2 mb-3">
                 <button type="submit" className="btn">
-                  Sign Up
+                  Submit
                 </button>
               </div>
             </form>
