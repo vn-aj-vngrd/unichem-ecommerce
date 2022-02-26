@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, reset } from "../features/products/productSlice";
 import Star from "./Star";
-import Spinner from "../components/Spinner";
+import Spinner from "./Spinner";
 
 const Featured = () => {
   const navigate = useNavigate();

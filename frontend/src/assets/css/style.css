@@ -6257,3 +6257,59 @@ ol {
 .checkout-sidebar-banner a img {
   width: 100%;
 }
+
+.featured-categories .section-title {
+  margin-bottom: 20px;
+}
+
+.featured-categories .single-category {
+  padding: 40px;
+  margin-top: 30px;
+  border: 2px solid #f0f0f0;
+  position: relative;
+  background: #fff;
+  z-index: 0;
+}
+
+.featured-categories .single-category .heading {
+  font-size: 17px;
+  font-weight: 700;
+  color: #757575;
+}
+
+.featured-categories .single-category ul {
+  margin-top: 20px;
+}
+
+.featured-categories .single-category ul li {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.featured-categories .single-category ul li:last-child {
+  margin: 0;
+}
+
+.featured-categories .single-category ul li a {
+  color: #666;
+}
+
+.featured-categories .single-category ul li a:hover {
+  color: #f44336;
+  padding-left: 5px;
+}
+
+.featured-categories .single-category img {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .featured-categories .single-category img {
+    width: 50%;
+  }
+}
