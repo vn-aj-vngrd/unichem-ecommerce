@@ -183,7 +183,9 @@ ol {
   }
 }
 
-/* Bread Crumbs */
+/*======================================
+    Breadcrumbs CSS
+========================================*/
 .breadcrumbs {
   margin-top: 200px;
   position: relative;
@@ -294,6 +296,10 @@ ol {
   color: #f44336;
 }
 
+/*======================================
+    Section CSS
+========================================*/
+
 .section {
   padding-top: 90px;
   padding-bottom: 90px;
@@ -314,7 +320,6 @@ ol {
   }
 }
 
-/* Section Title */
 .section-title {
   text-align: center;
   margin-bottom: 40px;
@@ -462,6 +467,10 @@ ol {
   }
 }
 
+/*======================================
+    Button CSS
+========================================*/
+
 .button .btn i {
   display: inline-block;
   margin-right: 5px;
@@ -517,17 +526,13 @@ ol {
 }
 
 /*======================================
-	01. Start Header CSS
+ Header CSS
 ========================================*/
 .header {
   width: 100%;
   background: #fff;
   position: relative;
   width: 100%;
-  /* Start Topbar */
-  /* End Topbar */
-  /* Start Main Menu Search */
-  /* End Main Menu Search */
 }
 
 .header .header-middle {
@@ -1560,7 +1565,9 @@ ol {
   background: #333;
 }
 
-/*===== NAVBAR =====*/
+/*======================================
+    Navbar CSS
+========================================*/
 .navbar-area {
   width: 100%;
   z-index: 99;
@@ -1828,9 +1835,6 @@ ol {
 }
 
 /*======================================
-     End Header CSS
-  ========================================*/
-/*======================================
     Hero Area CSS
 ========================================*/
 .hero-area {
@@ -1945,7 +1949,6 @@ ol {
 /*======================================
     Product CSS
 ========================================*/
-/* Single Product*/
 .single-product {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
@@ -2102,7 +2105,6 @@ ol {
   display: inline-block;
 }
 
-/* End Single Product */
 .trending-product {
   background-color: #f9f9f9;
   padding-top: 90px;
@@ -2686,7 +2688,9 @@ ol {
   color: #fff;
 }
 
-/* Product Details Info */
+/*======================================
+    Product Details CSS
+========================================*/
 .product-details {
   padding-bottom: 55px;
 }
@@ -2926,6 +2930,10 @@ ol {
 .product-details-info .reviews .single-review .review-info p {
   margin-top: 15px;
 }
+
+/*======================================
+    Review Modal CSS
+========================================*/
 
 .review-modal .modal-dialog {
   max-width: 600px;
@@ -3304,7 +3312,10 @@ ol {
   }
 }
 
-/* Product section */
+/*======================================
+    Product List CSS
+========================================*/
+
 .main-product-section {
   margin-top: 200px;
 }
@@ -3320,8 +3331,6 @@ ol {
     min-width: 300px;
   }
 }
-
-/* Product side bar */
 
 .product-sidebar,
 .contact-sidebar,
@@ -3443,6 +3452,10 @@ ol {
   margin-right: 10px;
 }
 
+/*======================================
+    Qauntity CSS
+========================================*/
+
 .quantity-control {
   border-radius: 4px;
   padding: 10px;
@@ -3482,6 +3495,10 @@ ol {
   margin: 0;
 }
 
+/*======================================
+    Spinner CSS
+========================================*/
+
 .loading {
   position: fixed;
   z-index: 999;
@@ -3504,6 +3521,10 @@ ol {
   width: 100%;
   height: 100%;
 }
+
+/*======================================
+    Team CSS
+========================================*/
 
 .team {
   background-color: #fff;
@@ -3577,6 +3598,10 @@ ol {
   color: #fff;
   background-color: #f44336;
 }
+
+/*======================================
+    Cart CSS
+========================================*/
 
 .cart-list-head {
   border-radius: 4px;
@@ -3856,6 +3881,10 @@ ol {
   box-shadow: none;
 }
 
+/*======================================
+    About Us CSS
+========================================*/
+
 .about-us {
   background-color: #f9f9f9;
   padding-top: 15px;
@@ -4017,6 +4046,10 @@ ol {
   margin: 0;
 }
 
+/*======================================
+    Contact CSS
+========================================*/
+
 .contact-us {
   position: relative;
   background-color: #fff;
@@ -4089,7 +4122,6 @@ ol {
   color: #f44336;
 }
 
-/* Contact Form Head */
 .contact-form-head {
   margin-top: 30px;
 }
@@ -4297,6 +4329,10 @@ ol {
     height: 300px;
   }
 }
+
+/*======================================
+    Checkout CSS
+========================================*/
 
 .checkout-wrapper {
   background-color: #f9f9f9;
@@ -4757,6 +4793,10 @@ ol {
   width: 100%;
 }
 
+/*======================================
+    Featured-Categoires CSS
+========================================*/
+
 .featured-categories {
   padding-bottom: 90px;
   padding-top: 90px;
@@ -4816,4 +4856,170 @@ ol {
   .featured-categories .single-category img {
     width: 50%;
   }
+}
+
+/*======================================
+    Faq CSS
+========================================*/
+.faq {
+  padding-bottom: 55px;
+  background-color: #f9f9f9;
+  margin-top: 220px;
+}
+
+.faq .section-title {
+  margin-bottom: 60px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .faq .section-title {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .faq .section-title {
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .faq {
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .faq {
+    padding-bottom: 30px;
+  }
+}
+
+.accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding-right: 40px;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.accordion-item .accordion-button {
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: 500;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  border: none;
+  padding: 15px 25px;
+  padding-right: 40px;
+  background-color: #fff;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .accordion-item .accordion-button {
+    padding: 18px 20px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .accordion-item .accordion-button {
+    padding: 15px 20px;
+    padding-right: 40px;
+  }
+}
+
+.accordion-item .accordion-button .title {
+  font-size: 14px;
+  position: relative;
+  font-weight: 600;
+  float: left;
+  line-height: 25px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .accordion-item .accordion-button .title {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .accordion-item .accordion-button .title {
+    font-size: 14px;
+  }
+}
+
+.accordion-item .accordion-button i {
+  font-size: 15px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  top: 0;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 20px;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #fff;
+  background-color: #f44336;
+  border-radius: 4px 4px 0 0;
+}
+
+.accordion-button:not(.collapsed) i::before {
+  content: "\eb2e";
+  font-family: lineIcons;
+}
+
+.accordion-button::after {
+  display: none;
+}
+
+.accordion-collapse {
+  border: none;
+}
+
+.accordion-body {
+  border-radius: 0 0 4px 4px;
+  padding: 25px;
+  background-color: #fff;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .accordion-body {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .accordion-body {
+    padding: 20px;
+  }
+}
+
+.accordion-body p {
+  margin: 0;
+  margin-bottom: 20px;
+  color: #777;
+}
+
+.accordion-body p:last-child {
+  margin: 0;
+}
+
+.accordion-item {
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0px 0px 20px #00000007;
+  box-shadow: 0px 0px 20px #00000007;
+  border-radius: 4px;
+}
+
+.accordion-item:last-child {
+  margin: 0;
 }

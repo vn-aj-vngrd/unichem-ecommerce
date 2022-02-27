@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Spinner from "./components/Spinner";
+import Messenger from "./components/Messenger";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
 import Products from "./pages/Product/Products";
@@ -16,12 +21,8 @@ import ProductDetails from "./pages/Product/ProductDetails";
 import Manage from "./pages/Account/Manage";
 import Order from "./pages/Account/Order";
 import Reviews from "./pages/Account/Reviews";
-import ScrollToTop from "./components/ScrollToTop";
 import Checkout from "./pages/Store/Checkout";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Spinner from "./components/Spinner";
-import Messenger from './components/Messenger';
+import Faq from "./pages/Store/Faq";
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -64,6 +65,7 @@ export const App = () => {
         <Route path="orders" element={<Order />} />
         <Route path="reviews" element={<Reviews />} />
         <Route path="checkout" element={<Checkout />} />
+        <Route path="faq" element={<Faq />} />
       </Routes>
       <Messenger />
       <Footer />

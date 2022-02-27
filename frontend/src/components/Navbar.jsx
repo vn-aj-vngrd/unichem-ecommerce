@@ -37,11 +37,7 @@ const Navbar = () => {
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
-                  <img
-                    className=""
-                    src="assets/images/logo.svg"
-                    alt="Logo"
-                  />
+                  <img className="" src="assets/images/logo.svg" alt="Logo" />
                   <span className="fw-bold text-danger">Unichem</span>
                 </Link>
               </div>
@@ -265,6 +261,12 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link to="/contact" aria-label="Toggle navigation">
                           Contact
+                        </Link>
+                      </li>
+
+                      <li className="nav-item">
+                        <Link to="/faq" aria-label="Toggle navigation">
+                          Faq
                         </Link>
                       </li>
                     </ul>
