@@ -21,6 +21,7 @@ import Checkout from "./pages/Store/Checkout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./components/Spinner";
+import Messenger from './components/Messenger';
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -64,6 +65,7 @@ export const App = () => {
         <Route path="reviews" element={<Reviews />} />
         <Route path="checkout" element={<Checkout />} />
       </Routes>
+      <Messenger />
       <Footer />
     </>
   ) : (
