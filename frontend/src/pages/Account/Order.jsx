@@ -5,7 +5,7 @@ const Order = () => {
     document.title = "Unichem | Orders";
   });
 
-  return <div className="container mt-200">Order</div>;
+  return <div className="body-content">Order</div>;
 };
 
 export default Order;

@@ -5,7 +5,7 @@ const Reviews = () => {
     document.title = "Unichem | Reviews";
   });
 
-  return <div className="container mt-200">Reviews</div>;
+  return <div className="body-content">Reviews</div>;
 };
 
 export default Reviews;

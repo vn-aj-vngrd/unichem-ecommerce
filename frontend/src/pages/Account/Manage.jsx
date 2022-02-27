@@ -5,7 +5,7 @@ const Manage = () => {
     document.title = "Unichem | Manage Acccount";
   });
 
-  return <div className="container mt-200">Manage</div>;
+  return <div className="body-content">Manage</div>;
 };
 
 export default Manage;
