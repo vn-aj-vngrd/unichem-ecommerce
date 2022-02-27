@@ -101,21 +101,22 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/user
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
-  const { _id, name, email, birthday, sex, phoneNumber } = await User.findById(
-    req.user.id
-  );
+  // const { _id, name, email, birthday, sex, phoneNumber } = await User.findById(
+  //   req.user.id
+  // );
 
-  const userAddress = await Address.find({ userAddress: req.user.id });
+  // const userAddress = await Address.find({ userAddress: req.user.id });
 
-  return res.status(200).json({
-    id: _id,
-    name,
-    email,
-    birthday,
-    sex,
-    phoneNumber,
-    userAddress,
-  });
+  // return res.status(200).json({
+  //   id: _id,
+  //   name,
+  //   email,
+  //   birthday,
+  //   sex,
+  //   phoneNumber,
+  //   userAddress,
+  // });
+  return res.status(200).json(req.user);
 });
 
 // Generate JWT Token
