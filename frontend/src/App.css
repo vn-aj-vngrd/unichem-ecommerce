@@ -3710,6 +3710,7 @@ ol {
 
 .shopping-cart {
   background-color: #f9f9f9;
+  margin-top: 20px;
 }
 
 .shopping-cart .total-amount .right ul li {
@@ -4276,6 +4277,7 @@ ol {
 
 .checkout-wrapper {
   background-color: #f9f9f9;
+  margin-top: 20px;
 }
 
 .checkout-steps-form-style-1 #accordionExample li {

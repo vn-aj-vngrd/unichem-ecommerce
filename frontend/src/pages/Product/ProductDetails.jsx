@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Details from "../../components/Details";
 import Specifications from "../../components/Specifications";
 import Reviews from "../../components/Reviews";
+import Breadcrumb from "../../components/Breadcrumb";
 
 const ProductDetails = () => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const ProductDetails = () => {
 
   return (
     <>
+      <Breadcrumb type="product"/>
       <Details product={product} />
       <Specifications product={product} />
       <Reviews />

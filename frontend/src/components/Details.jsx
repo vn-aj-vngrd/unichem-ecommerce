@@ -1,4 +1,3 @@
-import Breadcrumb from "./Breadcrumb";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Swal from "sweetalert2";
@@ -68,9 +67,6 @@ const Details = ({ product }) => {
 
   return (
     <>
-      <div className="container">
-        <Breadcrumb />
-      </div>
       <div className="item-details">
         <div className="container">
           <div className="top-area">
