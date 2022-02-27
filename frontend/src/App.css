@@ -4001,6 +4001,7 @@ ol {
   padding: 30px;
   border: 1px solid #eee;
   border-radius: 4px;
+  padding-bottom: 38px;
 }
 
 @media (max-width: 767px) {
