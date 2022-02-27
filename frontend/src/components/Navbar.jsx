@@ -266,7 +266,7 @@ const Navbar = () => {
 
                       <li className="nav-item">
                         <Link to="/faq" aria-label="Toggle navigation">
-                          Faq
+                          FAQ
                         </Link>
                       </li>
                     </ul>

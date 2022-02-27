@@ -1,4 +1,9 @@
+import { useEffect } from "react";
+
 const Faq = () => {
+  useEffect(() => {
+    document.title = "Unichem | FAQ";
+  });
   return (
     <section class="faq">
       <div class="container">
