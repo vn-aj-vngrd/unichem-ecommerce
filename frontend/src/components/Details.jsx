@@ -20,12 +20,13 @@ const Details = ({ product }) => {
   const [counter, setCounter] = useState(1);
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
-  if (counter < product.quantity) increment = () => setCounter(counter + 1);
+  if (counter < product.quantities[value])
+    increment = () => setCounter(counter + 1);
   let handleChange = (e) => {
     setCounter(e.target.value);
 
-    if (e.target.value > product.quantity) {
-      setCounter(product.quantity);
+    if (e.target.value > product.quantities[value]) {
+      setCounter(product.quantities[value]);
     }
     if (e.target.value < 0) {
       setCounter(1);
@@ -140,7 +141,9 @@ const Details = ({ product }) => {
                           onChange={(e) => setValue(e.currentTarget.value)}
                         >
                           {product.types.map((type, index) => (
-                            <option key={index} value={index}>{type}</option>
+                            <option key={index} value={index}>
+                              {type}
+                            </option>
                           ))}
                         </select>
                       </div>
