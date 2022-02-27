@@ -37,6 +37,19 @@ const Login = () => {
     document.title = "Unichem | Log in";
 
     if (isSuccess || user) {
+      const temp = localStorage.getItem("user");
+      const user = JSON.parse(temp);
+      toast.success(`Hello, ${user.name}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
       navigate("/");
     }
 
