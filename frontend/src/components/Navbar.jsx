@@ -38,8 +38,8 @@ const Navbar = () => {
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
                   <img
-                    className="w-25 h-25 p-2"
-                    src="assets/images/logo/logo.svg"
+                    className=""
+                    src="assets/images/logo.svg"
                     alt="Logo"
                   />
                   <span className="fw-bold text-danger">Unichem</span>
