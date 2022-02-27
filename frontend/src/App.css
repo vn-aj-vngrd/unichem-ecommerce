@@ -26,7 +26,7 @@ p {
 }
 
 .text-muted {
-  color: #757575;
+  color: #616161;
 }
 
 .body-content {
@@ -36,7 +36,7 @@ p {
 
 .form-control:focus,
 .form-select:focus {
-  border-color: #757575;
+  border-color: #616161;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -70,7 +70,7 @@ button:focus,
 }
 
 select {
-  color: #757575;
+  color: #616161;
   letter-spacing: normal;
   word-spacing: normal;
   text-transform: none;
@@ -126,7 +126,7 @@ h5,
 h6 {
   font-weight: 600;
   margin: 0px;
-  color: #757575;
+  color: #616161;
 }
 
 h1 a,
@@ -205,7 +205,7 @@ ol {
 
 .breadcrumbs .breadcrumbs-content .page-title {
   font-size: 14px;
-  color: #757575;
+  color: #616161;
   font-weight: 600;
   position: relative;
   line-height: 28px;
@@ -274,7 +274,7 @@ ol {
 
 .breadcrumbs .breadcrumb-nav li,
 .breadcrumbs .breadcrumb-nav li a {
-  color: #757575;
+  color: #616161;
   font-size: 12px;
   font-weight: 500;
 }
@@ -488,7 +488,7 @@ ol {
 }
 
 .button .btn-alt {
-  background-color: #757575 !important;
+  background-color: #616161 !important;
   color: #fff !important;
 }
 
@@ -590,7 +590,7 @@ ol {
 }
 
 .header .nav-hotline i {
-  color: #757575;
+  color: #616161;
   font-size: 18px;
   position: absolute;
   left: 0;
@@ -609,7 +609,7 @@ ol {
 .header .nav-hotline h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #757575;
+  color: #616161;
 }
 
 .header .nav-hotline h3 span {
@@ -665,7 +665,7 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #757575;
+  background-color: #616161;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -703,7 +703,7 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #757575;
+  background-color: #616161;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -883,7 +883,7 @@ ol {
   a {
   font-size: 14px;
   font-weight: 600;
-  color: #757575;
+  color: #616161;
 }
 
 @media (max-width: 767px) {
@@ -977,8 +977,8 @@ ol {
 }
 
 .header .main-menu-search .select-position:after {
-  border-bottom: 1.5px solid #757575;
-  border-right: 1.5px solid #757575;
+  border-bottom: 1.5px solid #616161;
+  border-right: 1.5px solid #616161;
   content: "";
   display: block;
   height: 8px;
@@ -1061,7 +1061,7 @@ ol {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #757575;
+    background-color: #616161;
   }
 
   .header .button {
@@ -1135,7 +1135,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item a {
-    color: #757575;
+    color: #616161;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1178,7 +1178,7 @@ ol {
 
 @media (max-width: 767px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #757575;
+    background-color: #616161;
   }
 
   .header .button {
@@ -1252,7 +1252,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item a {
-    color: #757575;
+    color: #616161;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1333,7 +1333,7 @@ ol {
 
 .header .mega-category-menu .cat-button {
   display: inline-block;
-  color: #757575;
+  color: #616161;
   font-size: 15px;
   font-weight: 600;
 }
@@ -1405,7 +1405,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category li a {
-  color: #757575;
+  color: #616161;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -1422,7 +1422,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li a {
-  color: #757575;
+  color: #616161;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -1476,7 +1476,7 @@ ol {
   display: block;
   font-weight: 600;
   font-size: 15px;
-  color: #757575;
+  color: #616161;
 }
 
 .header .account ul li a:hover,
@@ -1531,7 +1531,7 @@ ol {
 }
 
 .header.sticky .button .btn:hover {
-  background-color: #757575;
+  background-color: #616161;
   color: #fff;
 }
 
@@ -1659,7 +1659,7 @@ ol {
 
 .navbar-nav .nav-item a {
   font-size: 14px;
-  color: #757575;
+  color: #616161;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   position: relative;
@@ -1937,7 +1937,7 @@ ol {
   font-size: 15px;
   margin: 0px;
   font-weight: 600;
-  color: #757575;
+  color: #616161;
 }
 
 .shipping-info .media-body span {
@@ -2049,7 +2049,7 @@ ol {
 .single-product .product-info .title span {
   font-size: 16px;
   font-weight: 700;
-  color: #757575;
+  color: #616161;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -2091,7 +2091,7 @@ ol {
 .single-product .product-info .price span {
   font-size: 17px;
   font-weight: 700;
-  color: #757575;
+  color: #616161;
   display: inline-block;
 }
 
@@ -2173,7 +2173,7 @@ ol {
 }
 
 .single-banner .content .price span {
-  color: #757575;
+  color: #616161;
   display: block;
   margin-top: 10px;
   font-size: 22px;
@@ -2259,12 +2259,12 @@ ol {
 
 .call-action .content .button .btn {
   background-color: #fff;
-  color: #757575;
+  color: #616161;
 }
 
 .call-action .content .button .btn:hover {
   color: #fff;
-  background: #757575;
+  background: #616161;
 }
 
 /*======================================
@@ -2363,7 +2363,7 @@ ol {
 }
 
 .item-details .product-info .price {
-  color: #757575;
+  color: #616161;
   display: block;
   font-size: 24px;
   font-weight: 600;
@@ -2503,7 +2503,7 @@ ol {
 
 .item-details .product-info .wish-button .btn {
   border-radius: 4px;
-  background-color: #757575;
+  background-color: #616161;
   color: white;
   font-size: 13px;
   font-weight: 600;
@@ -2803,7 +2803,7 @@ ol {
 
 .product-details-info .give-review .review-btn:hover {
   color: #fff;
-  background-color: #757575;
+  background-color: #616161;
 }
 
 .product-details-info .reviews .title {
@@ -3017,7 +3017,7 @@ ol {
 	Footer CSS
 ========================================*/
 .footer {
-  background-color: #757575;
+  background-color: #616161;
   position: relative;
 }
 
@@ -3480,7 +3480,7 @@ ol {
 }
 
 .quantity-input {
-  color: #757575;
+  color: #616161;
   outline: none;
   text-align: center;
   width: 47px;
@@ -3621,7 +3621,7 @@ ol {
 }
 
 .cart-list-title p {
-  color: #081828;
+  color: #616161;
   font-weight: 500;
   font-size: 14px;
 }
@@ -3664,7 +3664,7 @@ ol {
 
 .cart-single-list .remove-item:hover {
   color: #fff;
-  background-color: #081828;
+  background-color: #b71c1c;
 }
 
 .cart-single-list .product-name {
@@ -3673,7 +3673,7 @@ ol {
 
 .cart-single-list .product-name a {
   font-size: 14px;
-  color: #333;
+  color: #616161;
   font-weight: 500;
 }
 
@@ -3689,7 +3689,7 @@ ol {
 
 .cart-single-list .product-des span em {
   font-style: normal;
-  color: #555;
+  color: #616161;
 }
 
 .cart-single-list {
@@ -3704,7 +3704,7 @@ ol {
 }
 
 .cart-single-list a:hover {
-  color: #0167f3;
+  color: #f44336;
 }
 
 .shopping-cart {
@@ -3714,74 +3714,12 @@ ol {
 .shopping-cart .total-amount .right ul li {
   font-size: 14px;
   font-weight: 500;
-  color: #081828;
+  color: #616161;
   margin-bottom: 12px;
 }
 
 .shopping-cart .total-amount .right ul li span {
-  display: inline-block;
   float: right;
-}
-
-.shopping-cart .total-amount .coupon {
-  padding: 40px;
-  border: 1px solid #eee;
-  background-color: #fff;
-  border-radius: 4px;
-  margin-top: 40px;
-  display: inline-block;
-}
-
-@media (max-width: 767px) {
-  .shopping-cart .total-amount .coupon {
-    width: 100%;
-    padding: 30px;
-    margin-top: 30px;
-  }
-}
-
-.shopping-cart .total-amount .coupon input {
-  width: 300px;
-  height: 46px;
-  border: 1px solid #dddddd;
-  overflow: hidden;
-  border-radius: 4px;
-  color: #333;
-  padding: 0px 20px;
-  display: inline-block;
-}
-
-@media (max-width: 767px) {
-  .shopping-cart .total-amount .coupon input {
-    width: 100%;
-  }
-}
-
-.shopping-cart .total-amount .coupon .button {
-  display: inline-block;
-}
-
-@media (max-width: 767px) {
-  .shopping-cart .total-amount .coupon .button {
-    display: block;
-  }
-}
-
-.shopping-cart .total-amount .coupon button {
-  border: none;
-  height: 46px;
-  display: inline-block;
-  margin-left: 8px;
-  position: relative;
-  top: -2px;
-}
-
-@media (max-width: 767px) {
-  .shopping-cart .total-amount .coupon button {
-    margin: 0;
-    margin-top: 10px;
-    width: 100%;
-  }
 }
 
 .shopping-cart .total-amount .right {
@@ -3867,7 +3805,7 @@ ol {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   background-color: #fff;
-  color: #505050;
+  color: #616161;
   font-size: 14px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -4265,7 +4203,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group input:focus {
-  border-color: #757575;
+  border-color: #616161;
 }
 
 .contact-form-head .form-main .form .form-group textarea {
@@ -4282,7 +4220,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group textarea:focus {
-  border-color: #757575;
+  border-color: #616161;
 }
 
 .contact-form-head .form-main .form .form-group.button {
@@ -4361,7 +4299,7 @@ ol {
 
 .checkout-steps-form-style-1 .title.collapsed {
   border-radius: 4px;
-  color: #757575;
+  color: #616161;
 }
 
 .checkout-steps-form-style-1 .title:before {
@@ -4818,7 +4756,7 @@ ol {
 .featured-categories .single-category .heading {
   font-size: 17px;
   font-weight: 700;
-  color: #757575;
+  color: #616161;
 }
 
 .featured-categories .single-category ul {
@@ -5083,7 +5021,7 @@ ol {
 .error-area .error-content h2 {
   font-size: 25px;
   margin-bottom: 10px;
-  color: #757575;
+  color: #616161;
   font-weight: 700;
 }
 
