@@ -3600,9 +3600,8 @@ ol {
 }
 
 /*======================================
-    Cart CSS
+  Cart CSS
 ========================================*/
-
 .cart-list-head {
   border-radius: 4px;
   overflow: hidden;
@@ -3705,7 +3704,7 @@ ol {
 }
 
 .cart-single-list a:hover {
-  color: #f44336;
+  color: #0167f3;
 }
 
 .shopping-cart {
@@ -3721,6 +3720,7 @@ ol {
 
 .shopping-cart .total-amount .right ul li span {
   display: inline-block;
+  float: right;
 }
 
 .shopping-cart .total-amount .coupon {
