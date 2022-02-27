@@ -31,7 +31,7 @@ const Cart = () => {
     document.title = "Unichem | Cart";
 
     if (!user) {
-      navigate("/");
+      navigate("/login");
     }
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 

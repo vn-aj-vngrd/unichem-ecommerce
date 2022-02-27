@@ -1,4 +1,23 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 const Checkout = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    document.title = "Unichem | Cart";
+
+    if (!user) {
+      navigate("/");
+    }
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   return (
     <section className="checkout-wrapper body-content">
       <div className="container">
@@ -114,7 +133,7 @@ const Checkout = () => {
                                   name="payment"
                                   id="payment-1"
                                 />
-                                <label for="payment-1">
+                                <label>
                                   <p>Cash on Delivery</p>
                                 </label>
                               </div>
@@ -124,7 +143,7 @@ const Checkout = () => {
                                   name="payment"
                                   id="payment-2"
                                 />
-                                <label for="payment-2">
+                                <label>
                                   <p>Bank Transfer</p>
                                 </label>
                               </div>
@@ -134,7 +153,7 @@ const Checkout = () => {
                                   name="payment"
                                   id="payment-3"
                                 />
-                                <label for="payment-3">
+                                <label>
                                   <p>G-Cash</p>
                                 </label>
                               </div>
@@ -144,7 +163,7 @@ const Checkout = () => {
                                   name="payment"
                                   id="payment-4"
                                 />
-                                <label for="payment-4">
+                                <label>
                                   <p>VISA</p>
                                 </label>
                               </div>
