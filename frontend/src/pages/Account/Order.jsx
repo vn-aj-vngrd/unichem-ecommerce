@@ -1,11 +1,17 @@
 import { useEffect } from "react";
+import Breadcrumb from "../../components/Breadcrumb";
 
 const Order = () => {
   useEffect(() => {
     document.title = "Unichem | Orders";
   });
 
-  return <div className="body-content">Order</div>;
+  return (
+    <>
+      <Breadcrumb type="order" />
+      {/* content here */}
+    </>
+  );
 };
 
 export default Order;

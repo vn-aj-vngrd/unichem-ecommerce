@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import Breadcrumb from "../../components/Breadcrumb";
 
-const Manage = () => {
+const Review = () => {
   useEffect(() => {
-    document.title = "Unichem | Manage Acccount";
+    document.title = "Unichem | Reviews";
   });
 
   return (
     <>
-      <Breadcrumb type="manage" />
+      <Breadcrumb type="review" />
       {/* content here */}
     </>
   );
 };
 
-export default Manage;
+export default Review;

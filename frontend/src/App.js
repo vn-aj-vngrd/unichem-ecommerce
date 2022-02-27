@@ -20,7 +20,7 @@ import Signup from "./pages/Signup";
 import ProductDetails from "./pages/Product/ProductDetails";
 import Manage from "./pages/Account/Manage";
 import Order from "./pages/Account/Order";
-import Reviews from "./pages/Account/Reviews";
+import Review from "./pages/Account/Review";
 import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
@@ -64,7 +64,7 @@ export const App = () => {
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="manage" element={<Manage />} />
         <Route path="orders" element={<Order />} />
-        <Route path="reviews" element={<Reviews />} />
+        <Route path="reviews" element={<Review />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="faq" element={<Faq />} />
         <Route path="*" element={<PageNotFound />} />

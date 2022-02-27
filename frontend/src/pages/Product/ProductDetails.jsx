@@ -12,7 +12,7 @@ const ProductDetails = () => {
 
   const location = useLocation();
   const { product } = location.state;
-  console.log(product);
+  // console.log(product);
 
   return (
     <>
