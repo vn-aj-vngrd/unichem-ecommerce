@@ -108,9 +108,9 @@ const Cart = () => {
                 <p>₱2000.00</p>
               </div>
               <div className="col-lg-1 col-md-1 col-12">
-                <a className="remove-item" href="/">
+                <button className="remove-item">
                   <i className="lni lni-close"></i>
-                </a>
+                </button>
               </div>
             </div>
           </div>
