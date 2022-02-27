@@ -25,6 +25,32 @@ p {
   padding: 0;
 }
 
+.text-danger {
+  color: #f44336;
+}
+
+.text-muted {
+  color: #757575;
+}
+
+.body-content {
+  margin-top: 220px;
+  padding-bottom: 55px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #757575;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.has-error .form-control:focus,
+.form-select:focus {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
 .navbar-toggler:focus,
 a:focus,
 input:focus,
@@ -3474,32 +3500,6 @@ ol {
   .footer .footer-bottom .socila li span {
     display: none;
   }
-}
-
-.text-danger {
-  color: #f44336;
-}
-
-.text-muted {
-  color: #757575;
-}
-
-.body-content {
-  margin-top: 220px;
-  padding-bottom: 55px;
-}
-
-.form-control:focus,
-.form-select:focus {
-  border-color: #f44336;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-
-.has-error .form-control:focus,
-.form-select:focus {
-  box-shadow: none;
-  -webkit-box-shadow: none;
 }
 
 /* Product section */
