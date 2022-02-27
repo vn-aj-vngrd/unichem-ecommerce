@@ -15,6 +15,8 @@ import Star from "./Star";
 const productImageTest = [1, 2, 3, 4, 5];
 
 const Details = ({ product }) => {
+  const [value, setValue] = useState(0);
+
   const [counter, setCounter] = useState(1);
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
@@ -114,15 +116,17 @@ const Details = ({ product }) => {
                   </div>
 
                   <h3 className="price mt-2">₱{product.price}</h3>
-                  {product.quantities === 1 && (
-                    <div>{product.quantity} item left</div>
+                  {product.quantities[value] === 1 && (
+                    <div>{product.quantities[value]} item left</div>
                   )}
 
-                  {product.quantities > 1 && (
-                    <div>{product.quantity} items available</div>
+                  {product.quantities[value] > 1 && (
+                    <div>{product.quantities[value]} items available</div>
                   )}
 
-                  {product.quantities === 0 && <div>Item is not available</div>}
+                  {product.quantities[value] === 0 && (
+                    <div>Item is not available</div>
+                  )}
 
                   <hr className="mt-3" />
 
@@ -130,9 +134,13 @@ const Details = ({ product }) => {
                     <div className="col">
                       <div className="form-group">
                         <label>Color / Type</label>
-                        <select className="form-control text-muted">
+                        <select
+                          className="form-control text-muted"
+                          value={value}
+                          onChange={(e) => setValue(e.currentTarget.value)}
+                        >
                           {product.types.map((type, index) => (
-                            <option key={index}>{type}</option>
+                            <option key={index} value={index}>{type}</option>
                           ))}
                         </select>
                       </div>
@@ -156,6 +164,7 @@ const Details = ({ product }) => {
                             name="quantity"
                             onChange={handleChange}
                           />
+
                           <button className="quantity-btn" onClick={increment}>
                             <svg viewBox="0 0 426.66667 426.66667">
                               <path d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0" />
@@ -165,7 +174,6 @@ const Details = ({ product }) => {
                       </div>
                     </div>
                   </div>
-
                   <div className="row">
                     <div className="col">
                       <div className="cart-button">
