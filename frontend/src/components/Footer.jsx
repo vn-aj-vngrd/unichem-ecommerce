@@ -21,12 +21,12 @@ const Footer = () => {
                     <ul className="mail">
                       <li>
                         <a href="mailto:unichem_@yahoo.com">
-                        Yahoo: unichem_@yahoo.com
+                          Yahoo: unichem_@yahoo.com
                         </a>
                       </li>
                       <li>
                         <a href="mailto:unichemsales@gmail.com">
-                        Gmail: unichemsales@gmail.com
+                          Gmail: unichemsales@gmail.com
                         </a>
                       </li>
                     </ul>
@@ -86,7 +86,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="https://www.instagram.com/"
+                        href="https://m.facebook.com/Unichem-Industrial-Sales-Inc-108090717684147/?_rdr"
                         rel="noreferrer"
                         target="_blank"
                       >
@@ -95,11 +95,11 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="https://www.instagram.com/"
+                        href="mailto:unichemsales@gmail.com"
                         rel="noreferrer"
                         target="_blank"
                       >
-                        <i className="lni lni-twitter"></i>
+                        <i className="lni lni-google"></i>
                       </a>
                     </li>
                     <li>
