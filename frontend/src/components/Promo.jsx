@@ -26,6 +26,7 @@ const Hero = () => {
                 }}
                 pagination={{
                   clickable: true,
+                  style: { color: "white" },
                 }}
                 modules={[Autoplay, Pagination]}
                 className="mySwiper"
@@ -35,28 +36,9 @@ const Hero = () => {
                     <div
                       className="single-slider"
                       style={{
-                        backgroundImage: `url(assets/images/hero/slider-bg1.jpg)`,
+                        backgroundImage: `url(https://www.paymaya.com/hubfs/PayMaya%20Deals%20Page/PayMaya%20Deals%20Page%202021/April%202021/Lazada-BDAY_Deals-Page.jpg)`,
                       }}
-                    >
-                      <div className="content">
-                        <h2>
-                          <span>No restocking fee ($35 savings)</span>
-                          M75 Sport Watch
-                        </h2>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit.
-                        </p>
-                        <h3>
-                          <span>Now Only</span> $320.99
-                        </h3>
-                        <div className="button">
-                          <Link to="/" className="btn">
-                            Shop Now
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
+                    ></div>
                   </SwiperSlide>
                 ))}
               </Swiper>
