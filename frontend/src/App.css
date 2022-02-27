@@ -4436,7 +4436,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group input:focus {
-  border-color: #f44336;
+  border-color: #757575;
 }
 
 .contact-form-head .form-main .form .form-group textarea {
@@ -4455,7 +4455,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group textarea:focus {
-  border-color: #f44336;
+  border-color: #757575;
 }
 
 .contact-form-head .form-main .form .form-group.button {
