@@ -9,9 +9,7 @@ const Construction = () => {
   return (
     <div>
       <div className="product-grid">
-        <label className="sort-element" >
-          Sort by:{" "}
-        </label>
+        <label className="sort-element">Sort by: </label>
         <select className="form-select sort-element" id="sorting">
           <option>Popularity</option>
           <option>Low - High Price</option>
@@ -29,7 +27,10 @@ const Construction = () => {
             <div key={index} className="col-lg-3 col-md-6 col-12">
               <div className="single-product">
                 <div className="product-image">
-                  <img src="assets/images/products/product-1.jpg" alt="/" />
+                  <img
+                    src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
+                    alt="/"
+                  />
                   <div className="button">
                     <Link to="/product-details" className="btn">
                       <i className="lni lni-eye"></i> View
