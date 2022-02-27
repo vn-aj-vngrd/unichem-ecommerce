@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
-// import { toast } from "react-toastify";
+import Spinner from "../../components/Spinner";
 
 const Cart = () => {
   const quantity = 5; //test
@@ -24,7 +24,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
 
@@ -35,6 +35,10 @@ const Cart = () => {
       navigate("/login");
     }
   }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -64,12 +68,12 @@ const Cart = () => {
             <div className="cart-single-list">
               <div className="row align-items-center">
                 <div className="col-lg-1 col-md-1 col-12">
-                  <a href="product-details.html">
+                  <Link to="/products">
                     <img
                       src="https://dm.henkel-dam.com/is/image/henkel/Loctite_271_232077_APAC_50ml_2019_12.15_QRcode?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
                       alt="#"
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="col-lg-4 col-md-3 col-12">
                   <h5 className="product-name">
