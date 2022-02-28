@@ -35,8 +35,8 @@ const productSchema = mongoose.Schema(
       required: [true, "Product Quantity is required"],
     },
     price: {
-      type: Number,
-      required: [true, "Product Quantity is required"],
+      type: Array,
+      required: [true, "Product Price is required"],
     },
     featured: {
       type: Boolean,
