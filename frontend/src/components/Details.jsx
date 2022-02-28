@@ -109,10 +109,10 @@ const Details = ({ product }) => {
                   <div className="category">
                     <i className="lni lni-package"></i> Category:
                     <a href="/">{product.category}</a>
-                    <Star star={1} reviews={1} />
+                  <Star star={1} reviews={1} />
                   </div>
 
-                  <h3 className="price mt-2">₱{product.price}</h3>
+                  <h3 className="price mt-2">₱{product.price[value]}</h3>
                   {product.quantities[value] === 1 && (
                     <div>{product.quantities[value]} item left</div>
                   )}

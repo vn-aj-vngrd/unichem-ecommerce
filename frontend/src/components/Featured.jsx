@@ -74,7 +74,7 @@ const Featured = () => {
                       <hr />
 
                       <div className="price">
-                        <span>₱{product.price}</span>
+                        <span>₱{product.price[0]}</span>
                       </div>
                     </div>
                   </div>
