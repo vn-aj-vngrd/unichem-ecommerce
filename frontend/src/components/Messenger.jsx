@@ -7,9 +7,9 @@ const Messenger = () => {
         pageId="101323719167913"
         appId="3284833775173886"
         themeColor="#f44336"
-        loggedInGreeting="Welcome to Unichem support service, we are here to assist you"
+        loggedInGreeting="Welcome to Unichem support service, we are here to assist you."
         loggedOutGreeting="Thank you for your interest in Unichem, we are glad to assist you."
-        greetingDialogDisplay="fade"
+        greetingDialogDisplay="show"
         greetingDialogDelay="5000"
         // htmlRef="<REF_STRING>"
       />
