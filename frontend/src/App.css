@@ -34,6 +34,12 @@ p {
   padding-bottom: 55px;
 }
 
+.form-select {
+  color: #616161;;
+}
+
+
+
 .form-control:focus,
 .form-select:focus {
   border-color: #616161;
@@ -5050,3 +5056,18 @@ ol {
 /*======================================
 	Name CSS (Name your custom css)
 ========================================*/
+.input  {
+  border: 1px solid #e2e2e2;
+}
+
+.form-select-custom {
+  border: 1px solid #e6e2f5;
+  min-height: 52px;
+  padding-left: 20px;
+  font-size: .9rem;
+  color: #333;
+  border-radius: 3px;
+  transition: all 0.4s ease;
+}
+
+

@@ -269,6 +269,12 @@ const Navbar = () => {
                           FAQ
                         </Link>
                       </li>
+
+                      <li className="nav-item">
+                        <Link to="/shopproducts" aria-label="Toggle navigation">
+                          Products
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 </nav>
