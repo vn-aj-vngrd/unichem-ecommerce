@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Star from "./Star";
 
-const count = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const count = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const star = 4.5;
 const reviews = 5;
 
@@ -33,7 +33,7 @@ const ShopConstruction = () => {
       <div className="product">
         <div className="row">
           {count.map((count, index) => (
-            <div key={index} className="col-lg-3 col-md-6 col-12">
+            <div key={index} className="col-lg-4 col-md-6 col-12">
               <div className="single-product">
                 <div className="product-image">
                   <img

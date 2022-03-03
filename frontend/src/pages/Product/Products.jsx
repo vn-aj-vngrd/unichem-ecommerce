@@ -16,6 +16,7 @@ const Products = () => {
       <Product /> */}
 
       <ShopSidebar />
+      <div className="spacer"></div>
       <ShopProduct />
     </div>
   );

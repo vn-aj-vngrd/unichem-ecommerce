@@ -1983,6 +1983,8 @@ ol {
   padding: 5px 10px;
   left: 0;
   z-index: 22;
+  
+
 }
 
 .single-product .product-image .new-tag {
@@ -2109,6 +2111,10 @@ ol {
   margin-left: 10px;
   font-size: 14px;
   display: inline-block;
+}
+
+.profile-single-product {
+  padding: 10px;
 }
 
 .trending-product {
@@ -3322,15 +3328,16 @@ ol {
     Product List CSS
 ========================================*/
 
-.main-product-section {
+.main-product-section  {
   margin-top: 200px;
 }
 @media (min-width: 991px) {
-  .main-product-section {
+  .main-product-section, .main-profile-section {
     display: flex;
   }
 
   .product-sidebar,
+  .profile-sidebar,
   .contact-sidebar,
   .contact-form,
   .dev-card {
@@ -3339,6 +3346,7 @@ ol {
 }
 
 .product-sidebar,
+.profile-sidebar,
 .contact-sidebar,
 .contact-form,
 .dev-card {
@@ -3352,6 +3360,7 @@ ol {
   box-shadow: 0px 0px 20px #00000012;
   padding: 30px;
   background: #fff;
+  width: 100%;
 }
 
 .sidebar-nav {
@@ -5070,4 +5079,71 @@ ol {
   transition: all 0.4s ease;
 }
 
+.profile-image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  margin-right: 20px;
+}
 
+.purchase-product-image {
+  height: 200px;
+  width: 200px;
+  margin: auto;
+}
+
+.spacer {
+  margin: 0px 15px 0px 15px;
+}
+
+.purchase-products-column {
+  width: 100%;
+}
+
+.order-total-row {
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 3px;
+}
+
+.btn-line:hover {
+  color: #fff;
+  background-color: #f44336;
+  border-color: transparent;
+}
+.btn-line {
+  background-color: #fff;
+  display: inline-block;
+  border: 1px solid #e0e0e0;
+  color: #555;
+  font-size: 18px;
+  text-align: center;
+  position: relative;
+
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 30px;
+  transition: 0.2s;
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .button .btn-line {
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 767px) {
+  .button .btn-line {
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

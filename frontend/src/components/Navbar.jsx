@@ -64,7 +64,7 @@ const Navbar = () => {
               <div className="col-lg-4 col-md-2 col-5">
                 <div className="middle-right-area">
                   <div className="nav-hotline"></div>
-
+                  
                   <div className="navbar-cart">
                     <div className="wishlist">
                       <Link to="/wishlist">
