@@ -16,7 +16,9 @@ const ShopSidebar = () => {
           </div>
           <div className="">
               <h5>Username</h5>
-              <p>LastName, FirstName Mi.</p>
+              <Link className="sidebar-nav" to="">
+                Edit Profile
+              </Link>
           </div>
         </div>
         <hr></hr>
