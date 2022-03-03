@@ -18,7 +18,6 @@ const Construction = () => {
           <option>A - Z Order</option>
           <option>Z - A Order</option>
         </select>
-        Showing: 1 - 12 items
       </div>
 
       <div className="product">

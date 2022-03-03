@@ -9,15 +9,29 @@ const Construction = () => {
   return (
     <div className="purchase-products-column">
       <div className="product-grid">
-        <label className="sort-element">Order Status: </label>
-        <select className="form-select sort-element" id="sorting">
-          <option>All</option>
-          <option>To Pay</option>
-          <option>To Ship</option>
-          <option>To Receive</option>
-          <option>Completed</option>
-          <option>Cancelled</option>
-        </select>
+
+        <div className="d-flex product-filter align-items-center">
+          <label className="sort-element">Order Status: </label>
+          <select className="form-select sort-element" id="sorting">
+            <option>All</option>
+            <option>To Pay</option>
+            <option>To Ship</option>
+            <option>To Receive</option>
+            <option>Completed</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+        <div className="d-flex product-filter align-items-center">
+          <label className="sort-element">Sort by: </label>
+          <select className="form-select sort-element" id="sorting">
+            <option>Popularity</option>
+            <option>Low - High Price</option>
+            <option>High - Low Price</option>
+            <option>Average Rating</option>
+            <option>A - Z Order</option>
+            <option>Z - A Order</option>
+          </select>
+        </div>
       </div>
 
       <div className="product">
@@ -60,7 +74,7 @@ const Construction = () => {
               <Link to="/product-details" className="underline-link">
                 <div className="color-white">Order Status Log </div>
               </Link>
-              <div className="color-white">
+              <div className="color-white purchase-update-time">
                 Last Update Time: mm/dd/yy - hh:mm
               </div>
               <h6 className="purchase-order-status">ORDER STATUS</h6>

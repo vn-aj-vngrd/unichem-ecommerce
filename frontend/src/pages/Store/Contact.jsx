@@ -25,7 +25,7 @@ const Login = () => {
             <div className="contact-info">
               <div className="row">
                 <div className="col-lg-4 col-md-12 col-12">
-                  <div className="single-info-head">
+                  <div className="box-shadow single-info-head">
                     <div className="single-info">
                       <i className="lni lni-map text-danger"></i>
                       <h6>Address</h6>
@@ -71,7 +71,7 @@ const Login = () => {
                 </div>
                 <div className="col-lg-8 col-md-12 col-12">
                   <div className="contact-form-head">
-                    <div className="form-main">
+                    <div className="box-shadow form-main">
                       <form
                         className="form"
                         method="post"

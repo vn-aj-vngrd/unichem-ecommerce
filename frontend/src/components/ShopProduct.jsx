@@ -18,8 +18,6 @@ const ShopConstruction = () => {
           <option>A - Z Order</option>
           <option>Z - A Order</option>
         </select>
-        Showing: 1 - 12 items
-        
       </div>
       <div className="product-grid">
         <label className="sort-element">Create New Product: </label>
