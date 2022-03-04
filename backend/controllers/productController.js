@@ -4,7 +4,7 @@ const Product = require("../models/productModel");
 
 // @desc    Get all products
 // @route   GET /api/products
-// @access  Private
+// @access  Public
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find();
 
@@ -12,7 +12,7 @@ const getProducts = asyncHandler(async (req, res) => {
 });
 
 // @desc    Set Product
-// @route   POST /api/Products
+// @route   POST /api/products
 // @access  Private
 const setProduct = asyncHandler(async (req, res) => {
   // if (!req.body.productName || !req.body.brand || !req.body.category || !req.body.description
@@ -39,14 +39,14 @@ const setProduct = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update Product
-// @route   PUT /api/Products/:id
+// @route   PUT /api/products/:id
 // @access  Private
 const updateProduct = asyncHandler(async (req, res) => {
 
 });
 
 // @desc    Delete Product
-// @route   DELETE /api/Products/:id
+// @route   DELETE /api/products/:id
 // @access  Private
 const deleteProduct = asyncHandler(async (req, res) => {
 

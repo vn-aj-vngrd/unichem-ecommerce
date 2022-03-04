@@ -34,6 +34,10 @@ const Details = ({ product }) => {
 
   let navigate = useNavigate();
   let addToCart = (event) => {
+    // const cartData = {
+
+    // }
+
     event.preventDefault();
     Swal.fire({
       title: "Added to Cart!",
@@ -109,10 +113,9 @@ const Details = ({ product }) => {
                   <div className="category">
                     <i className="lni lni-package"></i>Category:
                     <a href="/">{product.category}</a>
-                  <Star star={1} reviews={1} />
+                    <Star star={1} reviews={1} />
                   </div>
 
-                  
                   {product.quantities[value] === 1 && (
                     <div>{product.quantities[value]} item left</div>
                   )}
@@ -124,7 +127,7 @@ const Details = ({ product }) => {
                   {product.quantities[value] === 0 && (
                     <div>Item is not available</div>
                   )}
-                  <h4 className="text-red">₱{product.price[value]}</h4>
+                  <h4 className="text-red">₱{product.prices[value]}</h4>
 
                   <hr className="mt-3" />
 
