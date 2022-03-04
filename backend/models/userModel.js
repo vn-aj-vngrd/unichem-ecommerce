@@ -4,28 +4,32 @@ const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please add your name."],
+      required: [true, "Name is required."],
     },
     email: {
       type: String,
-      required: [true, "Please add your email."],
+      required: [true, "Email is required."],
       unique: true,
     },
     sex: {
       type: String,
-      required: [true, "Please add your sex."],
+      required: [true, "Sex is required."],
     },
     birthday: {
       type: String,
-      required: [true, "Please add your birthday."],
+      required: [true, "Please is required."],
     },
     phoneNumber: {
       type: String,
-      required: [true, "Please add your phone number."],
+      required: [true, "Phone Number is required."],
     },
     password: {
       type: String,
-      required: [true, "Please add your password."],
+      required: [true, "Password is required."],
+    },
+    userType: {
+      type: String,
+      required: [true, "Usertype is required."],
     },
   },
   {

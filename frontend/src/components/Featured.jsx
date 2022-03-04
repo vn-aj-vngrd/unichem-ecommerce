@@ -89,7 +89,7 @@ const Featured = () => {
           </div>
         </section>
       ) : (
-        <div className="mt-80"> </div>
+         <></>
       )}
     </>
   );
