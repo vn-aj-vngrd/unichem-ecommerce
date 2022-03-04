@@ -5,7 +5,6 @@ const ShopSidebar = () => {
   return (
     <div>
       <div className="profile-sidebar single-widget search">
-        
         <div className="d-flex align-items-center ">
           <div>
             <img
@@ -15,41 +14,42 @@ const ShopSidebar = () => {
             />
           </div>
           <div className="">
-              <h5>Username</h5>
-              <Link className="sidebar-nav" to="">
-                Edit Profile
-              </Link>
+            <h5>Username</h5>
+            <Link className="sidebar-nav" to="">
+              Edit Profile
+            </Link>
           </div>
         </div>
         <hr></hr>
-        <ul className="list">
-          <li>
-            <Link className="sidebar-nav" to="">
-              Profile
-            </Link>
-          </li>
-          <li>
-            <Link className="sidebar-nav" to="">
-              Addresses
-            </Link>
-          </li>
-          <li>
-            <Link className="sidebar-nav" to="">
-              Purchase
-            </Link>
-          </li>
-          <li>
-            <Link className="sidebar-nav" to="">
-              My Purchases
-            </Link>
-          </li>
-          <li>
-            <Link className="sidebar-nav" to="">
-              Change Password
-            </Link>
-          </li>
-          
-        </ul>
+        <div className="profile-category">
+          <ul className="list">
+            <li>
+              <Link className="" to="">
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link className="" to="">
+                Addresses
+              </Link>
+            </li>
+            <li>
+              <Link className="" to="">
+                Purchase
+              </Link>
+            </li>
+            <li>
+              <Link className="" to="">
+                My Purchases
+              </Link>
+            </li>
+            <li>
+              <Link className="" to="">
+                Change Password
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

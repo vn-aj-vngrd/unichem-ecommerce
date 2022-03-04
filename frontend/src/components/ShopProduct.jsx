@@ -45,18 +45,27 @@ const ShopConstruction = () => {
                   </div>
                 </div>
                 <div className="product-info">
-                  <span className="category">Category</span>
+                  <div className="category">
+                    <i className="lni lni-package category-icon"></i> Category:
+                    <a href="/">{}</a>
+                  </div>
                   <h4 className="title">
                     <span>Title</span>
                   </h4>
 
                   <Star star={star} reviews={reviews} />
 
-                  <hr />
+                  {/* <hr /> */}
 
-                  <div className="price">
+                  {/* <div className="price">
                     <span>₱199.00</span>
-                  </div>
+                  </div> */}
+                </div>
+              </div>
+              <div className="order-total-row">
+                <div class="price d-flex justify-content-between align-items-center">
+                  <div><h4 className="unichem-text-color">$199.00</h4></div>
+                  <div className="items-sold">6.9K items sold</div>
                 </div>
               </div>
             </div>

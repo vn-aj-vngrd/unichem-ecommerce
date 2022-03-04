@@ -45,29 +45,40 @@ const Cart = () => {
       <Breadcrumb type="cart" />
       <div className="shopping-cart">
         <div className="container">
-          <div className="cart-list-head">
-            <div className="cart-list-title">
-              <div className="row">
-                <div className="col-lg-1 col-md-1 col-12"></div>
-                <div className="col-lg-4 col-md-3 col-12">
-                  <p>Product Name</p>
-                </div>
-                <div className="col-lg-2 col-md-3 col-12">
-                  <p>Quantity</p>
-                </div>
-                <div className="col-lg-2 col-md-2 col-12">
-                  <p>Price</p>
-                </div>
-                <div className="col-lg-2 col-md-2 col-12">
-                  <p>Total</p>
-                </div>
-                <div className="col-lg-1 col-md-1 col-12"></div>
-              </div>
+          <div className="purchase-row-banner cart-banner">
+            <div className="include-in-cart color-white">Include</div>
+            <div className="image-in-cart color-white">
+              <p></p>
             </div>
-
+            <div className="product-in-cart color-white">
+              <p>Product</p>
+            </div>
+            <div className="quantity-in-cart color-white">
+              <p>Quantity</p>
+            </div>
+            <div className="price-in-cart color-white">
+              <p>Price</p>
+            </div>
+            <div className="total-in-cart color-white">
+              <p>Total</p>
+            </div>
+            <div className="action-in-cart color-white">
+              <p>Action</p>
+            </div>
+          </div>
+          <div className="cart-list-head box-shadow">
             <div className="cart-single-list">
-              <div className="row align-items-center">
-                <div className="col-lg-1 col-md-1 col-12">
+              <div className="d-flex align-items-center">
+                <div class="include-in-cart form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  ></input>
+                </div>
+
+                <div className="image-in-cart">
                   <Link to="/products">
                     <img
                       src="https://dm.henkel-dam.com/is/image/henkel/Loctite_271_232077_APAC_50ml_2019_12.15_QRcode?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
@@ -75,17 +86,19 @@ const Cart = () => {
                     />
                   </Link>
                 </div>
-                <div className="col-lg-4 col-md-3 col-12">
-                  <h5 className="product-name">
-                    <a href="product-details.html">Test</a>
-                  </h5>
+
+                <div className="product-in-cart">
+                  <h4 class="title">
+                    <Link to="/">ProductName</Link>
+                  </h4>
                   <p className="product-des">
                     <span>
                       <b>Type / Color:</b> test
                     </span>
                   </p>
                 </div>
-                <div className="col-lg-2 col-md-3 col-12">
+
+                <div className="quantity-in-cart">
                   <div className="quantity-control text-center">
                     <button className="quantity-btn" onClick={decrement}>
                       <svg viewBox="0 0 409.6 409.6">
@@ -108,13 +121,13 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
-                <div className="col-lg-2 col-md-2 col-12">
+                <div className="price-in-cart">
                   <p>₱910.00</p>
                 </div>
-                <div className="col-lg-2 col-md-2 col-12">
-                  <p>₱2000.00</p>
+                <div className="total-in-cart">
+                  <h6>₱2000.00</h6>
                 </div>
-                <div className="col-lg-1 col-md-1 col-12">
+                <div className="action-in-cart">
                   <button className="remove-item">
                     <i className="lni lni-close"></i>
                   </button>
@@ -122,6 +135,7 @@ const Cart = () => {
               </div>
             </div>
           </div>
+
           <div className="row">
             <div className="col-12">
               <div className="total-amount">
@@ -129,22 +143,74 @@ const Cart = () => {
                   <div className="col-lg-8 col-md-6 col-12"></div>
                   <div className="col-lg-4 col-md-6 col-12">
                     <div className="right">
+                      <h5 className="heading">Pricing Table</h5>
+                      <hr></hr>
                       <ul>
                         <li>
-                          Cart Subtotal<span>₱2000.00</span>
+                          Total Items
+                          <span>
+                            <h6>69 Items</h6>
+                          </span>
                         </li>
                         <li>
-                          Shipping Fee<span>Free</span>
+                          Cart Subtotal
+                          <span>
+                            <h6>₱2000.00</h6>
+                          </span>
+                        </li>
+                        <li>
+                          Shipping Fee
+                          <span>
+                            <h6>Free</h6>
+                          </span>
                         </li>
                         <li className="last">
-                          Total Payment<span>₱2000.00</span>
+                          Total Payment
+                          <span>
+                            <h6>₱2000.00</h6>
+                          </span>
                         </li>
                       </ul>
-                      <div className="button">
-                        <Link to="/checkout" className="btn">
-                          Checkout
-                        </Link>
+                    </div>
+
+                    <div class="no-box-shadow">
+                      <div className="order-total-row">
+                        <div class="price d-flex justify-content-between align-items-center">
+                          <div className="">Order Total:</div>
+                          <div className="spacer"></div>
+                          <h4 className="unichem-text-color">$199.00</h4>
+                        </div>
+                        <br></br>
+
+                        <div className="">
+                          <div className="purchase-options-checkout button">
+                            <Link to="/checkout" className="btn checkout-btn">
+                              Checkout
+                            </Link>
+                            <Link
+                              to="/product-details"
+                              className="btn-line message-btn"
+                            >
+                              Message Unichem
+                            </Link>
+                          </div>
+                        </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <div className="total-amount">
+                <div className="row">
+                  <div className="col-lg-8 col-md-6 col-12"></div>
+                  <div className="col-lg-4 col-md-6 col-12">
+                    <div className="ad-right">
+                      <img src="https://dm.henkel-dam.com/is/image/henkel/loctite-glass-glue-2g-ecom-usp?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048" className="square-ad"></img>                      
                     </div>
                   </div>
                 </div>

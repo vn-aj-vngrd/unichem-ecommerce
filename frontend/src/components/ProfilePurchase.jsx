@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Star from "./Star";
+import PurchasedProduct from "./PurchasedProduct";
 
 const row = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const star = 4.5;
@@ -9,7 +9,6 @@ const Construction = () => {
   return (
     <div className="purchase-products-column">
       <div className="product-grid">
-
         <div className="d-flex product-filter align-items-center">
           <label className="sort-element">Order Status: </label>
           <select className="form-select sort-element" id="sorting">
@@ -81,62 +80,8 @@ const Construction = () => {
             </div>
 
             {/* ORDERLINE START HERE */}
-            <div class="single-product no-box-shadow profile-single-product">
-              <div class="row align-items-center">
-                <div class="col-lg-4 col-md-4 col-12">
-                  <div class="purchase-product-image product-image">
-                    <img
-                      src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
-                      alt="#"
-                    ></img>
-                    <div className="button">
-                      <Link to="/product-details" className="btn">
-                        <i className="lni lni-eye"></i> View
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-8 col-md-8 col-12">
-                  <div class="product-info">
-                    <span class="category">Category</span>
-                    <h4 class="title">
-                      <a href="product-grids.html">ProductName</a>
-                    </h4>
-
-                    <div className="">
-                      Specifications: Sample, Sample, Sample, Sample
-                    </div>
-
-                    <ul class="review">
-                      <li>
-                        <i class="lni lni-star-filled"></i>
-                      </li>
-                      <li>
-                        <i class="lni lni-star-filled"></i>
-                      </li>
-                      <li>
-                        <i class="lni lni-star-filled"></i>
-                      </li>
-                      <li>
-                        <i class="lni lni-star-filled"></i>
-                      </li>
-                      <li>
-                        <i class="lni lni-star"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                    <hr></hr>
-                    <div class="price">
-                      <div className="">Quantity: 4pcs</div>
-                      <div className="spacer"></div>
-                      <span>$199.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
+            <PurchasedProduct />
 
             {/* END OF ORDERLINE */}
             <div class="no-box-shadow">
