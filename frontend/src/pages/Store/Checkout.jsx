@@ -26,7 +26,7 @@ const Checkout = () => {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8">
-              <div className="checkout-steps-form-style-1">
+              <div className="checkout-steps-form-style">
                 <ul id="accordionExample">
                   <li>
                     <div
@@ -36,7 +36,7 @@ const Checkout = () => {
                       aria-expanded="false"
                       aria-controls="collapseOne"
                     >
-                      Shipping Address
+                      Payment Address
                     </div>
                     <section
                       className="checkout-steps-form-content collapse show"
@@ -109,6 +109,7 @@ const Checkout = () => {
                       </div>
                     </section>
                   </li>
+
                   <li>
                     <div
                       className="title collapsed"
@@ -126,50 +127,51 @@ const Checkout = () => {
                       data-bs-parent="#accordionExample"
                     >
                       <div className="row">
-                        <div className="col-12">
-                          <div className="col-md-12">
-                            <div className="checkout-payment-option">
-                              <div className="payment-option-wrapper">
-                                <div className="single-payment-option">
-                                  <input
-                                    type="radio"
-                                    name="payment"
-                                    id="payment-1"
-                                  />
-                                  <label>
-                                    <p>Cash on Delivery</p>
-                                  </label>
-                                </div>
-                                <div className="single-payment-option">
-                                  <input
-                                    type="radio"
-                                    name="payment"
-                                    id="payment-2"
-                                  />
-                                  <label>
-                                    <p>Bank Transfer</p>
-                                  </label>
-                                </div>
-                                <div className="single-payment-option">
-                                  <input
-                                    type="radio"
-                                    name="payment"
-                                    id="payment-3"
-                                  />
-                                  <label>
-                                    <p>G-Cash</p>
-                                  </label>
-                                </div>
-                                <div className="single-payment-option">
-                                  <input
-                                    type="radio"
-                                    name="payment"
-                                    id="payment-4"
-                                  />
-                                  <label>
-                                    <p>VISA</p>
-                                  </label>
-                                </div>
+                        <div class="col-md-12">
+                          <div class="checkout-payment-option">
+                            <h6 class="heading-6 font-weight-400 payment-title">
+                              Select Delivery Option
+                            </h6>
+                            <div class="payment-option-wrapper">
+                              <div class="single-payment-option">
+                                <input
+                                  type="radio"
+                                  name="payment"
+                                  id="payment-1"
+                                />
+                                <label for="payment-1">
+                                  <p>Standerd payment</p>
+                                </label>
+                              </div>
+                              <div class="single-payment-option">
+                                <input
+                                  type="radio"
+                                  name="payment"
+                                  id="payment-2"
+                                />
+                                <label for="payment-2">
+                                  <p>Standerd payment</p>
+                                </label>
+                              </div>
+                              <div class="single-payment-option">
+                                <input
+                                  type="radio"
+                                  name="payment"
+                                  id="payment-3"
+                                />
+                                <label for="payment-3">
+                                  <p>Standerd payment</p>
+                                </label>
+                              </div>
+                              <div class="single-payment-option">
+                                <input
+                                  type="radio"
+                                  name="payment"
+                                  id="payment-4"
+                                />
+                                <label for="payment-4">
+                                  <p>Standerd payment</p>
+                                </label>
                               </div>
                             </div>
                           </div>

@@ -79,7 +79,7 @@ const Login = () => {
   }
 
   return (
-    <div className="body-content">
+    <div className="login">
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -91,7 +91,7 @@ const Login = () => {
         </div>
         <form
           onSubmit={onSubmit}
-          className="container border p-4 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12"
+          className="container p-5 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12"
         >
           <div className="mb-3">
             <label className="form-label">Email address</label>

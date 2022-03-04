@@ -123,7 +123,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="body-content">
+    <div className="signup">
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -135,164 +135,165 @@ const Signup = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-10 col-md-10 offset-md-1 col-12 border p-5">
-          <form onSubmit={onSubmit} className="row g-3">
-            <div className="fw-bold">Personal Information</div>
-            <hr />
-            <div className="col-6 mb-3">
-              <label className="form-label">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                name="name"
-                value={name}
-                onChange={onChange}
-                required
-              />
-            </div>
-            <div className="col-6 mb-3">
-              <label className="form-label">Email Address</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                value={email}
-                onChange={onChange}
-                required
-              />
-            </div>
-            <div className="col-6 mb-3">
-              <label className="form-label">Birthday</label>
-              <input
-                type="date"
-                className="form-control"
-                id="birthday"
-                name="birthday"
-                value={birthday}
-                onChange={onChange}
-                required
-              />
-            </div>
-            <div className="col-6 mb-3">
-              <label className="form-label">Birthday</label>
-              <select
-                className="form-select"
-                id="sex"
-                name="sex"
-                value={sex}
-                onChange={onChange}
-                required
-              >
-                <option value="" disabled>
-                  Please select your sex
-                </option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-              </select>
-            </div>
-            <div className="col-6 mb-3">
-              <label className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                name="password"
-                value={password}
-                onChange={onChange}
-                required
-              />
-            </div>
-            <div className="col-6 mb-3">
-              <label className="form-label">Confirm Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={onChange}
-                required
-              />
-            </div>
+        <form
+          onSubmit={onSubmit}
+          className="col-lg-10 col-md-10 offset-md-1 col-12 p-5 row g-3"
+        >
+          <div className="fw-bold">Personal Information</div>
+          <hr />
+          <div className="col-6 mb-3">
+            <label className="form-label">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              value={name}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">Email Address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={email}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">Birthday</label>
+            <input
+              type="date"
+              className="form-control"
+              id="birthday"
+              name="birthday"
+              value={birthday}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">Birthday</label>
+            <select
+              className="form-select"
+              id="sex"
+              name="sex"
+              value={sex}
+              onChange={onChange}
+              required
+            >
+              <option value="" disabled>
+                Please select your sex
+              </option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+          </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={password}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">Confirm Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={onChange}
+              required
+            />
+          </div>
 
-            <div className="fw-bold">Address Information</div>
-            <hr />
+          <div className="fw-bold">Address Information</div>
+          <hr />
 
-            <div className="col-6 mb-3">
-              <label className="form-label">
-                Region, Province, City, Barangay
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="address1"
-                name="address1"
-                value={address1}
-                onChange={onChange}
-                required
-              />
-            </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">
+              Region, Province, City, Barangay
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="address1"
+              name="address1"
+              value={address1}
+              onChange={onChange}
+              required
+            />
+          </div>
 
-            <div className="col-6 mb-3">
-              <label className="form-label">
-                Street Name, Building, House No.
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="address2"
-                name="address2"
-                value={address2}
-                onChange={onChange}
-                required
-              />
-            </div>
-            <div className="col-6 mb-3">
-              <label className="form-label">Postal Code</label>
-              <input
-                type="text"
-                className="form-control"
-                id="postalCode"
-                name="postalCode"
-                value={postalCode}
-                onChange={onChange}
-                required
-              />
-            </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">
+              Street Name, Building, House No.
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="address2"
+              name="address2"
+              value={address2}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">Postal Code</label>
+            <input
+              type="text"
+              className="form-control"
+              id="postalCode"
+              name="postalCode"
+              value={postalCode}
+              onChange={onChange}
+              required
+            />
+          </div>
 
-            <div className="col-6 mb-3">
-              <label className="form-label">Phone Number</label>
-              <input
-                type="text"
-                className="form-control"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={phoneNumber}
-                onChange={onChange}
-                required
-              />
-            </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">Phone Number</label>
+            <input
+              type="text"
+              className="form-control"
+              id="phoneNumber"
+              name="phoneNumber"
+              value={phoneNumber}
+              onChange={onChange}
+              required
+            />
+          </div>
 
-            <div className="button text-center pt-2 mb-3">
-              <button type="submit" className="btn">
-                Sign Up
-              </button>
-            </div>
+          <div className="button text-center pt-2 mb-3">
+            <button type="submit" className="btn">
+              Sign Up
+            </button>
+          </div>
 
-            <hr />
-            <div className="text-center mt-3">
-              <p>
-                Already have an account?{" "}
-                <Link to="/login" className="text-danger">
-                  {" "}
-                  Log in
-                </Link>
-              </p>
-            </div>
-          </form>
-        </div>
+          <hr />
+          <div className="text-center mt-3">
+            <p>
+              Already have an account?{" "}
+              <Link to="/login" className="text-danger">
+                {" "}
+                Log in
+              </Link>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   );

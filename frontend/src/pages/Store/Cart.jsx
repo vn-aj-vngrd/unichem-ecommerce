@@ -49,18 +49,18 @@ const Cart = () => {
             <div className="d-flex cart-product-left">
               <div className="include-in-cart color-white">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
                 ></input>
               </div>
-              <div className="image-in-cart color-white hide-on-thin-screen">
-                <p></p>
-              </div>
+              <div className="image-in-cart color-white hide-on-thin-screen"></div>
             </div>
             <div className="cart-product-right">
-              <div className="product-in-cart color-white hide-on-thin-screen"></div>
+              <div className="product-in-cart color-white hide-on-thin-screen">
+                <p>Product</p>
+              </div>
               <div className="quantity-in-cart color-white hide-on-thin-screen">
                 <p>Quantity</p>
               </div>
@@ -80,9 +80,9 @@ const Cart = () => {
             <div className="cart-single-list">
               <div className="d-flex single-cart-product">
                 <div className="d-flex align-items-center cart-product-left">
-                  <div class="include-in-cart form-check">
+                  <div className="include-in-cart form-check">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -99,20 +99,19 @@ const Cart = () => {
                   </div>
                 </div>
 
-                <hr classNam="cart-div"></hr>
+                <hr className="cart-div"></hr>
                 <div className="cart-product-right">
                   <div className="product-in-cart">
                     <div className="category">
-                      <i className="lni lni-package category-icon"></i> Category:
-                      <a href="/">{}</a>
+                      <i className="lni lni-package category-icon"></i>
+                      Category:
+                      <Link to="/product">{}</Link>
                     </div>
-                    <h4 class="title">
+                    <h5 className="title mt-1">
                       <Link to="/">ProductName</Link>
-                    </h4>
-                    <p className="product-des">
-                      <div className="">
-                        Type / Color: Sample, Sample, Sample, Sample
-                      </div>
+                    </h5>
+                    <p className="product-des mt-1">
+                      <div className="">Type / Color: Sample</div>
                     </p>
                   </div>
 
@@ -141,12 +140,14 @@ const Cart = () => {
                   </div>
                   <div className="price-in-cart">
                     <div className="price">
-                      <h6> $199.00</h6>
+                      <h6> ₱199.00</h6>
                     </div>
                   </div>
                   <div className="total-in-cart">
                     <div className="price">
-                      <h6><b> $199.00</b></h6>
+                      <h6>
+                        <h6 className="fw-bolder"> ₱199.00</h6>
+                      </h6>
                     </div>
                   </div>
                   <div className="action-in-cart">
@@ -177,71 +178,44 @@ const Cart = () => {
                         <li>
                           Total Items
                           <span>
-                            <h6>69 Items</h6>
+                            <p className="fw-bold">69 Items</p>
                           </span>
                         </li>
                         <li>
                           Cart Subtotal
                           <span>
-                            <h6>₱2000.00</h6>
+                            <p className="fw-bold">₱2000.00</p>
                           </span>
                         </li>
                         <li>
                           Shipping Fee
                           <span>
-                            <h6>Free</h6>
+                            <p className="fw-bold">Free</p>
                           </span>
                         </li>
                         <li className="last">
                           Total Payment
                           <span>
-                            <h6>₱2000.00</h6>
+                            <p className="fw-bold">₱2000.00</p>
                           </span>
                         </li>
                       </ul>
                     </div>
 
-                    <div class="no-box-shadow">
+                    <div className="no-box-shadow">
                       <div className="order-total-row">
-                        <div class="price d-flex justify-content-between align-items-center">
+                        <div className="price d-flex justify-content-between align-items-center">
                           <div className="">Order Total:</div>
                           <div className="spacer"></div>
-                          <h4 className="unichem-text-color">$199.00</h4>
+                          <h5 className="text-danger">$199.00</h5>
                         </div>
-                        <br></br>
 
-                        <div className="">
-                          <div className="purchase-options-checkout button">
-                            <Link to="/checkout" className="btn checkout-btn">
-                              Checkout
-                            </Link>
-                            <Link
-                              to="/product-details"
-                              className="btn-line message-btn"
-                            >
-                              Message Unichem
-                            </Link>
-                          </div>
+                        <div className="button mt-4">
+                          <Link to="/checkout" className="btn">
+                            Checkout
+                          </Link>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-12">
-              <div className="total-amount">
-                <div className="row">
-                  <div className="col-lg-8 col-md-6 col-12"></div>
-                  <div className="col-lg-4 col-md-6 col-12">
-                    <div className="ad-right">
-                      <img
-                        src="https://dm.henkel-dam.com/is/image/henkel/loctite-glass-glue-2g-ecom-usp?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
-                        className="square-ad"
-                      ></img>
                     </div>
                   </div>
                 </div>

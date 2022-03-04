@@ -80,7 +80,7 @@ const Construction = () => {
             </div>
 
             {/* ORDERLINE START HERE */}
-            
+
             <PurchasedProduct />
 
             {/* END OF ORDERLINE */}
@@ -102,9 +102,9 @@ const Construction = () => {
                         Cancel
                       </Link> */}
 
-                    <Link to="/product-details" className="btn-line">
+                    {/* <Link to="/product-details" className="btn-line">
                       Message Unichem
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>
