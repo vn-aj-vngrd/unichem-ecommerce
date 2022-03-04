@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Breadcrumb = ({ type }) => {
   return (
-    <div className="breadcrumbs container">
+    <div className="breadcrumbs">
       <div className="container">
         <div class="row align-items-center">
           {type === "cart" && (
