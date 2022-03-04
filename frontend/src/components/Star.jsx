@@ -35,7 +35,7 @@ const Star = ({ star, reviews }) => {
           <div>
             <MdStar className="text-warning" />
           </div>
-          <div>
+        <div>
             <MdStar className="text-warning" />
           </div>
           <div>

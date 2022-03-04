@@ -60,7 +60,7 @@ const Product = () => {
                   </div>
                 </div>
                 <div className="order-total-row ">
-                  <div class="price d-flex justify-content-between align-items-center">
+                  <div className="price d-flex justify-content-between align-items-center">
                     <div>
                       <h4 className="unichem-text-color">$199.00</h4>
                     </div>

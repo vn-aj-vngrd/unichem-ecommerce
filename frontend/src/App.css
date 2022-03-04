@@ -30,12 +30,6 @@ p {
   color: #616161;
 }
 
-.body-content {
-  margin-top: 220px;
-  margin-bottom: 90px;
-  /* padding-bottom: 55px; */
-}
-
 .form-select {
   color: #616161;
 }
@@ -195,7 +189,7 @@ ol {
 .breadcrumbs {
   position: -webkit-sticky; /* Safari */
   width: 100%;
-  margin-top: 155px;
+  margin-top: 160px;
   position: relative;
   padding: 20px;
   z-index: 1;
@@ -1849,7 +1843,7 @@ ol {
 .hero-area {
   position: relative;
   background-color: #f9f9f9;
-  margin-top: 230px;
+  margin-top: 220px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2124,7 +2118,7 @@ ol {
 
 .trending-product {
   background-color: #f9f9f9;
-  padding: 90px 0;
+  padding-top: 90px;
 }
 
 .trending-product .section-title {
@@ -3360,7 +3354,6 @@ ol {
   border-radius: 4px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  margin-top: 30px;
   margin-right: 25px;
   /* -webkit-box-shadow: 0px 0px 20px #00000012;
   box-shadow: 0px 0px 20px #00000012; */
@@ -3458,7 +3451,6 @@ ol {
   border-radius: 4px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  margin-top: 30px;
   /* -webkit-box-shadow: 0px 0px 20px #00000012;
   box-shadow: 0px 0px 20px #00000012; */
   padding: 20px;
@@ -3880,7 +3872,7 @@ ol {
 
 .about-us {
   background-color: #f9f9f9;
-  padding-top: 15px;
+  margin-top: 230px;
 }
 
 .about-us .content-left {
@@ -4338,6 +4330,7 @@ ol {
 .checkout-wrapper {
   background-color: #f9f9f9;
   margin-top: 20px;
+  padding-bottom: 55px;
 }
 
 .checkout-steps-form-style-1 #accordionExample li {
@@ -5497,4 +5490,3 @@ ol {
   margin-top: 40px;
   border-radius: 3px;
 }
-

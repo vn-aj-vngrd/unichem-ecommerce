@@ -68,17 +68,21 @@ const Featured = () => {
                     </div>
                     <div className="product-info">
                       <span className="category">
-                        <i className="lni lni-package category-icon"></i> Category: {product.category}</span>
-                      <h4 className="title">
-                        <span>{product.productName}</span>
-                      </h4>
+                        <i className="lni lni-package category-icon"></i>{" "}
+                        Category: {product.category}
+                      </span>
+                      <div className="title">
+                        <h5>{product.productName}</h5>
+                      </div>
                       <Star star={3} reviews={1} />
                     </div>
                   </div>
                   <div className="order-total-row">
-                    <div class="price d-flex justify-content-between align-items-center">
+                    <div className="price d-flex justify-content-between align-items-center">
                       <div>
-                        <h4 className="unichem-text-color"><span>₱{product.price[0]}</span></h4>
+                        <h6 className="unichem-text-color">
+                          <span>₱{product.price[0]}</span>
+                        </h6>
                       </div>
                       <div className="items-sold">6.9K items sold</div>
                     </div>
@@ -89,7 +93,7 @@ const Featured = () => {
           </div>
         </section>
       ) : (
-        <div className="mt-80"> </div>
+        <></>
       )}
     </>
   );

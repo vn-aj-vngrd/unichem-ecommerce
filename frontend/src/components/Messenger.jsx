@@ -10,7 +10,7 @@ const Messenger = () => {
         loggedInGreeting="Welcome to Unichem support service, we are here to assist you."
         loggedOutGreeting="Thank you for your interest in Unichem, we are glad to assist you."
         greetingDialogDisplay="show"
-        greetingDialogDelay="5000"
+        greetingDialogDelay={5000}
         // htmlRef="<REF_STRING>"
       />
     </div>

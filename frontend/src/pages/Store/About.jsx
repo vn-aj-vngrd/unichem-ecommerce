@@ -6,7 +6,7 @@ const About = () => {
   });
 
   return (
-    <div className="body-content">
+    <>
       <section className="about-us">
         <div className="container">
           <div className="row align-items-center">
@@ -63,7 +63,7 @@ const About = () => {
               <div className="single-team">
                 <div className="image">
                   <img
-                    src="https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/265045880_4664465363610412_3077703784126999012_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeG6OCYCZ3CHvDCnn3gkw4f07VEmKdmD4HrtUSYp2YPgeijaAgkLlVvIZi6OkafPGr9I9Ew1JO3LnF6iAYvJVZH-&_nc_ohc=aqCKcJTr730AX_jh2lf&_nc_ht=scontent.fceb2-2.fna&oh=00_AT_6BqovlMtCUeTqci4MFGHSItKRq0HLzJiVupFteSUTcA&oe=621DED01"
+                    // src="https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/265045880_4664465363610412_3077703784126999012_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeG6OCYCZ3CHvDCnn3gkw4f07VEmKdmD4HrtUSYp2YPgeijaAgkLlVvIZi6OkafPGr9I9Ew1JO3LnF6iAYvJVZH-&_nc_ohc=aqCKcJTr730AX_jh2lf&_nc_ht=scontent.fceb2-2.fna&oh=00_AT_6BqovlMtCUeTqci4MFGHSItKRq0HLzJiVupFteSUTcA&oe=621DED01"
                     alt="#"
                   />
                 </div>
@@ -95,7 +95,7 @@ const About = () => {
               <div className="single-team">
                 <div className="image">
                   <img
-                    src="https://scontent.fceb2-2.fna.fbcdn.net/v/t1.6435-9/60255777_10205808349163781_6229416713532735488_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeGuXE5hs2F1PtWOpccTSnbAY9sEjR8tFldj2wSNHy0WVwxTPmfOm9dMbU0rZS91gaS6ruU5b0c9R-0Mb9BnOSGx&_nc_ohc=uyKs1itBYK8AX9T4ObU&_nc_ht=scontent.fceb2-2.fna&oh=00_AT_nN_XimotmMXGDCcMPgNYFxf3aTpUZ-LbCoT619FIXIQ&oe=623E115D"
+                    // src="https://scontent.fceb2-2.fna.fbcdn.net/v/t1.6435-9/60255777_10205808349163781_6229416713532735488_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeGuXE5hs2F1PtWOpccTSnbAY9sEjR8tFldj2wSNHy0WVwxTPmfOm9dMbU0rZS91gaS6ruU5b0c9R-0Mb9BnOSGx&_nc_ohc=uyKs1itBYK8AX9T4ObU&_nc_ht=scontent.fceb2-2.fna&oh=00_AT_nN_XimotmMXGDCcMPgNYFxf3aTpUZ-LbCoT619FIXIQ&oe=623E115D"
                     alt="#"
                   />
                 </div>
@@ -127,7 +127,7 @@ const About = () => {
               <div className="single-team">
                 <div className="image">
                   <img
-                    src="https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-6/271657462_4899150540105361_3610241298101667884_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeFlBi2QrWTsC6h8G6x_yldUISWEXve9bfohJYRe971t-nY_yoEBIbmpAfl8Fl9bN4QBHO6GTFtJ9-adM6MoQwQR&_nc_ohc=ufndT4srzboAX80ILUL&_nc_ht=scontent.fceb2-1.fna&oh=00_AT-A8grgTFsZSuLZuD7U947C3px4AWiUgjERlAcuTAxZKQ&oe=621E0BA2"
+                    // src="https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-6/271657462_4899150540105361_3610241298101667884_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeFlBi2QrWTsC6h8G6x_yldUISWEXve9bfohJYRe971t-nY_yoEBIbmpAfl8Fl9bN4QBHO6GTFtJ9-adM6MoQwQR&_nc_ohc=ufndT4srzboAX80ILUL&_nc_ht=scontent.fceb2-1.fna&oh=00_AT-A8grgTFsZSuLZuD7U947C3px4AWiUgjERlAcuTAxZKQ&oe=621E0BA2"
                     alt="#"
                   />
                 </div>
@@ -159,7 +159,7 @@ const About = () => {
               <div className="single-team">
                 <div className="image">
                   <img
-                    src="https://scontent.fcrk4-1.fna.fbcdn.net/v/t1.6435-9/89595114_2790668074362384_5253522795815501824_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=a4a2d7&_nc_eui2=AeHXsn03IiqEn6omaUEIHM_Bi_8pd_rKJnGL_yl3-somcSQcauFysieA3LXgKI8yhRkZ1o5VDJ3MtPnrn4tZ3Kzw&_nc_ohc=GUU2jNVQE6sAX-Ni2kI&tn=k5PFbSYe6hUkAfvk&_nc_ht=scontent.fcrk4-1.fna&oh=00_AT-LMPLrqajMuCM7JZGz86dSo4VMp6jG82Tc1BzBiuluWA&oe=623E037F"
+                    // src="https://scontent.fcrk4-1.fna.fbcdn.net/v/t1.6435-9/89595114_2790668074362384_5253522795815501824_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=a4a2d7&_nc_eui2=AeHXsn03IiqEn6omaUEIHM_Bi_8pd_rKJnGL_yl3-somcSQcauFysieA3LXgKI8yhRkZ1o5VDJ3MtPnrn4tZ3Kzw&_nc_ohc=GUU2jNVQE6sAX-Ni2kI&tn=k5PFbSYe6hUkAfvk&_nc_ht=scontent.fcrk4-1.fna&oh=00_AT-LMPLrqajMuCM7JZGz86dSo4VMp6jG82Tc1BzBiuluWA&oe=623E037F"
                     alt="#"
                   />
                 </div>
@@ -190,7 +190,7 @@ const About = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
