@@ -35,7 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // hash the password using bcrypt
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-  
+
   // create user
   const userType = "customer";
   const user = await User.create({
@@ -45,13 +45,19 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     phoneNumber,
     password: hashedPassword,
+    userType,
   });
 
   const userAddress = await Address.create({
     userAddress: user.id,
-    address1: address.address1,
-    address2: address.address2,
-    postalCode: address.postalCode,
+    address: [
+      {
+        address1: address.address1,
+        address2: address.address2,
+        postalCode: address.postalCode,
+      },
+    ],
+    defaultAddress: 0,
     addressType: address.addressType,
   });
 

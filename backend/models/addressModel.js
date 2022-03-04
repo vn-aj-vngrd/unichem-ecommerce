@@ -7,18 +7,13 @@ const addressSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    address1: {
-      type: String,
-      required: [true, "Please add your Region, Province, City, Barangay."],
+    address: {
+      type: Array,
+      required: [true, "Address is required."],
     },
-    address2: {
-      type: String,
-      required: [true, "Please add your Street Name, Building, House No."],
-      unique: true,
-    },
-    postalCode: {
-      type: String,
-      required: [true, "Please add your Postal Code."],
+    defaultAddress: {
+      type: Number,
+      required: [true, "Default Address is required."],
     },
   },
   {

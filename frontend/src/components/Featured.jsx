@@ -71,14 +71,14 @@ const Featured = () => {
                         <i className="lni lni-package category-icon"></i>{" "}
                         Category: {product.category}
                       </span>
-                      <h4 className="title">
+                      <div className="title">
                         <h5>{product.productName}</h5>
-                      </h4>
+                      </div>
                       <Star star={3} reviews={1} />
                     </div>
                   </div>
                   <div className="order-total-row">
-                    <div class="price d-flex justify-content-between align-items-center">
+                    <div className="price d-flex justify-content-between align-items-center">
                       <div>
                         <h6 className="unichem-text-color">
                           <span>₱{product.price[0]}</span>
