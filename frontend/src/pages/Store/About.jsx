@@ -6,7 +6,7 @@ const About = () => {
   });
 
   return (
-    <div className="body-content">
+    <>
       <section className="about-us">
         <div className="container">
           <div className="row align-items-center">
@@ -190,7 +190,7 @@ const About = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

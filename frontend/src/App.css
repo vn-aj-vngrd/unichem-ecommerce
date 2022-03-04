@@ -30,12 +30,6 @@ p {
   color: #616161;
 }
 
-.body-content {
-  margin-top: 220px;
-  margin-bottom: 90px;
-  /* padding-bottom: 55px; */
-}
-
 .form-select {
   color: #616161;
 }
@@ -3878,7 +3872,7 @@ ol {
 
 .about-us {
   background-color: #f9f9f9;
-  padding-top: 15px;
+  margin-top: 230px;
 }
 
 .about-us .content-left {
