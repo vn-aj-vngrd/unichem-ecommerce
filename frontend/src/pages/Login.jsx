@@ -34,7 +34,7 @@ const Login = () => {
       });
     }
 
-    document.title = "Unichem | Log in";
+    document.title = "Unichem Store | Log in";
 
     if (isSuccess || user) {
       const temp = localStorage.getItem("user");

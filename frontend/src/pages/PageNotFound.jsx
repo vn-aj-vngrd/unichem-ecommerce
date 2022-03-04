@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
   useEffect(() => {
-    document.title = "Unichem | 404";
+    document.title = "Unichem Store | 404";
   });
   return (
     <div class="error-area">

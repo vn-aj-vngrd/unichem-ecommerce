@@ -5,7 +5,7 @@ import Sidebar from "../../components/Sidebar";
 
 const Products = () => {
   useEffect(() => {
-    document.title = "Unichem | Products";
+    document.title = "Unichem Store | Products";
   });
 
   return (

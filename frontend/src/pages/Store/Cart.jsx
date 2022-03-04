@@ -29,7 +29,7 @@ const Cart = () => {
   );
 
   useEffect(() => {
-    document.title = "Unichem | Cart";
+    document.title = "Unichem Store | Cart";
 
     if (!user) {
       navigate("/login");

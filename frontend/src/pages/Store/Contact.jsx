@@ -3,7 +3,7 @@ import Map from "../../components/Map";
 
 const Login = () => {
   useEffect(() => {
-    document.title = "Unichem | Contact";
+    document.title = "Unichem Store | Contact";
   });
 
   return (

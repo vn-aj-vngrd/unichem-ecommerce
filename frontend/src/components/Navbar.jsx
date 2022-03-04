@@ -35,10 +35,8 @@ const Navbar = () => {
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
-                  <img src="assets/images/logo.svg" alt="Logo" />
-                  <span className="fw-bold ps-1">
-                    Unichem Store
-                  </span>
+                  <img src="assets/images/logo.svg" alt="#" />
+                  <span className="fw-bold ps-1">Unichem Store</span>
                 </Link>
               </div>
 

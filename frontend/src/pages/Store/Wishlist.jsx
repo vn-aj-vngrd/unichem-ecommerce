@@ -13,7 +13,7 @@ const Wishlist = () => {
   );
 
   useEffect(() => {
-    document.title = "Unichem | Wishlist";
+    document.title = "Unichem Store | Wishlist";
 
     if (!user) {
       navigate("/login");

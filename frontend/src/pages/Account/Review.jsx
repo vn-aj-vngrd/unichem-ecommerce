@@ -3,7 +3,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 
 const Review = () => {
   useEffect(() => {
-    document.title = "Unichem | Reviews";
+    document.title = "Unichem Store | Reviews";
   });
 
   return (

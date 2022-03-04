@@ -60,7 +60,7 @@ const Signup = () => {
       });
     }
 
-    document.title = "Unichem | Sign up";
+    document.title = "Unichem Store | Sign up";
 
     if (isSuccess || user) {
       const temp = localStorage.getItem("user");

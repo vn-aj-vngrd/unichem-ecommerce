@@ -8,7 +8,7 @@ import Categories from "../components/Categories";
 
 const Home = () => {
   useEffect(() => {
-    document.title = "Unichem";
+    document.title = "Unichem Store";
   });
 
   return (

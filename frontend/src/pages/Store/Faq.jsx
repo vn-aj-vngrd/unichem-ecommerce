@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const Faq = () => {
   useEffect(() => {
-    document.title = "Unichem | FAQ";
+    document.title = "Unichem Store | FAQ";
   });
   return (
     <section class="faq">

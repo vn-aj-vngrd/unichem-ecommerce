@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const About = () => {
   useEffect(() => {
-    document.title = "Unichem | About";
+    document.title = "Unichem Store | About";
   });
 
   return (

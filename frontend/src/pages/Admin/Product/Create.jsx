@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const ProductCreate = () => {
   useEffect(() => {
-    document.title = "Unichem | About";
+    document.title = "Unichem Store | Create Product";
   });
 
   return (

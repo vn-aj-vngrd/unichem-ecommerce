@@ -5,7 +5,7 @@ import ProfilePurchase from "../../components/ProfilePurchase";
 
 const Manage = () => {
   useEffect(() => {
-    document.title = "Unichem | Manage Acccount";
+    document.title = "Unichem Store | Manage Acccount";
   });
 
   return (

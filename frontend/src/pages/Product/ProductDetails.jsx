@@ -7,7 +7,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 
 const ProductDetails = () => {
   useEffect(() => {
-    document.title = "Unichem | Product Details";
+    document.title = "Unichem Store | Product Details";
   });
 
   const location = useLocation();
