@@ -5273,7 +5273,6 @@ ol {
   }
 }
 
-
 .image-in-cart,
 .product-in-cart,
 .quantity-in-cart,
@@ -5339,12 +5338,6 @@ ol {
 
 .product-promo-new {
   background-color: rgb(16, 137, 236);
-}
-
-@media (max-width: 1399px) {
-  .items-sold {
-    display: none;
-  }
 }
 
 /* Ads */
