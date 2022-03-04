@@ -51,10 +51,9 @@ const ProductCreate = () => {
                           </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-12">
-                          
                           <div className="form-group">
                             <select
-                              class="form-select form-select-custom form-select-lg"
+                              className="form-select form-select-custom form-select-lg"
                               aria-label=".form-select-md example"
                             >
                               <option selected>Category</option>
@@ -108,15 +107,15 @@ const ProductCreate = () => {
                           </div>
                         </div>
                         <div className="col-lg-3 col-md-6 col-12 d-flex align-items-center">
-                          <div class="form-check">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               id="flexCheckDefault"
                             ></input>
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               for="flexCheckDefault"
                             >
                               Feature this Product
@@ -126,9 +125,8 @@ const ProductCreate = () => {
 
                         <div className="col-lg-3 col-md-6 col-12">
                           <div>
-                            
                             <input
-                              class="form-control form-control-lg"
+                              className="form-control form-control-lg"
                               id="formFileLg"
                               type="file"
                             ></input>

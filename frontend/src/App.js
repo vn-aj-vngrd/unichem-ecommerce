@@ -25,8 +25,7 @@ import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 
-import ShopProducts from "./pages/Product/Products";
-import ProductCreate from "./pages/Product/ProductCreate";
+import Create from "./pages/Admin/Product/Create";
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +55,6 @@ export const App = () => {
       />
       <Navbar />
       <Routes>
-
         {/* Store */}
         <Route path="/" element={<Home />} />
         <Route path="products" element={<Products />} />
@@ -75,10 +73,9 @@ export const App = () => {
         <Route path="*" element={<PageNotFound />} />
 
         {/* Admin */}
-        <Route path="shopproducts" element={<ShopProducts />} />
-        <Route path="product-create" element={<ProductCreate />} />
+        <Route path="create" element={<Create />} />
       </Routes>
-      <Messenger />
+      {/* <Messenger /> */}
       <Footer />
     </>
   ) : (
