@@ -31,7 +31,7 @@ const PurchasedProduct = () => {
               </h4>
 
               <div className="">
-                Specifications: Sample, Sample, Sample, Sample
+                Type / Color: Sample, Sample, Sample, Sample
               </div>
 
               <Star star={1} reviews={1} />

@@ -46,88 +46,116 @@ const Cart = () => {
       <div className="shopping-cart">
         <div className="container">
           <div className="purchase-row-banner cart-banner">
-            <div className="include-in-cart color-white">Include</div>
-            <div className="image-in-cart color-white">
-              <p></p>
+            <div className="d-flex cart-product-left">
+              <div className="include-in-cart color-white">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                ></input>
+              </div>
+              <div className="image-in-cart color-white hide-on-thin-screen">
+                <p></p>
+              </div>
             </div>
-            <div className="product-in-cart color-white">
-              <p>Product</p>
-            </div>
-            <div className="quantity-in-cart color-white">
-              <p>Quantity</p>
-            </div>
-            <div className="price-in-cart color-white">
-              <p>Price</p>
-            </div>
-            <div className="total-in-cart color-white">
-              <p>Total</p>
-            </div>
-            <div className="action-in-cart color-white">
-              <p>Action</p>
+            <div className="cart-product-right">
+              <div className="product-in-cart color-white hide-on-thin-screen"></div>
+              <div className="quantity-in-cart color-white hide-on-thin-screen">
+                <p>Quantity</p>
+              </div>
+              <div className="price-in-cart color-white hide-on-thin-screen">
+                <p>Price</p>
+              </div>
+              <div className="total-in-cart color-white hide-on-thin-screen">
+                <p>Total Price</p>
+              </div>
+              <div className="action-in-cart color-white hide-on-thin-screen">
+                <p>Action</p>
+              </div>
             </div>
           </div>
+
           <div className="cart-list-head box-shadow">
             <div className="cart-single-list">
-              <div className="d-flex align-items-center">
-                <div class="include-in-cart form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  ></input>
-                </div>
-
-                <div className="image-in-cart">
-                  <Link to="/products">
-                    <img
-                      src="https://dm.henkel-dam.com/is/image/henkel/Loctite_271_232077_APAC_50ml_2019_12.15_QRcode?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
-                      alt="#"
-                    />
-                  </Link>
-                </div>
-
-                <div className="product-in-cart">
-                  <h4 class="title">
-                    <Link to="/">ProductName</Link>
-                  </h4>
-                  <p className="product-des">
-                    <span>
-                      <b>Type / Color:</b> test
-                    </span>
-                  </p>
-                </div>
-
-                <div className="quantity-in-cart">
-                  <div className="quantity-control text-center">
-                    <button className="quantity-btn" onClick={decrement}>
-                      <svg viewBox="0 0 409.6 409.6">
-                        <path d="M392.533,187.733H17.067C7.641,187.733,0,195.374,0,204.8s7.641,17.067,17.067,17.067h375.467 c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z" />
-                      </svg>
-                    </button>
+              <div className="d-flex single-cart-product">
+                <div className="d-flex align-items-center cart-product-left">
+                  <div class="include-in-cart form-check">
                     <input
-                      type="number"
-                      className="quantity-input"
-                      value={counter}
-                      name="quantity"
-                      min="1"
-                      max={quantity}
-                      onChange={handleChange}
-                    />
-                    <button className="quantity-btn" onClick={increment}>
-                      <svg viewBox="0 0 426.66667 426.66667">
-                        <path d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0" />
-                      </svg>
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    ></input>
+                  </div>
+
+                  <div className="image-in-cart">
+                    <Link to="/products">
+                      <img
+                        src="https://dm.henkel-dam.com/is/image/henkel/Loctite_271_232077_APAC_50ml_2019_12.15_QRcode?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
+                        alt="#"
+                      />
+                    </Link>
+                  </div>
+                </div>
+
+                <hr classNam="cart-div"></hr>
+                <div className="cart-product-right">
+                  <div className="product-in-cart">
+                    <div className="category">
+                      <i className="lni lni-package category-icon"></i> Category:
+                      <a href="/">{}</a>
+                    </div>
+                    <h4 class="title">
+                      <Link to="/">ProductName</Link>
+                    </h4>
+                    <p className="product-des">
+                      <div className="">
+                        Type / Color: Sample, Sample, Sample, Sample
+                      </div>
+                    </p>
+                  </div>
+
+                  <div className="quantity-in-cart">
+                    <div className="quantity-control text-center">
+                      <button className="quantity-btn" onClick={decrement}>
+                        <svg viewBox="0 0 409.6 409.6">
+                          <path d="M392.533,187.733H17.067C7.641,187.733,0,195.374,0,204.8s7.641,17.067,17.067,17.067h375.467 c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z" />
+                        </svg>
+                      </button>
+                      <input
+                        type="number"
+                        className="quantity-input"
+                        value={counter}
+                        name="quantity"
+                        min="1"
+                        max={quantity}
+                        onChange={handleChange}
+                      />
+                      <button className="quantity-btn" onClick={increment}>
+                        <svg viewBox="0 0 426.66667 426.66667">
+                          <path d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="price-in-cart">
+                    <div className="price">
+                      <h6> $199.00</h6>
+                    </div>
+                  </div>
+                  <div className="total-in-cart">
+                    <div className="price">
+                      <h6><b> $199.00</b></h6>
+                    </div>
+                  </div>
+                  <div className="action-in-cart">
+                    <button className="remove-item">
+                      <i className="lni lni-close"></i>
                     </button>
                   </div>
                 </div>
-                <div className="price-in-cart">
-                  <p>₱910.00</p>
-                </div>
-                <div className="total-in-cart">
-                  <h6>₱2000.00</h6>
-                </div>
-                <div className="action-in-cart">
+                <div className="action-in-cart-2">
                   <button className="remove-item">
                     <i className="lni lni-close"></i>
                   </button>
@@ -210,7 +238,10 @@ const Cart = () => {
                   <div className="col-lg-8 col-md-6 col-12"></div>
                   <div className="col-lg-4 col-md-6 col-12">
                     <div className="ad-right">
-                      <img src="https://dm.henkel-dam.com/is/image/henkel/loctite-glass-glue-2g-ecom-usp?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048" className="square-ad"></img>                      
+                      <img
+                        src="https://dm.henkel-dam.com/is/image/henkel/loctite-glass-glue-2g-ecom-usp?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
+                        className="square-ad"
+                      ></img>
                     </div>
                   </div>
                 </div>
