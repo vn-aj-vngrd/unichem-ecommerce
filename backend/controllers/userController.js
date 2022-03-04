@@ -8,18 +8,9 @@ const Address = require("../models/addressModel");
 // @route   POST /api/users/signup
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, birthday, sex, email, phoneNumber, address, password } =
-    req.body;
+  const { name, birthday, sex, email, address, password } = req.body;
 
-  if (
-    !name ||
-    !birthday ||
-    !sex ||
-    !email ||
-    !phoneNumber ||
-    !password ||
-    !address
-  ) {
+  if (!name || !birthday || !sex || !email || !password || !address) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
@@ -43,7 +34,6 @@ const registerUser = asyncHandler(async (req, res) => {
     birthday,
     sex,
     email,
-    phoneNumber,
     password: hashedPassword,
     userType,
   });
@@ -55,6 +45,7 @@ const registerUser = asyncHandler(async (req, res) => {
         address1: address.address1,
         address2: address.address2,
         postalCode: address.postalCode,
+        phoneNumber: address.phoneNumber,
       },
     ],
     defaultAddress: 0,
@@ -68,7 +59,6 @@ const registerUser = asyncHandler(async (req, res) => {
       birthday: user.birthday,
       sex: user.sex,
       email: user.email,
-      phoneNumber: user.phoneNumber,
       token: generateToken(user._id),
       address: [userAddress],
     });

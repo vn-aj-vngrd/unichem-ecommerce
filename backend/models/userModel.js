@@ -19,10 +19,6 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please is required."],
     },
-    phoneNumber: {
-      type: String,
-      required: [true, "Phone Number is required."],
-    },
     password: {
       type: String,
       required: [true, "Password is required."],
