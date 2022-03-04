@@ -64,7 +64,7 @@ const Navbar = () => {
               <div className="col-lg-4 col-md-2 col-5">
                 <div className="middle-right-area">
                   <div className="nav-hotline"></div>
-                  
+
                   <div className="navbar-cart">
                     <div className="wishlist">
                       <Link to="/wishlist">
@@ -267,12 +267,6 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link to="/faq" aria-label="Toggle navigation">
                           FAQ
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link to="/shopproducts" aria-label="Toggle navigation">
-                          Products
                         </Link>
                       </li>
                     </ul>

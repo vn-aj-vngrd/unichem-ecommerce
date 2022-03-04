@@ -46,7 +46,15 @@ const Cart = () => {
       <div className="shopping-cart">
         <div className="container">
           <div className="purchase-row-banner cart-banner">
-            <div className="include-in-cart color-white">Include</div>
+            <div className="include-in-cart color-white">
+              {" "}
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
+            </div>
             <div className="image-in-cart color-white">
               <p></p>
             </div>
@@ -75,7 +83,7 @@ const Cart = () => {
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
-                  ></input>
+                  />
                 </div>
 
                 <div className="image-in-cart">
@@ -210,7 +218,10 @@ const Cart = () => {
                   <div className="col-lg-8 col-md-6 col-12"></div>
                   <div className="col-lg-4 col-md-6 col-12">
                     <div className="ad-right">
-                      <img src="https://dm.henkel-dam.com/is/image/henkel/loctite-glass-glue-2g-ecom-usp?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048" className="square-ad"></img>                      
+                      <img
+                        src="https://dm.henkel-dam.com/is/image/henkel/loctite-glass-glue-2g-ecom-usp?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
+                        className="square-ad"
+                      ></img>
                     </div>
                   </div>
                 </div>

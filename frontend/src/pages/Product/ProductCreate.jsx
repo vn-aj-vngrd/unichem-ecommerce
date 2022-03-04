@@ -5,7 +5,6 @@ const ProductCreate = () => {
     document.title = "Unichem | About";
   });
 
-
   return (
     <div className="body-content">
       <section className="">

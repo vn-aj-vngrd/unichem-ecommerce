@@ -56,6 +56,8 @@ export const App = () => {
       />
       <Navbar />
       <Routes>
+
+        {/* Store */}
         <Route path="/" element={<Home />} />
         <Route path="products" element={<Products />} />
         <Route path="product-details" element={<ProductDetails />} />
@@ -72,7 +74,7 @@ export const App = () => {
         <Route path="faq" element={<Faq />} />
         <Route path="*" element={<PageNotFound />} />
 
-        {/* Shop */}
+        {/* Admin */}
         <Route path="shopproducts" element={<ShopProducts />} />
         <Route path="product-create" element={<ProductCreate />} />
       </Routes>
