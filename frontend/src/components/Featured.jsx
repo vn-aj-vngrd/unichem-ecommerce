@@ -80,7 +80,7 @@ const Featured = () => {
                   <div className="order-total-row">
                     <div className="price d-flex justify-content-between align-items-center">
                       <div>
-                        <h6 className="unichem-text-color">
+                        <h6 className="text-red">
                           <span>₱{product.price[0]}</span>
                         </h6>
                       </div>
