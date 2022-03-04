@@ -124,7 +124,7 @@ const Details = ({ product }) => {
                   {product.quantities[value] === 0 && (
                     <div>Item is not available</div>
                   )}
-                  <h4 className="unichem-text-color">₱{product.price[value]}</h4>
+                  <h4 className="text-red">₱{product.price[value]}</h4>
 
                   <hr className="mt-3" />
 
@@ -133,7 +133,7 @@ const Details = ({ product }) => {
                       <div className="form-group">
                         <label>Color / Type</label>
                         <select
-                          className="form-control text-muted"
+                          className="form-control text-grey"
                           value={value}
                           onChange={(e) => setValue(e.currentTarget.value)}
                         >
