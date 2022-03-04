@@ -105,14 +105,14 @@ const Details = ({ product }) => {
               </div>
               <div className="col-lg-6 col-md-12 col-12">
                 <div className="product-info">
-                  <h2 className="title">{product.productName}</h2>
+                  <h4 className="title">{product.productName}</h4>
                   <div className="category">
-                    <i className="lni lni-package"></i> Category:
+                    <i className="lni lni-package"></i>Category:
                     <a href="/">{product.category}</a>
                   <Star star={1} reviews={1} />
                   </div>
 
-                  <h3 className="price mt-2">₱{product.price[value]}</h3>
+                  
                   {product.quantities[value] === 1 && (
                     <div>{product.quantities[value]} item left</div>
                   )}
@@ -124,6 +124,7 @@ const Details = ({ product }) => {
                   {product.quantities[value] === 0 && (
                     <div>Item is not available</div>
                   )}
+                  <h4 className="unichem-text-color">₱{product.price[value]}</h4>
 
                   <hr className="mt-3" />
 

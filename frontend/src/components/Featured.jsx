@@ -52,7 +52,10 @@ const Featured = () => {
                 <div key={product._id} className="col-lg-3 col-md-6 col-12">
                   <div className="single-product">
                     <div className="product-image">
-                      <img src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048" alt="#" />
+                      <img
+                        src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
+                        alt="#"
+                      />
                       <div className="button">
                         <Link
                           to={"product-details"}
@@ -64,18 +67,20 @@ const Featured = () => {
                       </div>
                     </div>
                     <div className="product-info">
-                      <span className="category">{product.category}</span>
+                      <span className="category">
+                        <i className="lni lni-package category-icon"></i> Category: {product.category}</span>
                       <h4 className="title">
                         <span>{product.productName}</span>
                       </h4>
-
                       <Star star={3} reviews={1} />
-
-                      <hr />
-
-                      <div className="price">
-                        <span>₱{product.price[0]}</span>
+                    </div>
+                  </div>
+                  <div className="order-total-row">
+                    <div class="price d-flex justify-content-between align-items-center">
+                      <div>
+                        <h4 className="unichem-text-color"><span>₱{product.price[0]}</span></h4>
                       </div>
+                      <div className="items-sold">6.9K items sold</div>
                     </div>
                   </div>
                 </div>

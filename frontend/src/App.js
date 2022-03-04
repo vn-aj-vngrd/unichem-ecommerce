@@ -25,6 +25,9 @@ import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 
+import ShopProducts from "./pages/Product/Products";
+import ProductCreate from "./pages/Product/ProductCreate";
+
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -68,6 +71,10 @@ export const App = () => {
         <Route path="checkout" element={<Checkout />} />
         <Route path="faq" element={<Faq />} />
         <Route path="*" element={<PageNotFound />} />
+
+        {/* Shop */}
+        <Route path="shopproducts" element={<ShopProducts />} />
+        <Route path="product-create" element={<ProductCreate />} />
       </Routes>
       <Messenger />
       <Footer />

@@ -15,7 +15,8 @@ const Categories = () => {
         <div className="row">
           <div className="col-lg-6 col-md-6 col-12">
             <div className="single-category">
-              <h3 className="heading">Loctite</h3>
+              <h5 className="">Loctite</h5>
+              <hr></hr>
               <ul>
                 <li>
                   <Link to="/products">Construction Adhesives</Link>
@@ -37,7 +38,8 @@ const Categories = () => {
           </div>
           <div className="col-lg-6 col-md-6 col-12">
             <div className="single-category">
-              <h3 className="heading">3M</h3>
+              <h5 className="heading">3M</h5>
+              <hr></hr>
               <ul>
                 <li>
                   <Link to="/products">Tapes</Link>
@@ -61,7 +63,8 @@ const Categories = () => {
           </div>
           <div className="col-lg-6 col-md-6 col-12">
             <div className="single-category">
-              <h3 className="heading">Phoenix Lubricants</h3>
+              <h5 className="heading">Phoenix Lubricants</h5>
+              <hr></hr>
               <ul>
                 <li>
                   <Link to="/products">Industrial Oils</Link>
@@ -86,7 +89,8 @@ const Categories = () => {
           </div>
           <div className="col-lg-6 col-md-6 col-12">
             <div className="single-category">
-              <h3 className="heading">Polymer Cleaning Chemicals</h3>
+              <h5 className="heading">Polymer Cleaning Chemicals</h5>
+              <hr></hr>
               <ul>
                 <li>
                   <Link to="/products">Housekeeping</Link>
