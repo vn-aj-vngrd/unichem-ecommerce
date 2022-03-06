@@ -34,11 +34,15 @@ const Details = ({ product }) => {
 
   let navigate = useNavigate();
   let addToCart = (event) => {
+    event.preventDefault();
+    console.log(counter);
+    console.log(product.types[value]);
+
     // const cartData = {
 
     // }
 
-    event.preventDefault();
+
     Swal.fire({
       title: "Added to Cart!",
       text: "To checkout please proceed to the cart page.",
