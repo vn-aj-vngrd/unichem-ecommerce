@@ -15,11 +15,6 @@ const getCartItems = asyncHandler(async (req, res) => {
 // @access  Private
 const setCartItem = asyncHandler(async (req, res) => {});
 
-// @desc    Update cart
-// @route   PUT /api/carts/:id
-// @access  Private
-const updateCartItem = asyncHandler(async (req, res) => {});
-
 // @desc    Delete cart
 // @route   DELETE /api/carts/:id
 // @access  Private
@@ -28,6 +23,5 @@ const deleteCartItem = asyncHandler(async (req, res) => {});
 module.exports = {
   getCartItems,
   setCartItem,
-  updateCartItem,
   deleteCartItem,
 };
