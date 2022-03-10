@@ -33,15 +33,16 @@ const Details = ({ product }) => {
   };
 
   let navigate = useNavigate();
-  let addToCart = (event) => {
-    event.preventDefault();
-    console.log(counter);
-    console.log(product.types[value]);
+  const addToCart = (e) => {
+    e.preventDefault();
 
-    // const cartData = {
+    const cartData = {
+      product: product._id,
+      productType: value,
+      quantity: counter,
+    };
 
-    // }
-
+    console.log(cartData);
 
     Swal.fire({
       title: "Added to Cart!",
@@ -57,8 +58,8 @@ const Details = ({ product }) => {
     });
   };
 
-  let addToWishlist = (event) => {
-    event.preventDefault();
+  const addToWishlist = (e) => {
+    e.preventDefault();
     Swal.fire({
       title: "Added to Wishlist!",
       text: "The item has been added to the wishlist.",
@@ -216,9 +217,15 @@ const Details = ({ product }) => {
                   <div className="row">
                     <div className="col">
                       <div className="cart-button">
-                        <button className="btn" onClick={addToCart}>
-                          <i className="lni lni-cart"></i> Cart
-                        </button>
+                        {product.quantities[value] !== 0 ? (
+                          <button className="btn" onClick={addToCart}>
+                            <i className="lni lni-cart"></i> Cart
+                          </button>
+                        ) : (
+                          <button className="btn disabled" onClick={addToCart}>
+                            <i className="lni lni-cart disabled"></i> Unavailable
+                          </button>
+                        )}
                       </div>
                     </div>
                     <div className="col">

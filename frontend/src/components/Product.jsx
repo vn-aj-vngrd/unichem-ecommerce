@@ -62,7 +62,7 @@ const Product = () => {
                 <div className="order-total-row ">
                   <div className="price d-flex justify-content-between align-items-center">
                     <div>
-                      <h4 className="unichem-text-color">$199.00</h4>
+                      <h6 className="text-red">₱199.00</h6>
                     </div>
                     <div className="items-sold">6.9K items sold</div>
                   </div>
