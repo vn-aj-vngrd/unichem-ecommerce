@@ -37,7 +37,7 @@ const Details = ({ product }) => {
     e.preventDefault();
 
     const cartData = {
-      product: product._id,
+      productID: product._id,
       productType: value,
       quantity: counter,
     };

@@ -7,7 +7,7 @@ const cartSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    product: {
+    productID: {
       type: String,
       required: [true, "Product is required"],
     },
