@@ -39,6 +39,7 @@ const ProductDetails = () => {
   let product = products.filter((product) => {
     return product._id === id;
   });
+
   return (
     <>
       <Breadcrumb type="product" />
