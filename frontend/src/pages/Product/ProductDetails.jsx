@@ -16,7 +16,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      {/* <Breadcrumb type="product"/>
+      {/* <Breadcrumb type="product"/> 
       <Details product={product} />
       <Specifications product={product} />
       <Reviews /> */}

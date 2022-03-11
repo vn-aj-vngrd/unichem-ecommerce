@@ -4,7 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "./App.css";
+import "./assets/css/Store.css";
+import "./assets/css/LineIcons.3.0.css";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

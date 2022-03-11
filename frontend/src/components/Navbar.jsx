@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
+import logo from "../assets/images/logo.svg"
 
 const cartCount = 5;
 const wishListCount = 5;
@@ -35,7 +36,7 @@ const Navbar = () => {
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
-                  <img src="assets/images/logo.svg" alt="#" />
+                  <img src={logo} alt="#" />
                   <span className="fw-bold ps-1">Unichem Store</span>
                 </Link>
               </div>
@@ -275,9 +276,9 @@ const Navbar = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="account">
                 {user ? (
-                  <div className="dropdown">
+                  <div className="dropdown h5">
                     <i
-                      className="lni lni-user h5 dropdown-toggle"
+                      className="lni lni-user dropdown-toggle"
                       href="#"
                       role="button"
                       id="dropdownMenuLink"
