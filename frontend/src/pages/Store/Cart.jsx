@@ -105,7 +105,6 @@ const Cart = () => {
                     <div className="category">
                       <i className="lni lni-package category-icon"></i>
                       Category:
-                      <Link to="/product">{}</Link>
                     </div>
                     <h5 className="title mt-1">
                       <Link to="/">ProductName</Link>

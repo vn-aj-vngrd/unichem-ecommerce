@@ -11,7 +11,7 @@ const createCart = async (cartData, token) => {
   };
 
   const response = await axios.post(API_URL, cartData, config);
-  console.log(response.data);
+
   return response.data;
 };
 

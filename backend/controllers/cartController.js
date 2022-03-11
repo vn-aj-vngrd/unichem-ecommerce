@@ -16,13 +16,14 @@ const getCarts = asyncHandler(async (req, res) => {
 // @route   POST /api/Carts
 // @access  Private
 const setCart = asyncHandler(async (req, res) => {
+  let cart;
   const cartExists = await Cart.findOneAndUpdate(
     { productID: req.body.productID, productType: req.body.productType },
     { quantity: req.body.quantity }
   );
 
   if (!cartExists) {
-    const cart = await Cart.create({
+    cart = await Cart.create({
       userCart: req.user.id,
       productID: req.body.productID,
       productType: req.body.productType,

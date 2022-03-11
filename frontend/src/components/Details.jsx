@@ -48,7 +48,6 @@ const Details = ({ product }) => {
     }
 
     if (isSuccess) {
-      console.log("Added to cart");
       Swal.fire({
         title: "Added to Cart!",
         text: "To checkout please proceed to the cart page.",
@@ -79,8 +78,6 @@ const Details = ({ product }) => {
       productType: value,
       quantity: counter,
     };
-
-    console.log(cartData);
 
     dispatch(createCart(cartData));
   };
