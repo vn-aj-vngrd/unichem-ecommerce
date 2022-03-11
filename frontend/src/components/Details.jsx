@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createCart, reset } from '../features/cart/cartSlice'
+import { createCart, reset } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Swal from "sweetalert2";
@@ -19,7 +19,7 @@ const productImageTest = [1, 2, 3, 4, 5];
 const Details = ({ product }) => {
   const [value, setValue] = useState(0);
 
-  const [counter, setCounter] = useState(1);
+  let [counter, setCounter] = useState(1);
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
   if (counter < product.quantities[value])
@@ -64,8 +64,12 @@ const Details = ({ product }) => {
     }
 
     dispatch(reset());
-
   }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  const changeType = (e) => {
+    setValue(e.currentTarget.value);
+    setCounter((counter = 1));
+  };
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -76,7 +80,7 @@ const Details = ({ product }) => {
       quantity: counter,
     };
 
-    // console.log(cartData);
+    console.log(cartData);
 
     dispatch(createCart(cartData));
   };
@@ -170,7 +174,7 @@ const Details = ({ product }) => {
                         <select
                           className="form-control text-grey"
                           value={value}
-                          onChange={(e) => setValue(e.currentTarget.value)}
+                          onChange={changeType}
                         >
                           {product.types.map((type, index) => (
                             <option key={index} value={index}>

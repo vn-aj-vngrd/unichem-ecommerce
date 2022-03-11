@@ -16,7 +16,21 @@ const getCarts = asyncHandler(async (req, res) => {
 // @route   POST /api/Carts
 // @access  Private
 const setCart = asyncHandler(async (req, res) => {
-  return res.status(200).json(req.body);
+  const cartExists = await Cart.findOneAndUpdate(
+    { productID: req.body.productID, productType: req.body.productType },
+    { quantity: req.body.quantity }
+  );
+
+  if (!cartExists) {
+    const cart = await Cart.create({
+      userCart: req.user.id,
+      productID: req.body.productID,
+      productType: req.body.productType,
+      quantity: req.body.quantity,
+    });
+  }
+
+  return res.status(200).json(cart);
 });
 
 // @desc    Delete Cart

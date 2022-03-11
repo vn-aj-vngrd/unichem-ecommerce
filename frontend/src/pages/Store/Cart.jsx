@@ -110,9 +110,9 @@ const Cart = () => {
                     <h5 className="title mt-1">
                       <Link to="/">ProductName</Link>
                     </h5>
-                    <p className="product-des mt-1">
-                      <div className="">Type / Color: Sample</div>
-                    </p>
+                    <div className="product-des mt-1">
+                      <div>Type / Color: Sample</div>
+                    </div>
                   </div>
 
                   <div className="quantity-in-cart">
@@ -145,9 +145,7 @@ const Cart = () => {
                   </div>
                   <div className="total-in-cart">
                     <div className="price">
-                      <h6>
-                        <h6 className="fw-bolder"> ₱199.00</h6>
-                      </h6>
+                      <h6 className="fw-bolder"> ₱199.00</h6>
                     </div>
                   </div>
                   <div className="action-in-cart">
