@@ -6,16 +6,16 @@ const PageNotFound = () => {
     document.title = "Unichem Store | 404";
   });
   return (
-    <div class="error-area">
-      <div class="d-table">
-        <div class="d-table-cell">
-          <div class="container">
-            <div class="error-content">
+    <div className="error-area">
+      <div className="d-table">
+        <div className="d-table-cell">
+          <div className="container">
+            <div className="error-content">
               <h1>404</h1>
               <h2>Page Not Found!</h2>
               <p>The page you are looking for does not exist.</p>
-              <div class="button">
-                <Link to="/" class="btn">
+              <div className="button">
+                <Link to="/" className="btn">
                   Back to Home
                 </Link>
               </div>

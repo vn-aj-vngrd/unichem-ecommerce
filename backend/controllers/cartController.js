@@ -16,16 +16,13 @@ const getCarts = asyncHandler(async (req, res) => {
 // @route   POST /api/Carts
 // @access  Private
 const setCart = asyncHandler(async (req, res) => {
-  return res.status(200).json({ message: "Cart created" });
+  return res.status(200).json(req.body);
 });
-
 
 // @desc    Delete Cart
 // @route   DELETE /api/Carts/:id
 // @access  Private
-const deleteCart = asyncHandler(async (req, res) => {
-
-});
+const deleteCart = asyncHandler(async (req, res) => {});
 
 module.exports = {
   getCarts,

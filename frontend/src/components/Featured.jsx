@@ -58,8 +58,7 @@ const Featured = () => {
                       />
                       <div className="button">
                         <Link
-                          to={"product-details"}
-                          state={{ product: product }}
+                          to={`/product-details/${product._id}`}
                           className="btn"
                         >
                           <i className="lni lni-eye"></i> View
