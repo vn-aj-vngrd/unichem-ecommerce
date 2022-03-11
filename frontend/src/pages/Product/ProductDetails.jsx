@@ -1,24 +1,56 @@
 import { useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getProducts, reset } from "../../features/products/productSlice";
 import Details from "../../components/Details";
 import Specifications from "../../components/Specifications";
 import Reviews from "../../components/Reviews";
 import Breadcrumb from "../../components/Breadcrumb";
+import Spinner from "../../components/Spinner";
 
 const ProductDetails = () => {
+  let { id } = useParams();
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { products, isLoading, isError, message } = useSelector(
+    (state) => state.products
+  );
 
   useEffect(() => {
     document.title = "Unichem Store | Product Details";
+
+    if (isError) {
+      console.log(message);
+    }
+
+    dispatch(getProducts());
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [navigate, isError, message, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  let product = products.filter((product) => {
+    return product._id === id;
   });
-
-  let { id } = useParams();
-  console.log(id);
-
   return (
     <>
       <Breadcrumb type="product" />
-      {/* <Details product={} />
-      <Specifications product={} /> */}
+
+      {product.length > 0 ? (
+        <>
+          <Details product={product[0]} />
+          <Specifications product={product[0]} />
+        </>
+      ) : (
+        <></>
+      )}
       <Reviews />
     </>
   );
