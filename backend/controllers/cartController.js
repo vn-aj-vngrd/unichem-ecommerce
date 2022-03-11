@@ -1,27 +1,34 @@
 const asyncHandler = require("express-async-handler");
 
-const Cart = require("../models/cartModel");
+const Cart = require("../models/CartModel");
+const User = require("../models/userModel");
 
-// @desc    Get all carts
-// @route   GET /api/carts
+// @desc    Get Carts
+// @route   GET /api/Carts
 // @access  Private
-const getCartItems = asyncHandler(async (req, res) => {
-  const carts = await Cart.find();
-  return res.status(200).json(carts);
+const getCarts = asyncHandler(async (req, res) => {
+  const carts = await Cart.find({ user: req.user.id });
+
+  res.status(200).json(carts);
 });
 
-// @desc    Create cart
-// @route   POST /api/carts
+// @desc    Set Cart
+// @route   POST /api/Carts
 // @access  Private
-const createCartItem = asyncHandler(async (req, res) => {});
+const setCart = asyncHandler(async (req, res) => {
+  return res.status(200).json({ message: "Cart created" });
+});
 
-// @desc    Delete cart
-// @route   DELETE /api/carts/:id
+
+// @desc    Delete Cart
+// @route   DELETE /api/Carts/:id
 // @access  Private
-const deleteCartItem = asyncHandler(async (req, res) => {});
+const deleteCart = asyncHandler(async (req, res) => {
+
+});
 
 module.exports = {
-  getCartItems,
-  createCartItem,
-  deleteCartItem,
+  getCarts,
+  setCart,
+  deleteCart,
 };

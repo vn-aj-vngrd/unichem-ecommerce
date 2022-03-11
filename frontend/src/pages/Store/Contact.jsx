@@ -8,7 +8,7 @@ const Login = () => {
 
   return (
     <>
-      <section className="contact-us body-content">
+      <section className="contact-us">
         <div className="container">
           <div className="contact-head">
             <div className="row">
@@ -28,7 +28,7 @@ const Login = () => {
                   <div className="box-shadow single-info-head">
                     <div className="single-info">
                       <i className="lni lni-map text-danger"></i>
-                      <h6 class="contact-us-label">Address</h6>
+                      <h6 className="contact-us-label">Address</h6>
                       <ul>
                         <li>
                           Room 212 N & N Cortes Arcade
@@ -40,7 +40,7 @@ const Login = () => {
 
                     <div className="single-info">
                       <i className="lni lni-phone text-danger"></i>
-                      <h6 class="contact-us-label">Telephone</h6>
+                      <h6 className="contact-us-label">Telephone</h6>
                       <ul>
                         <li>
                           <a href="tel:+(032) 345 6589">(032) 345 6589</a>
@@ -53,7 +53,7 @@ const Login = () => {
 
                     <div className="single-info">
                       <i className="lni lni-envelope text-danger"></i>
-                      <h6 class="contact-us-label">Email</h6>
+                      <h6 className="contact-us-label">Email</h6>
                       <ul>
                         <li>
                           <a href="mailto:unichemsales@gmail.com">

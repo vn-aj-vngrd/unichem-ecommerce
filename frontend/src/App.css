@@ -4054,7 +4054,7 @@ ol {
   position: relative;
   /* background-color: #fff; */
   margin-top: 220px;
-  margin-bottom: 90x;
+  padding-bottom: 90px;
 }
 
 .contact-us .contact-info .single-info-head {
@@ -4818,7 +4818,7 @@ ol {
     Faq CSS
 ========================================*/
 .faq {
-  padding-bottom: 55px;
+  padding-bottom: 90px;
   background-color: #f9f9f9;
   margin-top: 220px;
 }

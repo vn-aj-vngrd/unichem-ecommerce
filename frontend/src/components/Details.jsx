@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createCart, reset } from '../features/cart/cartSlice'
+import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -32,7 +35,38 @@ const Details = ({ product }) => {
     }
   };
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.cart
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log("Failed to add to cart");
+    }
+
+    if (isSuccess) {
+      console.log("Added to cart");
+      Swal.fire({
+        title: "Added to Cart!",
+        text: "To checkout please proceed to the cart page.",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
+        cancelButtonText: "Close",
+      }).then((result) => {
+        if (result.isConfirmed) navigate("/cart");
+      });
+    }
+
+    dispatch(reset);
+
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const addToCart = (e) => {
     e.preventDefault();
 
@@ -42,20 +76,9 @@ const Details = ({ product }) => {
       quantity: counter,
     };
 
-    console.log(cartData);
+    // console.log(cartData);
 
-    Swal.fire({
-      title: "Added to Cart!",
-      text: "To checkout please proceed to the cart page.",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
-      cancelButtonText: "Close",
-    }).then((result) => {
-      if (result.isConfirmed) navigate("/cart");
-    });
+    dispatch(createCart(cartData));
   };
 
   const addToWishlist = (e) => {
@@ -73,6 +96,10 @@ const Details = ({ product }) => {
       if (result.isConfirmed) navigate("/wishlist");
     });
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -223,7 +250,8 @@ const Details = ({ product }) => {
                           </button>
                         ) : (
                           <button className="btn disabled" onClick={addToCart}>
-                            <i className="lni lni-cart disabled"></i> Unavailable
+                            <i className="lni lni-cart disabled"></i>{" "}
+                            Unavailable
                           </button>
                         )}
                       </div>

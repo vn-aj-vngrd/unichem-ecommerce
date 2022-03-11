@@ -10,12 +10,12 @@ const initialState = {
 }
 
 // Create new cart
-export const createcart = createAsyncThunk(
+export const createCart = createAsyncThunk(
   'carts/create',
   async (cartData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await cartService.createcart(cartData, token)
+      return await cartService.createCart(cartData, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -29,12 +29,12 @@ export const createcart = createAsyncThunk(
 )
 
 // Get user carts
-export const getcarts = createAsyncThunk(
+export const getCarts = createAsyncThunk(
   'carts/getAll',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await cartService.getcarts(token)
+      return await cartService.getCarts(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -48,12 +48,12 @@ export const getcarts = createAsyncThunk(
 )
 
 // Delete user cart
-export const deletecart = createAsyncThunk(
+export const deleteCart = createAsyncThunk(
   'carts/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await cartService.deletecart(id, token)
+      return await cartService.deleteCart(id, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -74,43 +74,43 @@ export const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createcart.pending, (state) => {
+      .addCase(createCart.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createcart.fulfilled, (state, action) => {
+      .addCase(createCart.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.carts.push(action.payload)
       })
-      .addCase(createcart.rejected, (state, action) => {
+      .addCase(createCart.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(getcarts.pending, (state) => {
+      .addCase(getCarts.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getcarts.fulfilled, (state, action) => {
+      .addCase(getCarts.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.carts = action.payload
       })
-      .addCase(getcarts.rejected, (state, action) => {
+      .addCase(getCarts.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(deletecart.pending, (state) => {
+      .addCase(deleteCart.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(deletecart.fulfilled, (state, action) => {
+      .addCase(deleteCart.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.carts = state.carts.filter(
           (cart) => cart._id !== action.payload.id
         )
       })
-      .addCase(deletecart.rejected, (state, action) => {
+      .addCase(deleteCart.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
