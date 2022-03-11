@@ -7,31 +7,32 @@ const User = require("../models/userModel");
 // @route   GET /api/Wishlists
 // @access  Private
 const getWishlists = asyncHandler(async (req, res) => {
-  const Wishlists = await Wishlist.find({ user: req.user.id });
+  const wishlists = await Wishlist.find({ user: req.user.id });
 
-  res.status(200).json(Wishlists);
+  res.status(200).json(wishlists);
 });
 
 // @desc    Set Wishlist
 // @route   POST /api/Wishlists
 // @access  Private
 const setWishlist = asyncHandler(async (req, res) => {
-  let Wishlist;
   const WishlistExists = await Wishlist.findOneAndUpdate(
     { productID: req.body.productID, productType: req.body.productType },
     { quantity: req.body.quantity }
   );
 
   if (!WishlistExists) {
-    Wishlist = await Wishlist.create({
+    const wishlist = await Wishlist.create({
       userWishlist: req.user.id,
       productID: req.body.productID,
       productType: req.body.productType,
       quantity: req.body.quantity,
     });
-  }
 
-  return res.status(200).json(Wishlist);
+    return res.status(200).json(wishlist);
+  } else {
+    return res.status(200).json(WishlistExists);
+  }
 });
 
 // @desc    Delete Wishlist

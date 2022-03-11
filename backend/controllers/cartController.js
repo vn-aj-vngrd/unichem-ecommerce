@@ -29,9 +29,10 @@ const setCart = asyncHandler(async (req, res) => {
       productType: req.body.productType,
       quantity: req.body.quantity,
     });
+    return res.status(200).json(cart);
+  } else {
+    return res.status(200).json(cartExists);
   }
-
-  return res.status(200).json(cart);
 });
 
 // @desc    Delete Cart
