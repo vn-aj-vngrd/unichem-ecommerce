@@ -63,7 +63,7 @@ const Details = ({ product }) => {
       });
     }
 
-    dispatch(reset);
+    dispatch(reset());
 
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
