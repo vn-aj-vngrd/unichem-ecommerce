@@ -21,14 +21,14 @@ const About = () => {
             <div className="col-lg-6 col-md-12 col-12">
               <div className="content-right">
                 <h2>Unichem Industrial Sales Inc.</h2>
-                <p>
+                <p align="justify">
                   UNICHEM INDUSTRIAL SALES, INC. is located in Mandaue City,
                   Cebu, Philippines and is part of the Chemical and Allied
                   Products Merchant Wholesalers Industry. UNICHEM INDUSTRIAL
                   SALES, INC. has 40 total employees across all of its
                   locations. (Employees figure is modelled).
                 </p>
-                <p>
+                <p align="justify">
                   It is a small-sized enterprise based in the Philippines,
                   specifically located in Mandaue City, Cebu. Its main operation
                   is trading and distributing Loctite, 3M, Polymer, and Phoenix
