@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { createCart, reset } from "../features/cart/cartSlice";
+import { createCart, resetCart } from "../features/cart/cartSlice";
+import {
+  createWishlist,
+  resetWishlist,
+} from "../features/wishlist/wishlistSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Swal from "sweetalert2";
@@ -17,8 +21,7 @@ import Star from "./Star";
 const productImageTest = [1, 2, 3, 4, 5];
 
 const Details = ({ product }) => {
-  const [value, setValue] = useState(0);
-
+  let [value, setValue] = useState(0);
   let [counter, setCounter] = useState(1);
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
@@ -38,19 +41,37 @@ const Details = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.cart
-  );
+  const { isCartLoading, isCartError, isCartSuccess, cartMessage } =
+    useSelector((state) => state.cart);
+
+  const {
+    isWishlistLoading,
+    isWishlistError,
+    isWishlistSuccess,
+    wishlistMessage,
+  } = useSelector((state) => state.wishlist);
 
   useEffect(() => {
-    if (isError) {
-      console.log("Failed to add to cart");
+    if (isCartError) {
+      Swal.fire({
+        title: "The item could not be added to the cart.",
+        icon: "error",
+        text: "Please try again later.",
+      });
     }
 
-    if (isSuccess) {
+    if (isWishlistError) {
       Swal.fire({
-        title: "Added to Cart!",
-        text: "To checkout please proceed to the cart page.",
+        title: "The item could not be added to the wishlist.",
+        icon: "error",
+        text: "Please try again later.",
+      });
+    }
+
+    if (isCartSuccess) {
+      Swal.fire({
+        title: "Item was added to your cart.",
+        text: "To checkout, please proceed to the cart page.",
         icon: "success",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -62,8 +83,35 @@ const Details = ({ product }) => {
       });
     }
 
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    if (isWishlistSuccess) {
+      console.log("wishlist success");
+      Swal.fire({
+        title: "Added to Wishlist!",
+        text: "The item has been added to the wishlist.",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "<Link to='/cart'>View Wishlist</Link>",
+        cancelButtonText: "Close",
+      }).then((result) => {
+        if (result.isConfirmed) navigate("/wishlist");
+      });
+    }
+
+    dispatch(resetCart());
+    dispatch(resetWishlist());
+  }, [
+    isCartError,
+    isCartSuccess,
+    cartMessage,
+    isWishlistLoading,
+    isWishlistError,
+    isWishlistSuccess,
+    wishlistMessage,
+    navigate,
+    dispatch,
+  ]);
 
   const changeType = (e) => {
     setValue(e.currentTarget.value);
@@ -84,21 +132,16 @@ const Details = ({ product }) => {
 
   const addToWishlist = (e) => {
     e.preventDefault();
-    Swal.fire({
-      title: "Added to Wishlist!",
-      text: "The item has been added to the wishlist.",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "<Link to='/cart'>View Wishlist</Link>",
-      cancelButtonText: "Close",
-    }).then((result) => {
-      if (result.isConfirmed) navigate("/wishlist");
-    });
+    const wishlistData = {
+      productID: product._id,
+      productType: value,
+      quantity: counter,
+    };
+
+    dispatch(createWishlist(wishlistData));
   };
 
-  if (isLoading) {
+  if (isCartLoading || isWishlistLoading) {
     return <Spinner />;
   }
 
@@ -128,11 +171,7 @@ const Details = ({ product }) => {
                         {productImageTest.map((count, index) => (
                           <SwiperSlide key={index}>
                             <div className="single-slider"></div>
-                            <img
-                              src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
-                              id="current"
-                              alt="#"
-                            />
+                            <img src={product.image} id="current" alt="#" />
                           </SwiperSlide>
                         ))}
                       </Swiper>

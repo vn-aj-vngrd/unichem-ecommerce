@@ -52,10 +52,7 @@ const Featured = () => {
                 <div key={product._id} className="col-lg-3 col-md-6 col-12">
                   <div className="single-product">
                     <div className="product-image">
-                      <img
-                        src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
-                        alt="#"
-                      />
+                      <img src={product.image} alt="#" />
                       <div className="button">
                         <Link
                           to={`/product-details/${product._id}`}
