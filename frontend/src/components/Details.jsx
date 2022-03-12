@@ -86,13 +86,13 @@ const Details = ({ product }) => {
     if (isWishlistSuccess) {
       console.log("wishlist success");
       Swal.fire({
-        title: "Added to Wishlist!",
-        text: "The item has been added to the wishlist.",
+        title: "Item was added to your wishlist.",
+        text: "To view your wishlist, please proceed to the wishlist page.",
         icon: "success",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "<Link to='/cart'>View Wishlist</Link>",
+        confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
         cancelButtonText: "Close",
       }).then((result) => {
         if (result.isConfirmed) navigate("/wishlist");
