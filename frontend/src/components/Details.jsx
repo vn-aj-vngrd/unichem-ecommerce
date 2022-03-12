@@ -84,7 +84,6 @@ const Details = ({ product }) => {
     }
 
     if (isWishlistSuccess) {
-      console.log("wishlist success");
       Swal.fire({
         title: "Item was added to your wishlist.",
         text: "To view your wishlist, please proceed to the wishlist page.",
