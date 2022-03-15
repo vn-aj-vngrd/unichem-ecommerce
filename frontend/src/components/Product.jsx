@@ -26,10 +26,12 @@ const Product = () => {
             <div key={index} className="col-lg-4 col-md-6 col-12 ">
               <div className="box-shadow">
                 <div className="single-product">
-                  <div className="product-promo product-promo-sale">
-                    <b>-100% OFF</b>
-                  </div>
                   <div className="product-image">
+                    {/* promo  CLASS (.sale-tag OR .new-tag)*/}
+                    <div className="sale-tag">
+                      <b>-100% OFF</b>
+                    </div>
+                    {/* end of promo */}
                     <img
                       src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
                       alt="/"

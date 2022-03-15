@@ -76,7 +76,8 @@ const Cart = () => {
             </div>
           </div>
 
-          <div className="cart-list-head box-shadow">
+          {/* Row Start Here */}
+          <div className="cart-list-head">
             <div className="cart-single-list">
               <div className="d-flex single-cart-product">
                 <div className="d-flex align-items-center cart-product-left">
@@ -88,7 +89,6 @@ const Cart = () => {
                       id="flexCheckDefault"
                     ></input>
                   </div>
-
                   <div className="image-in-cart">
                     <Link to="/products">
                       <img
@@ -98,8 +98,12 @@ const Cart = () => {
                     </Link>
                   </div>
                 </div>
+<<<<<<< Updated upstream
 
                 <hr className="cart-div"></hr>
+=======
+                <hr classNam="cart-div"></hr>
+>>>>>>> Stashed changes
                 <div className="cart-product-right">
                   <div className="product-in-cart">
                     <div className="category">
@@ -161,6 +165,7 @@ const Cart = () => {
               </div>
             </div>
           </div>
+          {/* Row End Here */}
 
           <div className="row">
             <div className="col-12">
@@ -219,6 +224,11 @@ const Cart = () => {
               </div>
             </div>
           </div>
+<<<<<<< Updated upstream
+=======
+
+          
+>>>>>>> Stashed changes
         </div>
       </div>
     </>

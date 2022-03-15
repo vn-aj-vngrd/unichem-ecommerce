@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Breadcrumb from "../../components/Breadcrumb";
 import ProfileSidebar from "../../components/ProfileSidebar";
-import ProfilePurchase from "../../components/ProfilePurchase";
+import Profile from "../../components/Profile";
 
 const Manage = () => {
   useEffect(() => {
@@ -14,7 +14,7 @@ const Manage = () => {
       <div className="container main-profile-section">
         <ProfileSidebar />
         <div className="spacer"></div>
-        <ProfilePurchase />
+        <Profile />
       </div>
       {/* content here */}
     </>

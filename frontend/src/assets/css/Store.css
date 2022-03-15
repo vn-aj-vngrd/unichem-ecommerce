@@ -480,6 +480,27 @@ ol {
   margin-left: 0;
 }
 
+<<<<<<< Updated upstream:frontend/src/assets/css/Store.css
+=======
+.button .btn {
+  display: inline-block;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 30px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  /* margin-right: 7px; */
+  overflow: hidden;
+}
+
+>>>>>>> Stashed changes:frontend/src/App.css
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .button .btn {
     padding: 12px 25px;
@@ -3459,7 +3480,18 @@ ol {
   margin: 50px 0;
 }
 
-.product-grid {
+.profile-address-section {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  box-shadow: 0px 0px 20px #00000012;
+  padding: 28px;
+  background: #fff;
+  margin-top: 28px;
+}
+
+.product-grid, .profile-grid {
   display: flex;
   align-items: center;
   border: 1px solid #eee;
@@ -3468,7 +3500,7 @@ ol {
   transition: all 0.4s ease;
   /* -webkit-box-shadow: 0px 0px 20px #00000012;
   box-shadow: 0px 0px 20px #00000012; */
-  padding: 20px;
+  padding: 20px 28px;
   background: #fff;
 }
 
@@ -5084,7 +5116,7 @@ ol {
   margin: 0px 15px 0px 15px;
 }
 
-.purchase-products-column {
+.purchase-products-column, .profile-information-column {
   width: 100%;
 }
 
@@ -5101,7 +5133,6 @@ ol {
   font-size: 18px;
   text-align: center;
   position: relative;
-
   font-size: 14px;
   font-weight: 600;
   padding: 13px 30px;
@@ -5162,6 +5193,18 @@ ol {
   }
 }
 
+<<<<<<< Updated upstream:frontend/src/assets/css/Store.css
+=======
+.category-icon {
+  margin: 0 5px 0 0;
+}
+
+.checkout-btn {
+  width: 165px;
+  margin: 0 7px 0 0;
+}
+
+>>>>>>> Stashed changes:frontend/src/App.css
 .purchase-options-checkout {
   display: flex;
 }
@@ -5372,6 +5415,7 @@ ol {
   }
 }
 
+<<<<<<< Updated upstream:frontend/src/assets/css/Store.css
 /*======================================
 	Promo CSS 
 ========================================*/
@@ -5395,6 +5439,9 @@ ol {
 .product-promo-new {
   background-color: rgb(16, 137, 236);
 }
+=======
+
+>>>>>>> Stashed changes:frontend/src/App.css
 
 @media (max-width: 1399px) {
   .items-sold {
@@ -5415,4 +5462,56 @@ ol {
   padding: 0;
   margin-top: 40px;
   border-radius: 3px;
+}
+
+.address-options {
+  display: flex;
+}
+
+/* end */
+
+
+
+
+.second-option-btn, .set-default-btn {
+  margin: 0 7px 0 0;
+}
+
+.profile-address {
+  /* line-height: 26px; */
+}
+
+.addresses .profile-address ul,
+.profile-category ul {
+  margin-top: 20px;
+}
+
+.addresses .profile-address ul li,
+.profile-category ul li {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.addresses .profile-address ul li:last-child,
+.profile-category ul li:last-child {
+  margin: 0;
+}
+
+.address-row {
+  margin-bottom: 90px;
+}
+
+.address-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-address-section .default-address-indicator {
+  background-color: rgb(255, 222, 36);
+  border-radius: 2px;
+  font-size: 14px;
+ 
+  width: 75px;
+  padding: 5px 10px;
+  font-weight: bold;
 }

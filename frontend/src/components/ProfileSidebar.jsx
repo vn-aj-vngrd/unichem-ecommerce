@@ -34,13 +34,8 @@ const ShopSidebar = () => {
               </Link>
             </li>
             <li>
-              <Link className="" to="">
-                Purchase
-              </Link>
-            </li>
-            <li>
-              <Link className="" to="">
-                My Purchases
+              <Link className="/purchase" to="">
+                Orders
               </Link>
             </li>
             <li>
