@@ -5,11 +5,7 @@ import ProfilePurchase from "../../components/ProfilePurchase";
 
 const Order = () => {
   useEffect(() => {
-<<<<<<< Updated upstream
     document.title = "Unichem Store | Orders";
-=======
-    document.title = "Unichem | Manage Acccount";
->>>>>>> Stashed changes
   });
 
   return (

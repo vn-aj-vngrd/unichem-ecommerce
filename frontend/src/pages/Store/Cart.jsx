@@ -98,12 +98,8 @@ const Cart = () => {
                     </Link>
                   </div>
                 </div>
-<<<<<<< Updated upstream
 
                 <hr className="cart-div"></hr>
-=======
-                <hr classNam="cart-div"></hr>
->>>>>>> Stashed changes
                 <div className="cart-product-right">
                   <div className="product-in-cart">
                     <div className="category">
@@ -224,11 +220,6 @@ const Cart = () => {
               </div>
             </div>
           </div>
-<<<<<<< Updated upstream
-=======
-
-          
->>>>>>> Stashed changes
         </div>
       </div>
     </>

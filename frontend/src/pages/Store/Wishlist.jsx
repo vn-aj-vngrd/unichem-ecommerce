@@ -29,11 +29,7 @@ const Wishlist = () => {
   );
 
   useEffect(() => {
-<<<<<<< Updated upstream
     document.title = "Unichem Store | Wishlist";
-=======
-    document.title = "Unichem | Cart";
->>>>>>> Stashed changes
 
     if (!user) {
       navigate("/login");
