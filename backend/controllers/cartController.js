@@ -35,6 +35,44 @@ const setCart = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update Cart
+// @route   PUT /api/Carts/:id
+// @access  Private
+const updateCart = asyncHandler(async (req, res) => {
+  const Cart = await Cart.findById(req.params.id)
+
+  if(!Cart) {
+    res.status(400);
+    throw new Error("Cart not found");
+  }
+
+  const user = await Cart.findById(req.user.id);
+
+  // Check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  // Make sure the logged in user matches the cart user
+  if (Cart.userCart.toString() !== user.id) {
+    res.status(401)
+    throw new Error("User not authorized");
+  }
+
+  const updateCart = await Cart.findByIdAndUpdate(
+    req.params.id,
+    req.body, {
+      new: true,
+    }
+  )
+
+  res.status(200).json(updateCart);
+});
+  
+
+
+
 // @desc    Delete Cart
 // @route   DELETE /api/Carts/:id
 // @access  Private

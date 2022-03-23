@@ -99,7 +99,10 @@ const Cart = () => {
                   </div>
                 </div>
 
+
+
                 <hr className="cart-div"></hr>
+
                 <div className="cart-product-right">
                   <div className="product-in-cart">
                     <div className="category">
@@ -220,6 +223,9 @@ const Cart = () => {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
+
+          
         </div>
       </div>
     </>
