@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Breadcrumb from "../../components/Breadcrumb";
 import ProfileSidebar from "../../components/ProfileSidebar";
-import Profile from "../../components/Profile";
+import Address from "../../components/Address";
 
 const Manage = () => {
   useEffect(() => {
@@ -11,10 +11,10 @@ const Manage = () => {
   return (
     <>
       <Breadcrumb type="manage" />
-      <div className="container main-profile-section mt-90">
+      <div className="container main-profile-section">
         <ProfileSidebar />
         <div className="spacer"></div>
-        <Profile />
+        <Address />
       </div>
       {/* content here */}
     </>

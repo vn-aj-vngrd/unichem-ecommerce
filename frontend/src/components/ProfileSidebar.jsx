@@ -24,17 +24,17 @@ const ShopSidebar = () => {
         <div className="profile-category">
           <ul className="list">
             <li>
-              <Link className="" to="">
+              <Link className="" to="/manage">
                 Profile
               </Link>
             </li>
             <li>
-              <Link className="" to="">
-                Addresses
+              <Link className="" to="/address">
+                Address
               </Link>
             </li>
             <li>
-              <Link className="/purchase" to="">
+              <Link className="" to="/orders">
                 Orders
               </Link>
             </li>

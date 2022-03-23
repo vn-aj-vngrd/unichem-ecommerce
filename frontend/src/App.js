@@ -18,6 +18,7 @@ import Wishlist from "./pages/Store/Wishlist";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProductDetails from "./pages/Product/ProductDetails";
+import Address from "./pages/Account/Address";
 import Manage from "./pages/Account/Manage";
 import Order from "./pages/Account/Order";
 import Review from "./pages/Account/Review";
@@ -65,6 +66,7 @@ export const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="wishlist" element={<Wishlist />} />
+        <Route path="address" element={<Address />} />
         <Route path="manage" element={<Manage />} />
         <Route path="orders" element={<Order />} />
         <Route path="reviews" element={<Review />} />
