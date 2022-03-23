@@ -223,9 +223,6 @@ const Cart = () => {
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-
-          
         </div>
       </div>
     </>
