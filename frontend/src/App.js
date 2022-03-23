@@ -77,7 +77,7 @@ export const App = () => {
         {/* Admin */}
         <Route path="create" element={<Create />} />
       </Routes>
-      {/* <Messenger /> */}
+      <Messenger />
       <Footer />
     </>
   ) : (
