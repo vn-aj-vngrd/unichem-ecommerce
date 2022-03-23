@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 
-const Cart = require("../models/CartModel");
+const Cart = require("../models/cartModel");
 const User = require("../models/userModel");
 
 // @desc    Get Carts
