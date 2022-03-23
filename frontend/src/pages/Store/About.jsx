@@ -23,17 +23,15 @@ const About = () => {
                 <h2>Unichem Industrial Sales Inc.</h2>
                 <p align="justify">
                   Unichem Industrial Sales Inc. is a merchant wholesaler of
-                  chemical and different allied products.
-                </p>
-                <p align="justify">
-                  It is a small and medium-sized business (SME) company based in
-                  the Philippines, specifically in Mandaue City, Cebu. Its core
-                  business is trading and distributing products from Loctite,
-                  3M, Polymer, and Phoenix. The firm employs around 15 people in
-                  areas such as delivery, accounting, management, and
-                  administration. Unichem's gross profit margin is projected to
-                  be roughly P5 million every year. Its services continue to
-                  grow and extend throughout the country.
+                  chemical and different allied products. It is a small and
+                  medium-sized business (SME) company based in the Philippines,
+                  specifically in Mandaue City, Cebu. Its core business is
+                  trading and distributing products from Loctite, 3M, Polymer,
+                  and Phoenix. The firm employs around 15 people in areas such
+                  as delivery, accounting, management, and administration.
+                  Unichem's gross profit margin is projected to be roughly P5
+                  million every year. Its services continue to grow and extend
+                  throughout the country.
                 </p>
               </div>
             </div>
