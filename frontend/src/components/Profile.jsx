@@ -8,7 +8,7 @@ const Profile = () => {
       </div>
       
       <div className="contact-form-head">
-        <div className="box-shadow form-main">
+        <div className="form-main">
           <form className="form" method="post" action="assets/mail/mail.php">
             <h5>Personal Information</h5>
             <br></br>

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, reset } from "../../features/products/productSlice";
+import { createAction } from "@reduxjs/toolkit";
 import Details from "../../components/Details";
 import Specifications from "../../components/Specifications";
 import Reviews from "../../components/Reviews";
