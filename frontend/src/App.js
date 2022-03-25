@@ -27,6 +27,7 @@ import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 
 import Create from "./pages/Admin/Product/Create";
+import Admin from "./pages/Admin/Home/Admin";
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,6 +77,7 @@ export const App = () => {
 
         {/* Admin */}
         <Route path="create" element={<Create />} />
+        <Route path="admin" element={<Admin />} />
       </Routes>
       <Messenger />
       <Footer />
