@@ -5463,7 +5463,7 @@ ol {
 }
 
 .profile-address {
-  /* line-height: 26px; */
+  line-height: 0px;
 }
 
 .addresses .profile-address ul,
