@@ -72,69 +72,7 @@ const Login = () => {
                 <div className="col-lg-8 col-md-12 col-12">
                   <div className="contact-form-head">
                     <div className="box-shadow form-main">
-                      <form
-                        className="form"
-                        method="post"
-                        action="assets/mail/mail.php"
-                      >
-                        <div className="row">
-                          <div className="col-lg-6 col-md-6 col-12">
-                            <div className="form-group">
-                              <input
-                                name="name"
-                                type="text"
-                                placeholder="Your Name"
-                                required="required"
-                              />
-                            </div>
-                          </div>
-                          <div className="col-lg-6 col-md-6 col-12">
-                            <div className="form-group">
-                              <input
-                                name="subject"
-                                type="text"
-                                placeholder="Your Subject"
-                                required="required"
-                              />
-                            </div>
-                          </div>
-                          <div className="col-lg-6 col-md-6 col-12">
-                            <div className="form-group">
-                              <input
-                                name="email"
-                                type="email"
-                                placeholder="Your Email"
-                                required="required"
-                              />
-                            </div>
-                          </div>
-                          <div className="col-lg-6 col-md-6 col-12">
-                            <div className="form-group">
-                              <input
-                                name="phone"
-                                type="text"
-                                placeholder="Your Phone"
-                                required="required"
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12">
-                            <div className="form-group message">
-                              <textarea
-                                name="message"
-                                placeholder="Your Message"
-                              ></textarea>
-                            </div>
-                          </div>
-                          <div className="col-12">
-                            <div className="form-group button text-center">
-                              <button type="submit" className="btn ">
-                                Submit Message
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
+                      <Map />
                     </div>
                   </div>
                 </div>
@@ -142,7 +80,6 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <Map />
       </section>
     </>
   );

@@ -480,8 +480,6 @@ ol {
   margin-left: 0;
 }
 
-<<<<<<< Updated upstream:frontend/src/assets/css/Store.css
-=======
 .button .btn {
   display: inline-block;
   text-transform: capitalize;
@@ -500,7 +498,6 @@ ol {
   overflow: hidden;
 }
 
->>>>>>> Stashed changes:frontend/src/App.css
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .button .btn {
     padding: 12px 25px;
@@ -2032,30 +2029,28 @@ ol {
   border-radius: 3px;
 }
 
-
-
 @media (max-width: 767px) {
   .single-product .product-image img {
     min-height: 408px;
-  }  
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .single-product .product-image img {
     min-height: 320px;
-  }  
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .single-product .product-image img {
     min-height: 165px;
-  } 
+  }
 }
 
 @media (min-width: 1199px) {
   .single-product .product-image img {
     min-height: 290px;
-  } 
+  }
 }
 
 .single-product .product-image .sale-tag {
@@ -3517,7 +3512,8 @@ ol {
   margin-top: 28px;
 }
 
-.product-grid, .profile-grid {
+.product-grid,
+.profile-grid {
   display: flex;
   align-items: center;
   border: 1px solid #eee;
@@ -3530,12 +3526,14 @@ ol {
   background: #fff;
 }
 
-.product-sidebar, .profile-grid {
+.product-sidebar,
+.profile-grid {
   margin-bottom: 30px;
 }
 
 @media (max-width: 991px) {
-  .profile-grid, .product-grid {
+  .profile-grid,
+  .product-grid {
     margin-top: 30px;
   }
 }
@@ -3800,7 +3798,7 @@ ol {
   .items-sold {
     display: none;
   }
-  
+
   .title .product-name {
     font-size: 14px;
   }
@@ -3811,8 +3809,6 @@ ol {
   color: #616161;
   font-weight: 500;
 }
-
-
 
 .cart-single-list .product-des {
   display: block;
@@ -4383,38 +4379,20 @@ ol {
 }
 
 .map-section .mapouter {
-  height: 500px;
+  height: 455px;
 }
 
 .map-section .mapouter .gmap_canvas {
-  height: 500px;
+  width: 100%;
+  height: 455px;
 }
 
-.map-section .mapouter .gmap_canvas iframe {
-  height: 500px;
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 1199px) {
   .map-section .mapouter {
-    height: 400px;
+    height: 480px;
   }
   .map-section .mapouter .gmap_canvas {
-    height: 400px;
-  }
-  .map-section .mapouter .gmap_canvas iframe {
-    height: 400px;
-  }
-}
-
-@media (max-width: 767px) {
-  .map-section .mapouter {
-    height: 300px;
-  }
-  .map-section .mapouter .gmap_canvas {
-    height: 300px;
-  }
-  .map-section .mapouter .gmap_canvas iframe {
-    height: 300px;
+    height: 480px;
   }
 }
 
@@ -5164,7 +5142,8 @@ ol {
   margin: 0px 15px 0px 15px;
 }
 
-.purchase-products-column, .profile-information-column {
+.purchase-products-column,
+.profile-information-column {
   width: 100%;
 }
 
@@ -5451,34 +5430,6 @@ ol {
   }
 }
 
-<<<<<<< Updated upstream:frontend/src/assets/css/Store.css
-/*======================================
-	Promo CSS 
-========================================*/
-.product-promo {
-  position: relative;
-  z-index: 2;
-  color: white;
-  padding: 5px;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  min-width: 50px;
-  max-width: 90px;
-}
-
-/* promo status */
-.product-promo-sale {
-  background-color: rgb(252, 25, 25);
-}
-
-.product-promo-new {
-  background-color: rgb(16, 137, 236);
-}
-=======
-
->>>>>>> Stashed changes:frontend/src/App.css
-
 @media (max-width: 1399px) {
   .items-sold {
     display: none;
@@ -5506,10 +5457,8 @@ ol {
 
 /* end */
 
-
-
-
-.second-option-btn, .set-default-btn {
+.second-option-btn,
+.set-default-btn {
   margin: 0 7px 0 0;
 }
 
