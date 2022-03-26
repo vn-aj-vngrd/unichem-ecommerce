@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
-import logo from "../assets/images/logo.svg"
+import logo from "../assets/images/logo.svg";
 
 const cartCount = 5;
 const wishListCount = 5;
@@ -28,16 +28,17 @@ const Navbar = () => {
     });
   };
 
+
   if (true) {
     return (
       <header className="header navbar-area sticky">
-        <div className="header-middle">
+        <div className="header-middle background-red">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
                   <img src={logo} alt="#" />
-                  <span className="fw-bold ps-1">Unichem Store</span>
+                  {/* <span className="fw-bold">Unichem Store</span> */}
                 </Link>
               </div>
 
@@ -52,7 +53,7 @@ const Navbar = () => {
                       <button>
                         <Link
                           to="/products"
-                          className="lni lni-search-alt"
+                          className="lni lni-search-alt nav-search"
                         ></Link>
                       </button>
                     </div>
@@ -274,44 +275,85 @@ const Navbar = () => {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12">
-              <div className="account">
+              <div className="d-flex justify-content-end container">
                 {user ? (
-                  <div className="dropdown h5">
-                    <i
-                      className="lni lni-user dropdown-toggle"
-                      href="#"
-                      role="button"
-                      id="dropdownMenuLink"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    ></i>
+                  // <div className="dropdown h5">
+                  //   <i
+                  //     className="lni lni-user dropdown-toggle"
+                  //     href="#"
+                  //     role="button"
+                  //     id="dropdownMenuLink"
+                  //     data-bs-toggle="dropdown"
+                  //     aria-expanded="false"
+                  //   ></i>
 
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuLink"
-                    >
-                      <li>
-                        <Link to="/manage" className="dropdown-item">
-                          Manage Account
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/orders" className="dropdown-item">
-                          My Orders
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/reviews" className="dropdown-item">
-                          My Reviews
-                        </Link>
-                      </li>
-                      <li>
-                        <button className="dropdown-item" onClick={onLogout}>
-                          Log out
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
+                  //   <ul
+                  //     className="dropdown-menu"
+                  //     aria-labelledby="dropdownMenuLink"
+                  //   >
+                  //     <li>
+                  //       <Link to="/manage" className="dropdown-item">
+                  //         Manage Account
+                  //       </Link>
+                  //     </li>
+                  //     <li>
+                  //       <Link to="/orders" className="dropdown-item">
+                  //         My Orders
+                  //       </Link>
+                  //     </li>
+                  //     <li>
+                  //       <Link to="/reviews" className="dropdown-item">
+                  //         My Reviews
+                  //       </Link>
+                  //     </li>
+                  //     <li>
+                  //       <button className="dropdown-item" onClick={onLogout}>
+                  //         Log out
+                  //       </button>
+                  //     </li>
+                  //   </ul>
+                  // </div>
+                  
+                  <>
+                    <div className="">
+                      <div className="nav-inner">
+                        <nav className="navbar navbar-expand-lg">
+                          <ul id="nav" className="navbar-nav">
+                            <li className="nav-item">
+                              <Link
+                                to="/"
+                                className="dd-menu"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#submenu-1-2"
+                                aria-controls="navbarSupportedContent"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                              >
+                                {user.name}
+                              </Link>
+                              <ul
+                                className="sub-menu collapse"
+                                id="submenu-1-2"
+                              >
+                                <li className="nav-item">
+                                  <Link to="/manage">Manage Account</Link>
+                                </li>
+                                <li className="nav-item">
+                                  <Link to="/orders">My Orders</Link>
+                                </li>
+                                <li className="nav-item">
+                                  <Link to="/reviews">My Reviews</Link>
+                                </li>
+                                <li className="nav-item">
+                                  <button className="logout-btn" onClick={onLogout}><i className="lni lni-logout"></i> Log out </button>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <ul>
                     <li className="border-end pe-2">

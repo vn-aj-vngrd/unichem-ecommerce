@@ -15,7 +15,7 @@ const ShopSidebar = () => {
           </div>
           <div className="">
             <h5>Username</h5>
-            <Link className="sidebar-nav" to="">
+            <Link className="sidebar-nav" to="/manage">
               Edit Profile
             </Link>
           </div>
@@ -36,6 +36,11 @@ const ShopSidebar = () => {
             <li>
               <Link className="" to="/orders">
                 Orders
+              </Link>
+            </li>
+            <li>
+              <Link className="" to="/reviews">
+                Reviews
               </Link>
             </li>
             <li>

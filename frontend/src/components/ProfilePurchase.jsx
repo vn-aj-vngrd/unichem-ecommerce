@@ -34,39 +34,9 @@ const ProfilePurchase = () => {
       </div>
 
       <div className="product">
-        {/* <div className="row">
-          {row.map((row, index) => (
-            <div key={index} className="col-lg-3 col-md-6 col-12">
-              <div className="single-product">
-                <div className="product-image">
-                  <img
-                    src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
-                    alt="/"
-                  />
-                  <div className="button">
-                    <Link to="/product-details" className="btn">
-                      <i className="lni lni-eye"></i> View
-                    </Link>
-                  </div>
-                </div>
-                <div className="product-info">
-                  <span className="category">Category</span>
-                  <h4 className="title">
-                    <span>Title</span>
-                  </h4>
-
-                  <Star star={star} reviews={reviews} />
-
-                  <hr />
-
-                  <div className="price">
-                    <span>₱199.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div> */}
+        
+        {/* Product Purchase one */}
+        <>
         <div className="purchase-row">
           <div className="negative-padding-custom box-shadow">
             <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
@@ -97,20 +67,53 @@ const ProfilePurchase = () => {
                     <Link to="/product-details" className="btn">
                       Buy Again
                     </Link>
-
-                    {/* <Link to="/product-details" className="btn">
-                        Cancel
-                      </Link> */}
-
-                    {/* <Link to="/product-details" className="btn-line">
-                      Message Unichem
-                    </Link> */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        </>
+
+        {/* Product Purchase one */}
+        <>
+        <div className="purchase-row">
+          <div className="negative-padding-custom box-shadow">
+            <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
+              <Link to="/product-details" className="underline-link">
+                <div className="color-white">Order Status Log </div>
+              </Link>
+              <div className="color-white purchase-update-time">
+                Last Update Time: mm/dd/yy - hh:mm
+              </div>
+              <h6 className="purchase-order-status">ORDER STATUS</h6>
+            </div>
+
+            {/* ORDERLINE START HERE */}
+
+            <PurchasedProduct />
+
+            {/* END OF ORDERLINE */}
+            <div className="no-box-shadow">
+              <div className="order-total-row">
+                <div className="price d-flex justify-content-end align-items-center">
+                  <div className="">Order Total:</div>
+                  <div className="spacer"></div>
+                  <h4 className="unichem-text-color">$199.00</h4>
+                </div>
+                <br></br>
+                <div className="purchase-options">
+                  <div className="d-flex justify-content-end button">
+                    <Link to="/product-details" className="btn">
+                      Buy Again
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </>
 
         <nav>
           <ul className="product-pagination pagination justify-content-center">

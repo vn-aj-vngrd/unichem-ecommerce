@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
 body {
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: #616161;
+  color: #212529;
   overflow-x: hidden;
   font-size: 14px;
   background-color: #fafafa;
@@ -51,11 +51,11 @@ p {
 }
 
 .text-grey {
-  color: #616161;
+  color: #212529;
 }
 
 .form-select {
-  color: #616161;
+  color: #212529;
 }
 
 .form-control {
@@ -98,7 +98,7 @@ button:focus,
 }
 
 select {
-  color: #616161;
+  color: #212529;
   letter-spacing: normal;
   word-spacing: normal;
   text-transform: none;
@@ -154,7 +154,7 @@ h5,
 h6 {
   font-weight: 600;
   margin: 0px;
-  color: #616161;
+  color: #212529;
 }
 
 h1 a,
@@ -251,7 +251,7 @@ ol {
 
 .breadcrumbs .breadcrumbs-content .page-title {
   font-size: 16px;
-  /* color: #616161; */
+  /* color: #212529; */
   font-weight: 600;
   position: relative;
   line-height: 28px;
@@ -321,7 +321,7 @@ ol {
 
 .breadcrumbs .breadcrumb-nav li,
 .breadcrumbs .breadcrumb-nav li a {
-  color: #616161;
+  color: #212529;
   /* font-size: 14px; */
   font-weight: 500;
 }
@@ -650,7 +650,7 @@ ol {
 }
 
 .header .nav-hotline i {
-  color: #616161;
+  color: #212529;
   font-size: 18px;
   position: absolute;
   left: 0;
@@ -669,11 +669,11 @@ ol {
 .header .nav-hotline h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #616161;
+  color: #212529;
 }
 
 .header .nav-hotline h3 span {
-  color: #888;
+  color: #666;
   font-weight: 500;
   font-size: 14px;
   display: block;
@@ -706,15 +706,15 @@ ol {
   display: inline-block;
   border-radius: 50%;
   border: 1px solid #e0e0e0;
-  color: #555;
+  color: rgb(255, 255, 255);
   font-size: 18px;
   text-align: center;
   position: relative;
 }
 
 .header .navbar-cart .wishlist a:hover {
-  color: #fff;
-  background-color: #f44336;
+  color: #f44336;
+  background-color: #fff;
   border-color: transparent;
 }
 
@@ -725,12 +725,13 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #f44336;
-  color: #fff;
+  background-color: #ffffff;
+  color: #f44336;
   font-size: 12px;
   font-weight: 500;
   text-align: center;
   border-radius: 50%;
+  outline: 1px solid #ff4436;
 }
 
 .header .navbar-cart .cart-items {
@@ -738,8 +739,8 @@ ol {
 }
 
 .header .navbar-cart .cart-items:hover .main-btn {
-  color: #fff;
-  background-color: #f44336;
+  color: #f44336;
+  background-color: #fff;
   border-color: transparent;
 }
 
@@ -750,7 +751,7 @@ ol {
   display: inline-block;
   border-radius: 50%;
   border: 1px solid #e0e0e0;
-  color: #555;
+  color: rgb(255, 255, 255);
   font-size: 18px;
   text-align: center;
   position: relative;
@@ -763,12 +764,13 @@ ol {
   height: 19px;
   width: 19px;
   line-height: 19px;
-  background-color: #f44336;
-  color: #fff;
+  background-color: #fff;
+  color: #f44336;
   font-size: 12px;
   font-weight: 500;
   text-align: center;
   border-radius: 50%;
+  outline: 1px solid #ff4436;
 }
 
 .header .navbar-cart .cart-items:hover .shopping-item {
@@ -943,7 +945,7 @@ ol {
   a {
   font-size: 14px;
   font-weight: 600;
-  color: #616161;
+  color: #212529;
 }
 
 @media (max-width: 767px) {
@@ -1016,7 +1018,7 @@ ol {
   width: 100%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .header .main-menu-search {
     display: none;
   }
@@ -1037,8 +1039,8 @@ ol {
 }
 
 .header .main-menu-search .select-position:after {
-  border-bottom: 1.5px solid #616161;
-  border-right: 1.5px solid #616161;
+  border-bottom: 1.5px solid #212529;
+  border-right: 1.5px solid #212529;
   content: "";
   display: block;
   height: 8px;
@@ -1092,6 +1094,7 @@ ol {
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
   font-size: 14px;
+  border-radius: 3px;
 }
 
 .header .main-menu-search .search-btn button {
@@ -1104,24 +1107,28 @@ ol {
   border: 0;
   border-radius: 0 4px 4px 0;
   margin-left: -2px;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
   font-size: 18px;
+  border: 1px solid #fff;
 }
 
 .header .main-menu-search .search-btn button:hover {
-  color: #fff;
-  background-color: #b71c1c;
+  color: #f44336;
+  background-color: #ffffff;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.header .main-menu-search .search-btn button a {
-  text-decoration: none;
-  color: #fff;
+.header .main-menu-search .search-btn a:hover {
+  color: #f44336;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #616161;
+    background-color: #212529;
   }
 
   .header .button {
@@ -1195,7 +1202,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item a {
-    color: #616161;
+    color: #212529;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1238,7 +1245,7 @@ ol {
 
 @media (max-width: 767px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #616161;
+    background-color: #212529;
   }
 
   .header .button {
@@ -1312,7 +1319,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item a {
-    color: #616161;
+    color: #212529;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1393,7 +1400,7 @@ ol {
 
 .header .mega-category-menu .cat-button {
   display: inline-block;
-  color: #616161;
+  color: #212529;
   font-size: 15px;
   font-weight: 600;
 }
@@ -1465,7 +1472,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category li a {
-  color: #616161;
+  color: #212529;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -1482,7 +1489,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li a {
-  color: #616161;
+  color: #212529;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -1536,7 +1543,7 @@ ol {
   display: block;
   font-weight: 600;
   font-size: 15px;
-  color: #616161;
+  color: #212529;
 }
 
 .header .account ul li a:hover,
@@ -1559,7 +1566,7 @@ ol {
 }
 
 .header .navbar-brand img {
-  width: 45px;
+  width: 60px;
   margin-right: 4px;
 }
 
@@ -1592,7 +1599,7 @@ ol {
 }
 
 .header.sticky .button .btn:hover {
-  background-color: #616161;
+  background-color: #212529;
   color: #fff;
 }
 
@@ -1720,7 +1727,7 @@ ol {
 
 .navbar-nav .nav-item a {
   font-size: 14px;
-  color: #616161;
+  color: #212529;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   position: relative;
@@ -1825,7 +1832,7 @@ ol {
 
 .navbar-nav .nav-item .sub-menu .nav-item a {
   padding: 0;
-  color: #888;
+  color: #666;
   display: block;
   width: 100%;
   font-size: 14px;
@@ -1998,7 +2005,7 @@ ol {
   font-size: 15px;
   margin: 0px;
   font-weight: 600;
-  color: #616161;
+  color: #212529;
 }
 
 .shipping-info .media-body span {
@@ -2128,7 +2135,7 @@ ol {
 }
 
 .single-product .product-info .category {
-  color: #888;
+  color: #666;
   font-size: 13px;
   display: block;
   margin-bottom: 2px;
@@ -2137,7 +2144,7 @@ ol {
 .single-product .product-info .title span {
   font-size: 16px;
   font-weight: 700;
-  color: #616161;
+  color: #212529;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -2168,7 +2175,7 @@ ol {
 .single-product .product-info .review li span {
   display: inline-block;
   margin-left: 4px;
-  color: #888;
+  color: #666;
   font-size: 13px;
 }
 
@@ -2179,7 +2186,7 @@ ol {
 .single-product .product-info .price span {
   font-size: 17px;
   font-weight: 700;
-  color: #616161;
+  color: #212529;
   display: inline-block;
 }
 
@@ -2266,7 +2273,7 @@ ol {
 }
 
 .single-banner .content .price span {
-  color: #616161;
+  color: #212529;
   display: block;
   margin-top: 10px;
   font-size: 22px;
@@ -2352,12 +2359,12 @@ ol {
 
 .call-action .content .button .btn {
   background-color: #fff;
-  color: #616161;
+  color: #212529;
 }
 
 .call-action .content .button .btn:hover {
   color: #fff;
-  background: #616161;
+  background: #212529;
 }
 
 /*======================================
@@ -2441,11 +2448,11 @@ ol {
 .item-details .product-info .category i {
   display: inline-block;
   margin-right: 5px;
-  color: #888;
+  color: #666;
 }
 
 .item-details .product-info .category a {
-  color: #888;
+  color: #666;
   font-weight: 400;
   display: inline-block;
   margin-left: 5px;
@@ -2456,7 +2463,7 @@ ol {
 }
 
 .item-details .product-info .price {
-  color: #616161;
+  color: #212529;
   display: block;
   font-size: 24px;
   font-weight: 600;
@@ -2472,7 +2479,7 @@ ol {
 .item-details .product-info .price span {
   display: inline-block;
   margin-left: 15px;
-  color: #888;
+  color: #666;
   text-decoration: line-through;
   font-size: 23px;
   font-weight: 500;
@@ -2596,7 +2603,7 @@ ol {
 
 .item-details .product-info .wish-button .btn {
   border-radius: 4px;
-  background-color: #616161;
+  background-color: #212529;
   color: white;
   font-size: 13px;
   font-weight: 600;
@@ -2896,7 +2903,7 @@ ol {
 
 .product-details-info .give-review .review-btn:hover {
   color: #fff;
-  background-color: #616161;
+  background-color: #212529;
 }
 
 .product-details-info .reviews .title {
@@ -3006,7 +3013,7 @@ ol {
 .product-details-info .reviews .single-review .review-info h4 span {
   font-size: 14px;
   display: block;
-  color: #888;
+  color: #666;
   margin-top: 7px;
 }
 
@@ -3050,7 +3057,7 @@ ol {
 }
 
 .review-modal .modal-body .form-group label {
-  color: #888;
+  color: #666;
   font-size: 13px;
   margin-bottom: 5px;
   display: block;
@@ -3110,7 +3117,7 @@ ol {
 	Footer CSS
 ========================================*/
 .footer {
-  background-color: #616161;
+  background-color: #212529;
   position: relative;
 }
 
@@ -3424,7 +3431,7 @@ ol {
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: #888;
+  color: #666;
   font-size: 14px;
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -3444,7 +3451,7 @@ ol {
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: #888;
+  color: #666;
   font-size: 14px;
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -3602,7 +3609,7 @@ ol {
 }
 
 .quantity-input {
-  color: #616161;
+  color: #212529;
   outline: none;
   text-align: center;
   width: 47px;
@@ -3688,7 +3695,7 @@ ol {
 .team .single-team .content h5 {
   font-size: 13px;
   margin-top: 5px;
-  color: #888;
+  color: #666;
 }
 
 .team .single-team .content .social {
@@ -3743,7 +3750,7 @@ ol {
 }
 
 .cart-list-title p {
-  color: #616161;
+  color: #212529;
   font-weight: 500;
   font-size: 14px;
 }
@@ -3806,7 +3813,7 @@ ol {
 
 .cart-single-list .product-name a {
   font-size: 14px;
-  color: #616161;
+  color: #212529;
   font-weight: 500;
 }
 
@@ -3822,7 +3829,7 @@ ol {
 
 .cart-single-list .product-des span em {
   font-style: normal;
-  color: #616161;
+  color: #212529;
 }
 
 .cart-single-list {
@@ -3848,7 +3855,7 @@ ol {
 .shopping-cart .total-amount .right ul li {
   font-size: 14px;
   font-weight: 500;
-  color: #616161;
+  color: #212529;
   line-height: 26px;
   display: flex;
   align-items: center;
@@ -3943,7 +3950,7 @@ ol {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   background-color: #fff;
-  color: #616161;
+  color: #212529;
   font-size: 14px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -4195,7 +4202,7 @@ ol {
 }
 
 .contact-us .contact-info .single-info ul li a {
-  color: #888;
+  color: #666;
   font-weight: 500;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
@@ -4349,7 +4356,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group input:focus {
-  border-color: #616161;
+  border-color: #212529;
 }
 
 .contact-form-head .form-main .form .form-group textarea {
@@ -4366,7 +4373,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group textarea:focus {
-  border-color: #616161;
+  border-color: #212529;
 }
 
 .contact-form-head .form-main .form .form-group.button {
@@ -4429,7 +4436,7 @@ ol {
 
 .checkout-steps-form-style .title.collapsed {
   border-radius: 4px;
-  color: #616161;
+  color: #212529;
 }
 
 .checkout-steps-form-style .title:before {
@@ -4490,7 +4497,7 @@ ol {
 }
 
 .checkout-steps-form-style .form-default label {
-  color: #888;
+  color: #666;
   margin-bottom: 8px;
 }
 
@@ -4826,7 +4833,7 @@ ol {
 .featured-categories .single-category .heading {
   font-size: 17px;
   font-weight: 700;
-  color: #616161;
+  color: #212529;
 }
 
 .featured-categories .single-category ul,
@@ -5097,7 +5104,7 @@ ol {
 .error-area .error-content h2 {
   font-size: 25px;
   margin-bottom: 10px;
-  color: #616161;
+  color: #212529;
   font-weight: 700;
 }
 
@@ -5116,7 +5123,7 @@ ol {
 .error-area .error-content p {
   font-weight: 400;
   margin-bottom: 40px;
-  color: #888;
+  color: #666;
 }
 
 /*======================================
@@ -5463,7 +5470,7 @@ ol {
 }
 
 .profile-address {
-  line-height: 0px;
+  line-height: 26px;
 }
 
 .addresses .profile-address ul,
@@ -5539,4 +5546,31 @@ ol {
 
 .mt-90 {
   margin-bottom: 90px;
+}
+
+
+/*======================================
+	Reviews CSS 
+========================================*/
+
+.review-row {
+  margin-bottom: 30px;
+}
+
+.background-red {
+  background-color: #f44336;
+}
+
+/*======================================
+	Logout CSS 
+========================================*/
+
+.logout-btn {
+  border: none;
+  background-color: #fff;
+  text-decoration: none;
+}
+
+.logout-btn:hover {
+  color: #f44336;
 }
