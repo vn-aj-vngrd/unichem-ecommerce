@@ -21,7 +21,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProductDetails from "./pages/Product/ProductDetails";
 import Address from "./pages/Account/Address";
-import Reviews from "./pages/Account/Review";
 import Manage from "./pages/Account/Manage";
 import Order from "./pages/Account/Order";
 import Review from "./pages/Account/Review";

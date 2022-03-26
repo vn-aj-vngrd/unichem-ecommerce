@@ -312,7 +312,7 @@ const Navbar = ({ userType }) => {
                   //     </li>
                   //   </ul>
                   // </div>
-                  
+
                   <>
                     <div className="">
                       <div className="nav-inner">
@@ -344,7 +344,12 @@ const Navbar = ({ userType }) => {
                                   <Link to="/reviews">My Reviews</Link>
                                 </li>
                                 <li className="nav-item">
-                                  <button className="logout-btn" onClick={onLogout}><i className="lni lni-logout"></i> Log out </button>
+                                  <button
+                                    className="logout-btn"
+                                    onClick={onLogout}
+                                  >
+                                    <i className="lni lni-logout"></i> Log out{" "}
+                                  </button>
                                 </li>
                               </ul>
                             </li>
@@ -888,8 +893,6 @@ const Navbar = ({ userType }) => {
           <p>Get All Dashboards and 300+ UI Elements</p>
           <a
             href="https://plainadmin.com/pro"
-            target="_blank"
-            rel="nofollow"
             className="main-btn primary-btn btn-hover"
           >
             Purchase Now
