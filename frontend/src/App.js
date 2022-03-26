@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,7 +31,14 @@ import PageNotFound from "./pages/PageNotFound";
 import Create from "./pages/Admin/Product/Create";
 import Admin from "./pages/Admin/Home/Admin";
 
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import StoreCSS from "!!raw-loader!./assets/css/Store.css";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
+
 export const App = () => {
+  const { user } = useSelector((state) => state.auth);
+  const [userTypeData, setUserType] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const handleLoading = () => {
@@ -37,12 +46,20 @@ export const App = () => {
   };
 
   useEffect(() => {
+    if (user) {
+      const temp = localStorage.getItem("user");
+      const user = JSON.parse(temp);
+      setUserType({ userType: user.userType });
+    }
     window.addEventListener("load", handleLoading);
     return () => window.removeEventListener("load", handleLoading);
-  }, []);
+  }, [user]);
 
   return !isLoading ? (
     <>
+      <Helmet>
+        <style>{userTypeData.userType === "customer" ? StoreCSS : AdminCSS}</style>
+      </Helmet>
       <ScrollToTop />
       <ToastContainer
         position="top-center"
@@ -55,32 +72,39 @@ export const App = () => {
         draggable
         pauseOnHover
       />
-      <Navbar />
-      <Routes>
-        {/* Store */}
-        <Route path="/" element={<Home />} />
-        <Route path="products" element={<Products />} />
-        <Route path="product-details/:id" element={<ProductDetails />} />
-        <Route path="about" element={<About />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="wishlist" element={<Wishlist />} />
-        <Route path="address" element={<Address />} />
-        <Route path="manage" element={<Manage />} />
-        <Route path="orders" element={<Order />} />
-        <Route path="reviews" element={<Review />} />
-        <Route path="checkout" element={<Checkout />} />
-        <Route path="faq" element={<Faq />} />
-        <Route path="*" element={<PageNotFound />} />
-
-        {/* Admin */}
-        <Route path="create" element={<Create />} />
-        <Route path="admin" element={<Admin />} />
-      </Routes>
-      <Messenger />
-      <Footer />
+      <Navbar userType={userTypeData.userType} />
+      {true ? ( //userTypeData.userType === "customer"
+        <>
+          {/* Store Routes */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="products" element={<Products />} />
+            <Route path="product-details/:id" element={<ProductDetails />} />
+            <Route path="about" element={<About />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="address" element={<Address />} />
+            <Route path="manage" element={<Manage />} />
+            <Route path="orders" element={<Order />} />
+            <Route path="reviews" element={<Review />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="faq" element={<Faq />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+          <Messenger />
+        </>
+      ) : (
+        <>
+          {/* Admin Routes */}
+          <Route path="create" element={<Create />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="*" element={<PageNotFound />} />
+        </>
+      )}
+      <Footer userType={userTypeData.userType} />x
     </>
   ) : (
     <>
