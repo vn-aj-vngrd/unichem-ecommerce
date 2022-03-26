@@ -32,9 +32,10 @@ import Create from "./pages/Admin/Product/Create";
 import Admin from "./pages/Admin/Home/Admin";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import StoreCSS from "!!raw-loader!./assets/css/Store.css";
+// import StoreCSS from "!!raw-loader!./assets/css/Store.css";
+import "./assets/css/Store.css";
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
+// import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
 
 export const App = () => {
   const { user } = useSelector((state) => state.auth);
@@ -48,8 +49,10 @@ export const App = () => {
   useEffect(() => {
     if (user) {
       const temp = localStorage.getItem("user");
-      const user = JSON.parse(temp);
+      const user = JSON.parse(temp);  
       setUserType({ userType: user.userType });
+    } else {
+      setUserType({ userType: "customer" });
     }
     window.addEventListener("load", handleLoading);
     return () => window.removeEventListener("load", handleLoading);
@@ -57,9 +60,11 @@ export const App = () => {
 
   return !isLoading ? (
     <>
-      <Helmet>
-        <style>{userTypeData.userType === "customer" ? StoreCSS : AdminCSS}</style>
-      </Helmet>
+      {/* <Helmet>
+        <style>
+          {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
+        </style>
+      </Helmet> */}
       <ScrollToTop />
       <ToastContainer
         position="top-center"
@@ -73,7 +78,7 @@ export const App = () => {
         pauseOnHover
       />
       <Navbar userType={userTypeData.userType} />
-      {true ? ( //userTypeData.userType === "customer"
+      {userTypeData.userType === "customer" ? (
         <>
           {/* Store Routes */}
           <Routes>
@@ -99,12 +104,14 @@ export const App = () => {
       ) : (
         <>
           {/* Admin Routes */}
-          <Route path="create" element={<Create />} />
-          <Route path="admin" element={<Admin />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Routes>
+            <Route path="create" element={<Create />} />
+            <Route path="/" element={<Admin />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
         </>
       )}
-      <Footer userType={userTypeData.userType} />x
+      <Footer userType={userTypeData.userType} />
     </>
   ) : (
     <>

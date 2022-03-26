@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import PurchasedProduct from "./PurchasedProduct";
 
-const row = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-const star = 4.5;
-const reviews = 5;
+// const row = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+// const star = 4.5;
+// const reviews = 5;
 
 const ProfilePurchase = () => {
   return (

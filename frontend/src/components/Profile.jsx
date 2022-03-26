@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
@@ -6,7 +6,7 @@ const Profile = () => {
       <div className="profile-grid">
         <h5>My Profile</h5>
       </div>
-      
+
       <div className="contact-form-head">
         <div className="form-main">
           <form className="form" method="post" action="assets/mail/mail.php">
@@ -16,7 +16,8 @@ const Profile = () => {
               <img
                 className="profile-information-image"
                 src="https://scontent.fcrk4-1.fna.fbcdn.net/v/t1.6435-9/89595114_2790668074362384_5253522795815501824_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=a4a2d7&_nc_eui2=AeHXsn03IiqEn6omaUEIHM_Bi_8pd_rKJnGL_yl3-somcSQcauFysieA3LXgKI8yhRkZ1o5VDJ3MtPnrn4tZ3Kzw&_nc_ohc=GUU2jNVQE6sAX-Ni2kI&tn=k5PFbSYe6hUkAfvk&_nc_ht=scontent.fcrk4-1.fna&oh=00_AT-LMPLrqajMuCM7JZGz86dSo4VMp6jG82Tc1BzBiuluWA&oe=623E037F"
-              ></img>
+                alt="#"
+              />
               <br></br>
               <h5>Name</h5>
             </div>
@@ -25,7 +26,7 @@ const Profile = () => {
             <div className="row">
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="form-group">
-                    <label className="form-label">Name</label>
+                  <label className="form-label">Name</label>
                   <input
                     name="name"
                     type="text"
@@ -36,7 +37,7 @@ const Profile = () => {
               </div>
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="form-group">
-                    <label className="form-label">Birthday</label>
+                  <label className="form-label">Birthday</label>
                   <input
                     name="subject"
                     type="text"
@@ -100,7 +101,6 @@ const Profile = () => {
               </div>
             </div>
           </form>
-          
         </div>
       </div>
     </div>
