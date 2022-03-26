@@ -109,9 +109,9 @@ const Product = ({range1, range2, range3, range4}) => {
                 </div>
                 <div className="order-total-row ">
                   <div className="price d-flex justify-content-between align-items-center">
-                    <div>
+                    <h6 className="text-red">
                       <span>₱{product.prices[0]}</span>
-                    </div>
+                    </h6>
                     <div className="items-sold">6.9K items sold</div>
                   </div>
                 </div>

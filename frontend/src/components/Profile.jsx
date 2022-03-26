@@ -92,6 +92,7 @@ const Profile = () => {
               <br></br>
               <div className="col-12">
                 <div className="form-group button text-center">
+                  <br></br>
                   <button type="submit" className="btn ">
                     Save
                   </button>
