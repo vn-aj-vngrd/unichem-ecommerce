@@ -84,6 +84,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      userType: user.userType,
       token: generateToken(user._id),
     });
   } else {
@@ -101,9 +102,7 @@ const getUser = asyncHandler(async (req, res) => {
   // const { _id, name, email, birthday, sex, phoneNumber } = await User.findById(
   //   req.user.id
   // );
-
   // const userAddress = await Address.find({ userAddress: req.user.id });
-
   // return res.status(200).json({
   //   id: _id,
   //   name,
@@ -113,7 +112,7 @@ const getUser = asyncHandler(async (req, res) => {
   //   phoneNumber,
   //   userAddress,
   // });
-  return res.status(200).json(req.user);
+  // return res.status(200).json(req.user);
 });
 
 // Generate JWT Token
