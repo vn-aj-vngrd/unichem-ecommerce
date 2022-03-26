@@ -7,7 +7,7 @@ const addressSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    address: {
+    userID: {
       type: Array,
       required: [true, "Address is required."],
     },

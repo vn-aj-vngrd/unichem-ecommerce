@@ -24,7 +24,7 @@ const setCart = asyncHandler(async (req, res) => {
 
   if (!cartExists) {
     cart = await Cart.create({
-      userCart: req.user.id,
+      userID: req.user.id,
       productID: req.body.productID,
       productType: req.body.productType,
       quantity: req.body.quantity,
@@ -55,7 +55,7 @@ const updateCart = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the cart user
-  if (Cart.userCart.toString() !== user.id) {
+  if (Cart.userID.toString() !== user.id) {
     res.status(401)
     throw new Error("User not authorized");
   }

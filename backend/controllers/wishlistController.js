@@ -23,7 +23,7 @@ const setWishlist = asyncHandler(async (req, res) => {
 
   if (!WishlistExists) {
     const wishlist = await Wishlist.create({
-      userWish: req.user.id,
+      userID: req.user.id,
       productID: req.body.productID,
       productType: req.body.productType,
       quantity: req.body.quantity,
