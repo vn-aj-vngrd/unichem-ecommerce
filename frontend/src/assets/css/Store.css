@@ -4,7 +4,7 @@ body {
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: #212529;
+  color: #424242;
   overflow-x: hidden;
   font-size: 14px;
   background-color: #fafafa;
@@ -15,6 +15,7 @@ p {
   padding: 0;
   font-size: 14px;
   line-height: 24px;
+  color: #757575;
 }
 
 * {
@@ -51,11 +52,11 @@ p {
 }
 
 .text-grey {
-  color: #212529;
+  color: #424242;
 }
 
 .form-select {
-  color: #212529;
+  color: #424242;
 }
 
 .form-control {
@@ -98,7 +99,7 @@ button:focus,
 }
 
 select {
-  color: #212529;
+  color: #424242;
   letter-spacing: normal;
   word-spacing: normal;
   text-transform: none;
@@ -154,7 +155,7 @@ h5,
 h6 {
   font-weight: 600;
   margin: 0px;
-  color: #212529;
+  color: #424242;
 }
 
 h1 a,
@@ -251,7 +252,7 @@ ol {
 
 .breadcrumbs .breadcrumbs-content .page-title {
   font-size: 16px;
-  /* color: #212529; */
+  /* color: #424242; */
   font-weight: 600;
   position: relative;
   line-height: 28px;
@@ -321,7 +322,7 @@ ol {
 
 .breadcrumbs .breadcrumb-nav li,
 .breadcrumbs .breadcrumb-nav li a {
-  color: #212529;
+  color: #424242;
   /* font-size: 14px; */
   font-weight: 500;
 }
@@ -650,7 +651,7 @@ ol {
 }
 
 .header .nav-hotline i {
-  color: #212529;
+  color: #424242;
   font-size: 18px;
   position: absolute;
   left: 0;
@@ -669,7 +670,7 @@ ol {
 .header .nav-hotline h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #212529;
+  color: #424242;
 }
 
 .header .nav-hotline h3 span {
@@ -945,7 +946,7 @@ ol {
   a {
   font-size: 14px;
   font-weight: 600;
-  color: #212529;
+  color: #424242;
 }
 
 @media (max-width: 767px) {
@@ -1039,8 +1040,8 @@ ol {
 }
 
 .header .main-menu-search .select-position:after {
-  border-bottom: 1.5px solid #212529;
-  border-right: 1.5px solid #212529;
+  border-bottom: 1.5px solid #424242;
+  border-right: 1.5px solid #424242;
   content: "";
   display: block;
   height: 8px;
@@ -1128,7 +1129,7 @@ ol {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #212529;
+    background-color: #424242;
   }
 
   .header .button {
@@ -1202,7 +1203,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item a {
-    color: #212529;
+    color: #424242;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1245,7 +1246,7 @@ ol {
 
 @media (max-width: 767px) {
   .header .mobile-menu-btn .toggler-icon {
-    background-color: #212529;
+    background-color: #424242;
   }
 
   .header .button {
@@ -1319,7 +1320,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item a {
-    color: #212529;
+    color: #424242;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1400,7 +1401,7 @@ ol {
 
 .header .mega-category-menu .cat-button {
   display: inline-block;
-  color: #212529;
+  color: #424242;
   font-size: 15px;
   font-weight: 600;
 }
@@ -1472,7 +1473,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category li a {
-  color: #212529;
+  color: #424242;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -1489,7 +1490,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li a {
-  color: #212529;
+  color: #424242;
   text-transform: capitalize;
   font-size: 14px;
   position: relative;
@@ -1543,7 +1544,7 @@ ol {
   display: block;
   font-weight: 600;
   font-size: 15px;
-  color: #212529;
+  color: #424242;
 }
 
 .header .account ul li a:hover,
@@ -1599,7 +1600,7 @@ ol {
 }
 
 .header.sticky .button .btn:hover {
-  background-color: #212529;
+  background-color: #424242;
   color: #fff;
 }
 
@@ -1643,6 +1644,17 @@ ol {
   transition: all 0.3s ease-out 0s;
   padding: 0;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.authlink a{
+  text-decoration: none;
+  color: #424242;
+  font-weight: 600;
+}
+
+.authlink a:hover{
+  text-decoration: none;
+  color: #f44336;
 }
 
 .navbar-area.sticky {
@@ -1727,7 +1739,7 @@ ol {
 
 .navbar-nav .nav-item a {
   font-size: 14px;
-  color: #212529;
+  color: #424242;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   position: relative;
@@ -2005,7 +2017,7 @@ ol {
   font-size: 15px;
   margin: 0px;
   font-weight: 600;
-  color: #212529;
+  color: #424242;
 }
 
 .shipping-info .media-body span {
@@ -2144,7 +2156,7 @@ ol {
 .single-product .product-info .title span {
   font-size: 16px;
   font-weight: 700;
-  color: #212529;
+  color: #424242;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -2186,7 +2198,7 @@ ol {
 .single-product .product-info .price span {
   font-size: 17px;
   font-weight: 700;
-  color: #212529;
+  color: #424242;
   display: inline-block;
 }
 
@@ -2273,7 +2285,7 @@ ol {
 }
 
 .single-banner .content .price span {
-  color: #212529;
+  color: #424242;
   display: block;
   margin-top: 10px;
   font-size: 22px;
@@ -2359,12 +2371,12 @@ ol {
 
 .call-action .content .button .btn {
   background-color: #fff;
-  color: #212529;
+  color: #424242;
 }
 
 .call-action .content .button .btn:hover {
   color: #fff;
-  background: #212529;
+  background: #424242;
 }
 
 /*======================================
@@ -2463,7 +2475,7 @@ ol {
 }
 
 .item-details .product-info .price {
-  color: #212529;
+  color: #424242;
   display: block;
   font-size: 24px;
   font-weight: 600;
@@ -2603,7 +2615,7 @@ ol {
 
 .item-details .product-info .wish-button .btn {
   border-radius: 4px;
-  background-color: #212529;
+  background-color: #424242;
   color: white;
   font-size: 13px;
   font-weight: 600;
@@ -2903,7 +2915,7 @@ ol {
 
 .product-details-info .give-review .review-btn:hover {
   color: #fff;
-  background-color: #212529;
+  background-color: #424242;
 }
 
 .product-details-info .reviews .title {
@@ -3117,7 +3129,7 @@ ol {
 	Footer CSS
 ========================================*/
 .footer {
-  background-color: #212529;
+  background-color: #424242;
   position: relative;
 }
 
@@ -3609,7 +3621,7 @@ ol {
 }
 
 .quantity-input {
-  color: #212529;
+  color: #424242;
   outline: none;
   text-align: center;
   width: 47px;
@@ -3750,7 +3762,7 @@ ol {
 }
 
 .cart-list-title p {
-  color: #212529;
+  color: #424242;
   font-weight: 500;
   font-size: 14px;
 }
@@ -3813,7 +3825,7 @@ ol {
 
 .cart-single-list .product-name a {
   font-size: 14px;
-  color: #212529;
+  color: #424242;
   font-weight: 500;
 }
 
@@ -3829,7 +3841,7 @@ ol {
 
 .cart-single-list .product-des span em {
   font-style: normal;
-  color: #212529;
+  color: #424242;
 }
 
 .cart-single-list {
@@ -3855,7 +3867,7 @@ ol {
 .shopping-cart .total-amount .right ul li {
   font-size: 14px;
   font-weight: 500;
-  color: #212529;
+  color: #424242;
   line-height: 26px;
   display: flex;
   align-items: center;
@@ -3950,7 +3962,7 @@ ol {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   background-color: #fff;
-  color: #212529;
+  color: #424242;
   font-size: 14px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -4356,7 +4368,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group input:focus {
-  border-color: #212529;
+  border-color: #424242;
 }
 
 .contact-form-head .form-main .form .form-group textarea {
@@ -4373,7 +4385,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group textarea:focus {
-  border-color: #212529;
+  border-color: #424242;
 }
 
 .contact-form-head .form-main .form .form-group.button {
@@ -4436,7 +4448,7 @@ ol {
 
 .checkout-steps-form-style .title.collapsed {
   border-radius: 4px;
-  color: #212529;
+  color: #424242;
 }
 
 .checkout-steps-form-style .title:before {
@@ -4833,7 +4845,7 @@ ol {
 .featured-categories .single-category .heading {
   font-size: 17px;
   font-weight: 700;
-  color: #212529;
+  color: #424242;
 }
 
 .featured-categories .single-category ul,
@@ -5104,7 +5116,7 @@ ol {
 .error-area .error-content h2 {
   font-size: 25px;
   margin-bottom: 10px;
-  color: #212529;
+  color: #424242;
   font-weight: 700;
 }
 

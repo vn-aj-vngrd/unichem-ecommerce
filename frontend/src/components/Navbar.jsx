@@ -37,7 +37,7 @@ const Navbar = ({ userType }) => {
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
                   <img src={logo} alt="#" />
-                  {/* <span className="fw-bold">Unichem Store</span> */}
+                  <span className="fw-bold text-white">Unichem Store</span>
                 </Link>
               </div>
 
@@ -276,45 +276,8 @@ const Navbar = ({ userType }) => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="d-flex justify-content-end container">
                 {user ? (
-                  // <div className="dropdown h5">
-                  //   <i
-                  //     className="lni lni-user dropdown-toggle"
-                  //     href="#"
-                  //     role="button"
-                  //     id="dropdownMenuLink"
-                  //     data-bs-toggle="dropdown"
-                  //     aria-expanded="false"
-                  //   ></i>
-
-                  //   <ul
-                  //     className="dropdown-menu"
-                  //     aria-labelledby="dropdownMenuLink"
-                  //   >
-                  //     <li>
-                  //       <Link to="/manage" className="dropdown-item">
-                  //         Manage Account
-                  //       </Link>
-                  //     </li>
-                  //     <li>
-                  //       <Link to="/orders" className="dropdown-item">
-                  //         My Orders
-                  //       </Link>
-                  //     </li>
-                  //     <li>
-                  //       <Link to="/reviews" className="dropdown-item">
-                  //         My Reviews
-                  //       </Link>
-                  //     </li>
-                  //     <li>
-                  //       <button className="dropdown-item" onClick={onLogout}>
-                  //         Log out
-                  //       </button>
-                  //     </li>
-                  //   </ul>
-                  // </div>
-
                   <>
-                    <div className="">
+
                       <div className="nav-inner">
                         <nav className="navbar navbar-expand-lg">
                           <ul id="nav" className="navbar-nav">
@@ -356,15 +319,17 @@ const Navbar = ({ userType }) => {
                           </ul>
                         </nav>
                       </div>
-                    </div>
+          
                   </>
                 ) : (
                   <ul>
-                    <li className="border-end pe-2">
-                      <Link to="/login">Log In</Link>
-                    </li>
-                    <li className="ps-2">
-                      <Link to="/signup">Sign Up</Link>
+                    <li className="authlink">
+                      <Link to="/login" className="pe-2 border-end">
+                        Log In
+                      </Link>
+                      <Link to="/signup" className="ps-2">
+                        Sign Up
+                      </Link>
                     </li>
                   </ul>
                 )}
