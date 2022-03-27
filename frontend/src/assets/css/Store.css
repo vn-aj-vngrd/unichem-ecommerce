@@ -1115,14 +1115,14 @@ ol {
 }
 
 .header .main-menu-search .search-btn button:hover {
-  color: #f44336;
-  background-color: #ffffff;
+  /* color: #212121; */
+  background-color: #c62828;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 .header .main-menu-search .search-btn a:hover {
-  color: #f44336;
+  color: #fff;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
@@ -2645,7 +2645,7 @@ ol {
 
 .item-details .product-info .wish-button .btn:hover {
   color: #fff;
-  background-color: #424242;
+  background-color: #212121;
   border-color: transparent;
 }
 
