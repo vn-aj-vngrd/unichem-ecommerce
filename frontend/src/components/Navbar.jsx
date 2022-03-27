@@ -277,49 +277,44 @@ const Navbar = ({ userType }) => {
               <div className="d-flex justify-content-end container">
                 {user ? (
                   <>
-
-                      <div className="nav-inner">
-                        <nav className="navbar navbar-expand-lg">
-                          <ul id="nav" className="navbar-nav">
-                            <li className="nav-item">
-                              <Link
-                                to="/"
-                                className="dd-menu"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#submenu-1-2"
-                                aria-controls="navbarSupportedContent"
-                                aria-expanded="false"
-                                aria-label="Toggle navigation"
-                              >
-                                {user.name}
-                              </Link>
-                              <ul
-                                className="sub-menu collapse"
-                                id="submenu-1-2"
-                              >
-                                <li className="nav-item">
-                                  <Link to="/manage">Manage Account</Link>
-                                </li>
-                                <li className="nav-item">
-                                  <Link to="/orders">My Orders</Link>
-                                </li>
-                                <li className="nav-item">
-                                  <Link to="/reviews">My Reviews</Link>
-                                </li>
-                                <li className="nav-item">
-                                  <button
-                                    className="logout-btn"
-                                    onClick={onLogout}
-                                  >
-                                    <i className="lni lni-logout"></i> Log out{" "}
-                                  </button>
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
-          
+                    <div className="nav-inner">
+                      <nav className="navbar navbar-expand-lg">
+                        <ul id="nav" className="navbar-nav">
+                          <li className="nav-item">
+                            <Link
+                              to="/"
+                              className="dd-menu"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#submenu-1-2"
+                              aria-controls="navbarSupportedContent"
+                              aria-expanded="false"
+                              aria-label="Toggle navigation"
+                            >
+                              {user.name}
+                            </Link>
+                            <ul className="sub-menu collapse" id="submenu-1-2">
+                              <li className="nav-item">
+                                <Link to="/manage">Manage Account</Link>
+                              </li>
+                              <li className="nav-item">
+                                <Link to="/orders">My Orders</Link>
+                              </li>
+                              <li className="nav-item">
+                                <Link to="/reviews">My Reviews</Link>
+                              </li>
+                              <li className="nav-item">
+                                <button
+                                  className="logout-btn"
+                                  onClick={onLogout}
+                                >
+                                  <i className="lni lni-logout"></i> Log out{" "}
+                                </button>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
                   </>
                 ) : (
                   <ul>
@@ -401,7 +396,7 @@ const Navbar = ({ userType }) => {
             </li>
 
             <button className="logout-btn" onClick={onLogout}>
-              <i className="lni lni-logout"></i> Log out{" "}
+              <i className="lni lni-logout"></i> Log out
             </button>
           </ul>
         </nav>
