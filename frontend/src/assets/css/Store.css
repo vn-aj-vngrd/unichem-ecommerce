@@ -651,7 +651,7 @@ ol {
 }
 
 .header .nav-hotline i {
-  color: #424242;
+  color: #ffffff;
   font-size: 18px;
   position: absolute;
   left: 0;
@@ -670,11 +670,11 @@ ol {
 .header .nav-hotline h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #424242;
+  color: #ffffff;
 }
 
 .header .nav-hotline h3 span {
-  color: #666;
+  color: rgb(255, 255, 255);
   font-weight: 500;
   font-size: 14px;
   display: block;

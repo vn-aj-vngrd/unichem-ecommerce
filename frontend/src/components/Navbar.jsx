@@ -62,7 +62,13 @@ const Navbar = ({ userType }) => {
 
               <div className="col-lg-4 col-md-2 col-5">
                 <div className="middle-right-area">
-                  <div className="nav-hotline"></div>
+                  <div className="nav-hotline">
+                    <i class="lni lni-phone"></i>
+                    <h3>
+                      Call Now:
+                      <span>(032) 345 6589</span>
+                    </h3>
+                  </div>
 
                   <div className="navbar-cart">
                     <div className="wishlist">
