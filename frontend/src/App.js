@@ -32,10 +32,9 @@ import Create from "./pages/Admin/Product/Create";
 import Admin from "./pages/Admin/Home/Admin";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-// import StoreCSS from "!!raw-loader!./assets/css/Store.css";
-import "./assets/css/Store.css";
+import StoreCSS from "!!raw-loader!./assets/css/Store.css";
 // eslint-disable-next-line import/no-webpack-loader-syntax
-// import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
+import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
 
 export const App = () => {
   const { user } = useSelector((state) => state.auth);
@@ -49,7 +48,7 @@ export const App = () => {
   useEffect(() => {
     if (user) {
       const temp = localStorage.getItem("user");
-      const user = JSON.parse(temp);  
+      const user = JSON.parse(temp);
       setUserType({ userType: user.userType });
     } else {
       setUserType({ userType: "customer" });
@@ -60,11 +59,11 @@ export const App = () => {
 
   return !isLoading ? (
     <>
-      {/* <Helmet>
+      <Helmet>
         <style>
           {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
         </style>
-      </Helmet> */}
+      </Helmet>
       <ScrollToTop />
       <ToastContainer
         position="top-center"
