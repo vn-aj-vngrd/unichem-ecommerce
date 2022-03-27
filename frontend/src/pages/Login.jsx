@@ -39,7 +39,7 @@ const Login = () => {
     if (isSuccess || user) {
       const temp = localStorage.getItem("user");
       const user = JSON.parse(temp);
-      toast.success(`Welcome Back, ${user.name}`, {
+      toast.success(`Welcome, ${user.name}`, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,

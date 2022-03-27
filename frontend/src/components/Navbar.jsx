@@ -16,7 +16,7 @@ const Navbar = ({ userType }) => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
-    toast.error("User Logged Out", {
+    toast.success("User Logged Out", {
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
@@ -24,7 +24,6 @@ const Navbar = ({ userType }) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
     });
   };
 
@@ -313,7 +312,7 @@ const Navbar = ({ userType }) => {
                                   className="logout-btn"
                                   onClick={onLogout}
                                 >
-                                  <i className="lni lni-logout"></i> Log out{" "}
+                                  <i className="lni lni-logout"></i> Log out
                                 </button>
                               </li>
                             </ul>
@@ -370,8 +369,7 @@ const Navbar = ({ userType }) => {
                 <ul id="ddmenu_1" class="collapse show dropdown-nav">
                   <li>
                     <a href="index.html" class="active">
-                      {" "}
-                      eCommerce{" "}
+                      eCommerce
                     </a>
                   </li>
                   <li>
@@ -1038,21 +1036,18 @@ const Navbar = ({ userType }) => {
                         </li>
                         <li>
                           <a href="#0">
-                            {" "}
-                            <i class="lni lni-inbox"></i> Messages{" "}
+                            <i class="lni lni-inbox"></i> Messages
                           </a>
                         </li>
                         <li>
                           <a href="#0">
-                            {" "}
-                            <i class="lni lni-cog"></i> Settings{" "}
+                            <i class="lni lni-cog"></i> Settings
                           </a>
                         </li>
                         <li>
-                          <a href="#0">
-                            {" "}
-                            <i class="lni lni-exit"></i> Sign Out{" "}
-                          </a>
+                          <Link to="/" onClick={onLogout}>
+                            <i class="lni lni-exit"></i> Sign Out
+                          </Link>
                         </li>
                       </ul>
                     </div>
@@ -1064,10 +1059,6 @@ const Navbar = ({ userType }) => {
         </main>
       </>
     );
-
-    //   <button className="logout-btn" onClick={onLogout}>
-    //   <i className="lni lni-logout"></i> Log out
-    // </button>
   }
 };
 
