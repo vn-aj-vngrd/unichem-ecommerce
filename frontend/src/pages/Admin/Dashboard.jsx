@@ -1,8 +1,65 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import LineChart from "../../components/LineChart";
+
+const UserData = [
+  {
+    id: 1,
+    month: 1,
+    sales: 80000,
+  },
+  {
+    id: 2,
+    month: 2,
+    sales: 45677,
+  },
+  {
+    id: 3,
+    month: 3,
+    sales: 78888,
+  },
+  {
+    id: 4,
+    month: 4,
+    sales: 90000,
+  },
+  {
+    id: 5,
+    month: 5,
+    sales: 4300,
+  },
+];
 
 const Home = () => {
+  const [userData, setUserData] = useState({
+    labels: UserData.map((data) => data.month),
+    datasets: [
+      {
+        data: UserData.map((data) => data.sales),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  });
+
+  const [optionsData, setOptionsData] = useState({
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    maintainAspectRatio: false,
+  });
+
   useEffect(() => {
     document.title = "Unichem Store | Dashboard";
   });
@@ -22,17 +79,9 @@ const Home = () => {
                   <span className="text-success fw-bold">10.57%</span>
                 </div>
               </div>
-              <div className="d-flex ms-auto">
-                <a href=" " className="btn btn-secondary text-dark btn-sm me-2">
-                  Month
-                </a>
-                <a href=" " className="btn btn-secondary text-dark btn-sm me-2">
-                  Week
-                </a>
-              </div>
             </div>
             <div className="card-body p-2">
-              {/* <div className="ct-chart-sales-value ct-double-octave ct-series-g"><Doughnut /></div> */}
+              <LineChart chartData={userData} chartOptions={optionsData} />
             </div>
           </div>
         </div>

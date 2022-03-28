@@ -405,7 +405,7 @@ const Navbar = ({ userType }) => {
               </div>
             </div>
             <ul className="nav flex-column pt-3 pt-md-0">
-              <li className="nav-item">
+              <li>
                 <Link to="/" className="nav-link d-flex align-items-center">
                   <span className="sidebar-icon">
                     <img src={logo} height="20" width="20" alt="Volt Logo" />
