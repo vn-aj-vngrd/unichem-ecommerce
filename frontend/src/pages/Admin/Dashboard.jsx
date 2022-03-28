@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-const data = [1, 2, 3, 4];
-
 const Home = () => {
   useEffect(() => {
     document.title = "Unichem Store | Dashboard";
