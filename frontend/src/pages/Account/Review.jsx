@@ -10,7 +10,7 @@ const Review = () => {
 
   return (
     <>
-      <Breadcrumb type="manage" />
+      <Breadcrumb type="review" />
       <div className="container main-profile-section">
         <ProfileSidebar />
         <div className="spacer"></div>
