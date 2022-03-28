@@ -114,6 +114,11 @@ export const App = () => {
     </>
   ) : (
     <>
+      <Helmet>
+        <style>
+          {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
+        </style>
+      </Helmet>
       <Spinner />
     </>
   );
