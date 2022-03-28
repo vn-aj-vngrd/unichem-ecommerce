@@ -464,7 +464,7 @@ const Navbar = ({ userType }) => {
               </li>
 
               <li className="nav-item">
-                <Link to="/transactions" className="nav-link">
+                <Link to="/managetransactions" className="nav-link">
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
@@ -485,7 +485,7 @@ const Navbar = ({ userType }) => {
               </li>
 
               <li className="nav-item">
-                <Link to="/manageproduct" className="nav-link">
+                <Link to="/manageproducts" className="nav-link">
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"

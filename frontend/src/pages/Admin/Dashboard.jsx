@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Header from "../../components/Header";
-import { Doughnut } from "react-chartjs-2";
+// import { Doughnut } from "react-chartjs-2";
 
 const Home = () => {
   useEffect(() => {

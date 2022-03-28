@@ -29,7 +29,11 @@ import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 
 import Dashboard from "./pages/Admin/Dashboard";
-import ManageProduct from "./pages/Admin/ManageProduct";
+import UsersList from "./pages/Admin/UsersList";
+import ManageTransactions from "./pages/Admin/MangeTransactions";
+import ManageProducts from "./pages/Admin/ManageProducts";
+import ManagePromotions from "./pages/Admin/ManagePromotions";
+import Settings from "./pages/Admin/Settings";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import StoreCSS from "!!raw-loader!./assets/css/Store.css";
@@ -105,7 +109,11 @@ export const App = () => {
           {/* Admin Routes */}
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="manageproduct" element={<ManageProduct />} />
+            <Route path="userslist" element={<UsersList />} />
+            <Route path="managetransactions" element={<ManageTransactions />} />
+            <Route path="manageproducts" element={<ManageProducts />} />
+            <Route path="managepromotions" element={<ManagePromotions />} />
+            <Route path="settings" element={<Settings />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </>
