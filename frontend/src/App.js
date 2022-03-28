@@ -28,8 +28,12 @@ import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 
-import Create from "./pages/Admin/Product/Create";
-import Admin from "./pages/Admin/Home/Admin";
+import Dashboard from "./pages/Admin/Dashboard";
+import UsersList from "./pages/Admin/UsersList";
+import ManageTransactions from "./pages/Admin/MangeTransactions";
+import ManageProducts from "./pages/Admin/ManageProducts";
+import ManagePromotions from "./pages/Admin/ManagePromotions";
+import Settings from "./pages/Admin/Settings";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import StoreCSS from "!!raw-loader!./assets/css/Store.css";
@@ -99,21 +103,30 @@ export const App = () => {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Messenger />
+          <Footer userType={userTypeData.userType} />
         </>
       ) : (
         <>
           {/* Admin Routes */}
           <Routes>
-            <Route path="create" element={<Create />} />
-            <Route path="/" element={<Admin />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="userslist" element={<UsersList />} />
+            <Route path="managetransactions" element={<ManageTransactions />} />
+            <Route path="manageproducts" element={<ManageProducts />} />
+            <Route path="managepromotions" element={<ManagePromotions />} />
+            <Route path="settings" element={<Settings />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </>
       )}
-      <Footer userType={userTypeData.userType} />
     </>
   ) : (
     <>
+      <Helmet>
+        <style>
+          {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
+        </style>
+      </Helmet>
       <Spinner />
     </>
   );
