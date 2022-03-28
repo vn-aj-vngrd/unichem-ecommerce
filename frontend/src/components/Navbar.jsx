@@ -391,7 +391,7 @@ const Navbar = ({ userType }) => {
                 >
                   <svg
                     className="icon icon-xs"
-                    fill="currentColor"
+                    fill="white"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -427,7 +427,7 @@ const Navbar = ({ userType }) => {
                     <span className="sidebar-icon">
                       <svg
                         className="icon icon-xs me-2"
-                        fill="currentColor"
+                        fill="white"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -444,7 +444,7 @@ const Navbar = ({ userType }) => {
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
-                      fill="currentColor"
+                      fill="white"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -460,7 +460,7 @@ const Navbar = ({ userType }) => {
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
-                      fill="currentColor"
+                      fill="white"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -481,7 +481,7 @@ const Navbar = ({ userType }) => {
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
-                      fill="currentColor"
+                      fill="white"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -502,7 +502,7 @@ const Navbar = ({ userType }) => {
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
-                      fill="currentColor"
+                      fill="white"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -518,7 +518,7 @@ const Navbar = ({ userType }) => {
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
-                      fill="currentColor"
+                      fill="white"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
                     >

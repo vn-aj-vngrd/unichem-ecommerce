@@ -15,7 +15,7 @@ const Home = () => {
             <div className="card-header d-sm-flex flex-row align-items-center flex-0">
               <div className="d-block mb-3 mb-sm-0">
                 <div className="fs-5 fw-normal mb-2">Sales Value</div>
-                <h2 className="fs-3 fw-extrabold">$10,567</h2>
+                <h2 className="fs-3 fw-extrabold">₱10,567</h2>
                 <div className="small mt-2">
                   <span className="fw-normal me-2">Yesterday</span>
                   <span className="fas fa-angle-up text-success"></span>

@@ -17927,7 +17927,7 @@ fieldset:disabled .btn {
   overflow-y: auto;
   width: 100%;
   transition: max-width 0.1s;
-  background: #424242;
+  background: #f44336;
 }
 @media (prefers-reduced-motion: reduce) {
   .sidebar {
