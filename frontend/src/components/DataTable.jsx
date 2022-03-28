@@ -1,15 +1,13 @@
 import MUIDataTable from "mui-datatables";
 
-const DataTable = ( {data, columns} ) => {
-
-
+const DataTable = ( {title, data, columns} ) => {
   const options = {
     filterType: "checkbox",
   };
   return (
     <div>
       <MUIDataTable
-        title={"Employee List"}
+        title={title}
         data={data}
         columns={columns}
         options={options}

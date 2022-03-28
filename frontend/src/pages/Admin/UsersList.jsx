@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import SectionTitle from "../../components/SectionTitle";
 import DataTable from "../../components/DataTable";
 
 const Home = () => {
@@ -19,8 +20,9 @@ const Home = () => {
   return (
     <div className="content">
       <Header />
-      <div className="row mt-3">
-        <DataTable columns={columns} data={data} />
+      <SectionTitle type="userslist" />
+      <div className="row mt-3 mb-3">
+        <DataTable title="Users List" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />
     </div>
