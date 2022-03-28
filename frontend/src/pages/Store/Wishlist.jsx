@@ -42,7 +42,7 @@ const Wishlist = () => {
 
   return (
     <>
-      <Breadcrumb type="cart" />
+      <Breadcrumb type="wishlist" />
       <div className="shopping-cart">
         <div className="container">
           <div className="purchase-row-banner cart-banner">
@@ -50,7 +50,9 @@ const Wishlist = () => {
               <div className="image-in-cart color-white hide-on-thin-screen"></div>
             </div>
             <div className="cart-product-right">
-              <div className="product-in-cart color-white hide-on-thin-screen"></div>
+              <div className="product-in-cart color-white hide-on-thin-screen">
+                Product
+              </div>
               <div className="price-in-cart color-white hide-on-thin-screen">
                 Price
               </div>
