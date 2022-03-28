@@ -75,7 +75,7 @@ const Wishlist = () => {
                         Category:
                         <a href="/">{}</a>
                       </div>
-                      <h4 class="title">
+                      <h4 className="title">
                         <Link to="/">ProductName</Link>
                       </h4>
                       <p className="product-des">
@@ -138,7 +138,7 @@ const Wishlist = () => {
                         Category:
                         <a href="/">{}</a>
                       </div>
-                      <h4 class="title">
+                      <h4 className="title">
                         <Link to="/">ProductName</Link>
                       </h4>
                       <p className="product-des">
