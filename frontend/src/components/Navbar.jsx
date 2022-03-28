@@ -540,10 +540,6 @@ const Navbar = ({ userType }) => {
                   <span className="sidebar-text">Settings</span>
                 </Link>
               </li>
-              <li
-                role="separator"
-                className="dropdown-divider mt-4 mb-3 border-gray-700"
-              ></li>
             </ul>
           </div>
         </nav>
