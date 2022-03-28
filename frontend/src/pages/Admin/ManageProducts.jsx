@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import DataTable from "../../components/DataTable";
 
 const ProductCreate = () => {
   useEffect(() => {
@@ -10,7 +11,9 @@ const ProductCreate = () => {
   return (
     <div className="content">
       <Header />
-      <div className="row mt-3"> Products</div>
+      <div className="row mt-3">
+        <DataTable />
+      </div>
       <Footer userType="admin" />
     </div>
   );
