@@ -20,8 +20,8 @@ const Home = () => {
   return (
     <div className="content">
       <Header />
-      <SectionTitle type="userslist" />
-      <div className="row mt-3 mb-3">
+      <SectionTitle type="userslist"/>
+      <div className="row mt-3 mb-4">
         <DataTable title="Users List" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />

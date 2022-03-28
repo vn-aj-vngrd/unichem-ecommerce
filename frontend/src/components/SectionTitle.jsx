@@ -34,7 +34,7 @@ const SectionTitle = ({ type }) => {
             </ol>
           </nav>
           <h2 class="h4">Users List</h2>
-          <p class="mb-0">Your web analytics dashboard template.</p>
+          {/* <p class="mb-0">Your web analytics dashboard template.</p> */}
         </div>
       </>
     );
