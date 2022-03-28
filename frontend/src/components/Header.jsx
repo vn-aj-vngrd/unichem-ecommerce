@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
+import admin from "../assets/images/admin.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -122,7 +123,7 @@ const Header = () => {
                       <div className="col-auto">
                         <img
                           alt="img"
-                          src="https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-1/271657462_4899150540105361_3610241298101667884_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeFlBi2QrWTsC6h8G6x_yldUISWEXve9bfohJYRe971t-nY_yoEBIbmpAfl8Fl9bN4QBHO6GTFtJ9-adM6MoQwQR&_nc_ohc=Hj62DarEIWwAX-y1cpD&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fceb2-1.fna&oh=00_AT9w74DRCTtbaJum76ttU-HyP3QOc_o-YwejkzUjzKLeVg&oe=6245FD24"
+                          src={admin}
                           className="avatar-md rounded"
                         />
                       </div>
@@ -235,7 +236,7 @@ const Header = () => {
                   <img
                     className="avatar rounded-circle"
                     alt="img"
-                    src="https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-1/271657462_4899150540105361_3610241298101667884_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeFlBi2QrWTsC6h8G6x_yldUISWEXve9bfohJYRe971t-nY_yoEBIbmpAfl8Fl9bN4QBHO6GTFtJ9-adM6MoQwQR&_nc_ohc=Hj62DarEIWwAX-y1cpD&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fceb2-1.fna&oh=00_AT9w74DRCTtbaJum76ttU-HyP3QOc_o-YwejkzUjzKLeVg&oe=6245FD24"
+                    src={admin}
                   />
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                     <span className="mb-0 font-small fw-bold text-gray-900">
@@ -245,7 +246,10 @@ const Header = () => {
                 </div>
               </a>
               <div className="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
-                <Link className="dropdown-item d-flex align-items-center" to="/settings">
+                <Link
+                  className="dropdown-item d-flex align-items-center"
+                  to="/settings"
+                >
                   <svg
                     className="dropdown-icon text-gray-400 me-2"
                     fill="currentColor"
