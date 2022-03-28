@@ -12,7 +12,7 @@ const ProductCreate = () => {
     <div className="content">
       <Header />
       <div className="row mt-3">
-        <DataTable />
+        {/* <DataTable /> */}
       </div>
       <Footer userType="admin" />
     </div>
