@@ -344,7 +344,7 @@ const Navbar = ({ userType }) => {
       <>
         <nav className="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
           <Link className="navbar-brand me-lg-5" to="/">
-            <img className="navbar-brand-light" src={logo} alt="Logo" />
+            <img className="navbar-brand" src={logo} alt="Logo" />
           </Link>
           <div className="d-flex align-items-center">
             <button
@@ -407,14 +407,9 @@ const Navbar = ({ userType }) => {
             <ul className="nav flex-column pt-3 pt-md-0">
               <li className="nav-item">
                 <Link to="/" className="nav-link d-flex align-items-center">
-                  {/* <span className="sidebar-icon">
-                    <img
-                      src={logo}
-                      height="20"
-                      width="20"
-                      alt="Volt Logo"
-                    />
-                  </span> */}
+                  <span className="sidebar-icon">
+                    <img src={logo} height="20" width="20" alt="Volt Logo" />
+                  </span>
                   <span className="mt-1 sidebar-text fw-bolder">
                     Unichem Store
                   </span>
