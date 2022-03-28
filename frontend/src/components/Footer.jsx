@@ -132,7 +132,7 @@ const Footer = ({ userType }) => {
                 © {new Date().getFullYear()} |{" "}
                 <span class="current-year"></span>
                 <Link class="text-primary fw-normal" to="/">
-                  Unichem
+                  Unichem Admin
                 </Link>
               </p>
             </div>
