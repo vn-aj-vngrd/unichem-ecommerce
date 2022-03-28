@@ -103,6 +103,7 @@ export const App = () => {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Messenger />
+          <Footer userType={userTypeData.userType} />
         </>
       ) : (
         <>
@@ -118,7 +119,6 @@ export const App = () => {
           </Routes>
         </>
       )}
-      <Footer userType={userTypeData.userType} />
     </>
   ) : (
     <>

@@ -123,7 +123,33 @@ const Footer = ({ userType }) => {
       </div>
     );
   } else {
-    return <></>;
+    return (
+      <>
+        <footer class="bg-white rounded shadow p-5 mb-4 mt-2">
+          <div class="row">
+            <div class="col-12 col-md-4 col-xl-6 mb-4 mb-md-0">
+              <p class="mb-0 text-center text-lg-start">
+                © {new Date().getFullYear()} |{" "}
+                <span class="current-year"></span>
+                <Link class="text-primary fw-normal" to="/">
+                  Unichem
+                </Link>
+              </p>
+            </div>
+            <div class="col-12 col-md-8 col-xl-6 text-center text-lg-start">
+              <ul class="list-inline list-group-flush list-group-borderless text-md-end mb-0">
+                <li class="list-inline-item">
+                  <div>Created by:</div>
+                </li>
+                <li class="list-inline-item">
+                  <div>Exclusive Developers</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      </>
+    );
   }
 };
 

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 // import { Doughnut } from "react-chartjs-2";
 
 const Home = () => {
@@ -222,6 +223,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer userType="admin" />
     </div>
   );
 };
