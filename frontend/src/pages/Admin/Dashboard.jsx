@@ -37,12 +37,12 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-xl-4 mb-4">
+        <div className="col-12 col-sm-6 col-xl-3 mb-4">
           <div className="card border-0 shadow">
             <div className="card-body">
               <div className="row d-block d-xl-flex align-items-center">
                 <div className="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                  <div className="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                  <div className="icon-shape icon-shape-info rounded me-4 me-sm-0">
                     <svg
                       className="icon icon-md"
                       fill="currentColor"
@@ -71,7 +71,44 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-xl-4 mb-4">
+        <div className="col-12 col-sm-6 col-xl-3 mb-4">
+          <div className="card border-0 shadow">
+            <div className="card-body">
+              <div className="row d-block d-xl-flex align-items-center">
+                <div className="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                  <div className="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                    <svg
+                      className="icon icon-md"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
+                      <path
+                        fillRule="evenodd"
+                        d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div className="d-sm-none">
+                    <h2 className="fw-extrabold h5">Products</h2>
+                    <h3 className="mb-1">50</h3>
+                  </div>
+                </div>
+                <div className="col-12 col-xl-7 px-xl-0">
+                  <div className="d-none d-sm-block">
+                    <h2 className="h5">Products</h2>
+                    <h3 className="fw-extrabold mb-1">50</h3>
+                  </div>
+                  <small>Total Products</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-12 col-sm-6 col-xl-3 mb-4">
           <div className="card border-0 shadow">
             <div className="card-body">
               <div className="row d-block d-xl-flex align-items-center">
@@ -109,12 +146,12 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-xl-4 mb-4">
+        <div className="col-12 col-sm-6 col-xl-3 mb-4">
           <div className="card border-0 shadow">
             <div className="card-body">
               <div className="row d-block d-xl-flex align-items-center">
                 <div className="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                  <div className="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
+                  <div className="icon-shape icon-shape-purple rounded me-4 me-sm-0">
                     <svg
                       className="icon icon-md"
                       fill="currentColor"
@@ -144,7 +181,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
       </div>
       <Footer userType="admin" />
     </div>
