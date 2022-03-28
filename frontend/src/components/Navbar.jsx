@@ -423,7 +423,7 @@ const Navbar = ({ userType }) => {
 
               <li
                 role="separator"
-                className="dropdown-divider mt-3 mb-3 border-white"
+                className="dropdown-divider mt-3 mb-3"
               ></li>
 
               <li className="nav-item">

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-// import { Doughnut } from "react-chartjs-2";
+
+const data = [1, 2, 3, 4];
 
 const Home = () => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const Home = () => {
       <Header />
       <div className="row mt-3">
         <div className="col-12 mb-4">
-          <div className="card bg-yellow-100 border-0 shadow">
+          <div className="card border-0 shadow">
             <div className="card-header d-sm-flex flex-row align-items-center flex-0">
               <div className="d-block mb-3 mb-sm-0">
                 <div className="fs-5 fw-normal mb-2">Sales Value</div>
