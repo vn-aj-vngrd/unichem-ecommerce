@@ -128,6 +128,7 @@ const Product = ({searchData, range1, range2, range3, range4}) => {
                 <div className="single-product">
                   <div className="product-image">
                     {/* promo  CLASS (.sale-tag OR .new-tag)*/}
+                    
                     <div className="sale-tag">
                       <b>-100% OFF</b>
                     </div>
