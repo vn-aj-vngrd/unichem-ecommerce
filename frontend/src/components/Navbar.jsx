@@ -36,7 +36,7 @@ const Navbar = ({ userType }) => {
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
                   <img src={logo} alt="#" />
-                  {/* <span className="fw-bold text-white">Unichem Store</span> */}
+                  <span className="fw-bold text-white ps-2">Unichem Store</span>
                 </Link>
               </div>
 
@@ -421,10 +421,7 @@ const Navbar = ({ userType }) => {
                 </Link>
               </li>
 
-              <li
-                role="separator"
-                className="dropdown-divider mt-3 mb-3"
-              ></li>
+              <li role="separator" className="dropdown-divider mt-3 mb-3"></li>
 
               <li className="nav-item">
                 <Link
