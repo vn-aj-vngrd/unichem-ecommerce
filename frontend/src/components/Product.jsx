@@ -1,19 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, reset } from "../features/products/productSlice";
 import Star from "./Star";
 import Spinner from "./Spinner";
 
-const Product = ({range1, range2, range3, range4}) => {
+const Product = ({searchData, range1, range2, range3, range4}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [ sortDefault, setSortDefault ] = useState("descendingOrder");
+  
   const { user } = useSelector((state) => state.auth);
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.products
-  );
-
+    );
+    
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -30,11 +31,41 @@ const Product = ({range1, range2, range3, range4}) => {
     return <Spinner />;
   }
   
+
+  const options = [
+    {
+      label: "A - Z Order",
+      value: "ascendingOrder"
+    },
+    {
+      label: "Z - A Order",
+      value: "descendingOrder"
+    },
+    {
+      label: "Low - High Price",
+      value: "lowHigh"
+    },
+    {
+      label: "High - Low Price",
+      value: "highLow"
+    },
+    // {
+    //   label: "Average Rating",
+    //   value: "averageRating"
+    // },
+  ]
+
   // let allProducts = products.filter((product) => {
   //   return product.featured === true;
   // });
 
   let allProducts = products;
+
+  if(searchData != "") {
+    allProducts = products.filter((product) => {
+      return product.productName.toLowerCase().includes(searchData.toLowerCase());
+    })
+  }
 
   if(range1) {
     allProducts = products.filter((product) => {
@@ -60,17 +91,32 @@ const Product = ({range1, range2, range3, range4}) => {
     })
   }
 
+  // switch(sortDefault) {
+  //   case "descendingOrder":
+  //     allProducts.sort((a,b) => b.productName.toLowerCase() - a.productName.toLowerCase());
+  //     break;
+  //   case "lowHigh":
+  //     allProducts.sort((a,b) => a.prices[0] - b.prices[0]);
+  //     break;
+  //   case "highLow":
+  //     allProducts.sort((a,b) => b.prices[0] - a.prices[0]);
+  //     break;
+  //   default: 
+  //     allProducts.sort((a,b) => a.productName.toLowerCase() - b.productName.toLowerCase());
+  //     break;
+  // }
+
+  console.log(sortDefault);
+  console.log(allProducts);
+
   return (
     <div className="">
       <div className="product-grid">
         <label className="sort-element">Sort by: </label>
-        <select className="form-select sort-element" id="sorting">
-          <option>Popularity</option>
-          <option>Low - High Price</option>
-          <option>High - Low Price</option>
-          <option>Average Rating</option>
-          <option>A - Z Order</option>
-          <option>Z - A Order</option>
+        <select onChange={e => setSortDefault(e.target.value)} className="form-select sort-element" id="sorting">
+          {options.map((option) => (
+            <option value={option.value}>{option.label}</option>
+          ))}
         </select>
       </div>
 

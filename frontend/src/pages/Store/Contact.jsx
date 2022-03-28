@@ -25,7 +25,7 @@ const Login = () => {
             <div className="contact-info">
               <div className="row">
                 <div className="col-lg-4 col-md-12 col-12">
-                  <div className="box-shadow single-info-head">
+                  <div className="single-info-head">
                     <div className="single-info">
                       <i className="lni lni-map text-danger"></i>
                       <h6 className="contact-us-label">Address</h6>

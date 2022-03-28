@@ -11,7 +11,7 @@ function ProfileReviews() {
 
       {/* One Review */}
       <>
-        <div className="review-row">
+        <div className="review-row box-shadow">
           <div className="single-product no-box-shadow profile-single-product">
             <div className="row align-items-center">
               <div className="col-lg-4 col-md-4 col-12">
@@ -100,7 +100,7 @@ function ProfileReviews() {
       </>
 
       <>
-        <div className="review-row">
+        <div className="review-row box-shadow">
           <div className="single-product no-box-shadow profile-single-product">
             <div className="row align-items-center">
               <div className="col-lg-4 col-md-4 col-12">

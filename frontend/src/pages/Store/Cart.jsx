@@ -59,25 +59,25 @@ const Cart = () => {
             </div>
             <div className="cart-product-right">
               <div className="product-in-cart color-white hide-on-thin-screen">
-                <p>Product</p>
+                <>Product</>
               </div>
               <div className="quantity-in-cart color-white hide-on-thin-screen">
-                <p>Quantity</p>
+                Quantity
               </div>
               <div className="price-in-cart color-white hide-on-thin-screen">
-                <p>Price</p>
+                Price
               </div>
               <div className="total-in-cart color-white hide-on-thin-screen">
-                <p>Total Price</p>
+                Total Price
               </div>
               <div className="action-in-cart color-white hide-on-thin-screen">
-                <p>Action</p>
+                Action
               </div>
             </div>
           </div>
 
           {/* Row Start Here */}
-          <div className="cart-list-head">
+          <div className="cart-list-head box-shadow">
             <div className="cart-single-list">
               <div className="d-flex single-cart-product">
                 <div className="d-flex align-items-center cart-product-left">
@@ -212,7 +212,7 @@ const Cart = () => {
                         </div>
 
                         <div className="button mt-4">
-                          <Link to="/checkout" className="btn">
+                          <Link to="/checkout" className="btn checkout-btn">
                             Checkout
                           </Link>
                         </div>

@@ -36,7 +36,7 @@ const Navbar = ({ userType }) => {
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
                   <img src={logo} alt="#" />
-                  <span className="fw-bold text-white">Unichem Store</span>
+                  {/* <span className="fw-bold text-white">Unichem Store</span> */}
                 </Link>
               </div>
 

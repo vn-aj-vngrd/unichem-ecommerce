@@ -7,7 +7,7 @@ body {
   color: #424242;
   overflow-x: hidden;
   font-size: 14px;
-  background-color: #fafafa;
+  background-color: whitesmoke;
 }
 
 p {
@@ -240,7 +240,7 @@ ol {
   z-index: 1;
   text-align: left;
   /* border: 1px solid #e0e0e0; */
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   /* -webkit-box-shadow: 0px 7px 30px rgba(0, 0, 0, 0.075);
   box-shadow: 0px 7px 30px rgba(0, 0, 0, 0.075); */
 }
@@ -1567,7 +1567,7 @@ ol {
 }
 
 .header .navbar-brand img {
-  width: 60px;
+  height: 40px;
   margin-right: 4px;
 }
 
@@ -1919,7 +1919,7 @@ ol {
 ========================================*/
 .hero-area {
   position: relative;
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   margin-top: 220px;
 }
 
@@ -1963,7 +1963,7 @@ ol {
     Shipping Info CSS
 ========================================*/
 .shipping-info {
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   padding: 90px 0;
 }
 
@@ -2218,7 +2218,7 @@ ol {
 }
 
 .trending-product {
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   padding-top: 90px;
 }
 
@@ -2383,7 +2383,7 @@ ol {
     Item Details CSS
 ========================================*/
 .item-details {
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -3484,7 +3484,7 @@ ol {
   border: 1px solid #e2e2e2;
   padding: 0 20px;
   background: transparent;
-  border-radius: 0;
+  border-radius: 4px;
   position: relative;
   padding-right: 30px;
   -moz-appearance: none;
@@ -3668,7 +3668,6 @@ ol {
 ========================================*/
 
 .team {
-  background-color: #fff;
 }
 
 .team .single-team {
@@ -3679,6 +3678,7 @@ ol {
   padding: 35px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
+  background-color: #fff;
 }
 
 .team .single-team:hover {
@@ -3981,7 +3981,7 @@ ol {
 ========================================*/
 
 .about-us {
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   margin-top: 230px;
 }
 
@@ -4394,7 +4394,7 @@ ol {
 }
 
 .map-section {
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
 }
 
 .map-section .mapouter {
@@ -4420,7 +4420,7 @@ ol {
 ========================================*/
 
 .checkout-wrapper {
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   margin-top: 20px;
   padding-bottom: 55px;
 }
@@ -4896,7 +4896,7 @@ ol {
 ========================================*/
 .faq {
   padding-bottom: 90px;
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   margin-top: 220px;
 }
 
@@ -5243,19 +5243,6 @@ ol {
   display: flex;
 }
 
-@media (max-width: 1399px) {
-  .purchase-options-checkout {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 105px;
-  }
-
-  .checkout-btn,
-  .message-btn {
-    width: 100%;
-  }
-}
 
 /*======================================
 	Cart-1 CSS 
@@ -5265,9 +5252,20 @@ ol {
   margin: 0 5px 0 0;
 }
 
-.checkout-btn {
-  width: 165px;
+
+@media (max-width: 1399px) {
+  .purchase-options-checkout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 105px;
+  }
 }
+
+.checkout-btn,
+  .message-btn {
+    width: 100%;
+  }
 
 .image-in-cart,
 .quantity-in-cart,
