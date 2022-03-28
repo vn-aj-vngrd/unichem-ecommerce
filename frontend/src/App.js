@@ -28,8 +28,8 @@ import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 
-import Create from "./pages/Admin/Create";
 import Dashboard from "./pages/Admin/Dashboard";
+import ManageProduct from "./pages/Admin/ManageProduct";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import StoreCSS from "!!raw-loader!./assets/css/Store.css";
@@ -104,8 +104,8 @@ export const App = () => {
         <>
           {/* Admin Routes */}
           <Routes>
-            <Route path="create" element={<Create />} />
             <Route path="/" element={<Dashboard />} />
+            <Route path="manageproduct" element={<ManageProduct />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </>

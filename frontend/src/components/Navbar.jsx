@@ -485,7 +485,7 @@ const Navbar = ({ userType }) => {
               </li>
 
               <li className="nav-item">
-                <Link to="/manangeproducts" className="nav-link">
+                <Link to="/manageproduct" className="nav-link">
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
