@@ -363,7 +363,7 @@ const Navbar = ({ userType }) => {
 
         <nav
           id="sidebarMenu"
-          className="sidebar d-lg-block bg-gray-800 text-white collapse"
+          className="sidebar d-lg-block text-white collapse"
           data-simplebar
         >
           <div className="sidebar-inner px-4 pt-3">
@@ -423,7 +423,7 @@ const Navbar = ({ userType }) => {
 
               <li
                 role="separator"
-                className="dropdown-divider mt-3 mb-3 border-gray-700"
+                className="dropdown-divider mt-3 mb-3 border-white"
               ></li>
 
               <li className="nav-item">

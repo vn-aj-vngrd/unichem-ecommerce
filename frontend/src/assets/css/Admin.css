@@ -17666,7 +17666,7 @@ fieldset:disabled .btn {
   border-radius: 0.5rem;
 }
 .navbar-theme-primary:not(.headroom) {
-  background-color: #1f2937;
+  background-color: #424242;
 }
 .section {
   position: relative;
@@ -17921,6 +17921,7 @@ fieldset:disabled .btn {
   overflow-y: auto;
   width: 100%;
   transition: max-width 0.1s;
+  background: #424242;
 }
 @media (prefers-reduced-motion: reduce) {
   .sidebar {
@@ -18043,7 +18044,7 @@ fieldset:disabled .btn {
   text-transform: uppercase;
 }
 .user-card {
-  border-bottom: 0.0625rem solid #2e3650;
+  border-bottom: 0.0625rem solid white;
 }
 @media (max-width: 575.98px) {
   .sidebar {
