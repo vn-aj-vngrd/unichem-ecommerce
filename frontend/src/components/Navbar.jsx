@@ -16,9 +16,9 @@ const Navbar = ({ userType }) => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
-    toast.success("User Logged Out", {
+    toast.success("The user has logged out.", {
       position: "top-center",
-      autoClose: 2000,
+      autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

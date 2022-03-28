@@ -41,13 +41,13 @@ const Login = () => {
       const user = JSON.parse(temp);
       toast.success(`Welcome, ${user.name}`, {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: "light",
       });
 
       navigate("/");
