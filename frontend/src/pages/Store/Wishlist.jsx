@@ -5,22 +5,6 @@ import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 
 const Wishlist = () => {
-  const quantity = 5; //test
-  const [counter, setCounter] = useState(1);
-  let decrement, increment;
-  if (counter > 1) decrement = () => setCounter(counter - 1);
-  if (counter < quantity) increment = () => setCounter(counter + 1);
-  let handleChange = (e) => {
-    setCounter(e.target.value);
-
-    if (e.target.value > quantity) {
-      setCounter(quantity);
-    }
-    if (e.target.value < 0) {
-      setCounter(1);
-    }
-  };
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
