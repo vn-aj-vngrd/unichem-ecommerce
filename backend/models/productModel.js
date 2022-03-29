@@ -30,6 +30,13 @@ const productSchema = mongoose.Schema(
       type: Array,
       required: [true, "Product Price is required"],
     },
+    sales: {
+      type: Array,
+    },
+    isSale: {
+      type: Boolean,
+      defualt: false,
+    },
     description: {
       type: String,
       required: [true, "Product Description is required"],
