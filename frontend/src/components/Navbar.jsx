@@ -472,7 +472,7 @@ const Navbar = ({ userType }) => {
                       ></path>
                     </svg>
                   </span>
-                  <span className="sidebar-text">Transactions</span>
+                  <span className="sidebar-text">Orders</span>
                 </Link>
               </li>
 
