@@ -66,13 +66,13 @@ const Home = () => {
   return (
     <div className="content">
       <Header />
-      <div className="row mt-3">
+      <div className="row mt-2">
         <div className="col-12 mb-4">
-          <div className="card border-0 shadow">
+          <div className="card border-0 box-shadow">
             <div className="card-header d-sm-flex flex-row align-items-center flex-0">
               <div className="d-block mb-3 mb-sm-0">
-                <div className="fs-5 fw-normal mb-2">Sales Value</div>
-                <h2 className="fs-3 fw-extrabold">₱10,567</h2>
+                <h5>Sales Value</h5>
+                <h4 className="color-red">₱10,567</h4>
                 <div className="small mt-2">
                   <span className="fw-normal me-2">Yesterday</span>
                   <span className="fas fa-angle-up text-success"></span>
@@ -80,18 +80,18 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="card-body p-2">
+            <div className="card-body p-4">
               <LineChart chartData={userData} chartOptions={optionsData} />
             </div>
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-xl-3 mb-4">
-          <div className="card border-0 shadow">
+        <div className="col-12 col-sm-6 col-xl-3 mb-4 mt-2">
+          <div className="card border-0 box-shadow">
             <div className="card-body">
               <div className="row d-block d-xl-flex align-items-center">
                 <div className="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                  <div className="icon-shape icon-shape-info rounded me-4 me-sm-0">
+                  {/* <div className="icon-shape icon-shape-info rounded me-4 me-sm-0">
                     <svg
                       className="icon icon-md"
                       fill="currentColor"
@@ -100,16 +100,17 @@ const Home = () => {
                     >
                       <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
                     </svg>
-                  </div>
+                  </div> */}
+                  <i className="lni lni-users lni-users-dashboard"></i>
                   <div className="d-sm-none">
                     <h2 className="h5">Users</h2>
-                    <h3 className="fw-extrabold mb-1">230</h3>
+                    <h4 className="fw-extrabold mb-1">230</h4>
                   </div>
                 </div>
                 <div className="col-12 col-xl-7 px-xl-0">
                   <div className="d-none d-sm-block">
                     <h2 className="h5">Users</h2>
-                    <h3 className="fw-extrabold mb-1">230</h3>
+                    <h4 className="fw-extrabold mb-1">230</h4>
                   </div>
                   <small className="d-flex align-items-center">
                     Total Users
@@ -120,12 +121,12 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-xl-3 mb-4">
-          <div className="card border-0 shadow">
+        <div className="col-12 col-sm-6 col-xl-3 mb-4 mt-2">
+          <div className="card border-0 box-shadow">
             <div className="card-body">
               <div className="row d-block d-xl-flex align-items-center">
                 <div className="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                  <div className="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                  {/* <div className="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
                     <svg
                       className="icon icon-md"
                       fill="currentColor"
@@ -139,16 +140,17 @@ const Home = () => {
                         clipRule="evenodd"
                       ></path>
                     </svg>
-                  </div>
+                  </div> */}
+                  <i className="lni lni-archive lni-archive-dashboard"></i>
                   <div className="d-sm-none">
                     <h2 className="fw-extrabold h5">Products</h2>
-                    <h3 className="mb-1">50</h3>
+                    <h4 className="mb-1">50</h4>
                   </div>
                 </div>
                 <div className="col-12 col-xl-7 px-xl-0">
                   <div className="d-none d-sm-block">
                     <h2 className="h5">Products</h2>
-                    <h3 className="fw-extrabold mb-1">50</h3>
+                    <h4 className="fw-extrabold mb-1">50</h4>
                   </div>
                   <small>Total Products</small>
                 </div>
@@ -157,12 +159,12 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-xl-3 mb-4">
-          <div className="card border-0 shadow">
+        <div className="col-12 col-sm-6 col-xl-3 mb-4 mt-2">
+          <div className="card border-0 box-shadow">
             <div className="card-body">
               <div className="row d-block d-xl-flex align-items-center">
                 <div className="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                  <div className="icon-shape icon-shape-success rounded me-4 me-sm-0">
+                  {/* <div className="icon-shape icon-shape-success rounded me-4 me-sm-0">
                     <svg
                       className="icon icon-md"
                       fill="currentColor"
@@ -175,16 +177,17 @@ const Home = () => {
                         clipRule="evenodd"
                       ></path>
                     </svg>
-                  </div>
+                  </div> */}
+                  <i className="lni lni-revenue lni-revenue-dashboard"></i>
                   <div className="d-sm-none">
                     <h2 className="fw-extrabold h5">Revenue</h2>
-                    <h3 className="mb-1">₱43,594</h3>
+                    <h4 className="mb-1">₱43,594</h4>
                   </div>
                 </div>
                 <div className="col-12 col-xl-7 px-xl-0">
                   <div className="d-none d-sm-block">
                     <h2 className="h5">Revenue</h2>
-                    <h3 className="fw-extrabold mb-1">₱43,594</h3>
+                    <h4 className="fw-extrabold mb-1">₱43,594</h4>
                   </div>
                   <small className="d-flex align-items-center">
                     For this Month
@@ -195,12 +198,12 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-xl-3 mb-4">
-          <div className="card border-0 shadow">
+        <div className="col-12 col-sm-6 col-xl-3 mb-4 mt-2">
+          <div className="card border-0 box-shadow">
             <div className="card-body">
               <div className="row d-block d-xl-flex align-items-center">
                 <div className="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                  <div className="icon-shape icon-shape-purple rounded me-4 me-sm-0">
+                  {/* <div className="icon-shape icon-shape-purple rounded me-4 me-sm-0">
                     <svg
                       className="icon icon-md"
                       fill="currentColor"
@@ -213,16 +216,17 @@ const Home = () => {
                         clipRule="evenodd"
                       ></path>
                     </svg>
-                  </div>
+                  </div> */}
+                  <i className="lni lni-cart-full lni-cart-full-dashboard"></i>
                   <div className="d-sm-none">
-                    <h2 className="fw-extrabold h5">Orders</h2>
-                    <h3 className="mb-1">20</h3>
+                    <h6>Orders</h6>
+                    <h4 className="mb-1">20</h4>
                   </div>
                 </div>
                 <div className="col-12 col-xl-7 px-xl-0">
                   <div className="d-none d-sm-block">
                     <h2 className="h5">Orders</h2>
-                    <h3 className="fw-extrabold mb-1">20</h3>
+                    <h4 className="fw-extrabold mb-1">20</h4>
                   </div>
                   <small>For this Month</small>
                 </div>

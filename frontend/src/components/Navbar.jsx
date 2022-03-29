@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
 import logo from "../assets/images/logo.svg";
+import logoRgb from "../assets/images/logo-rgb.svg";
 
 const cartCount = 5;
 const wishListCount = 5;
@@ -344,7 +345,7 @@ const Navbar = ({ userType }) => {
       <>
         <nav className="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
           <Link className="navbar-brand me-lg-5" to="/">
-            <img className="navbar-brand" src={logo} alt="Logo" />
+            <img className="" src={logoRgb} alt="Logo" />
           </Link>
           <div className="d-flex align-items-center">
             <button
@@ -408,7 +409,7 @@ const Navbar = ({ userType }) => {
               <li>
                 <Link to="/" className="nav-link d-flex align-items-center">
                   <span className="sidebar-icon">
-                    <img src={logo} height="20" width="20" alt="Volt Logo" />
+                    <img src={logoRgb} height="20" width="20" alt="Volt Logo" />
                   </span>
                   <span className="mt-1 sidebar-text fw-bolder">
                     Unichem Store
@@ -425,14 +426,7 @@ const Navbar = ({ userType }) => {
                 >
                   <span>
                     <span className="sidebar-icon">
-                      <svg
-                        className="icon icon-xs me-2"
-                        fill="white"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                      </svg>
+                      <i className="lni lni-layout"></i> 
                     </span>
                     <span className="sidebar-text">Dashboard</span>
                   </span>
@@ -442,14 +436,7 @@ const Navbar = ({ userType }) => {
               <li className="nav-item">
                 <Link to="/userslist" className="nav-link">
                   <span className="sidebar-icon">
-                    <svg
-                      className="icon icon-xs me-2"
-                      fill="white"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
-                    </svg>
+                    <i className="lni lni-users"></i>
                   </span>
                   <span className="sidebar-text">Users List</span>
                 </Link>
@@ -458,19 +445,7 @@ const Navbar = ({ userType }) => {
               <li className="nav-item">
                 <Link to="/managetransactions" className="nav-link">
                   <span className="sidebar-icon">
-                    <svg
-                      className="icon icon-xs me-2"
-                      fill="white"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
-                      <path
-                        fillRule="evenodd"
-                        d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
+                    <i className="lni lni-cart-full"></i>
                   </span>
                   <span className="sidebar-text">Transactions</span>
                 </Link>
@@ -479,19 +454,7 @@ const Navbar = ({ userType }) => {
               <li className="nav-item">
                 <Link to="/manageproducts" className="nav-link">
                   <span className="sidebar-icon">
-                    <svg
-                      className="icon icon-xs me-2"
-                      fill="white"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
-                      <path
-                        fillRule="evenodd"
-                        d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
+                    <i className="lni lni-archive"></i>
                   </span>
                   <span className="sidebar-text">Products</span>
                 </Link>
@@ -516,18 +479,7 @@ const Navbar = ({ userType }) => {
               <li className="nav-item">
                 <Link to="/settings" className="nav-link">
                   <span className="sidebar-icon">
-                    <svg
-                      className="icon icon-xs me-2"
-                      fill="white"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
+                    <i className="lni lni-cog"></i>
                   </span>
                   <span className="sidebar-text">Settings</span>
                 </Link>

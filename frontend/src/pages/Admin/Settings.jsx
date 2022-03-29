@@ -14,7 +14,7 @@ const Home = () => {
       <SectionTitle type="settings" />
       <div className="row mt-3">
         <div className="col-12 col-xl-8">
-          <div className="card card-body border-0 shadow mb-4">
+          <div className="card card-body border-0 box-shadow mb-4">
             <h2 className="h5 mb-4">Admin Information</h2>
             <form>
               <div className="row">
@@ -64,7 +64,7 @@ const Home = () => {
           <div className="row">
             <div className="col-12 mb-4">
               <div
-                className="card shadow border-0 text-center p-0"
+                className="card border-0 text-center p-0"
                 style={{ height: `326px` }}
               >
                 <div
