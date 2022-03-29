@@ -30,7 +30,7 @@ const productSchema = mongoose.Schema(
       type: Array,
       required: [true, "Product Price is required"],
     },
-    sales: {
+    salePrices: {
       type: Array,
     },
     isSale: {

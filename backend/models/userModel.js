@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Usertype is required."],
     },
-    img: {
+    image: {
       type: String,
     },
   },
