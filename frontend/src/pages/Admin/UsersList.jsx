@@ -15,7 +15,7 @@ const UsersList = () => {
     "Password",
     "Address",
     "Created at",
-    "Update at",
+    "Updated at",
   ];
 
   const data = [
