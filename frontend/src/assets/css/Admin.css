@@ -48,10 +48,6 @@
   }
 }
 
-/*======================================
-    Button CSS
-========================================*/
-
 .button .btn i {
   display: inline-block;
   margin-right: 5px;
@@ -64,9 +60,9 @@
 .button .btn {
   display: inline-block;
   text-transform: capitalize;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  padding: 13px 30px;
+  padding: 13px 15px;
   background-color: #f44336;
   color: #fff;
   border: none;

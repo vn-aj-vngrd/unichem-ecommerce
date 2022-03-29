@@ -45,9 +45,9 @@ const Header = () => {
               >
                 <div className="media d-flex align-items-center">
                   <img
-                    className="avatar rounded-circle"
+                    className="avatar rounded-circle border-gray-100"
                     alt="img"
-                    src={admin}
+                    src="https://img.icons8.com/ios/344/administrator-male.png"
                   />
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                     <span className="mb-0 font-small fw-bold text-gray-900">
