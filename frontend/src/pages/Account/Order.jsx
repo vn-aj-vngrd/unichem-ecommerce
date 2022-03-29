@@ -10,7 +10,7 @@ const Order = () => {
 
   return (
     <>
-      <Breadcrumb type="manage" />
+      <Breadcrumb type="order" />
       <div className="container main-profile-section">
         <ProfileSidebar />
         <div className="spacer"></div>

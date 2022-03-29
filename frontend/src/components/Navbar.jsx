@@ -312,7 +312,7 @@ const Navbar = ({ userType }) => {
                                   className="logout-btn"
                                   onClick={onLogout}
                                 >
-                                  <i className="lni lni-logout"></i> Log out
+                                  <i className="lni lni-logout"></i>Log out
                                 </button>
                               </li>
                             </ul>
