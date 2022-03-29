@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
+import CreateProduct from "../../components/CreateProduct";
 
 const ProductCreate = () => {
   const columns = ["Name", "Company", "City", "State"];
@@ -23,6 +24,7 @@ const ProductCreate = () => {
       <Header />
       <SectionTitle type="products" />
       <div className="row mt-3 mb-4">
+        <CreateProduct />
         <DataTable title="Products" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />

@@ -10,6 +10,13 @@
   border: none;
   background: none;
 }
+.btn-second {
+  color: rgb(0, 0, 0);
+  background-color: #424242;
+  border-color: #424242;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 1px 1px rgba(17, 24, 39, 0.075);
+}
 
 .close i:hover {
   color: red;
@@ -4436,10 +4443,7 @@ fieldset:disabled .btn {
 }
 .btn-gray-800 {
   color: #fff;
-  background-color: #1f2937;
-  border-color: #1f2937;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 1px 1px rgba(17, 24, 39, 0.075);
+  background-color: #424242;
 }
 .btn-gray-800:hover {
   color: #fff;
