@@ -5,6 +5,15 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 
 const ProductCreate = () => {
+  const columns = ["Name", "Company", "City", "State"];
+
+  const data = [
+    ["Joe James", "Test Corp", "Yonkers", "NY"],
+    ["John Walsh", "Test Corp", "Hartford", "CT"],
+    ["Bob Herm", "Test Corp", "Tampa", "FL"],
+    ["James Houston", "Test Corp", "Dallas", "TX"],
+  ];
+
   useEffect(() => {
     document.title = "Unichem Store | Create Product";
   });
@@ -12,8 +21,9 @@ const ProductCreate = () => {
   return (
     <div className="content">
       <Header />
-      <SectionTitle type="products"/>
-      <div className="row mt-3">
+      <SectionTitle type="products" />
+      <div className="row mt-3 mb-4">
+        <DataTable title="Products" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />
     </div>
