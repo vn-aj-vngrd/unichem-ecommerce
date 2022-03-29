@@ -5,13 +5,32 @@ import SectionTitle from "../../components/SectionTitle";
 import DataTable from "../../components/DataTable";
 
 const UsersList = () => {
-  const columns = ["Name", "Company", "City", "State"];
+  const columns = [
+    "Image",
+    "ID",
+    "Name",
+    "Email",
+    "Sex",
+    "Birthday",
+    "Password",
+    "Address",
+    "Created at",
+    "Update at",
+  ];
 
   const data = [
-    ["Joe James", "Test Corp", "Yonkers", "NY"],
-    ["John Walsh", "Test Corp", "Hartford", "CT"],
-    ["Bob Herm", "Test Corp", "Tampa", "FL"],
-    ["James Houston", "Test Corp", "Dallas", "TX"],
+    [
+      "Sample Image",
+      "31231asdef",
+      "Horeb Barriga",
+      "horeb@gmail.com",
+      "Male",
+      "1/1/2001",
+      "das123as4adsf231213",
+      "This is Modal",
+      "2022-03-26T10:11:00.212+00:00",
+      "2022-03-26T10:11:00.212+00:00",
+    ],
   ];
 
   useEffect(() => {
