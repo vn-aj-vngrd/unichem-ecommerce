@@ -5,7 +5,7 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreatePromotion from "../../components/CreatePromotion";
 
-const Home = () => {
+const ManagePromotions = () => {
   const columns = ["Name", "Company", "City", "State"];
 
   const data = [
@@ -32,4 +32,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ManagePromotions;

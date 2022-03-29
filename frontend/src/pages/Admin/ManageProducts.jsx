@@ -5,7 +5,7 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 
-const ProductCreate = () => {
+const ManageProducts = () => {
   const columns = ["Name", "Company", "City", "State"];
 
   const data = [
@@ -32,7 +32,7 @@ const ProductCreate = () => {
   );
 };
 
-export default ProductCreate;
+export default ManageProducts;
 
 // <div className="body-content">
 // <section className="">

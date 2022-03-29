@@ -31,7 +31,7 @@ const UserData = [
   },
 ];
 
-const Home = () => {
+const Dashboard = () => {
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.month),
     datasets: [
@@ -236,4 +236,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

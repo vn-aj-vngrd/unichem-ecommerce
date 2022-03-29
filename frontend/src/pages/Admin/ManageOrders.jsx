@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 
-const Home = () => {
+const ManageOrders = () => {
   const columns = ["Name", "Company", "City", "State"];
 
   const data = [
@@ -21,13 +21,13 @@ const Home = () => {
   return (
     <div className="content">
       <Header />
-      <SectionTitle type="transactions" />
+      <SectionTitle type="orders" />
       <div className="row mt-3 mb-4">
-        <DataTable title="Transactions" columns={columns} data={data} />
+        <DataTable title="Orders" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />
     </div>
   );
 };
 
-export default Home;
+export default ManageOrders;

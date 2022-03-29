@@ -38,7 +38,7 @@ const SectionTitle = ({ type }) => {
         </div>
       </>
     );
-  } else if (type === "transactions") {
+  } else if (type === "orders") {
     return (
       <>
         <div className="d-block mb-4 mb-md-0">
@@ -66,7 +66,7 @@ const SectionTitle = ({ type }) => {
                 <Link to="/">Dashboard</Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                Transactions
+                Orders
               </li>
             </ol>
           </nav>

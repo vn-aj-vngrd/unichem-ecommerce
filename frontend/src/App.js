@@ -30,7 +30,7 @@ import PageNotFound from "./pages/PageNotFound";
 
 import Dashboard from "./pages/Admin/Dashboard";
 import UsersList from "./pages/Admin/UsersList";
-import ManageTransactions from "./pages/Admin/MangeTransactions";
+import ManageOrders from "./pages/Admin/ManageOrders";
 import ManageProducts from "./pages/Admin/ManageProducts";
 import ManagePromotions from "./pages/Admin/ManagePromotions";
 import Settings from "./pages/Admin/Settings";
@@ -112,7 +112,7 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="userslist" element={<UsersList />} />
-            <Route path="managetransactions" element={<ManageTransactions />} />
+            <Route path="manageorders" element={<ManageOrders />} />
             <Route path="manageproducts" element={<ManageProducts />} />
             <Route path="managepromotions" element={<ManagePromotions />} />
             <Route path="settings" element={<Settings />} />

@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import SectionTitle from "../../components/SectionTitle";
 import DataTable from "../../components/DataTable";
 
-const Home = () => {
+const UsersList = () => {
   const columns = ["Name", "Company", "City", "State"];
 
   const data = [
@@ -30,4 +30,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default UsersList;
