@@ -65,7 +65,7 @@ const Reviews = () => {
                 <h4 className="title">Latest Reviews</h4>
 
                 <div className="single-review">
-                  <img src="" alt="#" />
+                  <img src="https://i.mydramalist.com/kEpQwc.jpg" alt="#" />
                   <div className="review-info">
                     <h4>
                       Awesome quality for the price
@@ -96,7 +96,7 @@ const Reviews = () => {
                 </div>
 
                 <div className="single-review">
-                  <img src="" alt="#" />
+                  <img src="https://i.mydramalist.com/kEpQwc.jpg" alt="#" />
                   <div className="review-info">
                     <h4>
                       My husband love his new...
@@ -127,7 +127,7 @@ const Reviews = () => {
                 </div>
 
                 <div className="single-review">
-                  <img src="" alt="#" />
+                  <img src="https://i.mydramalist.com/kEpQwc.jpg" alt="#" />
                   <div className="review-info">
                     <h4>
                       I love the built quality...
