@@ -135,10 +135,10 @@ const Signup = () => {
         </div>
         <form
           onSubmit={onSubmit}
-          className="form-box col-lg-10 offset-md-1 col-12 row g-3"
+          className="col-lg-10 col-md-10 offset-md-1 col-12 p-5 row g-3"
         >
-          <h5>Personal Information<br></br><br></br></h5>
-          
+          <div className="fw-bold">Personal Information</div>
+          <hr />
           <div className="col-6 mb-3">
             <label className="form-label">Name</label>
             <input
@@ -176,7 +176,7 @@ const Signup = () => {
             />
           </div>
           <div className="col-6 mb-3">
-            <label className="form-label">Gender</label>
+            <label className="form-label">Birthday</label>
             <select
               className="form-select"
               id="sex"
@@ -186,7 +186,7 @@ const Signup = () => {
               required
             >
               <option value="" disabled>
-                Select your gender
+                Please select your sex
               </option>
               <option value="M">Male</option>
               <option value="F">Female</option>
