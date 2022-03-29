@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
+import SectionTitle from "../../components/SectionTitle";
 
 const ProductCreate = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const ProductCreate = () => {
   return (
     <div className="content">
       <Header />
+      <SectionTitle type="products"/>
       <div className="row mt-3">
       </div>
       <Footer userType="admin" />

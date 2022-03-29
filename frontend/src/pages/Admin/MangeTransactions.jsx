@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import SectionTitle from "../../components/SectionTitle";
 
 const Home = () => {
   useEffect(() => {
@@ -9,6 +10,7 @@ const Home = () => {
   return (
     <div className="content">
       <Header />
+      <SectionTitle type="transactions"/>
       <div className="row mt-3">Transactions</div>
       <Footer userType="admin" />
     </div>
