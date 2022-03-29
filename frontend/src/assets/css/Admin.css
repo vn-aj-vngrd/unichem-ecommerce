@@ -5,6 +5,15 @@
 .text-second {
   color: #424242;
 }
+
+.close {
+  border: none;
+  background: none;
+}
+
+.close i:hover {
+  color: red;
+}
 .dropdown ul {
   width: 100px;
   display: none;
