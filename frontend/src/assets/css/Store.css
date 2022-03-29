@@ -43,7 +43,7 @@ p {
   padding-left: 20px;
   font-size: 0.9rem;
   color: #333;
-  border-radius: 3px;
+  border-radius: 4px;
   transition: all 0.4s ease;
 }
 
@@ -60,7 +60,18 @@ p {
 }
 
 .form-control {
-  border: 1px solid rgb(224, 224, 224);
+  width: 100%;
+  height: 45px;
+  border: 1px solid #e2e2e2;
+  padding: 0 15px;
+  background: transparent;
+  border-radius: 4px;
+  position: relative;
+  padding-right: 30px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 14px;
 }
 
 .form-control:focus,
@@ -226,6 +237,11 @@ ol {
 .signup form {
   background: rgb(255, 255, 255);
   border: 1px solid rgb(230, 230, 230);
+}
+
+.form-box {
+  padding: 30px;
+  border-radius: 4px;
 }
 
 /*======================================
@@ -496,7 +512,7 @@ ol {
   border: none;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  border-radius: 3px;
+  border-radius: 4px;
   position: relative;
   z-index: 1;
   /* margin-right: 7px; */
@@ -539,7 +555,7 @@ ol {
   border: none;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  border-radius: 3px;
+  border-radius: 4px;
   position: relative;
   z-index: 1;
   margin-right: 7px;
@@ -1095,7 +1111,7 @@ ol {
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
   font-size: 14px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .header .main-menu-search .search-btn button {
@@ -2045,7 +2061,7 @@ ol {
   overflow: hidden;
   position: relative;
   /* border: 1px solid #eeee; */
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 @media (max-width: 767px) {
@@ -5183,7 +5199,7 @@ ol {
   font-weight: 600;
   padding: 13px 30px;
   transition: 0.2s;
-  border-radius: 3px;
+  border-radius: 4px;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -5209,7 +5225,7 @@ ol {
   padding: 30px;
   background-color: #ffffff;
   border: 1px solid #eee;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .purchase-row {
@@ -5463,7 +5479,7 @@ ol {
 .ad-right {
   padding: 0;
   margin-top: 40px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .address-options {
