@@ -67,7 +67,7 @@ const Wishlist = () => {
                       </Link>
                     </div>
                   </div>
-                  <hr classNam="cart-div"></hr>
+                  <hr className="cart-div"></hr>
                   <div className="cart-product-right">
                     <div className="product-in-cart">
                       <div className="category">
@@ -130,7 +130,7 @@ const Wishlist = () => {
                       </Link>
                     </div>
                   </div>
-                  <hr classNam="cart-div"></hr>
+                  <hr className="cart-div"></hr>
                   <div className="cart-product-right">
                     <div className="product-in-cart">
                       <div className="category">
