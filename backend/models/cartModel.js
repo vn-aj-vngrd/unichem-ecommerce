@@ -12,10 +12,6 @@ const cartSchema = mongoose.Schema(
       required: true,
       ref: "Product",
     },
-    productType: {
-      type: Number,
-      required: [true, "Product Type is required"],
-    },
     quantity: {
       type: Number,
       required: [true, "Quantity is required"],

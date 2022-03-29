@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema(
+const promoSchema = mongoose.Schema(
   {
     promoName: {
       type: String,
@@ -16,4 +16,4 @@ const Schema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Address", addressSchema);
+module.exports = mongoose.model("Promo", promoSchema);
