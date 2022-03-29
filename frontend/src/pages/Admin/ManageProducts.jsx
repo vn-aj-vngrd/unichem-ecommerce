@@ -4,15 +4,138 @@ import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
+import UpdateProduct from "../../components/UpdateProduct";
 
 const ManageProducts = () => {
-  const columns = ["Name", "Company", "City", "State"];
+  const columns = [
+    "image",
+    "Product ID",
+    "Name",
+    "Brand",
+    "Category",
+    "Specifications",
+    "Types",
+    "Description",
+    "Quantities",
+    "Prices",
+    "SalePrices",
+    "Promo",
+    "Featured",
+    "Updated",
+    "Created",
+    ""
+  ];
 
   const data = [
-    ["Joe James", "Test Corp", "Yonkers", "NY"],
-    ["John Walsh", "Test Corp", "Hartford", "CT"],
-    ["Bob Herm", "Test Corp", "Tampa", "FL"],
-    ["James Houston", "Test Corp", "Dallas", "TX"],
+    [
+      "image",
+      "1",
+      "Name",
+      "Brand",
+      "Category",
+      "Specifications",
+      "Types",
+      "Description",
+      "Quantities",
+      "Prices",
+      "SalePrices",
+      "Promo Status",
+      "Featured Status",
+      "Updated at",
+      "Created at",
+      <UpdateProduct />
+    ],
+    [
+      "image",
+      "1",
+      "Name",
+      "Brand",
+      "Category",
+      "Specifications",
+      "Types",
+      "Description",
+      "Quantities",
+      "Prices",
+      "SalePrices",
+      "Promo Status",
+      "Featured Status",
+      "Updated at",
+      "Created at",
+      <UpdateProduct />
+    ],
+    [
+      "image",
+      "1",
+      "Name",
+      "Brand",
+      "Category",
+      "Specifications",
+      "Types",
+      "Description",
+      "Quantities",
+      "Prices",
+      "SalePrices",
+      "Promo Status",
+      "Featured Status",
+      "Updated at",
+      "Created at",
+      <UpdateProduct />
+    ],
+    [
+      "image",
+      "1",
+      "Name",
+      "Brand",
+      "Category",
+      "Specifications",
+      "Types",
+      "Description",
+      "Quantities",
+      "Prices",
+      "SalePrices",
+      "Promo Status",
+      "Featured Status",
+      "Updated at",
+      "Created at",
+      <UpdateProduct />
+    ],
+    [
+      "image",
+      "1",
+      "Name",
+      "Brand",
+      "Category",
+      "Specifications",
+      "Types",
+      "Description",
+      "Quantities",
+      "Prices",
+      "SalePrices",
+      "Promo Status",
+      "Featured Status",
+      "Updated at",
+      "Created at",
+      <UpdateProduct />
+    ],
+    [
+      "image",
+      "1",
+      "Name",
+      "Brand",
+      "Category",
+      "Specifications",
+      "Types",
+      "Description",
+      "Quantities",
+      "Prices",
+      "SalePrices",
+      "Promo Status",
+      "Featured Status",
+      "Updated at",
+      "Created at",
+      <UpdateProduct />
+    ],
+   
   ];
 
   useEffect(() => {

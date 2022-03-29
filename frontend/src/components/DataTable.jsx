@@ -4,6 +4,7 @@ const DataTable = ( {title, data, columns} ) => {
   const options = {
     filterType: "checkbox",
     elevation: 0.9,
+    
   };
   return (
     <div>
