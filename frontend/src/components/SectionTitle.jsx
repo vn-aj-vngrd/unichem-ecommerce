@@ -4,13 +4,13 @@ const SectionTitle = ({ type }) => {
   if (type === "userslist") {
     return (
       <>
-        <div class="d-block mb-4 mb-md-0">
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
+        <div className="d-block mb-4 mb-md-0">
+          <nav aria-label="breadcrumb" className="d-none d-md-inline-block">
+            <ol className="breadcrumb breadcrumb-dark breadcrumb-transparent">
+              <li className="breadcrumb-item">
                 <Link to="/">
                   <svg
-                    class="icon icon-xxs"
+                    className="icon icon-xxs"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -25,29 +25,29 @@ const SectionTitle = ({ type }) => {
                   </svg>
                 </Link>
               </li>
-              <li class="breadcrumb-item">
+              <li className="breadcrumb-item">
                 <Link to="/">Dashboard</Link>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
+              <li className="breadcrumb-item active" aria-current="page">
                 Users List
               </li>
             </ol>
           </nav>
-          {/* <h2 class="h4">Users List</h2>
-          <p class="mb-0">Here are the list of users.</p> */}
+          {/* <h2 className="h4">Users List</h2>
+          <p className="mb-0">Here are the list of users.</p> */}
         </div>
       </>
     );
   } else if (type === "transactions") {
     return (
       <>
-        <div class="d-block mb-4 mb-md-0">
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
+        <div className="d-block mb-4 mb-md-0">
+          <nav aria-label="breadcrumb" className="d-none d-md-inline-block">
+            <ol className="breadcrumb breadcrumb-dark breadcrumb-transparent">
+              <li className="breadcrumb-item">
                 <Link to="/">
                   <svg
-                    class="icon icon-xxs"
+                    className="icon icon-xxs"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -62,29 +62,29 @@ const SectionTitle = ({ type }) => {
                   </svg>
                 </Link>
               </li>
-              <li class="breadcrumb-item">
+              <li className="breadcrumb-item">
                 <Link to="/">Dashboard</Link>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
+              <li className="breadcrumb-item active" aria-current="page">
                 Transactions
               </li>
             </ol>
           </nav>
-          {/* <h2 class="h4">Transactions</h2>
-          <p class="mb-0">Here are the list of transactions.</p> */}
+          {/* <h2 className="h4">Transactions</h2>
+          <p className="mb-0">Here are the list of transactions.</p> */}
         </div>
       </>
     );
   } else if (type === "products") {
     return (
       <>
-        <div class="d-block mb-4 mb-md-0">
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
+        <div className="d-block mb-4 mb-md-0">
+          <nav aria-label="breadcrumb" className="d-none d-md-inline-block">
+            <ol className="breadcrumb breadcrumb-dark breadcrumb-transparent">
+              <li className="breadcrumb-item">
                 <Link to="/">
                   <svg
-                    class="icon icon-xxs"
+                    className="icon icon-xxs"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -99,29 +99,29 @@ const SectionTitle = ({ type }) => {
                   </svg>
                 </Link>
               </li>
-              <li class="breadcrumb-item">
+              <li className="breadcrumb-item">
                 <Link to="/">Dashboard</Link>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
+              <li className="breadcrumb-item active" aria-current="page">
                 Products
               </li>
             </ol>
           </nav>
-          {/* <h2 class="h4">Products</h2>
-          <p class="mb-0">Here are the list of products.</p> */}
+          {/* <h2 className="h4">Products</h2>
+          <p className="mb-0">Here are the list of products.</p> */}
         </div>
       </>
     );
   } else if (type === "promotions") {
     return (
       <>
-        <div class="d-block mb-4 mb-md-0">
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
+        <div className="d-block mb-4 mb-md-0">
+          <nav aria-label="breadcrumb" className="d-none d-md-inline-block">
+            <ol className="breadcrumb breadcrumb-dark breadcrumb-transparent">
+              <li className="breadcrumb-item">
                 <Link to="/">
                   <svg
-                    class="icon icon-xxs"
+                    className="icon icon-xxs"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -136,29 +136,29 @@ const SectionTitle = ({ type }) => {
                   </svg>
                 </Link>
               </li>
-              <li class="breadcrumb-item">
+              <li className="breadcrumb-item">
                 <Link to="/">Dashboard</Link>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
+              <li className="breadcrumb-item active" aria-current="page">
                 Promotions
               </li>
             </ol>
           </nav>
-          {/* <h2 class="h4">Promotions</h2>
-          <p class="mb-0">Here are the list of promotions.</p> */}
+          {/* <h2 className="h4">Promotions</h2>
+          <p className="mb-0">Here are the list of promotions.</p> */}
         </div>
       </>
     );
   } else if (type === "settings") {
     return (
       <>
-        <div class="d-block mb-4 mb-md-0">
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
+        <div className="d-block mb-4 mb-md-0">
+          <nav aria-label="breadcrumb" className="d-none d-md-inline-block">
+            <ol className="breadcrumb breadcrumb-dark breadcrumb-transparent">
+              <li className="breadcrumb-item">
                 <Link to="/">
                   <svg
-                    class="icon icon-xxs"
+                    className="icon icon-xxs"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -173,16 +173,16 @@ const SectionTitle = ({ type }) => {
                   </svg>
                 </Link>
               </li>
-              <li class="breadcrumb-item">
+              <li className="breadcrumb-item">
                 <Link to="/">Dashboard</Link>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
+              <li className="breadcrumb-item active" aria-current="page">
                 Settings
               </li>
             </ol>
           </nav>
-          {/* <h2 class="h4">Settings</h2>
-          <p class="mb-0">Here are the list of settings.</p> */}
+          {/* <h2 className="h4">Settings</h2>
+          <p className="mb-0">Here are the list of settings.</p> */}
         </div>
       </>
     );
