@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
 import Notification from "./Notification";
-import admin from "../assets/images/admin.png";
+import admin from "../assets/images/admin.svg";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const Header = () => {
                   <img
                     className="avatar rounded-circle border-gray-100"
                     alt="img"
-                    src="https://img.icons8.com/ios/344/administrator-male.png"
+                    src={admin}
                   />
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                     <span className="mb-0 font-small fw-bold text-gray-900">
