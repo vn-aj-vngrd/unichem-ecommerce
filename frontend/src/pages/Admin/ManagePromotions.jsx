@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreatePromotion from "../../components/CreatePromotion";
-import UpdatePromotion from "../../components/updatePromo";
+import UpdatePromotion from "../../components/UpdatePromo";
 
 const ManagePromotions = () => {
   const columns = ["Promotion ID", "Name", "Source", "Updated", "Created", ""];
