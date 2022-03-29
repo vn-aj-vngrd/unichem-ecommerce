@@ -15,7 +15,7 @@ const ProductCreate = () => {
   ];
 
   useEffect(() => {
-    document.title = "Unichem Store | Create Product";
+    document.title = "Unichem Store | Products";
   });
 
   return (

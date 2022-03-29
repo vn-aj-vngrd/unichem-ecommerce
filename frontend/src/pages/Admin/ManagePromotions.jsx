@@ -15,7 +15,7 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    document.title = "Unichem Store | Dashboard";
+    document.title = "Unichem Store | Promotions";
   });
 
   return (
