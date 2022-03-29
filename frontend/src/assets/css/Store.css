@@ -481,6 +481,10 @@ ol {
   margin-left: 0;
 }
 
+/*======================================
+    Button CSS
+========================================*/
+
 .button .btn {
   display: inline-block;
   text-transform: capitalize;
@@ -514,10 +518,6 @@ ol {
     font-weight: 500;
   }
 }
-
-/*======================================
-    Button CSS
-========================================*/
 
 .button .btn i {
   display: inline-block;
@@ -1646,13 +1646,13 @@ ol {
   border-bottom: 1px solid #e0e0e0;
 }
 
-.authlink a{
+.authlink a {
   text-decoration: none;
   color: #424242;
   font-weight: 600;
 }
 
-.authlink a:hover{
+.authlink a:hover {
   text-decoration: none;
   color: #f44336;
 }
@@ -5065,7 +5065,7 @@ ol {
   width: auto;
   margin-left: auto;
   margin-right: auto;
-  background-color: #fff;
+  /* background-color: #fff; */
   position: relative;
   /* background-image: url("../images/error/404-bg.png"); */
   background-repeat: no-repeat;
@@ -5243,7 +5243,6 @@ ol {
   display: flex;
 }
 
-
 /*======================================
 	Cart-1 CSS 
 ========================================*/
@@ -5251,7 +5250,6 @@ ol {
 .category-icon {
   margin: 0 5px 0 0;
 }
-
 
 @media (max-width: 1399px) {
   .purchase-options-checkout {
@@ -5263,9 +5261,9 @@ ol {
 }
 
 .checkout-btn,
-  .message-btn {
-    width: 100%;
-  }
+.message-btn {
+  width: 100%;
+}
 
 .image-in-cart,
 .quantity-in-cart,
