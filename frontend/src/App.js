@@ -102,7 +102,8 @@ export const App = () => {
             <Route path="faq" element={<Faq />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
-          <Messenger />
+          {/* Enable Live Chat in Deployment */}
+          {/* <Messenger /> */}
           <Footer userType={userTypeData.userType} />
         </>
       ) : (

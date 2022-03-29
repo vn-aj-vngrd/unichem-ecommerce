@@ -5,16 +5,16 @@ import { getProducts, reset } from "../features/products/productSlice";
 import Star from "./Star";
 import Spinner from "./Spinner";
 
-const Product = ({searchData, range1, range2, range3, range4}) => {
+const Product = ({ searchData, range1, range2, range3, range4 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [ sortDefault, setSortDefault ] = useState("descendingOrder");
-  
+  const [sortDefault, setSortDefault] = useState("descendingOrder");
+
   const { user } = useSelector((state) => state.auth);
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.products
-    );
-    
+  );
+
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -30,30 +30,29 @@ const Product = ({searchData, range1, range2, range3, range4}) => {
   if (isLoading) {
     return <Spinner />;
   }
-  
 
   const options = [
     {
       label: "A - Z Order",
-      value: "ascendingOrder"
+      value: "ascendingOrder",
     },
     {
       label: "Z - A Order",
-      value: "descendingOrder"
+      value: "descendingOrder",
     },
     {
       label: "Low - High Price",
-      value: "lowHigh"
+      value: "lowHigh",
     },
     {
       label: "High - Low Price",
-      value: "highLow"
+      value: "highLow",
     },
     // {
     //   label: "Average Rating",
     //   value: "averageRating"
     // },
-  ]
+  ];
 
   // let allProducts = products.filter((product) => {
   //   return product.featured === true;
@@ -61,34 +60,36 @@ const Product = ({searchData, range1, range2, range3, range4}) => {
 
   let allProducts = products;
 
-  if(searchData != "") {
+  if (searchData !== "") {
     allProducts = products.filter((product) => {
-      return product.productName.toLowerCase().includes(searchData.toLowerCase());
-    })
+      return product.productName
+        .toLowerCase()
+        .includes(searchData.toLowerCase());
+    });
   }
 
-  if(range1) {
+  if (range1) {
     allProducts = products.filter((product) => {
       return product.prices[0] >= 50 && product.prices[0] <= 100;
-    })
+    });
   }
 
-  if(range2) {
+  if (range2) {
     allProducts = products.filter((product) => {
-      return product.prices[0] >= 101 && product.prices[0]  <= 500
-    })
+      return product.prices[0] >= 101 && product.prices[0] <= 500;
+    });
   }
 
-  if(range3) {
+  if (range3) {
     allProducts = products.filter((product) => {
-      return product.prices[0] >= 501 && product.prices[0]  <= 1000
-    })
+      return product.prices[0] >= 501 && product.prices[0] <= 1000;
+    });
   }
 
-  if(range4) {
+  if (range4) {
     allProducts = products.filter((product) => {
-      return product.prices[0] >= 1001 && product.prices[0]  <=5000
-    })
+      return product.prices[0] >= 1001 && product.prices[0] <= 5000;
+    });
   }
 
   // switch(sortDefault) {
@@ -101,7 +102,7 @@ const Product = ({searchData, range1, range2, range3, range4}) => {
   //   case "highLow":
   //     allProducts.sort((a,b) => b.prices[0] - a.prices[0]);
   //     break;
-  //   default: 
+  //   default:
   //     allProducts.sort((a,b) => a.productName.toLowerCase() - b.productName.toLowerCase());
   //     break;
   // }
@@ -113,9 +114,13 @@ const Product = ({searchData, range1, range2, range3, range4}) => {
     <div className="">
       <div className="product-grid">
         <label className="sort-element">Sort by: </label>
-        <select onChange={e => setSortDefault(e.target.value)} className="form-select sort-element" id="sorting">
-          {options.map((option) => (
-            <option value={option.value}>{option.label}</option>
+        <select
+          onChange={(e) => setSortDefault(e.target.value)}
+          className="form-select sort-element"
+          id="sorting"
+        >
+          {options.map((option, index) => (
+            <option key={index} value={option.value}>{option.label}</option>
           ))}
         </select>
       </div>
