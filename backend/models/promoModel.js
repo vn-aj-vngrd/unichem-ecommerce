@@ -10,6 +10,10 @@ const promoSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    pusblished: {
+      type: Boolean,
+      required: true,
+    },
   },
   {
     timestamps: true,
