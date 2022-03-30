@@ -12,6 +12,10 @@ const wishlistSchema = mongoose.Schema(
       required: true,
       ref: "Product",
     },
+    productType: {
+      type: String,
+      required: [true, "Product Type is required"],
+    },
   },
   { timestamps: true }
 );
