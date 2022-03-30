@@ -43,7 +43,8 @@ const setCart = asyncHandler(async (req, res) => {
       productID: req.body.productID,
       productType: req.body.productType,
     },
-    { quantity: existingCart.quantity + req.body.quantity }
+    { quantity: existingCart.quantity + req.body.quantity },
+    { new: true }
   );
 
   res.status(200).json(updatedCart);
