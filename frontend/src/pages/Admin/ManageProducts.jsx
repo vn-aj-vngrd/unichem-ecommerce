@@ -8,13 +8,8 @@ import UpdateProduct from "../../components/UpdateProduct";
 
 const ManageProducts = () => {
   const columns = [
-<<<<<<< Updated upstream
     "Product Image",
     "ProductID",
-=======
-    "Image",
-    "Product ID",
->>>>>>> Stashed changes
     "Name",
     "Brand",
     "Category",
