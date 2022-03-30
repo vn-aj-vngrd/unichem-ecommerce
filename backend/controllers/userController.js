@@ -39,7 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   const userAddress = await Address.create({
-    userAddress: user.id,
+    userID: user._id,
     address: [
       {
         address1: address.address1,
@@ -49,18 +49,15 @@ const registerUser = asyncHandler(async (req, res) => {
       },
     ],
     defaultAddress: 0,
-    addressType: address.addressType,
   });
 
   if (user && userAddress) {
     return res.status(201).json({
-      _id: user.id,
+      _id: user._id,
       name: user.name,
-      birthday: user.birthday,
-      sex: user.sex,
       email: user.email,
+      userType: user.userType,
       token: generateToken(user._id),
-      address: [userAddress],
     });
   } else {
     res.status(400);
@@ -81,7 +78,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (user && (await bcrypt.compare(password, user.password))) {
     return res.json({
-      _id: user.id,
+      _id: user._id,
       name: user.name,
       email: user.email,
       userType: user.userType,
