@@ -16,23 +16,22 @@ const getWishlists = asyncHandler(async (req, res) => {
 // @route   POST /api/Wishlists
 // @access  Private
 const setWishlist = asyncHandler(async (req, res) => {
-  const WishlistExists = await Wishlist.findOneAndUpdate(
-    { productID: req.body.productID, productType: req.body.productType },
-    { quantity: req.body.quantity }
-  );
+  const WishlistExists = await Wishlist.findOneAndUpdate({
+    productID: req.body.productID,
+    productType: req.body.productType,
+  });
 
   if (!WishlistExists) {
     const wishlist = await Wishlist.create({
       userID: req.user.id,
       productID: req.body.productID,
       productType: req.body.productType,
-      quantity: req.body.quantity,
     });
 
     return res.status(200).json(wishlist);
-  } else {
-    return res.status(200).json(WishlistExists);
   }
+
+  return res.status(200).json(WishlistExists);
 });
 
 // @desc    Delete Wishlist

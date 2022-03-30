@@ -54,15 +54,15 @@ const Details = ({ product }) => {
   useEffect(() => {
     if (isCartError) {
       Swal.fire({
-        title: "The item could not be added to the cart.",
+        title: "Item could not be added to cart",
         icon: "error",
-        text: "Please try again later.",
+        text: "You may have reached the maximum product quantity to be added to your cart.",
       });
     }
 
     if (isWishlistError) {
       Swal.fire({
-        title: "The item could not be added to the wishlist.",
+        title: "Item could not be added to wishlist",
         icon: "error",
         text: "Please try again later.",
       });
@@ -124,6 +124,7 @@ const Details = ({ product }) => {
       productID: product._id,
       productType: value,
       quantity: counter,
+      max: product.quantities[value],
     };
 
     dispatch(createCart(cartData));
@@ -134,7 +135,6 @@ const Details = ({ product }) => {
     const wishlistData = {
       productID: product._id,
       productType: value,
-      quantity: counter,
     };
 
     dispatch(createWishlist(wishlistData));

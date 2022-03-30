@@ -3,7 +3,7 @@ import cartService from "./cartService";
 
 const initialState = {
   carts: [],
-  isError: false,
+  isCartError: false,
   isCartSuccess: false,
   isCartLoading: false,
   cartMessage: "",
@@ -84,7 +84,7 @@ export const cartSlice = createSlice({
       })
       .addCase(createCart.rejected, (state, action) => {
         state.isCartLoading = false;
-        state.isError = true;
+        state.isCartError = true;
         state.cartMessage = action.payload;
       })
       .addCase(getCarts.pending, (state) => {
@@ -97,7 +97,7 @@ export const cartSlice = createSlice({
       })
       .addCase(getCarts.rejected, (state, action) => {
         state.isCartLoading = false;
-        state.isError = true;
+        state.isCartError = true;
         state.cartMessage = action.payload;
       })
       .addCase(deleteCart.pending, (state) => {
@@ -112,7 +112,7 @@ export const cartSlice = createSlice({
       })
       .addCase(deleteCart.rejected, (state, action) => {
         state.isCartLoading = false;
-        state.isError = true;
+        state.isCartError = true;
         state.cartMessage = action.payload;
       });
   },
