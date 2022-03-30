@@ -188,8 +188,8 @@ const Signup = () => {
               <option value="" disabled>
                 Please select your sex
               </option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
           </div>
           <div className="col-6 mb-3">
