@@ -7,7 +7,7 @@ import UpdateUser from "../../components/UpdateUser";
 
 const UsersList = () => {
   const columns = [
-    "Profile",
+    "User Image",
     "UserID",
     "Name",
     "Email",
