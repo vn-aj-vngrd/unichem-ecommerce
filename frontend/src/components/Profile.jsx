@@ -27,12 +27,7 @@ const Profile = () => {
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="form-group">
                   <label className="form-label">Name</label>
-                  <input
-                    name="name"
-                    type="text"
-                    value="Your Name"
-                    required="required"
-                  />
+                  <input name="name" type="text" value="Your Name" required />
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
@@ -42,7 +37,7 @@ const Profile = () => {
                     name="subject"
                     type="text"
                     value="Your Birthday"
-                    required="required"
+                    required
                   />
                 </div>
               </div>
@@ -53,19 +48,14 @@ const Profile = () => {
                     name="email"
                     type="email"
                     value="Your Email"
-                    required="required"
+                    required
                   />
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="form-group">
                   <label className="form-label">Sex</label>
-                  <input
-                    name="phone"
-                    type="text"
-                    value="Sex"
-                    required="required"
-                  />
+                  <input name="phone" type="text" value="Sex" required />
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
@@ -75,7 +65,7 @@ const Profile = () => {
                     name="password"
                     type="password"
                     value="Your Password"
-                    required="required"
+                    required
                   />
                 </div>
               </div>
@@ -86,7 +76,7 @@ const Profile = () => {
                     name="confirmPassword"
                     type="password"
                     value="Confirm Password"
-                    required="required"
+                    required
                   />
                 </div>
               </div>
