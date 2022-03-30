@@ -10,7 +10,7 @@ const UpdateProduct = () => {
             data-bs-toggle="modal"
             data-bs-target="#modal-form"
           >
-            Update
+            View/Update
           </button>
           <div
             class="modal fade"
