@@ -308,12 +308,14 @@ const Navbar = ({ userType }) => {
                                 <Link to="/reviews">My Reviews</Link>
                               </li>
                               <li className="nav-item">
-                                <button
-                                  className="logout-btn"
-                                  onClick={onLogout}
-                                >
-                                  <i className="lni lni-logout"></i>Log out
-                                </button>
+                                <Link to="/">
+                                  <button
+                                    className="logout-btn"
+                                    onClick={onLogout}
+                                  >
+                                    <i className="lni lni-logout"></i>Log out
+                                  </button>
+                                </Link>
                               </li>
                             </ul>
                           </li>
