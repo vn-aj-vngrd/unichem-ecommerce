@@ -53,10 +53,16 @@ export const App = () => {
     if (user) {
       const temp = localStorage.getItem("user");
       const user = JSON.parse(temp);
-      if (user.userType === "customer") {
-        setUserType({ userType: "customer" });
-      } else {
-        setUserType({ userType: "admin" });
+      switch (user.userType) {
+        case "admin":
+          setUserType({ userType: "admin" });
+          break;
+        case "customer":
+          setUserType({ userType: "customer" });
+          break;
+        default:
+          setUserType({ userType: "customer" });
+          break;
       }
     } else {
       setUserType({ userType: "customer" });

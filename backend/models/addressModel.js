@@ -11,9 +11,9 @@ const addressSchema = mongoose.Schema(
       type: Array,
       required: [true, "Address is required."],
     },
-    defaultAddress: {
+    primaryAddress: {
       type: Number,
-      required: [true, "Default Address is required."],
+      required: [true, "Primary Address is required."],
     },
   },
   {

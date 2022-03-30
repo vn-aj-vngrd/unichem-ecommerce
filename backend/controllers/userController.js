@@ -37,7 +37,6 @@ const registerUser = asyncHandler(async (req, res) => {
     password: hashedPassword,
     userType,
   });
-
   const userAddress = await Address.create({
     userID: user._id,
     address: [
@@ -48,23 +47,21 @@ const registerUser = asyncHandler(async (req, res) => {
         phoneNumber: address.phoneNumber,
       },
     ],
-    defaultAddress: 0,
+    primaryAddress: 0,
   });
 
-  if (user && userAddress) {
-    return res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      userType: user.userType,
-      token: generateToken(user._id),
-    });
-  } else {
+  if (!user && !userAddress) {
     res.status(400);
     throw new Error("User could not be created");
   }
 
-  // res.json({ message: "User Registered" });
+  res.status(201).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    userType: user.userType,
+    token: generateToken(user._id),
+  });
 });
 
 // @desc    Authenticate a user
@@ -77,7 +74,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    return res.json({
+    res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -88,8 +85,6 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Invalid credentials");
   }
-
-  // return res.json({ message: "User Logged In" });
 });
 
 // @desc    Get user data
@@ -100,7 +95,7 @@ const getUser = asyncHandler(async (req, res) => {
   //   req.user.id
   // );
   // const userAddress = await Address.find({ userAddress: req.user.id });
-  // return res.status(200).json({
+  // res.status(200).json({
   //   id: _id,
   //   name,
   //   email,
@@ -109,7 +104,7 @@ const getUser = asyncHandler(async (req, res) => {
   //   phoneNumber,
   //   userAddress,
   // });
-  // return res.status(200).json(req.user);
+  // res.status(200).json(req.user);
 });
 
 // Generate JWT Token
