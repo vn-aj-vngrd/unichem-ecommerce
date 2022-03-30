@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
 
 const Cart = require("../models/cartModel");
-const User = require("../models/userModel");
 
 // @desc    Get Carts
 // @route   GET /api/Carts
@@ -83,7 +82,8 @@ const updateCart = asyncHandler(async (req, res) => {
       productID: req.body.productID,
       productType: req.body.productType,
     },
-    { quantity: req.body.quantity }
+    { quantity: req.body.quantity },
+    { new: true }
   );
 
   res.status(200).json(updatedCart);
