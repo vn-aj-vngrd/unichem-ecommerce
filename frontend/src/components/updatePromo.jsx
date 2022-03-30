@@ -84,7 +84,7 @@ const UpdatePromotion = () => {
 
                     <div className="d-grid">
                       <button type="submit" className="btn btn-gray-800">
-                        Create Promotion
+                        Save Changes
                       </button>
                     </div>
                   </form>
