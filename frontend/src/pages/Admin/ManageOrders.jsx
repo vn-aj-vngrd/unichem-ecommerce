@@ -7,7 +7,7 @@ import UpdateOrder from "../../components/UpdateOrder";
 
 const ManageOrders = () => {
   const columns = [
-    "ID",
+    "OrderID",
     "UserID",
     "ProductID",
     "Quantity",

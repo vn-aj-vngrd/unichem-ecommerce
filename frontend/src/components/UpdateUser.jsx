@@ -41,8 +41,8 @@ const UpdateUser = ({ id }) => {
                         <div className="input-group">
                           <input
                             type="file"
-                            name="name"
-                            id="name"
+                            name="image"
+                            id="image"
                             className="form-control"
                           />
                         </div>

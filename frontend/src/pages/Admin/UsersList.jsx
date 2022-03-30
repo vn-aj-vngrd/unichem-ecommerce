@@ -7,8 +7,8 @@ import UpdateUser from "../../components/UpdateUser";
 
 const UsersList = () => {
   const columns = [
-    "User Image",
-    "User ID",
+    "Profile",
+    "UserID",
     "Name",
     "Email",
     "Sex",
@@ -30,7 +30,7 @@ const UsersList = () => {
       "Horeb Barriga",
       "horeb@gmail.com",
       "Male",
-      "1/1/2001",
+      "1-1-2001",
       "Danao, Cebu",
       "2022-03-26",
       "2022-03-26",
@@ -46,7 +46,7 @@ const UsersList = () => {
       "Horeb Barriga",
       "horeb@gmail.com",
       "Male",
-      "1/1/2001",
+      "1-1-2001",
       "Danao, Cebu",
       "2022-03-26",
       "2022-03-26",
@@ -62,7 +62,7 @@ const UsersList = () => {
       "Horeb Barriga",
       "horeb@gmail.com",
       "Male",
-      "1/1/2001",
+      "1-1-2001",
       "Danao, Cebu",
       "2022-03-26",
       "2022-03-26",
