@@ -13,7 +13,7 @@ const wishlistSchema = mongoose.Schema(
       ref: "Product",
     },
     productType: {
-      type: String,
+      type: Number,
       required: [true, "Product Type is required"],
     },
   },
