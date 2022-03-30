@@ -46,8 +46,8 @@ const ManageProducts = () => {
       "None",
       "false",
       "false",
-      "Updated at",
-      "Created at",
+      "2022-03-26",
+      "2022-03-26",
       <UpdateProduct />,
     ],
     [
@@ -69,8 +69,8 @@ const ManageProducts = () => {
       "None",
       "false",
       "false",
-      "Updated at",
-      "Created at",
+      "2022-03-26",
+      "2022-03-26",
       <UpdateProduct />,
     ],
   ];

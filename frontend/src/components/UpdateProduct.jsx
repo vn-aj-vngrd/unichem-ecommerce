@@ -31,7 +31,7 @@ const UpdateProduct = () => {
                     aria-label="Close"
                   ></button>
                   <div class="text-center text-md-center mb-4 mt-md-0">
-                    <h1 class="mb-0 h4">Update Product</h1>
+                    <h1 class="mb-0 h4">Product Information</h1>
                   </div>
                   <form action="#" class="mt-4">
                     <div className="form-group">

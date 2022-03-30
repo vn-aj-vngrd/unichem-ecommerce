@@ -8,13 +8,13 @@ const CreateProduct = () => {
           type="button"
           class="btn btn-block btn-gray-800 mb-3"
           data-bs-toggle="modal"
-          data-bs-target="#create-modal-form"
+          data-bs-target="#create-product-modal"
         >
           Create Product
         </button>
         <div
           class="modal fade"
-          id="create-modal-form"
+          id="create-product-modal"
           tabindex="-1"
           role="dialog"
           aria-labelledby="modal-form"
