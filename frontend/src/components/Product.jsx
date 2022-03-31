@@ -4,11 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProducts, reset } from "../features/products/productSlice";
 import Star from "./Star";
 import Spinner from "./Spinner";
+import ReactPaginate from "react-paginate";
 
 const Product = ({ searchData, range1, range2, range3, range4 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sortDefault, setSortDefault] = useState("descendingOrder");
+  const [pageNumber, setPageNumber] = useState(0);
+
+  // Pagination
+  const productsPerPage = 2;
+  const pagesVisited = pageNumber * productsPerPage;
 
   const { user } = useSelector((state) => state.auth);
   const { products, isLoading, isError, message } = useSelector(
@@ -58,7 +64,16 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
   //   return product.featured === true;
   // });
 
-  let allProducts = products;
+  let allProducts = JSON.parse(JSON.stringify(products));
+
+  // Pagination
+  allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
+  console.log(allProducts.length)
+  const pageCount = Math.ceil(products.length / productsPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   if (searchData !== "") {
     allProducts = products.filter((product) => {
@@ -107,8 +122,8 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
   //     break;
   // }
 
-  console.log(sortDefault);
-  console.log(allProducts);
+  // console.log(sortDefault);
+  // console.log(allProducts);
 
   return (
     <div className="">
@@ -120,7 +135,9 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
           id="sorting"
         >
           {options.map((option, index) => (
-            <option key={index} value={option.value}>{option.label}</option>
+            <option key={index} value={option.value}>
+              {option.label}
+            </option>
           ))}
         </select>
       </div>
@@ -173,36 +190,24 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
 
         <nav>
           <ul className="product-pagination pagination justify-content-center">
-            <li className="page-item disabled">
-              <a
-                className="page-link"
-                href="/"
-                tabIndex="-1"
-                aria-disabled="true"
-              >
-                Previous
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                Next
-              </a>
-            </li>
+            <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              breakLabel={"..."}
+              pageRangeDisplayed={8}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"page-link-button"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page"}
+              disabledClassName={"disabled"}
+              activeClassName={"page-link-active"}
+            />
           </ul>
         </nav>
       </div>

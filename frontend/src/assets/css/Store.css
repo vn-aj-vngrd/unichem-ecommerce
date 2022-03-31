@@ -3510,23 +3510,61 @@ ol {
   width: 0px;
 }
 
+
+/*======================================
+    Pagination CSS
+========================================*/
+
 .page-item {
   margin: 5px;
   border-radius: 5px;
   /* background-color: #fff; */
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
-.page-link {
+.page-link, .page-link-button a {
   background-color: #fff;
   padding: 8px 20px;
-  margin: 5px 0 0 0;
+  margin: 0 5px;
   border-radius: 5px;
-  color: #000;
   border: 1px solid #e0e0e0;
+  color: #424242;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.page-link-button li:hover {
+  color: #f44336;
+}
+
+.page-link-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.page-link-active a {
+  color: #f44336;
 }
 
 .product-pagination {
   margin: 50px 0;
+}
+
+.page-link:hover {
+  background-color: #ffffff;
+  color: #ff4436;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.page-link:focus {
+  background-color: #fff;
+  color: #f44336;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 .profile-address-section {
