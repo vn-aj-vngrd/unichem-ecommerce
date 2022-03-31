@@ -145,6 +145,7 @@ video {
 
 img {
   max-width: 100%;
+  object-fit: cover;
 }
 
 h1,
@@ -2048,6 +2049,10 @@ ol {
   border-radius: 3px;
 }
 
+.product-image img {
+  height: 100%;
+}
+
 @media (max-width: 767px) {
   .single-product .product-image img {
     min-height: 408px;
@@ -2061,8 +2066,12 @@ ol {
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-  .single-product .product-image img {
+  .single-product .product-image:not(.featured-product-image) img {
     min-height: 165px;
+  }
+
+  .featured-product-image img {
+    min-height: 198px;
   }
 }
 

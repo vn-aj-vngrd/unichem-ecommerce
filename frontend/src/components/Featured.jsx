@@ -50,37 +50,44 @@ const Featured = () => {
             <div className="row">
               {featuredProducts.map((product) => (
                 <div key={product._id} className="col-lg-3 col-md-6 col-12">
-                  <div className="single-product">
-                    <div className="product-image">
-                      <img src={product.image} alt="#" />
-                      <div className="button">
-                        <Link
-                          to={`/product-details/${product._id}`}
-                          className="btn"
-                        >
-                          <i className="lni lni-eye"></i> View
-                        </Link>
+                  <div className="box-shadow">
+                    <div className="single-product">
+                      <div className="product-image featured-product-image">
+                        {/* promo  CLASS (.sale-tag OR .new-tag)*/}
+                        <div className="sale-tag">
+                          <b>-100% OFF</b>
+                        </div>
+                        {/* end of promo */}
+                        <img src={product.image} className="" alt={product.productName} />
+                        <div className="button">
+                          <Link
+                            to={`/product-details/${product._id}`}
+                            className="btn"
+                          >
+                            <i className="lni lni-eye"></i> View
+                          </Link>
+                        </div>
+                      </div>
+                      <div className="product-info">
+                        <span className="category">
+                          <i className="lni lni-package category-icon"></i>{" "}
+                          {product.category}
+                        </span>
+                        <div className="title">
+                          <h5>{product.productName}</h5>
+                        </div>
+                        <Star star={3} reviews={1} />
                       </div>
                     </div>
-                    <div className="product-info">
-                      <span className="category">
-                        <i className="lni lni-package category-icon"></i>{" "}
-                        Category: {product.category}
-                      </span>
-                      <div className="title">
-                        <h5>{product.productName}</h5>
+                    <div className="order-total-row">
+                      <div className="price d-flex justify-content-between align-items-center">
+                        <div>
+                          <h6 className="text-red">
+                            <span>₱{product.prices[0]}</span>
+                          </h6>
+                        </div>
+                        <div className="items-sold">6.9K items sold</div>
                       </div>
-                      <Star star={3} reviews={1} />
-                    </div>
-                  </div>
-                  <div className="order-total-row">
-                    <div className="price d-flex justify-content-between align-items-center">
-                      <div>
-                        <h6 className="text-red">
-                          <span>₱{product.prices[0]}</span>
-                        </h6>
-                      </div>
-                      <div className="items-sold">6.9K items sold</div>
                     </div>
                   </div>
                 </div>
