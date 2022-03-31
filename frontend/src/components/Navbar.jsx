@@ -32,7 +32,7 @@ const Navbar = ({ userType }) => {
       <header className="header navbar-area sticky">
         <div className="header-middle background-red">
           <div className="container">
-            <div className="row align-items-center">
+            <div className="row align-items-center ">
               <div className="col-lg-3 col-md-3 col-7">
                 <Link className="navbar-brand" to="/">
                   <img src={logo} alt="#" />
@@ -90,8 +90,8 @@ const Navbar = ({ userType }) => {
           </div>
         </div>
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-8 col-md-6 col-12">
+          <div className="row align-items-center nav-flex-on-thin-screen">
+            <div className="col-lg-8 col-md-6 col-12 left-nav-profile-section">
               <div className="nav-inner">
                 <div className="mega-category-menu">
                   <span className="cat-button">
@@ -278,26 +278,65 @@ const Navbar = ({ userType }) => {
                 </nav>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 col-12">
-              <div className="d-flex justify-content-end container">
+            <div className="col-lg-4 col-md-6 col-12 right-nav-profile-section">
+              <div className="d-flex justify-content-end nav-profile-section">
                 {user ? (
                   <>
+                    {/*  */}
                     <div className="nav-inner">
-                      <nav className="navbar navbar-expand-lg">
-                        <ul id="nav" className="navbar-nav">
+                      <div class=" mobile-dropdown-hover">
+                        <button className="hover-button">
+                          <img
+                            src="https://pbs.twimg.com/profile_images/1313999242449416193/mY-iNLOf_400x400.jpg"
+                            className="nav-profile-image"
+                          ></img>
+                          {user.name.split(" ")[0]}
+                        </button>
+
+                        <ul className="mobile-profile-collapse profile-collapse">
                           <li className="nav-item">
+                            <Link to="/manage">Manage Account</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/orders">My Orders</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/reviews">My Reviews</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/">
+                              <button className="logout-btn" onClick={onLogout}>
+                                <i className="lni lni-logout"></i>Log out
+                              </button>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    {/*  */}
+                    <div className="nav-inner ">
+                      <nav className="navbar navbar-expand-lg hide-on-thin-screen">
+                        <ul id="nav" className="navbar-nav">
+                          <li className="nav-item nav-item-profile">
                             <Link
                               to="/"
-                              className="dd-menu"
+                              className=""
                               data-bs-toggle="collapse"
-                              data-bs-target="#submenu-1-2"
+                              data-bs-target="#submenu-1-3"
                               aria-controls="navbarSupportedContent"
                               aria-expanded="false"
                               aria-label="Toggle navigation"
                             >
-                              {user.name}
+                              <img
+                                src="https://pbs.twimg.com/profile_images/1313999242449416193/mY-iNLOf_400x400.jpg"
+                                className="nav-profile-image"
+                              ></img>
+                              {user.name.split(" ")[0]}
                             </Link>
-                            <ul className="sub-menu collapse" id="submenu-1-2">
+                            <ul
+                              className="sub-menu collapse profile-collapse"
+                              id="submenu-1-3"
+                            >
                               <li className="nav-item">
                                 <Link to="/manage">Manage Account</Link>
                               </li>

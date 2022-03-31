@@ -194,13 +194,12 @@ const Cart = () => {
                             <p className="fw-bold">Free</p>
                           </span>
                         </li>
-                        <li className="last">
-                          Total Payment
-                          <span>
-                            <p className="fw-bold">₱2000.00</p>
-                          </span>
-                        </li>
                       </ul>
+                      <hr></hr>
+                      <div className="">
+                        <label className="form-label">Discount Coupon</label>
+                        <input className="form-control" type="text"></input>
+                      </div>
                     </div>
 
                     <div className="no-box-shadow">

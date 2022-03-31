@@ -209,7 +209,7 @@ ol {
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   .container {
-    width: 450px;
+    width: 426px;
   }
 }
 
@@ -1178,6 +1178,10 @@ ol {
     padding: 12px 16px !important;
   }
 
+  .header .navbar-nav .nav-item-profile a {
+    padding: 12px 0px !important;
+  }
+
   .header .navbar-nav .nav-item a::before {
     display: none;
   }
@@ -1293,6 +1297,10 @@ ol {
 
   .header .navbar-nav .nav-item a {
     padding: 12px 16px !important;
+  }
+
+  .header .navbar-nav .nav-item-profile a {
+    padding: 12px 0px !important;
   }
 
   .header .navbar-nav .nav-item a::before {
@@ -1914,6 +1922,106 @@ ol {
   display: inline-block;
   margin-right: 5px;
 }
+
+.nav-profile-image {
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* @media only screen and (min-width: 768px) and (max-width: 991px) { */
+.nav-profile-section {
+  padding-right: 0px;
+}
+/* } */
+
+
+
+.navbar-nav .nav-item .profile-collapse {
+  position: absolute;
+  left: -182px !important;
+}
+
+.mobile-dropdown-hover {
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  display: flex;
+  font-weight: 600;
+  justify-content: flex-end;
+}
+
+.hover-button {
+  border: none;
+  background-color: #fff;
+}
+
+.nav-item button i {
+  font-weight: 600;
+}
+
+.mobile-profile-collapse {
+  padding: 30px;
+  min-width: 240px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  border-radius: 0 0 4px 4px;
+  display: none;
+  z-index: 1;
+  position: absolute;
+  top: 44px;
+  left: -185px;
+  font-weight: 600;
+}
+
+.mobile-profile-collapse .nav-item:not(:last-child) {
+  margin-bottom: 15px; 
+}
+
+
+.mobile-profile-collapse .nav-item a {
+  color: #424242;
+  font-size: 14px
+}
+
+@media (max-width: 767px) {
+  .mobile-profile-collapse .nav-item:not(:last-child) {
+    margin-bottom: 23px; 
+  }
+
+  .mobile-profile-collapse {
+    left: -184px;
+  }
+}
+
+.mobile-dropdown-hover:hover .mobile-profile-collapse {
+  display: block;
+}
+
+
+@media (min-width: 992px) {
+  .mobile-dropdown-hover {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-flex-on-thin-screen {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .left-nav-profile-section {
+    width: 281px;
+  }
+
+  .right-nav-profile-section {
+    width: 81px;
+  }
+}
+
 
 /*======================================
     Hero Area CSS
@@ -3510,7 +3618,6 @@ ol {
   width: 0px;
 }
 
-
 /*======================================
     Pagination CSS
 ========================================*/
@@ -3523,7 +3630,8 @@ ol {
   transition: all 0.4s ease;
 }
 
-.page-link, .page-link-button a {
+.page-link,
+.page-link-button a {
   background-color: #fff;
   padding: 8px 20px;
   margin: 0 5px;
@@ -4003,7 +4111,7 @@ ol {
 }
 
 .shopping-cart .form-control {
-  padding: 0 18px;
+  padding: 10px 18px;
   -webkit-transition: color 0.25s, background-color 0.25s, border-color 0.25s;
   transition: color 0.25s, background-color 0.25s, border-color 0.25s;
   border: 1px solid #e0e0e0;
@@ -4864,6 +4972,11 @@ ol {
   width: 100%;
 }
 
+.checkout-coupon {
+  display: flex;
+  flex-direction: column;
+}
+
 /*======================================
     Featured-Categoires CSS
 ========================================*/
@@ -5194,7 +5307,7 @@ ol {
   width: 100px;
   border-radius: 50%;
   padding: 5px;
-  border: 1px solid #eee;
+  border: 1px solid #c7c7c7;
   margin-right: 20px;
 }
 
@@ -5291,7 +5404,7 @@ ol {
 }
 
 /*======================================
-	Cart-1 CSS 
+	Cart / CSS 
 ========================================*/
 
 .category-icon {
@@ -5437,10 +5550,6 @@ ol {
   .total-in-cart {
     display: flex;
     justify-content: start;
-  }
-
-  .hide-on-thin-screen {
-    display: none;
   }
 
   .image-in-cart,
