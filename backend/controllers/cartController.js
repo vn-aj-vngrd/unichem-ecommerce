@@ -11,7 +11,7 @@ const getCarts = asyncHandler(async (req, res) => {
 
   let retData = [];
   for (let i = 0; i < carts.length; i++) {
-    let product = await Product.findOne(carts[i].productID);
+    let product = await Product.findById(carts[i].productID);
     const temp = { ...carts[i], product };
     retData.push(temp);
   }

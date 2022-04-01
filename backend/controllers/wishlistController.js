@@ -11,8 +11,8 @@ const getWishlists = asyncHandler(async (req, res) => {
 
   let retData = [];
   for (let i = 0; i < wishlists.length; i++) {
-    let product = await Product.findOne(wishlists[i].productID);
-    const temp = { ...wishlists[i], product };
+    const product = await Product.findById(wishlists[i].productID);
+    let temp = { ...wishlists[i], product };
     retData.push(temp);
   }
 
