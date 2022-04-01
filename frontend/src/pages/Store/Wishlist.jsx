@@ -27,8 +27,8 @@ const Wishlist = () => {
     if (isWishlistError) {
       console.log(wishlistMessage);
     }
-
     dispatch(getWishlists());
+
     return () => {
       dispatch(resetWishlist());
     };
@@ -63,9 +63,15 @@ const Wishlist = () => {
           </div>
 
           <div className="cart-list-head accordion-bodybox-shadow">
-            {wishlists.map((wishlist, index) => (
-              <WishlistRow key={index} wishlist={wishlist} />
-            ))}
+            {wishlists.length > 0 ? (
+              <>
+                {wishlists.map((wishlist, index) => (
+                  <WishlistRow key={index} wishlist={wishlist} />
+                ))}
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
