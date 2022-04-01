@@ -1,17 +1,10 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteWishlist } from "../features/wishlist/wishlistSlice";
-import { getWishlists } from "../features/wishlist/wishlistSlice";
 
 const WishlistRow = ({ wishlist }) => {
-  const [data, setData] = useState(wishlist);
-
   const dispatch = useDispatch();
-  const onDelete = () => {
-    dispatch(deleteWishlist(data._doc._id));
-    dispatch(getWishlists());
-  };
+
   return (
     <>
       {/* Row Start Here */}
@@ -53,20 +46,22 @@ const WishlistRow = ({ wishlist }) => {
               <div className="price"></div>
             </div>
             <div className="action-in-cart">
-              <button className="remove-item" onClick={onDelete}>
+              <button
+                className="remove-item"
+                onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
+              >
                 <i className="lni lni-close"></i>
               </button>
             </div>
           </div>
-          {/* <div className="action-in-cart-2">
-                    <button
-                      className="remove-item"
-                      onClick={onDelete}
-                      value={wishlist._doc._id}
-                    >
-                      <i className="lni lni-close"></i>
-                    </button>
-                  </div> */}
+          <div className="action-in-cart-2">
+            <button
+              className="remove-item"
+              onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
+            >
+              <i className="lni lni-close"></i>
+            </button>
+          </div>
         </div>
       </div>
       {/* Row End Here */}

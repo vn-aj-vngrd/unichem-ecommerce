@@ -107,8 +107,8 @@ export const wishlistSlice = createSlice({
         state.isWishlistLoading = false;
         state.isWishlistSuccess = true;
         state.wishlists = state.wishlists.filter(
-          (wishlist) => wishlist._id !== action.payload.id
-        );
+          (wishlist) => wishlist._doc._id !== action.payload.id
+          );
       })
       .addCase(deleteWishlist.rejected, (state, action) => {
         state.isWishlistLoading = false;
