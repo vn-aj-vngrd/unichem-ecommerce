@@ -58,7 +58,11 @@ const Featured = () => {
                           <b>-100% OFF</b>
                         </div>
                         {/* end of promo */}
-                        <img src={product.image} className="" alt={product.productName} />
+                        <img
+                          src={product.image}
+                          className=""
+                          alt={product.productName}
+                        />
                         <div className="button">
                           <Link
                             to={`/product-details/${product._id}`}

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getWishlists,
-  deleteWishlist,
   resetWishlist,
 } from "../../features/wishlist/wishlistSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
+import WishlistRow from "../../components/WishlistRow";
 
 const Wishlist = () => {
   const navigate = useNavigate();
@@ -38,15 +38,6 @@ const Wishlist = () => {
     return <Spinner />;
   }
 
-  const onDelete = (e) => {
-    dispatch(deleteWishlist(e.target.value));
-  };
-
-  let deleteParams = [];
-  for (let i = 0; i < wishlists.length; i++) {
-    deleteParams.push(wishlists[i]._doc._id);
-  }
-
   return (
     <>
       <Breadcrumb type="wishlist" />
@@ -73,60 +64,7 @@ const Wishlist = () => {
           {/* Row Start Here */}
           <div className="cart-list-head accordion-bodybox-shadow">
             {wishlists.map((wishlist, index) => (
-              <div key={index} className="cart-single-list">
-                <div className="d-flex single-cart-product">
-                  <div className="d-flex align-items-center cart-product-left">
-                    <div className="image-in-cart">
-                      <Link to="/products">
-                        <img src={wishlist.product.image} alt="" />
-                      </Link>
-                    </div>
-                  </div>
-                  <hr className="cart-div"></hr>
-                  <div className="cart-product-right">
-                    <div className="product-in-cart">
-                      <div className="category">
-                        <i className="lni lni-package category-icon"></i>{" "}
-                        Category: {wishlist.product.category}
-                      </div>
-                      <h4 className="title">
-                        <Link to="/">{wishlist.product.productName}</Link>
-                      </h4>
-                      <div className="product-des">
-                        <p>
-                          Type / Color:{" "}
-                          {wishlist.product.types[wishlist._doc.productType]}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="price-in-cart">
-                      <div className="price">
-                        ₱ {wishlist.product.prices[wishlist._doc.productType]}
-                      </div>
-                    </div>
-                    <div className="price-in-cart">
-                      <div className="price"></div>
-                    </div>
-                    <div className="total-in-cart">
-                      <div className="price"></div>
-                    </div>
-                    <div className="action-in-cart">
-                      <button
-                        className="remove-item"
-                        value={deleteParams[index]}
-                        onClick={onDelete}
-                      >
-                        <i className="lni lni-close"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="action-in-cart-2">
-                    <button className="remove-item" onClick={onDelete}>
-                      <i className="lni lni-close"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <WishlistRow key={index} wishlist={wishlist} />
             ))}
             {/* Row End Here */}
           </div>
