@@ -7,7 +7,9 @@ const Product = require("../models/productModel");
 // @route   GET /api/Wishlists
 // @access  Private
 const getWishlists = asyncHandler(async (req, res) => {
-  let wishlists = await Wishlist.find({ userID: req.user._id });
+  let wishlists = await Wishlist.find({ userID: req.user._id }).sort({
+    createdAt: "desc",
+  });
 
   let retData = [];
   for (let i = 0; i < wishlists.length; i++) {
