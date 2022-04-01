@@ -267,9 +267,8 @@ const Details = ({ product }) => {
                               <input
                                 type="number"
                                 className="quantity-input"
-                                defaultValue="0"
-                                min="0"
-                                max="0"
+                                value="0"
+                                readOnly
                               />
                               <button className="quantity-btn">
                                 <svg viewBox="0 0 426.66667 426.66667">

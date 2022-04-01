@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteWishlist } from "../features/wishlist/wishlistSlice";
+import { getWishlists } from "../features/wishlist/wishlistSlice";
 
 const WishlistRow = ({ wishlist }) => {
   const [data, setData] = useState(wishlist);
 
   const dispatch = useDispatch();
   const onDelete = () => {
-    // console.log(data);
-    setData({ wishlist });
     dispatch(deleteWishlist(data._doc._id));
+    dispatch(getWishlists());
   };
   return (
     <>

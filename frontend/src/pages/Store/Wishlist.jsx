@@ -61,12 +61,11 @@ const Wishlist = () => {
               </div>
             </div>
           </div>
-          {/* Row Start Here */}
+
           <div className="cart-list-head accordion-bodybox-shadow">
             {wishlists.map((wishlist, index) => (
               <WishlistRow key={index} wishlist={wishlist} />
             ))}
-            {/* Row End Here */}
           </div>
         </div>
       </div>
