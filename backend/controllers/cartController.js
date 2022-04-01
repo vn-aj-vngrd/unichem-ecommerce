@@ -1,23 +1,33 @@
 const asyncHandler = require("express-async-handler");
 
 const Cart = require("../models/cartModel");
+const Product = require("../models/productModel");
 
 // @desc    Get Carts
 // @route   GET /api/Carts
 // @access  Private
 const getCarts = asyncHandler(async (req, res) => {
-  const carts = await Cart.find({ user: req.user.id });
+  const carts = await Cart.find({ userID: req.user._id });
 
-  res.status(200).json(carts);
+  let retData = [];
+  for (let i = 0; i < carts.length; i++) {
+    let product = await Product.findOne(carts[i].productID);
+    const temp = { ...carts[i], product };
+    retData.push(temp);
+  }
+
+  res.status(200).json(retData);
 });
 
 // @desc    Set Cart
 // @route   POST /api/Carts
 // @access  Private
 const setCart = asyncHandler(async (req, res) => {
+  const { productID, productType } = req.body;
+
   const existingCart = await Cart.findOne({
-    productID: req.body.productID,
-    productType: req.body.productType,
+    productID,
+    productType,
   });
 
   // If cart does not exist then create.

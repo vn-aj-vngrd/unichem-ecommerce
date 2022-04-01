@@ -12,14 +12,9 @@ const getWishlists = asyncHandler(async (req, res) => {
   let retData = [];
   for (let i = 0; i < wishlists.length; i++) {
     let product = await Product.findOne(wishlists[i].productID);
-
-    const wishlist = wishlists[i];
-    const temp  = {...wishlist, product};
+    const temp = { ...wishlists[i], product };
     retData.push(temp);
   }
-
-  // let retData = { ...wishlists, ...products };
-  // const wishlists = { wishlistItems, products };
 
   res.status(200).json(retData);
 });
@@ -29,9 +24,9 @@ const getWishlists = asyncHandler(async (req, res) => {
 // @access  Private
 const setWishlist = asyncHandler(async (req, res) => {
   const { productID, productType } = req.body;
-  const wishlistExists = await Wishlist.findOne({ productID, productType });
+  const existingWishlist = await Wishlist.findOne({ productID, productType });
 
-  if (!wishlistExists) {
+  if (!existingWishlist) {
     const wishlist = await Wishlist.create({
       userID: req.user._id,
       productID: req.body.productID,
@@ -41,7 +36,7 @@ const setWishlist = asyncHandler(async (req, res) => {
     res.status(200).json(wishlist);
   }
 
-  res.status(200).json(wishlistExists);
+  res.status(200).json(existingWishlist);
 });
 
 // @desc    Delete Wishlist
