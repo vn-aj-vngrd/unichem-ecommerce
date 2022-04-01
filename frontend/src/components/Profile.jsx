@@ -1,9 +1,74 @@
 // import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 const Profile = () => {
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   birthday: "",
+  //   sex: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
+
+  // const {
+  //   name,
+  //   birthday,
+  //   sex,
+  //   email,
+  //   password,
+  //   confirmPassword,
+  // } = formData;
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  // const onChange = (e) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   if (password !== confirmPassword) {
+  //     toast.error("Passwords do not match", {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "colored",
+  //     });
+  //   } else {
+  //     const userData = {
+  //       name,
+  //       birthday,
+  //       sex,
+  //       email,
+  //       address: {
+  //         address1,
+  //         address2,
+  //         postalCode,
+  //         phoneNumber,
+  //       },
+  //       password,
+  //       confirmPassword,
+  //     };
+  //     // console.log(userData);
+
+  //     dispatch(register(userData));
+  //   }
+  // };
+
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   
   return (
     <div className="profile-information-column">
