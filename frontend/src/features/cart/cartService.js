@@ -24,7 +24,7 @@ const getCarts = async (token) => {
   };
 
   const response = await axios.get(API_URL, config);
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };

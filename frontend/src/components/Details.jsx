@@ -98,8 +98,8 @@ const Details = ({ product }) => {
       });
     }
 
-    dispatch(resetCart());
     dispatch(resetWishlist());
+    dispatch(resetCart());
   }, [
     isCartError,
     isCartSuccess,
@@ -265,7 +265,7 @@ const Details = ({ product }) => {
                               <input
                                 type="number"
                                 className="quantity-input"
-                                value="0"
+                                defaultValue="0"
                                 min="0"
                                 max="0"
                               />

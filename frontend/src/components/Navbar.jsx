@@ -5,45 +5,15 @@ import { logout, reset } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
 import logo from "../assets/images/logo.svg";
 
-import { getCarts } from "../features/cart/cartSlice";
-import { getWishlists } from "../features/wishlist/wishlistSlice";
-
 const Navbar = ({ userType }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { carts, isCartError, cartMessage } = useSelector(
-    (state) => state.cart
-  );
-  const { wishlists, isWishlistError, wishlistMessage } = useSelector(
-    (state) => state.wishlist
-  );
 
-  useEffect(() => {
-    document.title = "Unichem Store | Cart";
+  useEffect(() => {}, []);
 
-    if (isCartError) {
-      console.log(cartMessage);
-    }
-
-    if (isWishlistError) {
-      console.log(wishlistMessage);
-    }
-
-    dispatch(getCarts());
-    dispatch(getWishlists());
-  }, [
-    user,
-    navigate,
-    isCartError,
-    cartMessage,
-    isWishlistError,
-    wishlistMessage,
-    dispatch,
-  ]);
-
-  const cartCount = carts.length;
-  const wishListCount = wishlists.length;
+  const cartCount = 5;
+  const wishListCount = 5;
 
   const onLogout = () => {
     dispatch(logout());

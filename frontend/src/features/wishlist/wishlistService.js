@@ -24,7 +24,7 @@ const getWishlists = async (token) => {
   };
 
   const response = await axios.get(API_URL, config);
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };
@@ -38,6 +38,7 @@ const deleteWishlist = async (wishlistId, token) => {
   };
 
   const response = await axios.delete(API_URL + wishlistId, config);
+  console.log(response.data);
 
   return response.data;
 };
