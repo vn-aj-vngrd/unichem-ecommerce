@@ -1,14 +1,27 @@
 const asyncHandler = require("express-async-handler");
 
 const Wishlist = require("../models/wishlistModel");
+const Product = require("../models/productModel");
 
 // @desc    Get Wishlists
 // @route   GET /api/Wishlists
 // @access  Private
 const getWishlists = asyncHandler(async (req, res) => {
-  const wishlists = await Wishlist.find({ userID: req.user._id });
+  let wishlists = await Wishlist.find({ userID: req.user._id });
 
-  res.status(200).json(wishlists);
+  let retData = [];
+  for (let i = 0; i < wishlists.length; i++) {
+    let product = await Product.findOne(wishlists[i].productID);
+
+    const wishlist = wishlists[i];
+    const temp  = {...wishlist, product};
+    retData.push(temp);
+  }
+
+  // let retData = { ...wishlists, ...products };
+  // const wishlists = { wishlistItems, products };
+
+  res.status(200).json(retData);
 });
 
 // @desc    Set Wishlist
