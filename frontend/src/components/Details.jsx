@@ -98,8 +98,10 @@ const Details = ({ product }) => {
       });
     }
 
-    dispatch(resetWishlist());
-    dispatch(resetCart());
+    return () => {
+      dispatch(resetWishlist());
+      dispatch(resetCart());
+    };
   }, [
     isCartError,
     isCartSuccess,
