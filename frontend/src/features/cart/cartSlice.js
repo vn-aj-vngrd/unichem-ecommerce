@@ -107,7 +107,7 @@ export const cartSlice = createSlice({
         state.isCartLoading = false;
         state.isCartSuccess = true;
         state.carts = state.carts.filter(
-          (cart) => cart._id !== action.payload.id
+          (cart) => cart._doc._id !== action.payload.id
         );
       })
       .addCase(deleteCart.rejected, (state, action) => {

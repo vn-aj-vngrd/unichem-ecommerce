@@ -104,13 +104,10 @@ const updateCart = asyncHandler(async (req, res) => {
 // @route   DELETE /api/Carts/:id
 // @access  Private
 const deleteCart = asyncHandler(async (req, res) => {
-  const existingCart = await Cart.findById({
-    productID: req.body.productID,
-    productType: req.body.productType,
-  });
+  const cart = await Cart.findById(req.params.id);
 
   // Check for cart
-  if (!existingCart) {
+  if (!cart) {
     res.status(400);
     throw new Error("Cart not found");
   }
@@ -122,16 +119,14 @@ const deleteCart = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the cart user
-  if (existingCart.userID.toString() !== req.user.id) {
+  if (cart.userID.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
 
-  await existingCart.remove();
+  await cart.remove();
 
-  res
-    .status(200)
-    .json({ productID: req.body.productID, productType: req.body.productType });
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
