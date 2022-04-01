@@ -176,7 +176,7 @@ const Signup = () => {
             />
           </div>
           <div className="col-6 mb-3">
-            <label className="form-label">Birthday</label>
+            <label className="form-label">Gender</label>
             <select
               className="form-select"
               id="sex"

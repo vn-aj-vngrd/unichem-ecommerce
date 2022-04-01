@@ -1,6 +1,10 @@
 // import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  
   return (
     <div className="profile-information-column">
       <div className="profile-grid">
@@ -15,11 +19,11 @@ const Profile = () => {
             <div className="profile-information-image-section">
               <img
                 className="profile-information-image"
-                src="https://i.mydramalist.com/kEpQwc.jpg"
+                src={user.image}
                 alt="#"
               />
               <br></br>
-              <h5>Name</h5>
+              <h5>{user.name}</h5>
             </div>
             <hr></hr>
             <br></br>
@@ -27,7 +31,7 @@ const Profile = () => {
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="form-group">
                   <label className="form-label">Name</label>
-                  <input name="name" type="text" value="Your Name" required />
+                  <input name="name" type="text" defaultValue={user.name} required />
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
@@ -35,8 +39,8 @@ const Profile = () => {
                   <label className="form-label">Birthday</label>
                   <input
                     name="subject"
-                    type="text"
-                    value="Your Birthday"
+                    type="date"
+                    defaultValue={user.birthday}
                     required
                   />
                 </div>
@@ -47,16 +51,33 @@ const Profile = () => {
                   <input
                     name="email"
                     type="email"
-                    value="Your Email"
+                    defaultValue="Your Email"
                     required
                   />
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
-                <div className="form-group">
-                  <label className="form-label">Sex</label>
-                  <input name="phone" type="text" value="Sex" required />
-                </div>
+                <label className="form-label">Gender</label>
+                <select
+                  className="form-select"
+                  id="sex"
+                  name="sex"
+                  // value={sex}
+                  // onChange={onChange}
+                  required
+                >
+                  {user.sex === "Male"? (
+                    <>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    </>
+                  ):(
+                    <>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    </>
+                  )}
+                </select>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="form-group">
@@ -64,7 +85,6 @@ const Profile = () => {
                   <input
                     name="password"
                     type="password"
-                    value="Your Password"
                     required
                   />
                 </div>
@@ -75,7 +95,6 @@ const Profile = () => {
                   <input
                     name="confirmPassword"
                     type="password"
-                    value="Confirm Password"
                     required
                   />
                 </div>

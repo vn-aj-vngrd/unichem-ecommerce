@@ -287,7 +287,7 @@ const Navbar = ({ userType }) => {
                       <div className=" mobile-dropdown-hover">
                         <button className="hover-button">
                           <img
-                            src="https://pbs.twimg.com/profile_images/1313999242449416193/mY-iNLOf_400x400.jpg"
+                            src={user.image}
                             className="nav-profile-image"
                             alt=""
                           ></img>
@@ -329,7 +329,7 @@ const Navbar = ({ userType }) => {
                               aria-label="Toggle navigation"
                             >
                               <img
-                                src="https://pbs.twimg.com/profile_images/1313999242449416193/mY-iNLOf_400x400.jpg"
+                                src={user.image}
                                 className="nav-profile-image"
                                 alt=""
                               ></img>
