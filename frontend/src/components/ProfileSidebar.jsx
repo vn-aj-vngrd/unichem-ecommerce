@@ -1,20 +1,24 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 //array of 5 items
 const ShopSidebar = () => {
+  const { user } = useSelector((state) => state.auth);
+
+  
   return (
     <div>
       <div className="profile-sidebar single-widget search">
         <div className="d-flex align-items-center ">
           <div>
             <img
-              src="https://i.mydramalist.com/kEpQwc.jpg"
+              src={user.image}
               alt="#"
               className="profile-image"
             />
           </div>
           <div className="">
-            <h5>Username</h5>
+            <h5>{user.name.split(" ")[0]}</h5>
             <Link className="sidebar-nav" to="/manage">
               Edit Profile
             </Link>

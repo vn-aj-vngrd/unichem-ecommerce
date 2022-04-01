@@ -1,6 +1,75 @@
 // import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const Profile = () => {
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   birthday: "",
+  //   sex: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
+
+  // const {
+  //   name,
+  //   birthday,
+  //   sex,
+  //   email,
+  //   password,
+  //   confirmPassword,
+  // } = formData;
+
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  // const onChange = (e) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   if (password !== confirmPassword) {
+  //     toast.error("Passwords do not match", {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "colored",
+  //     });
+  //   } else {
+  //     const userData = {
+  //       name,
+  //       birthday,
+  //       sex,
+  //       email,
+  //       address: {
+  //         address1,
+  //         address2,
+  //         postalCode,
+  //         phoneNumber,
+  //       },
+  //       password,
+  //       confirmPassword,
+  //     };
+  //     // console.log(userData);
+
+  //     dispatch(register(userData));
+  //   }
+  // };
+
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
+  
   return (
     <div className="profile-information-column">
       <div className="profile-grid">
@@ -15,11 +84,11 @@ const Profile = () => {
             <div className="profile-information-image-section">
               <img
                 className="profile-information-image"
-                src="https://i.mydramalist.com/kEpQwc.jpg"
+                src={user.image}
                 alt="#"
               />
               <br></br>
-              <h5>Name</h5>
+              <h5>{user.name}</h5>
             </div>
             <hr></hr>
             <br></br>
@@ -27,7 +96,7 @@ const Profile = () => {
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="form-group">
                   <label className="form-label">Name</label>
-                  <input name="name" type="text" value="Your Name" required />
+                  <input name="name" type="text" defaultValue={user.name} required />
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
@@ -35,8 +104,8 @@ const Profile = () => {
                   <label className="form-label">Birthday</label>
                   <input
                     name="subject"
-                    type="text"
-                    value="Your Birthday"
+                    type="date"
+                    defaultValue={user.birthday}
                     required
                   />
                 </div>
@@ -47,16 +116,33 @@ const Profile = () => {
                   <input
                     name="email"
                     type="email"
-                    value="Your Email"
+                    defaultValue="Your Email"
                     required
                   />
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
-                <div className="form-group">
-                  <label className="form-label">Sex</label>
-                  <input name="phone" type="text" value="Sex" required />
-                </div>
+                <label className="form-label">Gender</label>
+                <select
+                  className="form-select"
+                  id="sex"
+                  name="sex"
+                  // value={sex}
+                  // onChange={onChange}
+                  required
+                >
+                  {user.sex === "Male"? (
+                    <>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    </>
+                  ):(
+                    <>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    </>
+                  )}
+                </select>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="form-group">
@@ -64,7 +150,6 @@ const Profile = () => {
                   <input
                     name="password"
                     type="password"
-                    value="Your Password"
                     required
                   />
                 </div>
@@ -75,7 +160,6 @@ const Profile = () => {
                   <input
                     name="confirmPassword"
                     type="password"
-                    value="Confirm Password"
                     required
                   />
                 </div>
