@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  getWishlists,
+  resetWishlist,
+} from "../../features/wishlist/wishlistSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 
@@ -8,9 +12,9 @@ const Wishlist = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const { user } = useSelector((state) => state.auth);
+  const { wishlists, isWishlistLoading, isWishlistError, wishlistMessage } =
+    useSelector((state) => state.cart);
 
   useEffect(() => {
     document.title = "Unichem Store | Wishlist";
@@ -18,9 +22,19 @@ const Wishlist = () => {
     if (!user) {
       navigate("/login");
     }
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  if (isLoading) {
+    if (isWishlistError) {
+      console.log(wishlistMessage);
+    }
+
+    dispatch(getWishlists());
+
+    return () => {
+      dispatch(resetWishlist());
+    };
+  }, [user, navigate, isWishlistError, wishlistMessage, dispatch]);
+
+  if (isWishlistLoading) {
     return <Spinner />;
   }
 
@@ -37,12 +51,9 @@ const Wishlist = () => {
               <div className="product-in-cart color-white hide-on-thin-screen">
                 Product
               </div>
-              <div className="price-in-cart color-white hide-on-thin-screen">
-              </div>
-              <div className="price-in-cart color-white hide-on-thin-screen">
-              </div>
-              <div className="total-in-cart color-white hide-on-thin-screen">
-              </div>
+              <div className="price-in-cart color-white hide-on-thin-screen"></div>
+              <div className="price-in-cart color-white hide-on-thin-screen"></div>
+              <div className="total-in-cart color-white hide-on-thin-screen"></div>
               <div className="action-in-cart color-white hide-on-thin-screen">
                 Action
               </div>
@@ -75,24 +86,19 @@ const Wishlist = () => {
                       <h4 className="title">
                         <Link to="/">ProductName</Link>
                       </h4>
-                      <p className="product-des">
-                        <div className="">
-                          Type / Color: Sample, Sample, Sample, Sample
-                        </div>
-                      </p>
-                    </div>
-                    <div className="price-in-cart">
-                      <div className="price">
+                      <div className="product-des">
+                        <p>Type / Color: Sample, Sample, Sample, Sample</p>
                       </div>
                     </div>
                     <div className="price-in-cart">
-                      <div className="price">
-                      </div>
+                      <div className="price"></div>
+                    </div>
+                    <div className="price-in-cart">
+                      <div className="price"></div>
                     </div>
                     <div className="total-in-cart">
                       <div className="price">
-                        <h6>
-                        </h6>
+                        <h6></h6>
                       </div>
                     </div>
                     <div className="action-in-cart">
@@ -110,7 +116,6 @@ const Wishlist = () => {
               </div>
             </div>
             {/* Row End Here */}
-            
           </div>
         </div>
       </div>

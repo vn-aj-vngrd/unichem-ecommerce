@@ -6,7 +6,7 @@ const initialState = {
   isWishlistError: false,
   isWishlistSuccess: false,
   isWishlistLoading: false,
-  cartMessage: "",
+  wishlistMessage: "",
 };
 
 // Create new wishlist
@@ -17,13 +17,13 @@ export const createWishlist = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await wishlistService.createWishlist(wishlistData, token);
     } catch (error) {
-      const cartMessage =
+      const wishlistMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.wishlistMessage) ||
+        error.wishlistMessage ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(wishlistMessage);
     }
   }
 );
@@ -36,13 +36,13 @@ export const getWishlists = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await wishlistService.getWishlists(token);
     } catch (error) {
-      const cartMessage =
+      const wishlistMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.wishlistMessage) ||
+        error.wishlistMessage ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(wishlistMessage);
     }
   }
 );
@@ -55,13 +55,13 @@ export const deleteWishlist = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await wishlistService.deleteWishlist(id, token);
     } catch (error) {
-      const cartMessage =
+      const wishlistMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.wishlistMessage) ||
+        error.wishlistMessage ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(wishlistMessage);
     }
   }
 );
@@ -85,7 +85,7 @@ export const wishlistSlice = createSlice({
       .addCase(createWishlist.rejected, (state, action) => {
         state.isWishlistLoading = false;
         state.isWishlistError = true;
-        state.cartMessage = action.payload;
+        state.wishlistMessage = action.payload;
       })
       .addCase(getWishlists.pending, (state) => {
         state.isWishlistLoading = true;
@@ -98,7 +98,7 @@ export const wishlistSlice = createSlice({
       .addCase(getWishlists.rejected, (state, action) => {
         state.isWishlistLoading = false;
         state.isWishlistError = true;
-        state.cartMessage = action.payload;
+        state.wishlistMessage = action.payload;
       })
       .addCase(deleteWishlist.pending, (state) => {
         state.isWishlistLoading = true;
@@ -113,7 +113,7 @@ export const wishlistSlice = createSlice({
       .addCase(deleteWishlist.rejected, (state, action) => {
         state.isWishlistLoading = false;
         state.isWishlistError = true;
-        state.cartMessage = action.payload;
+        state.wishlistMessage = action.payload;
       });
   },
 });

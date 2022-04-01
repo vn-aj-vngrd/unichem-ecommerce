@@ -6,7 +6,7 @@ const Wishlist = require("../models/wishlistModel");
 // @route   GET /api/Wishlists
 // @access  Private
 const getWishlists = asyncHandler(async (req, res) => {
-  const wishlists = await Wishlist.find({ user: req.user.id });
+  const wishlists = await Wishlist.find({ userID: req.user._id });
 
   res.status(200).json(wishlists);
 });
@@ -15,22 +15,20 @@ const getWishlists = asyncHandler(async (req, res) => {
 // @route   POST /api/Wishlists
 // @access  Private
 const setWishlist = asyncHandler(async (req, res) => {
-  const WishlistExists = await Wishlist.findOneAndUpdate({
-    productID: req.body.productID,
-    productType: req.body.productType,
-  });
+  const { productID, productType } = req.body;
+  const wishlistExists = await Wishlist.findOne({ productID, productType });
 
-  if (!WishlistExists) {
+  if (!wishlistExists) {
     const wishlist = await Wishlist.create({
-      userID: req.user.id,
+      userID: req.user._id,
       productID: req.body.productID,
       productType: req.body.productType,
     });
 
-    return res.status(200).json(wishlist);
+    res.status(200).json(wishlist);
   }
 
-  return res.status(200).json(WishlistExists);
+  res.status(200).json(wishlistExists);
 });
 
 // @desc    Delete Wishlist

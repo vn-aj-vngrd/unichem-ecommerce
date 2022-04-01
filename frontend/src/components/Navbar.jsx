@@ -284,11 +284,12 @@ const Navbar = ({ userType }) => {
                   <>
                     {/*  */}
                     <div className="nav-inner">
-                      <div class=" mobile-dropdown-hover">
+                      <div className=" mobile-dropdown-hover">
                         <button className="hover-button">
                           <img
                             src="https://pbs.twimg.com/profile_images/1313999242449416193/mY-iNLOf_400x400.jpg"
                             className="nav-profile-image"
+                            alt=""
                           ></img>
                           {user.name.split(" ")[0]}
                         </button>
@@ -330,6 +331,7 @@ const Navbar = ({ userType }) => {
                               <img
                                 src="https://pbs.twimg.com/profile_images/1313999242449416193/mY-iNLOf_400x400.jpg"
                                 className="nav-profile-image"
+                                alt=""
                               ></img>
                               {user.name.split(" ")[0]}
                             </Link>
