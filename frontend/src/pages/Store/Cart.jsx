@@ -64,7 +64,7 @@ const Cart = () => {
                 Price
               </div>
               <div className="total-in-cart color-white hide-on-thin-screen">
-                Total Price
+                Total
               </div>
               <div className="action-in-cart color-white hide-on-thin-screen">
                 Action
