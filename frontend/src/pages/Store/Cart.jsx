@@ -37,6 +37,16 @@ const Cart = () => {
     return <Spinner />;
   }
 
+  const count = carts.length;
+  let subtotal = 0;
+  for (let i = 0; i < count; i++) {
+    subtotal +=
+      carts[i].product.prices[carts[i]._doc.productType] *
+      carts[i]._doc.quantity;
+  }
+  const shippingFee = 50;
+  const total = subtotal + shippingFee;
+
   return (
     <>
       <Breadcrumb type="cart" />
@@ -83,7 +93,7 @@ const Cart = () => {
           ) : (
             <></>
           )}
-          <PricingTable />
+          <PricingTable count={count} subtotal={subtotal} shippingFee={shippingFee} total={total}/>
         </div>
       </div>
     </>

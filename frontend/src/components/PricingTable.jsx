@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const PricingTable = () => {
+const PricingTable = ({count, subtotal, shippingFee, total}) => {
   return (
     <>
       <div className="row">
@@ -17,19 +17,19 @@ const PricingTable = () => {
                     <li>
                       Total Items
                       <span>
-                        <p className="fw-bold">69 Items</p>
+                        <p className="fw-bold">{count} Item(s)</p>
                       </span>
                     </li>
                     <li>
                       Cart Subtotal
                       <span>
-                        <p className="fw-bold">₱2000.00</p>
+                        <p className="fw-bold">₱ {subtotal}</p>
                       </span>
                     </li>
                     <li>
                       Shipping Fee
                       <span>
-                        <p className="fw-bold">Free</p>
+                        <p className="fw-bold">₱ {shippingFee}</p>
                       </span>
                     </li>
                   </ul>
@@ -45,7 +45,7 @@ const PricingTable = () => {
                     <div className="price d-flex justify-content-between align-items-center">
                       <div>Order Total:</div>
                       <div className="spacer"></div>
-                      <h5 className="text-danger">$199.00</h5>
+                      <h5 className="text-danger">₱ {total}</h5>
                     </div>
 
                     <div className="button mt-4">
