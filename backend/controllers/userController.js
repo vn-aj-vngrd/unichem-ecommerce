@@ -59,7 +59,13 @@ const registerUser = asyncHandler(async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
     userType: user.userType,
+    image: user.image,
+    userType: user.userType,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
     token: generateToken(user._id),
   });
 });
@@ -73,12 +79,21 @@ const loginUser = asyncHandler(async (req, res) => {
   // check for user email
   const user = await User.findOne({ email });
 
+  const userID = user._id;
+  const userAddress = await Address.findOne({ userID });
+
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
+      sex: user.sex,
+      birthday: user.birthday,
       userType: user.userType,
+      image: user.image,
+      userType: user.userType,
+      address: userAddress.address,
+      primaryAddress: userAddress.primaryAddress,
       token: generateToken(user._id),
     });
   } else {
@@ -91,20 +106,36 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/user
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
-  // const { _id, name, email, birthday, sex, phoneNumber } = await User.findById(
-  //   req.user.id
-  // );
-  // const userAddress = await Address.find({ userAddress: req.user.id });
-  // res.status(200).json({
-  //   id: _id,
-  //   name,
-  //   email,
-  //   birthday,
-  //   sex,
-  //   phoneNumber,
-  //   userAddress,
-  // });
-  // res.status(200).json(req.user);
+  const userID = req.user.id;
+  const user = await User.findById({ userID });
+
+  res.status(200).json(user);
+});
+
+// @desc    Update user data
+// @route   PUT /api/users/user
+// @access  Private
+const updateUser = asyncHandler(async (req, res) => {
+  // Check for user
+  res.status(200).json(req.body);
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  const userID = req.user.id;
+  const user = await User.find({ userID });
+  const { currentPassword } = req.body;
+
+  if (user && (await bcrypt.compare(currentPassword, user.password))) {
+    const updatedUser = await User.findByIdAndUpdate({ userID }, req.body, {
+      new: true,
+    });
+    res.status(200).json(updatedUser);
+  } else {
+    res.status(400);
+    throw new Error("Invalid credentials");
+  }
 });
 
 // Generate JWT Token
@@ -114,4 +145,4 @@ const generateToken = (id) => {
   });
 };
 
-module.exports = { registerUser, loginUser, getUser };
+module.exports = { registerUser, loginUser, getUser, updateUser };

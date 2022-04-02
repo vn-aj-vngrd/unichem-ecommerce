@@ -6,6 +6,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import CartRow from "../../components/CartRow";
 import PricingTable from "../../components/PricingTable";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -24,7 +25,16 @@ const Cart = () => {
     }
 
     if (isCartError) {
-      console.log(cartMessage);
+      toast.error(cartMessage, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
 
     dispatch(getCarts());
@@ -93,7 +103,12 @@ const Cart = () => {
           ) : (
             <></>
           )}
-          <PricingTable count={count} subtotal={subtotal} shippingFee={shippingFee} total={total}/>
+          <PricingTable
+            count={count}
+            subtotal={subtotal}
+            shippingFee={shippingFee}
+            total={total}
+          />
         </div>
       </div>
     </>

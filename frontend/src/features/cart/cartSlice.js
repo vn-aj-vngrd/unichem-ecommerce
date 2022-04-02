@@ -143,7 +143,7 @@ export const cartSlice = createSlice({
         const idx = state.carts.findIndex(
           (obj) => obj._doc._id === action.payload._id
         );
-        state.carts[idx]._doc= action.payload;
+        state.carts[idx]._doc = action.payload;
       })
       .addCase(updateCart.rejected, (state, action) => {
         state.isCartLoading = false;
