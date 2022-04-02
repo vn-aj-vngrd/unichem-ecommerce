@@ -9,13 +9,11 @@ const Navbar = ({ userType }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { carts } = useSelector((state) => state.cart);
-  const { wishlists } = useSelector((state) => state.wishlist);
 
   useEffect(() => {}, []);
 
-  const cartCount = carts.length;
-  const wishListCount = wishlists.length;
+  const cartCount = 0
+  const wishListCount = 0;
 
   const onLogout = () => {
     dispatch(logout());

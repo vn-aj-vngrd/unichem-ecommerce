@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const Address = require("../models/addressModel");
+const Cart = require("../models/cartModel");
+const Wishlist = require("../models/wishlistModel");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -81,6 +83,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const userID = user._id;
   const userAddress = await Address.findOne({ userID });
+  const cart = await Cart.find({ userID });
+  const wishlist = await Wishlist.find({ userID });
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
@@ -93,6 +97,8 @@ const loginUser = asyncHandler(async (req, res) => {
       image: user.image,
       userType: user.userType,
       address: userAddress.address,
+      cartCount: cart.length,
+      wishlistCount: wishlist.length,
       primaryAddress: userAddress.primaryAddress,
       token: generateToken(user._id),
     });

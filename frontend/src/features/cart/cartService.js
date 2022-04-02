@@ -2,8 +2,8 @@ import axios from "axios";
 
 const API_URL = "/api/carts/";
 
-// Create new cart
-const createCart = async (cartData, token) => {
+// Set cart
+const setCart = async (cartData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ const deleteCart = async (cartId, token) => {
 };
 
 const cartService = {
-  createCart,
+  setCart,
   getCarts,
   updateCart,
   deleteCart,
