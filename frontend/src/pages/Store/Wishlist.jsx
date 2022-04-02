@@ -45,9 +45,16 @@ const Wishlist = () => {
         <div className="container">
           <div className="purchase-row-banner cart-banner">
             <div className="d-flex cart-product-left">
-              <div className="image-in-cart color-white hide-on-thin-screen"></div>
+              <div className="image-in-cart color-white">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                ></input>
+              </div>
             </div>
-            <div className="cart-product-right">
+            <div className="cart-product-right hide-on-thin-screen">
               <div className="product-in-cart color-white hide-on-thin-screen">
                 Product
               </div>

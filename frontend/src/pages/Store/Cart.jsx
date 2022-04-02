@@ -64,7 +64,7 @@ const Cart = () => {
               </div>
               <div className="image-in-cart color-white hide-on-thin-screen"></div>
             </div>
-            <div className="cart-product-right">
+            <div className="cart-product-right hide-on-thin-screen">
               <div className="product-in-cart color-white hide-on-thin-screen">
                 <>Product</>
               </div>
