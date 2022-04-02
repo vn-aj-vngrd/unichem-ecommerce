@@ -74,17 +74,17 @@ const updateCart = asyncHandler(async (req, res) => {
     throw new Error("Cart not found");
   }
 
-  // // Check for user
-  // if (!req.user) {
-  //   res.status(401);
-  //   throw new Error("User not found");
-  // }
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
 
-  // // Make sure the logged in user matches the cart user
-  // if (cart.userID.toString() !== req.user.id) {
-  //   res.status(401);
-  //   throw new Error("User not authorized");
-  // }
+  // Make sure the logged in user matches the cart user
+  if (existingCart.userID.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
 
   // Update cart
   const updatedCart = await Cart.findOneAndUpdate(

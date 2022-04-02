@@ -38,7 +38,7 @@ const updateCart = async (cartParams, token) => {
   };
 
   const response = await axios.put(API_URL + cartParams.id, cartParams, config);
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };
