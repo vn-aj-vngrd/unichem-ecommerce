@@ -2,8 +2,8 @@ import axios from "axios";
 
 const API_URL = "/api/wishlists/";
 
-// Create new wishlist
-const createWishlist = async (wishlistData, token) => {
+// Set wishlist
+const setWishlist = async (wishlistData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -44,7 +44,7 @@ const deleteWishlist = async (wishlistId, token) => {
 };
 
 const wishlistService = {
-  createWishlist,
+  setWishlist,
   getWishlists,
   deleteWishlist,
 };

@@ -1,10 +1,36 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateCart } from "../features/cart/cartSlice";
 
-const Quantity = ({max, quantity}) => {
+const Quantity = ({ cartID, max, quantity }) => {
   const [counter, setCounter] = useState(quantity);
+  const dispatch = useDispatch();
+
   let decrement, increment;
-  if (counter > 1) decrement = () => setCounter(counter - 1);
-  if (counter < max) increment = () => setCounter(counter + 1);
+
+  if (counter > 1) {
+    decrement = () => {
+      setCounter(counter - 1);
+      const temp = counter - 1;
+      const cartParams = {
+        quantity: temp,
+        id: cartID,
+      };
+      dispatch(updateCart(cartParams));
+    };
+  }
+
+  if (counter < max) {
+    increment = () => {
+      setCounter(counter + 1);
+      const temp = counter + 1;
+      const cartParams = {
+        quantity: temp,
+        id: cartID,
+      };
+      dispatch(updateCart(cartParams));
+    };
+  }
 
   let handleChange = (e) => {
     setCounter(e.target.value);

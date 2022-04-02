@@ -29,6 +29,20 @@ const getCarts = async (token) => {
   return response.data;
 };
 
+// Update user cart
+const updateCart = async (cartParams, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(API_URL + cartParams.id, cartParams, config);
+  console.log(response.data);
+
+  return response.data;
+};
+
 // Delete user cart
 const deleteCart = async (cartId, token) => {
   const config = {
@@ -45,6 +59,7 @@ const deleteCart = async (cartId, token) => {
 const cartService = {
   createCart,
   getCarts,
+  updateCart,
   deleteCart,
 };
 

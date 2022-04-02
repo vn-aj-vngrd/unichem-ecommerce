@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { createCart, resetCart } from "../features/cart/cartSlice";
-import {
-  createWishlist,
-  resetWishlist,
-} from "../features/wishlist/wishlistSlice";
+import { setCart, resetCart } from "../features/cart/cartSlice";
+import { setWishlist, resetWishlist } from "../features/wishlist/wishlistSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Swal from "sweetalert2";
@@ -129,7 +126,7 @@ const Details = ({ product }) => {
       max: product.quantities[value],
     };
 
-    dispatch(createCart(cartData));
+    dispatch(setCart(cartData));
   };
 
   const addToWishlist = (e) => {
@@ -139,7 +136,7 @@ const Details = ({ product }) => {
       productType: value,
     };
 
-    dispatch(createWishlist(wishlistData));
+    dispatch(setWishlist(wishlistData));
   };
 
   if (isCartLoading || isWishlistLoading) {

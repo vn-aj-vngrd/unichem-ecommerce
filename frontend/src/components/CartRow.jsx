@@ -46,6 +46,7 @@ const CartRow = ({ cart }) => {
 
             <div className="quantity-in-cart">
               <Quantity
+                cartID={cart._doc._id}
                 max={cart.product.quantities[cart._doc.productType]}
                 quantity={cart._doc.quantity}
               />

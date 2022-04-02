@@ -9,13 +9,13 @@ const initialState = {
   cartMessage: "",
 };
 
-// Create new cart
-export const createCart = createAsyncThunk(
-  "carts/create",
+// Set  cart
+export const setCart = createAsyncThunk(
+  "carts/set",
   async (cartData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await cartService.createCart(cartData, token);
+      return await cartService.setCart(cartData, token);
     } catch (error) {
       const cartMessage =
         (error.response &&
@@ -35,6 +35,25 @@ export const getCarts = createAsyncThunk(
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.getCarts(token);
+    } catch (error) {
+      const cartMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.cartMessage) ||
+        error.cartMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(cartMessage);
+    }
+  }
+);
+
+// Update user cart
+export const updateCart = createAsyncThunk(
+  "carts/update",
+  async (cartParams, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await cartService.updateCart(cartParams, token);
     } catch (error) {
       const cartMessage =
         (error.response &&
@@ -74,15 +93,15 @@ export const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createCart.pending, (state) => {
+      .addCase(setCart.pending, (state) => {
         state.isCartLoading = true;
       })
-      .addCase(createCart.fulfilled, (state, action) => {
+      .addCase(setCart.fulfilled, (state, action) => {
         state.isCartLoading = false;
         state.isCartSuccess = true;
         state.carts.push(action.payload);
       })
-      .addCase(createCart.rejected, (state, action) => {
+      .addCase(setCart.rejected, (state, action) => {
         state.isCartLoading = false;
         state.isCartError = true;
         state.cartMessage = action.payload;
@@ -111,6 +130,22 @@ export const cartSlice = createSlice({
         );
       })
       .addCase(deleteCart.rejected, (state, action) => {
+        state.isCartLoading = false;
+        state.isCartError = true;
+        state.cartMessage = action.payload;
+      })
+      .addCase(updateCart.pending, (state) => {
+        state.isCartLoading = true;
+      })
+      .addCase(updateCart.fulfilled, (state, action) => {
+        state.isCartLoading = false;
+        state.isCartSuccess = true;
+        const idx = state.carts.findIndex(
+          (obj) => obj._doc._id === action.payload._id
+        );
+        state.carts[idx]._doc= action.payload;
+      })
+      .addCase(updateCart.rejected, (state, action) => {
         state.isCartLoading = false;
         state.isCartError = true;
         state.cartMessage = action.payload;

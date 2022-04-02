@@ -9,13 +9,13 @@ const initialState = {
   wishlistMessage: "",
 };
 
-// Create new wishlist
-export const createWishlist = createAsyncThunk(
-  "wishlists/create",
+// Set wishlist
+export const setWishlist = createAsyncThunk(
+  "wishlists/set",
   async (wishlistData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await wishlistService.createWishlist(wishlistData, token);
+      return await wishlistService.setWishlist(wishlistData, token);
     } catch (error) {
       const wishlistMessage =
         (error.response &&
@@ -74,15 +74,15 @@ export const wishlistSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createWishlist.pending, (state) => {
+      .addCase(setWishlist.pending, (state) => {
         state.isWishlistLoading = true;
       })
-      .addCase(createWishlist.fulfilled, (state, action) => {
+      .addCase(setWishlist.fulfilled, (state, action) => {
         state.isWishlistLoading = false;
         state.isWishlistSuccess = true;
         state.wishlists.push(action.payload);
       })
-      .addCase(createWishlist.rejected, (state, action) => {
+      .addCase(setWishlist.rejected, (state, action) => {
         state.isWishlistLoading = false;
         state.isWishlistError = true;
         state.wishlistMessage = action.payload;
