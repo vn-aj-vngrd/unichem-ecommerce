@@ -63,7 +63,7 @@ const Profile = () => {
     };
     // console.log(userData);
     dispatch(update(userData));
-    toast.sucess("User updated successfully", {
+    toast.success("User updated successfully", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
