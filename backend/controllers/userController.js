@@ -38,6 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     userType,
+    image: "https://img.icons8.com/ios-glyphs/344/user--v1.png",
   });
   const userAddress = await Address.create({
     userID: user._id,
@@ -64,7 +65,7 @@ const registerUser = asyncHandler(async (req, res) => {
     sex: user.sex,
     birthday: user.birthday,
     userType: user.userType,
-    image: user.image,
+    image: "https://img.icons8.com/ios-glyphs/344/user--v1.png",
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
     token: generateToken(user._id),
@@ -129,6 +130,9 @@ const updateUser = asyncHandler(async (req, res) => {
   const { currentPassword } = req.body;
 
   if (user && (await bcrypt.compare(currentPassword, user.password))) {
+    // hash the password using bcrypt
+    const salt = await bcrypt.genSalt(10);
+    req.body.password = await bcrypt.hash(req.body.password, salt);
     const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
@@ -140,7 +144,7 @@ const updateUser = asyncHandler(async (req, res) => {
       sex: updatedUser.sex,
       birthday: updatedUser.birthday,
       userType: updatedUser.userType,
-      image: updatedUser.image,
+      image: user.image,
       userType: updatedUser.userType,
       address: userAddress.address,
       primaryAddress: userAddress.primaryAddress,
