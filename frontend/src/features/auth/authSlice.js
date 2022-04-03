@@ -51,13 +51,13 @@ export const update = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await authService.update(userData, token);
     } catch (error) {
-      const cartMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -120,7 +120,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
+        // state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;

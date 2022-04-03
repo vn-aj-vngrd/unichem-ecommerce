@@ -44,19 +44,6 @@ const Profile = () => {
       });
     }
 
-    if (isSuccess) {
-      toast.success(message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
-
     // dispatch(get());
     return () => {
       dispatch(reset());
@@ -74,7 +61,7 @@ const Profile = () => {
       password,
       currentPassword,
     };
-    console.log(userData);
+    // console.log(userData);
     dispatch(update(userData));
   };
 
@@ -167,7 +154,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label className="form-label">Current Password</label>
                   <input
-                    name="password"
+                    name="currentPassword"
                     type="password"
                     onChange={onChange}
                     required
@@ -178,7 +165,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label className="form-label">New Password</label>
                   <input
-                    name="currentPassword"
+                    name="password"
                     type="password"
                     onChange={onChange}
                     required

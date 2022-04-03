@@ -65,7 +65,6 @@ const registerUser = asyncHandler(async (req, res) => {
     birthday: user.birthday,
     userType: user.userType,
     image: user.image,
-    userType: user.userType,
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
     token: generateToken(user._id),
@@ -83,8 +82,6 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const userID = user._id;
   const userAddress = await Address.findOne({ userID });
-  const cart = await Cart.find({ userID });
-  const wishlist = await Wishlist.find({ userID });
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
@@ -95,10 +92,7 @@ const loginUser = asyncHandler(async (req, res) => {
       birthday: user.birthday,
       userType: user.userType,
       image: user.image,
-      userType: user.userType,
       address: userAddress.address,
-      cartCount: cart.length,
-      wishlistCount: wishlist.length,
       primaryAddress: userAddress.primaryAddress,
       token: generateToken(user._id),
     });
@@ -115,7 +109,7 @@ const getUser = asyncHandler(async (req, res) => {
   const userID = req.user.id;
   const user = await User.findById({ userID });
 
-  res.status(200).json(user);
+  // res.status(200).json(user);
 });
 
 // @desc    Update user data
@@ -123,24 +117,38 @@ const getUser = asyncHandler(async (req, res) => {
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
   // Check for user
-  res.status(200).json(req.body);
+
   if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
-  const userID = req.user.id;
-  const user = await User.find({ userID });
+  const userAddress = await Address.findOne({ userID: req.user.id });
+
+  const user = await User.findById(req.user.id);
   const { currentPassword } = req.body;
 
   if (user && (await bcrypt.compare(currentPassword, user.password))) {
-    const updatedUser = await User.findByIdAndUpdate({ userID }, req.body, {
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
-    res.status(200).json(updatedUser);
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      sex: updatedUser.sex,
+      birthday: updatedUser.birthday,
+      userType: updatedUser.userType,
+      image: updatedUser.image,
+      userType: updatedUser.userType,
+      address: userAddress.address,
+      primaryAddress: userAddress.primaryAddress,
+      token: generateToken(updatedUser._id),
+    });
   } else {
     res.status(400);
-    throw new Error("Invalid credentials");
+    throw new Error("Your current password is incorrect.");
   }
 });
 
