@@ -8,6 +8,7 @@ import {
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import WishlistRow from "../../components/WishlistRow";
+import WishlistSummary from "../../components/WishlistSummary";
 
 const Wishlist = () => {
   const navigate = useNavigate();
@@ -77,6 +78,7 @@ const Wishlist = () => {
               </>
             )}
           </div>
+          <WishlistSummary count={wishlists.length} />
         </div>
       </div>
     </>

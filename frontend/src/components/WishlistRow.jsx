@@ -42,8 +42,10 @@ const WishlistRow = ({ wishlist }) => {
             <div className="price-in-cart">
               <div className="price"></div>
             </div>
-            <div className="total-in-cart">
-              <div className="price"></div>
+            <div className="action-in-cart">
+              <button className="remove-item" onClick="">
+                <i className="lni lni-cart"></i>
+              </button>
             </div>
             <div className="action-in-cart">
               <button
@@ -60,6 +62,11 @@ const WishlistRow = ({ wishlist }) => {
               onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
             >
               <i className="lni lni-close"></i>
+            </button>
+          </div>
+          <div className="action-in-cart-2">
+            <button className="remove-item" onClick="">
+              <i className="lni lni-cart"></i>
             </button>
           </div>
         </div>
