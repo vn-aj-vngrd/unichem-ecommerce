@@ -1,8 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import wishlistService from "./wishlistService";
 
+// Get user from localStorage
+const wishlistsCount = localStorage.getItem("wishlistCount");
+
 const initialState = {
   wishlists: [],
+  wishlistCount: wishlistsCount ? wishlistsCount : 0,
   isWishlistError: false,
   isWishlistSuccess: false,
   isWishlistLoading: false,
@@ -81,6 +85,7 @@ export const wishlistSlice = createSlice({
         state.isWishlistLoading = false;
         state.isWishlistSuccess = true;
         state.wishlists.push(action.payload);
+        state.wishlistCount = null;
       })
       .addCase(setWishlist.rejected, (state, action) => {
         state.isWishlistLoading = false;
@@ -94,6 +99,7 @@ export const wishlistSlice = createSlice({
         state.isWishlistLoading = false;
         state.isWishlistSuccess = true;
         state.wishlists = action.payload;
+        state.wishlistCount = action.payload.length;
       })
       .addCase(getWishlists.rejected, (state, action) => {
         state.isWishlistLoading = false;
@@ -108,7 +114,7 @@ export const wishlistSlice = createSlice({
         state.isWishlistSuccess = true;
         state.wishlists = state.wishlists.filter(
           (wishlist) => wishlist._doc._id !== action.payload.id
-          );
+        );
       })
       .addCase(deleteWishlist.rejected, (state, action) => {
         state.isWishlistLoading = false;

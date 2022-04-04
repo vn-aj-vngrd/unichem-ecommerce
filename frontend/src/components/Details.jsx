@@ -66,38 +66,16 @@ const Details = ({ product }) => {
     }
 
     if (isCartSuccess) {
-      Swal.fire({
-        title: "Item was added to your cart.",
-        text: "To checkout, please proceed to the cart page.",
-        icon: "success",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
-        cancelButtonText: "Close",
-      }).then((result) => {
-        if (result.isConfirmed) navigate("/cart");
-      });
+      // console.log(wishlistMessage);
     }
 
     if (isWishlistSuccess) {
-      Swal.fire({
-        title: "Item was added to your wishlist.",
-        text: "To view your wishlist, please proceed to the wishlist page.",
-        icon: "success",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
-        cancelButtonText: "Close",
-      }).then((result) => {
-        if (result.isConfirmed) navigate("/wishlist");
-      });
+      // console.log(wishlistMessage);
     }
 
     return () => {
-      dispatch(resetWishlist());
       dispatch(resetCart());
+      dispatch(resetWishlist());
     };
   }, [
     isCartError,
@@ -127,6 +105,18 @@ const Details = ({ product }) => {
     };
 
     dispatch(setCart(cartData));
+    Swal.fire({
+      title: "Item was added to your cart.",
+      text: "To checkout, please proceed to the cart page.",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
+      cancelButtonText: "Close",
+    }).then((result) => {
+      if (result.isConfirmed) navigate("/cart");
+    });
   };
 
   const addToWishlist = (e) => {
@@ -137,6 +127,18 @@ const Details = ({ product }) => {
     };
 
     dispatch(setWishlist(wishlistData));
+    Swal.fire({
+      title: "Item was added to your wishlist.",
+      text: "To view your wishlist, please proceed to the wishlist page.",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
+      cancelButtonText: "Close",
+    }).then((result) => {
+      if (result.isConfirmed) navigate("/wishlist");
+    });
   };
 
   if (isCartLoading || isWishlistLoading) {
