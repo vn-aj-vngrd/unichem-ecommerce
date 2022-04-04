@@ -319,7 +319,7 @@ const Navbar = ({ userType }) => {
                           <li className="nav-item">
                             <Link to="/">
                               <button className="logout-btn" onClick={onLogout}>
-                                <i className="lni lni-logout"></i>Log out
+                                <i className="lni lni-exit"></i>Log out
                               </button>
                             </Link>
                           </li>
@@ -366,7 +366,7 @@ const Navbar = ({ userType }) => {
                                     className="logout-btn"
                                     onClick={onLogout}
                                   >
-                                    <i className="lni lni-logout"></i>Log out
+                                    <i className="lni lni-exist"></i>Log out
                                   </button>
                                 </Link>
                               </li>
