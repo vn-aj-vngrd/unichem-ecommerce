@@ -16,12 +16,12 @@ const Navbar = ({ userType }) => {
 
   useEffect(() => {
     return () => {
-      // dispatch(resetCart());
+      dispatch(resetCart());
       dispatch(resetUser());
     };
   }, [dispatch]);
 
-  let userCartCount = carts.length;
+  let userCartCount = 0;
   let userWishlistCount = 0;
 
   const onLogout = () => {
