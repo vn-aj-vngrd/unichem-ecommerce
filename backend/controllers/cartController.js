@@ -7,9 +7,9 @@ const Product = require("../models/productModel");
 // @route   GET /api/Carts
 // @access  Private
 const getCarts = asyncHandler(async (req, res) => {
-  const carts = await Cart.find({ userID: req.user._id }).sort({
-    createdAt: "desc",
-  });
+  const carts = await Cart.find({ userID: req.user._id }); //.sort({
+  //   createdAt: "desc",
+  // });
 
   let retData = [];
   for (let i = 0; i < carts.length; i++) {

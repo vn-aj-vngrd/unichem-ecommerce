@@ -30,8 +30,15 @@ const Navbar = ({ userType }) => {
     };
   }, [dispatch]);
 
-  const wishlistCount = localStorage.getItem("wishlistCount");
-  const cartCount = localStorage.getItem("cartCount");
+  let wishlistCount;
+  let cartCount;
+  if (!user) {
+    wishlistCount = 0;
+    cartCount = 0;
+  } else {
+    wishlistCount = localStorage.getItem("wishlistCount");
+    cartCount = localStorage.getItem("cartCount");
+  }
 
   const onLogout = () => {
     dispatch(logout());

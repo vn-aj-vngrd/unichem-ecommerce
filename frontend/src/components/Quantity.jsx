@@ -33,14 +33,23 @@ const Quantity = ({ cartID, max, quantity }) => {
   }
 
   let handleChange = (e) => {
+    let val = e.target.value;
     setCounter(e.target.value);
 
     if (e.target.value > max) {
       setCounter(max);
+      val = max;
     }
     if (e.target.value < 0) {
       setCounter(1);
+      val = 1;
     }
+
+    const cartParams = {
+      quantity: val,
+      id: cartID,
+    };
+    dispatch(updateCart(cartParams));
   };
   return (
     <div>
