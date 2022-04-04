@@ -1,3 +1,210 @@
+// // import { Link } from "react-router-dom";
+// import { useState, useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { update, resetUser } from "../features/auth/authSlice";
+// import Spinner from "../components/Spinner";
+// import { toast } from "react-toastify";
+
+// const Profile = () => {
+//   const dispatch = useDispatch();
+
+//   const { user, isLoading, isError, isSuccess, message } = useSelector(
+//     (state) => state.auth
+//   );
+
+//   const [formData, setFormData] = useState({
+//     name: user.name,
+//     birthday: user.birthday,
+//     sex: user.sex,
+//     email: user.email,
+//     password: "",
+//     currentPassword: "",
+//   });
+
+//   const { name, birthday, sex, email, password, currentPassword } = formData;
+
+//   const onChange = (e) => {
+//     setFormData((prevState) => ({
+//       ...prevState,
+//       [e.target.name]: e.target.value,
+//     }));
+//   };
+
+//   useEffect(() => {
+//     if (isError) {
+//       toast.error(message, {
+//         position: "top-center",
+//         autoClose: 5000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: true,
+//         draggable: true,
+//         progress: undefined,
+//         theme: "colored",
+//       });
+//     }
+
+//     if (isSuccess) {
+//       toast.success(message, {
+//         position: "top-center",
+//         autoClose: 5000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: true,
+//         draggable: true,
+//         progress: undefined,
+//         theme: "colored",
+//       });
+//     }
+
+//     // dispatch(get());
+//     return () => {
+//       dispatch(resetUser());
+//     };
+//   }, [isError, isSuccess, message, dispatch]);
+
+//   const onSubmit = (e) => {
+//     e.preventDefault();
+
+//     const userData = {
+//       name,
+//       birthday,
+//       sex,
+//       email,
+//       password,
+//       currentPassword,
+//     };
+//     console.log(userData);
+//     // console.log(userData);
+//     dispatch(update(userData));
+//   };
+
+//   if (isLoading) {
+//     return <Spinner />;
+//   }
+
+//   return (
+//     <div className="profile-information-column">
+//       <div className="profile-grid">
+//         <h5>My Profile</h5>
+//       </div>
+
+//       <div className="contact-form-head">
+//         <div className="form-main">
+//           <form className="form" onSubmit={onSubmit}>
+//             <h5>Personal Information</h5>
+//             <br />
+//             <div className="profile-information-image-section">
+//               <img
+//                 className="profile-information-image"
+//                 src={user.image}
+//                 alt="#"
+//               />
+//               <br />
+//               <h5>{user.name}</h5>
+//             </div>
+//             <hr></hr>
+//             <br />
+//             <div className="row">
+//               <div className="col-lg-6 col-md-6 col-12">
+//                 <div className="form-group">
+//                   <label className="form-label">Name</label>
+//                   <input
+//                     name="name"
+//                     type="text"
+//                     value={name}
+//                     onChange={onChange}
+//                     required
+//                   />
+//                 </div>
+//               </div>
+//               <div className="col-lg-6 col-md-6 col-12">
+//                 <div className="form-group">
+//                   <label className="form-label">Birthday</label>
+//                   <input
+//                     name="birthday"
+//                     type="date"
+//                     value={birthday}
+//                     onChange={onChange}
+//                     required
+//                   />
+//                 </div>
+//               </div>
+//               <div className="col-lg-6 col-md-6 col-12">
+//                 <div className="form-group">
+//                   <label className="form-label">Email Address</label>
+//                   <input
+//                     name="email"
+//                     type="email"
+//                     value={email}
+//                     onChange={onChange}
+//                     required
+//                   />
+//                 </div>
+//               </div>
+//               <div className="col-lg-6 col-md-6 col-12">
+//                 <label className="form-label">Gender</label>
+//                 <select
+//                   className="form-select"
+//                   name="sex"
+//                   value={sex}
+//                   onChange={onChange}
+//                   required
+//                 >
+//                   {user.sex === "Male" ? (
+//                     <>
+//                       <option value="Male">Male</option>
+//                       <option value="Female">Female</option>
+//                     </>
+//                   ) : (
+//                     <>
+//                       <option value="Female">Female</option>
+//                       <option value="Male">Male</option>
+//                     </>
+//                   )}
+//                 </select>
+//               </div>
+//               <div className="col-lg-6 col-md-6 col-12">
+//                 <div className="form-group">
+//                   <label className="form-label">Current Password</label>
+//                   <input
+//                     name="currentPassword"
+//                     type="password"
+//                     onChange={onChange}
+//                     required
+//                   />
+//                 </div>
+//               </div>
+//               <div className="col-lg-6 col-md-6 col-12">
+//                 <div className="form-group">
+//                   <label className="form-label">New Password</label>
+//                   <input
+//                     name="password"
+//                     type="password"
+//                     onChange={onChange}
+//                     required
+//                   />
+//                 </div>
+//               </div>
+//               <br />
+//               <div className="col-12">
+//                 <div className="form-group button text-center">
+//                   <br />
+//                   <button type="submit" className="btn ">
+//                     Save Changes
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           </form>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Profile;
+
 // import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,18 +219,18 @@ const Profile = () => {
     (state) => state.auth
   );
 
-  console.log(user);
-
   const [formData, setFormData] = useState({
     name: user.name,
     birthday: user.birthday,
     sex: user.sex,
     email: user.email,
-    password: "",
+    // image: "",
+  });
+
+  const [formPassword, setFormPassword] = useState({
     newPassword: "",
     confirmNewPassword: "",
     currentPassword: "",
-    image: "",
   });
 
   const {
@@ -31,18 +238,47 @@ const Profile = () => {
     birthday,
     sex,
     email,
-    password,
-    newPassword,
-    confirmNewPassword,
-    currentPassword,
-    image,
+    // image,
   } = formData;
 
-  const onChange = (e) => {
+  const { newPassword, confirmNewPassword, currentPassword } = formPassword;
+
+  // const [formData, setFormData] = useState({
+  //   name: user.name,
+  //   birthday: user.birthday,
+  //   sex: user.sex,
+  //   email: user.email,
+  //   newPassword: "",
+  //   confirmNewPassword: "",
+  //   currentPassword: "",
+  //   // image: "",
+  // });
+
+  // const {
+  //   name,
+  //   birthday,
+  //   sex,
+  //   email,
+  //   newPassword,
+  //   confirmNewPassword,
+  //   currentPassword,
+  //   // image,
+  // } = formData;
+
+  const onChangeData = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+    // console.log(e.target.files[0]);
+  };
+
+  const onChangePassword = (e) => {
+    setFormPassword((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+    // console.log(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -65,7 +301,7 @@ const Profile = () => {
     };
   }, [isError, isSuccess, message, dispatch]);
 
-  const onSubmit = (e) => {
+  const onSubmitData = (e) => {
     e.preventDefault();
 
     const userData = {
@@ -73,11 +309,57 @@ const Profile = () => {
       birthday,
       sex,
       email,
-      password,
+      // image,
+    };
+
+    dispatch(update(userData));
+    toast.success("User updated successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const onSubmitPassword = (e) => {
+    e.preventDefault();
+
+    if (newPassword !== confirmNewPassword) {
+      toast.error("Passwords do not match", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+    if (newPassword.length <= 8) {
+      toast.error("Password must contain atleast 8 characters", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
+    const userData = {
       newPassword,
       confirmNewPassword,
       currentPassword,
-      image,
+      // image,
     };
 
     dispatch(update(userData));
@@ -105,9 +387,9 @@ const Profile = () => {
 
       <div className="">
         <div className="checkout-steps-form-style">
-          <form className="form" onSubmit={onSubmit}>
-            <ul id="accordionExample">
-              <li className=" box-shadow">
+          <ul id="accordionExample">
+            <li className=" box-shadow">
+              <form className="form" onSubmit={onSubmitData}>
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -130,7 +412,6 @@ const Profile = () => {
                         <img
                           className="profile-information-image"
                           src={user.image}
-                          alt=""
                         ></img>
                         <label
                           className="upload-image-label"
@@ -141,8 +422,8 @@ const Profile = () => {
                         <input
                           type="file"
                           name="image"
-                          value={image}
-                          onChange={onChange}
+                          // value={image}
+                          // onChange={onChange}
                           id="upload-photo"
                         />
                       </div>
@@ -159,7 +440,7 @@ const Profile = () => {
                             name="name"
                             type="text"
                             value={name}
-                            onChange={onChange}
+                            onChange={onChangeData}
                             required
                           />
                         </div>
@@ -173,7 +454,7 @@ const Profile = () => {
                             name="birthday"
                             type="date"
                             value={birthday}
-                            onChange={onChange}
+                            onChange={onChangeData}
                             required
                           />
                         </div>
@@ -187,7 +468,7 @@ const Profile = () => {
                             name="email"
                             type="email"
                             value={email}
-                            onChange={onChange}
+                            onChange={onChangeData}
                             required
                           />
                         </div>
@@ -201,7 +482,7 @@ const Profile = () => {
                             className="form-select"
                             name="sex"
                             value={sex}
-                            onChange={onChange}
+                            onChange={onChangeData}
                             required
                           >
                             {user.sex === "Male" ? (
@@ -221,23 +502,18 @@ const Profile = () => {
                     </div>
                     <div className="col-md-12">
                       <div className="steps-form-btn button">
-                        <button
-                          className="btn"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseTwo"
-                          aria-expanded="false"
-                          aria-controls="collapseTwo"
-                          type="submit"
-                        >
+                        <button className="btn" type="submit">
                           Save Changes
                         </button>
                       </div>
                     </div>
                   </div>
                 </section>
-              </li>
+              </form>
+            </li>
 
-              <li className=" box-shadow">
+            <li className=" box-shadow">
+              <form className="form" onSubmit={onSubmitPassword}>
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -262,7 +538,7 @@ const Profile = () => {
                             name="newPassword"
                             type="password"
                             value={newPassword}
-                            onChange={onChange}
+                            onChange={onChangePassword}
                             required
                           />
                         </div>
@@ -273,10 +549,10 @@ const Profile = () => {
                         <label className="form-label">Confirm Password</label>
                         <div className="form-input form">
                           <input
-                            name="ConfirmNewPassword"
+                            name="confirmNewPassword"
                             type="password"
                             value={confirmNewPassword}
-                            onChange={onChange}
+                            onChange={onChangePassword}
                             required
                           />
                         </div>
@@ -288,34 +564,27 @@ const Profile = () => {
                         <label className="form-label">Current Password</label>
                         <div className="form-input form">
                           <input
-                            name="password"
+                            name="currentPassword"
                             type="password"
                             value={currentPassword}
-                            onChange={onChange}
-                            required
+                            onChange={onChangePassword}
+                            // required
                           />
                         </div>
                       </div>
                     </div>
                     <div className="col-md-12">
                       <div className="steps-form-btn button">
-                        <button
-                          className="btn"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseTwo"
-                          aria-expanded="false"
-                          aria-controls="collapseTwo"
-                          type="submit"
-                        >
+                        <button className="btn" type="submit">
                           Save Changes
                         </button>
                       </div>
                     </div>
                   </div>
                 </section>
-              </li>
-            </ul>
-          </form>
+              </form>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

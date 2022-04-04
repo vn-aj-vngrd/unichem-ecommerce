@@ -95,25 +95,39 @@ const Signup = () => {
         progress: undefined,
         theme: "colored",
       });
-    } else {
-      const userData = {
-        name,
-        birthday,
-        sex,
-        email,
-        address: {
-          address1,
-          address2,
-          postalCode,
-          phoneNumber,
-        },
-        password,
-        confirmPassword,
-      };
-      // console.log(userData);
-
-      dispatch(register(userData));
+      return;
     }
+    if (password.length <= 8) {
+      toast.error("Password must contain atleast 8 characters", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
+    const userData = {
+      name,
+      birthday,
+      sex,
+      email,
+      address: {
+        address1,
+        address2,
+        postalCode,
+        phoneNumber,
+      },
+      password,
+      confirmPassword,
+    };
+    // console.log(userData);
+
+    dispatch(register(userData));
   };
 
   if (isLoading) {

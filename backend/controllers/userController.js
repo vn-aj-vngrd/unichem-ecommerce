@@ -124,15 +124,23 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  console.log(req.body);
+
   const userAddress = await Address.findOne({ userID: req.user.id });
-
   const user = await User.findById(req.user.id);
-  const { currentPassword } = req.body;
 
-  if (user && (await bcrypt.compare(currentPassword, user.password))) {
-    // hash the password using bcrypt
-    const salt = await bcrypt.genSalt(10);
-    req.body.password = await bcrypt.hash(req.body.password, salt);
+  if (user) {
+    // Check if body is password
+    if (req.body.newPassword) {
+      if (await bcrypt.compare(req.body.currentPassword, user.password)) {
+        // hash the password using bcrypt
+        const salt = await bcrypt.genSalt(10);
+        req.body.newPassword = await bcrypt.hash(req.body.newPassword, salt);
+      } else {
+        res.status(400);
+        throw new Error("Your current password is incorrect.");
+      }
+    }
     const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
@@ -150,9 +158,6 @@ const updateUser = asyncHandler(async (req, res) => {
       primaryAddress: userAddress.primaryAddress,
       token: generateToken(updatedUser._id),
     });
-  } else {
-    res.status(400);
-    throw new Error("Your current password is incorrect.");
   }
 });
 
