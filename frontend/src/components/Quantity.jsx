@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateCart } from "../features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const Quantity = ({ cartID, max, quantity }) => {
   const [counter, setCounter] = useState(quantity);
@@ -37,19 +38,35 @@ const Quantity = ({ cartID, max, quantity }) => {
     setCounter(e.target.value);
 
     if (e.target.value > max) {
+      toast.error("Quantity cannot be greater than max stock quantity.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       setCounter(max);
-      val = max;
+    } else if (e.target.value < 1) {
+      toast.error("Quantity cannot be less than 1.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      const cartParams = {
+        quantity: val,
+        id: cartID,
+      };
+      dispatch(updateCart(cartParams));
     }
-    if (e.target.value < 0) {
-      setCounter(1);
-      val = 1;
-    }
-
-    const cartParams = {
-      quantity: val,
-      id: cartID,
-    };
-    dispatch(updateCart(cartParams));
   };
   return (
     <>
