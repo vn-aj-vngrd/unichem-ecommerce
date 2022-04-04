@@ -1,7 +1,10 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PricingTable = ({ count, subtotal, shippingFee, total }) => {
+  const clearCart = () => {
+    console.log("clear cart");
+  };
   return (
     <>
       <div className="row">
@@ -55,7 +58,10 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
                     </div>
 
                     <div className="button mt-3">
-                      <button className="btn-alt checkout-btn">
+                      <button
+                        className="btn-alt checkout-btn"
+                        onClick={clearCart}
+                      >
                         Clear Cart
                       </button>
                     </div>
