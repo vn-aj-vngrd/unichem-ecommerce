@@ -97,7 +97,7 @@ const Signup = () => {
       });
       return;
     }
-    if (password.length <= 8) {
+    if (password.length < 8) {
       toast.error("Password must contain atleast 8 characters", {
         position: "top-center",
         autoClose: 5000,
