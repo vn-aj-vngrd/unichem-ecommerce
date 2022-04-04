@@ -8,11 +8,11 @@ import Swal from "sweetalert2";
 const PricingTable = ({ count, subtotal, shippingFee, total }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(resetCart());
-  //   };
-  // }, [dispatch]);
+  useEffect(() => {
+    return () => {
+      dispatch(resetCart());
+    };
+  }, [dispatch]);
 
   const clearCart = () => {
     Swal.fire({
