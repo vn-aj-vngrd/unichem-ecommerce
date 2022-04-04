@@ -130,10 +130,11 @@ const Profile = () => {
                         <img
                           className="profile-information-image"
                           src={user.image}
+                          alt=""
                         ></img>
                         <label
                           className="upload-image-label"
-                          for="upload-photo"
+                          htmlFor="upload-photo"
                         >
                           <i className="lni lni-pencil"></i>
                         </label>
