@@ -65,7 +65,7 @@ const registerUser = asyncHandler(async (req, res) => {
     sex: user.sex,
     birthday: user.birthday,
     userType: user.userType,
-    image: "https://img.icons8.com/ios-glyphs/344/user--v1.png",
+    image: user.image,
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
     token: generateToken(user._id),
@@ -81,10 +81,9 @@ const loginUser = asyncHandler(async (req, res) => {
   // check for user email
   const user = await User.findOne({ email });
 
-  const userID = user._id;
-  const userAddress = await Address.findOne({ userID });
-
   if (user && (await bcrypt.compare(password, user.password))) {
+    const userID = user._id;
+    const userAddress = await Address.findOne({ userID });
     res.json({
       _id: user._id,
       name: user.name,

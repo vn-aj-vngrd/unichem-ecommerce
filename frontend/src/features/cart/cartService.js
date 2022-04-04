@@ -20,6 +20,7 @@ const setCart = async (cartData, token) => {
 
 // Get user carts
 const getCarts = async (token) => {
+  console.log("test");
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

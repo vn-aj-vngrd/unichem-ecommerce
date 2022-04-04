@@ -25,7 +25,7 @@ const Wishlist = () => {
     }
 
     if (isWishlistError) {
-      console.log(wishlistMessage);
+      // console.log(wishlistMessage);
     }
     dispatch(getWishlists());
 

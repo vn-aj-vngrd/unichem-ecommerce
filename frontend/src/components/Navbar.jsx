@@ -41,6 +41,7 @@ const Navbar = ({ userType }) => {
   }
 
   const onLogout = () => {
+    localStorage.clear();
     dispatch(logout());
     dispatch(resetUser());
     navigate("/");
