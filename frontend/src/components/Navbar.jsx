@@ -20,15 +20,17 @@ const Navbar = ({ userType }) => {
   const { carts } = useSelector((state) => state.cart);
 
   useEffect(() => {
-    dispatch(getWishlists());
-    dispatch(getCarts());
+    if (user) {
+      dispatch(getWishlists());
+      dispatch(getCarts());
 
-    return () => {
-      dispatch(resetUser());
-      dispatch(resetWishlist());
-      dispatch(resetCart());
-    };
-  }, [dispatch]);
+      return () => {
+        dispatch(resetUser());
+        dispatch(resetWishlist());
+        dispatch(resetCart());
+      };
+    }
+  }, [user, dispatch]);
 
   let wishlistCount;
   let cartCount;
