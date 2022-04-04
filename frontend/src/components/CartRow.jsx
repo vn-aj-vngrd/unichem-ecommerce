@@ -11,14 +11,6 @@ const CartRow = ({ cart }) => {
       <div className="cart-single-list">
         <div className="d-flex single-cart-product">
           <div className="d-flex align-items-center cart-product-left">
-            <div className="include-in-cart form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="flexCheckDefault"
-              ></input>
-            </div>
             <div className="image-in-cart">
               <Link to="/products">
                 <img src={cart.product.image} alt="" />

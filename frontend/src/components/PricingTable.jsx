@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const PricingTable = ({count, subtotal, shippingFee, total}) => {
+const PricingTable = ({ count, subtotal, shippingFee, total }) => {
   return (
     <>
       <div className="row">
@@ -52,6 +52,12 @@ const PricingTable = ({count, subtotal, shippingFee, total}) => {
                       <Link to="/checkout" className="btn checkout-btn">
                         Checkout
                       </Link>
+                    </div>
+
+                    <div className="button mt-3">
+                      <button className="btn-alt checkout-btn">
+                        Clear Cart
+                      </button>
                     </div>
                   </div>
                 </div>
