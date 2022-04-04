@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts, reset } from "../features/products/productSlice";
+import { getProducts, resetProduct } from "../features/products/productSlice";
 import Star from "./Star";
 import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
@@ -29,7 +29,7 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
     dispatch(getProducts());
 
     return () => {
-      dispatch(reset());
+      dispatch(resetProduct());
     };
   }, [user, navigate, isError, message, dispatch]);
 

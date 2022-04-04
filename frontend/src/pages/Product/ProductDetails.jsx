@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts, reset } from "../../features/products/productSlice";
+import { getProducts, resetProduct } from "../../features/products/productSlice";
 import { createAction } from "@reduxjs/toolkit";
 import Details from "../../components/Details";
 import Specifications from "../../components/Specifications";
@@ -29,7 +29,7 @@ const ProductDetails = () => {
     dispatch(getProducts());
 
     return () => {
-      dispatch(reset());
+      dispatch(resetProduct());
     };
   }, [navigate, isError, message, dispatch]);
 

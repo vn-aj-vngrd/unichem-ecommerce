@@ -1,23 +1,32 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset } from "../features/auth/authSlice";
+import { logout, resetUser } from "../features/auth/authSlice";
+import { getCarts, resetCart } from "../features/cart/cartSlice";
 import { toast } from "react-toastify";
 import logo from "../assets/images/logo.svg";
 
 const Navbar = ({ userType }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { user } = useSelector((state) => state.auth);
+  const { carts } = useSelector((state) => state.cart);
+  // const { wishlists } = useSelector((state) => state.wishlist);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    return () => {
+      // dispatch(resetCart());
+      dispatch(resetUser());
+    };
+  }, [dispatch]);
 
-  const cartCount = 0
-  const wishListCount = 0;
+  let userCartCount = carts.length;
+  let userWishlistCount = 0;
 
   const onLogout = () => {
     dispatch(logout());
-    dispatch(reset());
+    dispatch(resetUser());
     navigate("/");
     toast.success("User has logged out", {
       position: "top-center",
@@ -76,14 +85,14 @@ const Navbar = ({ userType }) => {
                     <div className="wishlist">
                       <Link to="/wishlist">
                         <i className="lni lni-heart"></i>
-                        <span className="total-items">{wishListCount}</span>
+                        <span className="total-items">{userWishlistCount}</span>
                       </Link>
                     </div>
 
                     <div className="cart-items">
                       <Link to="/cart" className="main-btn">
                         <i className="lni lni-cart"></i>
-                        <span className="total-items">{cartCount}</span>
+                        <span className="total-items">{userCartCount}</span>
                       </Link>
                     </div>
                   </div>
@@ -385,7 +394,7 @@ const Navbar = ({ userType }) => {
         </div>
       </header>
     );
-  } else {
+  } else if (userType === "admin") {
     return (
       <>
         <nav className="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">

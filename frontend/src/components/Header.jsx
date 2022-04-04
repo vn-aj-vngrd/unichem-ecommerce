@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout, reset } from "../features/auth/authSlice";
+import { logout, resetUser } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
 import Notification from "./Notification";
 import admin from "../assets/images/admin.svg";
@@ -11,7 +11,7 @@ const Header = () => {
 
   const onLogout = () => {
     dispatch(logout());
-    dispatch(reset());
+    dispatch(resetUser());
     navigate("/");
     toast.success("User Logged Out", {
       position: "top-center",

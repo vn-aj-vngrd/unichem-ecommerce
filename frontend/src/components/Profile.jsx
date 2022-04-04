@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { update, reset } from "../features/auth/authSlice";
+import { update, resetUser } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 
@@ -46,7 +46,7 @@ const Profile = () => {
 
     // dispatch(get());
     return () => {
-      dispatch(reset());
+      dispatch(resetUser());
     };
   }, [isError, isSuccess, message, dispatch]);
 

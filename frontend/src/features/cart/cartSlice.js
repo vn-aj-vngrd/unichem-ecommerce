@@ -107,17 +107,17 @@ export const cartSlice = createSlice({
         state.cartMessage = action.payload;
       })
       .addCase(getCarts.pending, (state) => {
-        state.isCartLoading = true;
+        state.isLoading = true;
       })
       .addCase(getCarts.fulfilled, (state, action) => {
-        state.isCartLoading = false;
-        state.isCartSuccess = true;
+        state.isLoading = false;
+        state.isSuccess = true;
         state.carts = action.payload;
       })
       .addCase(getCarts.rejected, (state, action) => {
-        state.isCartLoading = false;
-        state.isCartError = true;
-        state.cartMessage = action.payload;
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(deleteCart.pending, (state) => {
         state.isCartLoading = true;

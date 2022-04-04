@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, reset } from "../features/auth/authSlice";
+import { register, resetUser } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 const Signup = () => {
@@ -78,7 +78,7 @@ const Signup = () => {
       navigate("/");
     }
 
-    dispatch(reset());
+    dispatch(resetUser());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onSubmit = (e) => {

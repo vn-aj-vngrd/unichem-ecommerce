@@ -36,7 +36,6 @@ const Cart = () => {
         theme: "colored",
       });
     }
-
     dispatch(getCarts());
     return () => {
       dispatch(resetCart());

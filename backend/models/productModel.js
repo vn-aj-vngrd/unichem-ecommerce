@@ -30,8 +30,8 @@ const productSchema = mongoose.Schema(
       type: Array,
       required: [true, "Product Price is required"],
     },
-    salePrices: {
-      type: Array,
+    salePercent: {
+      type: Number,
     },
     isSale: {
       type: Boolean,

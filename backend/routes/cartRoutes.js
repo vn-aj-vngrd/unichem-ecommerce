@@ -5,6 +5,7 @@ const {
   setCart,
   updateCart,
   deleteCart,
+  getCartCount,
 } = require("../controllers/cartController");
 
 const { protect } = require("../middleware/authMiddleware");

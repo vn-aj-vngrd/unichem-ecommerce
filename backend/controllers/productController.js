@@ -6,7 +6,9 @@ const Product = require("../models/productModel");
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find();
+  const products = await Product.find().sort({
+    createdAt: "desc",
+  });
   return res.status(200).json(products);
 });
 

@@ -130,4 +130,5 @@ module.exports = {
   setCart,
   updateCart,
   deleteCart,
+  getCartCount,
 };
