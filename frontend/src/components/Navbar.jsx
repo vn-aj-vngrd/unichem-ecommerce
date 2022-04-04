@@ -6,6 +6,7 @@ import {
   getWishlists,
   resetWishlist,
 } from "../features/wishlist/wishlistSlice";
+import { getCarts, resetCart } from "../features/cart/cartSlice";
 
 import { toast } from "react-toastify";
 import logo from "../assets/images/logo.svg";
@@ -15,20 +16,22 @@ const Navbar = ({ userType }) => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { wishlistCount } = useSelector((state) => state.wishlist);
+  const { wishlists } = useSelector((state) => state.wishlist);
+  const { carts } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(getWishlists());
+    dispatch(getCarts());
+
     return () => {
       dispatch(resetUser());
       dispatch(resetWishlist());
+      dispatch(resetCart());
     };
   }, [dispatch]);
 
-  console.log(wishlistCount);
-
-  let userCartCount = 0;
-  const userWishlistCount = wishlistCount;
+  const wishlistCount = localStorage.getItem("wishlistCount");
+  const cartCount = localStorage.getItem("cartCount");
 
   const onLogout = () => {
     dispatch(logout());
@@ -91,14 +94,14 @@ const Navbar = ({ userType }) => {
                     <div className="wishlist">
                       <Link to="/wishlist">
                         <i className="lni lni-heart"></i>
-                        <span className="total-items">{userWishlistCount}</span>
+                        <span className="total-items">{wishlistCount}</span>
                       </Link>
                     </div>
 
                     <div className="cart-items">
                       <Link to="/cart" className="main-btn">
                         <i className="lni lni-cart"></i>
-                        <span className="total-items">{userCartCount}</span>
+                        <span className="total-items">{cartCount}</span>
                       </Link>
                     </div>
                   </div>

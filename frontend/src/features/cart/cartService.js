@@ -12,6 +12,9 @@ const setCart = async (cartData, token) => {
 
   const response = await axios.post(API_URL, cartData, config);
 
+  let temp = localStorage.getItem("cartCount");
+  localStorage.setItem("cartCount", ++temp);
+
   return response.data;
 };
 
@@ -25,6 +28,10 @@ const getCarts = async (token) => {
 
   const response = await axios.get(API_URL, config);
   // console.log(response.data);
+
+  if (response.data) {
+    localStorage.setItem("cartCount", JSON.stringify(response.data.length));
+  }
 
   return response.data;
 };
@@ -52,6 +59,9 @@ const deleteCart = async (cartId, token) => {
   };
 
   const response = await axios.delete(API_URL + cartId, config);
+
+  let temp = localStorage.getItem("cartCount");
+  localStorage.setItem("cartCount", --temp);
 
   return response.data;
 };
