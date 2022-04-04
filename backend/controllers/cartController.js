@@ -66,7 +66,8 @@ const setCart = asyncHandler(async (req, res) => {
 // @route   PUT /api/Carts/:id
 // @access  Private
 const updateCart = asyncHandler(async (req, res) => {
-  const existingCart = await Cart.findById(req.params.id);
+  const _id = req.body.id;
+  let existingCart = await Cart.findById(_id);
 
   // Check for cart
   if (!existingCart) {
@@ -87,8 +88,8 @@ const updateCart = asyncHandler(async (req, res) => {
   }
 
   // Update cart
-  const updatedCart = await Cart.findOneAndUpdate(
-    req.params.id,
+  const updatedCart = await Cart.findByIdAndUpdate(
+    _id,
     { quantity: req.body.quantity },
     { new: true }
   );

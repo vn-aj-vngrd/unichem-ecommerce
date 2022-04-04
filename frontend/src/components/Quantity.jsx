@@ -52,8 +52,7 @@ const Quantity = ({ cartID, max, quantity }) => {
     dispatch(updateCart(cartParams));
   };
   return (
-    <div>
-      {" "}
+    <>
       <div className="quantity-control text-center">
         <button className="quantity-btn" onClick={decrement}>
           <svg viewBox="0 0 409.6 409.6">
@@ -76,7 +75,7 @@ const Quantity = ({ cartID, max, quantity }) => {
           </svg>
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
