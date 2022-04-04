@@ -131,7 +131,12 @@ const Signup = () => {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <>
+        <Spinner />
+        <div className="empty-container"></div>
+      </>
+    );
   }
 
   return (

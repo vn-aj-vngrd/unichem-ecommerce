@@ -35,7 +35,12 @@ const Wishlist = () => {
   }, [user, navigate, isWishlistError, wishlistMessage, dispatch]);
 
   if (isWishlistLoading) {
-    return <Spinner />;
+    return (
+      <>
+        <Spinner />
+        <div className="empty-container"></div>
+      </>
+    );
   }
 
   return (
@@ -77,7 +82,7 @@ const Wishlist = () => {
                 ))}
               </>
             ) : (
-              <></>
+              <><div className="empty-container-sm"></div></>
             )}
           </div>
         </div>

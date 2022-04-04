@@ -56,6 +56,15 @@ const Cart = () => {
   const shippingFee = 50;
   const total = subtotal + shippingFee;
 
+  if (isCartLoading) {
+    return (
+      <>
+        <Spinner />
+        <div className="empty-container"></div>
+      </>
+    );
+  }
+
   return (
     <>
       <Breadcrumb type="cart" />

@@ -75,7 +75,12 @@ const Login = () => {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <>
+        <Spinner />
+        <div className="empty-container"></div>
+      </>
+    );
   }
 
   return (
