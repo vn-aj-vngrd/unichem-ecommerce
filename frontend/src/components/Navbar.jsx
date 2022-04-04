@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, resetUser } from "../features/auth/authSlice";
-import { getCarts, resetCart } from "../features/cart/cartSlice";
+import {
+  getWishlists,
+  resetWishlist,
+} from "../features/wishlist/wishlistSlice";
+
 import { toast } from "react-toastify";
 import logo from "../assets/images/logo.svg";
 
@@ -11,18 +15,20 @@ const Navbar = ({ userType }) => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { carts } = useSelector((state) => state.cart);
-  // const { wishlists } = useSelector((state) => state.wishlist);
+  const { wishlistCount } = useSelector((state) => state.wishlist);
 
   useEffect(() => {
+    dispatch(getWishlists());
     return () => {
-      dispatch(resetCart());
       dispatch(resetUser());
+      dispatch(resetWishlist());
     };
   }, [dispatch]);
 
+  console.log(wishlistCount);
+
   let userCartCount = 0;
-  let userWishlistCount = 0;
+  const userWishlistCount = wishlistCount;
 
   const onLogout = () => {
     dispatch(logout());
