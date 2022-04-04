@@ -68,7 +68,7 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
 
   // Pagination
   allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
-  console.log(allProducts.length)
+  console.log(allProducts.length);
   const pageCount = Math.ceil(products.length / productsPerPage);
 
   const changePage = ({ selected }) => {
@@ -150,9 +150,13 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
                 <div className="single-product">
                   <div className="product-image">
                     {/* promo  CLASS (.sale-tag OR .new-tag)*/}
-                    <div className="sale-tag">
-                      <b>-100% OFF</b>
-                    </div>
+                    {product.salePercent > 0 ? (
+                      <div className="sale-tag">
+                        <b>- {product.salePercent}% OFF</b>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                     {/* end of promo */}
                     <img src={product.image} alt={product.productName} />
                     <div className="button">
