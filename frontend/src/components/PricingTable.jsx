@@ -1,9 +1,37 @@
 import React from "react";
+import { deleteAllCart, resetCart } from "../features/cart/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const PricingTable = ({ count, subtotal, shippingFee, total }) => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(resetCart());
+  //   };
+  // }, [dispatch]);
+
   const clearCart = () => {
-    console.log("clear cart");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Delete all items in the cart",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Cleared!", "Your cart has been cleared.", "success");
+        const userID = {
+          id: user._id,
+        };
+        dispatch(deleteAllCart(userID));
+      }
+    });
   };
   return (
     <>

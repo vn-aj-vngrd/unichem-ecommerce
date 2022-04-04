@@ -85,6 +85,25 @@ export const deleteCart = createAsyncThunk(
   }
 );
 
+// Delete all user cart
+export const deleteAllCart = createAsyncThunk(
+  "carts/deleteAll",
+  async (userID, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await cartService.deleteAllCart(userID, token);
+    } catch (error) {
+      const cartMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.cartMessage) ||
+        error.cartMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(cartMessage);
+    }
+  }
+);
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -119,6 +138,22 @@ export const cartSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+      .addCase(updateCart.pending, (state) => {
+        state.isCartLoading = true;
+      })
+      .addCase(updateCart.fulfilled, (state, action) => {
+        state.isCartLoading = false;
+        state.isCartSuccess = true;
+        const idx = state.carts.findIndex(
+          (obj) => obj._doc._id === action.payload._id
+        );
+        state.carts[idx]._doc = action.payload;
+      })
+      .addCase(updateCart.rejected, (state, action) => {
+        state.isCartLoading = false;
+        state.isCartError = true;
+        state.cartMessage = action.payload;
+      })
       .addCase(deleteCart.pending, (state) => {
         state.isCartLoading = true;
       })
@@ -134,18 +169,15 @@ export const cartSlice = createSlice({
         state.isCartError = true;
         state.cartMessage = action.payload;
       })
-      .addCase(updateCart.pending, (state) => {
+      .addCase(deleteAllCart.pending, (state) => {
         state.isCartLoading = true;
       })
-      .addCase(updateCart.fulfilled, (state, action) => {
+      .addCase(deleteAllCart.fulfilled, (state, action) => {
         state.isCartLoading = false;
         state.isCartSuccess = true;
-        const idx = state.carts.findIndex(
-          (obj) => obj._doc._id === action.payload._id
-        );
-        state.carts[idx]._doc = action.payload;
+        state.carts = [];
       })
-      .addCase(updateCart.rejected, (state, action) => {
+      .addCase(deleteAllCart.rejected, (state, action) => {
         state.isCartLoading = false;
         state.isCartError = true;
         state.cartMessage = action.payload;

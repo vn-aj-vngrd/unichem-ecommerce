@@ -68,11 +68,31 @@ const deleteCart = async (cartId, token) => {
   return response.data;
 };
 
+// Delete all user cart
+const deleteAllCart = async (userID, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(
+    API_URL + "deleteallcart/" + userID.id,
+    config
+  );
+  // console.log(response.data);
+
+  localStorage.setItem("cartCount", "0");
+
+  return response.data;
+};
+
 const cartService = {
   setCart,
   getCarts,
   updateCart,
   deleteCart,
+  deleteAllCart,
 };
 
 export default cartService;

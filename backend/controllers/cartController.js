@@ -40,7 +40,7 @@ const setCart = asyncHandler(async (req, res) => {
       productType: req.body.productType,
       quantity: req.body.quantity,
     });
-    res.status(200).json(newCart);
+    return res.status(200).json(newCart);
   }
 
   // If cart "current quantity + req quanity" is greater than max then throw error
@@ -59,7 +59,7 @@ const setCart = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  res.status(200).json(updatedCart);
+  return res.status(200).json(updatedCart);
 });
 
 // @desc    Update Cart
@@ -130,13 +130,7 @@ const deleteCart = asyncHandler(async (req, res) => {
 // @route   DELETE /api/Carts/deleteAll
 // @access  Private
 const deleteAllCart = asyncHandler(async (req, res) => {
-  const cart = await Cart.find(req.user._id);
-
-  // Check for cart
-  if (!cart) {
-    res.status(400);
-    throw new Error("Cart not found");
-  }
+  const cart = await Cart.find({ userID: req.params.id });
 
   // Check for user
   if (!req.user) {
@@ -144,13 +138,9 @@ const deleteAllCart = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  // Make sure the logged in user matches the cart user
-  if (cart.userID.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
+  for (let i = 0; i < cart.length; i++) {
+    await cart[i].remove();
   }
-
-  await cart.remove();
 
   res.status(200).json({ id: req.params.id });
 });
