@@ -54,9 +54,14 @@ const Featured = () => {
                     <div className="single-product">
                       <div className="product-image featured-product-image">
                         {/* promo  CLASS (.sale-tag OR .new-tag)*/}
-                        <div className="sale-tag">
-                          <b>-100% OFF</b>
-                        </div>
+                        {product.salePercent > 0 ? (
+                          <div className="sale-tag">
+                            <b>- {product.salePercent}% OFF</b>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+
                         {/* end of promo */}
                         <img
                           src={product.image}
