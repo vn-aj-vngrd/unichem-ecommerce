@@ -35,7 +35,7 @@ const setWishlist = asyncHandler(async (req, res) => {
       productType: req.body.productType,
     });
 
-    res.status(200).json(wishlist);
+    return res.status(200).json(wishlist);
   }
 
   res.status(200).json(existingWishlist);

@@ -59,7 +59,7 @@ const setCart = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  return res.status(200).json(updatedCart);
+  res.status(200).json(updatedCart);
 });
 
 // @desc    Update Cart
