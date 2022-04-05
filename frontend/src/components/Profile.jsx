@@ -132,7 +132,8 @@ const Profile = () => {
       currentPassword,
     };
 
-    console.log(userData);
+    // console.log(userData);
+    setFormPassword(formData);
     dispatch(update(userData));
     toast.success("User updated successfully", {
       position: "top-center",

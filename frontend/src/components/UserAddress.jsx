@@ -28,7 +28,7 @@ const Profile = () => {
     }));
   };
 
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     if (isError) {
@@ -82,10 +82,10 @@ const Profile = () => {
       primaryAddress: index,
     };
 
-    console.log(userData);
-
+    // console.log(userData);
     dispatch(update(userData));
-    toast.success("Address created successfully", {
+
+    toast.success("Address updated successfully", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
