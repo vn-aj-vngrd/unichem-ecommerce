@@ -94,6 +94,10 @@ button:focus,
   height: 1000px;
 }
 
+.empty-container-md {
+  height: 821px;
+}
+
 .empty-container-sm {
   height: 100px;
 }

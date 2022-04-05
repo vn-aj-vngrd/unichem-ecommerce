@@ -44,6 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
     userID: user._id,
     address: [
       {
+        addressName: address.addressName,
         address1: address.address1,
         address2: address.address2,
         postalCode: address.postalCode,

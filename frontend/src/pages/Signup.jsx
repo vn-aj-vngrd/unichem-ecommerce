@@ -84,6 +84,29 @@ const Signup = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    if (birthday) {
+      const today = new Date();
+      const birthDate = new Date(birthday); // create a date object directly from `dob1` argument
+      let age_now = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age_now--;
+      }
+      if (age_now < 18) {
+        toast.error("You must be at least 18 years old to register.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        return;
+      }
+    }
+
     if (password !== confirmPassword) {
       toast.error("Passwords do not match", {
         position: "top-center",
@@ -97,8 +120,9 @@ const Signup = () => {
       });
       return;
     }
+
     if (password.length < 8) {
-      toast.error("Password must contain atleast 8 characters", {
+      toast.error("Password must be at least 8 characters.", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
