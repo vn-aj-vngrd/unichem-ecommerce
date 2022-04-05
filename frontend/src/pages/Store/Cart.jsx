@@ -30,7 +30,7 @@ const Cart = () => {
 
     dispatch(getCarts());
     return () => {
-      dispatch(resetCart());
+      // dispatch(resetCart());
     };
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
@@ -71,23 +71,23 @@ const Cart = () => {
       <Breadcrumb type="cart" />
       <div className="shopping-cart">
         <div className="container">
-          <div class="cart-list-head">
-            <div class="cart-list-title purchase-row-banner">
-              <div class="row">
-                <div class="col-lg-1 col-md-1 col-12"></div>
-                <div class="col-lg-4 col-md-3 col-12">
+          <div className="cart-list-head">
+            <div className="cart-list-title purchase-row-banner">
+              <div className="row">
+                <div className="col-lg-1 col-md-1 col-12"></div>
+                <div className="col-lg-4 col-md-3 col-12">
                   <p>Product Name</p>
                 </div>
-                <div class="col-lg-2 col-md-2 col-12">
+                <div className="col-lg-2 col-md-2 col-12">
                   <p>Quantity</p>
                 </div>
-                <div class="col-lg-2 col-md-2 col-12">
+                <div className="col-lg-2 col-md-2 col-12">
                   <p>Subtotal</p>
                 </div>
-                <div class="col-lg-2 col-md-2 col-12">
-                  <p>Discount</p>
+                <div className="col-lg-2 col-md-2 col-12">
+                  <p>Total</p>
                 </div>
-                <div class="col-lg-1 col-md-2 col-12">
+                <div className="col-lg-1 col-md-2 col-12">
                   <p>Remove</p>
                 </div>
               </div>

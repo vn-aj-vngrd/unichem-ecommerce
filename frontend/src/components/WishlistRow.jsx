@@ -38,33 +38,33 @@ const WishlistRow = ({ wishlist }) => {
     <>
       {/* Row Start Here */}
       <div className="cart-list-head accordion-bodybox-shadow box-shadow">
-      <div class="cart-single-list">
-        <div class="row align-items-center">
-          <div class="col-lg-1 col-md-1 col-12">
-            <Link to="/products">
-              <img src={wishlist.product.image} alt="" />
-            </Link>
-          </div>
-          <div class="col-lg-4 col-md-3 col-12">
-            <h5 class="">
-              <Link to="/">{wishlist.product.productName}</Link>
-            </h5>
-            <p class="product-des">
-              <span>
-                <em>
-                  <i className="lni lni-package category-icon"></i>Category:{" "}
-                </em>{" "}
-                {wishlist.product.category}
-              </span>
-              <span>
-                <em>Type / Color:</em>{" "}
-                {wishlist.product.types[wishlist._doc.productType]}
-              </span>
-            </p>
-          </div>
-          <div class="col-lg-2 col-md-2 col-12">
-            {/* <div class="count-input">
-              <select class="form-control">
+        <div className="cart-single-list">
+          <div className="row align-items-center">
+            <div className="col-lg-1 col-md-1 col-12">
+              <Link to="/products">
+                <img src={wishlist.product.image} alt="" />
+              </Link>
+            </div>
+            <div className="col-lg-4 col-md-3 col-12">
+              <h5 className="">
+                <Link to="/">{wishlist.product.productName}</Link>
+              </h5>
+              <p className="product-des">
+                <span>
+                  <em>
+                    <i className="lni lni-package category-icon"></i>Category:{" "}
+                  </em>{" "}
+                  {wishlist.product.category}
+                </span>
+                <span>
+                  <em>Type / Color:</em>{" "}
+                  {wishlist.product.types[wishlist._doc.productType]}
+                </span>
+              </p>
+            </div>
+            <div className="col-lg-2 col-md-2 col-12">
+              {/* <div className="count-input">
+              <select className="form-control">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -72,28 +72,32 @@ const WishlistRow = ({ wishlist }) => {
                 <option>5</option>
               </select>
             </div> */}
-          </div>
-          <div class="col-lg-2 col-md-2 col-12">
-            <p>$910.00</p>
-          </div>
-          <div class="col-lg-2 col-md-2 col-12">
-            <p>₱ {wishlist.product.prices[wishlist._doc.productType]}</p>
-          </div>
-          <div class="col-lg-1 col-md-2 col-12">
-            <button
-              className="remove-item"
-              onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
-            >
-              <i className="lni lni-close"></i>
-            </button>
-            <button className="add-item" onClick={addToCart}>
+            </div>
+            <div className="col-lg-2 col-md-2 col-12">
+              <p>₱ {wishlist.product.prices[wishlist._doc.productType]}</p>
+            </div>
+            <div className="col-lg-2 col-md-2 col-12">
+              {wishlist.product.salePercent > 0 ? (
+                <p>- {wishlist.product.salePercent}% OFF</p>
+              ) : (
+                <p>Unavailable</p>
+              )}
+            </div>
+            <div className="col-lg-1 col-md-2 col-12">
+              <button
+                className="remove-item"
+                onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
+              >
+                <i className="lni lni-close"></i>
+              </button>
+              <button className="add-item" onClick={addToCart}>
                 <i className="lni lni-cart"></i>
               </button>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-{/* 
+      {/* 
       <div className="cart-list-head accordion-bodybox-shadow">
         <div className="cart-single-list">
           <div className="d-flex single-cart-product">

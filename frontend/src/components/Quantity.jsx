@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateCart } from "../features/cart/cartSlice";
+import { updateCart, resetCart } from "../features/cart/cartSlice";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Quantity = ({ cartID, max, quantity }) => {
   const [counter, setCounter] = useState(quantity);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      // dispatch(resetCart());
+    };
+  }, [dispatch]);
 
   let decrement, increment;
 

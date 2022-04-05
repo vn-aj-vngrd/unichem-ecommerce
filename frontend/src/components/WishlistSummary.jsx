@@ -16,7 +16,7 @@ const WishlistSummary = ({ wishlists, count }) => {
   useEffect(() => {
     return () => {
       dispatch(resetCart());
-      dispatch(resetWishlist());
+      // dispatch(resetWishlist());
     };
   }, [dispatch]);
 

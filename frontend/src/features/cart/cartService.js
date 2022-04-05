@@ -48,10 +48,10 @@ const updateCart = async (cartParams, token) => {
     },
   };
 
-  console.log(cartParams);
+  // console.log(cartParams);
 
   const response = await axios.put(API_URL, cartParams, config);
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };

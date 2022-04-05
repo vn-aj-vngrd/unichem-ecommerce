@@ -1,26 +1,33 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteCart } from "../features/cart/cartSlice";
+import { resetCart, deleteCart } from "../features/cart/cartSlice";
 import Quantity from "../components/Quantity";
+import { useEffect } from "react";
 
 const CartRow = ({ cart }) => {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    return () => {
+      // dispatch(resetCart());
+    };
+  }, [dispatch]);
+
   return (
     <>
       <div className="cart-list-head accordion-bodybox-shadow box-shadow">
-        <div class="cart-single-list">
-          <div class="row align-items-center">
-            <div class="col-lg-1 col-md-1 col-12">
+        <div className="cart-single-list">
+          <div className="row align-items-center">
+            <div className="col-lg-1 col-md-1 col-12">
               <Link to="/products">
                 <img src={cart.product.image} alt="" />
               </Link>
             </div>
-            <div class="col-lg-4 col-md-3 col-12">
-              <h5 class="">
+            <div className="col-lg-4 col-md-3 col-12">
+              <h5 className="">
                 <Link to="/">{cart.product.productName}</Link>
               </h5>
-              <p class="product-des">
+              <p className="product-des">
                 <span>
                   <em>
                     <i className="lni lni-package category-icon"></i>Category:{" "}
@@ -33,24 +40,24 @@ const CartRow = ({ cart }) => {
                 </span>
               </p>
             </div>
-            <div class="col-lg-2 col-md-2 col-12">
+            <div className="col-lg-2 col-md-2 col-12">
               <Quantity
                 cartID={cart._doc._id}
                 max={cart.product.quantities[cart._doc.productType]}
                 quantity={cart._doc.quantity}
               />
             </div>
-            <div class="col-lg-2 col-md-2 col-12">
+            <div className="col-lg-2 col-md-2 col-12">
               <p>₱ {cart.product.prices[cart._doc.productType]}</p>
             </div>
-            <div class="col-lg-2 col-md-2 col-12">
+            <div className="col-lg-2 col-md-2 col-12">
               <p>
-                ₱{" "}
+                ₱
                 {cart.product.prices[cart._doc.productType] *
                   cart._doc.quantity}
               </p>
             </div>
-            <div class="col-lg-1 col-md-2 col-12">
+            <div className="col-lg-1 col-md-2 col-12">
               <button
                 className="remove-item"
                 onClick={() => dispatch(deleteCart(cart._doc._id))}
@@ -61,7 +68,7 @@ const CartRow = ({ cart }) => {
           </div>
         </div>
       </div>
-{/* 
+      {/* 
       <div className="cart-list-head box-shadow">
         <div className="cart-single-list">
           <div className="d-flex single-cart-product">
