@@ -3,8 +3,6 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const Address = require("../models/addressModel");
-const Cart = require("../models/cartModel");
-const Wishlist = require("../models/wishlistModel");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -143,66 +141,69 @@ const updateUser = asyncHandler(async (req, res) => {
   const userAddress = await Address.findOne({ userID: req.user.id });
   const user = await User.findById(req.user.id);
 
-  if (user) {
-    if (req.body.newPassword) {
-      if (await bcrypt.compare(req.body.currentPassword, user.password)) {
-        // hash the password using bcrypt
-        const salt = await bcrypt.genSalt(10);
-        req.body.newPassword = await bcrypt.hash(req.body.newPassword, salt);
-      } else {
-        res.status(400);
-        throw new Error("Your current password is incorrect.");
-      }
-    }
-
-    if (req.body.address1) {
-      // userAddress.address.push(req.body);
-      const newAddress = {
-        address1: req.body.address1,
-        address2: req.body.address2,
-        postalCode: req.body.postalCode,
-        phoneNumber: req.body.phoneNumber,
-      };
-
-      const updatedUserAddress = await Address.findOneAndUpdate(
-        { userID: req.user.id },
-        {
-          $push: { address: newAddress },
-        }
-      );
-
-      userAddress.address = JSON.parse(
-        JSON.stringify(updatedUserAddress.address)
-      );
-    }
-
-    if (req.body.primaryAddress) {
-      const updatedUserAddress = await Address.findOneAndUpdate(
-        { userID: req.user.id },
-        { primaryAddress: req.body.primaryAddress }
-      );
-
-      userAddress.address = updatedUserAddress.primaryAddress;
-    }
-
-    const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
-      new: true,
-    });
-
-    res.status(200).json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      sex: updatedUser.sex,
-      birthday: updatedUser.birthday,
-      userType: updatedUser.userType,
-      image: user.image,
-      userType: updatedUser.userType,
-      address: userAddress.address,
-      primaryAddress: userAddress.primaryAddress,
-      token: generateToken(updatedUser._id),
-    });
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
   }
+
+  if (req.body.currentPassword) {
+    if (await bcrypt.compare(req.body.currentPassword, user.password)) {
+      // hash the password using bcrypt
+      const salt = await bcrypt.genSalt(10);
+      req.body.password = await bcrypt.hash(req.body.password, salt);
+    } else {
+      res.status(400);
+      throw new Error("Your current password is incorrect.");
+    }
+  }
+
+  // if (req.body.address1) {
+  //   // userAddress.address.push(req.body);
+  //   const newAddress = {
+  //     address1: req.body.address1,
+  //     address2: req.body.address2,
+  //     postalCode: req.body.postalCode,
+  //     phoneNumber: req.body.phoneNumber,
+  //   };
+
+  //   const updatedUserAddress = await Address.findOneAndUpdate(
+  //     { userID: req.user.id },
+  //     {
+  //       $push: { address: newAddress },
+  //     }
+  //   );
+
+  //   userAddress.address = JSON.parse(
+  //     JSON.stringify(updatedUserAddress.address)
+  //   );
+  // }
+
+  // if (req.body.primaryAddress) {
+  //   const updatedUserAddress = await Address.findOneAndUpdate(
+  //     { userID: req.user.id },
+  //     { primaryAddress: req.body.primaryAddress }
+  //   );
+
+  //   userAddress.address = updatedUserAddress.primaryAddress;
+  // }
+
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
+    new: true,
+  });
+
+  res.status(200).json({
+    _id: updatedUser._id,
+    name: updatedUser.name,
+    email: updatedUser.email,
+    sex: updatedUser.sex,
+    birthday: updatedUser.birthday,
+    userType: updatedUser.userType,
+    image: user.image,
+    userType: updatedUser.userType,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: generateToken(updatedUser._id),
+  });
 });
 
 // Generate JWT Token

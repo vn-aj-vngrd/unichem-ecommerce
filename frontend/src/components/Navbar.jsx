@@ -327,18 +327,18 @@ const Navbar = ({ userType }) => {
 
                         <ul className="mobile-profile-collapse profile-collapse">
                           <li className="nav-item">
-                            <Link to="/manage">Manage Account</Link>
+                            <Link to="/account/manage">Manage Account</Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/orders">My Orders</Link>
+                            <Link to="/account/orders">My Orders</Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/reviews">My Reviews</Link>
+                            <Link to="/account/reviews">My Reviews</Link>
                           </li>
                           <li className="nav-item">
                             <Link to="/">
                               <button className="logout-btn" onClick={onLogout}>
-                                <i className="lni lni-exit"></i>Log out
+                                Log out
                               </button>
                             </Link>
                           </li>
@@ -371,13 +371,13 @@ const Navbar = ({ userType }) => {
                               id="submenu-1-3"
                             >
                               <li className="nav-item">
-                                <Link to="/manage">Manage Account</Link>
+                                <Link to="/account/manage">Manage Account</Link>
                               </li>
                               <li className="nav-item">
-                                <Link to="/orders">My Orders</Link>
+                                <Link to="/account/orders">My Orders</Link>
                               </li>
                               <li className="nav-item">
-                                <Link to="/reviews">My Reviews</Link>
+                                <Link to="/account/reviews">My Reviews</Link>
                               </li>
                               <li className="nav-item">
                                 <Link to="/">
@@ -385,7 +385,7 @@ const Navbar = ({ userType }) => {
                                     className="logout-btn"
                                     onClick={onLogout}
                                   >
-                                    <i className="lni lni-exist"></i>Log out
+                                    Log out
                                   </button>
                                 </Link>
                               </li>

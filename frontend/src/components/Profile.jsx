@@ -35,7 +35,7 @@ const Profile = () => {
   } = formData;
 
   const { newPassword, confirmNewPassword, currentPassword } = formPassword;
-  
+
   const onChangeData = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -112,7 +112,8 @@ const Profile = () => {
       });
       return;
     }
-    if (newPassword.length <= 8) {
+
+    if (newPassword.length < 8) {
       toast.error("Password must contain atleast 8 characters", {
         position: "top-center",
         autoClose: 5000,
@@ -127,12 +128,11 @@ const Profile = () => {
     }
 
     const userData = {
-      newPassword,
-      confirmNewPassword,
+      password: newPassword,
       currentPassword,
-      // image,
     };
 
+    console.log(userData);
     dispatch(update(userData));
     toast.success("User updated successfully", {
       position: "top-center",
@@ -183,6 +183,7 @@ const Profile = () => {
                         <img
                           className="profile-information-image"
                           src={user.image}
+                          alt=""
                         ></img>
                         <label
                           className="upload-image-label"
@@ -240,7 +241,7 @@ const Profile = () => {
                             type="email"
                             value={email}
                             onChange={onChangeData}
-                            required
+                            disabled
                           />
                         </div>
                       </div>
@@ -339,7 +340,7 @@ const Profile = () => {
                             type="password"
                             value={currentPassword}
                             onChange={onChangePassword}
-                            // required
+                            required
                           />
                         </div>
                       </div>

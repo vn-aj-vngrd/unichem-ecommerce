@@ -106,10 +106,10 @@ export const App = () => {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="wishlist" element={<Wishlist />} />
-            <Route path="address" element={<Address />} />
-            <Route path="manage" element={<Manage />} />
-            <Route path="orders" element={<Order />} />
-            <Route path="reviews" element={<Review />} />
+            <Route path="account/address" element={<Address />} />
+            <Route path="account/manage" element={<Manage />} />
+            <Route path="account/orders" element={<Order />} />
+            <Route path="account/reviews" element={<Review />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="faq" element={<Faq />} />
             <Route path="*" element={<PageNotFound />} />
