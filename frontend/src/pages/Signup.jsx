@@ -111,12 +111,15 @@ const Signup = () => {
       return;
     }
 
+    const addressName = "Primary Address";
+
     const userData = {
       name,
       birthday,
       sex,
       email,
       address: {
+        addressName,
         address1,
         address2,
         postalCode,
