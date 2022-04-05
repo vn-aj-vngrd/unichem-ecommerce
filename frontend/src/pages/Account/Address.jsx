@@ -1,9 +1,9 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import ProfileSidebar from "../../components/ProfileSidebar";
 import UserAddress from "../../components/UserAddress";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const Manage = () => {
   const navigate = useNavigate();
@@ -13,20 +13,22 @@ const Manage = () => {
     document.title = "Unichem Store | Manage Acccount";
 
     if (!user) {
-      console.log(user);
       navigate("/login");
     }
-    
   }, [user, navigate]);
 
   return (
     <>
-      <Breadcrumb type="manage" />
-      <div className="container main-profile-section">
-        <ProfileSidebar />
-        <div className="spacer"></div>
-        <UserAddress />
-      </div>
+      {user && (
+        <>
+          <Breadcrumb type="manage" />
+          <div className="container main-profile-section">
+            <ProfileSidebar />
+            <div className="spacer"></div>
+            <UserAddress />
+          </div>
+        </>
+      )}
     </>
   );
 };
