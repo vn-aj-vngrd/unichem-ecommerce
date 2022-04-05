@@ -44,6 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
     userID: user._id,
     address: [
       {
+        addressName: address.addressName,
         address1: address.address1,
         address2: address.address2,
         postalCode: address.postalCode,
@@ -127,7 +128,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
   const userAddress = await Address.findOne({ userID: req.user.id });
 
-  console.log(userAddress)
+  console.log(userAddress);
   const user = await User.findById(req.user.id);
 
   if (user) {
@@ -143,12 +144,12 @@ const updateUser = asyncHandler(async (req, res) => {
       }
     }
 
-    if(req.body.address1) {
+    if (req.body.address1) {
       userAddress.address.push(req.body);
     }
-    
-    console.log(userAddress)
-    
+
+    console.log(userAddress);
+
     const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
