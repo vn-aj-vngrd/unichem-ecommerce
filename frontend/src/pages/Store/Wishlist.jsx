@@ -65,19 +65,26 @@ const Wishlist = () => {
             </div>
           </div>
 
-          <div className="cart-list-head accordion-bodybox-shadow">
-            {wishlists.length > 0 ? (
-              <>
-                {wishlists.map((wishlist, index) => (
-                  <WishlistRow key={index} wishlist={wishlist} />
-                ))}
-              </>
-            ) : (
-              <>
-                <div className="empty-container-sm"></div>
-              </>
-            )}
-          </div>
+          {wishlists.length > 0 ? (
+            <>
+              {wishlists.map((wishlist, index) => (
+                <WishlistRow key={index} wishlist={wishlist} />
+              ))}
+            </>
+          ) : (
+            <>
+              <div className="cart-list-head box-shadow">
+                <div className="cart-single-list">
+                  <div className="d-flex single-cart-product">
+                    <div className="d-flex align-items-center cart-product-left">
+                      There no items in the wishlist.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
           <WishlistSummary wishlists={wishlists} count={wishlists.length} />
         </div>
       </div>

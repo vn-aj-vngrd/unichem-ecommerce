@@ -91,7 +91,6 @@ const Cart = () => {
             </div>
           </div>
 
-          <div className="cart-list-head box-shadow"></div>
           {carts.length > 0 ? (
             <>
               {carts.map((cart, index) => (
@@ -99,7 +98,17 @@ const Cart = () => {
               ))}
             </>
           ) : (
-            <></>
+            <>
+              <div className="cart-list-head box-shadow">
+                <div className="cart-single-list">
+                  <div className="d-flex single-cart-product">
+                    <div className="d-flex align-items-center cart-product-left">
+                      There no items in the cart.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
           <PricingTable
             count={count}
