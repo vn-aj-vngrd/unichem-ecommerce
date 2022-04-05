@@ -102,7 +102,7 @@ const Cart = () => {
                 <div className="cart-single-list">
                   <div className="d-flex single-cart-product">
                     <div className="d-flex align-items-center cart-product-left">
-                      There no items in the cart.
+                      There are no items in the cart.
                     </div>
                   </div>
                 </div>

@@ -94,7 +94,7 @@ const Wishlist = () => {
                 <div className="cart-single-list">
                   <div className="d-flex single-cart-product">
                     <div className="d-flex align-items-center cart-product-left">
-                      There no items in the wishlist.
+                      There are no items in the wishlist.
                     </div>
                   </div>
                 </div>
