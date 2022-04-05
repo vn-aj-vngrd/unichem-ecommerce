@@ -8,6 +8,60 @@ const CartRow = ({ cart }) => {
 
   return (
     <>
+      <div className="cart-list-head accordion-bodybox-shadow box-shadow">
+        <div class="cart-single-list">
+          <div class="row align-items-center">
+            <div class="col-lg-1 col-md-1 col-12">
+              <Link to="/products">
+                <img src={cart.product.image} alt="" />
+              </Link>
+            </div>
+            <div class="col-lg-4 col-md-3 col-12">
+              <h5 class="">
+                <Link to="/">{cart.product.productName}</Link>
+              </h5>
+              <p class="product-des">
+                <span>
+                  <em>
+                    <i className="lni lni-package category-icon"></i>Category:{" "}
+                  </em>{" "}
+                  {cart.product.category}
+                </span>
+                <span>
+                  <em>Type / Color:</em>{" "}
+                  {cart.product.types[cart._doc.productType]}
+                </span>
+              </p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-12">
+              <Quantity
+                cartID={cart._doc._id}
+                max={cart.product.quantities[cart._doc.productType]}
+                quantity={cart._doc.quantity}
+              />
+            </div>
+            <div class="col-lg-2 col-md-2 col-12">
+              <p>₱ {cart.product.prices[cart._doc.productType]}</p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-12">
+              <p>
+                ₱{" "}
+                {cart.product.prices[cart._doc.productType] *
+                  cart._doc.quantity}
+              </p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-12">
+              <button
+                className="remove-item"
+                onClick={() => dispatch(deleteCart(cart._doc._id))}
+              >
+                <i className="lni lni-close"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+{/* 
       <div className="cart-list-head box-shadow">
         <div className="cart-single-list">
           <div className="d-flex single-cart-product">
@@ -78,7 +132,7 @@ const CartRow = ({ cart }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

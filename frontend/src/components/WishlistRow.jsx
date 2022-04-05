@@ -37,6 +37,63 @@ const WishlistRow = ({ wishlist }) => {
   return (
     <>
       {/* Row Start Here */}
+      <div className="cart-list-head accordion-bodybox-shadow box-shadow">
+      <div class="cart-single-list">
+        <div class="row align-items-center">
+          <div class="col-lg-1 col-md-1 col-12">
+            <Link to="/products">
+              <img src={wishlist.product.image} alt="" />
+            </Link>
+          </div>
+          <div class="col-lg-4 col-md-3 col-12">
+            <h5 class="">
+              <Link to="/">{wishlist.product.productName}</Link>
+            </h5>
+            <p class="product-des">
+              <span>
+                <em>
+                  <i className="lni lni-package category-icon"></i>Category:{" "}
+                </em>{" "}
+                {wishlist.product.category}
+              </span>
+              <span>
+                <em>Type / Color:</em>{" "}
+                {wishlist.product.types[wishlist._doc.productType]}
+              </span>
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            {/* <div class="count-input">
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div> */}
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>$910.00</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>₱ {wishlist.product.prices[wishlist._doc.productType]}</p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12">
+            <button
+              className="remove-item"
+              onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
+            >
+              <i className="lni lni-close"></i>
+            </button>
+            <button className="add-item" onClick={addToCart}>
+                <i className="lni lni-cart"></i>
+              </button>
+          </div>
+        </div>
+      </div>
+      </div>
+{/* 
       <div className="cart-list-head accordion-bodybox-shadow">
         <div className="cart-single-list">
           <div className="d-flex single-cart-product">
@@ -54,9 +111,9 @@ const WishlistRow = ({ wishlist }) => {
                   <i className="lni lni-package category-icon"></i> Category:{" "}
                   {wishlist.product.category}
                 </div>
-                <h4 className="title">
+                <h5 className="title">
                   <Link to="/">{wishlist.product.productName}</Link>
-                </h4>
+                </h5>
                 <div className="product-des">
                   <p>
                     Type / Color:{" "}
@@ -66,7 +123,9 @@ const WishlistRow = ({ wishlist }) => {
               </div>
               <div className="price-in-cart">
                 <div className="price">
-                  ₱ {wishlist.product.prices[wishlist._doc.productType]}
+                  <h6 className="fw-bolder">
+                    ₱ {wishlist.product.prices[wishlist._doc.productType]}
+                  </h6>
                 </div>
               </div>
               <div className="price-in-cart">
@@ -101,7 +160,7 @@ const WishlistRow = ({ wishlist }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Row End Here */}
     </>
   );

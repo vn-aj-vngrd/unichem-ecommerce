@@ -71,26 +71,28 @@ const Cart = () => {
       <Breadcrumb type="cart" />
       <div className="shopping-cart">
         <div className="container">
-          <div className="purchase-row-banner cart-banner">
-            <div className="cart-product-right hide-on-thin-screen">
-              <div className="product-in-cart color-white hide-on-thin-screen">
-                <>Product</>
-              </div>
-              <div className="quantity-in-cart color-white hide-on-thin-screen">
-                Quantity
-              </div>
-              <div className="price-in-cart color-white hide-on-thin-screen">
-                Price
-              </div>
-              <div className="total-in-cart color-white hide-on-thin-screen">
-                Total
-              </div>
-              <div className="action-in-cart color-white hide-on-thin-screen">
-                Action
+          <div class="cart-list-head">
+            <div class="cart-list-title purchase-row-banner">
+              <div class="row">
+                <div class="col-lg-1 col-md-1 col-12"></div>
+                <div class="col-lg-4 col-md-3 col-12">
+                  <p>Product Name</p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-12">
+                  <p>Quantity</p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-12">
+                  <p>Subtotal</p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-12">
+                  <p>Discount</p>
+                </div>
+                <div class="col-lg-1 col-md-2 col-12">
+                  <p>Remove</p>
+                </div>
               </div>
             </div>
           </div>
-
           {carts.length > 0 ? (
             <>
               {carts.map((cart, index) => (

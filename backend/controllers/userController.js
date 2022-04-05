@@ -123,11 +123,11 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  console.log(req.body);
+  // console.log(req.body);
 
   const userAddress = await Address.findOne({ userID: req.user.id });
 
-  console.log(userAddress)
+  // console.log(userAddress)
   const user = await User.findById(req.user.id);
 
   if (user) {
@@ -143,15 +143,43 @@ const updateUser = asyncHandler(async (req, res) => {
       }
     }
 
-    if(req.body.address1) {
-      userAddress.address.push(req.body);
+    if (req.body.address1) {
+      // userAddress.address.push(req.body);
+      const newAddress = {
+        address1: req.body.address1,
+        address2: req.body.address2,
+        postalCode: req.body.postalCode,
+        phoneNumber: req.body.phoneNumber,
+      };
+
+      const updatedUserAddress = await Address.findOneAndUpdate(
+        { userID: req.user.id },
+        {
+          $push: { address: newAddress },
+        }
+      );
+
+      userAddress.address = JSON.parse(JSON.stringify(updatedUserAddress.address));
+      console.log(updatedUserAddress.address)
     }
-    
-    console.log(userAddress)
-    
+
+    if (req.body.primaryAddress) {
+      const updatedUserAddress = await Address.findOneAndUpdate(
+        { userID: req.user.id },
+        { primaryAddress: req.body.primaryAddress },
+      );
+
+      userAddress.address = updatedUserAddress.primaryAddress;
+    }
+
+    // console.log("this")
+    // console.log(userAddress.primaryAddress);
+
     const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
+
+    // console.log(updatedUser)
 
     res.status(200).json({
       _id: updatedUser._id,
