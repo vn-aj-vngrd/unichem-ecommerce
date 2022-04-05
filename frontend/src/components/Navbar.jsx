@@ -26,8 +26,8 @@ const Navbar = ({ userType }) => {
 
       return () => {
         dispatch(resetUser());
-        dispatch(resetWishlist());
-        dispatch(resetCart());
+        // dispatch(resetWishlist());
+        // dispatch(resetCart());
       };
     }
   }, [user, dispatch]);

@@ -31,16 +31,19 @@ const Cart = () => {
     dispatch(getCarts());
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
-  if (isCartLoading) {
-    return <Spinner />;
-  }
-
   let count = 0;
   let subtotal = 0;
   let shippingFee = 0;
   let total = 0;
 
-  // console.log(carts);
+  if (isCartLoading) {
+    return (
+      <>
+        <Spinner />
+        <div className="empty-container"></div>
+      </>
+    );
+  }
 
   if (carts.length > 0) {
     count = carts.length;
@@ -52,15 +55,6 @@ const Cart = () => {
     }
     shippingFee = 50;
     total = subtotal + shippingFee;
-  }
-
-  if (isCartLoading) {
-    return (
-      <>
-        <Spinner />
-        <div className="empty-container"></div>
-      </>
-    );
   }
 
   return (
