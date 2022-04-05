@@ -1,17 +1,10 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { resetCart, deleteCart } from "../features/cart/cartSlice";
+import { deleteCart } from "../features/cart/cartSlice";
 import Quantity from "../components/Quantity";
-import { useEffect } from "react";
 
 const CartRow = ({ cart }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    return () => {
-      // dispatch(resetCart());
-    };
-  }, [dispatch]);
 
   return (
     <>

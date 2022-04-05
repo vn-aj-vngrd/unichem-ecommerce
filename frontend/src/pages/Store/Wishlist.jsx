@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getWishlists,
-  resetWishlist,
-} from "../../features/wishlist/wishlistSlice";
+import { getWishlists } from "../../features/wishlist/wishlistSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import WishlistRow from "../../components/WishlistRow";
@@ -29,10 +26,6 @@ const Wishlist = () => {
       // console.log(wishlistMessage);
     }
     dispatch(getWishlists());
-
-    return () => {
-      // dispatch(resetWishlist());
-    };
   }, [user, navigate, isWishlistError, wishlistMessage, dispatch]);
 
   if (isWishlistLoading) {

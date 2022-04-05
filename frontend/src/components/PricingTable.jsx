@@ -1,17 +1,10 @@
-import { deleteAllCart, resetCart } from "../features/cart/cartSlice"; //resetCart
+import { deleteAllCart } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import Swal from "sweetalert2";
 
 const PricingTable = ({ count, subtotal, shippingFee, total }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  useEffect(() => {
-    return () => {
-      // dispatch(resetCart());
-    };
-  }, [dispatch]);
 
   const clearCart = () => {
     Swal.fire({

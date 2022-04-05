@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getCarts, resetCart } from "../../features/cart/cartSlice";
+import { getCarts } from "../../features/cart/cartSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import CartRow from "../../components/CartRow";
@@ -25,13 +25,10 @@ const Cart = () => {
     }
 
     if (isCartError) {
-      console.log(isCartError);
+      // console.log(isCartError);
     }
 
     dispatch(getCarts());
-    return () => {
-      // dispatch(resetCart());
-    };
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
   if (isCartLoading) {
