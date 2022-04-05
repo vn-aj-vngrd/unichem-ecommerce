@@ -3956,12 +3956,35 @@ ol {
   }
 }
 
+.cart-single-list .add-item {
+  color: #fff;
+  background-color: #424242;
+  font-size: 16px;
+  height: 28px;
+  width: 28px;
+  line-height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  border: none;
+}
+
+@media (max-width: 767px) {
+  .cart-single-list .add-item {
+    margin-top: 5px;
+  }
+}
+
+.cart-single-list .add-item:hover {
+  color: #fff;
+  background-color: #212121;
+}
+
 .cart-single-list .remove-item {
   color: #fff;
   background-color: #f44336;
-  font-size: 8px;
-  height: 20px;
-  width: 20px;
+  font-size: 12px;
+  height: 28px;
+  width: 28px;
   line-height: 20px;
   border-radius: 50%;
   text-align: center;

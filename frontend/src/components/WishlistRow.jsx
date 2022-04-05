@@ -1,9 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteWishlist } from "../features/wishlist/wishlistSlice";
+import { setCart } from "../features/cart/cartSlice.js";
+import Swal from "sweetalert2";
 
 const WishlistRow = ({ wishlist }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const addToCart = (e) => {
+    e.preventDefault();
+
+    const cartData = {
+      productID: wishlist.product._id,
+      productType: wishlist._doc.productType,
+      quantity: 1,
+      max: wishlist.product.quantities[wishlist._doc.productType],
+    };
+
+    // console.log(cartData);
+    dispatch(setCart(cartData));
+    Swal.fire({
+      title: "Item was added to your cart.",
+      text: "To checkout, please proceed to the cart page.",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
+      cancelButtonText: "Close",
+    }).then((result) => {
+      if (result.isConfirmed) navigate("/cart");
+    });
+  };
 
   return (
     <>
@@ -44,7 +73,7 @@ const WishlistRow = ({ wishlist }) => {
                 <div className="price"></div>
               </div>
               <div className="action-in-cart">
-                <button className="remove-item">
+                <button className="add-item" onClick={addToCart}>
                   <i className="lni lni-cart"></i>
                 </button>
               </div>
@@ -58,16 +87,16 @@ const WishlistRow = ({ wishlist }) => {
               </div>
             </div>
             <div className="action-in-cart-2">
+              <button className="add-item" onClick={addToCart}>
+                <i className="lni lni-cart"></i>
+              </button>
+            </div>
+            <div className="action-in-cart-2">
               <button
                 className="remove-item"
                 onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
               >
                 <i className="lni lni-close"></i>
-              </button>
-            </div>
-            <div className="action-in-cart-2">
-              <button className="remove-item">
-                <i className="lni lni-cart"></i>
               </button>
             </div>
           </div>
