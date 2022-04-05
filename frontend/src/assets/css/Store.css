@@ -554,6 +554,24 @@ ol {
   overflow: hidden;
 }
 
+.button .btn-alt-disabled {
+  display: inline-block;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 30px;
+  background-color: #424242;
+  color: #fff;
+  border: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  /* margin-right: 7px; */
+  overflow: hidden;
+}
+
 .button .btn-alt:hover {
   background-color: #212121;
   color: #fff;

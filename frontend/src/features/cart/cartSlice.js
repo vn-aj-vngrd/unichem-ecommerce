@@ -118,7 +118,7 @@ export const cartSlice = createSlice({
       .addCase(setCart.fulfilled, (state, action) => {
         state.isCartLoading = false;
         state.isCartSuccess = true;
-        state.carts.push(action.payload);
+        // state.carts.push(action.payload);
       })
       .addCase(setCart.rejected, (state, action) => {
         state.isCartLoading = false;

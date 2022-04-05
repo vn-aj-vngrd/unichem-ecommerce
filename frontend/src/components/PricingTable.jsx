@@ -1,4 +1,4 @@
-import { deleteAllCart, resetCart } from "../features/cart/cartSlice";
+import { deleteAllCart, resetCart } from "../features/cart/cartSlice"; //resetCart
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     return () => {
-      // dispatch(resetCart());
+      dispatch(resetCart());
     };
   }, [dispatch]);
 
@@ -64,34 +64,68 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
                     </li>
                   </ul>
                   <hr></hr>
-                  <div>
-                    <label className="form-label">Discount Coupon</label>
-                    <input className="form-control" type="text"></input>
-                  </div>
+
+                  {total > 0 ? (
+                    <>
+                      <label className="form-label">Discount Coupon</label>
+                      <input className="form-control" type="text"></input>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </div>
 
                 <div className="no-box-shadow">
                   <div className="order-total-row">
-                    <div className="price d-flex justify-content-between align-items-center">
-                      <div>Order Total:</div>
-                      <div className="spacer"></div>
-                      <h5 className="text-danger">₱ {total}</h5>
-                    </div>
+                    {count > 0 ? (
+                      <>
+                        <div className="price d-flex justify-content-between align-items-center">
+                          <div>Order Total:</div>
+                          <div className="spacer"></div>
+                          <h5 className="text-danger">₱ {total}</h5>
+                        </div>
 
-                    <div className="button mt-4">
-                      <Link to="/checkout" className="btn checkout-btn">
-                        Checkout
-                      </Link>
-                    </div>
+                        <div className="button mt-4">
+                          <button className="btn checkout-btn">Checkout</button>
+                        </div>
 
-                    <div className="button mt-3">
-                      <button
-                        className="btn-alt checkout-btn"
-                        onClick={clearCart}
-                      >
-                        Clear Cart
-                      </button>
-                    </div>
+                        <div className="button mt-3">
+                          <button
+                            className="btn-alt checkout-btn"
+                            onClick={clearCart}
+                          >
+                            Clear Cart
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="price d-flex justify-content-between align-items-center">
+                          <div>Order Total:</div>
+                          <div className="spacer"></div>
+                          <h5 className="text-danger">₱ {total}</h5>
+                        </div>
+
+                        <div className="button mt-4">
+                          <button
+                            // to="/checkout"
+                            className="btn checkout-btn"
+                            disabled
+                          >
+                            Checkout
+                          </button>
+                        </div>
+
+                        <div className="button mt-3">
+                          <button
+                            className="btn-alt-disabled checkout-btn"
+                            disabled
+                          >
+                            Clear Cart
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

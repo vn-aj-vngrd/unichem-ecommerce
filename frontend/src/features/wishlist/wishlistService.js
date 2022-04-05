@@ -70,7 +70,7 @@ const deleteAllWishlist = async (userID, token) => {
   );
   localStorage.setItem("wishlistCount", "0");
 
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };

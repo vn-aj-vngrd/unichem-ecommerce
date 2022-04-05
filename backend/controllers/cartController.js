@@ -25,26 +25,31 @@ const getCarts = asyncHandler(async (req, res) => {
 // @route   POST /api/Carts
 // @access  Private
 const setCart = asyncHandler(async (req, res) => {
-  const { productID, productType } = req.body;
+  const { productID, productType, quantity, max } = req.body;
 
   const existingCart = await Cart.findOne({
     productID,
     productType,
   });
 
+  if (max == 0) {
+    res.status(400);
+    throw new Error("Product is not available");
+  }
+
   // If cart does not exist then create.
   if (!existingCart) {
     const newCart = await Cart.create({
       userID: req.user._id,
-      productID: req.body.productID,
-      productType: req.body.productType,
-      quantity: req.body.quantity,
+      productID: productID,
+      productType: productType,
+      quantity: quantity,
     });
     return res.status(200).json(newCart);
   }
 
   // If cart "current quantity + req quanity" is greater than max then throw error
-  if (existingCart.quantity + req.body.quantity > req.body.max) {
+  if (existingCart.quantity + quantity > max) {
     res.status(400);
     throw new Error("Product quantity exceeds maximum quantity");
   }
@@ -52,10 +57,10 @@ const setCart = asyncHandler(async (req, res) => {
   // If cart exists then update quantity
   const updatedCart = await Cart.findOneAndUpdate(
     {
-      productID: req.body.productID,
-      productType: req.body.productType,
+      productID,
+      productType,
     },
-    { quantity: existingCart.quantity + req.body.quantity },
+    { quantity: existingCart.quantity + quantity },
     { new: true }
   );
 

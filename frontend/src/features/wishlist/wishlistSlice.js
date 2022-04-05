@@ -99,7 +99,7 @@ export const wishlistSlice = createSlice({
       .addCase(setWishlist.fulfilled, (state, action) => {
         state.isWishlistLoading = false;
         state.isWishlistSuccess = true;
-        state.wishlists.push(action.payload);
+        // state.wishlists.push(action.payload);
       })
       .addCase(setWishlist.rejected, (state, action) => {
         state.isWishlistLoading = false;

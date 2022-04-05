@@ -6,7 +6,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import CartRow from "../../components/CartRow";
 import PricingTable from "../../components/PricingTable";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -25,17 +25,9 @@ const Cart = () => {
     }
 
     if (isCartError) {
-      toast.error(cartMessage, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      console.log(isCartError);
     }
+
     dispatch(getCarts());
     return () => {
       dispatch(resetCart());
@@ -46,15 +38,24 @@ const Cart = () => {
     return <Spinner />;
   }
 
-  const count = carts.length;
+  let count = 0;
   let subtotal = 0;
-  for (let i = 0; i < count; i++) {
-    subtotal +=
-      carts[i].product.prices[carts[i]._doc.productType] *
-      carts[i]._doc.quantity;
+  let shippingFee = 0;
+  let total = 0;
+
+  // console.log(carts);
+
+  if (carts.length > 0) {
+    count = carts.length;
+    subtotal = 0;
+    for (let i = 0; i < count; i++) {
+      subtotal +=
+        carts[i].product.prices[carts[i]._doc.productType] *
+        carts[i]._doc.quantity;
+    }
+    shippingFee = 50;
+    total = subtotal + shippingFee;
   }
-  const shippingFee = 50;
-  const total = subtotal + shippingFee;
 
   if (isCartLoading) {
     return (

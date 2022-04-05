@@ -2,21 +2,31 @@ import {
   deleteAllWishlist,
   resetWishlist,
 } from "../features/wishlist/wishlistSlice";
+import { setCart, resetCart } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 
-const WishlistSummary = ({ count }) => {
+const WishlistSummary = ({ wishlists, count }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+
   useEffect(() => {
     return () => {
-      // dispatch(resetWishlist());
+      dispatch(resetCart());
+      dispatch(resetWishlist());
     };
   }, [dispatch]);
 
-  const clearWishlist = () => {
+  const clearWishlist = (e) => {
+    e.preventDefault();
+
+    const userID = {
+      id: user._id,
+    };
+
     Swal.fire({
       title: "Are you sure?",
       text: "Delete all items in wishlist",
@@ -28,13 +38,37 @@ const WishlistSummary = ({ count }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Cleared!", "Your wishlist has been cleared.", "success");
-        const userID = {
-          id: user._id,
-        };
         dispatch(deleteAllWishlist(userID));
       }
     });
   };
+
+  const addAlltoCart = () => {
+    for (let i = 0; i < wishlists.length; i++) {
+      const cartData = {
+        productID: wishlists[i]._doc.productID,
+        productType: wishlists[i]._doc.productType,
+        quantity: 1,
+        max: wishlists[i].product.quantities[wishlists[i]._doc.productType],
+      };
+      dispatch(setCart(cartData));
+      // console.log(cartData);
+    }
+
+    Swal.fire({
+      title: "Items were added to your cart.",
+      text: "To checkout, please proceed to the cart page.",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
+      cancelButtonText: "Close",
+    }).then((result) => {
+      if (result.isConfirmed) navigate("/cart");
+    });
+  };
+
   return (
     <>
       <div className="row">
@@ -58,20 +92,42 @@ const WishlistSummary = ({ count }) => {
 
                 <div className="no-box-shadow">
                   <div className="order-total-row">
-                    <div className="button mt-4">
-                      <button to="/checkout" className="btn checkout-btn">
-                        Add All to Cart
-                      </button>
-                    </div>
-
-                    <div className="button mt-3">
-                      <button
-                        className="btn-alt checkout-btn"
-                        onClick={clearWishlist}
-                      >
-                        Clear Wishlist
-                      </button>
-                    </div>
+                    {count > 0 ? (
+                      <>
+                        <div className="button mt-4">
+                          <button
+                            className="btn checkout-btn"
+                            onClick={addAlltoCart}
+                          >
+                            Add All to Cart
+                          </button>
+                        </div>
+                        <div className="button mt-3">
+                          <button
+                            className="btn-alt checkout-btn"
+                            onClick={clearWishlist}
+                          >
+                            Clear Wishlist
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="button mt-4">
+                          <button className="btn checkout-btn" disabled>
+                            Add All to Cart
+                          </button>
+                        </div>
+                        <div className="button mt-3">
+                          <button
+                            className="btn-alt-disabled checkout-btn"
+                            disabled
+                          >
+                            Clear Wishlist
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

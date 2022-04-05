@@ -78,7 +78,7 @@ const Wishlist = () => {
               </>
             )}
           </div>
-          <WishlistSummary count={wishlists.length} />
+          <WishlistSummary wishlists={wishlists} count={wishlists.length} />
         </div>
       </div>
     </>
