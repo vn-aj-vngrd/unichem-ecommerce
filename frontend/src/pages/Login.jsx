@@ -78,7 +78,7 @@ const Login = () => {
     return (
       <>
         <Spinner />
-        <div className="empty-container"></div>
+        <div className="empty-container-md"></div>
       </>
     );
   }

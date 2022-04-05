@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts, resetProduct } from "../../features/products/productSlice";
+import {
+  getProducts,
+  resetProduct,
+} from "../../features/products/productSlice";
 import { createAction } from "@reduxjs/toolkit";
 import Details from "../../components/Details";
 import Specifications from "../../components/Specifications";
@@ -34,7 +37,12 @@ const ProductDetails = () => {
   }, [navigate, isError, message, dispatch]);
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <>
+        <div className="empty-container"></div>
+        <Spinner />
+      </>
+    );
   }
 
   let product = products.filter((product) => {
