@@ -43,7 +43,7 @@ const WishlistRow = ({ wishlist }) => {
               <div className="price"></div>
             </div>
             <div className="action-in-cart">
-              <button className="remove-item" onClick="">
+              <button className="remove-item">
                 <i className="lni lni-cart"></i>
               </button>
             </div>
@@ -65,7 +65,7 @@ const WishlistRow = ({ wishlist }) => {
             </button>
           </div>
           <div className="action-in-cart-2">
-            <button className="remove-item" onClick="">
+            <button className="remove-item">
               <i className="lni lni-cart"></i>
             </button>
           </div>

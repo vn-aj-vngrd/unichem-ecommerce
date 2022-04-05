@@ -16,6 +16,6 @@ router
   .post(protect, setCart)
   .put(protect, updateCart);
 router.route("/:id").delete(protect, deleteCart);
-router.delete("/deleteallcart/:id", protect, deleteAllCart);
+router.delete("/deleteall/:id", protect, deleteAllCart);
 
 module.exports = router;

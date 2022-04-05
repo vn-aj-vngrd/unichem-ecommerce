@@ -1,4 +1,3 @@
-import React from "react";
 import { deleteAllCart, resetCart } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";

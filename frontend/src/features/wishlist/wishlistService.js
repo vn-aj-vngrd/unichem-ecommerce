@@ -56,10 +56,30 @@ const deleteWishlist = async (wishlistId, token) => {
   return response.data;
 };
 
+// Delete user wishlist
+const deleteAllWishlist = async (userID, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(
+    API_URL + "deleteall/" + userID.id,
+    config
+  );
+  localStorage.setItem("wishlistCount", "0");
+
+  console.log(response.data);
+
+  return response.data;
+};
+
 const wishlistService = {
   setWishlist,
   getWishlists,
   deleteWishlist,
+  deleteAllWishlist,
 };
 
 export default wishlistService;

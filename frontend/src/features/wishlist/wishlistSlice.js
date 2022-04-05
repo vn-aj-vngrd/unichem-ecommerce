@@ -66,6 +66,25 @@ export const deleteWishlist = createAsyncThunk(
   }
 );
 
+// Delete user wishlist
+export const deleteAllWishlist = createAsyncThunk(
+  "wishlists/deleteAll",
+  async (userID, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await wishlistService.deleteAllWishlist(userID, token);
+    } catch (error) {
+      const wishlistMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.wishlistMessage) ||
+        error.wishlistMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(wishlistMessage);
+    }
+  }
+);
+
 export const wishlistSlice = createSlice({
   name: "wishlist",
   initialState,
@@ -111,6 +130,19 @@ export const wishlistSlice = createSlice({
         );
       })
       .addCase(deleteWishlist.rejected, (state, action) => {
+        state.isWishlistLoading = false;
+        state.isWishlistError = true;
+        state.wishlistMessage = action.payload;
+      })
+      .addCase(deleteAllWishlist.pending, (state) => {
+        state.isWishlistLoading = true;
+      })
+      .addCase(deleteAllWishlist.fulfilled, (state, action) => {
+        state.isWishlistLoading = false;
+        state.isWishlistSuccess = true;
+        state.wishlists = [];
+      })
+      .addCase(deleteAllWishlist.rejected, (state, action) => {
         state.isWishlistLoading = false;
         state.isWishlistError = true;
         state.wishlistMessage = action.payload;

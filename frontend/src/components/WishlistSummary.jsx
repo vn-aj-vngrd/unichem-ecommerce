@@ -1,4 +1,40 @@
+import {
+  deleteAllWishlist,
+  resetWishlist,
+} from "../features/wishlist/wishlistSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+
 const WishlistSummary = ({ count }) => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  useEffect(() => {
+    return () => {
+      dispatch(resetWishlist());
+    };
+  }, [dispatch]);
+
+  const clearWishlist = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Delete all items in wishlist",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Cleared!", "Your wishlist has been cleared.", "success");
+        const userID = {
+          id: user._id,
+        };
+        dispatch(deleteAllWishlist(userID));
+      }
+    });
+  };
   return (
     <>
       <div className="row">
@@ -29,7 +65,10 @@ const WishlistSummary = ({ count }) => {
                     </div>
 
                     <div className="button mt-3">
-                      <button className="btn-alt checkout-btn">
+                      <button
+                        className="btn-alt checkout-btn"
+                        onClick={clearWishlist}
+                      >
                         Clear Wishlist
                       </button>
                     </div>

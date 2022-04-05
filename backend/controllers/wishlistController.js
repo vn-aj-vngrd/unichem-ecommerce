@@ -69,8 +69,28 @@ const deleteWishlist = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id });
 });
 
+// @desc    Delete All Wishlist
+// @route   DELETE /api/wishlist/deleteAll
+// @access  Private
+const deleteAllWishlist = asyncHandler(async (req, res) => {
+  const wishlist = await Wishlist.find({ userID: req.params.id });
+
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  for (let i = 0; i < wishlist.length; i++) {
+    await wishlist[i].remove();
+  }
+
+  res.status(200).json({ id: req.params.id });
+});
+
 module.exports = {
   getWishlists,
   setWishlist,
   deleteWishlist,
+  deleteAllWishlist,
 };
