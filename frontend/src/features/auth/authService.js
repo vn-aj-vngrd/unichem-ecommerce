@@ -38,7 +38,23 @@ const update = async (userData, token) => {
     localStorage.setItem("user", JSON.stringify(response.data));
   }
 
+  console.log(response.data);
+
+  return response.data;
+};
+
+const getUser = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL, config);
   // console.log(response.data);
+  if (response.data) {
+    localStorage.setItem("user", JSON.stringify(response.data));
+  }
 
   return response.data;
 };
@@ -52,6 +68,7 @@ const authService = {
   register,
   logout,
   login,
+  getUser,
   update,
 };
 

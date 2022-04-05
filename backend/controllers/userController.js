@@ -107,10 +107,27 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/user
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
   const userID = req.user.id;
   const user = await User.findById({ userID });
+  const userAddress = await Address.findOne({ userID });
 
-  // res.status(200).json(user);
+  res.status(200).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
+    userType: user.userType,
+    image: user.image,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: generateToken(user._id),
+  });
 });
 
 // @desc    Update user data
@@ -118,14 +135,12 @@ const getUser = asyncHandler(async (req, res) => {
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
   // Check for user
-
   if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
   const userAddress = await Address.findOne({ userID: req.user.id });
-
   const user = await User.findById(req.user.id);
 
   if (user) {
@@ -156,13 +171,15 @@ const updateUser = asyncHandler(async (req, res) => {
         }
       );
 
-      userAddress.address = JSON.parse(JSON.stringify(updatedUserAddress.address));
+      userAddress.address = JSON.parse(
+        JSON.stringify(updatedUserAddress.address)
+      );
     }
 
     if (req.body.primaryAddress) {
       const updatedUserAddress = await Address.findOneAndUpdate(
         { userID: req.user.id },
-        { primaryAddress: req.body.primaryAddress },
+        { primaryAddress: req.body.primaryAddress }
       );
 
       userAddress.address = updatedUserAddress.primaryAddress;

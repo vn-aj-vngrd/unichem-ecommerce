@@ -5,17 +5,12 @@ import { useSelector } from "react-redux";
 const ShopSidebar = () => {
   const { user } = useSelector((state) => state.auth);
 
-  
   return (
     <div>
       <div className="profile-sidebar single-widget search">
         <div className="d-flex align-items-center ">
           <div>
-            <img
-              src={user.image}
-              alt="#"
-              className="profile-image"
-            />
+            <img src={user.image} alt="#" className="profile-image" />
           </div>
           <div className="">
             <h5>{user.name.split(" ")[0]}</h5>
@@ -28,29 +23,16 @@ const ShopSidebar = () => {
         <div className="profile-category">
           <ul className="list">
             <li>
-              <Link className="" to="/manage">
-                Profile
-              </Link>
+              <Link to="/manage">Profile</Link>
             </li>
             <li>
-              <Link className="" to="/address">
-                Address
-              </Link>
+              <Link to="/address">Address</Link>
             </li>
             <li>
-              <Link className="" to="/orders">
-                Orders
-              </Link>
+              <Link to="/orders">Orders</Link>
             </li>
             <li>
-              <Link className="" to="/reviews">
-                Reviews
-              </Link>
-            </li>
-            <li>
-              <Link className="" to="">
-                Change Password
-              </Link>
+              <Link to="/reviews">Reviews</Link>
             </li>
           </ul>
         </div>
