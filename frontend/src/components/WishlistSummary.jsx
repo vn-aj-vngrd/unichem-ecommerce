@@ -12,7 +12,7 @@ const WishlistSummary = ({ count }) => {
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     return () => {
-      dispatch(resetWishlist());
+      // dispatch(resetWishlist());
     };
   }, [dispatch]);
 

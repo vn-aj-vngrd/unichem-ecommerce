@@ -9,7 +9,7 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     return () => {
-      dispatch(resetCart());
+      // dispatch(resetCart());
     };
   }, [dispatch]);
 

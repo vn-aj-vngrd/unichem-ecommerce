@@ -16,6 +16,9 @@ const setCart = async (cartData, token) => {
   if (count.data) {
     localStorage.setItem("cartCount", JSON.stringify(count.data.length));
   }
+
+  // console.log(response.data);
+
   return response.data;
 };
 
