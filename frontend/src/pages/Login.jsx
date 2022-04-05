@@ -66,6 +66,20 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
     const userData = {
       email,
       password,
