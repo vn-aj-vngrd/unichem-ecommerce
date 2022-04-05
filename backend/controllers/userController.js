@@ -126,6 +126,8 @@ const updateUser = asyncHandler(async (req, res) => {
   console.log(req.body);
 
   const userAddress = await Address.findOne({ userID: req.user.id });
+
+  console.log(userAddress)
   const user = await User.findById(req.user.id);
 
   if (user) {
@@ -140,6 +142,13 @@ const updateUser = asyncHandler(async (req, res) => {
         throw new Error("Your current password is incorrect.");
       }
     }
+
+    if(req.body.address1) {
+      userAddress.address.push(req.body);
+    }
+    
+    console.log(userAddress)
+    
     const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });

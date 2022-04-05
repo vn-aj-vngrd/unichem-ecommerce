@@ -24,6 +24,10 @@ const reviewSchema = mongoose.Schema(
       type: Number,
       required: [true, "Rating is required."],
     },
+    isEdit: {
+      type: Boolean,
+      required: true,
+    }
   },
   {
     timestamps: true,

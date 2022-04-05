@@ -7,10 +7,15 @@ const orderSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    productID: {
-      type: mongoose.Schema.Types.ObjectId,
+    ProductID: {
+      types: {
+        type: Array,
+        required: [true, "Product ID is required"],
+      },
+    },
+    isReview: {
+      type: Boolean,
       required: true,
-      ref: "Product",
     },
     quantity: {
       type: Number,
