@@ -28,6 +28,8 @@ const Profile = () => {
     }));
   };
 
+  console.log(user)
+
   useEffect(() => {
     if (isError) {
       toast.error(message, {
@@ -58,7 +60,7 @@ const Profile = () => {
       phoneNumber,
     };
 
-    console.log(userData)
+    // console.log(userData)
 
     dispatch(update(userData));
     toast.success("Address created successfully", {
@@ -96,8 +98,6 @@ const Profile = () => {
   };
 
   const deleteAddress = (e) => {};
-
-  console.log(user)
 
   return (
     <div className="profile-information-column">

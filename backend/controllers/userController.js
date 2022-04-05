@@ -124,15 +124,11 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  // console.log(req.body);
-
   const userAddress = await Address.findOne({ userID: req.user.id });
 
-  // console.log(userAddress)
   const user = await User.findById(req.user.id);
 
   if (user) {
-    // Check if body is password
     if (req.body.newPassword) {
       if (await bcrypt.compare(req.body.currentPassword, user.password)) {
         // hash the password using bcrypt
@@ -161,7 +157,6 @@ const updateUser = asyncHandler(async (req, res) => {
       );
 
       userAddress.address = JSON.parse(JSON.stringify(updatedUserAddress.address));
-      console.log(updatedUserAddress.address)
     }
 
     if (req.body.primaryAddress) {
@@ -173,14 +168,9 @@ const updateUser = asyncHandler(async (req, res) => {
       userAddress.address = updatedUserAddress.primaryAddress;
     }
 
-    // console.log("this")
-    // console.log(userAddress.primaryAddress);
-
     const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
-
-    // console.log(updatedUser)
 
     res.status(200).json({
       _id: updatedUser._id,
