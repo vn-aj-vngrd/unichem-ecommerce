@@ -51,14 +51,19 @@ const Profile = () => {
   const onSubmitCreate = (e) => {
     e.preventDefault();
 
-    const userData = {
+    const address =  JSON.parse(JSON.stringify(user.address));
+    address.push({
       address1,
       address2,
       postalCode,
       phoneNumber,
-    };
+    })
+    
+    const userData = {
+      address: address,
+    }
 
-    // console.log(userData)
+    console.log(userData)
 
     dispatch(update(userData));
     toast.success("Address created successfully", {

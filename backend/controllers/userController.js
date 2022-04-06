@@ -156,36 +156,6 @@ const updateUser = asyncHandler(async (req, res) => {
     }
   }
 
-  // if (req.body.address1) {
-  //   // userAddress.address.push(req.body);
-  //   const newAddress = {
-  //     address1: req.body.address1,
-  //     address2: req.body.address2,
-  //     postalCode: req.body.postalCode,
-  //     phoneNumber: req.body.phoneNumber,
-  //   };
-
-  //   const updatedUserAddress = await Address.findOneAndUpdate(
-  //     { userID: req.user.id },
-  //     {
-  //       $push: { address: newAddress },
-  //     }
-  //   );
-
-  //   userAddress.address = JSON.parse(
-  //     JSON.stringify(updatedUserAddress.address)
-  //   );
-  // }
-
-  // if (req.body.primaryAddress) {
-  //   const updatedUserAddress = await Address.findOneAndUpdate(
-  //     { userID: req.user.id },
-  //     { primaryAddress: req.body.primaryAddress }
-  //   );
-
-  //   userAddress.address = updatedUserAddress.primaryAddress;
-  // }
-
   const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
     new: true,
   });
