@@ -72,7 +72,10 @@ const WishlistRow = ({ wishlist }) => {
                 <option>5</option>
               </select>
             </div> */}
-              <p>₱ {wishlist.product.prices[wishlist._doc.productType]}</p>
+              <p>
+                ₱{" "}
+                {wishlist.product.prices[wishlist._doc.productType].toFixed(2)}
+              </p>
             </div>
             <div className="col-lg-2 col-md-2 col-12">
               {wishlist.product.salePercent > 0 ? (

@@ -46,7 +46,7 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
                     <li>
                       Cart Subtotal
                       <span>
-                        <p className="fw-bold">₱ {subtotal}</p>
+                        <p className="fw-bold">₱ {subtotal.toFixed(2)}</p>
                       </span>
                     </li>
                     <li>
@@ -75,7 +75,7 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
                         <div className="price d-flex justify-content-between align-items-center">
                           <div>Order Total:</div>
                           <div className="spacer"></div>
-                          <h5 className="text-danger">₱ {total}</h5>
+                          <h5 className="text-danger">₱ {total.toFixed(2)}</h5>
                         </div>
 
                         <div className="button mt-4">
@@ -96,7 +96,7 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
                         <div className="price d-flex justify-content-between align-items-center">
                           <div>Order Total:</div>
                           <div className="spacer"></div>
-                          <h5 className="text-danger">₱ {total}</h5>
+                          <h5 className="text-danger">₱ {total.toFixed(2)}</h5>
                         </div>
 
                         <div className="button mt-4">

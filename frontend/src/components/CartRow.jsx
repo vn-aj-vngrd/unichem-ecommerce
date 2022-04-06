@@ -46,8 +46,11 @@ const CartRow = ({ cart }) => {
             <div className="col-lg-2 col-md-2 col-12">
               <p>
                 ₱
-                {cart.product.prices[cart._doc.productType] *
-                  cart._doc.quantity}
+                {Math.round(
+                  cart.product.prices[cart._doc.productType] *
+                    cart._doc.quantity *
+                    100
+                ) / 100}
               </p>
             </div>
             <div className="col-lg-1 col-md-2 col-12">

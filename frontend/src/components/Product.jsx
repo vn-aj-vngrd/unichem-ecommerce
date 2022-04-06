@@ -182,7 +182,7 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
                 <div className="order-total-row ">
                   <div className="price d-flex justify-content-between align-items-center">
                     <h6 className="text-red">
-                      <span>₱{product.prices[0]}</span>
+                      <span>₱{product.prices[0].toFixed(2)}</span>
                     </h6>
                     <div className="items-sold">6.9K items sold</div>
                   </div>
