@@ -20,7 +20,16 @@ const Profile = () => {
     phoneNumber: "",
   });
 
+  const [formDataUpdate, setFormDataUpdate] = useState({
+    addressNameUpdate: "",
+    address1Update: "",
+    address2Update: "",
+    postalCodeUpdate: "",
+    phoneNumberUpdate: "",
+  });
+
   const { addressName, address1, address2, postalCode, phoneNumber } = formData;
+  const { addressNameUpdate, address1Update, address2Update, postalCodeUpdate, phoneNumberUpdate } = formDataUpdate;
 
   const onChangeCreate = (e) => {
     setFormData((prevState) => ({
@@ -28,6 +37,13 @@ const Profile = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const onChangeUpdate = (e) => {
+    setFormDataUpdate((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  }
 
   useEffect(() => {
     if (isError) {
@@ -48,11 +64,13 @@ const Profile = () => {
     };
   }, [isError, isSuccess, message, dispatch]);
 
+  // Create user address
   const onSubmitCreate = (e) => {
     e.preventDefault();
 
     const address =  JSON.parse(JSON.stringify(user.address));
     address.push({
+      addressName,
       address1,
       address2,
       postalCode,
@@ -78,11 +96,12 @@ const Profile = () => {
     });
   };
 
+  // Delete user address
   const deleteAddress = (index) => {
-    const newPrimaryAddress = user.primaryAddress;
+    let newPrimaryAddress = user.primaryAddress;
 
     if (index == newPrimaryAddress) {
-      toast.warning("Deleting a default address will set your first address as your new default address", {
+      toast.error("Cannot delete a default address", {
         position: "top-center",
         autoClose: 7000,
         hideProgressBar: false,
@@ -92,6 +111,7 @@ const Profile = () => {
         progress: undefined,
         theme: "colored",
       });
+      return;
     }
 
     const address =  JSON.parse(JSON.stringify(user.address));
@@ -118,6 +138,7 @@ const Profile = () => {
     });
   };
 
+  // Set default user address
   const onSubmitDefault = (index) => {
     const userData = {
       primaryAddress: index,
@@ -126,6 +147,37 @@ const Profile = () => {
     dispatch(update(userData));
 
     toast.success("Address updated successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  // Update user address
+  const onSubmitUpdate = (index) => (e) => {
+    e.preventDefault();
+
+    const address =  JSON.parse(JSON.stringify(user.address));
+
+    address[index] = {
+      addressName: addressNameUpdate,
+      address1: address1Update,
+      address2: address2Update,
+      postalCode: postalCodeUpdate,
+      phoneNumber: phoneNumberUpdate,
+    };
+    
+    const userData = {
+      address: address,
+    };
+
+    dispatch(update(userData));
+    toast.success("Address created successfully", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -228,7 +280,7 @@ const Profile = () => {
                         <li className="">
                           <form
                             className="form"
-                            // onSubmit={onSubmitData}
+                            onSubmit={onSubmitUpdate(index)}
                           >
                             {/* <div
                           className="title collapsed"
@@ -253,10 +305,10 @@ const Profile = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    id="addressName"
-                                    name="addressName"
-                                    // value={addressName}
-                                    // onChange={addressName}
+                                    id="addressNameUpdate"
+                                    name="addressNameUpdate"
+                                    value={addressNameUpdate}
+                                    onChange={onChangeUpdate}
                                     required
                                   />
                                 </div>
@@ -271,10 +323,10 @@ const Profile = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="address1"
-                                      name="address1"
-                                      // value={address1}
-                                      // onChange={onChange}
+                                      id="address1Update"
+                                      name="address1Update"
+                                      value={address1Update}
+                                      onChange={onChangeUpdate}
                                       required
                                     />
                                   </div>
@@ -288,10 +340,10 @@ const Profile = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="address2"
-                                      name="address2"
-                                      // value={address2}
-                                      // onChange={onChange}
+                                      id="address2Update"
+                                      name="address2Update"
+                                      value={address2Update}
+                                      onChange={onChangeUpdate}
                                       required
                                     />
                                   </div>
@@ -304,10 +356,10 @@ const Profile = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="postalCode"
-                                      name="postalCode"
-                                      // value={postalCode}
-                                      // onChange={onChange}
+                                      id="postalCodeUpdate"
+                                      name="postalCodeUpdate"
+                                      value={postalCodeUpdate}
+                                      onChange={onChangeUpdate}
                                       required
                                     />
                                   </div>
@@ -321,10 +373,10 @@ const Profile = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="phoneNumber"
-                                      name="phoneNumber"
-                                      // value={phoneNumber}
-                                      // onChange={onChange}
+                                      id="phoneNumberUpdate"
+                                      name="phoneNumberUpdate"
+                                      value={phoneNumberUpdate}
+                                      onChange={onChangeUpdate}
                                       required
                                     />
                                   </div>
@@ -412,7 +464,7 @@ const Profile = () => {
                         <li className="">
                           <form
                             className="form"
-                            // onSubmit={onSubmitData}
+                            onSubmit={onSubmitUpdate(index)}
                           >
                             {/* <div
                           className="title collapsed"
@@ -437,10 +489,10 @@ const Profile = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    id="addressName"
-                                    name="addressName"
-                                    // value={addressName}
-                                    // onChange={onChange}
+                                    id="addressNameUpdate"
+                                    name="addressNameUpdate"
+                                    value={addressNameUpdate}
+                                    onChange={onChangeUpdate}
                                     required
                                   />
                                 </div>
@@ -455,10 +507,10 @@ const Profile = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="address1"
-                                      name="address1"
-                                      // value={address1}
-                                      // onChange={onChange}
+                                      id="address1Update"
+                                      name="address1Update"
+                                      value={address1Update}
+                                      onChange={onChangeUpdate}
                                       required
                                     />
                                   </div>
@@ -472,10 +524,10 @@ const Profile = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="address2"
-                                      name="address2"
-                                      // value={address2}
-                                      // onChange={onChange}
+                                      id="address2Update"
+                                      name="address2Update"
+                                      value={address2Update}
+                                      onChange={onChangeUpdate}
                                       required
                                     />
                                   </div>
@@ -488,10 +540,10 @@ const Profile = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="postalCode"
-                                      name="postalCode"
-                                      // value={postalCode}
-                                      // onChange={onChange}
+                                      id="postalCodeUpdate"
+                                      name="postalCodeUpdate"
+                                      value={postalCodeUpdate}
+                                      onChange={onChangeUpdate}
                                       required
                                     />
                                   </div>
@@ -505,10 +557,10 @@ const Profile = () => {
                                     <input
                                       type="text"
                                       className="form-control"
-                                      id="phoneNumber"
-                                      name="phoneNumber"
-                                      // value={phoneNumber}
-                                      // onChange={onChange}
+                                      id="phoneNumberUpdate"
+                                      name="phoneNumberUpdate"
+                                      value={phoneNumberUpdate}
+                                      onChange={onChangeUpdate}
                                       required
                                     />
                                   </div>
@@ -635,7 +687,7 @@ const Profile = () => {
                     <div className="col-md-12">
                       <div className="steps-form-btn button">
                         <button className="btn" type="submit">
-                          Save Changes
+                          Create Address
                         </button>
                       </div>
                     </div>
