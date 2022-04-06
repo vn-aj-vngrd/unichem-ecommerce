@@ -8,10 +8,10 @@ const Products = () => {
     document.title = "Unichem Store | Products";
   });
 
-  const [range1, setRange1] = useState(false);
-  const [range2, setRange2] = useState(false);
-  const [range3, setRange3] = useState(false);
-  const [range4, setRange4] = useState(false);
+  // const [range1, setRange1] = useState(false);
+  // const [range2, setRange2] = useState(false);
+  // const [range3, setRange3] = useState(false);
+  // const [range4, setRange4] = useState(false);
 
   let { productName } = useParams();
   let { categoryName } = useParams();
@@ -41,6 +41,7 @@ const Products = () => {
             </div>
           </div> */}
 
+          {/* 
           <div className="product-sidebar single-widget condition">
             <h5>Filter by Price</h5>
             <hr></hr>
@@ -93,7 +94,7 @@ const Products = () => {
                 ₱ 1,001 - ₱ 5,000
               </label>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="spacer"></div>
@@ -101,10 +102,10 @@ const Products = () => {
           productName={productName}
           categoryName={categoryName}
           brandName={brandName}
-          range1={range1}
-          range2={range2}
-          range3={range3}
-          range4={range4}
+          // range1={range1}
+          // range2={range2}
+          // range3={range3}
+          // range4={range4}
         />
       </div>
     </div>

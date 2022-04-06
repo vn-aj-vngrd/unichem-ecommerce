@@ -20,10 +20,6 @@ const Product = ({
   const [sortDefault, setSortDefault] = useState("descendingOrder");
   const [pageNumber, setPageNumber] = useState(0);
 
-  // Pagination
-  const productsPerPage = 3;
-  const pagesVisited = pageNumber * productsPerPage;
-
   const { user } = useSelector((state) => state.auth);
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.products
@@ -68,9 +64,12 @@ const Product = ({
     // },
   ];
 
-  let allProducts = JSON.parse(JSON.stringify(products));
+  // Pagination
+  const productsPerPage = 3;
+  const pagesVisited = pageNumber * productsPerPage;
 
   // Pagination
+  let allProducts = JSON.parse(JSON.stringify(products));
   allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
   const pageCount = Math.ceil(products.length / productsPerPage);
 
@@ -86,43 +85,43 @@ const Product = ({
     });
   }
 
-  if (categoryName) {
-    allProducts = products.filter((product) => {
-      return product.category
-        .toLowerCase()
-        .includes(categoryName.toLowerCase());
-    });
-  }
+  // if (categoryName) {
+  //   allProducts = products.filter((product) => {
+  //     return product.category
+  //       .toLowerCase()
+  //       .includes(categoryName.toLowerCase());
+  //   });
+  // }
 
-  if (brandName) {
-    allProducts = products.filter((product) => {
-      return product.brand.toLowerCase().includes(brandName.toLowerCase());
-    });
-  }
+  // if (brandName) {
+  //   allProducts = products.filter((product) => {
+  //     return product.brand.toLowerCase().includes(brandName.toLowerCase());
+  //   });
+  // }
 
-  if (range1) {
-    allProducts = products.filter((product) => {
-      return product.prices[0] >= 50 && product.prices[0] <= 100;
-    });
-  }
+  // if (range1) {
+  //   allProducts = products.filter((product) => {
+  //     return product.prices[0] >= 50 && product.prices[0] <= 100;
+  //   });
+  // }
 
-  if (range2) {
-    allProducts = products.filter((product) => {
-      return product.prices[0] >= 101 && product.prices[0] <= 500;
-    });
-  }
+  // if (range2) {
+  //   allProducts = products.filter((product) => {
+  //     return product.prices[0] >= 101 && product.prices[0] <= 500;
+  //   });
+  // }
 
-  if (range3) {
-    allProducts = products.filter((product) => {
-      return product.prices[0] >= 501 && product.prices[0] <= 1000;
-    });
-  }
+  // if (range3) {
+  //   allProducts = products.filter((product) => {
+  //     return product.prices[0] >= 501 && product.prices[0] <= 1000;
+  //   });
+  // }
 
-  if (range4) {
-    allProducts = products.filter((product) => {
-      return product.prices[0] >= 1001 && product.prices[0] <= 5000;
-    });
-  }
+  // if (range4) {
+  //   allProducts = products.filter((product) => {
+  //     return product.prices[0] >= 1001 && product.prices[0] <= 5000;
+  //   });
+  // }
 
   // switch(sortDefault) {
   //   case "descendingOrder":
@@ -140,7 +139,7 @@ const Product = ({
   // }
 
   // console.log(sortDefault);
-  // console.log(allProducts);
+  console.log(allProducts);
 
   return (
     <div className="">
