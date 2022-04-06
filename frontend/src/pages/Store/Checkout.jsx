@@ -47,52 +47,23 @@ const Checkout = () => {
                       <div className="row">
                         <div className="col-md-6">
                           <div className="single-form form-default">
-                            <label>Name</label>
+                            <label>Select Address</label>
                             <div className="form-input form">
-                              <input type="text" />
+                              <select
+                                className="form-select"
+                                id="address"
+                                name="address"
+                                // value={address}
+                                // onChange={address}
+                                required
+                              >
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                              </select>
                             </div>
                           </div>
                         </div>
-                        <div className="col-md-6">
-                          <div className="single-form form-default">
-                            <label>Phone Number</label>
-                            <div className="form-input form">
-                              <input type="text" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="single-form form-default">
-                            <label>Email</label>
-                            <div className="form-input form">
-                              <input type="text" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="single-form form-default">
-                            <label>Region, Province, City, Barangay</label>
-                            <div className="form-input form">
-                              <input type="text" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="single-form form-default">
-                            <label>Street Name, Building, House No.</label>
-                            <div className="form-input form">
-                              <input type="text" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="single-form form-default">
-                            <label>Postal Code</label>
-                            <div className="form-input form">
-                              <input type="text" />
-                            </div>
-                          </div>
-                        </div>
+
                         <div className="col-md-12">
                           <div className="steps-form-btn button">
                             <button

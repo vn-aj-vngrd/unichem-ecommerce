@@ -4,7 +4,7 @@ const Cart = require("../models/cartModel");
 const Product = require("../models/productModel");
 
 // @desc    Get Carts
-// @route   GET /api/Carts
+// @route   GET /api/carts
 // @access  Private
 const getCarts = asyncHandler(async (req, res) => {
   const carts = await Cart.find({ userID: req.user._id }).sort({
@@ -22,12 +22,13 @@ const getCarts = asyncHandler(async (req, res) => {
 });
 
 // @desc    Set Cart
-// @route   POST /api/Carts
+// @route   POST /api/carts
 // @access  Private
 const setCart = asyncHandler(async (req, res) => {
   const { productID, productType, quantity, max } = req.body;
 
   const existingCart = await Cart.findOne({
+    userID: req.user._id,
     productID,
     productType,
   });
@@ -57,6 +58,7 @@ const setCart = asyncHandler(async (req, res) => {
   // If cart exists then update quantity
   const updatedCart = await Cart.findOneAndUpdate(
     {
+      userID: req.user._id,
       productID,
       productType,
     },
@@ -68,7 +70,7 @@ const setCart = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update Cart
-// @route   PUT /api/Carts/:id
+// @route   PUT /api/carts/:id
 // @access  Private
 const updateCart = asyncHandler(async (req, res) => {
   const _id = req.body.id;
@@ -103,7 +105,7 @@ const updateCart = asyncHandler(async (req, res) => {
 });
 
 // @desc    Delete Cart
-// @route   DELETE /api/Carts/:id
+// @route   DELETE /api/carts/:id
 // @access  Private
 const deleteCart = asyncHandler(async (req, res) => {
   const cart = await Cart.findById(req.params.id);
@@ -132,7 +134,7 @@ const deleteCart = asyncHandler(async (req, res) => {
 });
 
 // @desc    Delete All Cart
-// @route   DELETE /api/Carts/deleteAll
+// @route   DELETE /api/carts/deleteAll
 // @access  Private
 const deleteAllCart = asyncHandler(async (req, res) => {
   const cart = await Cart.find({ userID: req.params.id });

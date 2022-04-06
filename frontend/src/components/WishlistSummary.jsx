@@ -17,8 +17,8 @@ const WishlistSummary = ({ wishlists, count }) => {
     };
 
     Swal.fire({
-      title: "Are you sure?",
-      text: "Delete all items in wishlist",
+      title: "Are you sure to clear your wishlist?",
+      text: "Select YES to proceed, otherwise select NO.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",

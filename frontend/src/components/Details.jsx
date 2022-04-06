@@ -199,7 +199,9 @@ const Details = ({ product }) => {
                   {product.quantities[value] === 0 && (
                     <div>Item is not available</div>
                   )}
-                  <h4 className="text-red">₱{product.prices[value].toFixed(2)}</h4>
+                  <h4 className="text-red">
+                    ₱{product.prices[value].toFixed(2)}
+                  </h4>
 
                   <hr className="mt-3" />
 

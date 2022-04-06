@@ -1,15 +1,18 @@
 import { deleteAllCart } from "../features/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-const PricingTable = ({ count, subtotal, shippingFee, total }) => {
+const PricingTable = ({ carts, count, subtotal, shippingFee, total }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { user } = useSelector((state) => state.auth);
 
   const clearCart = () => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "Delete all items in the cart",
+      title: "Are you sure to clear your cart?",
+      text: "Select YES to proceed, otherwise select NO.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -25,6 +28,24 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
       }
     });
   };
+
+  const checkout = () => {
+    Swal.fire({
+      title: "Are you sure you want to checkout?",
+      text: "Select yes to proceed, otherwise select no.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/checkout");
+        console.log(carts);
+      }
+    });
+  };
+
   return (
     <>
       <div className="row">
@@ -52,20 +73,20 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
                     <li>
                       Shipping Fee
                       <span>
-                        <p className="fw-bold">₱ {shippingFee}</p>
+                        <p className="fw-bold">₱ {shippingFee.toFixed(2)}</p>
                       </span>
                     </li>
                   </ul>
                   <hr></hr>
 
-                  {total > 0 ? (
+                  {/* {total > 0 ? (
                     <>
-                      <label className="form-label">Discount Coupon</label>
+                      <label className="form-label">Coupon Code</label>
                       <input className="form-control" type="text"></input>
                     </>
                   ) : (
                     <></>
-                  )}
+                  )} */}
                 </div>
 
                 <div className="no-box-shadow">
@@ -79,7 +100,12 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
                         </div>
 
                         <div className="button mt-4">
-                          <button className="btn checkout-btn">Checkout</button>
+                          <button
+                            className="btn checkout-btn"
+                            onClick={checkout}
+                          >
+                            Checkout
+                          </button>
                         </div>
 
                         <div className="button mt-3">
@@ -100,11 +126,7 @@ const PricingTable = ({ count, subtotal, shippingFee, total }) => {
                         </div>
 
                         <div className="button mt-4">
-                          <button
-                            // to="/checkout"
-                            className="btn checkout-btn"
-                            disabled
-                          >
+                          <button className="btn checkout-btn" disabled>
                             Checkout
                           </button>
                         </div>

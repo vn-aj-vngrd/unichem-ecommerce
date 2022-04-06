@@ -26,7 +26,12 @@ const getWishlists = asyncHandler(async (req, res) => {
 // @access  Private
 const setWishlist = asyncHandler(async (req, res) => {
   const { productID, productType } = req.body;
-  const existingWishlist = await Wishlist.findOne({ productID, productType });
+
+  const existingWishlist = await Wishlist.findOne({
+    userID: req.user._id,
+    productID,
+    productType,
+  });
 
   if (!existingWishlist) {
     const wishlist = await Wishlist.create({

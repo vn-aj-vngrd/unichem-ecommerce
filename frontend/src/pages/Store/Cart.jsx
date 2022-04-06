@@ -53,7 +53,7 @@ const Cart = () => {
         carts[i].product.prices[carts[i]._doc.productType] *
         carts[i]._doc.quantity;
     }
-    shippingFee = 50;
+    shippingFee = 0.00;
     total = subtotal + shippingFee;
   }
 
@@ -104,6 +104,7 @@ const Cart = () => {
             </>
           )}
           <PricingTable
+            carts={carts}
             count={count}
             subtotal={subtotal}
             shippingFee={shippingFee}
