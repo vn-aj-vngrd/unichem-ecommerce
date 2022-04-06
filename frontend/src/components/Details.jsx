@@ -282,7 +282,7 @@ const Details = ({ product }) => {
                   </div>
                   <div className="row">
                     <div className="col">
-                      <div className="cart-button">
+                      <div className="cart-button button">
                         {product.quantities[value] !== 0 ? (
                           <button className="btn" onClick={addToCart}>
                             <i className="lni lni-cart"></i> Cart
