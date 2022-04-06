@@ -13,13 +13,14 @@ const Profile = () => {
   );
 
   const [formData, setFormData] = useState({
+    addressName: "",
     address1: "",
     address2: "",
     postalCode: "",
     phoneNumber: "",
   });
 
-  const { address1, address2, postalCode, phoneNumber } = formData;
+  const { addressName, address1, address2, postalCode, phoneNumber } = formData;
 
   const onChangeCreate = (e) => {
     setFormData((prevState) => ({
@@ -127,7 +128,7 @@ const Profile = () => {
                   <div className="profile-address">
                     <ul>
                       <li className="address-header">
-                        <h6>Tumapon's Best Residence</h6>
+                        <h6>{user.address[index].addressName}</h6>
                       </li>
                       <li>
                         <p>
@@ -294,7 +295,7 @@ const Profile = () => {
                   <div className="profile-address">
                     <ul>
                       <li className="address-header">
-                        <h6>Tumapon's Best Residence</h6>
+                        <h6>{user.address[index].addressName}</h6>
                       </li>
                       <li>
                         <p>
