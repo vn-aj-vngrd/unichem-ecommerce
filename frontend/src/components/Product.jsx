@@ -6,14 +6,22 @@ import Star from "./Star";
 import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
 
-const Product = ({ searchData, range1, range2, range3, range4 }) => {
+const Product = ({
+  productName,
+  categoryName,
+  brandName,
+  range1,
+  range2,
+  range3,
+  range4,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sortDefault, setSortDefault] = useState("descendingOrder");
   const [pageNumber, setPageNumber] = useState(0);
 
   // Pagination
-  const productsPerPage = 2;
+  const productsPerPage = 3;
   const pagesVisited = pageNumber * productsPerPage;
 
   const { user } = useSelector((state) => state.auth);
@@ -23,7 +31,7 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      // console.log(message);
     }
 
     dispatch(getProducts());
@@ -60,26 +68,35 @@ const Product = ({ searchData, range1, range2, range3, range4 }) => {
     // },
   ];
 
-  // let allProducts = products.filter((product) => {
-  //   return product.featured === true;
-  // });
-
   let allProducts = JSON.parse(JSON.stringify(products));
 
   // Pagination
   allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
-  console.log(allProducts.length);
   const pageCount = Math.ceil(products.length / productsPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
 
-  if (searchData !== "") {
+  if (productName) {
     allProducts = products.filter((product) => {
       return product.productName
         .toLowerCase()
-        .includes(searchData.toLowerCase());
+        .includes(productName.toLowerCase());
+    });
+  }
+
+  if (categoryName) {
+    allProducts = products.filter((product) => {
+      return product.category
+        .toLowerCase()
+        .includes(categoryName.toLowerCase());
+    });
+  }
+
+  if (brandName) {
+    allProducts = products.filter((product) => {
+      return product.brand.toLowerCase().includes(brandName.toLowerCase());
     });
   }
 

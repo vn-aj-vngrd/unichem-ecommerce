@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, resetUser } from "../features/auth/authSlice";
@@ -18,6 +19,8 @@ const Navbar = ({ userType }) => {
   const { user } = useSelector((state) => state.auth);
   const { wishlists } = useSelector((state) => state.wishlist);
   const { carts } = useSelector((state) => state.cart);
+
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -42,7 +45,9 @@ const Navbar = ({ userType }) => {
     cartCount = localStorage.getItem("cartCount");
   }
 
-  const onLogout = () => {
+  const onLogout = (e) => {
+    e.preventDefault();
+
     localStorage.clear();
     dispatch(logout());
     dispatch(resetUser());
@@ -56,6 +61,13 @@ const Navbar = ({ userType }) => {
       draggable: true,
       progress: undefined,
     });
+  };
+
+  const onSearch = (e) => {
+    e.preventDefault();
+
+    navigate(`/products/product/${input}`);
+    setInput("");
   };
 
   if (userType === "customer") {
@@ -76,15 +88,26 @@ const Navbar = ({ userType }) => {
                   <div className="navbar-search search-style-5">
                     <div className="search-select"></div>
                     <div className="search-input">
-                      <input type="text" placeholder="Search Product" />
+                      <input
+                        type="text"
+                        placeholder="Search Product"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        name="searchInput"
+                      />
                     </div>
                     <div className="search-btn">
-                      <button>
-                        <Link
-                          to="/products"
+                      {input ? (
+                        <button
                           className="lni lni-search-alt nav-search"
-                        ></Link>
-                      </button>
+                          onClick={onSearch}
+                        ></button>
+                      ) : (
+                        <button
+                          className="lni lni-search-alt nav-search disabled"
+                          disabled
+                        ></button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -130,76 +153,23 @@ const Navbar = ({ userType }) => {
                   </span>
                   <ul className="sub-category">
                     <li>
-                      <Link to="/products">
-                        Loctite <i className="lni lni-chevron-right"></i>
-                      </Link>
-                      <ul className="inner-sub-category">
-                        <li>
-                          <Link to="/products">Construction</Link>
-                        </li>
-                        <li>
-                          <Link to="/products">Adhesives</Link>
-                        </li>
-                        <li>
-                          <Link to="/products">Threadlockers</Link>
-                        </li>
-                        <li>
-                          <Link to="/products">Foam Sealants</Link>
-                        </li>
-                        <li>
-                          <Link to="/products">Sealants</Link>
-                        </li>
-                        <li>
-                          <Link to="/products">Epoxies</Link>
-                        </li>
-                      </ul>
+                      <Link to="/products/brand/loctite">Loctite</Link>
                     </li>
 
                     <li>
-                      <Link to="/products">
-                        3M <i className="lni lni-chevron-right"></i>
-                      </Link>
-                      <ul className="inner-sub-category">
-                        <li>
-                          <Link to="/products">Tapes </Link>
-                        </li>
-                        <li>
-                          <Link to="/products">Adhesives</Link>
-                        </li>
-                        <li>
-                          <Link to="/products">Window Films</Link>
-                        </li>
-                        <li>
-                          <Link to="/products">Car Tints</Link>
-                        </li>
-                      </ul>
+                      <Link to="/products/brand/3m">3M</Link>
                     </li>
 
                     <li>
-                      <Link to="/products">
+                      <Link to="/products/brand/phoenix_lubricants">
                         Phoenix Lubricants
-                        <i className="lni lni-chevron-right"></i>
                       </Link>
-                      <ul className="inner-sub-category">
-                        <li>
-                          <Link to="/products">Industrial Oils </Link>
-                        </li>
-                      </ul>
                     </li>
 
                     <li>
-                      <Link to="/products">
+                      <Link to="/products/brand/polymer_cleaning_chemicals">
                         Polymer Cleaning Chemicals
-                        <i className="lni lni-chevron-right"></i>
                       </Link>
-                      <ul className="inner-sub-category">
-                        <li>
-                          <Link to="/products">Housekeeping </Link>
-                          <Link to="/products">Kitchen </Link>
-                          <Link to="/products">Laundry </Link>
-                          <Link to="/products">Restroom </Link>
-                        </li>
-                      </ul>
                     </li>
                   </ul>
                 </div>
@@ -313,7 +283,6 @@ const Navbar = ({ userType }) => {
               <div className="d-flex justify-content-end nav-profile-section">
                 {user ? (
                   <>
-                    {/*  */}
                     <div className="nav-inner">
                       <div className=" mobile-dropdown-hover">
                         <button className="hover-button">
@@ -345,7 +314,6 @@ const Navbar = ({ userType }) => {
                         </ul>
                       </div>
                     </div>
-                    {/*  */}
                     <div className="nav-inner ">
                       <nav className="navbar navbar-expand-lg hide-on-thin-screen">
                         <ul id="nav" className="navbar-nav">
@@ -413,7 +381,9 @@ const Navbar = ({ userType }) => {
         </div>
       </header>
     );
-  } else if (userType === "admin") {
+  }
+
+  if (userType === "admin") {
     return (
       <>
         <nav className="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
