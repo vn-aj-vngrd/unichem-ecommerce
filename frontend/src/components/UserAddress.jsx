@@ -43,9 +43,8 @@ const Profile = () => {
       });
     }
 
-    // dispatch(get());
     return () => {
-      // dispatch(resetUser());
+      dispatch(resetUser());
     };
   }, [isError, isSuccess, message, dispatch]);
 
@@ -121,9 +120,9 @@ const Profile = () => {
           index === user.primaryAddress ? (
             <div key={index}>
               <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
-                <div className="color-white purchase-update-time">
-                  Last Update Time: mm/dd/yy - hh:mm
-                </div>
+                {/* <div className="color-white purchase-update-time">
+                  Last Update Time: mm/dd/yy - hh:mm 
+                </div> */}
                 <h6 className="purchase-order-status">DEFAULT ADDRESS</h6>
               </div>
               <div className="profile-address-section">
@@ -517,9 +516,7 @@ const Profile = () => {
                   <div className="row">
                     <div className="col-13">
                       <div className="single-form form-default">
-                        <label className="form-label">
-                          Address Name
-                        </label>
+                        <label className="form-label">Address Name</label>
                         <input
                           type="text"
                           className="form-control"
