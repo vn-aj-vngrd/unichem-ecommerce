@@ -76,7 +76,9 @@ const Product = ({
   };
 
   if (productName) {
-    console.log("product");
+    productName = productName.replaceAll("_", " ");
+    // console.log(productName);
+
     allProducts = products.filter((product) => {
       return product.productName
         .toLowerCase()
@@ -85,7 +87,8 @@ const Product = ({
   }
 
   if (categoryName) {
-    console.log("category");
+    categoryName = categoryName.replaceAll("_", " ");
+    // console.log(categoryName);
 
     allProducts = products.filter((product) => {
       return product.category
@@ -95,7 +98,8 @@ const Product = ({
   }
 
   if (brandName) {
-    console.log("brand");
+    brandName = brandName.replaceAll("_", " ");
+    // console.log(brandName);
 
     allProducts = products.filter((product) => {
       return product.brand.toLowerCase().includes(brandName.toLowerCase());
