@@ -70,14 +70,13 @@ const Product = ({
 
   // Pagination
   let allProducts = JSON.parse(JSON.stringify(products));
-  allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
-  const pageCount = Math.ceil(products.length / productsPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
 
   if (productName) {
+    console.log("product");
     allProducts = products.filter((product) => {
       return product.productName
         .toLowerCase()
@@ -85,20 +84,26 @@ const Product = ({
     });
   }
 
-  // if (categoryName) {
-  //   allProducts = products.filter((product) => {
-  //     return product.category
-  //       .toLowerCase()
-  //       .includes(categoryName.toLowerCase());
-  //   });
-  // }
+  if (categoryName) {
+    console.log("category");
 
-  // if (brandName) {
-  //   allProducts = products.filter((product) => {
-  //     return product.brand.toLowerCase().includes(brandName.toLowerCase());
-  //   });
-  // }
+    allProducts = products.filter((product) => {
+      return product.category
+        .toLowerCase()
+        .includes(categoryName.toLowerCase());
+    });
+  }
 
+  if (brandName) {
+    console.log("brand");
+
+    allProducts = products.filter((product) => {
+      return product.brand.toLowerCase().includes(brandName.toLowerCase());
+    });
+  }
+
+  const pageCount = Math.ceil(allProducts.length / productsPerPage);
+  allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
   // if (range1) {
   //   allProducts = products.filter((product) => {
   //     return product.prices[0] >= 50 && product.prices[0] <= 100;
