@@ -9,7 +9,7 @@ const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find().sort({
     createdAt: "desc",
   });
-  return res.status(200).json(products);
+  res.status(200).json(products);
 });
 
 // @desc    Set Product

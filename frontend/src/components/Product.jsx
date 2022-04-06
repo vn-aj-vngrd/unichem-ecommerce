@@ -144,7 +144,7 @@ const Product = ({
   // }
 
   // console.log(sortDefault);
-  console.log(allProducts);
+  // console.log(allProducts);
 
   return (
     <div className="">

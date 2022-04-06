@@ -213,46 +213,68 @@ const Navbar = ({ userType }) => {
                         </Link>
                         <ul className="sub-menu collapse" id="submenu-1-2">
                           <li className="nav-item">
-                            <Link to="/products">Adhesives</Link>
+                            <Link to="/products/category/adhesives">
+                              Adhesives
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Car Tints</Link>
+                            <Link to="/products/category/cart_tints">
+                              Car Tints
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Construction</Link>
+                            <Link to="/products/category/construction">
+                              Construction
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Epoxies </Link>
+                            <Link to="/products/category/epoxies">
+                              Epoxies{" "}
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Foam Sealants</Link>
+                            <Link to="/products/category/foam_sealants">
+                              Foam Sealants
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Housekeeping</Link>
+                            <Link to="/products/category/housekeeping">
+                              Housekeeping
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Industrial Oils</Link>
+                            <Link to="/products/category/industrial_oils">
+                              Industrial Oils
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Kitchen</Link>
+                            <Link to="/products/category/kitchen">Kitchen</Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Laundry</Link>
+                            <Link to="/products/category/laundry">Laundry</Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Restroom</Link>
+                            <Link to="/products/category/restroom">
+                              Restroom
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Sealants</Link>
+                            <Link to="/products/category/sealants">
+                              Sealants
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Tapes</Link>
+                            <Link to="/products/category/tapes">Tapes</Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Threadlockers</Link>
+                            <Link to="/products/category/threadlockers">
+                              Threadlockers
+                            </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products">Window Films</Link>
+                            <Link to="/products/category/window_films">
+                              Window Films
+                            </Link>
                           </li>
                         </ul>
                       </li>
