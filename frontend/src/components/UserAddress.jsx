@@ -29,8 +29,6 @@ const Profile = () => {
     }));
   };
 
-  // console.log(user);
-
   useEffect(() => {
     if (isError) {
       toast.error(message, {
@@ -99,6 +97,15 @@ const Profile = () => {
   };
 
   const deleteAddress = (e) => {};
+
+  if (isLoading) {
+    return (
+      <>
+        <Spinner />
+        <div className="empty-container"></div>
+      </>
+    );
+  }
 
   return (
     <div className="profile-information-column">
@@ -199,6 +206,23 @@ const Profile = () => {
                               aria-labelledby="headingOne"
                               data-bs-parent="#accordionExample"
                             >
+                              <div className="col-13">
+                                <div className="single-form form-default">
+                                  <label className="form-label">
+                                    Address Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="addressName"
+                                    name="addressName"
+                                    // value={addressName}
+                                    // onChange={addressName}
+                                    required
+                                  />
+                                </div>
+                              </div>
+
                               <div className="row">
                                 <div className="col-6">
                                   <div className="single-form no-margin form-default">
@@ -366,6 +390,23 @@ const Profile = () => {
                               aria-labelledby="headingOne"
                               data-bs-parent="#accordionExample"
                             >
+                              <div className="col-13">
+                                <div className="single-form form-default">
+                                  <label className="form-label">
+                                    Address Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="addressName"
+                                    name="addressName"
+                                    // value={addressName}
+                                    // onChange={onChange}
+                                    required
+                                  />
+                                </div>
+                              </div>
+
                               <div className="row">
                                 <div className="col-6">
                                   <div className="single-form no-margin form-default">
@@ -474,6 +515,23 @@ const Profile = () => {
                   data-bs-parent="#accordionExample"
                 >
                   <div className="row">
+                    <div className="col-13">
+                      <div className="single-form form-default">
+                        <label className="form-label">
+                          Address Name
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="addressName"
+                          name="addressName"
+                          value={addressName}
+                          onChange={onChangeCreate}
+                          required
+                        />
+                      </div>
+                    </div>
+
                     <div className="col-6">
                       <div className="single-form form-default">
                         <label className="form-label">
