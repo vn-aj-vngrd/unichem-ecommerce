@@ -7,7 +7,14 @@ import CreatePromotion from "../../components/CreatePromotion";
 import UpdatePromotion from "../../components/UpdatePromo";
 
 const ManagePromotions = () => {
-  const columns = ["Promo Image", "Promo ID", "Promo Name", "Updated", "Created", ""];
+  const columns = [
+    "Promo Image",
+    "Promo ID",
+    "Promo Name",
+    "Updated",
+    "Created",
+    "",
+  ];
 
   const data = [
     [

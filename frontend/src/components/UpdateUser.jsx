@@ -1,6 +1,4 @@
-import React from "react";
-
-const UpdateUser = ({ id }) => {
+const UpdateUser = () => {
   return (
     <>
       <div className="col-lg-4">
