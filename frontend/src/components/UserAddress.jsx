@@ -57,11 +57,11 @@ const Profile = () => {
       address2,
       postalCode,
       phoneNumber,
-    })
+    });
     
     const userData = {
       address: address,
-    }
+    };
 
     console.log(userData)
 
@@ -78,14 +78,51 @@ const Profile = () => {
     });
   };
 
-  const onSubmitDefault = (index) => {
-    // setPrimaryAddress(index);
+  const deleteAddress = (index) => {
+    const newPrimaryAddress = user.primaryAddress;
 
+    if (index == newPrimaryAddress) {
+      toast.warning("Deleting a default address will set your first address as your new default address", {
+        position: "top-center",
+        autoClose: 7000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+
+    const address =  JSON.parse(JSON.stringify(user.address));
+
+    console.log(newPrimaryAddress)
+
+    address.splice(index, 1);
+    
+    const userData = {
+      address: address,
+      primaryAddress: newPrimaryAddress,
+    }
+
+    dispatch(update(userData));
+    toast.success("Address deleted successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const onSubmitDefault = (index) => {
     const userData = {
       primaryAddress: index,
     };
 
-    // console.log(userData);
     dispatch(update(userData));
 
     toast.success("Address updated successfully", {
@@ -99,8 +136,6 @@ const Profile = () => {
       theme: "colored",
     });
   };
-
-  const deleteAddress = (e) => {};
 
   if (isLoading) {
     return (
@@ -182,7 +217,7 @@ const Profile = () => {
                       </button>
                       <button
                         to="/product-details"
-                        onClick={deleteAddress}
+                        onClick={() => deleteAddress(index)}
                         className="btn-line second-option-btn"
                       >
                         Delete
@@ -366,7 +401,7 @@ const Profile = () => {
                       </button>
                       <button
                         to="/product-details"
-                        onClick={deleteAddress}
+                        onClick={() => deleteAddress(index)}
                         className="btn-line second-option-btn"
                       >
                         Delete
