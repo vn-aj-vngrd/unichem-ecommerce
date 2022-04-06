@@ -51,13 +51,13 @@ const Wishlist = () => {
                   <p>Product Name</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
-                  {/* <p>Quantity</p> */}
-                </div>
-                <div className="col-lg-2 col-md-2 col-12">
                   <p>Price</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
                   <p>Discount</p>
+                </div>
+                <div className="col-lg-2 col-md-2 col-12">
+                  <p>Add to Cart</p>
                 </div>
                 <div className="col-lg-1 col-md-2 col-12">
                   <p>Remove</p>

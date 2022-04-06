@@ -72,8 +72,6 @@ const WishlistRow = ({ wishlist }) => {
                 <option>5</option>
               </select>
             </div> */}
-            </div>
-            <div className="col-lg-2 col-md-2 col-12">
               <p>₱ {wishlist.product.prices[wishlist._doc.productType]}</p>
             </div>
             <div className="col-lg-2 col-md-2 col-12">
@@ -83,15 +81,18 @@ const WishlistRow = ({ wishlist }) => {
                 <p>Unavailable</p>
               )}
             </div>
+            <div className="col-lg-2 col-md-2 col-12">
+              <button className="add-item" onClick={addToCart}>
+                <i className="lni lni-cart"></i>
+              </button>
+            </div>
+
             <div className="col-lg-1 col-md-2 col-12">
               <button
                 className="remove-item"
                 onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
               >
                 <i className="lni lni-close"></i>
-              </button>
-              <button className="add-item" onClick={addToCart}>
-                <i className="lni lni-cart"></i>
               </button>
             </div>
           </div>
