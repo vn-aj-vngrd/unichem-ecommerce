@@ -138,7 +138,6 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  const userAddress = await Address.findOne({ userID: req.user.id });
   const user = await User.findById(req.user.id);
 
   if (!user) {
@@ -191,6 +190,14 @@ const updateUser = asyncHandler(async (req, res) => {
     new: true,
   });
 
+  const updatedAddress = await Address.findOneAndUpdate(
+    {
+      userID: req.user.id,
+    },
+    req.body,
+    { new: true }
+  );
+
   res.status(200).json({
     _id: updatedUser._id,
     name: updatedUser.name,
@@ -198,10 +205,10 @@ const updateUser = asyncHandler(async (req, res) => {
     sex: updatedUser.sex,
     birthday: updatedUser.birthday,
     userType: updatedUser.userType,
-    image: user.image,
+    image: updatedUser.image,
     userType: updatedUser.userType,
-    address: userAddress.address,
-    primaryAddress: userAddress.primaryAddress,
+    address: updatedAddress.address,
+    primaryAddress: updatedAddress.primaryAddress,
     token: generateToken(updatedUser._id),
   });
 });
