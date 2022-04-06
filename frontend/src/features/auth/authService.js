@@ -31,9 +31,9 @@ const update = async (userData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  console.log(userData);
   const response = await axios.put(API_URL + "updateUser", userData, config);
-
+  console.log(response);
+  
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }
