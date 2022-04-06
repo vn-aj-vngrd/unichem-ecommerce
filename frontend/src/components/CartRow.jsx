@@ -18,7 +18,9 @@ const CartRow = ({ cart }) => {
             </div>
             <div className="col-lg-4 col-md-3 col-12">
               <h5 className="">
-                <Link to="/">{cart.product.productName}</Link>
+                <Link to={`/product-details/${cart.product._id}`}>
+                  {cart.product.productName}
+                </Link>
               </h5>
               <p className="product-des">
                 <span>
