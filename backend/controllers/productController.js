@@ -20,14 +20,16 @@ const getProducts = asyncHandler(async (req, res) => {
       sold: 0,
     };
     const reviews = await Review.find({ productID: products[i]._id });
-    const orders = await Order.find({ productID: products[i]._id });
+    const orders = await Order.find({ products: products[i]._id });
 
     for (let j = 0; j < reviews.length; j++) {
       market.averageRatings += reviews[j].rating;
     }
 
     for (let k = 0; k < orders.length; k++) {
-      market.sold += orders[k].quantity;
+      for (let l = 0; l < orders.quantities.length; l++) {
+        market.sold += orders[k].quantities[l];
+      }
     }
 
     if (reviews.length > 0) {

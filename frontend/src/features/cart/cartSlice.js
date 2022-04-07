@@ -6,7 +6,7 @@ const initialState = {
   isCartError: false,
   isCartSuccess: false,
   isCartLoading: false,
-  cartMessage: "",
+  cartcartMessage: "",
 };
 
 // Set  cart
@@ -17,13 +17,13 @@ export const setCart = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.setCart(cartData, token);
     } catch (error) {
-      const cartMessage =
+      const cartcartMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.cartcartMessage) ||
+        error.cartcartMessage ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(cartcartMessage);
     }
   }
 );
@@ -36,13 +36,13 @@ export const getCarts = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.getCarts(token);
     } catch (error) {
-      const cartMessage =
+      const cartcartMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.cartcartMessage) ||
+        error.cartcartMessage ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(cartcartMessage);
     }
   }
 );
@@ -55,13 +55,13 @@ export const updateCart = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.updateCart(cartParams, token);
     } catch (error) {
-      const cartMessage =
+      const cartcartMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.cartcartMessage) ||
+        error.cartcartMessage ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(cartcartMessage);
     }
   }
 );
@@ -74,13 +74,13 @@ export const deleteCart = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.deleteCart(id, token);
     } catch (error) {
-      const cartMessage =
+      const cartcartMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.cartcartMessage) ||
+        error.cartcartMessage ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(cartcartMessage);
     }
   }
 );
@@ -93,13 +93,13 @@ export const deleteAllCart = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.deleteAllCart(userID, token);
     } catch (error) {
-      const cartMessage =
+      const cartcartMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.cartcartMessage) ||
+        error.cartcartMessage ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(cartcartMessage);
     }
   }
 );
@@ -123,20 +123,20 @@ export const cartSlice = createSlice({
       .addCase(setCart.rejected, (state, action) => {
         state.isCartLoading = false;
         state.isCartError = true;
-        state.cartMessage = action.payload;
+        state.cartcartMessage = action.payload;
       })
       .addCase(getCarts.pending, (state) => {
-        state.isLoading = true;
+        state.isCartLoading = true;
       })
       .addCase(getCarts.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isCartLoading = false;
         state.isSuccess = true;
         state.carts = action.payload;
       })
       .addCase(getCarts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
+        state.isCartLoading = false;
+        state.isCartError = true;
+        state.cartMessage = action.payload;
       })
       .addCase(updateCart.pending, (state) => {
         state.isCartLoading = true;
@@ -152,7 +152,7 @@ export const cartSlice = createSlice({
       .addCase(updateCart.rejected, (state, action) => {
         state.isCartLoading = false;
         state.isCartError = true;
-        state.cartMessage = action.payload;
+        state.cartcartMessage = action.payload;
       })
       .addCase(deleteCart.pending, (state) => {
         state.isCartLoading = true;
@@ -167,7 +167,7 @@ export const cartSlice = createSlice({
       .addCase(deleteCart.rejected, (state, action) => {
         state.isCartLoading = false;
         state.isCartError = true;
-        state.cartMessage = action.payload;
+        state.cartcartMessage = action.payload;
       })
       .addCase(deleteAllCart.pending, (state) => {
         state.isCartLoading = true;
@@ -180,7 +180,7 @@ export const cartSlice = createSlice({
       .addCase(deleteAllCart.rejected, (state, action) => {
         state.isCartLoading = false;
         state.isCartError = true;
-        state.cartMessage = action.payload;
+        state.cartcartMessage = action.payload;
       });
   },
 });

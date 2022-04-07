@@ -20,14 +20,12 @@ const Product = ({
   const [sortDefault, setSortDefault] = useState("descendingOrder");
   const [pageNumber, setPageNumber] = useState(0);
 
-  const { user } = useSelector((state) => state.auth);
-  const { products, isLoading, isError, message } = useSelector(
-    (state) => state.products
-  );
+  const { products, isProductLoading, isProductError, productMessage } =
+    useSelector((state) => state.products);
 
   useEffect(() => {
-    if (isError) {
-      // console.log(message);
+    if (isProductError) {
+      // console.log(productMessage);
     }
 
     dispatch(getProducts());
@@ -35,10 +33,10 @@ const Product = ({
     return () => {
       dispatch(resetProduct());
     };
-  }, [user, navigate, isError, message, dispatch]);
+  }, [isProductError, productMessage, dispatch]);
 
-  if (isLoading) {
-    return <Spinner />;
+  if (isProductLoading) {
+    return <><div className="empty-container"></div><Spinner /></>;
   }
 
   const options = [
@@ -185,7 +183,10 @@ const Product = ({
                       <></>
                     )}
                     {/* end of promo */}
-                    <img src={product._doc.image} alt={product._doc.productName} />
+                    <img
+                      src={product._doc.image}
+                      alt={product._doc.productName}
+                    />
                     <div className="button">
                       <Link
                         to={`/product-details/${product._doc._id}`}
@@ -201,7 +202,9 @@ const Product = ({
                       {product._doc.category}
                     </span>
                     <div className="title">
-                      <h5 className="product-name">{product._doc.productName}</h5>
+                      <h5 className="product-name">
+                        {product._doc.productName}
+                      </h5>
                     </div>
                     <Star star={3} reviews={1} />
                   </div>
@@ -213,7 +216,9 @@ const Product = ({
                         {
                           (salesPrice =
                             product._doc.prices[0] -
-                            (product._doc.prices[0] * product._doc.salePercent) / 100)
+                            (product._doc.prices[0] *
+                              product._doc.salePercent) /
+                              100)
                         }
                       </div>
 
