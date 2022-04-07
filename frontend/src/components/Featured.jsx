@@ -25,9 +25,9 @@ const Featured = () => {
     };
   }, [user, navigate, isProductError, productMessage, dispatch]);
 
-  if (isProductLoading) {
-    return <Spinner />;
-  }
+  // if (isProductLoading) {
+  //   return <Spinner />;
+  // }
 
   let featuredProducts = products.filter((product) => {
     return product._doc.featured === true;
