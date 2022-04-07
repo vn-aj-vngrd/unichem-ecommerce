@@ -11,10 +11,9 @@ const { protect } = require("../middleware/authMiddleware");
 
 router
   .route("/")
-  .get(protect, getReviews)
+  .get(getReviews)
   .post(protect, setReview)
   .put(protect, updateReview);
 router.route("/:id").delete(protect, deleteReview);
-// router.delete("/deleteall/:id", protect, deleteAllReview);
 
 module.exports = router;

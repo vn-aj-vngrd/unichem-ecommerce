@@ -35,6 +35,8 @@ const Details = ({ product }) => {
     }
   };
 
+  console.log(product);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -202,6 +204,11 @@ const Details = ({ product }) => {
                   <h4 className="text-red">
                     ₱{product.prices[value].toFixed(2)}
                   </h4>
+                  {product.isSale && (
+                    <h4 className="text-red">
+                      ₱{product.prices[value].toFixed(2)}
+                    </h4>
+                  )}
 
                   <hr className="mt-3" />
 

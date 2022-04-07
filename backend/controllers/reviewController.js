@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 
 const Review = require("../models/reviewModel");
 const Product = require("../models/productModel");
+const User = require("../models/userModel");
 
 // @desc    Get Reviews by user
 // @route   GET /api/reviews
@@ -11,14 +12,16 @@ const getReviews = asyncHandler(async (req, res) => {
     createdAt: "desc",
   });
 
-  // let retData = [];
-  // for (let i = 0; i < reviews.length; i++) {
-  //   let product = await Product.findById(reviews[i].productID);
-  //   const temp = { ...reviews[i], product };
-  //   retData.push(temp);
-  // }
+  let retData = [];
+  for (let i = 0; i < reviews.length; i++) {
+    let product = await Product.findById(reviews[i].productID);
+    let user = await User.findById(reviews[i].userID);
+    const temp = { ...reviews[i], product, user };
+    retData.push(temp);
+  }
 
-  res.status(200).json(reviews);
+  res.status(200).json(retData);
+  // res.status(200).json(reviews);
 });
 
 // @desc    Set Review

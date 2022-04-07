@@ -12,66 +12,44 @@ const setReview = async (reviewData, token) => {
 
   const response = await axios.post(API_URL, reviewData, config);
 
-  const count = await axios.get(API_URL, config);
-  if (count.data) {
-    localStorage.setItem("reviewCount", JSON.stringify(count.data.length));
-  }
-
   return response.data;
 };
 
 // Get user reviews
-const getReviews = async (token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  const response = await axios.get(API_URL, config);
+const getReviews = async () => {
+  const response = await axios.get(API_URL);
   // console.log(response.data);
-
-  if (response.data) {
-    localStorage.setItem("reviewCount", JSON.stringify(response.data.length));
-  }
 
   return response.data;
 };
 
 // Update user review
 const updateReview = async (reviewParams, token) => {
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // };
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-  // // console.log(reviewParams);
+  // console.log(reviewParams);
+  const response = await axios.put(API_URL, reviewParams, config);
+  // console.log(response.data);
 
-  // const response = await axios.put(API_URL, reviewParams, config);
-  // // console.log(response.data);
-
-  // return response.data;
+  return response.data;
 };
 
 // Delete user review
 const deleteReview = async (reviewId, token) => {
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // };
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-  // const response = await axios.delete(API_URL + reviewId, config);
+  const response = await axios.delete(API_URL + reviewId, config);
 
-  // const count = await axios.get(API_URL, config);
-  // if (count.data) {
-  //   localStorage.setItem("reviewCount", JSON.stringify(count.data.length));
-  // }
-
-  // return response.data;
+  return response.data;
 };
-
 
 const reviewService = {
   setReview,

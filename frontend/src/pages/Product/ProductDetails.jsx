@@ -5,7 +5,6 @@ import {
   getProducts,
   resetProduct,
 } from "../../features/products/productSlice";
-import { createAction } from "@reduxjs/toolkit";
 import Details from "../../components/Details";
 import Specifications from "../../components/Specifications";
 import Reviews from "../../components/Reviews";
@@ -18,15 +17,14 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { products, isLoading, isError, message } = useSelector(
-    (state) => state.products
-  );
+  const { products, isProductLoading, isProductError, productMessage } =
+    useSelector((state) => state.products);
 
   useEffect(() => {
     document.title = "Unichem Store | Product Details";
 
-    if (isError) {
-      console.log(message);
+    if (isProductError) {
+      // console.log(productMessage);
     }
 
     dispatch(getProducts());
@@ -34,9 +32,9 @@ const ProductDetails = () => {
     return () => {
       dispatch(resetProduct());
     };
-  }, [navigate, isError, message, dispatch]);
+  }, [navigate, isProductError, productMessage, dispatch]);
 
-  if (isLoading) {
+  if (isProductLoading) {
     return (
       <>
         <div className="empty-container"></div>
@@ -45,7 +43,7 @@ const ProductDetails = () => {
     );
   }
 
-  let product = products.filter((product) => {
+  const product = products.filter((product) => {
     return product._id === id;
   });
 
@@ -61,7 +59,7 @@ const ProductDetails = () => {
       ) : (
         <></>
       )}
-      <Reviews />
+      <Reviews productID={id} />
     </>
   );
 };

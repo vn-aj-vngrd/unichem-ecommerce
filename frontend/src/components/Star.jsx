@@ -68,10 +68,12 @@ const Star = ({ star, reviews }) => {
           <div>
             <MdStarOutline className="text-warning" />
           </div>
-
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
+          
         </div>
       )}
 
@@ -165,9 +167,11 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -189,9 +193,11 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -213,9 +219,11 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -237,9 +245,11 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -261,9 +271,11 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
     </div>
