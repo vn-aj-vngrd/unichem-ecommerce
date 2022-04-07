@@ -36,7 +36,12 @@ const Product = ({
   }, [isProductError, productMessage, dispatch]);
 
   if (isProductLoading) {
-    return <><div className="empty-container"></div><Spinner /></>;
+    return (
+      <>
+        <div className="empty-container"></div>
+        <Spinner />
+      </>
+    );
   }
 
   const options = [
@@ -184,7 +189,7 @@ const Product = ({
                     )}
                     {/* end of promo */}
                     <img
-                      src={product._doc.image}
+                      src={product._doc.images[0]}
                       alt={product._doc.productName}
                     />
                     <div className="button">
@@ -235,7 +240,7 @@ const Product = ({
                         </h6>
                       )}
                     </div>
-                    <div className="items-sold">6.9K items sold</div>
+                    <div className="items-sold">{product.market.sold} sold</div>
                   </div>
                 </div>
               </div>

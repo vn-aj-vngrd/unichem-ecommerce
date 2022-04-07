@@ -41,8 +41,8 @@ const productSchema = mongoose.Schema(
       type: String,
       required: [true, "Product Description is required"],
     },
-    image: {
-      type: String,
+    images: {
+      type: Array,
       required: [true, "Product Image is required"],
     },
     featured: {

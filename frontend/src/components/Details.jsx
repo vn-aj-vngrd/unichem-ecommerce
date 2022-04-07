@@ -15,8 +15,6 @@ import "swiper/css";
 import { Autoplay, Pagination } from "swiper";
 import Star from "./Star";
 
-const productImageTest = [1, 2, 3, 4, 5];
-
 const Details = ({ product }) => {
   let [value, setValue] = useState(0);
   let [counter, setCounter] = useState(1);
@@ -160,14 +158,10 @@ const Details = ({ product }) => {
                         modules={[Autoplay, Pagination]}
                         className="mySwiper"
                       >
-                        {productImageTest.map((count, index) => (
+                        {product._doc.images.map((image, index) => (
                           <SwiperSlide key={index}>
                             <div className="single-slider"></div>
-                            <img
-                              src={product._doc.image}
-                              id="current"
-                              alt="#"
-                            />
+                            <img src={image} id="current" alt="#" />
                           </SwiperSlide>
                         ))}
                       </Swiper>

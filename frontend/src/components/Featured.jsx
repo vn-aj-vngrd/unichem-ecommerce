@@ -69,7 +69,7 @@ const Featured = () => {
 
                         {/* end of promo */}
                         <img
-                          src={product._doc.image}
+                          src={product._doc.images[0]}
                           className=""
                           alt={product._doc.productName}
                         />
