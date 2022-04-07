@@ -7,14 +7,14 @@ const Specifications = ({ product }) => {
             <div className="col-lg-6 col-12">
               <div className="info-body custom-responsive-margin">
                 <h4>Description</h4>
-                <p>{product.description}</p>
+                <p>{product._doc.description}</p>
               </div>
             </div>
             <div className="col-lg-6 col-12">
               <div className="info-body">
                 <h4>Specifications</h4>
                 <ul className="normal-list">
-                  {product.specifications.map((specification, index) => (
+                  {product._doc.specifications.map((specification, index) => (
                     <li key={index}>{specification}</li>
                   ))}
                 </ul>

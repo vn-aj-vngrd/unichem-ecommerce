@@ -31,8 +31,10 @@ const Featured = () => {
   }
 
   let featuredProducts = products.filter((product) => {
-    return product.featured === true;
+    return product._doc.featured === true;
   });
+
+  let salesPrice = 0;
 
   return (
     <>
@@ -49,14 +51,17 @@ const Featured = () => {
             </div>
             <div className="row">
               {featuredProducts.map((product) => (
-                <div key={product._id} className="col-lg-3 col-md-6 col-12">
+                <div
+                  key={product._doc._id}
+                  className="col-lg-3 col-md-6 col-12"
+                >
                   <div className="box-shadow">
                     <div className="single-product">
                       <div className="product-image featured-product-image">
                         {/* promo  CLASS (.sale-tag OR .new-tag)*/}
-                        {product.salePercent > 0 ? (
+                        {product._doc.salePercent > 0 ? (
                           <div className="sale-tag">
-                            <b>- {product.salePercent}% OFF</b>
+                            <b>- {product._doc.salePercent}% OFF</b>
                           </div>
                         ) : (
                           <></>
@@ -64,13 +69,13 @@ const Featured = () => {
 
                         {/* end of promo */}
                         <img
-                          src={product.image}
+                          src={product._doc.image}
                           className=""
-                          alt={product.productName}
+                          alt={product._doc.productName}
                         />
                         <div className="button">
                           <Link
-                            to={`/product-details/${product._id}`}
+                            to={`/product-details/${product._doc._id}`}
                             className="btn"
                           >
                             <i className="lni lni-eye"></i> View
@@ -80,22 +85,46 @@ const Featured = () => {
                       <div className="product-info">
                         <span className="category">
                           <i className="lni lni-package category-icon"></i>{" "}
-                          {product.category}
+                          {product._doc.category}
                         </span>
                         <div className="title">
-                          <h5>{product.productName}</h5>
+                          <h5>{product._doc.productName}</h5>
                         </div>
-                        <Star star={3} reviews={1} />
+                        <Star
+                          star={product.market.averageRatings}
+                          reviews={product.market.reviewsCount}
+                        />
                       </div>
                     </div>
                     <div className="order-total-row">
                       <div className="price d-flex justify-content-between align-items-center">
                         <div>
-                          <h6 className="text-red">
-                            <span>₱{product.prices[0].toFixed(2)}</span>
-                          </h6>
+                          <div hidden>
+                            {
+                              (salesPrice =
+                                product._doc.prices[0] -
+                                (product._doc.prices[0] *
+                                  product._doc.salePercent) /
+                                  100)
+                            }
+                          </div>
+
+                          {product._doc.isSale ? (
+                            <h6 className="text-red">
+                              ₱ {salesPrice.toFixed(2)}
+                              <del className="small text-grey ps-1">
+                                ₱{product._doc.prices[0].toFixed(2)}
+                              </del>
+                            </h6>
+                          ) : (
+                            <h6 className="text-red">
+                              ₱{product._doc.prices[0].toFixed(2)}
+                            </h6>
+                          )}
                         </div>
-                        <div className="items-sold">6.9K items sold</div>
+                        <div className="items-sold">
+                          {product.market.sold} sold
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -44,7 +44,7 @@ const ProductDetails = () => {
   }
 
   const product = products.filter((product) => {
-    return product._id === id;
+    return product._doc._id === id;
   });
 
   return (

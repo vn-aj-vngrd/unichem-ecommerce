@@ -80,7 +80,7 @@ const Product = ({
     // console.log(productName);
 
     allProducts = products.filter((product) => {
-      return product.productName
+      return product._doc.productName
         .toLowerCase()
         .includes(productName.toLowerCase());
     });
@@ -91,7 +91,7 @@ const Product = ({
     // console.log(categoryName);
 
     allProducts = products.filter((product) => {
-      return product.category
+      return product._doc.category
         .toLowerCase()
         .includes(categoryName.toLowerCase());
     });
@@ -102,7 +102,7 @@ const Product = ({
     // console.log(brandName);
 
     allProducts = products.filter((product) => {
-      return product.brand.toLowerCase().includes(brandName.toLowerCase());
+      return product._doc.brand.toLowerCase().includes(brandName.toLowerCase());
     });
   }
 
@@ -110,25 +110,25 @@ const Product = ({
   allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
   // if (range1) {
   //   allProducts = products.filter((product) => {
-  //     return product.prices[0] >= 50 && product.prices[0] <= 100;
+  //     return product._doc.prices[0] >= 50 && product._doc.prices[0] <= 100;
   //   });
   // }
 
   // if (range2) {
   //   allProducts = products.filter((product) => {
-  //     return product.prices[0] >= 101 && product.prices[0] <= 500;
+  //     return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
   //   });
   // }
 
   // if (range3) {
   //   allProducts = products.filter((product) => {
-  //     return product.prices[0] >= 501 && product.prices[0] <= 1000;
+  //     return product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000;
   //   });
   // }
 
   // if (range4) {
   //   allProducts = products.filter((product) => {
-  //     return product.prices[0] >= 1001 && product.prices[0] <= 5000;
+  //     return product._doc.prices[0] >= 1001 && product._doc.prices[0] <= 5000;
   //   });
   // }
 
@@ -150,6 +150,8 @@ const Product = ({
   // console.log(sortDefault);
   // console.log(allProducts);
 
+  let salesPrice = 0;
+
   return (
     <div className="">
       <div className="product-grid">
@@ -170,23 +172,23 @@ const Product = ({
       <div className="product">
         <div className="row">
           {allProducts.map((product) => (
-            <div key={product._id} className="col-lg-4 col-md-6 col-12 ">
+            <div key={product._doc._id} className="col-lg-4 col-md-6 col-12 ">
               <div className="box-shadow">
                 <div className="single-product">
                   <div className="product-image">
                     {/* promo  CLASS (.sale-tag OR .new-tag)*/}
-                    {product.salePercent > 0 ? (
+                    {product._doc.salePercent > 0 ? (
                       <div className="sale-tag">
-                        <b>- {product.salePercent}% OFF</b>
+                        <b>- {product._doc.salePercent}% OFF</b>
                       </div>
                     ) : (
                       <></>
                     )}
                     {/* end of promo */}
-                    <img src={product.image} alt={product.productName} />
+                    <img src={product._doc.image} alt={product._doc.productName} />
                     <div className="button">
                       <Link
-                        to={`/product-details/${product._id}`}
+                        to={`/product-details/${product._doc._id}`}
                         className="btn"
                       >
                         <i className="lni lni-eye"></i> View
@@ -196,19 +198,38 @@ const Product = ({
                   <div className="product-info">
                     <span className="category">
                       <i className="lni lni-package category-icon"></i>{" "}
-                      {product.category}
+                      {product._doc.category}
                     </span>
                     <div className="title">
-                      <h5 className="product-name">{product.productName}</h5>
+                      <h5 className="product-name">{product._doc.productName}</h5>
                     </div>
                     <Star star={3} reviews={1} />
                   </div>
                 </div>
                 <div className="order-total-row ">
                   <div className="price d-flex justify-content-between align-items-center">
-                    <h6 className="text-red">
-                      <span>₱{product.prices[0].toFixed(2)}</span>
-                    </h6>
+                    <div>
+                      <div hidden>
+                        {
+                          (salesPrice =
+                            product._doc.prices[0] -
+                            (product._doc.prices[0] * product._doc.salePercent) / 100)
+                        }
+                      </div>
+
+                      {product._doc.isSale ? (
+                        <h6 className="text-red">
+                          ₱ {salesPrice.toFixed(2)}
+                          <del className="small text-grey ps-1">
+                            ₱{product._doc.prices[0].toFixed(2)}
+                          </del>
+                        </h6>
+                      ) : (
+                        <h6 className="text-red">
+                          ₱{product._doc.prices[0].toFixed(2)}
+                        </h6>
+                      )}
+                    </div>
                     <div className="items-sold">6.9K items sold</div>
                   </div>
                 </div>

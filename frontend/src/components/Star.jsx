@@ -21,9 +21,11 @@ const Star = ({ star, reviews }) => {
             <MdStar className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews}1)</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -35,7 +37,7 @@ const Star = ({ star, reviews }) => {
           <div>
             <MdStar className="text-warning" />
           </div>
-        <div>
+          <div>
             <MdStar className="text-warning" />
           </div>
           <div>
@@ -45,9 +47,11 @@ const Star = ({ star, reviews }) => {
             <MdStarHalf className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -68,12 +72,12 @@ const Star = ({ star, reviews }) => {
           <div>
             <MdStarOutline className="text-warning" />
           </div>
+
           {reviews && (
             <div className="ms-1">
               <span>({reviews})</span>
             </div>
           )}
-          
         </div>
       )}
 
@@ -95,9 +99,11 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -119,9 +125,11 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -143,9 +151,11 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          <div className="ms-1">
-            <span>({reviews})</span>
-          </div>
+          {reviews && (
+            <div className="ms-1">
+              <span>({reviews})</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -271,7 +281,7 @@ const Star = ({ star, reviews }) => {
             <MdStarOutline className="text-warning" />
           </div>
 
-          {reviews && (
+          {reviews === 0 && (
             <div className="ms-1">
               <span>({reviews})</span>
             </div>

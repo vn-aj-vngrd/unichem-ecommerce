@@ -36,15 +36,15 @@ const Reviews = ({ productID }) => {
   });
 
   const ratings = [0, 0, 0, 0, 0];
-  let totalRating = 0;
+  let totalRatings = 0;
 
   for (let i = 0; i < productReviews.length; i++) {
     ratings[productReviews[i]._doc.rating - 1]++;
-    totalRating += productReviews[i]._doc.rating;
+    totalRatings += productReviews[i]._doc.rating;
   }
 
-  if (productReviews.length > 0) {
-    totalRating /= productReviews.length;
+  if (totalRatings > 0) {
+    totalRatings /= productReviews.length;
   }
 
   return (
@@ -53,7 +53,7 @@ const Reviews = ({ productID }) => {
         <div className="row">
           <div className="col-lg-4 col-12">
             <div className="single-block give-review">
-              <h4>{totalRating.toFixed(2)} (Overall)</h4>
+              <h4>{totalRatings.toFixed(2)} (Overall)</h4>
               <ul>
                 <li>
                   <span>5 stars </span>

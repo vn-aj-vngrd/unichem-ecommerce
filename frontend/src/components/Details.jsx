@@ -4,7 +4,7 @@ import { setWishlist, resetWishlist } from "../features/wishlist/wishlistSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 
 import "swiper/css";
@@ -22,20 +22,18 @@ const Details = ({ product }) => {
   let [counter, setCounter] = useState(1);
   let decrement, increment;
   if (counter > 1) decrement = () => setCounter(counter - 1);
-  if (counter < product.quantities[value])
+  if (counter < product._doc.quantities[value])
     increment = () => setCounter(counter + 1);
   let handleChange = (e) => {
     setCounter(e.target.value);
 
-    if (e.target.value > product.quantities[value]) {
-      setCounter(product.quantities[value]);
+    if (e.target.value > product._doc.quantities[value]) {
+      setCounter(product._doc.quantities[value]);
     }
     if (e.target.value < 0) {
       setCounter(1);
     }
   };
-
-  console.log(product);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -67,25 +65,15 @@ const Details = ({ product }) => {
       });
     }
 
-    if (isCartSuccess) {
-      // console.log(wishlistMessage);
-    }
-
-    if (isWishlistSuccess) {
-      // console.log(wishlistMessage);
-    }
-
     return () => {
       dispatch(resetCart());
       dispatch(resetWishlist());
     };
   }, [
     isCartError,
-    isCartSuccess,
     cartMessage,
     isWishlistLoading,
     isWishlistError,
-    isWishlistSuccess,
     wishlistMessage,
     navigate,
     dispatch,
@@ -100,10 +88,10 @@ const Details = ({ product }) => {
     e.preventDefault();
 
     const cartData = {
-      productID: product._id,
+      productID: product._doc._id,
       productType: value,
       quantity: counter,
-      max: product.quantities[value],
+      max: product._doc.quantities[value],
     };
 
     dispatch(setCart(cartData));
@@ -124,7 +112,7 @@ const Details = ({ product }) => {
   const addToWishlist = (e) => {
     e.preventDefault();
     const wishlistData = {
-      productID: product._id,
+      productID: product._doc._id,
       productType: value,
     };
 
@@ -146,6 +134,8 @@ const Details = ({ product }) => {
   if (isCartLoading || isWishlistLoading) {
     return <Spinner />;
   }
+
+  let salesPrice = 0;
 
   return (
     <>
@@ -173,7 +163,11 @@ const Details = ({ product }) => {
                         {productImageTest.map((count, index) => (
                           <SwiperSlide key={index}>
                             <div className="single-slider"></div>
-                            <img src={product.image} id="current" alt="#" />
+                            <img
+                              src={product._doc.image}
+                              id="current"
+                              alt="#"
+                            />
                           </SwiperSlide>
                         ))}
                       </Swiper>
@@ -183,30 +177,54 @@ const Details = ({ product }) => {
               </div>
               <div className="col-lg-6 col-md-12 col-12">
                 <div className="product-info">
-                  <h4 className="title">{product.productName}</h4>
+                  <h4 className="title">{product._doc.productName}</h4>
+
                   <div className="category">
-                    <i className="lni lni-package"></i>Category:
-                    <a href="/">{product.category}</a>
+                    <div>
+                      <i className="lni lni-package"></i>Category:
+                      <Link to={`/products/category/${product._doc.category}`}>
+                        {product._doc.category}
+                      </Link>
+                    </div>
+                    <div className="mt-1">
+                      <i className="lni lni-delivery"></i>Sold:{" "}
+                      {product.market.sold}
+                    </div>
                     <Star star={1} reviews={1} />
                   </div>
 
-                  {product.quantities[value] === 1 && (
-                    <div>{product.quantities[value]} item left</div>
+                  {product._doc.quantities[value] === 1 && (
+                    <div>{product._doc.quantities[value]} item left</div>
                   )}
 
-                  {product.quantities[value] > 1 && (
-                    <div>{product.quantities[value]} items available</div>
+                  {product._doc.quantities[value] > 1 && (
+                    <div>{product._doc.quantities[value]} items available</div>
                   )}
 
-                  {product.quantities[value] === 0 && (
+                  {product._doc.quantities[value] === 0 && (
                     <div>Item is not available</div>
                   )}
-                  <h4 className="text-red">
-                    ₱{product.prices[value].toFixed(2)}
-                  </h4>
-                  {product.isSale && (
+
+                  <div hidden>
+                    {
+                      (salesPrice =
+                        product._doc.prices[value] -
+                        (product._doc.prices[value] *
+                          product._doc.salePercent) /
+                          100)
+                    }
+                  </div>
+
+                  {product._doc.isSale ? (
                     <h4 className="text-red">
-                      ₱{product.prices[value].toFixed(2)}
+                      ₱ {salesPrice.toFixed(2)}
+                      <del className="h6 text-grey ps-1">
+                        ₱{product._doc.prices[value].toFixed(2)}
+                      </del>
+                    </h4>
+                  ) : (
+                    <h4 className="text-red">
+                      ₱{product._doc.prices[value].toFixed(2)}
                     </h4>
                   )}
 
@@ -221,7 +239,7 @@ const Details = ({ product }) => {
                           value={value}
                           onChange={changeType}
                         >
-                          {product.types.map((type, index) => (
+                          {product._doc.types.map((type, index) => (
                             <option key={index} value={index}>
                               {type}
                             </option>
@@ -231,7 +249,7 @@ const Details = ({ product }) => {
                     </div>
                     <div className="col">
                       <div className="form-group">
-                        {product.quantities[value] !== 0 ? (
+                        {product._doc.quantities[value] !== 0 ? (
                           <div>
                             <label>Quantity</label>
                             <div className="quantity-control text-center">
@@ -248,7 +266,7 @@ const Details = ({ product }) => {
                                 className="quantity-input"
                                 value={counter}
                                 min="1"
-                                max={product.quantity}
+                                max={product._doc.quantity}
                                 name="quantity"
                                 onChange={handleChange}
                               />
@@ -292,7 +310,7 @@ const Details = ({ product }) => {
                   <div className="row">
                     <div className="col">
                       <div className="cart-button button">
-                        {product.quantities[value] !== 0 ? (
+                        {product._doc.quantities[value] !== 0 ? (
                           <button className="btn" onClick={addToCart}>
                             <i className="lni lni-cart"></i> Cart
                           </button>

@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 
 const Product = require("../models/productModel");
+const Review = require("../models/reviewModel");
+const Order = require("../models/orderModel");
 
 // @desc    Get all products
 // @route   GET /api/products
@@ -9,7 +11,35 @@ const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find().sort({
     createdAt: "desc",
   });
-  res.status(200).json(products);
+
+  let retData = [];
+  for (let i = 0; i < products.length; i++) {
+    let market = {
+      reviewsCount: 0,
+      averageRatings: 0,
+      sold: 0,
+    };
+    const reviews = await Review.find({ productID: products[i]._id });
+    const orders = await Order.find({ productID: products[i]._id });
+
+    for (let j = 0; j < reviews.length; j++) {
+      market.averageRatings += reviews[j].rating;
+    }
+
+    for (let k = 0; k < orders.length; k++) {
+      market.sold += orders[k].quantity;
+    }
+
+    if (reviews.length > 0) {
+      market.reviewsCount = reviews.length;
+      market.averageRatings = market.averageRatings / reviews.length;
+    }
+
+    const productAndReviews = { ...products[i], market };
+    retData.push(productAndReviews);
+  }
+
+  res.status(200).json(retData);
 });
 
 // @desc    Set Product
