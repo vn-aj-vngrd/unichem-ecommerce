@@ -10,13 +10,12 @@ const Featured = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { products, isLoading, isError, message } = useSelector(
-    (state) => state.products
-  );
+  const { products, isProductLoading, isProductError, productMessage } =
+    useSelector((state) => state.products);
 
   useEffect(() => {
-    if (isError) {
-      console.log(message);
+    if (isProductError) {
+      console.log(productMessage);
     }
 
     dispatch(getProducts());
@@ -24,9 +23,9 @@ const Featured = () => {
     return () => {
       dispatch(resetProduct());
     };
-  }, [user, navigate, isError, message, dispatch]);
+  }, [user, navigate, isProductError, productMessage, dispatch]);
 
-  if (isLoading) {
+  if (isProductLoading) {
     return <Spinner />;
   }
 
