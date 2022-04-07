@@ -153,9 +153,23 @@ const Checkout = () => {
                 </ul>
               </div>
             </div>
+
             <div className="col-lg-4">
               <div className="checkout-sidebar">
-                <div className="checkout-sidebar-price-table">
+                <div class="checkout-sidebar-coupon">
+                  <p>Apply Valid Coupon Here</p>
+                  <form action="#">
+                    <div class="single-form form-default">
+                      <div class="form-input form">
+                        <input type="text" placeholder="Coupon Code" />
+                      </div>
+                      <div class="button">
+                        <button class="btn">apply</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div className="checkout-sidebar-price-table mt-3">
                   <h5 className="title">Pricing Table</h5>
                   <div className="sub-total-price">
                     <div className="total-price">
