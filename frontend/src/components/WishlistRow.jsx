@@ -38,11 +38,11 @@ const WishlistRow = ({ wishlist }) => {
     <>
       {/* Row Start Here */}
       <div className="cart-list-head accordion-bodybox-shadow box-shadow">
-        <div className="cart-single-list">
+        <div className="cart-single-list"></div>
           <div className="row align-items-center">
             <div className="col-lg-1 col-md-1 col-12">
               <Link to="/products">
-                <img src={wishlist.product.image} alt="" />
+                <img src={wishlist.product.images[0]} alt="" />
               </Link>
             </div>
             <div className="col-lg-4 col-md-3 col-12">

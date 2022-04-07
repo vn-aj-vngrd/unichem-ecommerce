@@ -13,7 +13,7 @@ const CartRow = ({ cart }) => {
           <div className="row align-items-center">
             <div className="col-lg-1 col-md-1 col-12">
               <Link to="/products">
-                <img src={cart.product.image} alt="" />
+                <img src={cart.product.images[0]} alt="" />
               </Link>
             </div>
             <div className="col-lg-4 col-md-3 col-12">
