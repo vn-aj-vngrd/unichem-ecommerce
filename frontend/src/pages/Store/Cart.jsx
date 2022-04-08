@@ -37,7 +37,7 @@ const Cart = () => {
   const [checkoutItems, setCheckout] = useState([]);
 
   let count = 0;
-  const subtotal = carts.reduce((sum, cart, index) => {
+  const subtotal = carts.reduce((sum, cart) => {
     if (cart._doc.checked) {
       count++;
       return (
@@ -51,7 +51,7 @@ const Cart = () => {
   const total = shippingFee + subtotal;
 
   const selectAll =
-    count === parseInt(localStorage.getItem("cartCount")) ? true : false;
+    count === parseInt(localStorage.getItem("cartCount")) && count !== 0 ? true : false;
 
   const checkOne = (cart) => {
     const cartParams = {
