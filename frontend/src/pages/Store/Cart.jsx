@@ -35,11 +35,12 @@ const Cart = () => {
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
   const [checkoutItems, setCheckout] = useState([]);
+  const cartCount = localStorage.getItem("cartCount");
 
-  let count = 0;
+  let checkoutCount = 0;
   const subtotal = carts.reduce((sum, cart) => {
     if (cart._doc.checked) {
-      count++;
+      checkoutCount++;
       return (
         sum + cart._doc.quantity * cart.product.prices[cart._doc.productType]
       );
@@ -51,7 +52,10 @@ const Cart = () => {
   const total = shippingFee + subtotal;
 
   const selectAll =
-    count === parseInt(localStorage.getItem("cartCount")) && count !== 0 ? true : false;
+    checkoutCount === parseInt(localStorage.getItem("cartCount")) &&
+    checkoutCount !== 0
+      ? true
+      : false;
 
   const checkOne = (cart) => {
     const cartParams = {
@@ -105,10 +109,10 @@ const Cart = () => {
                   <p>Quantity</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
-                  <p>Subtotal</p>
+                  <p>Price</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
-                  <p>Total</p>
+                  <p>Subtotal</p>
                 </div>
                 <div className="col-lg-1 col-md-1 col-12">
                   <p>Remove</p>
@@ -209,7 +213,8 @@ const Cart = () => {
           )}
           <PricingTable
             carts={carts}
-            count={count}
+            checkoutCount={checkoutCount}
+            cartCount={cartCount}
             subtotal={subtotal}
             shippingFee={shippingFee}
             total={total}

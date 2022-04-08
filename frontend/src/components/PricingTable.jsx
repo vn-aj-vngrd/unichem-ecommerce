@@ -3,7 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-const PricingTable = ({ carts, count, subtotal, shippingFee, total }) => {
+const PricingTable = ({
+  carts,
+  cartCount,
+  checkoutCount,
+  subtotal,
+  shippingFee,
+  total,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -61,7 +68,7 @@ const PricingTable = ({ carts, count, subtotal, shippingFee, total }) => {
                     <li>
                       Total Items
                       <span>
-                        <p className="fw-bold">{count} Item(s)</p>
+                        <p className="fw-bold">{checkoutCount} Item(s)</p>
                       </span>
                     </li>
                     <li>
@@ -91,14 +98,13 @@ const PricingTable = ({ carts, count, subtotal, shippingFee, total }) => {
 
                 <div className="no-box-shadow">
                   <div className="order-total-row">
-                    {count > 0 ? (
+                    {checkoutCount > 0 ? (
                       <>
                         <div className="price d-flex justify-content-between align-items-center">
                           <div>Order Total:</div>
                           <div className="spacer"></div>
                           <h5 className="text-danger">₱ {total.toFixed(2)}</h5>
                         </div>
-
                         <div className="button mt-4">
                           <button
                             className="btn checkout-btn"
@@ -107,7 +113,23 @@ const PricingTable = ({ carts, count, subtotal, shippingFee, total }) => {
                             Checkout
                           </button>
                         </div>
-
+                      </>
+                    ) : (
+                      <>
+                        <div className="price d-flex justify-content-between align-items-center">
+                          <div>Order Total:</div>
+                          <div className="spacer"></div>
+                          <h5 className="text-danger">₱ {total.toFixed(2)}</h5>
+                        </div>
+                        <div className="button mt-4">
+                          <button className="btn checkout-btn" disabled>
+                            Checkout
+                          </button>
+                        </div>
+                      </>
+                    )}
+                    {cartCount > 0 ? (
+                      <>
                         <div className="button mt-3">
                           <button
                             className="btn-alt checkout-btn"
@@ -119,18 +141,6 @@ const PricingTable = ({ carts, count, subtotal, shippingFee, total }) => {
                       </>
                     ) : (
                       <>
-                        <div className="price d-flex justify-content-between align-items-center">
-                          <div>Order Total:</div>
-                          <div className="spacer"></div>
-                          <h5 className="text-danger">₱ {total.toFixed(2)}</h5>
-                        </div>
-
-                        <div className="button mt-4">
-                          <button className="btn checkout-btn" disabled>
-                            Checkout
-                          </button>
-                        </div>
-
                         <div className="button mt-3">
                           <button
                             className="btn-alt-disabled checkout-btn"
