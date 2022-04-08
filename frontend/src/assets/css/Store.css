@@ -633,7 +633,7 @@ ol {
   justify-content: space-between;
   -ms-flex-align: center;
   align-items: center;
-  padding: 25px 0;
+  padding: 30px 0;
   border-bottom: 1px solid #eee;
 }
 
@@ -2316,6 +2316,30 @@ ol {
   font-size: 15px;
 }
 
+.review-menu {
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 0 0 4px 4px;
+  display: none;
+  position: absolute;
+  top: 44px;
+  font-size: 14px;
+}
+
+.review-menu ul li {
+  margin: 18px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.review-menu ul li:hover {
+  color: #f44336;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
 .single-product .product-info .review li {
   display: inline-block;
 }
@@ -2328,7 +2352,7 @@ ol {
 .single-product .product-info .review li span {
   display: inline-block;
   margin-left: 4px;
-  color: #666;
+  color: rgb(145, 145, 145);
   font-size: 13px;
 }
 
@@ -2365,6 +2389,12 @@ ol {
 
 .trending-product .section-title {
   margin-bottom: 20px;
+}
+
+.lni-star, .lni-star-filled {
+  color: #ffbb00;
+  font-size: 16px;
+  margin: 2px;
 }
 
 /*======================================
@@ -3042,22 +3072,20 @@ ol {
   font-size: 12px;
 }
 
-.product-details-info .give-review .review-btn {
-  margin-top: 30px;
-  padding: 12px 30px;
-  width: 100%;
-  background-color: #ffa000;
+.review-btn {
+  padding: 13px 30px;
+  background-color: #ffa000 !important;
+  margin: 0 7px 0 0;
   color: #fff;
-  font-size: 14px;
-  font-weight: 500;
   border-radius: 4px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
+  height: 47px !important
 }
 
-.product-details-info .give-review .review-btn:hover {
+.review-btn:hover {
   color: #fff;
-  background-color: #424242;
+  background-color: #d1890c !important;
 }
 
 .product-details-info .reviews .title {
@@ -3102,7 +3130,7 @@ ol {
   position: relative;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
-  padding: 25px;
+  padding: 30px;
 }
 
 @media (max-width: 767px) {
@@ -3110,6 +3138,7 @@ ol {
     padding: 20px;
   }
 }
+
 
 .product-details-info .reviews .single-review .review-info::before {
   position: absolute;
@@ -3181,6 +3210,17 @@ ol {
   font-size: 12px;
 }
 
+.lni-star-filled:hover, .lni-star:hover {
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.lni-star-filled:hover, .lni-star:hover {
+  transform: scale(1.3);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
 .product-details-info .reviews .single-review .review-info p {
   margin-top: 15px;
 }
@@ -3194,7 +3234,7 @@ ol {
 }
 
 .review-modal .modal-header {
-  padding: 25px;
+  padding: 18px 30px;
 }
 
 .review-modal .modal-header h5 {
@@ -3203,18 +3243,34 @@ ol {
 }
 
 .review-modal .modal-body {
-  padding: 25px;
+  padding: 30px 30px 30px 30px;
 }
 
 .review-modal .modal-body .form-group {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 .review-modal .modal-body .form-group label {
   color: #666;
-  font-size: 13px;
-  margin-bottom: 5px;
+  font-size: 14px;
   display: block;
+  margin-right: 15px;
+}
+
+.review-modal .modal-body .form-group label {
+  margin-left: 70px;
+}
+
+@media (min-width: 768px) {
+  .review-modal .modal-body .form-group label {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 767px) {
+  .review-modal .modal-body .form-group label {
+    margin-left: 60px;
+  }
 }
 
 .review-modal .modal-body .form-group input {
@@ -3264,7 +3320,16 @@ ol {
 }
 
 .review-modal .modal-footer {
-  padding: 25px;
+  padding: 30px;
+}
+
+.review-modal-form {
+  border: none;
+  padding: 0px !important;
+}
+
+.modal-dialog .modal-body .review-info {
+  padding: 20px 30px 30px 30px !important;
 }
 
 /*======================================
@@ -3458,7 +3523,7 @@ ol {
 
 .footer .footer-bottom .inner-content {
   border-top: 1px solid #bdbdbd;
-  padding: 25px 0;
+  padding: 30px 0;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -4959,7 +5024,7 @@ ol {
 
 .checkout-sidebar-coupon {
   background-color: #fff;
-  padding: 25px;
+  padding: 30px;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
 }
@@ -5000,7 +5065,7 @@ ol {
 
 .checkout-sidebar-price-table {
   background-color: #fff;
-  padding: 25px;
+  padding: 30px;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
 }
@@ -5271,7 +5336,7 @@ ol {
 
 .accordion-body {
   border-radius: 0 0 4px 4px;
-  padding: 25px;
+  padding: 30px;
   background-color: #fff;
 }
 
@@ -5483,6 +5548,22 @@ ol {
 .color-white {
   color: #fff;
 }
+
+.vertical-menu-button{
+  color: rgb(139, 139, 139);
+  transform: rotate(90deg);
+  border: none;
+  background-color: white;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+}
+
+.vertical-menu-button:hover {
+  color: #424242;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+}
+
 
 .underline-link:hover {
   text-decoration: underline;
@@ -5896,4 +5977,11 @@ ol {
 .no-box-shadow {
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+.btn:active {
+  transform: scale(0.9) !important;
+  -webkit-transition: all 0.4s ease !important;
+  -moz-transition: all 0.4s ease !important;
+  transition: all 0.4s ease !important;
 }

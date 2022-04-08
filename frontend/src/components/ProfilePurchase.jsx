@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import PurchasedProduct from "./PurchasedProduct";
+import Review from "./ReviewModal";
 
 // const row = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 // const star = 4.5;
@@ -34,85 +35,45 @@ const ProfilePurchase = () => {
       </div>
 
       <div className="product">
-        
         {/* Product Purchase one */}
         <>
-        <div className="purchase-row">
-          <div className="negative-padding-custom box-shadow">
-            <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
-              <Link to="/product-details" className="underline-link">
-                <div className="color-white">Order Status Log </div>
-              </Link>
-              <div className="color-white purchase-update-time">
-                Last Update Time: mm/dd/yy - hh:mm
-              </div>
-              <h6 className="purchase-order-status">ORDER STATUS</h6>
-            </div>
-
-            {/* ORDERLINE START HERE */}
-
-            <PurchasedProduct />
-
-            {/* END OF ORDERLINE */}
-            <div className="no-box-shadow">
-              <div className="order-total-row">
-                <div className="price d-flex justify-content-end align-items-center">
-                  <div className="">Order Total:</div>
-                  <div className="spacer"></div>
-                  <h4 className="unichem-text-color">$199.00</h4>
+          <div className="purchase-row">
+            <div className="negative-padding-custom box-shadow">
+              <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
+                <Link to="/product-details" className="underline-link">
+                  <div className="color-white">Order Status Log </div>
+                </Link>
+                <div className="color-white purchase-update-time">
+                  Last Update Time: mm/dd/yy - hh:mm
                 </div>
-                <br></br>
-                <div className="purchase-options">
-                  <div className="d-flex justify-content-end button">
-                    <Link to="/product-details" className="btn">
-                      Buy Again
-                    </Link>
+                <h6 className="purchase-order-status">ORDER STATUS</h6>
+              </div>
+
+              {/* ORDERLINE START HERE */}
+
+              <PurchasedProduct />
+
+              {/* END OF ORDERLINE */}
+              <div className="no-box-shadow">
+                <div className="order-total-row">
+                  <div className="price d-flex justify-content-end align-items-center">
+                    <div className="">Order Total:</div>
+                    <div className="spacer"></div>
+                    <h4 className="unichem-text-color">$199.00</h4>
+                  </div>
+                  <br></br>
+                  <div className="purchase-options">
+                    <div className="d-flex justify-content-end button">
+                      <Review />
+                      <Link to="/product-details" className="btn">
+                        Buy Again
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        </>
-
-        {/* Product Purchase one */}
-        <>
-        <div className="purchase-row">
-          <div className="negative-padding-custom box-shadow">
-            <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
-              <Link to="/product-details" className="underline-link">
-                <div className="color-white">Order Status Log </div>
-              </Link>
-              <div className="color-white purchase-update-time">
-                Last Update Time: mm/dd/yy - hh:mm
-              </div>
-              <h6 className="purchase-order-status">ORDER STATUS</h6>
-            </div>
-
-            {/* ORDERLINE START HERE */}
-
-            <PurchasedProduct />
-
-            {/* END OF ORDERLINE */}
-            <div className="no-box-shadow">
-              <div className="order-total-row">
-                <div className="price d-flex justify-content-end align-items-center">
-                  <div className="">Order Total:</div>
-                  <div className="spacer"></div>
-                  <h4 className="unichem-text-color">$199.00</h4>
-                </div>
-                <br></br>
-                <div className="purchase-options">
-                  <div className="d-flex justify-content-end button">
-                    <Link to="/product-details" className="btn">
-                      Buy Again
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         </>
 
         <nav>
