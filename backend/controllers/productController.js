@@ -27,8 +27,10 @@ const getProducts = asyncHandler(async (req, res) => {
     }
 
     for (let k = 0; k < orders.length; k++) {
-      for (let l = 0; l < orders.quantities.length; l++) {
-        market.sold += orders[k].quantities[l];
+      if (orders[k].orderStatus === "completed") {
+        for (let l = 0; l < orders[k].quantities.length; l++) {
+          market.sold += orders[k].quantities[l];
+        }
       }
     }
 

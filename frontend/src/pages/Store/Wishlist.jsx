@@ -48,7 +48,7 @@ const Wishlist = () => {
               <div className="row">
                 <div className="col-lg-1 col-md-1 col-12"></div>
                 <div className="col-lg-4 col-md-3 col-12">
-                  <p>Product Name</p>
+                  <p>Product</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
                   <p>Price</p>
@@ -65,23 +65,6 @@ const Wishlist = () => {
               </div>
             </div>
           </div>
-
-          {/* <div className="purchase-row-banner cart-banner">
-            <div className="cart-product-right hide-on-thin-screen">
-              <div className="product-in-cart color-white hide-on-thin-screen">
-                Product
-              </div>
-              <div className="price-in-cart color-white hide-on-thin-screen"></div>
-              <div className="price-in-cart color-white hide-on-thin-screen">
-                Price
-              </div>
-              <div className="total-in-cart color-white hide-on-thin-screen"></div>
-              <div className="action-in-cart color-white hide-on-thin-screen"></div>
-              <div className="action-in-cart color-white hide-on-thin-screen">
-                Action
-              </div>
-            </div>
-          </div> */}
 
           {wishlists.length > 0 ? (
             <>

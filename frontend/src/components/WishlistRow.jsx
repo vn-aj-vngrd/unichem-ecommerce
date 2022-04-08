@@ -18,7 +18,6 @@ const WishlistRow = ({ wishlist }) => {
       max: wishlist.product.quantities[wishlist._doc.productType],
     };
 
-    // console.log(cartData);
     dispatch(setCart(cartData));
     Swal.fire({
       title: "Item was added to your cart.",
@@ -36,7 +35,6 @@ const WishlistRow = ({ wishlist }) => {
 
   return (
     <>
-      {/* Row Start Here */}
       <div className="cart-list-head accordion-bodybox-shadow box-shadow">
         <div className="cart-single-list">
           <div className="row align-items-center">
@@ -63,15 +61,6 @@ const WishlistRow = ({ wishlist }) => {
               </p>
             </div>
             <div className="col-lg-2 col-md-2 col-12">
-              {/* <div className="count-input">
-              <select className="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div> */}
               <p>
                 ₱{" "}
                 {wishlist.product.prices[wishlist._doc.productType].toFixed(2)}
@@ -101,75 +90,6 @@ const WishlistRow = ({ wishlist }) => {
           </div>
         </div>
       </div>
-      {/* 
-      <div className="cart-list-head accordion-bodybox-shadow">
-        <div className="cart-single-list">
-          <div className="d-flex single-cart-product">
-            <div className="d-flex align-items-center cart-product-left">
-              <div className="image-in-cart">
-                <Link to="/products">
-                  <img src={wishlist.product.image} alt="" />
-                </Link>
-              </div>
-            </div>
-            <hr className="cart-div"></hr>
-            <div className="cart-product-right">
-              <div className="product-in-cart">
-                <div className="category">
-                  <i className="lni lni-package category-icon"></i> Category:{" "}
-                  {wishlist.product.category}
-                </div>
-                <h5 className="title">
-                  <Link to="/">{wishlist.product.productName}</Link>
-                </h5>
-                <div className="product-des">
-                  <p>
-                    Type / Color:{" "}
-                    {wishlist.product.types[wishlist._doc.productType]}
-                  </p>
-                </div>
-              </div>
-              <div className="price-in-cart">
-                <div className="price">
-                  <h6 className="fw-bolder">
-                    ₱ {wishlist.product.prices[wishlist._doc.productType]}
-                  </h6>
-                </div>
-              </div>
-              <div className="price-in-cart">
-                <div className="price"></div>
-              </div>
-              <div className="action-in-cart">
-                <button className="add-item" onClick={addToCart}>
-                  <i className="lni lni-cart"></i>
-                </button>
-              </div>
-              <div className="action-in-cart">
-                <button
-                  className="remove-item"
-                  onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
-                >
-                  <i className="lni lni-close"></i>
-                </button>
-              </div>
-            </div>
-            <div className="action-in-cart-2">
-              <button className="add-item" onClick={addToCart}>
-                <i className="lni lni-cart"></i>
-              </button>
-            </div>
-            <div className="action-in-cart-2">
-              <button
-                className="remove-item"
-                onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
-              >
-                <i className="lni lni-close"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* Row End Here */}
     </>
   );
 };
