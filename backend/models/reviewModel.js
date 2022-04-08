@@ -12,10 +12,6 @@ const reviewSchema = mongoose.Schema(
       required: true,
       ref: "Product",
     },
-    subject: {
-      type: String,
-      required: [true, "Subject is required."],
-    },
     review: {
       type: String,
       required: [true, "Review is required."],

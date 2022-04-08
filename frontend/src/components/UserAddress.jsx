@@ -298,7 +298,7 @@ const Profile = () => {
                               data-bs-parent="#accordionExample"
                             >
                               <div className="col-13">
-                                <div className="single-form form-default">
+                                <div className="form-default">
                                   <label className="form-label">
                                     Address Name
                                   </label>
@@ -316,7 +316,7 @@ const Profile = () => {
 
                               <div className="row">
                                 <div className="col-6">
-                                  <div className="single-form no-margin form-default">
+                                  <div className="single-form form-default">
                                     <label className="form-label">
                                       Region, Province, City, Barangay
                                     </label>
@@ -333,7 +333,7 @@ const Profile = () => {
                                 </div>
 
                                 <div className="col-6">
-                                  <div className="single-form no-margin form-default">
+                                  <div className="single-form form-default">
                                     <label className="form-label">
                                       Street Name, Building, House No.
                                     </label>
@@ -482,7 +482,7 @@ const Profile = () => {
                               data-bs-parent="#accordionExample"
                             >
                               <div className="col-13">
-                                <div className="single-form form-default">
+                                <div className="form-default">
                                   <label className="form-label">
                                     Address Name
                                   </label>

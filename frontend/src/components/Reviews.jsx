@@ -6,6 +6,7 @@ import Spinner from "../components/Spinner";
 
 const Reviews = ({ productID }) => {
   const dispatch = useDispatch();
+  const moment = require("moment");
 
   const { reviews, isReviewLoading, isReviewError, reviewMessage } =
     useSelector((state) => state.reviews);
@@ -46,6 +47,8 @@ const Reviews = ({ productID }) => {
   if (totalRatings > 0) {
     totalRatings /= productReviews.length;
   }
+
+  console.log(productReviews);
 
   return (
     <div className="product-details">
@@ -106,10 +109,13 @@ const Reviews = ({ productID }) => {
                   <div key={review._doc._id} className="single-review">
                     <img src={review.user.image} alt="#" />
                     <div className="review-info">
-                      <h4>
-                        {review._doc.subject}
-                        <span>{review.user.name}</span>
+                      <h4 className="">
+                        {review.user.name}
+                        <span>
+                          {moment(review._doc.updatedAt).format("DD/MM/YY")}
+                        </span>
                       </h4>
+
                       <Star star={review._doc.rating} />
                       <p>{review._doc.review}</p>
                     </div>
