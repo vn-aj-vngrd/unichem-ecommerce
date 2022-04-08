@@ -35,7 +35,7 @@ const WishlistRow = ({ wishlist }) => {
 
   return (
     <>
-      <div className="cart-list-head accordion-bodybox-shadow box-shadow">
+      <div className="cart-list-head accordion-body">
         <div className="cart-single-list">
           <div className="row align-items-center">
             <div className="col-lg-1 col-md-1 col-12">

@@ -218,10 +218,6 @@ const Profile = () => {
                 <h6 className="purchase-order-status">DEFAULT ADDRESS</h6>
               </div>
               <div className="profile-address-section">
-                <div className="d-flex align-items-center">
-                  <h4 className="">Address {index + 1}</h4>
-                </div>
-                <hr></hr>
                 <div className="addresses">
                   <div className="profile-address">
                     <ul>
@@ -399,10 +395,6 @@ const Profile = () => {
           ) : (
             <div key={index}>
               <div className="profile-address-section">
-                <div className="d-flex align-items-center">
-                  <h4 className="">Address {index + 1}</h4>
-                </div>
-                <hr></hr>
                 <div className="addresses">
                   <div className="profile-address">
                     <ul>
