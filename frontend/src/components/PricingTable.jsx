@@ -31,8 +31,8 @@ const PricingTable = ({ carts, count, subtotal, shippingFee, total }) => {
 
   const checkout = () => {
     Swal.fire({
-      title: "Are you sure you want to checkout?",
-      text: "Select yes to proceed, otherwise select no.",
+      title: "Are you sure to checkout?",
+      text: "All items in you cart will be processed to checkout.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
