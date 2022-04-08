@@ -122,81 +122,147 @@ const Cart = () => {
           </div>
           {carts.length > 0 ? (
             <>
-              {carts.map((cart, index) => (
-                <div
-                  key={cart._doc._id}
-                  className="cart-list-head accordion-bodybox-shadow box-shadow"
-                >
-                  <div className="cart-single-list">
-                    <div className="row align-items-center">
-                      <div className="col-lg-1 col-md-1 col-12">
-                        <input
-                          type="checkbox"
-                          id={`custom-checkbox-${index}`}
-                          name={cart}
-                          value={cart}
-                          checked={cart._doc.checked}
-                          readOnly
-                          onClick={() => checkOne(cart)}
-                        />
-                      </div>
-                      <div className="col-lg-1 col-md-2 col-12">
-                        <Link to="/products">
-                          <img src={cart.product.images[0]} alt="" />
-                        </Link>
-                      </div>
-                      <div className="col-lg-3 col-md-2 col-12">
-                        <h5 className="">
+              {carts.map((cart, index) =>
+                cart.product.quantities[cart._doc.productType] > 0 ? (
+                  <div
+                    key={cart._doc._id}
+                    className="cart-list-head accordion-bodybox-shadow box-shadow"
+                  >
+                    <div className="cart-single-list">
+                      <div className="row align-items-center">
+                        <div className="col-lg-1 col-md-1 col-12">
+                          <input
+                            type="checkbox"
+                            id={`custom-checkbox-${index}`}
+                            name={cart}
+                            value={cart}
+                            checked={cart._doc.checked}
+                            readOnly
+                            onClick={() => checkOne(cart)}
+                          />
+                        </div>
+                        <div className="col-lg-1 col-md-2 col-12">
                           <Link to={`/product-details/${cart.product._id}`}>
-                            {cart.product.productName}
+                            <img src={cart.product.images[0]} alt="" />
                           </Link>
-                        </h5>
-                        <p className="product-des">
-                          <span>
-                            <em>
-                              <i className="lni lni-package category-icon"></i>
-                              Category:{" "}
-                            </em>{" "}
-                            {cart.product.category}
-                          </span>
-                          <span>
-                            <em>Type / Color:</em>{" "}
-                            {cart.product.types[cart._doc.productType]}
-                          </span>
-                        </p>
-                      </div>
-                      <div className="col-lg-2 col-md-2 col-12">
-                        <Quantity
-                          cartID={cart._doc._id}
-                          max={cart.product.quantities[cart._doc.productType]}
-                          quantity={cart._doc.quantity}
-                        />
-                      </div>
-                      <div className="col-lg-2 col-md-2 col-12">
-                        <p>₱ {cart.product.prices[cart._doc.productType]}</p>
-                      </div>
-                      <div className="col-lg-2 col-md-2 col-12">
-                        <p>
-                          ₱
-                          {Math.round(
-                            cart.product.prices[cart._doc.productType] *
-                              cart._doc.quantity *
-                              100
-                          ) / 100}
-                        </p>
-                      </div>
-                      <div className="col-lg-1 col-md-1 col-12">
-                        <button
-                          className="remove-item"
-                          onClick={() => dispatch(deleteCart(cart._doc._id))}
-                        >
-                          <i className="lni lni-close"></i>
-                        </button>
+                        </div>
+                        <div className="col-lg-3 col-md-2 col-12">
+                          <h5>
+                            <Link to={`/product-details/${cart.product._id}`}>
+                              {cart.product.productName}
+                            </Link>
+                          </h5>
+                          <p className="product-des">
+                            <span>
+                              <em>Category: </em> {cart.product.category}
+                            </span>
+                            <span>
+                              <em>Type / Color:</em>{" "}
+                              {cart.product.types[cart._doc.productType]}
+                            </span>
+                          </p>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-12">
+                          <Quantity
+                            cartID={cart._doc._id}
+                            max={cart.product.quantities[cart._doc.productType]}
+                            quantity={cart._doc.quantity}
+                          />
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-12">
+                          <p>₱ {cart.product.prices[cart._doc.productType]}</p>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-12">
+                          <p>
+                            ₱
+                            {Math.round(
+                              cart.product.prices[cart._doc.productType] *
+                                cart._doc.quantity *
+                                100
+                            ) / 100}
+                          </p>
+                        </div>
+                        <div className="col-lg-1 col-md-1 col-12">
+                          <button
+                            className="remove-item"
+                            onClick={() => dispatch(deleteCart(cart._doc._id))}
+                          >
+                            <i className="lni lni-close"></i>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ) : (
+                  <div
+                    key={cart._doc._id}
+                    className="cart-list-head accordion-bodybox-shadow box-shadow"
+                  >
+                    <div className="cart-single-list">
+                      <div className="row align-items-center">
+                        <div className="col-lg-1 col-md-1 col-12">
+                          <input
+                            type="checkbox"
+                            className=""
+                            checked={false}
+                            readOnly
+                          />
+                        </div>
+                        <div className="col-lg-1 col-md-2 col-12">
+                          <Link to={`/product-details/${cart.product._id}`}>
+                            <img src={cart.product.images[0]} alt="" />
+                          </Link>
+                        </div>
+                        <div className="col-lg-3 col-md-2 col-12">
+                          <h5>
+                            <Link to={`/product-details/${cart.product._id}`}>
+                              {cart.product.productName}
+                            </Link>
+                          </h5>
+                          <p className="product-des">
+                            <span>
+                              <em>Category: </em> {cart.product.category}
+                            </span>
+                            <span>
+                              <em>Type / Color:</em>{" "}
+                              {cart.product.types[cart._doc.productType]}
+                            </span>
+                          </p>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-12 text-center text-red">
+                          <Quantity
+                            cartID={cart._doc._id}
+                            max={cart.product.quantities[cart._doc.productType]}
+                            quantity="0"
+                          />
+                          <small>Product is unavailable</small>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-12">
+                          <p>₱ {cart.product.prices[cart._doc.productType]}</p>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-12">
+                          <p>
+                            ₱
+                            {Math.round(
+                              cart.product.prices[cart._doc.productType] *
+                                cart._doc.quantity *
+                                100
+                            ) / 100}
+                          </p>
+                        </div>
+                        <div className="col-lg-1 col-md-1 col-12">
+                          <button
+                            className="remove-item"
+                            onClick={() => dispatch(deleteCart(cart._doc._id))}
+                          >
+                            <i className="lni lni-close"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              )}
             </>
           ) : (
             <>
