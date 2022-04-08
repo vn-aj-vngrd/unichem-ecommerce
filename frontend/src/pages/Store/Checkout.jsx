@@ -36,10 +36,200 @@ const Checkout = () => {
                       aria-expanded="false"
                       aria-controls="collapseOne"
                     >
-                      Payment Address
+                      Products to Purchase
                     </div>
                     <section
                       className="checkout-steps-form-content collapse show"
+                      id="collapseOne"
+                      aria-labelledby="headingOne"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div className="row">
+                        <div>
+                          <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
+                            <h6 className="purchase-order-status">
+                              DEFAULT ADDRESS
+                            </h6>
+                          </div>
+                          <div className="profile-address-section">
+                            <div className="d-flex align-items-center">
+                              {/* <h4 className="">Address {index + 1}</h4> */}
+                            </div>
+                            <hr></hr>
+                            <div className="addresses">
+                              <div className="profile-address">
+                                <ul>
+                                  <li className="address-header">
+                                    {/* <h6>{user.address[index].addressName}</h6> */}
+                                  </li>
+                                  <li>
+                                    <p>
+                                      {/* <b>Phone:</b> {address.phoneNumber} */}
+                                    </p>
+                                  </li>
+                                  <li>
+                                    <p>
+                                      {/* <b>Address:</b> {address.address1},{" "} */}
+                                      {/* {address.address2} */}
+                                    </p>
+                                  </li>
+                                  <li>
+                                    <p>
+                                      {/* <b>Postal Code:</b> {address.postalCode} */}
+                                    </p>
+                                  </li>
+                                </ul>
+                                <br></br>
+
+                                <div className="checkout-steps-form-style">
+                                  <ul id="accordionExample">
+                                    <li className="">
+                                      <form
+                                        className="form"
+                                        // onSubmit={onSubmitUpdate(index)}
+                                      >
+                                        {/* <div
+                          className="title collapsed"
+                          data-bs-toggle="collapse"
+                          data-bs-target={"#collapse" + index.toString()}
+                          aria-expanded="false"
+                          aria-controls="collapseOne"
+                        >
+                          Edit Address
+                        </div> */}
+                                        <section
+                                          className=" collapse"
+                                          // id={"collapse" + index.toString()}
+                                          aria-labelledby="headingOne"
+                                          data-bs-parent="#accordionExample"
+                                        >
+                                          <div className="col-13">
+                                            <div className="single-form form-default">
+                                              <label className="form-label">
+                                                Address Name
+                                              </label>
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                id="addressNameUpdate"
+                                                name="addressNameUpdate"
+                                                // value={addressNameUpdate}
+                                                // onChange={onChangeUpdate}
+                                                required
+                                              />
+                                            </div>
+                                          </div>
+
+                                          <div className="row">
+                                            <div className="col-6">
+                                              <div className="single-form no-margin form-default">
+                                                <label className="form-label">
+                                                  Region, Province, City,
+                                                  Barangay
+                                                </label>
+                                                <input
+                                                  type="text"
+                                                  className="form-control"
+                                                  id="address1Update"
+                                                  name="address1Update"
+                                                  // value={address1Update}
+                                                  // onChange={onChangeUpdate}
+                                                  required
+                                                />
+                                              </div>
+                                            </div>
+
+                                            <div className="col-6">
+                                              <div className="single-form no-margin form-default">
+                                                <label className="form-label">
+                                                  Street Name, Building, House
+                                                  No.
+                                                </label>
+                                                <input
+                                                  type="text"
+                                                  className="form-control"
+                                                  id="address2Update"
+                                                  name="address2Update"
+                                                  // value={address2Update}
+                                                  // onChange={onChangeUpdate}
+                                                  required
+                                                />
+                                              </div>
+                                            </div>
+                                            <div className="col-6">
+                                              <div className="single-form form-default">
+                                                <label className="form-label">
+                                                  Postal Code
+                                                </label>
+                                                <input
+                                                  type="text"
+                                                  className="form-control"
+                                                  id="postalCodeUpdate"
+                                                  name="postalCodeUpdate"
+                                                  // value={postalCodeUpdate}
+                                                  // onChange={onChangeUpdate}
+                                                  required
+                                                />
+                                              </div>
+                                            </div>
+
+                                            <div className="col-6">
+                                              <div className="single-form form-default">
+                                                <label className="form-label">
+                                                  Phone Number
+                                                </label>
+                                                <input
+                                                  type="text"
+                                                  className="form-control"
+                                                  id="phoneNumberUpdate"
+                                                  name="phoneNumberUpdate"
+                                                  // value={phoneNumberUpdate}
+                                                  // onChange={onChangeUpdate}
+                                                  required
+                                                />
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                        </section>
+                                      </form>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="col-md-12">
+                          <div className="steps-form-btn button">
+                            <button
+                              className="btn"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseTwo"
+                              aria-expanded="false"
+                              aria-controls="collapseTwo"
+                            >
+                              Next
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </li>
+
+                  <li>
+                    <div
+                      className="title collapsed"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="false"
+                      aria-controls="collapseOne"
+                    >
+                      Payment Address
+                    </div>
+                    <section
+                      className="checkout-steps-form-content collapse"
                       id="collapseOne"
                       aria-labelledby="headingOne"
                       data-bs-parent="#accordionExample"
@@ -80,7 +270,6 @@ const Checkout = () => {
                       </div>
                     </section>
                   </li>
-
                   <li>
                     <div
                       className="title collapsed"

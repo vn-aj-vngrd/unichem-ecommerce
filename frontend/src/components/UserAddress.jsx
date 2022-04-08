@@ -29,7 +29,13 @@ const Profile = () => {
   });
 
   const { addressName, address1, address2, postalCode, phoneNumber } = formData;
-  const { addressNameUpdate, address1Update, address2Update, postalCodeUpdate, phoneNumberUpdate } = formDataUpdate;
+  const {
+    addressNameUpdate,
+    address1Update,
+    address2Update,
+    postalCodeUpdate,
+    phoneNumberUpdate,
+  } = formDataUpdate;
 
   const onChangeCreate = (e) => {
     setFormData((prevState) => ({
@@ -43,7 +49,7 @@ const Profile = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-  }
+  };
 
   useEffect(() => {
     if (isError) {
@@ -68,7 +74,7 @@ const Profile = () => {
   const onSubmitCreate = (e) => {
     e.preventDefault();
 
-    const address =  JSON.parse(JSON.stringify(user.address));
+    const address = JSON.parse(JSON.stringify(user.address));
     address.push({
       addressName,
       address1,
@@ -76,12 +82,12 @@ const Profile = () => {
       postalCode,
       phoneNumber,
     });
-    
+
     const userData = {
       address: address,
     };
 
-    console.log(userData)
+    console.log(userData);
 
     dispatch(update(userData));
     toast.success("Address created successfully", {
@@ -114,16 +120,16 @@ const Profile = () => {
       return;
     }
 
-    const address =  JSON.parse(JSON.stringify(user.address));
+    const address = JSON.parse(JSON.stringify(user.address));
 
-    console.log(newPrimaryAddress)
+    console.log(newPrimaryAddress);
 
     address.splice(index, 1);
-    
+
     const userData = {
       address: address,
       primaryAddress: newPrimaryAddress,
-    }
+    };
 
     dispatch(update(userData));
     toast.success("Address deleted successfully", {
@@ -162,7 +168,7 @@ const Profile = () => {
   const onSubmitUpdate = (index) => (e) => {
     e.preventDefault();
 
-    const address =  JSON.parse(JSON.stringify(user.address));
+    const address = JSON.parse(JSON.stringify(user.address));
 
     address[index] = {
       addressName: addressNameUpdate,
@@ -171,7 +177,7 @@ const Profile = () => {
       postalCode: postalCodeUpdate,
       phoneNumber: phoneNumberUpdate,
     };
-    
+
     const userData = {
       address: address,
     };
@@ -205,16 +211,10 @@ const Profile = () => {
       </div>
 
       <div className="address-row">
-        {/* Address Row Start Here */}
-        {/* If Default */}
-
         {user.address.map((address, index) =>
           index === user.primaryAddress ? (
             <div key={index}>
               <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
-                {/* <div className="color-white purchase-update-time">
-                  Last Update Time: mm/dd/yy - hh:mm 
-                </div> */}
                 <h6 className="purchase-order-status">DEFAULT ADDRESS</h6>
               </div>
               <div className="profile-address-section">
@@ -236,9 +236,6 @@ const Profile = () => {
                       <li>
                         <p>
                           <b>Address:</b> {address.address1}, {address.address2}
-                          {/* Blk 2 Lot 11, Villa Marina subd. Pajac
-                      Lapu-Lapu City, 6015, Cebu, Philippines Pajac, Lapu-Lapu
-                      City Visayas, Cebu 6015 */}
                         </p>
                       </li>
                       <li>
@@ -420,9 +417,6 @@ const Profile = () => {
                       <li>
                         <p>
                           <b>Address:</b> {address.address1}, {address.address2}
-                          {/* Blk 2 Lot 11, Villa Marina subd. Pajac
-                      Lapu-Lapu City, 6015, Cebu, Philippines Pajac, Lapu-Lapu
-                      City Visayas, Cebu 6015 */}
                         </p>
                       </li>
                       <li>

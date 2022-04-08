@@ -8,7 +8,7 @@ import {
 } from "../../features/cart/cartSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
-import PricingTable from "../../components/PricingTable";
+import CartSummary from "../../components/CartSummary";
 import Quantity from "../../components/Quantity";
 // import { toast } from "react-toastify";
 
@@ -34,12 +34,22 @@ const Cart = () => {
     dispatch(getCarts());
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
-  const [checkoutItems, setCheckout] = useState([]);
-  const cartCount = localStorage.getItem("cartCount");
+  const checkoutItems = carts.filter(
+    (cart) =>
+      cart._doc.checked > 0 && cart.product.quantities[cart._doc.productType]
+  );
+  console.log(checkoutItems);
+
+  const cartCount = carts.reduce((count, cart) => {
+    if (cart.product.quantities[cart._doc.productType] > 0) {
+      return count + 1;
+    }
+    return count;
+  }, 0);
 
   let checkoutCount = 0;
   const subtotal = carts.reduce((sum, cart) => {
-    if (cart._doc.checked) {
+    if (cart._doc.checked && cart.product.quantities[cart._doc.productType]) {
       checkoutCount++;
       return (
         sum + cart._doc.quantity * cart.product.prices[cart._doc.productType]
@@ -52,10 +62,7 @@ const Cart = () => {
   const total = shippingFee + subtotal;
 
   const selectAll =
-    checkoutCount === parseInt(localStorage.getItem("cartCount")) &&
-    checkoutCount !== 0
-      ? true
-      : false;
+    checkoutCount === cartCount && checkoutCount !== 0 ? true : false;
 
   const checkOne = (cart) => {
     const cartParams = {
@@ -96,11 +103,12 @@ const Cart = () => {
                   <input
                     id="main"
                     type="checkbox"
+                    className="me-1"
                     value={carts}
                     checked={selectAll}
                     readOnly
                     onClick={() => checkAll(carts)}
-                  />
+                  /> All
                 </div>
                 <div className="col-lg-3 col-md-4 col-12">
                   <p>Product</p>
@@ -201,12 +209,7 @@ const Cart = () => {
                     <div className="cart-single-list">
                       <div className="row align-items-center">
                         <div className="col-lg-1 col-md-1 col-12">
-                          <input
-                            type="checkbox"
-                            className=""
-                            checked={false}
-                            readOnly
-                          />
+                          <input type="checkbox" checked={false} readOnly />
                         </div>
                         <div className="col-lg-1 col-md-2 col-12">
                           <Link to={`/product-details/${cart.product._id}`}>
@@ -277,7 +280,7 @@ const Cart = () => {
               </div>
             </>
           )}
-          <PricingTable
+          <CartSummary
             carts={carts}
             checkoutCount={checkoutCount}
             cartCount={cartCount}

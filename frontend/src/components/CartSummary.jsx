@@ -39,8 +39,8 @@ const PricingTable = ({
   const checkout = () => {
     Swal.fire({
       title: "Are you sure to checkout?",
-      text: "All items in you cart will be processed to checkout.",
-      icon: "warning",
+      text: "Select YES to proceed, otherwise select NO.",
+      icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -62,7 +62,7 @@ const PricingTable = ({
               <div className="col-lg-8 col-md-6 col-12"></div>
               <div className="col-lg-4 col-md-6 col-12">
                 <div className="right">
-                  <h5 className="heading">Pricing Table</h5>
+                  <h5 className="heading">Cart Summary</h5>
                   <hr></hr>
                   <ul>
                     <li>
