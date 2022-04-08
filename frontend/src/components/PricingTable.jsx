@@ -40,7 +40,7 @@ const PricingTable = ({ carts, count, subtotal, shippingFee, total }) => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/checkout");
+        navigate("/cart/checkout");
         console.log(carts);
       }
     });

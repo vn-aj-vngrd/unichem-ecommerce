@@ -25,7 +25,7 @@ const getCarts = asyncHandler(async (req, res) => {
 // @route   POST /api/carts
 // @access  Private
 const setCart = asyncHandler(async (req, res) => {
-  const { productID, productType, quantity, max } = req.body;
+  const { productID, productType, quantity, max, checked } = req.body;
 
   const existingCart = await Cart.findOne({
     userID: req.user._id,
@@ -45,6 +45,7 @@ const setCart = asyncHandler(async (req, res) => {
       productID: productID,
       productType: productType,
       quantity: quantity,
+      checked: checked,
     });
     return res.status(200).json(newCart);
   }
@@ -97,7 +98,7 @@ const updateCart = asyncHandler(async (req, res) => {
   // Update cart
   const updatedCart = await Cart.findByIdAndUpdate(
     _id,
-    { quantity: req.body.quantity },
+    { quantity: req.body.quantity, checked: req.body.checked },
     { new: true }
   );
 

@@ -90,6 +90,7 @@ const Details = ({ product }) => {
       productType: value,
       quantity: counter,
       max: product._doc.quantities[value],
+      checked: true,
     };
 
     dispatch(setCart(cartData));

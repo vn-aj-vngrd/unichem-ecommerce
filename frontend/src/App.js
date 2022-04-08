@@ -112,7 +112,7 @@ export const App = () => {
             <Route path="account/manage" element={<Manage />} />
             <Route path="account/orders" element={<Order />} />
             <Route path="account/reviews" element={<Review />} />
-            <Route path="checkout" element={<Checkout />} />
+            <Route path="cart/checkout" element={<Checkout />} />
             <Route path="faq" element={<Faq />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

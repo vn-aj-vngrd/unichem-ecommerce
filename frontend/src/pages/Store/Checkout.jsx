@@ -98,49 +98,49 @@ const Checkout = () => {
                       data-bs-parent="#accordionExample"
                     >
                       <div className="row">
-                        <div class="col-md-12">
-                          <div class="checkout-payment-option">
-                            <h6 class="heading-6 font-weight-400 payment-title">
+                        <div className="col-md-12">
+                          <div className="checkout-payment-option">
+                            <h6 className="heading-6 font-weight-400 payment-title">
                               Select Delivery Option
                             </h6>
-                            <div class="payment-option-wrapper">
-                              <div class="single-payment-option">
+                            <div className="payment-option-wrapper">
+                              <div className="single-payment-option">
                                 <input
                                   type="radio"
                                   name="payment"
                                   id="payment-1"
                                 />
-                                <label for="payment-1">
+                                <label htmlFor="payment-1">
                                   <p>Standerd payment</p>
                                 </label>
                               </div>
-                              <div class="single-payment-option">
+                              <div className="single-payment-option">
                                 <input
                                   type="radio"
                                   name="payment"
                                   id="payment-2"
                                 />
-                                <label for="payment-2">
+                                <label htmlFor="payment-2">
                                   <p>Standerd payment</p>
                                 </label>
                               </div>
-                              <div class="single-payment-option">
+                              <div className="single-payment-option">
                                 <input
                                   type="radio"
                                   name="payment"
                                   id="payment-3"
                                 />
-                                <label for="payment-3">
+                                <label htmlFor="payment-3">
                                   <p>Standerd payment</p>
                                 </label>
                               </div>
-                              <div class="single-payment-option">
+                              <div className="single-payment-option">
                                 <input
                                   type="radio"
                                   name="payment"
                                   id="payment-4"
                                 />
-                                <label for="payment-4">
+                                <label htmlFor="payment-4">
                                   <p>Standerd payment</p>
                                 </label>
                               </div>
@@ -156,15 +156,15 @@ const Checkout = () => {
 
             <div className="col-lg-4">
               <div className="checkout-sidebar">
-                <div class="checkout-sidebar-coupon">
+                <div className="checkout-sidebar-coupon">
                   <p>Apply Valid Coupon Here</p>
                   <form action="#">
-                    <div class="single-form form-default">
-                      <div class="form-input form">
+                    <div className="single-form form-default">
+                      <div className="form-input form">
                         <input type="text" placeholder="Coupon Code" />
                       </div>
-                      <div class="button">
-                        <button class="btn">apply</button>
+                      <div className="button">
+                        <button className="btn">apply</button>
                       </div>
                     </div>
                   </form>

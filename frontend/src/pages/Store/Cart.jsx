@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getCarts, deleteCart } from "../../features/cart/cartSlice";
+import {
+  getCarts,
+  updateCart,
+  deleteCart,
+} from "../../features/cart/cartSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import PricingTable from "../../components/PricingTable";
@@ -12,11 +16,10 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth);
   const { carts, isCartLoading, isCartError, cartMessage } = useSelector(
     (state) => state.cart
   );
-
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
@@ -31,10 +34,42 @@ const Cart = () => {
     dispatch(getCarts());
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
+  const [checkoutItems, setCheckout] = useState([]);
+
   let count = 0;
-  let subtotal = 0;
-  let shippingFee = 0;
-  let total = 0;
+  const subtotal = carts.reduce((sum, cart, index) => {
+    if (cart._doc.checked) {
+      count++;
+      return (
+        sum + cart._doc.quantity * cart.product.prices[cart._doc.productType]
+      );
+    }
+    return sum;
+  }, 0);
+
+  const shippingFee = 0; //Initial Value
+  const total = shippingFee + subtotal;
+
+  const selectAll =
+    count === parseInt(localStorage.getItem("cartCount")) ? true : false;
+
+  const checkOne = (cart) => {
+    const cartParams = {
+      checked: !cart._doc.checked,
+      id: cart._doc._id,
+    };
+    dispatch(updateCart(cartParams));
+  };
+
+  const checkAll = (carts) => {
+    carts.forEach((cart) => {
+      const cartParams = {
+        checked: !selectAll,
+        id: cart._doc._id,
+      };
+      dispatch(updateCart(cartParams));
+    });
+  };
 
   if (isCartLoading) {
     return (
@@ -43,18 +78,6 @@ const Cart = () => {
         <div className="empty-container"></div>
       </>
     );
-  }
-
-  if (carts.length > 0) {
-    count = carts.length;
-    subtotal = 0;
-    for (let i = 0; i < count; i++) {
-      subtotal +=
-        carts[i].product.prices[carts[i]._doc.productType] *
-        carts[i]._doc.quantity;
-    }
-    shippingFee = 0.0;
-    total = subtotal + shippingFee;
   }
 
   return (
@@ -66,7 +89,14 @@ const Cart = () => {
             <div className="cart-list-title purchase-row-banner">
               <div className="row">
                 <div className="col-lg-2 col-md-1 col-12">
-                  <input type="checkbox" />
+                  <input
+                    id="main"
+                    type="checkbox"
+                    value={carts}
+                    checked={selectAll}
+                    readOnly
+                    onClick={() => checkAll(carts)}
+                  />
                 </div>
                 <div className="col-lg-3 col-md-4 col-12">
                   <p>Product</p>
@@ -88,7 +118,7 @@ const Cart = () => {
           </div>
           {carts.length > 0 ? (
             <>
-              {carts.map((cart) => (
+              {carts.map((cart, index) => (
                 <div
                   key={cart._doc._id}
                   className="cart-list-head accordion-bodybox-shadow box-shadow"
@@ -98,7 +128,12 @@ const Cart = () => {
                       <div className="col-lg-1 col-md-1 col-12">
                         <input
                           type="checkbox"
-                          // onClick={checkItem}
+                          id={`custom-checkbox-${index}`}
+                          name={cart}
+                          value={cart}
+                          checked={cart._doc.checked}
+                          readOnly
+                          onClick={() => checkOne(cart)}
                         />
                       </div>
                       <div className="col-lg-1 col-md-2 col-12">

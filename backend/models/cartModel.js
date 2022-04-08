@@ -20,6 +20,10 @@ const cartSchema = mongoose.Schema(
       type: Number,
       required: [true, "Quantity is required"],
     },
+    checked: {
+      type: Boolean,
+      required: [true, "Is Checked is required"],
+    },
   },
   { timestamps: true }
 );

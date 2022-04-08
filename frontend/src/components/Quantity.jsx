@@ -40,7 +40,7 @@ const Quantity = ({ cartID, max, quantity }) => {
     };
   }
 
-  let handleChange = (e) => {
+  const handleChange = (e) => {
     let val = e.target.value;
     setCounter(e.target.value);
 
@@ -75,6 +75,7 @@ const Quantity = ({ cartID, max, quantity }) => {
       dispatch(updateCart(cartParams));
     }
   };
+  
   return (
     <>
       <div className="quantity-control text-center">
