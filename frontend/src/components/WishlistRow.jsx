@@ -73,18 +73,34 @@ const WishlistRow = ({ wishlist }) => {
                 <p>Unavailable</p>
               )}
             </div>
-            <div className="col-lg-2 col-md-2 col-12">
-              {wishlist.product.quantities[wishlist._doc.productType] > 0 ? (
-                <p>{wishlist.product.quantities[wishlist._doc.productType]}</p>
-              ) : (
-                <p>Unavailable</p>
-              )}
-            </div>
-            <div className="col-lg-1 col-md-1 col-12">
-              <button className="add-item" onClick={addToCart}>
-                <i className="lni lni-cart"></i>
-              </button>
-            </div>
+
+            {wishlist.product.quantities[wishlist._doc.productType] > 0 ? (
+              <>
+                <div className="col-lg-2 col-md-2 col-12">
+                  <p>
+                    {wishlist.product.quantities[wishlist._doc.productType]}
+                  </p>
+                </div>
+
+                <div className="col-lg-1 col-md-1 col-12">
+                  <button className="add-item" onClick={addToCart}>
+                    <i className="lni lni-cart"></i>
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="col-lg-2 col-md-2 col-12">
+                  <p className="text-red">0</p>
+                </div>
+
+                <div className="col-lg-1 col-md-1 col-12">
+                  <button className="empty" disabled>
+                    <i className="lni lni-cart"></i>
+                  </button>
+                </div>
+              </>
+            )}
 
             <div className="col-lg-1 col-md-1 col-12">
               <button
