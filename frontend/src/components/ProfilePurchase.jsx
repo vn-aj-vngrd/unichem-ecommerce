@@ -1,12 +1,67 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getOrders, resetOrder } from "../features/orders/orderSlice";
+import { getProducts, resetProduct } from "../features/products/productSlice";
+import { useSelector, useDispatch } from "react-redux";
 import PurchasedProduct from "./PurchasedProduct";
 import Review from "./ReviewModal";
-
-// const row = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-// const star = 4.5;
-// const reviews = 5;
+import Spinner from "../components/Spinner";
 
 const ProfilePurchase = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const moment = require("moment");
+
+  const { orders, isOrderLoading, isOrderError, orderMessage } = useSelector(
+    (state) => state.orders
+  );
+
+  const { products, isProductLoading, isProductError, productMessage } =
+    useSelector((state) => state.products);
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isOrderError) {
+      console.log(orderMessage);
+    }
+
+    if (!user) {
+      navigate("/login");
+    }
+
+    dispatch(getOrders());
+
+    return () => {
+      dispatch(resetOrder());
+    };
+  }, [user, navigate, isOrderError, orderMessage, dispatch]);
+
+  useEffect(() => {
+    if (isProductError) {
+      // console.log(productMessage);
+    }
+
+    dispatch(getProducts());
+
+    return () => {
+      dispatch(resetProduct());
+    };
+  }, [isProductError, productMessage, dispatch]);
+
+  if (isOrderLoading || isProductLoading) {
+    return (
+      <>
+        {/* <div className="empty-container"></div> */}
+        <Spinner />
+      </>
+    );
+  }
+
+  let statusOrders = JSON.parse(JSON.stringify(orders));
+
+  console.log(orders)
+
   return (
     <div className="purchase-products-column">
       <div className="product-grid">
@@ -36,30 +91,36 @@ const ProfilePurchase = () => {
 
       <div className="product">
         {/* Product Purchase one */}
-        <>
-          <div className="purchase-row">
+        {statusOrders.map((order) => (
+          <div key={order.orderID} className="purchase-row">
             <div className="negative-padding-custom box-shadow">
               <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
-                <Link to="/product-details" className="underline-link">
-                  <div className="color-white">Order Status Log </div>
-                </Link>
+                <div className="color-white">Order ID: {order.orderID}</div>
                 <div className="color-white purchase-update-time">
-                  Last Update Time: mm/dd/yy - hh:mm
+                  Order Date: {moment(order.orderDate).format("DD/MM/YY")}
                 </div>
-                <h6 className="purchase-order-status">ORDER STATUS</h6>
+                <h6 className="purchase-order-status">
+                  {order.orderStatus.toUpperCase()}
+                </h6>
               </div>
 
               {/* ORDERLINE START HERE */}
 
-              <PurchasedProduct />
+              <PurchasedProduct
+                orderID={order.orderID}
+                products={products}
+                productOrders={order.products}
+              /> 
 
               {/* END OF ORDERLINE */}
+
+
               <div className="no-box-shadow">
                 <div className="order-total-row">
                   <div className="price d-flex justify-content-end align-items-center">
                     <div className="">Order Total:</div>
                     <div className="spacer"></div>
-                    <h4 className="unichem-text-color">$199.00</h4>
+                    <h4 className="unichem-text-color">${order.orderTotal}</h4>
                   </div>
                   <br></br>
                   <div className="purchase-options">
@@ -74,7 +135,7 @@ const ProfilePurchase = () => {
               </div>
             </div>
           </div>
-        </>
+        ))}
 
         <nav>
           <ul className="product-pagination pagination justify-content-center">

@@ -75,16 +75,16 @@ function ProfileReviews() {
                         <h4 className="">
                           <div className="d-flex justify-content-between">
                             Horeb Barriga
-                            <div class="btn-group dropstart">
+                            <div className="btn-group dropstart">
                               <button
                                 type="button"
-                                class="vertical-menu-button"
+                                className="vertical-menu-button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                               >
                                 <li className="lni lni-more-alt"></li>
                               </button>
-                              <ul class="review-menu dropdown-menu">
+                              <ul className="review-menu dropdown-menu">
                                 <ul>
                                   <li>Edit</li>
                                   <li>Delete</li>

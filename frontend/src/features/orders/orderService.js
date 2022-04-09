@@ -16,10 +16,15 @@ const setOrder = async (orderData, token) => {
 };
 
 // Get user orders
-const getOrders = async () => {
-  const response = await axios.get(API_URL);
-  // console.log(response.data);
+const getOrders = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
+  const response = await axios.get(API_URL, config);
+  
   return response.data;
 };
 

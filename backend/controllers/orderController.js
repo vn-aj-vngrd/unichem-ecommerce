@@ -1,8 +1,7 @@
 const asyncHandler = require("express-async-handler");
 
-const Order = require("../models/OrderModel");
+const Order = require("../models/orderModel");
 const Product = require("../models/productModel");
-const User = require("../models/userModel");
 
 // @desc    Get Orders by user
 // @route   GET /api/Orders
@@ -12,16 +11,53 @@ const getOrders = asyncHandler(async (req, res) => {
     createdAt: "desc",
   });
 
-  let retData = [];
-  for (let i = 0; i < Orders.length; i++) {
-    let product = await Product.findById(Orders[i].productID);
-    let user = await User.findById(Orders[i].userID);
-    const temp = { ...Orders[i], product, user };
-    retData.push(temp);
-  }
+  const Products = await Product.find().sort({
+    createdAt: "desc",
+  });
+
+  // console.log(Products)
+
+  let groupValues = Orders.reduce((order, key) => {
+    order[key.orderID] = order[key.orderID] || [];
+
+    // order[key.orderID].push({
+    //   productID: key.productID,
+    //   productType: key.productType,
+    //   reviewed: key.reviewed,
+    //   totalPrice: key.totalPrice,
+    //   _id: key._id,
+    // });
+
+    order[key.orderID].push(key);
+    
+    return order;
+  }, {});
+
+  console.log(groupValues)
+
+  let retData = Object.keys(groupValues).map((mkey) => {
+    let total = 0;
+    groupValues[mkey].forEach((order) => {
+      total += order.totalPrice;
+    });
+
+    console.log(total)
+
+    return { 
+      orderID: mkey, 
+      createdAt: groupValues[mkey][0].createdAt,
+      orderDate: groupValues[mkey][0].orderDate,
+      orderStatus: groupValues[mkey][0].orderStatus,
+      receivedDate: groupValues[mkey][0].receivedDate,
+      shippingDate: groupValues[mkey][0].shippingDate,
+      updatedAt: groupValues[mkey][0].updatedAt,
+      userID: groupValues[mkey][0].userID,
+      orderTotal: total,
+      products: groupValues[mkey]
+    };
+  });
 
   res.status(200).json(retData);
-  // res.status(200).json(Orders);
 });
 
 // @desc    Set Order

@@ -11,7 +11,7 @@ const { protect } = require("../middleware/authMiddleware");
 
 router
   .route("/")
-  .get(getOrders)
+  .get(protect, getOrders)
   .post(protect, setOrder)
   .put(protect, updateOrder);
 router.route("/:id").delete(protect, deleteOrder);

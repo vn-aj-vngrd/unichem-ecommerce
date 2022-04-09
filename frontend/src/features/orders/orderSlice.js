@@ -33,7 +33,8 @@ export const getOrders = createAsyncThunk(
   "orders/getAll",
   async (_, thunkAPI) => {
     try {
-      return await orderService.getOrders();
+      const token = thunkAPI.getState().auth.user.token;
+      return await orderService.getOrders(token);
     } catch (error) {
       const orderMessage =
         (error.response &&
