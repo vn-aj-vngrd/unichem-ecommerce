@@ -99,7 +99,7 @@ const Cart = () => {
           <div className="cart-list-head">
             <div className="cart-list-title purchase-row-banner">
               <div className="row">
-                <div className="col-lg-2 col-md-1 col-12">
+                <div className="col-lg-1 col-md-1 col-12">
                   <input
                     id="main"
                     type="checkbox"
@@ -108,9 +108,9 @@ const Cart = () => {
                     checked={selectAll}
                     readOnly
                     onClick={() => checkAll(carts)}
-                  /> 
+                  />
                 </div>
-                <div className="col-lg-3 col-md-4 col-12">
+                <div className="col-lg-3 col-md-3 col-12">
                   <p>Product</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
@@ -120,10 +120,13 @@ const Cart = () => {
                   <p>Price</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
-                  <p>Subtotal</p>
+                  <>Subtotal</>
                 </div>
                 <div className="col-lg-1 col-md-1 col-12">
-                  <p>Remove</p>
+                  <p></p>
+                </div>
+                <div className="col-lg-1 col-md-1 col-12">
+                  <p></p>
                 </div>
               </div>
             </div>
@@ -149,12 +152,12 @@ const Cart = () => {
                             onClick={() => checkOne(cart)}
                           />
                         </div>
-                        <div className="col-lg-1 col-md-2 col-12">
+                        <div className="col-lg-1 col-md-1 col-12">
                           <Link to={`/product-details/${cart.product._id}`}>
                             <img src={cart.product.images[0]} alt="" />
                           </Link>
                         </div>
-                        <div className="col-lg-3 col-md-2 col-12">
+                        <div className="col-lg-2 col-md-2 col-12">
                           <h5>
                             <Link to={`/product-details/${cart.product._id}`}>
                               {cart.product.productName}
@@ -181,14 +184,22 @@ const Cart = () => {
                           <p>₱ {cart.product.prices[cart._doc.productType]}</p>
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
-                          <p>
+                          <b>
                             ₱
                             {Math.round(
                               cart.product.prices[cart._doc.productType] *
                                 cart._doc.quantity *
                                 100
                             ) / 100}
-                          </p>
+                          </b>
+                        </div>
+                        <div className="col-lg-1 col-md-1 col-12">
+                          <button
+                            className="add-item"
+                            onClick={() => dispatch(deleteCart(cart._doc._id))}
+                          >
+                            <i className="lni lni-heart"></i>
+                          </button>
                         </div>
                         <div className="col-lg-1 col-md-1 col-12">
                           <button
@@ -211,12 +222,12 @@ const Cart = () => {
                         <div className="col-lg-1 col-md-1 col-12">
                           <input type="checkbox" checked={false} readOnly />
                         </div>
-                        <div className="col-lg-1 col-md-2 col-12">
+                        <div className="col-lg-1 col-md-1 col-12">
                           <Link to={`/product-details/${cart.product._id}`}>
                             <img src={cart.product.images[0]} alt="" />
                           </Link>
                         </div>
-                        <div className="col-lg-3 col-md-2 col-12">
+                        <div className="col-lg-2 col-md-2 col-12">
                           <h5>
                             <Link to={`/product-details/${cart.product._id}`}>
                               {cart.product.productName}
@@ -225,7 +236,7 @@ const Cart = () => {
                           <p className="product-des">
                             <span>
                               <em>Category: </em> {cart.product.category}
-                            </span>
+                          </span>
                             <span>
                               <em>Type / Color:</em>{" "}
                               {cart.product.types[cart._doc.productType]}
@@ -244,14 +255,22 @@ const Cart = () => {
                           <p>₱ {cart.product.prices[cart._doc.productType]}</p>
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
-                          <p>
+                          <b>
                             ₱
                             {Math.round(
                               cart.product.prices[cart._doc.productType] *
                                 cart._doc.quantity *
                                 100
                             ) / 100}
-                          </p>
+                          </b>
+                        </div>
+                        <div className="col-lg-1 col-md-1 col-12">
+                          <button
+                            className="add-item"
+                            onClick={() => dispatch(deleteCart(cart._doc._id))}
+                          >
+                            <i className="lni lni-heart"></i>
+                          </button>
                         </div>
                         <div className="col-lg-1 col-md-1 col-12">
                           <button

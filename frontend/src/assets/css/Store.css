@@ -2395,7 +2395,8 @@ ol {
   margin-bottom: 20px;
 }
 
-.lni-star, .lni-star-filled {
+.lni-star,
+.lni-star-filled {
   color: #ffbb00;
   font-size: 16px;
   margin: 2px;
@@ -3084,7 +3085,7 @@ ol {
   border-radius: 4px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  height: 47px !important
+  height: 47px !important;
 }
 
 .review-btn:hover {
@@ -3142,7 +3143,6 @@ ol {
     padding: 20px;
   }
 }
-
 
 .product-details-info .reviews .single-review .review-info::before {
   position: absolute;
@@ -3214,12 +3214,14 @@ ol {
   font-size: 12px;
 }
 
-.lni-star-filled:hover, .lni-star:hover {
+.lni-star-filled:hover,
+.lni-star:hover {
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
 
-.lni-star-filled:hover, .lni-star:hover {
+.lni-star-filled:hover,
+.lni-star:hover {
   transform: scale(1.3);
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
@@ -4072,7 +4074,6 @@ ol {
   border-radius: 50%;
   text-align: center;
   border: none;
-  margin-right: 10px;
 }
 
 @media (max-width: 767px) {
@@ -4701,7 +4702,7 @@ ol {
 }
 
 .profile-address-section ul li {
- margin-bottom: 4px !important; 
+  margin-bottom: 4px !important;
 }
 
 /*======================================
@@ -5561,7 +5562,7 @@ ol {
   color: #fff;
 }
 
-.vertical-menu-button{
+.vertical-menu-button {
   color: rgb(139, 139, 139);
   transform: rotate(90deg);
   border: none;
@@ -5575,7 +5576,6 @@ ol {
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
 }
-
 
 .underline-link:hover {
   text-decoration: underline;
@@ -6007,7 +6007,7 @@ ol {
 }
 
 .checkbox {
-  transform: scale(1.3);  
+  transform: scale(1.3);
   border-color: #e6e6e6;
 }
 

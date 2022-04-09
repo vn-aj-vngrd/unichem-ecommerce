@@ -47,7 +47,7 @@ const Wishlist = () => {
             <div className="cart-list-title purchase-row-banner">
               <div className="row">
                 <div className="col-lg-1 col-md-1 col-12"></div>
-                <div className="col-lg-4 col-md-3 col-12">
+                <div className="col-lg-3 col-md-3 col-12">
                   <p>Product</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
@@ -57,10 +57,13 @@ const Wishlist = () => {
                   <p>Discount</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
-                  <p>Add to Cart</p>
+                  <p>Stock</p>
                 </div>
-                <div className="col-lg-1 col-md-2 col-12">
-                  <p>Remove</p>
+                <div className="col-lg-1 col-md-1 col-12">
+                  <p></p>
+                </div>
+                <div className="col-lg-1 col-md-1 col-12">
+                  <p></p>
                 </div>
               </div>
             </div>

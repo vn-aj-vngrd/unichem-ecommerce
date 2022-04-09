@@ -43,7 +43,7 @@ const WishlistRow = ({ wishlist }) => {
                 <img src={wishlist.product.images[0]} alt="" />
               </Link>
             </div>
-            <div className="col-lg-4 col-md-3 col-12">
+            <div className="col-lg-3 col-md-3 col-12">
               <h5 className="">
                 <Link to="/">{wishlist.product.productName}</Link>
               </h5>
@@ -74,12 +74,19 @@ const WishlistRow = ({ wishlist }) => {
               )}
             </div>
             <div className="col-lg-2 col-md-2 col-12">
+              {wishlist.product.quantities[wishlist._doc.productType] > 0 ? (
+                <p>{wishlist.product.quantities[wishlist._doc.productType]}</p>
+              ) : (
+                <p>Unavailable</p>
+              )}
+            </div>
+            <div className="col-lg-1 col-md-1 col-12">
               <button className="add-item" onClick={addToCart}>
                 <i className="lni lni-cart"></i>
               </button>
             </div>
 
-            <div className="col-lg-1 col-md-2 col-12">
+            <div className="col-lg-1 col-md-1 col-12">
               <button
                 className="remove-item"
                 onClick={() => dispatch(deleteWishlist(wishlist._doc._id))}
