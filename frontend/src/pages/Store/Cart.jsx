@@ -99,18 +99,16 @@ const Cart = () => {
           <div className="cart-list-head">
             <div className="cart-list-title purchase-row-banner">
               <div className="row">
-                <div className="col-lg-1 col-md-1 col-12">
+                <div className="col-lg-2 col-md-1 col-12">
                   <input
                     id="main"
                     type="checkbox"
-                    className="me-1 checkbox"
+                    className="me-1"
                     value={carts}
                     checked={selectAll}
                     readOnly
                     onClick={() => checkAll(carts)}
-                  />
-                </div>
-                <div className="col-lg-1 col-md-4 col-12">
+                  /> 
                 </div>
                 <div className="col-lg-3 col-md-4 col-12">
                   <p>Product</p>
@@ -131,18 +129,17 @@ const Cart = () => {
             </div>
           </div>
           {carts.length > 0 ? (
-            <div className="box-shadow">
+            <>
               {carts.map((cart, index) =>
                 cart.product.quantities[cart._doc.productType] > 0 ? (
                   <div
                     key={cart._doc._id}
-                    className="cart-list-head accordion-body "
+                    className="cart-list-head accordion-bodybox-shadow box-shadow"
                   >
                     <div className="cart-single-list">
                       <div className="row align-items-center">
                         <div className="col-lg-1 col-md-1 col-12">
                           <input
-                            className="checkbox"
                             type="checkbox"
                             id={`custom-checkbox-${index}`}
                             name={cart}
@@ -207,12 +204,12 @@ const Cart = () => {
                 ) : (
                   <div
                     key={cart._doc._id}
-                    className="cart-list-head accordion-body"
+                    className="cart-list-head accordion-bodybox-shadow box-shadow"
                   >
                     <div className="cart-single-list">
                       <div className="row align-items-center">
                         <div className="col-lg-1 col-md-1 col-12">
-                          <input type="checkbox" className="checkbox" checked={false} readOnly />
+                          <input type="checkbox" checked={false} readOnly />
                         </div>
                         <div className="col-lg-1 col-md-2 col-12">
                           <Link to={`/product-details/${cart.product._id}`}>
@@ -269,9 +266,9 @@ const Cart = () => {
                   </div>
                 )
               )}
-            </div>
+            </>
           ) : (
-            <div className="box-shadow">
+            <>
               <div className="cart-list-head box-shadow">
                 <div className="cart-single-list">
                   <div className="d-flex single-cart-product">
@@ -281,7 +278,7 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </>
           )}
           <CartSummary
             carts={carts}
