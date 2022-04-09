@@ -128,7 +128,7 @@ const Cart = () => {
           <div className="cart-list-head">
             <div className="cart-list-title purchase-row-banner">
               <div className="row">
-                <div className="col-lg-1 col-md-1 col-12">
+                <div className="col-lg-2 col-md-1 col-12">
                   <input
                     id="main"
                     type="checkbox"
@@ -139,7 +139,7 @@ const Cart = () => {
                     onClick={() => checkAll(carts)}
                   />
                 </div>
-                <div className="col-lg-3 col-md-3 col-12">
+                <div className="col-lg-2 col-md-3 col-12">
                   <p>Product</p>
                 </div>
                 <div className="col-lg-2 col-md-2 col-12">
@@ -213,14 +213,14 @@ const Cart = () => {
                           <p>₱ {cart.product.prices[cart._doc.productType]}</p>
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
-                          <b>
+                          <p className="fw-bolder">
                             ₱
                             {Math.round(
                               cart.product.prices[cart._doc.productType] *
                                 cart._doc.quantity *
                                 100
                             ) / 100}
-                          </b>
+                          </p>
                         </div>
                         <div className="col-lg-1 col-md-1 col-12">
                           <button
@@ -289,14 +289,14 @@ const Cart = () => {
                           <p>₱ {cart.product.prices[cart._doc.productType]}</p>
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
-                          <b>
+                          <p className="fw-bolder">
                             ₱
                             {Math.round(
                               cart.product.prices[cart._doc.productType] *
                                 cart._doc.quantity *
                                 100
                             ) / 100}
-                          </b>
+                          </p>
                         </div>
                         <div className="col-lg-1 col-md-1 col-12">
                           <button
