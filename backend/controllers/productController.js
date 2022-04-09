@@ -26,13 +26,13 @@ const getProducts = asyncHandler(async (req, res) => {
       market.averageRatings += reviews[j].rating;
     }
 
-    for (let k = 0; k < orders.length; k++) {
-      if (orders[k].orderStatus === "completed") {
-        for (let l = 0; l < orders[k].quantities.length; l++) {
-          market.sold += orders[k].quantities[l];
-        }
-      }
-    }
+    // for (let k = 0; k < orders.length; k++) {
+    //   if (orders[k].orderStatus === "completed") {
+    //     for (let l = 0; l < orders[k].quantities.length; l++) {
+    //       market.sold += orders[k].quantities[l];
+    //     }
+    //   }
+    // }
 
     if (reviews.length > 0) {
       market.reviewsCount = reviews.length;
