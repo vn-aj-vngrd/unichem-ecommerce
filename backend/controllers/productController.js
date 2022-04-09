@@ -39,7 +39,6 @@ const getProducts = asyncHandler(async (req, res) => {
       market.averageRatings += reviews[j].rating;
     }
 
-    console.log(ordersCount);
     if (ordersCount > 0) {
       for (let k = 0; k < orders.length; k++) {
         if (orders[k].orderStatus === "completed") {
