@@ -6,10 +6,15 @@ import {
   updateCart,
   deleteCart,
 } from "../../features/cart/cartSlice";
+import {
+  setWishlist,
+  resetWishlist,
+} from "../../features/wishlist/wishlistSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import CartSummary from "../../components/CartSummary";
 import Quantity from "../../components/Quantity";
+import Swal from "sweetalert2";
 // import { toast } from "react-toastify";
 
 const Cart = () => {
@@ -32,6 +37,10 @@ const Cart = () => {
     }
 
     dispatch(getCarts());
+
+    return () => {
+      dispatch(resetWishlist());
+    };
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
   const checkoutItems = carts.filter(
@@ -79,6 +88,26 @@ const Cart = () => {
         id: cart._doc._id,
       };
       dispatch(updateCart(cartParams));
+    });
+  };
+
+  const addToWishlist = (id, type) => {
+    const wishlistData = {
+      productID: id,
+      productType: type,
+    };
+    dispatch(setWishlist(wishlistData));
+    Swal.fire({
+      title: "Item was added to your wishlist.",
+      text: "To view your wishlist, please proceed to the wishlist page.",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
+      cancelButtonText: "Close",
+    }).then((result) => {
+      if (result.isConfirmed) navigate("/wishlist");
     });
   };
 
@@ -196,7 +225,12 @@ const Cart = () => {
                         <div className="col-lg-1 col-md-1 col-12">
                           <button
                             className="add-item"
-                            onClick={() => dispatch(deleteCart(cart._doc._id))}
+                            onClick={() =>
+                              addToWishlist(
+                                cart._doc.productID,
+                                cart._doc.productType
+                              )
+                            }
                           >
                             <i className="lni lni-heart"></i>
                           </button>
@@ -236,7 +270,7 @@ const Cart = () => {
                           <p className="product-des">
                             <span>
                               <em>Category: </em> {cart.product.category}
-                          </span>
+                            </span>
                             <span>
                               <em>Type / Color:</em>{" "}
                               {cart.product.types[cart._doc.productType]}
@@ -267,7 +301,7 @@ const Cart = () => {
                         <div className="col-lg-1 col-md-1 col-12">
                           <button
                             className="add-item"
-                            onClick={() => dispatch(deleteCart(cart._doc._id))}
+                            onClick={() => dispatch(addToWishlist(cart))}
                           >
                             <i className="lni lni-heart"></i>
                           </button>
@@ -275,7 +309,12 @@ const Cart = () => {
                         <div className="col-lg-1 col-md-1 col-12">
                           <button
                             className="remove-item"
-                            onClick={() => dispatch(deleteCart(cart._doc._id))}
+                            onClick={() =>
+                              addToWishlist(
+                                cart._doc.productID,
+                                cart._doc.productType
+                              )
+                            }
                           >
                             <i className="lni lni-close"></i>
                           </button>
