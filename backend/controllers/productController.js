@@ -11,30 +11,44 @@ const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find().sort({
     createdAt: "desc",
   });
+  const productCount = await Product.count();
+
+  if (productCount < 0) {
+    res.status(200).json({});
+  }
 
   let retData = [];
   for (let i = 0; i < products.length; i++) {
+    const reviews = await Review.find({ productID: products[i]._id });
+    const orders = await Order.find({ productID: products[i]._id });
+
+    const reviewCount = await Review.find({
+      productID: products[i]._id,
+    }).count();
+    const ordersCount = await Order.find({
+      productID: products[i]._id,
+    }).count();
+
     let market = {
       reviewsCount: 0,
       averageRatings: 0,
       sold: 0,
     };
-    const reviews = await Review.find({ productID: products[i]._id });
-    const orders = await Order.find({ products: products[i]._id });
 
     for (let j = 0; j < reviews.length; j++) {
       market.averageRatings += reviews[j].rating;
     }
 
-    // for (let k = 0; k < orders.length; k++) {
-    //   if (orders[k].orderStatus === "completed") {
-    //     for (let l = 0; l < orders[k].quantities.length; l++) {
-    //       market.sold += orders[k].quantities[l];
-    //     }
-    //   }
-    // }
+    console.log(ordersCount);
+    if (ordersCount > 0) {
+      for (let k = 0; k < orders.length; k++) {
+        if (orders[k].orderStatus === "completed") {
+          market.sold += orders[k].quantity;
+        }
+      }
+    }
 
-    if (reviews.length > 0) {
+    if (reviewCount > 0) {
       market.reviewsCount = reviews.length;
       market.averageRatings = market.averageRatings / reviews.length;
     }

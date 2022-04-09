@@ -8,24 +8,28 @@ const orderSchema = mongoose.Schema(
       ref: "User",
     },
     productID: {
-      types: {
-        type: Array,
-        required: [true, "Product ID is required"],
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Product",
+    },
+    orderID: {
+      type: String,
+      required: true,
+      ref: "Product",
     },
     productType: {
       types: {
-        type: Array,
+        type: Number,
         required: [true, "Product Type is required"],
       },
     },
-    reviewed: {
-      type: Array,
-      required: true,
-    },
-    quantities: {
-      type: Array,
+    quantity: {
+      type: Number,
       required: [true, "Quantity is required."],
+    },
+    reviewed: {
+      type: Boolean,
+      required: [true, "Reviewed is required."],
     },
     orderDate: {
       type: Date,
