@@ -29,7 +29,7 @@ const Checkout = () => {
       Swal.fire({
         title: "Cannot Checkout",
         icon: "error",
-        text: "You don't have any item in your cart.",
+        text: "You don't have any items in your cart.",
       });
       navigate("/cart");
     }
@@ -41,8 +41,6 @@ const Checkout = () => {
         icon: "success",
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        timer: 2000,
-        timerProgressBar: true,
       });
       navigate("/cart");
     }
