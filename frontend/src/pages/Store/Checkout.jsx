@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
-import { resetCart } from "../../features/cart/cartSlice.js";
+import { resetCart, getCarts } from "../../features/cart/cartSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
@@ -25,14 +25,7 @@ const Checkout = () => {
       navigate("/");
     }
 
-    if (carts.length < 1) {
-      Swal.fire({
-        title: "Cannot Checkout",
-        icon: "error",
-        text: "You don't have any items in your cart.",
-      });
-      navigate("/cart");
-    }
+    dispatch(getCarts());
 
     if (isOrderSuccess) {
       Swal.fire({
@@ -58,7 +51,16 @@ const Checkout = () => {
       dispatch(resetOrder());
       dispatch(resetCart());
     };
-  }, [user, carts, navigate, isOrderSuccess, isOrderError, dispatch]);
+  }, [user, navigate, isOrderSuccess, isOrderError, dispatch]);
+
+  if (localStorage.getItem("cartCount") < 1) {
+    Swal.fire({
+      title: "Cannot Checkout",
+      icon: "error",
+      text: "You don't have any items in your cart.",
+    });
+    navigate("/cart");
+  }
 
   const checked = carts.reduce((count, cart) => {
     if (cart._doc.checked) {
@@ -139,7 +141,7 @@ const Checkout = () => {
 
     Swal.fire({
       title: "Are you sure to checkout?",
-      text: "Select YES to proceed, otherwise select NO.",
+      text: "Select YES to proceed, otherwise select CANCEL.",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#f44336",
