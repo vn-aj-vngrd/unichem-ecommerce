@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
-// import { resetCart } from "../../features/cart/cartSlice.js";
+import { getCarts } from "../../features/cart/cartSlice.js";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
@@ -30,8 +30,9 @@ const Checkout = () => {
       navigate("/cart");
     }
 
+    dispatch(getCarts());
+
     return () => {
-      // dispatch(resetCart());
       dispatch(resetOrder());
     };
   }, [user, carts, navigate, dispatch]);
@@ -45,6 +46,8 @@ const Checkout = () => {
 
   let subtotal = 0;
   let orders;
+
+  console.log(checked);
 
   if (checked > 0) {
     subtotal = carts.reduce((sum, cart) => {
@@ -102,10 +105,29 @@ const Checkout = () => {
           totalPrice: 0,
         };
       });
+
+      Swal.fire({
+        title: "Order is being processed",
+        text: "Please wait for the confirmation of your order.",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+      });
+      navigate("/cart");
       return;
     }
 
-    orders.forEach((cart) => {});
+    carts.forEach((cart) => {});
+
+    Swal.fire({
+      title: "Order is being processed",
+      text: "Please wait for the confirmation of your order.",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+    });
   };
 
   return (
