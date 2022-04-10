@@ -3878,13 +3878,8 @@ ol {
   margin: 0;
 }
 
-@media (max-width: 991px) {
-  .quantity-control {
-    border-radius: 4px;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    border: 1px solid #e1e1e1;
+@media (min-width: 768px ) and (max-width: 991px) {
+  .cart {
     height: 90px;
   }
 }

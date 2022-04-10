@@ -207,6 +207,7 @@ const Cart = () => {
                             cartID={cart._doc._id}
                             max={cart.product.quantities[cart._doc.productType]}
                             quantity={cart._doc.quantity}
+                            type="cart"
                           />
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
