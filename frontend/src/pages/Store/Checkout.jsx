@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { resetCart } from "../../features/cart/cartSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ const Checkout = () => {
   const { carts, isCartError, isCartSuccess, cartMessage } = useSelector(
     (state) => state.cart
   );
+
+  const [payment, setPayment] = useState("");
 
   useEffect(() => {
     document.title = "Unichem Store | Cart";
@@ -64,6 +67,24 @@ const Checkout = () => {
 
   const shippingFee = 0;
   const total = subtotal + shippingFee;
+
+  const onSelectPayment = (e) => {
+    setPayment(e.target.value);
+  };
+
+  const onCheckout = () => {
+    if (payment === "") {
+      Swal.fire({
+        title: "Failed to Checkout",
+        icon: "error",
+        text: "Please select a payment method.",
+      });
+      return;
+    }
+
+    const cartIds = carts.map((cart) => cart._doc._id);
+
+  };
 
   return (
     <>
@@ -244,16 +265,18 @@ const Checkout = () => {
                           </>
                           <div className="cart-list-head accordion-bodybox-shadow">
                             <div className="cart-single-list">
-                              <div class="button">
-                                <button
-                                  class="btn"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#collapseAddress"
-                                  aria-expanded="false"
-                                  aria-controls="collapseAddress"
-                                >
-                                  next step
-                                </button>
+                              <div className="col-md-12">
+                                <div className="steps-form-btn button">
+                                  <button
+                                    className="btn"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseAddress"
+                                    aria-expanded="false"
+                                    aria-controls="collapsePayment"
+                                  >
+                                    next step
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -281,7 +304,7 @@ const Checkout = () => {
                       <div className="row">
                         <div className="addresses">
                           <div className="profile-address">
-                            <ul className="">
+                            <ul>
                               <li className="address-header">
                                 <h6>
                                   {
@@ -315,24 +338,27 @@ const Checkout = () => {
                                   {user.address[user.primaryAddress].postalCode}
                                 </p>
                               </li>
-                              <br></br>
-                              <li className="address-options button">
-                                <Link
-                                  to="/account/address"
-                                  className="btn set-default-btn"
-                                >
-                                  Change Address
-                                </Link>
-                                <button
-                                  class="btn"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#collapsePayment"
-                                  aria-expanded="false"
-                                  aria-controls="collapsePayment"
-                                >
-                                  next step
-                                </button>
-                              </li>
+
+                              <div className="col-md-12">
+                                <div className="steps-form-btn button">
+                                  <Link
+                                    to="/account/address"
+                                    className="btn btn-alt me-2"
+                                  >
+                                    Change Address
+                                  </Link>
+
+                                  <button
+                                    className="btn"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapsePayment"
+                                    aria-expanded="false"
+                                    aria-controls="collapsePayment"
+                                  >
+                                    next step
+                                  </button>
+                                </div>
+                              </div>
                             </ul>
                           </div>
                         </div>
@@ -368,9 +394,11 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-1"
+                                  value="cod"
+                                  onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-1">
-                                  <p>Standard payment</p>
+                                  <p>COD</p>
                                 </label>
                               </div>
                               <div className="single-payment-option">
@@ -378,9 +406,11 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-2"
+                                  value="in-store"
+                                  onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-2">
-                                  <p>Standard payment</p>
+                                  <p>In Store</p>
                                 </label>
                               </div>
                               <div className="single-payment-option">
@@ -388,9 +418,11 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-3"
+                                  value="bank-transfer"
+                                  onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-3">
-                                  <p>Standard payment</p>
+                                  <p>Bank Transfer</p>
                                 </label>
                               </div>
                               <div className="single-payment-option">
@@ -398,17 +430,22 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-4"
+                                  disabled
                                 />
                                 <label htmlFor="payment-4">
-                                  <p>Standard payment</p>
+                                  <p>Not Available</p>
                                 </label>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="button mt-4">
-                        <button class="btn">checkout</button>
+                      <div className="col-md-12">
+                        <div className="steps-form-btn button">
+                          <button className="btn" onClick={onCheckout}>
+                            checkout
+                          </button>
+                        </div>
                       </div>
                     </section>
                   </li>

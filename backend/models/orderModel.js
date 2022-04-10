@@ -51,6 +51,10 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: [true, "Order Status is required."],
     },
+    paymentMethod: {
+      type: String,
+      required: [true, "Payment Method is required."],
+    },
   },
   {
     timestamps: true,
