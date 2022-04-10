@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
+import { resetCart } from "../../features/cart/cartSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
@@ -31,6 +32,7 @@ const Checkout = () => {
 
     return () => {
       dispatch(resetOrder());
+      dispatch(resetCart());
     };
   }, [user, carts, navigate, dispatch]);
 
@@ -122,7 +124,6 @@ const Checkout = () => {
         title: "Order is being processed",
         text: "Please wait for the confirmation of your order.",
         icon: "success",
-        showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
       });
