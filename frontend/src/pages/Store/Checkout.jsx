@@ -137,39 +137,51 @@ const Checkout = () => {
       orderline: [],
     };
 
-    if (checked > 0 && orders) {
-      orders.forEach((order) => {
-        const orderline = {
-          cartID: order._doc._id,
-          productID: order.product._id,
-          productName: order.product.productName,
-          productType: order.product.types[order._doc.productType],
-          quantity: order._doc.quantity,
-          price: order.product.prices[order._doc.productType],
-          reviewed: false,
-        };
-        orderData.orderline.push(orderline);
-      });
+    Swal.fire({
+      title: "Are you sure to checkout?",
+      text: "Select YES to proceed, otherwise select NO.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (checked > 0 && orders) {
+          orders.forEach((order) => {
+            const orderline = {
+              cartID: order._doc._id,
+              productID: order.product._id,
+              productName: order.product.productName,
+              productType: order.product.types[order._doc.productType],
+              quantity: order._doc.quantity,
+              price: order.product.prices[order._doc.productType],
+              reviewed: false,
+            };
+            orderData.orderline.push(orderline);
+          });
 
-      dispatch(setOrder(orderData));
+          dispatch(setOrder(orderData));
 
-      return;
-    }
+          return;
+        }
 
-    carts.forEach((cart) => {
-      const orderline = {
-        cartID: cart._doc._id,
-        productID: cart.product.id,
-        productName: cart.product.productName,
-        productType: cart.product.productType[cart._doc.productType],
-        quantity: cart._doc.quantity,
-        price: cart.product.prices[cart._doc.productType],
-        reviewed: false,
-      };
-      orderData.orderline.push(orderline);
+        carts.forEach((cart) => {
+          const orderline = {
+            cartID: cart._doc._id,
+            productID: cart.product.id,
+            productName: cart.product.productName,
+            productType: cart.product.productType[cart._doc.productType],
+            quantity: cart._doc.quantity,
+            price: cart.product.prices[cart._doc.productType],
+            reviewed: false,
+          };
+          orderData.orderline.push(orderline);
+        });
+
+        dispatch(setOrder(orderData));
+      }
     });
-
-    dispatch(setOrder(orderData));
   };
 
   return (

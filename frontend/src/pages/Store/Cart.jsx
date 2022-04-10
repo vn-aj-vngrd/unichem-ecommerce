@@ -102,8 +102,8 @@ const Cart = () => {
       text: "To view your wishlist, please proceed to the wishlist page.",
       icon: "success",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
       confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
       cancelButtonText: "Close",
     }).then((result) => {

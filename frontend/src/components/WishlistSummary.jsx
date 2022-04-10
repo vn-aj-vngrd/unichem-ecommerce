@@ -21,8 +21,8 @@ const WishlistSummary = ({ wishlists, count }) => {
       text: "Select YES to proceed, otherwise select NO.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
@@ -52,8 +52,8 @@ const WishlistSummary = ({ wishlists, count }) => {
       text: "To checkout, please proceed to the cart page.",
       icon: "success",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
       confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
       cancelButtonText: "Close",
     }).then((result) => {
