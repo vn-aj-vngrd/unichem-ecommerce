@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
-import { resetCart } from "../../features/cart/cartSlice.js";
+// import { resetCart } from "../../features/cart/cartSlice.js";
+import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
@@ -31,6 +32,7 @@ const Checkout = () => {
 
     return () => {
       // dispatch(resetCart());
+      dispatch(resetOrder());
     };
   }, [user, carts, navigate, dispatch]);
 
@@ -42,6 +44,8 @@ const Checkout = () => {
   }, 0);
 
   let subtotal = 0;
+  let orders;
+
   if (checked > 0) {
     subtotal = carts.reduce((sum, cart) => {
       if (
@@ -54,6 +58,10 @@ const Checkout = () => {
       }
       return sum;
     }, 0);
+
+    orders = carts.filter((cart) => {
+      return cart._doc.checked === true;
+    });
   }
 
   subtotal = carts.reduce((sum, cart) => {
@@ -82,8 +90,19 @@ const Checkout = () => {
       return;
     }
 
-    const cartIds = carts.map((cart) => cart._doc._id);
+    const orderData = {
+      productID: "",
+      productType: "",
+      quantity: "",
+      reviewed: false,
+    };
 
+    if (checked > 0 && orders) {
+      orders.forEach((order) => {});
+      return;
+    }
+
+    orders.forEach((cart) => {});
   };
 
   return (
@@ -266,7 +285,7 @@ const Checkout = () => {
                           <div className="cart-list-head accordion-bodybox-shadow">
                             <div className="cart-single-list">
                               <div className="col-md-12">
-                                <div className="steps-form-btn button">
+                                <div className="steps-form-btn-order button">
                                   <button
                                     className="btn"
                                     data-bs-toggle="collapse"

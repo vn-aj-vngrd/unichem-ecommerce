@@ -5016,11 +5016,16 @@ ol {
 }
 
 .checkout-steps-form-style .steps-form-btn {
-  margin-top: 30px;
+  margin-top: 20px;
+}
+
+.checkout-steps-form-style .steps-form-btn-order {
+  margin-top: 0px;
 }
 
 @media (max-width: 767px) {
-  .checkout-steps-form-style .steps-form-btn .btn {
+  .checkout-steps-form-style .steps-form-btn .btn,
+  .checkout-steps-form-style .steps-form-btn-order .btn {
     width: 100%;
     margin: 0;
     margin-bottom: 10px;

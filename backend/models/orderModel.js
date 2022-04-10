@@ -29,19 +29,12 @@ const orderSchema = mongoose.Schema(
     },
     reviewed: {
       type: Boolean,
-      required: [true, "Reviewed is required."],
-    },
-    orderDate: {
-      type: Date,
-      required: [true, "Order Date is required."],
     },
     shippingDate: {
       type: Date,
-      required: [true, "Shipping Date is required."],
     },
     receivedDate: {
       type: Date,
-      required: [true, "Received Date is required."],
     },
     totalPrice: {
       type: Number,
