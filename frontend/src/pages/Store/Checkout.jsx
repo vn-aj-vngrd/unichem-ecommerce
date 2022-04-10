@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
-import { getCarts } from "../../features/cart/cartSlice.js";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
@@ -30,8 +29,6 @@ const Checkout = () => {
       navigate("/cart");
     }
 
-    dispatch(getCarts());
-
     return () => {
       dispatch(resetOrder());
     };
@@ -47,7 +44,7 @@ const Checkout = () => {
   let subtotal = 0;
   let orders;
 
-  console.log(checked);
+  // console.log(checked);
 
   if (checked > 0) {
     subtotal = carts.reduce((sum, cart) => {
@@ -93,18 +90,33 @@ const Checkout = () => {
       return;
     }
 
+    let orderData = {
+      order: {
+        shippingFee: 0,
+        shippingDate: new Date(new Date().setDate(new Date().getDate() + 5)),
+        receivedDate: new Date(new Date().setDate(new Date().getDate() + 20)),
+        totalPrice: total,
+        orderStatus: "Pending",
+        paymentMethod: "COD",
+      },
+      orderline: [],
+    };
+
     if (checked > 0 && orders) {
       orders.forEach((order) => {
-        const orderData = {
-          productID: order._doc.id,
-          productType: order._doc.productType,
+        const orderline = {
+          cartID: order._doc._id,
+          productID: order.product._id,
+          productName: order.product.productName,
+          productType: order.product.types[order._doc.productType],
           quantity: order._doc.quantity,
+          price: order.product.quantities[order._doc.productType],
           reviewed: false,
-          shippingDate: "",
-          receivedDate: "",
-          totalPrice: 0,
         };
+        orderData.orderline.push(orderline);
       });
+
+      dispatch(setOrder(orderData));
 
       Swal.fire({
         title: "Order is being processed",
@@ -114,11 +126,25 @@ const Checkout = () => {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
       });
+
       navigate("/cart");
       return;
     }
 
-    carts.forEach((cart) => {});
+    carts.forEach((cart) => {
+      const orderline = {
+        cartID: cart._doc._id,
+        productID: cart.product.id,
+        productName: cart.product.productName,
+        productType: cart.product.productType[cart._doc.productType],
+        quantity: cart._doc.quantity,
+        price: cart.product.quantities[cart._doc.productType],
+        reviewed: false,
+      };
+      orderData.orderline.push(orderline);
+    });
+
+    dispatch(setOrder(orderData));
 
     Swal.fire({
       title: "Order is being processed",
@@ -128,6 +154,8 @@ const Checkout = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
     });
+
+    navigate("/cart");
   };
 
   return (

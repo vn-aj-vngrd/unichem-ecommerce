@@ -1,10 +1,12 @@
 const asyncHandler = require("express-async-handler");
 
 const Order = require("../models/orderModel");
+const Orderline = require("../models/orderlineModel");
 const Product = require("../models/productModel");
+const Cart = require("../models/cartModel");
 
 // @desc    Get Orders by user
-// @route   GET /api/Orders
+// @route   GET /api/orders
 // @access  Private
 const getOrders = asyncHandler(async (req, res) => {
   const Orders = await Order.find().sort({
@@ -29,11 +31,11 @@ const getOrders = asyncHandler(async (req, res) => {
     // });
 
     order[key.orderID].push(key);
-    
+
     return order;
   }, {});
 
-  console.log(groupValues)
+  console.log(groupValues);
 
   let retData = Object.keys(groupValues).map((mkey) => {
     let total = 0;
@@ -41,10 +43,10 @@ const getOrders = asyncHandler(async (req, res) => {
       total += order.totalPrice;
     });
 
-    console.log(total)
+    console.log(total);
 
-    return { 
-      orderID: mkey, 
+    return {
+      orderID: mkey,
       createdAt: groupValues[mkey][0].createdAt,
       orderDate: groupValues[mkey][0].orderDate,
       orderStatus: groupValues[mkey][0].orderStatus,
@@ -53,7 +55,7 @@ const getOrders = asyncHandler(async (req, res) => {
       updatedAt: groupValues[mkey][0].updatedAt,
       userID: groupValues[mkey][0].userID,
       orderTotal: total,
-      products: groupValues[mkey]
+      products: groupValues[mkey],
     };
   });
 
@@ -61,7 +63,7 @@ const getOrders = asyncHandler(async (req, res) => {
 });
 
 // @desc    Set Order
-// @route   POST /api/Orders
+// @route   POST /api/orders
 // @access  Private
 const setOrder = asyncHandler(async (req, res) => {
   // Check for user
@@ -70,33 +72,46 @@ const setOrder = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  const userID = req.user._id;
-  const { productID, subject, Order, rating } = req.body;
-
-  // Check if Order exists
-  const OrderExists = await Order.findOne({
-    productID,
-    userID,
+  // Create Order
+  const newOrder = await Order.create({
+    userID: req.user._id,
+    shippingFee: req.body.order.shippingFee,
+    shippingDate: req.body.order.shippingDate,
+    receivedDate: req.body.order.receivedDate,
+    totalPrice: req.body.order.totalPrice,
+    orderStatus: req.body.order.orderStatus,
+    paymentMethod: req.body.order.paymentMethod,
   });
 
-  if (OrderExists) {
-    res.status(400);
-    throw new Error("Order already exists");
+  // Create Orderline
+  let newOrderline = [];
+  for (let i = 0; i < req.body.orderline.length; i++) {
+    const deleteCart = await Cart.findById(req.body.orderline[i].cartID);
+    await deleteCart.remove();
+
+    const orderline = await Orderline.create({
+      orderID: newOrder._id,
+      productID: req.body.orderline[i].productID,
+      productName: req.body.orderline[i].productName,
+      productType: req.body.orderline[i].productType,
+      quantity: req.body.orderline[i].quantity,
+      price: req.body.orderline[i].price,
+      reviewed: req.body.orderline[i].reviewed,
+    });
+
+    newOrderline.push(orderline);
   }
 
-  // If Order does not exist then create.
-  const newOrder = await Order.create({
-    productID,
-    userID,
-    subject,
-    Order,
-    rating,
-  });
-  return res.status(200).json(newOrder);
+  let retData = {
+    order: newOrder,
+    orderline: newOrderline,
+  };
+
+  return res.status(200).json(retData);
 });
 
 // @desc    Update Order
-// @route   PUT /api/Orders/:id
+// @route   PUT /api/orders/:id
 // @access  Private
 const updateOrder = asyncHandler(async (req, res) => {
   const userID = req.user._id;
@@ -134,26 +149,26 @@ const updateOrder = asyncHandler(async (req, res) => {
 });
 
 // @desc    Delete Order
-// @route   DELETE /api/Orders/:id
+// @route   DELETE /api/orders/:id
 // @access  Private
 const deleteOrder = asyncHandler(async (req, res) => {
-  const Order = await Order.findById(req.params.id);
+  const order = await Order.findById(req.params.id);
 
   // Check for Order
-  if (!Order) {
+  if (!order) {
     res.status(400);
     throw new Error("Order not found");
   }
 
   // Make sure the logged in user matches the Order user
-  if (Order.userID.toString() !== req.user.id) {
+  if (order.userID.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
 
   // CHECK IF DATE IS PAST 30
 
-  await Order.remove();
+  await order.remove();
 
   res.status(200).json({ id: req.params.id });
 });

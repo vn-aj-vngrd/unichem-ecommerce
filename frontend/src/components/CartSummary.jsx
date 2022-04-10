@@ -48,7 +48,7 @@ const PricingTable = ({
     }).then((result) => {
       if (result.isConfirmed) {
         navigate("/cart/checkout");
-        console.log(carts);
+        // console.log(carts);
       }
     });
   };

@@ -12,16 +12,24 @@ const orderlineSchema = mongoose.Schema(
       required: true,
       ref: "Product",
     },
+    productName: {
+      type: String,
+      required: [true, "Product Name is required."],
+    },
     productType: {
-      type: Number,
+      type: String,
       required: [true, "Product Type is required."],
     },
     quantity: {
       type: Number,
-      required: [true, "Quantity Type is required."],
+      required: [true, "Quantity is required."],
+    },
+    price: {
+      type: Number,
+      required: [true, "Price is required."],
     },
     reviewed: {
-      type: Booean,
+      type: Boolean,
       required: [true, "Reviewed is required."],
     },
   },
@@ -30,4 +38,4 @@ const orderlineSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Order", orderlineSchema);
+module.exports = mongoose.model("Orderline", orderlineSchema);
