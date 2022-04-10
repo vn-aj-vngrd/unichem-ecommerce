@@ -29,8 +29,8 @@ const Navbar = ({ userType }) => {
 
       return () => {
         dispatch(resetUser());
-        // dispatch(resetWishlist());
-        // dispatch(resetCart());
+        dispatch(resetWishlist());
+        dispatch(resetCart());
       };
     }
   }, [user, dispatch]);
@@ -101,12 +101,12 @@ const Navbar = ({ userType }) => {
                         <button
                           className="lni lni-search-alt nav-search"
                           onClick={onSearch}
-                        ></button>
+                        />
                       ) : (
                         <button
-                          className="lni lni-search-alt nav-search disabled"
+                          className="lni lni-search-alt nav-search"
                           disabled
-                        ></button>
+                        />
                       )}
                     </div>
                   </div>

@@ -43,11 +43,11 @@ const Cart = () => {
     };
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
-  const checkoutItems = carts.filter(
-    (cart) =>
-      cart._doc.checked > 0 && cart.product.quantities[cart._doc.productType]
-  );
-  console.log(checkoutItems);
+  // const checkoutItems = carts.filter(
+  //   (cart) =>
+  //     cart._doc.checked > 0 && cart.product.quantities[cart._doc.productType]
+  // );
+  // console.log(checkoutItems);
 
   const cartCount = carts.reduce((count, cart) => {
     if (cart.product.quantities[cart._doc.productType] > 0) {

@@ -3878,7 +3878,7 @@ ol {
   margin: 0;
 }
 
-@media (min-width: 768px ) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .cart {
     height: 90px;
   }
@@ -4050,7 +4050,7 @@ ol {
   border: none;
 }
 
-.cart-single-list .empty{
+.cart-single-list .empty {
   color: #fff;
   background-color: #9e9e9e;
   font-size: 14px;
@@ -4996,8 +4996,17 @@ ol {
   .single-payment-option
   input[type="radio"]:checked
   + label {
-  border-color: #757575;
+  border-color: #f44336;
+  color: #f44336;
   background-color: #fff;
+}
+
+.checkout-steps-form-style
+  .single-payment-option
+  input[type="radio"]:checked
+  + label
+  p {
+  color: #f44336;
 }
 
 .checkout-steps-form-style .single-payment-option p {

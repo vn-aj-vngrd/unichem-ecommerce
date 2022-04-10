@@ -22,13 +22,39 @@ const Checkout = () => {
       navigate("/");
     }
 
+    if (!carts) {
+      navigate("/cart");
+    }
+
     return () => {
       // dispatch(resetCart());
     };
-  }, [user, navigate, dispatch]);
+  }, [user, carts, navigate, dispatch]);
 
-  const subtotal = carts.reduce((sum, cart) => {
-    if (cart._doc.checked && cart.product.quantities[cart._doc.productType]) {
+  const checked = carts.reduce((count, cart) => {
+    if (cart._doc.checked) {
+      return count + 1;
+    }
+    return count;
+  }, 0);
+
+  let subtotal = 0;
+  if (checked > 0) {
+    subtotal = carts.reduce((sum, cart) => {
+      if (
+        cart._doc.checked &&
+        cart.product.quantities[cart._doc.productType] > 0
+      ) {
+        return (
+          sum + cart._doc.quantity * cart.product.prices[cart._doc.productType]
+        );
+      }
+      return sum;
+    }, 0);
+  }
+
+  subtotal = carts.reduce((sum, cart) => {
+    if (cart.product.quantities[cart._doc.productType] > 0) {
       return (
         sum + cart._doc.quantity * cart.product.prices[cart._doc.productType]
       );
@@ -50,7 +76,7 @@ const Checkout = () => {
                 <ul id="accordionExample">
                   <li>
                     <div
-                      className="title collapsed"
+                      className="title"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseProduct"
                       aria-expanded="false"
@@ -67,76 +93,170 @@ const Checkout = () => {
                       <div className="row">
                         <div>
                           <>
-                            {carts.map((cart) => (
-                              <div
-                                key={cart._doc._id}
-                                className="cart-list-head accordion-bodybox-shadow"
-                              >
-                                <div className="cart-single-list">
-                                  <div className="row align-items-center">
-                                    <div className="col-lg-2 col-md-2 col-12">
-                                      <Link
-                                        to={`/product-details/${cart.product._id}`}
+                            {checked > 0 ? (
+                              <>
+                                {carts.map(
+                                  (cart) =>
+                                    cart._doc.checked && (
+                                      <div
+                                        key={cart._doc._id}
+                                        className="cart-list-head accordion-bodybox-shadow"
                                       >
-                                        <img
-                                          src={cart.product.images[0]}
-                                          alt=""
-                                        />
-                                      </Link>
-                                    </div>
-                                    <div className="col-lg-4 col-md-4 col-12">
-                                      <h5>
-                                        <Link
-                                          to={`/product-details/${cart.product._id}`}
-                                        >
-                                          {cart.product.productName}
-                                        </Link>
-                                      </h5>
-                                      <p className="product-des">
-                                        <span>
-                                          <em>Category: </em>{" "}
-                                          {cart.product.category}
-                                        </span>
-                                        <span>
-                                          <em>Type / Color:</em>{" "}
-                                          {
-                                            cart.product.types[
-                                              cart._doc.productType
-                                            ]
-                                          }
-                                        </span>
-                                      </p>
-                                    </div>
-                                    <div className="col-lg-2 col-md-2 col-12">
-                                      <p>x{cart._doc.quantity}</p>
-                                    </div>
-                                    <div className="col-lg-2 col-md-2 col-12">
-                                      <p>
-                                        ₱{" "}
-                                        {
-                                          cart.product.prices[
-                                            cart._doc.productType
-                                          ]
-                                        }
-                                      </p>
-                                    </div>
-                                    <div className="col-lg-2 col-md-2 col-12">
-                                      <p className="fw-bolder">
-                                        ₱{" "}
-                                        {Math.round(
-                                          cart.product.prices[
-                                            cart._doc.productType
-                                          ] *
-                                            cart._doc.quantity *
-                                            100
-                                        ) / 100}
-                                      </p>
+                                        <div className="cart-single-list">
+                                          <div className="row align-items-center">
+                                            <div className="col-lg-2 col-md-2 col-12">
+                                              <Link
+                                                to={`/product-details/${cart.product._id}`}
+                                              >
+                                                <img
+                                                  src={cart.product.images[0]}
+                                                  alt=""
+                                                />
+                                              </Link>
+                                            </div>
+                                            <div className="col-lg-4 col-md-4 col-12">
+                                              <h5>
+                                                <Link
+                                                  to={`/product-details/${cart.product._id}`}
+                                                >
+                                                  {cart.product.productName}
+                                                </Link>
+                                              </h5>
+                                              <p className="product-des">
+                                                <span>
+                                                  <em>Category: </em>{" "}
+                                                  {cart.product.category}
+                                                </span>
+                                                <span>
+                                                  <em>Type / Color:</em>{" "}
+                                                  {
+                                                    cart.product.types[
+                                                      cart._doc.productType
+                                                    ]
+                                                  }
+                                                </span>
+                                              </p>
+                                            </div>
+                                            <div className="col-lg-2 col-md-2 col-12">
+                                              <p>x{cart._doc.quantity}</p>
+                                            </div>
+                                            <div className="col-lg-2 col-md-2 col-12">
+                                              <p>
+                                                ₱{" "}
+                                                {
+                                                  cart.product.prices[
+                                                    cart._doc.productType
+                                                  ]
+                                                }
+                                              </p>
+                                            </div>
+                                            <div className="col-lg-2 col-md-2 col-12">
+                                              <p className="fw-bolder">
+                                                ₱{" "}
+                                                {Math.round(
+                                                  cart.product.prices[
+                                                    cart._doc.productType
+                                                  ] *
+                                                    cart._doc.quantity *
+                                                    100
+                                                ) / 100}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )
+                                )}
+                              </>
+                            ) : (
+                              <>
+                                {carts.map((cart) => (
+                                  <div
+                                    key={cart._doc._id}
+                                    className="cart-list-head accordion-bodybox-shadow"
+                                  >
+                                    <div className="cart-single-list">
+                                      <div className="row align-items-center">
+                                        <div className="col-lg-2 col-md-2 col-12">
+                                          <Link
+                                            to={`/product-details/${cart.product._id}`}
+                                          >
+                                            <img
+                                              src={cart.product.images[0]}
+                                              alt=""
+                                            />
+                                          </Link>
+                                        </div>
+                                        <div className="col-lg-4 col-md-4 col-12">
+                                          <h5>
+                                            <Link
+                                              to={`/product-details/${cart.product._id}`}
+                                            >
+                                              {cart.product.productName}
+                                            </Link>
+                                          </h5>
+                                          <p className="product-des">
+                                            <span>
+                                              <em>Category: </em>{" "}
+                                              {cart.product.category}
+                                            </span>
+                                            <span>
+                                              <em>Type / Color:</em>{" "}
+                                              {
+                                                cart.product.types[
+                                                  cart._doc.productType
+                                                ]
+                                              }
+                                            </span>
+                                          </p>
+                                        </div>
+                                        <div className="col-lg-2 col-md-2 col-12">
+                                          <p>x{cart._doc.quantity}</p>
+                                        </div>
+                                        <div className="col-lg-2 col-md-2 col-12">
+                                          <p>
+                                            ₱{" "}
+                                            {
+                                              cart.product.prices[
+                                                cart._doc.productType
+                                              ]
+                                            }
+                                          </p>
+                                        </div>
+                                        <div className="col-lg-2 col-md-2 col-12">
+                                          <p className="fw-bolder">
+                                            ₱{" "}
+                                            {Math.round(
+                                              cart.product.prices[
+                                                cart._doc.productType
+                                              ] *
+                                                cart._doc.quantity *
+                                                100
+                                            ) / 100}
+                                          </p>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
-                            ))}
+                                ))}
+                              </>
+                            )}
                           </>
+                          <div className="cart-list-head accordion-bodybox-shadow">
+                            <div className="cart-single-list">
+                              <div class="button">
+                                <button
+                                  class="btn"
+                                  data-bs-toggle="collapse"
+                                  data-bs-target="#collapseAddress"
+                                  aria-expanded="false"
+                                  aria-controls="collapseAddress"
+                                >
+                                  next step
+                                </button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </section>
@@ -155,7 +275,7 @@ const Checkout = () => {
                     <section
                       className="profile-address-section collapse"
                       id="collapseAddress"
-                      aria-labelledby="headingOne"
+                      aria-labelledby="headingTwo"
                       data-bs-parent="#accordionExample"
                     >
                       <div className="row">
@@ -197,12 +317,20 @@ const Checkout = () => {
                               </li>
                               <br></br>
                               <li className="address-options button">
-                                <button
-                                  to="/checkout"
-                                  // onClick={() => onSubmitDefault(index)}
+                                <Link
+                                  to="/account/address"
                                   className="btn set-default-btn"
                                 >
                                   Change Address
+                                </Link>
+                                <button
+                                  class="btn"
+                                  data-bs-toggle="collapse"
+                                  data-bs-target="#collapsePayment"
+                                  aria-expanded="false"
+                                  aria-controls="collapsePayment"
+                                >
+                                  next step
                                 </button>
                               </li>
                             </ul>
@@ -211,20 +339,21 @@ const Checkout = () => {
                       </div>
                     </section>
                   </li>
+
                   <li>
                     <div
                       className="title collapsed"
                       data-bs-toggle="collapse"
-                      data-bs-target="#collapseTwo"
+                      data-bs-target="#collapsePayment"
                       aria-expanded="false"
-                      aria-controls="collapseTwo"
+                      aria-controls="collapsThree"
                     >
                       Payment Method
                     </div>
                     <section
                       className="checkout-steps-form-content collapse"
-                      id="collapseTwo"
-                      aria-labelledby="headingTwo"
+                      id="collapsePayment"
+                      aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
                       <div className="row">
@@ -278,6 +407,9 @@ const Checkout = () => {
                           </div>
                         </div>
                       </div>
+                      <div className="button mt-4">
+                        <button class="btn">checkout</button>
+                      </div>
                     </section>
                   </li>
                 </ul>
@@ -303,21 +435,53 @@ const Checkout = () => {
                 <div className="checkout-sidebar-price-table mt-3">
                   <h5 className="title">Order Summary</h5>
                   <div className="sub-total-price">
-                    {carts.map((cart) => (
-                      <div key={cart._doc._id} className="total-price">
+                    {checked > 0 ? (
+                      <>
+                        {carts.map(
+                          (cart) =>
+                            cart._doc.checked && (
+                              <div key={cart._doc._id} className="total-price">
+                                {" "}
+                                <p className="value">
+                                  {cart.product.productName}
+                                </p>
+                                <p className="price">
+                                  {" "}
+                                  ₱{" "}
+                                  {Math.round(
+                                    cart.product.prices[cart._doc.productType] *
+                                      cart._doc.quantity *
+                                      100
+                                  ) / 100}
+                                </p>
+                              </div>
+                            )
+                        )}{" "}
+                      </>
+                    ) : (
+                      <>
                         {" "}
-                        <p className="value">{cart.product.productName}</p>
-                        <p className="price">
-                          {" "}
-                          ₱{" "}
-                          {Math.round(
-                            cart.product.prices[cart._doc.productType] *
-                              cart._doc.quantity *
-                              100
-                          ) / 100}
-                        </p>
-                      </div>
-                    ))}
+                        <>
+                          {carts.map((cart) => (
+                            <div key={cart._doc._id} className="total-price">
+                              {" "}
+                              <p className="value">
+                                {cart.product.productName}
+                              </p>
+                              <p className="price">
+                                {" "}
+                                ₱{" "}
+                                {Math.round(
+                                  cart.product.prices[cart._doc.productType] *
+                                    cart._doc.quantity *
+                                    100
+                                ) / 100}
+                              </p>
+                            </div>
+                          ))}{" "}
+                        </>
+                      </>
+                    )}
                   </div>
 
                   <h5 className="title"> </h5>
@@ -338,13 +502,9 @@ const Checkout = () => {
                   <h5 className="title"> </h5>
                   <div className="sub-total-price">
                     <div className="total-price">
-                      <p className="value">Order Total:</p>
-                      <p className="price">₱ {total}</p>
+                      <p className="value fw-bolder">Order Total:</p>
+                      <p className="price fw-bolder">₱ {total}</p>
                     </div>
-                  </div>
-
-                  <div className="price-table-btn button">
-                    <button className="btn">Checkout</button>
                   </div>
                 </div>
               </div>
