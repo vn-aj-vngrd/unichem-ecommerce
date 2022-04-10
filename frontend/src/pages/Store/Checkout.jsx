@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
-import { resetCart } from "../../features/cart/cartSlice.js";
+import { getCarts, resetCart } from "../../features/cart/cartSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
@@ -120,7 +120,7 @@ const Checkout = () => {
           productName: order.product.productName,
           productType: order.product.types[order._doc.productType],
           quantity: order._doc.quantity,
-          price: order.product.quantities[order._doc.productType],
+          price: order.product.prices[order._doc.productType],
           reviewed: false,
         };
         orderData.orderline.push(orderline);
@@ -147,7 +147,7 @@ const Checkout = () => {
         productName: cart.product.productName,
         productType: cart.product.productType[cart._doc.productType],
         quantity: cart._doc.quantity,
-        price: cart.product.quantities[cart._doc.productType],
+        price: cart.product.prices[cart._doc.productType],
         reviewed: false,
       };
       orderData.orderline.push(orderline);
