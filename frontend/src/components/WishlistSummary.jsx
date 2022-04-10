@@ -33,16 +33,19 @@ const WishlistSummary = ({ wishlists, count }) => {
   };
 
   const addAlltoCart = () => {
-    for (let i = 0; i < wishlists.length; i++) {
-      const cartData = {
-        productID: wishlists[i]._doc.productID,
-        productType: wishlists[i]._doc.productType,
-        quantity: 1,
-        max: wishlists[i].product.quantities[wishlists[i]._doc.productType],
-      };
-      dispatch(setCart(cartData));
+    wishlists.forEach((wishlist) => {
+      if (wishlist.product.quantities[wishlist._doc.productType] > 0) {
+        const cartData = {
+          productID: wishlist._doc.productID,
+          productType: wishlist._doc.productType,
+          quantity: 1,
+          max: wishlist.product.quantities[wishlist._doc.productType],
+        };
+        dispatch(setCart(cartData));
+      }
+
       // console.log(cartData);
-    }
+    });
 
     Swal.fire({
       title: "Items were added to your cart.",

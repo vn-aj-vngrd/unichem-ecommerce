@@ -27,6 +27,10 @@ const Wishlist = () => {
     }
 
     dispatch(getWishlists());
+
+    return () => {
+      
+    };
   }, [user, navigate, isWishlistError, wishlistMessage, dispatch]);
 
   if (isWishlistLoading) {

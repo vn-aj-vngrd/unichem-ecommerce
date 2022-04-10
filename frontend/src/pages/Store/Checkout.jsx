@@ -14,6 +14,8 @@ const Checkout = () => {
 
   const { carts } = useSelector((state) => state.cart);
 
+  const { isOrderSuccess, isOrderError } = useSelector((state) => state.orders);
+
   const [payment, setPayment] = useState("");
 
   useEffect(() => {
@@ -24,6 +26,33 @@ const Checkout = () => {
     }
 
     if (carts.length < 1) {
+      Swal.fire({
+        title: "Cannot Checkout",
+        icon: "error",
+        text: "You don't have any item in your cart.",
+      });
+      navigate("/cart");
+    }
+
+    if (isOrderSuccess) {
+      Swal.fire({
+        title: "Order is being processed",
+        text: "Please wait for the confirmation of your order.",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      navigate("/cart");
+    }
+
+    if (isOrderError) {
+      Swal.fire({
+        title: "Failed to Checkout",
+        icon: "error",
+        text: "There is a problem with your order process, please try again",
+      });
       navigate("/cart");
     }
 
@@ -31,7 +60,7 @@ const Checkout = () => {
       dispatch(resetOrder());
       dispatch(resetCart());
     };
-  }, [user, carts, navigate, dispatch]);
+  }, [user, carts, navigate, isOrderSuccess, isOrderError, dispatch]);
 
   const checked = carts.reduce((count, cart) => {
     if (cart._doc.checked) {
@@ -42,8 +71,6 @@ const Checkout = () => {
 
   let subtotal = 0;
   let orders;
-
-  // console.log(checked);
 
   if (checked > 0) {
     subtotal = carts.reduce((sum, cart) => {
@@ -128,15 +155,6 @@ const Checkout = () => {
 
       dispatch(setOrder(orderData));
 
-      Swal.fire({
-        title: "Order is being processed",
-        text: "Please wait for the confirmation of your order.",
-        icon: "success",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-      });
-
-      navigate("/cart");
       return;
     }
 
@@ -154,17 +172,6 @@ const Checkout = () => {
     });
 
     dispatch(setOrder(orderData));
-
-    Swal.fire({
-      title: "Order is being processed",
-      text: "Please wait for the confirmation of your order.",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-    });
-
-    navigate("/cart");
   };
 
   return (
