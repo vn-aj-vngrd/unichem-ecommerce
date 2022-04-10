@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
 import { resetCart } from "../../features/cart/cartSlice.js";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,7 +23,7 @@ const Checkout = () => {
       navigate("/");
     }
 
-    if (!carts) {
+    if (carts.length < 1) {
       navigate("/cart");
     }
 
@@ -90,6 +89,17 @@ const Checkout = () => {
       return;
     }
 
+    if (subtotal === 0) {
+      Swal.fire({
+        title: "Failed to Checkout",
+        icon: "error",
+        text: "Please add an available item to your cart.",
+      });
+
+      navigate("/cart");
+      return;
+    }
+
     let orderData = {
       order: {
         shippingFee: 0,
@@ -97,7 +107,7 @@ const Checkout = () => {
         receivedDate: new Date(new Date().setDate(new Date().getDate() + 20)),
         totalPrice: total,
         orderStatus: "Pending",
-        paymentMethod: "COD",
+        paymentMethod: payment,
       },
       orderline: [],
     };
