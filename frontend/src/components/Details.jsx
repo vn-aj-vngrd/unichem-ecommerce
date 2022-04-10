@@ -49,15 +49,45 @@ const Details = ({ product }) => {
   useEffect(() => {
     if (isCartError) {
       Swal.fire({
-        title: "Item could not be added to cart",
+        title: "Failed to add item to cart",
         icon: "error",
-        text: "You may have reached the maximum product quantity to be added to your cart.",
+        text: "You may have exceed your purchase limit.",
+      });
+    }
+
+    if (isCartSuccess) {
+      Swal.fire({
+        title: "Item added to your cart.",
+        text: "To checkout, please proceed to the cart page.",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#f44336",
+        cancelButtonColor: "#424242",
+        confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
+        cancelButtonText: "Close",
+      }).then((result) => {
+        if (result.isConfirmed) navigate("/cart");
+      });
+    }
+
+    if (isWishlistSuccess) {
+      Swal.fire({
+        title: "Item added to your wishlist.",
+        text: "To view your wishlist, please proceed to the wishlist page.",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#f44336",
+        cancelButtonColor: "#424242",
+        confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
+        cancelButtonText: "Close",
+      }).then((result) => {
+        if (result.isConfirmed) navigate("/wishlist");
       });
     }
 
     if (isWishlistError) {
       Swal.fire({
-        title: "Item could not be added to wishlist",
+        title: "Failed to add item to wishlist",
         icon: "error",
         text: "Please try again later.",
       });
@@ -70,6 +100,8 @@ const Details = ({ product }) => {
   }, [
     isCartError,
     cartMessage,
+    isCartSuccess,
+    isWishlistSuccess,
     isWishlistLoading,
     isWishlistError,
     wishlistMessage,
@@ -93,18 +125,6 @@ const Details = ({ product }) => {
     };
 
     dispatch(setCart(cartData));
-    Swal.fire({
-      title: "Item was added to your cart.",
-      text: "To checkout, please proceed to the cart page.",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: "#f44336",
-      cancelButtonColor: "#424242",
-      confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
-      cancelButtonText: "Close",
-    }).then((result) => {
-      if (result.isConfirmed) navigate("/cart");
-    });
   };
 
   const addToWishlist = (e) => {
@@ -115,18 +135,6 @@ const Details = ({ product }) => {
     };
 
     dispatch(setWishlist(wishlistData));
-    Swal.fire({
-      title: "Item was added to your wishlist.",
-      text: "To view your wishlist, please proceed to the wishlist page.",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: "#f44336",
-      cancelButtonColor: "#424242",
-      confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
-      cancelButtonText: "Close",
-    }).then((result) => {
-      if (result.isConfirmed) navigate("/wishlist");
-    });
   };
 
   if (isCartLoading || isWishlistLoading) {

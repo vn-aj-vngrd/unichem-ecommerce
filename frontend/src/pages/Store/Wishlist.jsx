@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getWishlists } from "../../features/wishlist/wishlistSlice";
+import { getWishlists, resetWishlist } from "../../features/wishlist/wishlistSlice";
+import { resetCart } from "../../features/cart/cartSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import WishlistRow from "../../components/WishlistRow";
@@ -28,7 +29,10 @@ const Wishlist = () => {
 
     dispatch(getWishlists());
 
-    return () => {};
+    return () => {
+      dispatch(resetCart());
+      dispatch(resetWishlist());
+    };
   }, [user, navigate, isWishlistError, wishlistMessage, dispatch]);
 
   if (isWishlistLoading) {

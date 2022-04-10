@@ -5,6 +5,7 @@ import {
   getCarts,
   updateCart,
   deleteCart,
+  resetCart,
 } from "../../features/cart/cartSlice";
 import {
   setWishlist,
@@ -40,6 +41,7 @@ const Cart = () => {
 
     return () => {
       dispatch(resetWishlist());
+      dispatch(resetCart());
     };
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
