@@ -13,9 +13,7 @@ const Checkout = () => {
 
   const { user } = useSelector((state) => state.auth);
 
-  const { carts, isCartError, isCartSuccess, cartMessage } = useSelector(
-    (state) => state.cart
-  );
+  const { carts } = useSelector((state) => state.cart);
 
   const [payment, setPayment] = useState("");
 
