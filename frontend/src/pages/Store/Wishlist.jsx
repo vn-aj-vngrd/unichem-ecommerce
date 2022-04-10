@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getWishlists } from "../../features/wishlist/wishlistSlice";
 import Breadcrumb from "../../components/Breadcrumb";
@@ -28,9 +28,7 @@ const Wishlist = () => {
 
     dispatch(getWishlists());
 
-    return () => {
-      
-    };
+    return () => {};
   }, [user, navigate, isWishlistError, wishlistMessage, dispatch]);
 
   if (isWishlistLoading) {
@@ -83,9 +81,14 @@ const Wishlist = () => {
             <>
               <div className="cart-list-head box-shadow">
                 <div className="cart-single-list">
-                  <div className="d-flex single-cart-product">
-                    <div className="d-flex align-items-center cart-product-left">
-                      There are no items in the wishlist.
+                  <div className="text-center">
+                    There is no item in your wishlist.
+                  </div>
+                  <div className="text-center mt-3">
+                    <div className="button">
+                      <Link to="/" className="btn">
+                        See Featured Products
+                      </Link>
                     </div>
                   </div>
                 </div>
