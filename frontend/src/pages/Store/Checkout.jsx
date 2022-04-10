@@ -90,15 +90,18 @@ const Checkout = () => {
       return;
     }
 
-    const orderData = {
-      productID: "",
-      productType: "",
-      quantity: "",
-      reviewed: false,
-    };
-
     if (checked > 0 && orders) {
-      orders.forEach((order) => {});
+      orders.forEach((order) => {
+        const orderData = {
+          productID: order._doc.id,
+          productType: order._doc.productType,
+          quantity: order._doc.quantity,
+          reviewed: false,
+          shippingDate: "",
+          receivedDate: "",
+          totalPrice: 0,
+        };
+      });
       return;
     }
 
