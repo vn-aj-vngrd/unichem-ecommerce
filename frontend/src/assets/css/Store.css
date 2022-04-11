@@ -5978,6 +5978,46 @@ ol {
   height: 45px;
 }
 
+
+/*======================================
+	Order CSS 
+========================================*/
+
+.order-product-image {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+
+.order-product-image img {
+  height: 200px;
+  width: 200px;
+  margin: auto;
+}
+
+.order-single-product {
+  margin-top: 0;
+}
+
+.order-single-product .product-info .category a {
+  color: #666;
+  font-weight: 400;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.order-single-product .product-info .category .lni-package {
+  margin-right: 5px;
+}
+
+
+.order-single-product .product-info .category a:hover,
+.order-single-product .product-info .title a:hover {
+  color: #f44336;
+}
+
+
+
 /*======================================
 	Logout CSS 
 ========================================*/

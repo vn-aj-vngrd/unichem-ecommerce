@@ -2,62 +2,37 @@ const asyncHandler = require("express-async-handler");
 
 const Order = require("../models/orderModel");
 const Orderline = require("../models/orderlineModel");
-const Product = require("../models/productModel");
 const Cart = require("../models/cartModel");
 
 // @desc    Get Orders by user
 // @route   GET /api/orders
 // @access  Private
 const getOrders = asyncHandler(async (req, res) => {
-  const Orders = await Order.find().sort({
-    createdAt: "desc",
+  const userID = req.user._id;
+  const Orders = await Order.find({
+    userID: userID,
   });
 
-  const Products = await Product.find().sort({
-    createdAt: "desc",
-  });
-
-  // console.log(Products)
-
-  let groupValues = Orders.reduce((order, key) => {
-    order[key.orderID] = order[key.orderID] || [];
-
-    // order[key.orderID].push({
-    //   productID: key.productID,
-    //   productType: key.productType,
-    //   reviewed: key.reviewed,
-    //   totalPrice: key.totalPrice,
-    //   _id: key._id,
-    // });
-
-    order[key.orderID].push(key);
-
-    return order;
-  }, {});
-
-  console.log(groupValues);
-
-  let retData = Object.keys(groupValues).map((mkey) => {
-    let total = 0;
-    groupValues[mkey].forEach((order) => {
-      total += order.totalPrice;
-    });
-
-    console.log(total);
-
-    return {
-      orderID: mkey,
-      createdAt: groupValues[mkey][0].createdAt,
-      orderDate: groupValues[mkey][0].orderDate,
-      orderStatus: groupValues[mkey][0].orderStatus,
-      receivedDate: groupValues[mkey][0].receivedDate,
-      shippingDate: groupValues[mkey][0].shippingDate,
-      updatedAt: groupValues[mkey][0].updatedAt,
-      userID: groupValues[mkey][0].userID,
-      orderTotal: total,
-      products: groupValues[mkey],
+  let retData = [];
+  for (let i = 0; i < Orders.length; i++) {
+    let orderID = Orders[i]._id;
+    console.log(orderID);
+    let orderLine = await Orderline.find({ orderID: orderID });
+    let temp = {
+      _id: Orders[i]._id,
+      userID: userID,
+      shippingFee: Orders[i].shipingFee,
+      shippingDate: Orders[i].shippingDate,
+      receivedDate: Orders[i].receivedDate,
+      totalPrice: Orders[i].totalPrice,
+      orderStatus: Orders[i].orderStatus,
+      paymentMethod: Orders[i].paymentMethod,
+      orderLine,
     };
-  });
+    retData.push(temp);
+  }
+
+  console.log(retData);
 
   res.status(200).json(retData);
 });

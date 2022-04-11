@@ -1,25 +1,22 @@
 import { Link } from "react-router-dom";
-import { setOrder } from "../features/orders/orderSlice";
+import { useNavigate } from "react-router-dom";
 import Star from "./Star";
 
-const PurchasedProduct = (products) => {
-  console.log(products)
+const PurchasedProduct = ({ products, orderLines }) => {
+  const navigate = useNavigate();
 
-   return (
+  return (
     <div>
-      <div className="single-product no-box-shadow profile-single-product">
-        {products.productOrders.map((orderLine) => (
-          <div
-            key={products.orderID + orderLine._id}
-            className="row align-items-center"
-          >
+      {orderLines.map((orderLine) => (
+        <div key={orderLine._id} className="single-product no-box-shadow order-single-product">
+          <div key={orderLine._id} className="row align-items-center">
             <div className="col-lg-4 col-md-4 col-12">
               <div className="purchase-product-image product-image">
                 <img
                   src={
-                    products.products.find(
+                    products.find(
                       (product) => product._doc._id === orderLine.productID
-                    )._doc.images
+                    )._doc.images[0]
                   }
                   alt="#"
                 ></img>
@@ -33,35 +30,29 @@ const PurchasedProduct = (products) => {
             <div className="col-lg-8 col-md-8 col-12">
               <div className="product-info">
                 <div className="category">
-                  <i className="lni lni-package category-icon"></i>{" "}
-                  <a href="/">
-                    {
-                      products.products.find(
-                        (product) => product._doc._id === orderLine.productID
-                      )._doc.category
-                    }
-                  </a>
+                  <div>
+                    <i className="lni lni-package"></i>Category:
+                    <Link
+                      to={`/products/category/${
+                        products.find(
+                          (product) => product._doc._id === orderLine.productID
+                        )._doc.category
+                      }`}
+                    >
+                      {
+                        products.find(
+                          (product) => product._doc._id === orderLine.productID
+                        )._doc.category
+                      }
+                    </Link>
+                  </div>
                 </div>
 
                 <h4 className="title">
-                  <Link to="/">
-                    {
-                      products.products.find(
-                        (product) => product._doc._id === orderLine.productID
-                      )._doc.productName
-                    }
-                  </Link>
+                  <Link to="/">{orderLine.productName}</Link>
                 </h4>
 
-                <div className="">
-                  Type / Color:{" "}
-                  {
-                    products.products.find(
-                      (product) => product._doc._id === orderLine.productID
-                    )._doc.types[orderLine.productType]
-                  }
-                </div>
-                {/* 
+                <div className="">Type / Color: {orderLine.productType}</div>
                 <Star
                   star={
                     products.find(
@@ -73,27 +64,17 @@ const PurchasedProduct = (products) => {
                       (product) => product._doc._id === orderLine.productID
                     ).market.reviewsCount
                   }
-                /> */}
+                />
                 <hr></hr>
-                <div className="price">
+                <div className="price d-flex justify-content-between">
                   <div className="">Quantity: {orderLine.quantity}pcs</div>
-                  <div className="spacer"></div>
-                  <span>
-                    $
-                    {products.products.find(
-                      (product) => product._doc._id === orderLine.productID
-                    )._doc.prices[orderLine.productType] * orderLine.quantity}
-                    
-                    {/* {products.addSubTotal(products.products.find(
-                      (product) => product._doc._id === orderLine.productID
-                    )._doc.prices[orderLine.productType] * orderLine.quantity)} */}
-                  </span>
+                  <span>${orderLine.price * orderLine.quantity}</span>
                 </div>
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };

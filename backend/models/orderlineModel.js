@@ -26,7 +26,7 @@ const orderlineSchema = mongoose.Schema(
     },
     price: {
       type: Number,
-      required: [true, "Price is required."],
+      required: [true, "Product Price is required"],
     },
     reviewed: {
       type: Boolean,

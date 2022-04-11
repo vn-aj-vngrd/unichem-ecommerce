@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PurchasedProduct from "./PurchasedProduct";
 import Review from "./ReviewModal";
 import Spinner from "../components/Spinner";
+import ReactPaginate from "react-paginate";
 
 const ProfilePurchase = () => {
   const navigate = useNavigate();
@@ -20,6 +21,22 @@ const ProfilePurchase = () => {
     useSelector((state) => state.products);
 
   const { user } = useSelector((state) => state.auth);
+
+  const [orderStatus, setOrderStatus] = useState("All");
+
+  const [pageNumber, setPageNumber] = useState(0);
+
+  useEffect(() => {
+    if (isProductError) {
+      console.log(productMessage);
+    }
+
+    dispatch(getProducts());
+
+    return () => {
+      dispatch(resetProduct());
+    };
+  }, [isProductError, productMessage, dispatch]);
 
   useEffect(() => {
     if (isOrderError) {
@@ -37,18 +54,6 @@ const ProfilePurchase = () => {
     };
   }, [user, navigate, isOrderError, orderMessage, dispatch]);
 
-  useEffect(() => {
-    if (isProductError) {
-      // console.log(productMessage);
-    }
-
-    dispatch(getProducts());
-
-    return () => {
-      dispatch(resetProduct());
-    };
-  }, [isProductError, productMessage, dispatch]);
-
   if (isOrderLoading || isProductLoading) {
     return (
       <>
@@ -58,33 +63,83 @@ const ProfilePurchase = () => {
     );
   }
 
+  // Pagination
+  const ordersPerPage = 10;
+  const pagesVisited = pageNumber * ordersPerPage;
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
+  switch (orderStatus) {
+    case "To Pay": {
+      let statusOrders = orders.filter(
+        (order) => order.orderStatus === "toPay"
+      );
+      break;
+    }
+    case "To Ship": {
+      let statusOrders = orders.filter(
+        (order) => order.orderStatus === "toShip"
+      );
+      break;
+    }
+    case "To Receive": {
+      let statusOrders = orders.filter(
+        (order) => order.orderStatus === "toReceive"
+      );
+      break;
+    }
+    case "Completed": {
+      let statusOrders = orders.filter(
+        (order) => order.orderStatus === "completed"
+      );
+      break;
+    }
+    case "Cancelled": {
+      let statusOrders = orders.filter(
+        (order) => order.orderStatus === "cancelled"
+      );
+      break;
+    }
+    case "Failed": {
+      let statusOrders = orders.filter(
+        (order) => order.orderStatus === "failed"
+      );
+      break;
+    }
+    default: {
+      let statusOrders = orders;
+      break;
+    }
+  }
+
   let statusOrders = JSON.parse(JSON.stringify(orders));
 
-  console.log(orders)
+  const pageCount = Math.ceil(statusOrders.length / ordersPerPage);
+  statusOrders = statusOrders.slice(
+    pagesVisited,
+    pagesVisited + ordersPerPage
+  );
 
   return (
     <div className="purchase-products-column">
       <div className="product-grid">
         <div className="d-flex product-filter align-items-center">
           <label className="sort-element">Order Status: </label>
-          <select className="form-select sort-element" id="sorting">
+          <select
+            value={orderStatus}
+            onChange={(e) => {
+              setOrderStatus(e.target.value);
+            }}
+            className="form-select sort-element"
+            id="sorting"
+          >
             <option>All</option>
-            <option>To Pay</option>
-            <option>To Ship</option>
-            <option>To Receive</option>
-            <option>Completed</option>
-            <option>Cancelled</option>
-          </select>
-        </div>
-        <div className="d-flex product-filter align-items-center">
-          <label className="sort-element">Sort by: </label>
-          <select className="form-select sort-element" id="sorting">
-            <option>Popularity</option>
-            <option>Low - High Price</option>
-            <option>High - Low Price</option>
-            <option>Average Rating</option>
-            <option>A - Z Order</option>
-            <option>Z - A Order</option>
+            <option>Processing</option>
+            <option>Packed</option>
+            <option>Shipped</option>
+            <option>Delivered</option>
           </select>
         </div>
       </div>
@@ -92,12 +147,12 @@ const ProfilePurchase = () => {
       <div className="product">
         {/* Product Purchase one */}
         {statusOrders.map((order) => (
-          <div key={order.orderID} className="purchase-row">
+          <div key={order._id} className="purchase-row">
             <div className="negative-padding-custom box-shadow">
               <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
                 <div className="color-white">Order ID: {order.orderID}</div>
                 <div className="color-white purchase-update-time">
-                  Order Date: {moment(order.orderDate).format("DD/MM/YY")}
+                  Order Date: {moment(order.createdAt).format("DD/MM/YY")}
                 </div>
                 <h6 className="purchase-order-status">
                   {order.orderStatus.toUpperCase()}
@@ -107,20 +162,18 @@ const ProfilePurchase = () => {
               {/* ORDERLINE START HERE */}
 
               <PurchasedProduct
-                orderID={order.orderID}
                 products={products}
-                productOrders={order.products}
-              /> 
+                orderLines={order.orderLine}
+              />
 
               {/* END OF ORDERLINE */}
-
 
               <div className="no-box-shadow">
                 <div className="order-total-row">
                   <div className="price d-flex justify-content-end align-items-center">
                     <div className="">Order Total:</div>
                     <div className="spacer"></div>
-                    <h4 className="unichem-text-color">${order.orderTotal}</h4>
+                    <h4 className="unichem-text-color">${order.totalPrice}</h4>
                   </div>
                   <br></br>
                   <div className="purchase-options">
@@ -139,36 +192,24 @@ const ProfilePurchase = () => {
 
         <nav>
           <ul className="product-pagination pagination justify-content-center">
-            <li className="page-item disabled">
-              <a
-                className="page-link"
-                href="/"
-                tabIndex="-1"
-                aria-disabled="true"
-              >
-                Previous
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
-                Next
-              </a>
-            </li>
+            <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              breakLabel={"..."}
+              pageRangeDisplayed={8}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"page-link-button"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page"}
+              disabledClassName={"disabled"}
+              activeClassName={"page-link-active"}
+            />
           </ul>
         </nav>
       </div>

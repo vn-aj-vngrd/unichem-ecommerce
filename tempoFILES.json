@@ -1,47 +1,62 @@
 
 {
-    {"_id": {
-        "$oid": "624e812a8db6c57001494305"
+    "_id": {
+        "$oid": "624c3809fd404295d9407abc"
     },
     "userID": {
         "$oid": "624c3809fd404295d9407cfd"
+    },
+    "shippingFee": 125.00,
+    "shippingDate": {
+        "$date": "2022-04-06T11:00:24.511Z"
+    },
+    "receivedDate": {
+        "$date": "2022-04-06T11:00:24.511Z"
+    },
+    "totalPrice": 5000.00,
+    "orderStatus": "completed",
+    "paymentMethod": "Bank Transfer"
+}
+
+// Orderline
+
+{
+    "orderID": {
+        "$oid": "624c3809fd404295d9407abc"
     },
     "productID": {
         "$oid": "6249af34aa913b8f10621dde"
     },
-    "subject": "This is a subject",
-    "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "rating": 4},
+    "productType": "Small",
+    "productPrice": 200.00,
+    "quantity": 50,
+    "reviewed": false
 }
 
 {
-    
-    "userID": {
-        "$oid": "624c3809fd404295d9407cfd"
+    "orderID": {
+        "$oid": "624c3809fd404295d9407abc"
     },
     "productID": {
         "$oid": "6249b078aa913b8f10621ddf"
     },
-    "subject": "This is a subject",
-    "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "rating": 4
+    "productType": "Small",
+    "productPrice": 400.00,
+    "quantity": 20,
+    "reviewed": false
 }
-
 
 {
-    
-    "userID": {
-        "$oid": "624c3809fd404295d9407cfd"
+    "orderID": {
+        "$oid": "624c3809fd404295d9407abc"
     },
     "productID": {
-        "$oid": "624d08394ecea9713cfb37f7"
+        "$oid": "624d08304ecea9713cfb37f6"
     },
-    "subject": "This is a subject",
-    "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "rating": 4
+    "productType": "Small",
+    "productPrice": 400.00,
+    "quantity": 20,
+    "reviewed": false
 }
-
-
-
 
 

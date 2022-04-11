@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getReviews, resetReview } from "../features/reviews/reviewSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Star from "../components/Star";
 import Spinner from "../components/Spinner";
+import ReactPaginate from "react-paginate";
 
 const Reviews = ({ productID }) => {
   const dispatch = useDispatch();
   const moment = require("moment");
+  const [pageNumber, setPageNumber] = useState(0);
 
   const { reviews, isReviewLoading, isReviewError, reviewMessage } =
     useSelector((state) => state.reviews);
@@ -32,7 +34,15 @@ const Reviews = ({ productID }) => {
     );
   }
 
-  const productReviews = reviews.filter((review) => {
+  // Pagination
+  const reviewsPerPage = 10;
+  const pagesVisited = pageNumber * reviewsPerPage;
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
+  let productReviews = reviews.filter((review) => {
     return review.product._id === productID;
   });
 
@@ -48,7 +58,8 @@ const Reviews = ({ productID }) => {
     totalRatings /= productReviews.length;
   }
 
-  console.log(productReviews);
+  const pageCount = Math.ceil(productReviews.length / reviewsPerPage);
+  productReviews = productReviews.slice(pagesVisited, pagesVisited + reviewsPerPage);
 
   return (
     <div className="product-details">
@@ -123,6 +134,28 @@ const Reviews = ({ productID }) => {
                 ))}
               </div>
             </div>
+            <nav>
+              <ul className="product-pagination pagination justify-content-center">
+                <ReactPaginate
+                  previousLabel={"Previous"}
+                  nextLabel={"Next"}
+                  breakLabel={"..."}
+                  pageRangeDisplayed={8}
+                  pageCount={pageCount}
+                  onPageChange={changePage}
+                  containerClassName={"page-link-button"}
+                  pageLinkClassName={"page-link"}
+                  previousClassName={"page-item"}
+                  previousLinkClassName={"page-link"}
+                  nextClassName={"page-item"}
+                  nextLinkClassName={"page-link"}
+                  breakClassName={"page-item"}
+                  breakLinkClassName={"page"}
+                  disabledClassName={"disabled"}
+                  activeClassName={"page-link-active"}
+                />
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
