@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-//array of 5 items
-const ShopSidebar = () => {
+const ProfileSidebar = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
@@ -41,4 +40,4 @@ const ShopSidebar = () => {
   );
 };
 
-export default ShopSidebar;
+export default ProfileSidebar;
