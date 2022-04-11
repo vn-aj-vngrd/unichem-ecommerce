@@ -5,6 +5,7 @@ import {
   getCarts,
   updateCart,
   deleteCart,
+  resetCart,
 } from "../../features/cart/cartSlice";
 import {
   setWishlist,
@@ -40,6 +41,7 @@ const Cart = () => {
 
     return () => {
       dispatch(resetWishlist());
+      dispatch(resetCart());
     };
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
@@ -102,8 +104,8 @@ const Cart = () => {
       text: "To view your wishlist, please proceed to the wishlist page.",
       icon: "success",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
       confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
       cancelButtonText: "Close",
     }).then((result) => {
@@ -330,9 +332,14 @@ const Cart = () => {
             <>
               <div className="cart-list-head box-shadow">
                 <div className="cart-single-list">
-                  <div className="d-flex single-cart-product">
-                    <div className="d-flex align-items-center cart-product-left">
-                      There are no items in the cart.
+                  <div className="text-center">
+                    There is no item in your cart.
+                  </div>
+                  <div className="mt-3 text-center">
+                    <div className="button">
+                      <Link to="/" className="btn">
+                        See Featured Products
+                      </Link>
                     </div>
                   </div>
                 </div>

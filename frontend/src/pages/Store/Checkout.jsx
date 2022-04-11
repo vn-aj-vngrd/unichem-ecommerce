@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
-import { resetCart } from "../../features/cart/cartSlice.js";
+import { resetCart, getCarts } from "../../features/cart/cartSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
@@ -14,6 +14,8 @@ const Checkout = () => {
 
   const { carts } = useSelector((state) => state.cart);
 
+  const { isOrderSuccess, isOrderError } = useSelector((state) => state.orders);
+
   const [payment, setPayment] = useState("");
 
   useEffect(() => {
@@ -23,7 +25,25 @@ const Checkout = () => {
       navigate("/");
     }
 
-    if (carts.length < 1) {
+    dispatch(getCarts());
+
+    if (isOrderSuccess) {
+      Swal.fire({
+        title: "Order is being processed",
+        text: "Please wait for the confirmation of your order.",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+      });
+      navigate("/cart");
+    }
+
+    if (isOrderError) {
+      Swal.fire({
+        title: "Failed to Checkout",
+        icon: "error",
+        text: "There is a problem with your order process, please try again",
+      });
       navigate("/cart");
     }
 
@@ -31,7 +51,16 @@ const Checkout = () => {
       dispatch(resetOrder());
       dispatch(resetCart());
     };
-  }, [user, carts, navigate, dispatch]);
+  }, [user, navigate, isOrderSuccess, isOrderError, dispatch]);
+
+  if (localStorage.getItem("cartCount") < 1) {
+    Swal.fire({
+      title: "Cannot Checkout",
+      icon: "error",
+      text: "You don't have any items in your cart.",
+    });
+    navigate("/cart");
+  }
 
   const checked = carts.reduce((count, cart) => {
     if (cart._doc.checked) {
@@ -42,8 +71,6 @@ const Checkout = () => {
 
   let subtotal = 0;
   let orders;
-
-  // console.log(checked);
 
   if (checked > 0) {
     subtotal = carts.reduce((sum, cart) => {
@@ -112,59 +139,51 @@ const Checkout = () => {
       orderline: [],
     };
 
-    if (checked > 0 && orders) {
-      orders.forEach((order) => {
-        const orderline = {
-          cartID: order._doc._id,
-          productID: order.product._id,
-          productName: order.product.productName,
-          productType: order.product.types[order._doc.productType],
-          quantity: order._doc.quantity,
-          price: order.product.prices[order._doc.productType],
-          reviewed: false,
-        };
-        orderData.orderline.push(orderline);
-      });
-
-      dispatch(setOrder(orderData));
-
-      Swal.fire({
-        title: "Order is being processed",
-        text: "Please wait for the confirmation of your order.",
-        icon: "success",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-      });
-
-      navigate("/cart");
-      return;
-    }
-
-    carts.forEach((cart) => {
-      const orderline = {
-        cartID: cart._doc._id,
-        productID: cart.product.id,
-        productName: cart.product.productName,
-        productType: cart.product.productType[cart._doc.productType],
-        quantity: cart._doc.quantity,
-        price: cart.product.prices[cart._doc.productType],
-        reviewed: false,
-      };
-      orderData.orderline.push(orderline);
-    });
-
-    dispatch(setOrder(orderData));
-
     Swal.fire({
-      title: "Order is being processed",
-      text: "Please wait for the confirmation of your order.",
-      icon: "success",
+      title: "Are you sure to checkout?",
+      text: "Select YES to proceed, otherwise select CANCEL.",
+      icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-    });
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (checked > 0 && orders) {
+          orders.forEach((order) => {
+            const orderline = {
+              cartID: order._doc._id,
+              productID: order.product._id,
+              productName: order.product.productName,
+              productType: order.product.types[order._doc.productType],
+              quantity: order._doc.quantity,
+              price: order.product.prices[order._doc.productType],
+              reviewed: false,
+            };
+            orderData.orderline.push(orderline);
+          });
 
-    navigate("/cart");
+          dispatch(setOrder(orderData));
+
+          return;
+        }
+
+        carts.forEach((cart) => {
+          const orderline = {
+            cartID: cart._doc._id,
+            productID: cart.product.id,
+            productName: cart.product.productName,
+            productType: cart.product.productType[cart._doc.productType],
+            quantity: cart._doc.quantity,
+            price: cart.product.prices[cart._doc.productType],
+            reviewed: false,
+          };
+          orderData.orderline.push(orderline);
+        });
+
+        dispatch(setOrder(orderData));
+      }
+    });
   };
 
   return (

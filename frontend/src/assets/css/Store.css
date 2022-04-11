@@ -673,25 +673,25 @@ ol {
   }
 }
 
-.header .nav-hotline {
+.header .navbar-loc {
   position: relative;
   padding-left: 50px;
   margin-right: 35px;
 }
 
 @media (max-width: 767px) {
-  .header .nav-hotline {
+  .header .navbar-loc {
     display: none;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .header .nav-hotline {
+  .header .navbar-loc {
     display: none;
   }
 }
 
-.header .nav-hotline i {
+.header .navbar-loc i {
   color: #ffffff;
   font-size: 18px;
   position: absolute;
@@ -706,15 +706,22 @@ ol {
   display: block;
   border: 1px solid #e6e6e6;
   border-radius: 50%;
+  transition: 0.3s;
 }
 
-.header .nav-hotline h3 {
+.header .navbar-loc i:hover {
+  color: #f44336;
+  background-color: #fff;
+  border-color: transparent;
+}
+
+.header .navbar-loc h3 {
   font-size: 15px;
   font-weight: 600;
   color: #ffffff;
 }
 
-.header .nav-hotline h3 span {
+.header .navbar-loc h3 span {
   color: rgb(255, 255, 255);
   font-weight: 500;
   font-size: 14px;
@@ -723,7 +730,7 @@ ol {
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .header .nav-hotline h3 span {
+  .header .navbar-loc h3 span {
     font-size: 12px;
     font-weight: 600;
   }
@@ -741,11 +748,11 @@ ol {
   justify-content: end;
 }
 
-.header .navbar-cart .wishlist {
+.header .navbar-cart .wishlist-items {
   margin-right: 12px;
 }
 
-.header .navbar-cart .wishlist a {
+.header .navbar-cart .wishlist-items a {
   height: 40px;
   width: 40px;
   line-height: 40px;
@@ -758,13 +765,13 @@ ol {
   position: relative;
 }
 
-.header .navbar-cart .wishlist a:hover {
+.header .navbar-cart .wishlist-items a:hover {
   color: #f44336;
   background-color: #fff;
   border-color: transparent;
 }
 
-.header .navbar-cart .wishlist a .total-items {
+.header .navbar-cart .wishlist-items a .total-items {
   position: absolute;
   right: -6px;
   top: -5px;

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-//array of 5 items
-const ShopSidebar = () => {
+const ProfileSidebar = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
@@ -14,7 +13,7 @@ const ShopSidebar = () => {
           </div>
           <div className="">
             <h5>{user.name.split(" ")[0]}</h5>
-            <Link className="sidebar-nav" to="/manage">
+            <Link className="sidebar-nav" to="/account/profile">
               Edit Profile
             </Link>
           </div>
@@ -23,7 +22,7 @@ const ShopSidebar = () => {
         <div className="profile-category">
           <ul className="list">
             <li>
-              <Link to="/account/manage">Profile</Link>
+              <Link to="/account/profile">Profile</Link>
             </li>
             <li>
               <Link to="/account/address">Address</Link>
@@ -41,4 +40,4 @@ const ShopSidebar = () => {
   );
 };
 
-export default ShopSidebar;
+export default ProfileSidebar;

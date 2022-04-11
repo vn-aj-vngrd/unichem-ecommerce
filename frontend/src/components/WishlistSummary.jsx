@@ -18,11 +18,11 @@ const WishlistSummary = ({ wishlists, count }) => {
 
     Swal.fire({
       title: "Are you sure to clear your wishlist?",
-      text: "Select YES to proceed, otherwise select NO.",
+      text: "Select YES to proceed, otherwise select CANCEL.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
@@ -33,24 +33,27 @@ const WishlistSummary = ({ wishlists, count }) => {
   };
 
   const addAlltoCart = () => {
-    for (let i = 0; i < wishlists.length; i++) {
-      const cartData = {
-        productID: wishlists[i]._doc.productID,
-        productType: wishlists[i]._doc.productType,
-        quantity: 1,
-        max: wishlists[i].product.quantities[wishlists[i]._doc.productType],
-      };
-      dispatch(setCart(cartData));
+    wishlists.forEach((wishlist) => {
+      if (wishlist.product.quantities[wishlist._doc.productType] > 0) {
+        const cartData = {
+          productID: wishlist._doc.productID,
+          productType: wishlist._doc.productType,
+          quantity: 1,
+          max: wishlist.product.quantities[wishlist._doc.productType],
+        };
+        dispatch(setCart(cartData));
+      }
+
       // console.log(cartData);
-    }
+    });
 
     Swal.fire({
       title: "Items were added to your cart.",
       text: "To checkout, please proceed to the cart page.",
       icon: "success",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
       confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
       cancelButtonText: "Close",
     }).then((result) => {

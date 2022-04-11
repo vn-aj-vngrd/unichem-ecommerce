@@ -19,11 +19,11 @@ const PricingTable = ({
   const clearCart = () => {
     Swal.fire({
       title: "Are you sure to clear your cart?",
-      text: "Select YES to proceed, otherwise select NO.",
+      text: "Select YES to proceed, otherwise select CANCEL.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
@@ -37,20 +37,7 @@ const PricingTable = ({
   };
 
   const checkout = () => {
-    Swal.fire({
-      title: "Are you sure to checkout?",
-      text: "Select YES to proceed, otherwise select NO.",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate("/cart/checkout");
-        // console.log(carts);
-      }
-    });
+    navigate("/cart/checkout");
   };
 
   return (

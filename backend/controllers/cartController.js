@@ -71,7 +71,7 @@ const setCart = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update Cart
-// @route   PUT /api/carts/:id
+// @route   PUT /api/carts/
 // @access  Private
 const updateCart = asyncHandler(async (req, res) => {
   const _id = req.body.id;
@@ -90,7 +90,7 @@ const updateCart = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the cart user
-  if (existingCart.userID.toString() !== req.user.id) {
+  if (existingCart.userID.toString() != req.user._id) {
     res.status(401);
     throw new Error("User not authorized");
   }
