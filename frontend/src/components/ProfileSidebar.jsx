@@ -14,7 +14,7 @@ const ShopSidebar = () => {
           </div>
           <div className="">
             <h5>{user.name.split(" ")[0]}</h5>
-            <Link className="sidebar-nav" to="/manage">
+            <Link className="sidebar-nav" to="/account/profile">
               Edit Profile
             </Link>
           </div>
@@ -23,7 +23,7 @@ const ShopSidebar = () => {
         <div className="profile-category">
           <ul className="list">
             <li>
-              <Link to="/account/manage">Profile</Link>
+              <Link to="/account/profile">Profile</Link>
             </li>
             <li>
               <Link to="/account/address">Address</Link>

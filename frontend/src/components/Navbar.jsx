@@ -115,7 +115,6 @@ const Navbar = ({ userType }) => {
 
               <div className="col-lg-4 col-md-2 col-5">
                 <div className="middle-right-area">
-                  
                   <div className="navbar-loc">
                     <Link to="/contact">
                       <i className="lni lni-map"></i>
@@ -321,7 +320,10 @@ const Navbar = ({ userType }) => {
 
                         <ul className="mobile-profile-collapse profile-collapse">
                           <li className="nav-item">
-                            <Link to="/account/manage">Manage Account</Link>
+                            <Link to="/account/profile">My Profile</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/account/address">My Address</Link>
                           </li>
                           <li className="nav-item">
                             <Link to="/account/orders">My Orders</Link>
@@ -364,7 +366,10 @@ const Navbar = ({ userType }) => {
                               id="submenu-1-3"
                             >
                               <li className="nav-item">
-                                <Link to="/account/manage">Manage Account</Link>
+                                <Link to="/account/profile">My Profile</Link>
+                              </li>
+                              <li className="nav-item">
+                                <Link to="/account/address">My Address</Link>
                               </li>
                               <li className="nav-item">
                                 <Link to="/account/orders">My Orders</Link>
