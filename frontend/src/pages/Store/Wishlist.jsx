@@ -83,7 +83,7 @@ const Wishlist = () => {
             </>
           ) : (
             <>
-              <div className="cart-list-head box-shadow">
+              <div className="cart-list-head">
                 <div className="cart-single-list">
                   <div className="text-center">
                     There is no item in your wishlist.

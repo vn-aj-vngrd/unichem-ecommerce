@@ -117,15 +117,12 @@ const ProfilePurchase = () => {
   let statusOrders = JSON.parse(JSON.stringify(orders));
 
   const pageCount = Math.ceil(statusOrders.length / ordersPerPage);
-  statusOrders = statusOrders.slice(
-    pagesVisited,
-    pagesVisited + ordersPerPage
-  );
+  statusOrders = statusOrders.slice(pagesVisited, pagesVisited + ordersPerPage);
 
   return (
     <div className="purchase-products-column">
       <div className="product-grid">
-        <div className="d-flex product-filter align-items-center">
+        {/* <div className="d-flex product-filter align-items-center">
           <label className="sort-element">Order Status: </label>
           <select
             value={orderStatus}
@@ -141,6 +138,55 @@ const ProfilePurchase = () => {
             <option>Shipped</option>
             <option>Delivered</option>
           </select>
+        </div> */}
+        <div className="order-status">
+          <div className="order-status-progress">
+            <div className="order-status-progress-bar progress-packed"></div>
+          </div>
+          <div className="one-status">
+            <button
+              onClick={(e) => {
+                setOrderStatus("processing");
+              }}
+              className="btn order-status-circle true"
+            >
+              <i className="lni lni-cogs"></i>
+            </button>
+            <p>Processing</p>
+          </div>
+          <div className="one-status">
+            <button
+              onClick={(e) => {
+                setOrderStatus("packed");
+              }}
+              className="btn order-status-circle true"
+            >
+              <i className="lni lni-archive"></i>
+            </button>
+            <p>Packed</p>
+          </div>
+          <div className="one-status">
+            <button
+              onClick={(e) => {
+                setOrderStatus("shipped");
+              }}
+              className="btn order-status-circle"
+            >
+              <i className="lni lni-ship"></i>
+            </button>
+            <p>Shipped</p>
+          </div>
+          <div className="one-status">
+            <button
+              onClick={(e) => {
+                setOrderStatus("delivered");
+              }}
+              className="btn order-status-circle"
+            >
+              <i className="lni lni-checkmark"></i>
+            </button>
+            <p>Delivered</p>
+          </div>
         </div>
       </div>
 

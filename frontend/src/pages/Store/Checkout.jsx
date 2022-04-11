@@ -221,7 +221,7 @@ const Checkout = () => {
                                     cart._doc.checked && (
                                       <div
                                         key={cart._doc._id}
-                                        className="cart-list-head accordion-bodybox-shadow"
+                                        className="cart-list-head accordion-body"
                                       >
                                         <div className="cart-single-list">
                                           <div className="row align-items-center">
@@ -294,7 +294,7 @@ const Checkout = () => {
                                 {carts.map((cart) => (
                                   <div
                                     key={cart._doc._id}
-                                    className="cart-list-head accordion-bodybox-shadow"
+                                    className="cart-list-head accordion-body"
                                   >
                                     <div className="cart-single-list">
                                       <div className="row align-items-center">
@@ -363,7 +363,7 @@ const Checkout = () => {
                               </>
                             )}
                           </>
-                          <div className="cart-list-head accordion-bodybox-shadow">
+                          <div className="cart-list-head accordion-body">
                             <div className="cart-single-list">
                               <div className="col-md-12">
                                 <div className="steps-form-btn-order button">

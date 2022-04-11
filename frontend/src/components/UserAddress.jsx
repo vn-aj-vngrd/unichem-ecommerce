@@ -214,7 +214,7 @@ const Profile = () => {
         {user.address.map((address, index) =>
           index === user.primaryAddress ? (
             <div key={index}>
-              <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
+              <div className="address-row-banner d-flex justify-content-between d-flex align-items-center">
                 <h6 className="purchase-order-status">DEFAULT ADDRESS</h6>
               </div>
               <div className="profile-address-section">
@@ -256,14 +256,14 @@ const Profile = () => {
                         data-bs-target={"#collapse" + index.toString()}
                         aria-expanded="false"
                         aria-controls="collapseOne"
-                        className="btn-line second-option-btn title collapsed"
+                        className="btn-alt second-option-btn title collapsed"
                       >
                         Edit
                       </button>
                       <button
                         to="/product-details"
                         onClick={() => deleteAddress(index)}
-                        className="btn-line second-option-btn"
+                        className="btn-alt second-option-btn"
                       >
                         Delete
                       </button>
@@ -433,14 +433,14 @@ const Profile = () => {
                         data-bs-target={"#collapse" + index.toString()}
                         aria-expanded="false"
                         aria-controls="collapseOne"
-                        className="btn-line second-option-btn title collapsed"
+                        className="btn-alt second-option-btn title collapsed"
                       >
                         Edit
                       </button>
                       <button
                         to="/product-details"
                         onClick={() => deleteAddress(index)}
-                        className="btn-line second-option-btn"
+                        className="btn-alt second-option-btn"
                       >
                         Delete
                       </button>

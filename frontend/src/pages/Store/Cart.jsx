@@ -168,7 +168,7 @@ const Cart = () => {
                 cart.product.quantities[cart._doc.productType] > 0 ? (
                   <div
                     key={cart._doc._id}
-                    className="cart-list-head accordion-bodybox-shadow box-shadow"
+                    className="cart-list-head accordion-body"
                   >
                     <div className="cart-single-list">
                       <div className="row align-items-center">
@@ -252,7 +252,7 @@ const Cart = () => {
                 ) : (
                   <div
                     key={cart._doc._id}
-                    className="cart-list-head accordion-bodybox-shadow box-shadow"
+                    className="cart-list-head accordion-body"
                   >
                     <div className="cart-single-list">
                       <div className="row align-items-center">
@@ -330,7 +330,7 @@ const Cart = () => {
             </>
           ) : (
             <>
-              <div className="cart-list-head box-shadow">
+              <div className="cart-list-head">
                 <div className="cart-single-list">
                   <div className="text-center">
                     There is no item in your cart.
