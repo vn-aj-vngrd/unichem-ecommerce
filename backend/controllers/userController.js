@@ -110,7 +110,7 @@ const getUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  const userID = req.user.id;
+  const userID = req.user._id;
   const user = await User.findById({ userID });
   const userAddress = await Address.findOne({ userID });
 
@@ -138,7 +138,7 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  const user = await User.findById(req.user.id);
+  const user = await User.findById(req.user._id);
 
   if (!user) {
     res.status(400);

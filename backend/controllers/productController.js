@@ -63,26 +63,16 @@ const getProducts = asyncHandler(async (req, res) => {
 // @route   POST /api/products
 // @access  Private
 const setProduct = asyncHandler(async (req, res) => {
-  if (
-    !req.body.productName ||
-    !req.body.brand ||
-    !req.body.category ||
-    !req.body.types ||
-    !req.body.specifications ||
-    !req.body.quantities ||
-    !req.body.prices ||
-    !req.body.isSale ||
-    !req.body.description ||
-    !req.body.image ||
-    !req.body.featured
-  ) {
+  // Check user
+  if (!req.user) {
     res.status(400);
-    throw new Error("Please enter a valid input for all fields.");
+    throw new Error("User not found");
   }
 
-  if (req.body.isSale == true && !req.body.salePrices) {
-    res.status(400);
-    throw new Error("Please enter a valid input for all fields.");
+  // Check if user is not an admin
+  if (req.user.userType !== "admin") {
+    res.status(401);
+    throw new Error("User not authorized");
   }
 
   const product = await Product.create({
@@ -96,7 +86,7 @@ const setProduct = asyncHandler(async (req, res) => {
     salePrices: req.body.salePrices,
     isSale: req.body.isSale,
     description: req.body.description,
-    image: req.body.image,
+    images: req.body.image,
     featured: req.body.featured,
   });
 
@@ -107,10 +97,7 @@ const setProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private
 const updateProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById({
-    productID: req.body.productID,
-    productType: req.body.productType,
-  });
+  const product = await Product.find(req.body._id);
 
   if (!product) {
     res.status(400);
@@ -123,15 +110,15 @@ const updateProduct = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  // Check if user is admin
-  if (req.user.userType.toString() !== "admin") {
+  // Check if user is not an admin
+  if (req.user.userType !== "admin") {
     res.status(401);
     throw new Error("User not authorized");
   }
 
-  const updatedProduct = await Product.findByIdAndUpdate(
+  const updatedProduct = await Product.findAndUpdate(
     {
-      productID: req.body.productID,
+      _id: req.body.productID,
       productType: req.body.productType,
     },
     req.body,

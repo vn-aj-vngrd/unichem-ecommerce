@@ -60,7 +60,7 @@ const setReview = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update Review
-// @route   PUT /api/reviews/:id
+// @route   PUT /api/reviews/
 // @access  Private
 const updateReview = asyncHandler(async (req, res) => {
   const userID = req.user._id;
