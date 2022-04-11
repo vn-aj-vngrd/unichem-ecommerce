@@ -317,8 +317,8 @@ const Details = ({ product }) => {
                       </div>
                     </div>
                     <div className="col">
-                      <div className="wish-button">
-                        <button className="btn" onClick={addToWishlist}>
+                      <div className="wish-button button">
+                        <button className="btn btn-alt" onClick={addToWishlist}>
                           <i className="lni lni-heart"></i> Wishlist
                         </button>
                       </div>

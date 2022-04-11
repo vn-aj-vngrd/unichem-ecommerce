@@ -424,7 +424,7 @@ const Checkout = () => {
                                 <div className="steps-form-btn button">
                                   <Link
                                     to="/account/address"
-                                    className="btn btn-alt me-2"
+                                    className="btn btn-line me-2"
                                   >
                                     Change Address
                                   </Link>
@@ -480,6 +480,9 @@ const Checkout = () => {
                                 />
                                 <label htmlFor="payment-1">
                                   <p>COD</p>
+                                  <div className="single-payment-option-check">
+                                    <i className="lni lni-checkmark"></i>
+                                  </div>
                                 </label>
                               </div>
                               <div className="single-payment-option">
@@ -492,6 +495,9 @@ const Checkout = () => {
                                 />
                                 <label htmlFor="payment-2">
                                   <p>In Store</p>
+                                  <div className="single-payment-option-check">
+                                    <i className="lni lni-checkmark"></i>
+                                  </div>
                                 </label>
                               </div>
                               <div className="single-payment-option">
@@ -504,9 +510,12 @@ const Checkout = () => {
                                 />
                                 <label htmlFor="payment-3">
                                   <p>Bank Transfer</p>
+                                  <div className="single-payment-option-check">
+                                    <i className="lni lni-checkmark"></i>
+                                  </div>
                                 </label>
                               </div>
-                              <div className="single-payment-option">
+                              <div className="single-payment-option single-payment-option-disabled">
                                 <input
                                   type="radio"
                                   name="payment"
