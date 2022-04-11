@@ -1558,6 +1558,8 @@ ol {
   position: relative;
   width: 100%;
   padding: 8px 30px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 .header .mega-category-menu .sub-category li a i {
@@ -1569,6 +1571,9 @@ ol {
 
 .header .mega-category-menu .sub-category li a:hover {
   color: #f44336;
+  padding-left: 35px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 .header .account {
@@ -1916,12 +1921,15 @@ ol {
   z-index: 1;
   border-radius: 4px;
   overflow: hidden;
-  -webkit-transition: all 0.1s ease;
-  transition: all 0.1s ease;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 .navbar-nav .nav-item .sub-menu .nav-item a:hover {
   color: #f44336;
+  padding-left: 5px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 .navbar-nav .nav-item .sub-menu.left-menu {
