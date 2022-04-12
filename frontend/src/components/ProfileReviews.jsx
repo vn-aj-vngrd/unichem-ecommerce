@@ -1,13 +1,66 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getProducts, resetProduct } from "../features/products/productSlice";
+import { getReviews, resetReview } from "../features/reviews/reviewSlice";
 import Star from "./Star";
 import EditReview from "./EditReviewModal";
+import Spinner from "../components/Spinner";
+import ReactPaginate from "react-paginate";
+import ReviewSingle from "./ReviewSingle";
 
 function ProfileReviews() {
-  // const { user } = useSelector((state) => state.auth);
-  
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { reviews, isReviewLoading, isReviewError, reviewMessage } =
+    useSelector((state) => state.reviews);
+
+  const { products, isProductLoading, isProductError, productMessage } =
+    useSelector((state) => state.products);
+
+  useEffect(() => {
+    if (isReviewError) {
+      // console.log(reviewMessage);
+    }
+
+    dispatch(getReviews());
+
+    return () => {
+      dispatch(resetReview());
+    };
+  }, [isReviewError, reviewMessage, dispatch]);
+
+  useEffect(() => {
+    document.title = "Unichem Store | Product Details";
+
+    if (isProductError) {
+      // console.log(productMessage);
+    }
+
+    dispatch(getProducts());
+
+    return () => {
+      dispatch(resetProduct());
+    };
+  }, [navigate, isProductError, productMessage, dispatch]);
+
+  if (isReviewLoading || isProductLoading) {
+    return (
+      <>
+        {/* <div className="empty-container"></div> */}
+        <Spinner />
+      </>
+    );
+  }
+
+  let allReviews = JSON.parse(JSON.stringify(reviews));
+  allReviews.filter((review) => review.userID === user._id);
+
+  console.log(allReviews);
+
   return (
     <div className="profile-information-column">
       <div className="profile-grid">
@@ -15,45 +68,27 @@ function ProfileReviews() {
       </div>
 
       {/* One Review */}
-      <>
-        <div className="review-row box-shadow">
-          <div className="single-product no-box-shadow profile-single-product">
-            <div className="row align-items-center">
-              <div className="col-lg-4 col-md-4 col-12">
-                <div className="purchase-product-image product-image">
-                  <img
-                    src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
-                    alt="#"
-                  ></img>
-                  <div className="button">
-                    <Link to="/product-details" className="btn">
-                      <i className="lni lni-eye"></i> View
-                    </Link>
-                  </div>
+      {allReviews.map((review) => (
+        <div key={review._doc._id} className="review-row box-shadow">
+          <div className="review-single-product">
+            <div className="d-flex">
+              <div className="">
+                <div className="review-product-image">
+                  <img src={review.product.images[0]} alt="#"></img>
                 </div>
               </div>
-              <div className="col-lg-8 col-md-8 col-12">
+              <div className="">
                 <div className="product-info">
+                  <h5 className="title">
+                    <Link to="/">{review.product.productName}</Link>
+                  </h5>
                   <div className="category">
-                    <i className="lni lni-package category-icon"></i> Category:
-                    <a href="/">{}</a>
+                    <i className="lni lni-package"></i> Category:
+                    <Link to={`/products/category/${review.product.category}`}>
+                      {review.product.category}
+                    </Link>
                   </div>
-
-                  <h4 className="title">
-                    <Link to="/">ProductName</Link>
-                  </h4>
-
-                  <div className="">
-                    Type / Color: Sample, Sample, Sample, Sample
-                  </div>
-
-                  <Star star={1} reviews={1} />
-                  <hr></hr>
-                  <div className="price">
-                    <div className="">Quantity: 4pcs</div>
-                    <div className="spacer"></div>
-                    <span>$199.00</span>
-                  </div>
+                    Types / Color: {review.product.types}
                 </div>
               </div>
             </div>
@@ -63,56 +98,14 @@ function ProfileReviews() {
               <div className="product-details-info">
                 <div className="">
                   <div className="reviews">
-                    {/* {productReviews.map((review) => ( */}
-                    {/* <div key={review._doc._id} className="single-review"> */}
-                    <div className="single-review">
-                      {/* <img src={review.user.image} alt="#" /> */}
-                      <img
-                        src="https://dm.henkel-dam.com/is/image/henkel/loctite-power-grab-mounting-tape-.75inx60in-card_1280x1280?wid=2048&fit=fit%2C1&qlt=90&align=0%2C0&hei=2048"
-                        alt="#"
-                      />
-                      <div className="review-info">
-                        <h4 className="">
-                          <div className="d-flex justify-content-between">
-                            Horeb Barriga
-                            <div className="btn-group dropstart">
-                              <button
-                                type="button"
-                                className="vertical-menu-button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
-                                <li className="lni lni-more-alt"></li>
-                              </button>
-                              <ul className="review-menu dropdown-menu">
-                                <ul>
-                                  <li>Edit</li>
-                                  <li>Delete</li>
-                                </ul>
-                              </ul>
-                            </div>
-                          </div>
-                          {/* {review.user.name} */}
-                          <span>
-                            mm/dd/yy
-                            {/* {moment(review._doc.updatedAt).format("DD/MM/YY")} */}
-                          </span>
-                        </h4>
-
-                        {/* <Star star={review._doc.rating} /> */}
-                        <Star star={4} />
-                        {/* <p>{review._doc.review}</p> */}
-                        <p>Lorem Ipsum Dolor amit bayot unggoy</p>
-                      </div>
-                    </div>
-                    {/* ))} */}
+                    <ReviewSingle review={review} editable={true} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </>
+      ))}
 
       <nav>
         <ul className="product-pagination pagination justify-content-center">
