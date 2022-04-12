@@ -76,14 +76,14 @@ const Navbar = ({ userType }) => {
         <div className="header-middle background-red">
           <div className="container">
             <div className="row align-items-center ">
-              <div className="col-lg-3 col-md-3 col-7">
+              <div className="col-lg-3 col-md-2 col-3">
                 <Link className="navbar-brand" to="/">
                   <img src={logo} alt="#" />
                   <span className="fw-bold text-white ps-2">Unichem Store</span>
                 </Link>
               </div>
 
-              <div className="col-lg-5 col-md-7 d-xs-none">
+              <div className="col-lg-5 col-md-8 col-6 d-xs-none">
                 <div className="main-menu-search">
                   <div className="navbar-search search-style-5">
                     <div className="search-select"></div>
@@ -113,7 +113,7 @@ const Navbar = ({ userType }) => {
                 </div>
               </div>
 
-              <div className="col-lg-4 col-md-2 col-5">
+              <div className="col-lg-4 col-md-2 col-3">
                 <div className="middle-right-area">
                   <div className="navbar-loc">
                     <Link to="/contact">

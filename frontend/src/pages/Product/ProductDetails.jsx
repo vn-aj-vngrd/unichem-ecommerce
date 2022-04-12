@@ -7,7 +7,7 @@ import {
 } from "../../features/products/productSlice";
 import Details from "../../components/Details";
 import Specifications from "../../components/Specifications";
-import Reviews from "../../components/Reviews";
+import ReviewsSection from "../../components/ReviewsSection";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 
@@ -57,7 +57,7 @@ const ProductDetails = () => {
       ) : (
         <></>
       )}
-      <Reviews productID={id} />
+      <ReviewsSection productID={id} />
     </>
   );
 };

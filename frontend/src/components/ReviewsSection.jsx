@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { getReviews, resetReview } from "../features/reviews/reviewSlice";
 import { useSelector, useDispatch } from "react-redux";
-import Star from "../components/Star";
-import Spinner from "../components/Spinner";
+import Star from "./Star";
+import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
+import ReviewSingle from "./ReviewSingle";
 
-const Reviews = ({ productID }) => {
+const ReviewsSection = ({ productID }) => {
   const dispatch = useDispatch();
   const moment = require("moment");
   const [pageNumber, setPageNumber] = useState(0);
@@ -117,20 +118,7 @@ const Reviews = ({ productID }) => {
               <div className="reviews">
                 <h4 className="title">Latest Reviews</h4>
                 {productReviews.map((review) => (
-                  <div key={review._doc._id} className="single-review">
-                    <img src={review.user.image} alt="#" />
-                    <div className="review-info">
-                      <h4 className="">
-                        {review.user.name}
-                        <span>
-                          {moment(review._doc.updatedAt).format("DD/MM/YY")}
-                        </span>
-                      </h4>
-
-                      <Star star={review._doc.rating} />
-                      <p>{review._doc.review}</p>
-                    </div>
-                  </div>
+                  <ReviewSingle review={review} editable={false}/>
                 ))}
               </div>
             </div>
@@ -163,4 +151,4 @@ const Reviews = ({ productID }) => {
   );
 };
 
-export default Reviews;
+export default ReviewsSection;
