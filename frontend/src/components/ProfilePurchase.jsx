@@ -196,7 +196,7 @@ const ProfilePurchase = () => {
           <div key={order._id} className="purchase-row">
             <div className="negative-padding-custom box-shadow">
               <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
-                <div className="color-white">Order ID: {order.orderID}</div>
+                {/* <div className="color-white">Order ID: {order.orderID}</div> */}
                 <div className="color-white purchase-update-time">
                   Order Date: {moment(order.createdAt).format("DD/MM/YY")}
                 </div>

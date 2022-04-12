@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
 import { resetCart, getCarts } from "../../features/cart/cartSlice.js";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
 
@@ -11,12 +12,15 @@ const Checkout = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-
   const { carts } = useSelector((state) => state.cart);
-
   const { isOrderSuccess, isOrderError } = useSelector((state) => state.orders);
 
   const [payment, setPayment] = useState("");
+  const [couponData, setCouponData] = useState("");
+
+  const onChange = (e) => {
+    setCouponData(e.target.value);
+  };
 
   useEffect(() => {
     document.title = "Unichem Store | Cart";
@@ -184,6 +188,23 @@ const Checkout = () => {
         dispatch(setOrder(orderData));
       }
     });
+  };
+
+  const onApply = () => {
+    if (couponData === "") {
+      toast.error(`Please input a valid coupon code.`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+    console.log(couponData);
   };
 
   return (
@@ -569,10 +590,17 @@ const Checkout = () => {
                   <form action="#">
                     <div className="single-form form-default">
                       <div className="form-input form">
-                        <input type="text" placeholder="Coupon Code" />
+                        <input
+                          type="text"
+                          placeholder="Coupon Code"
+                          value={couponData}
+                          onChange={onChange}
+                        />
                       </div>
                       <div className="button">
-                        <button className="btn">apply</button>
+                        <button className="btn" onClick={onApply}>
+                          apply
+                        </button>
                       </div>
                     </div>
                   </form>
