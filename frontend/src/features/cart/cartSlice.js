@@ -6,6 +6,7 @@ const initialState = {
   isCartError: false,
   isCartSuccess: false,
   isCartLoading: false,
+  isCartAdded: false,
   cartcartMessage: "",
 };
 
@@ -118,6 +119,7 @@ export const cartSlice = createSlice({
       .addCase(setCart.fulfilled, (state, action) => {
         state.isCartLoading = false;
         state.isCartSuccess = true;
+        state.isCartAdded = true;
         // state.carts.push(action.payload);
       })
       .addCase(setCart.rejected, (state, action) => {

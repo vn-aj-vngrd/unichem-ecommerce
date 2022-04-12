@@ -48,7 +48,7 @@ export const getProducts = createAsyncThunk(
 
 // Get specific product
 export const getOneProduct = createAsyncThunk(
-  "products/getSpecific",
+  "products/getOne",
   async (id, thunkAPI) => {
     try {
       return await productService.getOneProduct(id);

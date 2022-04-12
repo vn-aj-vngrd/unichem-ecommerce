@@ -11,6 +11,6 @@ const { protect } = require("../middleware/authMiddleware");
 
 router.route("/").get(protect, getWishlists).post(protect, setWishlist);
 router.route("/:id").delete(protect, deleteWishlist);
-router.delete("/deleteall/:id", protect, deleteAllWishlist);
+router.delete("/deleteAll/:id", protect, deleteAllWishlist);
 
 module.exports = router;

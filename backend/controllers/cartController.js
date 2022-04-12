@@ -42,9 +42,9 @@ const setCart = asyncHandler(async (req, res) => {
   if (!existingCart) {
     const newCart = await Cart.create({
       userID: req.user._id,
-      productID: productID,
-      productType: productType,
-      quantity: quantity,
+      productID,
+      productType,
+      quantity,
       checked: true,
     });
     return res.status(200).json(newCart);

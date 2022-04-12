@@ -33,17 +33,18 @@ const setWishlist = asyncHandler(async (req, res) => {
     productType,
   });
 
-  if (!existingWishlist) {
-    const wishlist = await Wishlist.create({
-      userID: req.user._id,
-      productID: req.body.productID,
-      productType: req.body.productType,
-    });
-
-    return res.status(200).json(wishlist);
+  if (existingWishlist) {
+    res.status(400);
+    throw new Error("Wishlist already exists");
   }
 
-  res.status(200).json(existingWishlist);
+  const newWishlist = await Wishlist.create({
+    userID: req.user._id,
+    productID,
+    productType,
+  });
+
+  res.status(200).json(newWishlist);
 });
 
 // @desc    Delete Wishlist
