@@ -243,7 +243,7 @@ ol {
 .breadcrumbs {
   /* position: -webkit-sticky; Safari */
   width: 100%;
-  margin-top: 167px;
+  margin-top: 170px;
   position: relative;
   padding: 20px;
   z-index: 1;
@@ -509,7 +509,6 @@ ol {
   border-radius: 3px;
   position: relative;
   z-index: 1;
-  /* margin-right: 7px; */
   overflow: hidden;
 }
 
@@ -546,7 +545,7 @@ ol {
 }
 
 .button .btn-alt {
-  /* display: inline-block;
+  display: inline-block;
   text-transform: capitalize;
   font-size: 14px;
   font-weight: 600;
@@ -555,21 +554,6 @@ ol {
   color: #fff;
   border: none;
   -webkit-transition: 0.2s;
-  transition: 0.2s;
-  border-radius: 3px;
-  position: relative;
-  z-index: 1;
-  overflow: hidden; */
-  background-color: #fff;
-  border: 1px solid #e6e6e6;
-  color: #424242;
-  font-size: 18px;
-  text-align: center;
-  height: 47px;
-  position: relative;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 13px 30px;
   transition: 0.2s;
   border-radius: 3px;
   position: relative;
@@ -583,21 +567,20 @@ ol {
   font-size: 14px;
   font-weight: 600;
   padding: 13px 30px;
-  background-color: #fff;
-  border: 1px solid #e6e6e6;
-  color: rgb(175, 175, 175);
+  background-color: #757575;
+  border: none;
+  color: #fff;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   border-radius: 3px;
   position: relative;
   z-index: 1;
-  /* margin-right: 7px; */
   overflow: hidden;
 }
 
 .button .btn-alt:hover {
   color: #fff;
-  background-color: #f44336;
+  background-color: #212121;
   border-color: transparent;
 }
 
@@ -2845,7 +2828,6 @@ ol {
   border-color: transparent;
 }
 
-
 .item-details .product-info .wish-button .btn i,
 .item-details .product-info .cart-button .btn i {
   font-size: 16px;
@@ -4160,9 +4142,14 @@ ol {
 }
 
 .cart-single-list {
-  padding: 30px;
   background-color: #fff;
   border-bottom: 1px solid #e6e6e6;
+}
+
+.cart-add-padding {
+  background-color: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 30px;
 }
 
 .cart-single-list:last-child {
@@ -5049,28 +5036,29 @@ ol {
 
 .checkout-steps-form-style
   .single-payment-option
-  input[type="radio"]:checked + label .single-payment-option-check {
-    background-color: #95d323;
-    font-weight: 800;
-    color: #fff;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 14px;
-    height: 25px;
-    width: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: -4px;
-    top: -7px;
-    z-index: 1;
-    /* display: none; */
-    -webkit-transition: all 0.1s linear;
-    transition: all 0.1s linear;
-    padding-top: 1px;
+  input[type="radio"]:checked
+  + label
+  .single-payment-option-check {
+  background-color: #95d323;
+  font-weight: 800;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 14px;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -4px;
+  top: -7px;
+  z-index: 1;
+  /* display: none; */
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  padding-top: 1px;
 }
-
 
 .single-payment-option-disabled label {
   background-color: whitesmoke;
@@ -6017,7 +6005,6 @@ ol {
   color: white;
 }
 
-
 /*======================================
 	Reviews CSS 
 ========================================*/
@@ -6033,7 +6020,6 @@ ol {
 .review-btn {
   height: 45px;
 }
-
 
 /*======================================
 	Order CSS 
@@ -6066,13 +6052,10 @@ ol {
   margin-right: 5px;
 }
 
-
 .order-single-product .product-info .category a:hover,
 .order-single-product .product-info .title a:hover {
   color: #f44336;
 }
-
-
 
 /*======================================
 	Logout CSS 
@@ -6134,14 +6117,6 @@ ol {
   border-color: #ff4436;
 }
 
-
-
-
-
-
-
-
-
 .order-status {
   display: flex;
   justify-content: space-between;
@@ -6190,7 +6165,7 @@ ol {
   background-color: rgb(216, 216, 216);
   height: 5px;
   border-radius: 4px;
-  width: 100%;  
+  width: 100%;
   z-index: 1;
 }
 

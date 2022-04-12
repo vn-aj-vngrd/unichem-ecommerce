@@ -443,7 +443,7 @@ const Checkout = () => {
                                 <div className="steps-form-btn button">
                                   <Link
                                     to="/account/address"
-                                    className="btn btn-line me-2"
+                                    className="btn btn-alt me-2"
                                   >
                                     Change Address
                                   </Link>

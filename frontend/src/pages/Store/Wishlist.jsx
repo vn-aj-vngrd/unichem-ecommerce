@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getWishlists, resetWishlist } from "../../features/wishlist/wishlistSlice";
+import {
+  getWishlists,
+  resetWishlist,
+} from "../../features/wishlist/wishlistSlice";
 import { resetCart } from "../../features/cart/cartSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
@@ -84,14 +87,14 @@ const Wishlist = () => {
           ) : (
             <>
               <div className="cart-list-head">
-                <div className="cart-single-list">
+                <div className="cart-add-padding">
                   <div className="text-center">
-                    There is no item in your wishlist.
+                    There are no items in your wishlist.
                   </div>
                   <div className="text-center mt-3">
                     <div className="button">
                       <Link to="/" className="btn">
-                        See Featured Products
+                        Continue Shopping
                       </Link>
                     </div>
                   </div>

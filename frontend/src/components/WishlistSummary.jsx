@@ -105,7 +105,7 @@ const WishlistSummary = ({ wishlists, count }) => {
                       </>
                     ) : (
                       <>
-                        <div className="button mt-4">
+                        <div className="button">
                           <button className="btn checkout-btn" disabled>
                             Add All to Cart
                           </button>

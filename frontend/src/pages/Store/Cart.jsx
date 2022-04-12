@@ -331,14 +331,14 @@ const Cart = () => {
           ) : (
             <>
               <div className="cart-list-head">
-                <div className="cart-single-list">
+                <div className="cart-add-padding">
                   <div className="text-center">
-                    There is no item in your cart.
+                    There are no items in your cart.
                   </div>
                   <div className="mt-3 text-center">
                     <div className="button">
                       <Link to="/" className="btn">
-                        See Featured Products
+                        Continue Shopping
                       </Link>
                     </div>
                   </div>
