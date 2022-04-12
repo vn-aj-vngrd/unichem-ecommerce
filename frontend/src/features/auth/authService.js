@@ -32,8 +32,8 @@ const update = async (userData, token) => {
     },
   };
   const response = await axios.put(API_URL + "updateUser", userData, config);
-  console.log(response);
-  
+  // console.log(response);
+
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }

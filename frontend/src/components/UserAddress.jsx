@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { update, resetUser } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
+import EditAdddress from "../components/EditAddress";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -20,32 +21,10 @@ const Profile = () => {
     phoneNumber: "",
   });
 
-  const [formDataUpdate, setFormDataUpdate] = useState({
-    addressNameUpdate: "",
-    address1Update: "",
-    address2Update: "",
-    postalCodeUpdate: "",
-    phoneNumberUpdate: "",
-  });
-
   const { addressName, address1, address2, postalCode, phoneNumber } = formData;
-  const {
-    addressNameUpdate,
-    address1Update,
-    address2Update,
-    postalCodeUpdate,
-    phoneNumberUpdate,
-  } = formDataUpdate;
 
   const onChangeCreate = (e) => {
     setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const onChangeUpdate = (e) => {
-    setFormDataUpdate((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
@@ -106,7 +85,7 @@ const Profile = () => {
   const deleteAddress = (index) => {
     let newPrimaryAddress = user.primaryAddress;
 
-    if (index == newPrimaryAddress) {
+    if (index === newPrimaryAddress) {
       toast.error("Cannot delete a default address", {
         position: "top-center",
         autoClose: 7000,
@@ -164,37 +143,6 @@ const Profile = () => {
     });
   };
 
-  // Update user address
-  const onSubmitUpdate = (index) => (e) => {
-    e.preventDefault();
-
-    const address = JSON.parse(JSON.stringify(user.address));
-
-    address[index] = {
-      addressName: addressNameUpdate,
-      address1: address1Update,
-      address2: address2Update,
-      postalCode: postalCodeUpdate,
-      phoneNumber: phoneNumberUpdate,
-    };
-
-    const userData = {
-      address: address,
-    };
-
-    dispatch(update(userData));
-    toast.success("Address created successfully", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
-
   if (isLoading) {
     return (
       <>
@@ -211,367 +159,138 @@ const Profile = () => {
       </div>
 
       <div className="address-row">
-        {user.address.map((address, index) =>
-          index === user.primaryAddress ? (
-            <div key={index}>
-              <div className="address-row-banner d-flex justify-content-between d-flex align-items-center">
-                <h6 className="purchase-order-status">DEFAULT ADDRESS</h6>
-              </div>
-              <div className="profile-address-section">
-                <div className="addresses">
-                  <div className="profile-address">
-                    <ul>
-                      <li className="address-header">
-                        <h6>{user.address[index].addressName}</h6>
-                      </li>
-                      <li>
-                        <p>
-                          <b>Phone:</b> {address.phoneNumber}
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <b>Address:</b> {address.address1}, {address.address2}
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <b>Postal Code:</b> {address.postalCode}
-                        </p>
-                      </li>
-                    </ul>
-                    <br></br>
-                    <div className="address-options button">
-                      <button
-                        to="/checkout"
-                        onClick={() => onSubmitDefault(index)}
-                        className="btn set-default-btn"
-                      >
-                        Set as Default
-                      </button>
-                      <button
-                        to="/product-details"
-                        // onClick={deleteAddress}
-                        data-bs-toggle="collapse"
-                        data-bs-target={"#collapse" + index.toString()}
-                        aria-expanded="false"
-                        aria-controls="collapseOne"
-                        className="btn-alt second-option-btn title collapsed"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        to="/product-details"
-                        onClick={() => deleteAddress(index)}
-                        className="btn-alt second-option-btn"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                    <div className="checkout-steps-form-style">
-                      <ul id="accordionExample">
-                        <li className="">
-                          <form
-                            className="form"
-                            onSubmit={onSubmitUpdate(index)}
-                          >
-                            {/* <div
-                          className="title collapsed"
+        {user.address.map(
+          (address, index) =>
+            index === user.primaryAddress && (
+              <div key={index}>
+                <div className="address-row-banner d-flex justify-content-between d-flex align-items-center">
+                  <h6 className="purchase-order-status">DEFAULT ADDRESS</h6>
+                </div>
+                <div className="profile-address-section">
+                  <div className="addresses">
+                    <div className="profile-address">
+                      <ul>
+                        <li className="address-header">
+                          <h6>{user.address[index].addressName}</h6>
+                        </li>
+                        <li>
+                          <p>
+                            <b>Phone:</b> {address.phoneNumber}
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <b>Address:</b> {address.address1},{" "}
+                            {address.address2}
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <b>Postal Code:</b> {address.postalCode}
+                          </p>
+                        </li>
+                      </ul>
+                      <br></br>
+                      <div className="address-options button">
+                        <button
+                          to="/checkout"
+                          onClick={() => onSubmitDefault(index)}
+                          className="btn set-default-btn"
+                        >
+                          Set as Default
+                        </button>
+
+                        <button
+                          to="/product-details"
                           data-bs-toggle="collapse"
                           data-bs-target={"#collapse" + index.toString()}
                           aria-expanded="false"
                           aria-controls="collapseOne"
+                          className="btn-alt second-option-btn title collapsed"
                         >
-                          Edit Address
-                        </div> */}
-                            <section
-                              className=" collapse"
-                              id={"collapse" + index.toString()}
-                              aria-labelledby="headingOne"
-                              data-bs-parent="#accordionExample"
-                            >
-                              <div className="col-13">
-                                <div className="form-default">
-                                  <label className="form-label">
-                                    Address Name
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    id="addressNameUpdate"
-                                    name="addressNameUpdate"
-                                    value={addressNameUpdate}
-                                    onChange={onChangeUpdate}
-                                    required
-                                  />
-                                </div>
-                              </div>
+                          Edit
+                        </button>
 
-                              <div className="row">
-                                <div className="col-6">
-                                  <div className="single-form form-default">
-                                    <label className="form-label">
-                                      Region, Province, City, Barangay
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="address1Update"
-                                      name="address1Update"
-                                      value={address1Update}
-                                      onChange={onChangeUpdate}
-                                      required
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-6">
-                                  <div className="single-form form-default">
-                                    <label className="form-label">
-                                      Street Name, Building, House No.
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="address2Update"
-                                      name="address2Update"
-                                      value={address2Update}
-                                      onChange={onChangeUpdate}
-                                      required
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-6">
-                                  <div className="single-form form-default">
-                                    <label className="form-label">
-                                      Postal Code
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="postalCodeUpdate"
-                                      name="postalCodeUpdate"
-                                      value={postalCodeUpdate}
-                                      onChange={onChangeUpdate}
-                                      required
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-6">
-                                  <div className="single-form form-default">
-                                    <label className="form-label">
-                                      Phone Number
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="phoneNumberUpdate"
-                                      name="phoneNumberUpdate"
-                                      value={phoneNumberUpdate}
-                                      onChange={onChangeUpdate}
-                                      required
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-md-12">
-                                  <div className="steps-form-btn button">
-                                    <button className="btn" type="submit">
-                                      Save Changes
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </section>
-                          </form>
-                        </li>
-                      </ul>
+                        <button
+                          to="/product-details"
+                          onClick={() => deleteAddress(index)}
+                          className="btn-alt second-option-btn"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                      <EditAdddress index={index} />
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div key={index}>
-              <div className="profile-address-section">
-                <div className="addresses">
-                  <div className="profile-address">
-                    <ul>
-                      <li className="address-header">
-                        <h6>{user.address[index].addressName}</h6>
-                      </li>
-                      <li>
-                        <p>
-                          <b>Phone:</b> {address.phoneNumber}
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <b>Address:</b> {address.address1}, {address.address2}
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <b>Postal Code:</b> {address.postalCode}
-                        </p>
-                      </li>
-                    </ul>
-                    <br></br>
-                    <div className="address-options button">
-                      <button
-                        to="/checkout"
-                        onClick={() => onSubmitDefault(index)}
-                        className="btn set-default-btn"
-                      >
-                        Set as Default
-                      </button>
-                      <button
-                        to="/product-details"
-                        // onClick={deleteAddress}
-                        data-bs-toggle="collapse"
-                        data-bs-target={"#collapse" + index.toString()}
-                        aria-expanded="false"
-                        aria-controls="collapseOne"
-                        className="btn-alt second-option-btn title collapsed"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        to="/product-details"
-                        onClick={() => deleteAddress(index)}
-                        className="btn-alt second-option-btn"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                    <div className="checkout-steps-form-style">
-                      <ul id="accordionExample">
-                        <li className="">
-                          <form
-                            className="form"
-                            onSubmit={onSubmitUpdate(index)}
-                          >
-                            {/* <div
-                          className="title collapsed"
-                          data-bs-toggle="collapse"
-                          data-bs-target={"#collapse" + index.toString()}
-                          aria-expanded="false"
-                          aria-controls="collapseOne"
-                        >
-                          Edit Address
-                        </div> */}
-                            <section
-                              className=" collapse"
-                              id={"collapse" + index.toString()}
-                              aria-labelledby="headingOne"
-                              data-bs-parent="#accordionExample"
-                            >
-                              <div className="col-13">
-                                <div className="form-default">
-                                  <label className="form-label">
-                                    Address Name
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    id="addressNameUpdate"
-                                    name="addressNameUpdate"
-                                    value={addressNameUpdate}
-                                    onChange={onChangeUpdate}
-                                    required
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="row">
-                                <div className="col-6">
-                                  <div className="single-form no-margin form-default">
-                                    <label className="form-label">
-                                      Region, Province, City, Barangay
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="address1Update"
-                                      name="address1Update"
-                                      value={address1Update}
-                                      onChange={onChangeUpdate}
-                                      required
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-6">
-                                  <div className="single-form no-margin form-default">
-                                    <label className="form-label">
-                                      Street Name, Building, House No.
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="address2Update"
-                                      name="address2Update"
-                                      value={address2Update}
-                                      onChange={onChangeUpdate}
-                                      required
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-6">
-                                  <div className="single-form form-default">
-                                    <label className="form-label">
-                                      Postal Code
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="postalCodeUpdate"
-                                      name="postalCodeUpdate"
-                                      value={postalCodeUpdate}
-                                      onChange={onChangeUpdate}
-                                      required
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-6">
-                                  <div className="single-form form-default">
-                                    <label className="form-label">
-                                      Phone Number
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="phoneNumberUpdate"
-                                      name="phoneNumberUpdate"
-                                      value={phoneNumberUpdate}
-                                      onChange={onChangeUpdate}
-                                      required
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-md-12">
-                                  <div className="steps-form-btn button">
-                                    <button className="btn" type="submit">
-                                      Save Changes
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </section>
-                          </form>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
+            )
         )}
 
+        {user.address.map(
+          (address, index) =>
+            index !== user.primaryAddress && (
+              <div key={index}>
+                <div className="profile-address-section">
+                  <div className="addresses">
+                    <div className="profile-address">
+                      <ul>
+                        <li className="address-header">
+                          <h6>{user.address[index].addressName}</h6>
+                        </li>
+                        <li>
+                          <p>
+                            <b>Phone:</b> {address.phoneNumber}
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <b>Address:</b> {address.address1},{" "}
+                            {address.address2}
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <b>Postal Code:</b> {address.postalCode}
+                          </p>
+                        </li>
+                      </ul>
+                      <br></br>
+                      <div className="address-options button">
+                        <button
+                          to="/checkout"
+                          onClick={() => onSubmitDefault(index)}
+                          className="btn set-default-btn"
+                        >
+                          Set as Default
+                        </button>
+
+                        <button
+                          to="/product-details"
+                          data-bs-toggle="collapse"
+                          data-bs-target={"#collapse" + index.toString()}
+                          aria-expanded="false"
+                          aria-controls="collapseOne"
+                          className="btn-alt second-option-btn title collapsed"
+                        >
+                          Edit
+                        </button>
+
+                        <button
+                          to="/product-details"
+                          onClick={() => deleteAddress(index)}
+                          className="btn-alt second-option-btn"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                      <EditAdddress index={index} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+        )}
         <div className="checkout-steps-form-style">
           <ul id="accordionExample">
             <li className=" box-shadow">

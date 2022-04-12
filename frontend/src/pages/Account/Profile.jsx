@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import ProfileSidebar from "../../components/ProfileSidebar";
-import Profile from "../../components/Profile";
+import UserProfile from "../../components/UserProfile";
 
 const Manage = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Manage = () => {
           <div className="container main-profile-section mt-90">
             <ProfileSidebar />
             <div className="spacer"></div>
-            <Profile />
+            <UserProfile />
           </div>
         </>
       )}

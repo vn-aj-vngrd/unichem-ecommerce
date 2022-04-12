@@ -2,10 +2,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { update, resetUser } from "../features/auth/authSlice";
-import Spinner from "../components/Spinner";
+import Spinner from "./Spinner";
 import { toast } from "react-toastify";
 
-const Profile = () => {
+const UserProfile = () => {
   const dispatch = useDispatch();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
@@ -364,4 +364,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfile;
