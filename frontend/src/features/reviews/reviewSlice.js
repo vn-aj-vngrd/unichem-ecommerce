@@ -71,6 +71,7 @@ export const deleteReview = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
+      console.log(false)
       return await reviewService.deleteReview(id, token);
     } catch (error) {
       const reviewMessage =
@@ -135,23 +136,23 @@ export const reviewSlice = createSlice({
         state.isReviewLoading = false;
         state.isReviewError = true;
         state.reviewMessage = action.payload;
-      });
+      })
 
-    // .addCase(deleteReview.pending, (state) => {
-    //   state.isReviewLoading = true;
-    // })
-    // .addCase(deleteReview.fulfilled, (state, action) => {
-    //   state.isReviewLoading = false;
-    //   state.isReviewSuccess = true;
-    //   state.reviews = state.reviews.filter(
-    //     (review) => review._doc._id !== action.payload.id
-    //   );
-    // })
-    // .addCase(deleteReview.rejected, (state, action) => {
-    //   state.isReviewLoading = false;
-    //   state.isReviewError = true;
-    //   state.reviewMessage = action.payload;
-    // });
+      .addCase(deleteReview.pending, (state) => {
+        state.isReviewLoading = true;
+      })
+      .addCase(deleteReview.fulfilled, (state, action) => {
+        state.isReviewLoading = false;
+        state.isReviewSuccess = true;
+        state.reviews = state.reviews.filter(
+          (review) => review._doc._id !== action.payload.id
+        );
+      })
+      .addCase(deleteReview.rejected, (state, action) => {
+        state.isReviewLoading = false;
+        state.isReviewError = true;
+        state.reviewMessage = action.payload;
+      });
   },
 });
 

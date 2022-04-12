@@ -3111,13 +3111,17 @@ ol {
 .product-details-info .reviews .title {
   font-size: 20px;
   font-weight: 500;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .product-details-info .reviews .single-review {
   position: relative;
   padding-left: 80px;
-  margin-bottom: 30px;
+ 
+}
+
+.product-details-info .reviews .single-review:not(.single-review:only-child) {
+  margin-top: 30px;
 }
 
 @media (max-width: 767px) {
@@ -3126,9 +3130,6 @@ ol {
   }
 }
 
-.product-details-info .reviews .single-review:last-child {
-  margin-bottom: 0;
-}
 
 .product-details-info .reviews .single-review img {
   height: 60px;

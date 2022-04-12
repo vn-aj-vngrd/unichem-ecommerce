@@ -1,12 +1,15 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { updateReview, resetReview } from "../features/reviews/reviewSlice";
+import {
+  updateReview,
+  deleteReview,
+  resetReview,
+} from "../features/reviews/reviewSlice";
 import Star from "./Star";
 import { toast } from "react-toastify";
 
 function ReviewSingle({ reviewOne, editable }) {
-  
   const dispatch = useDispatch();
   const moment = require("moment");
   const [starRating, setStarRating] = useState(0);
@@ -14,7 +17,7 @@ function ReviewSingle({ reviewOne, editable }) {
   const [formData, setFormData] = useState({
     review: reviewOne._doc.review,
   });
-//   console.log(reviewOne._doc.createdAt)
+  //   console.log(reviewOne._doc.createdAt)
   const currentDate = moment();
   const createdtDate = moment(reviewOne._doc.createdAt);
   const expiryDate = moment(currentDate).add(30, "d");
@@ -41,6 +44,20 @@ function ReviewSingle({ reviewOne, editable }) {
     };
 
     dispatch(updateReview(reviewData));
+    toast.success("Review created successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const onClickDeleteReview = (_id) => {
+    dispatch(deleteReview(_id));
     toast.success("Review created successfully", {
       position: "top-center",
       autoClose: 5000,
@@ -133,26 +150,32 @@ function ReviewSingle({ reviewOne, editable }) {
                   </span>
                 </h4>
                 <div className="btn-group dropstart">
-                  {editable && (
-                    <>
-                      <button
-                        type="button"
-                        className="vertical-menu-button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <li className="lni lni-more-alt"></li>
-                      </button>
-                      <ul className="review-menu dropdown-menu">
-                        <ul>
-                          {currentDate.isBetween(createdtDate, expiryDate) && (
+                  {editable &&
+                    reviewOne._doc.reviewed === false &&
+                    currentDate.isBetween(createdtDate, expiryDate) && (
+                      <>
+                        <button
+                          type="button"
+                          className="vertical-menu-button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <li className="lni lni-more-alt"></li>
+                        </button>
+                        <ul className="review-menu dropdown-menu">
+                          <ul>
                             <li onClick={() => setIsEditing(true)}>Edit</li>
-                          )}
-                          <li>Delete</li>
+                            <li
+                              onClick={() =>
+                                onClickDeleteReview(reviewOne._doc._id)
+                              }
+                            >
+                              Delete
+                            </li>
+                          </ul>
                         </ul>
-                      </ul>
-                    </>
-                  )}
+                      </>
+                    )}
                 </div>
               </div>
 

@@ -105,8 +105,8 @@ const updateReview = asyncHandler(async (req, res) => {
 // @route   DELETE /api/Reviews/:id
 // @access  Private
 const deleteReview = asyncHandler(async (req, res) => {
+  console.log(req.params)
   const review = await Review.findById(req.params.id);
-
   // Check for review
   if (!review) {
     res.status(400);
@@ -118,8 +118,6 @@ const deleteReview = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not authorized");
   }
-
-  // CHECK IF DATE IS PAST 30
 
   await review.remove();
 
