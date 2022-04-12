@@ -72,6 +72,10 @@ p {
   box-shadow: none;
 }
 
+textarea {
+  resize: none !important;
+}
+
 .navbar-toggler:focus,
 a:focus,
 input:focus,
@@ -500,7 +504,7 @@ ol {
   font-size: 14px;
   font-weight: 600;
   padding: 13px 30px;
-  height: 47px;
+  height: 52px;
   background-color: #f44336;
   color: #fff;
   border: none;
@@ -3096,7 +3100,7 @@ ol {
   border-radius: 4px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  height: 47px !important;
+  height: 52px !important;
 }
 
 .review-btn:hover {
@@ -3146,7 +3150,7 @@ ol {
   position: relative;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
-  padding: 30px;
+  padding: 25px 30px 25px 30px;
 }
 
 @media (max-width: 767px) {
@@ -3333,7 +3337,7 @@ ol {
 }
 
 .modal-dialog .modal-body .review-info {
-  padding: 25px 30px 30px 30px !important;
+  padding: 30px !important;
 }
 
 .modal-dialog .modal-body .review-info textarea {
@@ -5013,7 +5017,7 @@ ol {
 }
 
 .single-payment-option-check {
-  background-color: #95d323;
+  background-color: #f44336;
   font-weight: 800;
   color: #fff;
   border-radius: 50%;
@@ -5038,8 +5042,8 @@ ol {
   .single-payment-option
   input[type="radio"]:checked
   + label {
-  outline: 3px solid #95d323;
-  color: #95d323;
+  outline: 3px solid #f44336;
+  color: #f44336;
   background-color: #fff;
 }
 
@@ -5048,7 +5052,7 @@ ol {
   input[type="radio"]:checked
   + label
   .single-payment-option-check {
-  background-color: #95d323;
+  background-color: #f44336;
   font-weight: 800;
   color: #fff;
   border-radius: 50%;
@@ -5089,6 +5093,8 @@ ol {
 
 .checkout-steps-form-style .steps-form-btn {
   margin-top: 20px;
+  display: flex;
+  justify-content: end;
 }
 
 .checkout-steps-form-style .steps-form-btn-order {
@@ -6005,7 +6011,7 @@ ol {
 
 .address-row-banner {
   padding: 16px 30px;
-  background-color: #95d323;
+  background-color: #f44336;
   border-radius: 4px;
   color: white;
 }
@@ -6071,6 +6077,29 @@ ol {
   margin-right: 10px;
 }
 
+.edit-review textarea {
+  font-size: 14px !important;
+}
+
+.edit-review .edit-review-stars {
+  margin: 18px 0 0 0;
+}
+
+.edit-review .edit-review-stars label {
+  margin: 0 15px 0 0;
+}
+
+.hide-on-review-edit {
+  display: none;
+}
+
+.edit-review .modal-footer {
+  padding: 12px 0 0 0;
+}
+
+.edit-review button {
+  margin-left: 5px !important;
+}
 
 /*======================================
 	Order CSS 
@@ -6162,7 +6191,7 @@ ol {
 }
 
 .order-status-progress-bar {
-  background-color: #95d323;
+  background-color: #f44336;
   height: 3px;
 }
 
@@ -6191,13 +6220,13 @@ ol {
 }
 
 .one-status .true {
-  background-color: #95d323;
+  background-color: #f44336;
   -webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;
 }
 
 .one-status .true:hover {
-  background-color: #78a721;
+  background-color: #b71c1c;
   color: #fff !important;
   -webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;

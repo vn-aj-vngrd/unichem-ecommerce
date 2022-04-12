@@ -118,7 +118,7 @@ const ReviewsSection = ({ productID }) => {
               <div className="reviews">
                 <h4 className="title">Latest Reviews</h4>
                 {productReviews.map((review) => (
-                  <ReviewSingle review={review} editable={false}/>
+                  <ReviewSingle reviewOne={review} editable={false}/>
                 ))}
               </div>
             </div>

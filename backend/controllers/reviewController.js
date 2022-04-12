@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const Review = require("../models/reviewModel");
 const Product = require("../models/productModel");
 const User = require("../models/userModel");
+const moment = require("moment");
 
 // @desc    Get Reviews by user
 // @route   GET /api/reviews
@@ -70,6 +71,9 @@ const updateReview = asyncHandler(async (req, res) => {
     userID,
   });
 
+  console.log(userID);
+  console.log(productID);
+
   // Check for review
   if (!reviewExists) {
     res.status(400);
@@ -82,8 +86,6 @@ const updateReview = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  // CHECK IF DATE IS PAST 30
-
   // Update review
   const updatedReview = await Review.findOneAndUpdate(
     {
@@ -93,6 +95,8 @@ const updateReview = asyncHandler(async (req, res) => {
     req.body,
     { new: true }
   );
+
+  console.log(updateReview);
 
   res.status(200).json(updatedReview);
 });

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProducts, resetProduct } from "../features/products/productSlice";
 import { getReviews, resetReview } from "../features/reviews/reviewSlice";
 import Star from "./Star";
-import EditReview from "./EditReviewModal";
 import Spinner from "../components/Spinner";
 import ReactPaginate from "react-paginate";
 import ReviewSingle from "./ReviewSingle";
@@ -98,7 +97,7 @@ function ProfileReviews() {
               <div className="product-details-info">
                 <div className="">
                   <div className="reviews">
-                    <ReviewSingle review={review} editable={true} />
+                    <ReviewSingle reviewOne={review} editable={true} />
                   </div>
                 </div>
               </div>

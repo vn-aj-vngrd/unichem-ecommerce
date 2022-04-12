@@ -49,10 +49,10 @@ export const getReviews = createAsyncThunk(
 // Update user review from user
 export const updateReview = createAsyncThunk(
   "reviews/update",
-  async (reviewParams, thunkAPI) => {
+  async (reviewData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await reviewService.updateReview(reviewParams, token);
+      return await reviewService.updateReview(reviewData, token);
     } catch (error) {
       const reviewMessage =
         (error.response &&
@@ -118,24 +118,24 @@ export const reviewSlice = createSlice({
         state.isReviewLoading = false;
         state.isReviewError = true;
         state.reviewMessage = action.payload;
-      });
+      })
 
-    // .addCase(updateReview.pending, (state) => {
-    //   state.isReviewLoading = true;
-    // })
-    // .addCase(updateReview.fulfilled, (state, action) => {
-    //   state.isReviewLoading = false;
-    //   state.isReviewSuccess = true;
-    //   const idx = state.reviews.findIndex(
-    //     (obj) => obj._doc._id === action.payload._id
-    //   );
-    //   state.reviews[idx]._doc = action.payload;
-    // })
-    // .addCase(updateReview.rejected, (state, action) => {
-    //   state.isReviewLoading = false;
-    //   state.isReviewError = true;
-    //   state.reviewMessage = action.payload;
-    // })
+      .addCase(updateReview.pending, (state) => {
+        state.isReviewLoading = true;
+      })
+      .addCase(updateReview.fulfilled, (state, action) => {
+        state.isReviewLoading = false;
+        state.isReviewSuccess = true;
+        const idx = state.reviews.findIndex(
+          (obj) => obj._doc._id === action.payload._id
+        );
+        state.reviews[idx]._doc = action.payload;
+      })
+      .addCase(updateReview.rejected, (state, action) => {
+        state.isReviewLoading = false;
+        state.isReviewError = true;
+        state.reviewMessage = action.payload;
+      });
 
     // .addCase(deleteReview.pending, (state) => {
     //   state.isReviewLoading = true;
