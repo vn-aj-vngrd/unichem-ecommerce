@@ -28,8 +28,7 @@ const initialState = {
 //   }
 // )
 
-// Get user products
-
+// Get products
 export const getProducts = createAsyncThunk(
   "products/getAll",
   async (_, thunkAPI) => {
@@ -47,7 +46,25 @@ export const getProducts = createAsyncThunk(
   }
 );
 
-// Delete user product
+// Get specific product
+export const getSpecificProduct = createAsyncThunk(
+  "products/get",
+  async (_, thunkAPI) => {
+    try {
+      return await productService.getProducts();
+    } catch (error) {
+      const productMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.productMessage) ||
+        error.productMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(productMessage);
+    }
+  }
+);
+
+// Delete product
 // export const deleteProduct = createAsyncThunk(
 //   'products/delete',
 //   async (id, thunkAPI) => {
