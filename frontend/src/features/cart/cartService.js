@@ -83,7 +83,7 @@ const deleteAllCart = async (userID, token) => {
   };
 
   const response = await axios.delete(
-    API_URL + "deleteall/" + userID.id,
+    API_URL + "deleteAll/" + userID.id,
     config
   );
   // console.log(response.data);

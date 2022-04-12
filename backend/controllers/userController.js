@@ -10,11 +10,6 @@ const Address = require("../models/addressModel");
 const registerUser = asyncHandler(async (req, res) => {
   const { name, birthday, sex, email, address, password } = req.body;
 
-  if (!name || !birthday || !sex || !email || !password || !address) {
-    res.status(400);
-    throw new Error("Please fill in all fields");
-  }
-
   // check if user is already registered
   const userExists = await User.findOne({ email });
 

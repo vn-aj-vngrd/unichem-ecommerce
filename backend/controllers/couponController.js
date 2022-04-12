@@ -13,6 +13,15 @@ const getCoupons = asyncHandler(async (req, res) => {
   res.status(200).json(coupons);
 });
 
+// @desc    Get Coupons
+// @route   GET /api/coupons
+// @access  Private
+const getOneCoupon = asyncHandler(async (req, res) => {
+  const coupons = await Coupon.findById(req.params.id);
+
+  res.status(200).json(coupons);
+});
+
 // @desc    Set Coupon
 // @route   POST /api/coupons
 // @access  Private

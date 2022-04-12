@@ -6,6 +6,7 @@ const initialState = {
   isWishlistError: false,
   isWishlistSuccess: false,
   isWishlistLoading: false,
+  isWishlistAdded: false,
   wishlistMessage: "",
 };
 
@@ -99,6 +100,7 @@ export const wishlistSlice = createSlice({
       .addCase(setWishlist.fulfilled, (state, action) => {
         state.isWishlistLoading = false;
         state.isWishlistSuccess = true;
+        state.isWishlistAdded = true;
         // state.wishlists.push(action.payload);
       })
       .addCase(setWishlist.rejected, (state, action) => {

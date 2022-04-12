@@ -36,13 +36,14 @@ const Details = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isCartLoading, isCartError, isCartSuccess, cartMessage } =
-    useSelector((state) => state.cart);
+  const { isCartLoading, isCartError, isCartAdded, cartMessage } = useSelector(
+    (state) => state.cart
+  );
 
   const {
     isWishlistLoading,
     isWishlistError,
-    isWishlistSuccess,
+    isWishlistAdded,
     wishlistMessage,
   } = useSelector((state) => state.wishlist);
 
@@ -57,9 +58,46 @@ const Details = ({ product }) => {
 
     if (isWishlistError) {
       Swal.fire({
-        title: "Failed to add item to your wishlist",
-        icon: "error",
-        text: "Please try again later.",
+        title: "Item is already added to your wishlist",
+        text: "To view your wishlist, please proceed to the wishlist page.",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#f44336",
+        cancelButtonColor: "#424242",
+        confirmButtonText: "<Link to='/wishlist'>Go to Wishlist</Link>",
+        cancelButtonText: "Close",
+      }).then((result) => {
+        if (result.isConfirmed) navigate("/wishlist");
+      });
+    }
+
+    if (isWishlistAdded) {
+      Swal.fire({
+        title: "Item added to your wishlist.",
+        text: "To view your wishlist, please proceed to the wishlist page.",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#f44336",
+        cancelButtonColor: "#424242",
+        confirmButtonText: "<Link to='/wishlist'>Go to Wishlist</Link>",
+        cancelButtonText: "Close",
+      }).then((result) => {
+        if (result.isConfirmed) navigate("/wishlist");
+      });
+    }
+
+    if (isCartAdded) {
+      Swal.fire({
+        title: "Item added to your cart.",
+        text: "To checkout, please proceed to the cart page.",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#f44336",
+        cancelButtonColor: "#424242",
+        confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
+        cancelButtonText: "Close",
+      }).then((result) => {
+        if (result.isConfirmed) navigate("/cart");
       });
     }
 
@@ -70,10 +108,9 @@ const Details = ({ product }) => {
   }, [
     isCartError,
     cartMessage,
-    isCartSuccess,
-    isWishlistSuccess,
-    isWishlistLoading,
+    isCartAdded,
     isWishlistError,
+    isWishlistAdded,
     wishlistMessage,
     navigate,
     dispatch,
@@ -95,18 +132,6 @@ const Details = ({ product }) => {
     };
 
     dispatch(setCart(cartData));
-    Swal.fire({
-      title: "Item added to your cart.",
-      text: "To checkout, please proceed to the cart page.",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: "#f44336",
-      cancelButtonColor: "#424242",
-      confirmButtonText: "<Link to='/cart'>Go to Cart</Link>",
-      cancelButtonText: "Close",
-    }).then((result) => {
-      if (result.isConfirmed) navigate("/cart");
-    });
   };
 
   const addToWishlist = (e) => {
@@ -117,18 +142,6 @@ const Details = ({ product }) => {
     };
 
     dispatch(setWishlist(wishlistData));
-    Swal.fire({
-      title: "Item added to your wishlist.",
-      text: "To view your wishlist, please proceed to the wishlist page.",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: "#f44336",
-      cancelButtonColor: "#424242",
-      confirmButtonText: "<Link to='/cart'>Go to Wishlist</Link>",
-      cancelButtonText: "Close",
-    }).then((result) => {
-      if (result.isConfirmed) navigate("/wishlist");
-    });
   };
 
   if (isCartLoading || isWishlistLoading) {

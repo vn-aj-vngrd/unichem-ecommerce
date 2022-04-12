@@ -65,7 +65,7 @@ const deleteAllWishlist = async (userID, token) => {
   };
 
   const response = await axios.delete(
-    API_URL + "deleteall/" + userID.id,
+    API_URL + "deleteAll/" + userID.id,
     config
   );
   localStorage.setItem("wishlistCount", "0");
