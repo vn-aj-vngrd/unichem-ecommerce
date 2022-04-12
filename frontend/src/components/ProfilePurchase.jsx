@@ -57,7 +57,7 @@ const ProfilePurchase = () => {
   if (isOrderLoading || isProductLoading) {
     return (
       <>
-        {/* <div className="empty-container"></div> */}
+        <div className="empty-container"></div>
         <Spinner />
       </>
     );
