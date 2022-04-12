@@ -59,6 +59,112 @@ const getProducts = asyncHandler(async (req, res) => {
   res.status(200).json(retData);
 });
 
+// @desc    Get one product
+// @route   GET /api/products/getOneProduct
+// @access  Public
+const getOneProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  if (!product) {
+    res.status(200).json({});
+  }
+
+  let retData = [];
+
+  const reviews = await Review.find({ productID: product._id });
+  const orders = await Order.find({ productID: product._id });
+
+  const reviewCount = await Review.find({
+    productID: product._id,
+  }).count();
+  const ordersCount = await Order.find({
+    productID: product._id,
+  }).count();
+
+  let market = {
+    reviewsCount: 0,
+    averageRatings: 0,
+    sold: 0,
+  };
+
+  for (let j = 0; j < reviews.length; j++) {
+    market.averageRatings += reviews[j].rating;
+  }
+
+  if (ordersCount > 0) {
+    for (let k = 0; k < orders.length; k++) {
+      if (orders[k].orderStatus === "completed") {
+        market.sold += orders[k].quantity;
+      }
+    }
+  }
+
+  if (reviewCount > 0) {
+    market.reviewsCount = reviews.length;
+    market.averageRatings = market.averageRatings / reviews.length;
+  }
+
+  const productAndReviews = { ...product, market };
+  retData.push(productAndReviews);
+
+  res.status(200).json(retData);
+});
+
+// @desc    Get featured products
+// @route   GET /api/products/getFeaturedProducts
+// @access  Public
+const getFeaturedProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({ featured: true }).sort({
+    createdAt: "desc",
+  });
+  const productCount = await Product.count();
+
+  if (productCount < 0) {
+    res.status(200).json({});
+  }
+
+  let retData = [];
+  for (let i = 0; i < products.length; i++) {
+    const reviews = await Review.find({ productID: products[i]._id });
+    const orders = await Order.find({ productID: products[i]._id });
+
+    const reviewCount = await Review.find({
+      productID: products[i]._id,
+    }).count();
+    const ordersCount = await Order.find({
+      productID: products[i]._id,
+    }).count();
+
+    let market = {
+      reviewsCount: 0,
+      averageRatings: 0,
+      sold: 0,
+    };
+
+    for (let j = 0; j < reviews.length; j++) {
+      market.averageRatings += reviews[j].rating;
+    }
+
+    if (ordersCount > 0) {
+      for (let k = 0; k < orders.length; k++) {
+        if (orders[k].orderStatus === "completed") {
+          market.sold += orders[k].quantity;
+        }
+      }
+    }
+
+    if (reviewCount > 0) {
+      market.reviewsCount = reviews.length;
+      market.averageRatings = market.averageRatings / reviews.length;
+    }
+
+    const productAndReviews = { ...products[i], market };
+    retData.push(productAndReviews);
+  }
+
+  res.status(200).json(retData);
+});
+
 // @desc    Set Product
 // @route   POST /api/products
 // @access  Private
@@ -163,6 +269,8 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 module.exports = {
   getProducts,
+  getOneProduct,
+  getFeaturedProducts,
   setProduct,
   updateProduct,
   deleteProduct,

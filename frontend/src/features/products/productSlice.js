@@ -47,11 +47,29 @@ export const getProducts = createAsyncThunk(
 );
 
 // Get specific product
-export const getSpecificProduct = createAsyncThunk(
-  "products/get",
+export const getOneProduct = createAsyncThunk(
+  "products/getSpecific",
+  async (id, thunkAPI) => {
+    try {
+      return await productService.getOneProduct(id);
+    } catch (error) {
+      const productMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.productMessage) ||
+        error.productMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(productMessage);
+    }
+  }
+);
+
+// Get featured product
+export const getFeaturedProducts = createAsyncThunk(
+  "products/getFeatured",
   async (_, thunkAPI) => {
     try {
-      return await productService.getProducts();
+      return await productService.getFeaturedProducts();
     } catch (error) {
       const productMessage =
         (error.response &&
@@ -113,6 +131,34 @@ export const productSlice = createSlice({
         state.products = action.payload;
       })
       .addCase(getProducts.rejected, (state, action) => {
+        state.isProductLoading = false;
+        state.isProductError = true;
+        state.productMessage = action.payload;
+      })
+
+      .addCase(getOneProduct.pending, (state) => {
+        state.isProductLoading = true;
+      })
+      .addCase(getOneProduct.fulfilled, (state, action) => {
+        state.isProductLoading = false;
+        state.isProductSuccess = true;
+        state.products = action.payload;
+      })
+      .addCase(getOneProduct.rejected, (state, action) => {
+        state.isProductLoading = false;
+        state.isProductError = true;
+        state.productMessage = action.payload;
+      })
+
+      .addCase(getFeaturedProducts.pending, (state) => {
+        state.isProductLoading = true;
+      })
+      .addCase(getFeaturedProducts.fulfilled, (state, action) => {
+        state.isProductLoading = false;
+        state.isProductSuccess = true;
+        state.products = action.payload;
+      })
+      .addCase(getFeaturedProducts.rejected, (state, action) => {
         state.isProductLoading = false;
         state.isProductError = true;
         state.productMessage = action.payload;

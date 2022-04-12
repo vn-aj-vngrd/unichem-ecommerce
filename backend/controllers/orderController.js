@@ -16,7 +16,7 @@ const getOrders = asyncHandler(async (req, res) => {
   let retData = [];
   for (let i = 0; i < Orders.length; i++) {
     let orderID = Orders[i]._id;
-    console.log(orderID);
+    // console.log(orderID);
     let orderLine = await Orderline.find({ orderID: orderID });
     let temp = {
       _id: Orders[i]._id,
@@ -32,7 +32,7 @@ const getOrders = asyncHandler(async (req, res) => {
     retData.push(temp);
   }
 
-  console.log(retData);
+  // console.log(retData);
 
   res.status(200).json(retData);
 });

@@ -3241,9 +3241,9 @@ ol {
   padding: 30px 30px 30px 30px;
 }
 
-.review-modal .modal-body .form-group {
-  /* margin-bottom: 15px; */
-}
+/* .review-modal .modal-body .form-group {
+  margin-bottom: 15px;
+} */
 
 .review-modal .modal-body .form-group label {
   color: #666;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getProducts,
+  getOneProduct,
   resetProduct,
 } from "../../features/products/productSlice";
 import Details from "../../components/Details";
@@ -27,12 +27,12 @@ const ProductDetails = () => {
       // console.log(productMessage);
     }
 
-    dispatch(getProducts());
+    dispatch(getOneProduct(id));
 
     return () => {
       dispatch(resetProduct());
     };
-  }, [navigate, isProductError, productMessage, dispatch]);
+  }, [navigate, id, isProductError, productMessage, dispatch]);
 
   if (isProductLoading) {
     return (
@@ -43,18 +43,16 @@ const ProductDetails = () => {
     );
   }
 
-  const product = products.filter((product) => {
-    return product._doc._id === id;
-  });
+  // console.log(products);
 
   return (
     <>
       <Breadcrumb type="product" />
 
-      {product.length > 0 ? (
+      {products.length > 0 ? (
         <>
-          <Details product={product[0]} />
-          <Specifications product={product[0]} />
+          <Details product={products[0]} />
+          <Specifications product={products[0]} />
         </>
       ) : (
         <></>

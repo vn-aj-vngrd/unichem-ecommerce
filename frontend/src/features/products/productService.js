@@ -15,7 +15,7 @@ const API_URL = "/api/products/";
 //   return response.data;
 // };
 
-// Get user products
+// Get all products
 const getProducts = async () => {
   const response = await axios.get(API_URL);
   // console.log(response.data);
@@ -23,7 +23,23 @@ const getProducts = async () => {
   return response.data;
 };
 
-// Delete user product
+// Get specific product
+const getOneProduct = async (id) => {
+  const response = await axios.get(API_URL + "getOneProduct/" + id);
+  // console.log(response.data);
+
+  return response.data;
+};
+
+// Get specific product
+const getFeaturedProducts = async () => {
+  const response = await axios.get(API_URL + "getFeaturedProducts");
+  // console.log(response.data);
+
+  return response.data;
+};
+
+// Delete product
 // const deleteProduct = async (productId, token) => {
 //   const config = {
 //     headers: {
@@ -39,6 +55,8 @@ const getProducts = async () => {
 const productService = {
   //   createProduct,
   getProducts,
+  getOneProduct,
+  getFeaturedProducts,
   //   deleteProduct,
 };
 

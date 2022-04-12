@@ -211,7 +211,7 @@ const Product = ({
                         {product._doc.productName}
                       </h5>
                     </div>
-                    <Star star={3} reviews={1} />
+                    <Star star={product.market.averageRatings} reviews={product.market.reviewsCount} />
                   </div>
                 </div>
                 <div className="order-total-row ">
