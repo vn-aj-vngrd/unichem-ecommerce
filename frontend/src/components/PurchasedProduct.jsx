@@ -21,7 +21,7 @@ const PurchasedProduct = ({ products, orderLines }) => {
                   alt="#"
                 ></img>
                 <div className="button">
-                  <Link to="/product-details" className="btn">
+                  <Link to={`/product-details/${orderLine.productID}`} className="btn">
                     <i className="lni lni-eye"></i> View
                   </Link>
                 </div>
@@ -49,7 +49,7 @@ const PurchasedProduct = ({ products, orderLines }) => {
                 </div>
 
                 <h4 className="title">
-                  <Link to="/">{orderLine.productName}</Link>
+                  <Link to={`/product-details/${orderLine.productID}`}>{orderLine.productName}</Link>
                 </h4>
 
                 <div className="">Type / Color: {orderLine.productType}</div>
