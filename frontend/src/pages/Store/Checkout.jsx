@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
 import { resetCart, getCarts } from "../../features/cart/cartSlice.js";
-import { getCoupons } from "../../features/coupons/couponSlice.js";
+import {
+  validateCoupon,
+  resetCoupon,
+} from "../../features/coupons/couponSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Breadcrumb from "../../components/Breadcrumb";
@@ -15,7 +18,9 @@ const Checkout = () => {
   const { user } = useSelector((state) => state.auth);
   const { carts } = useSelector((state) => state.cart);
   const { isOrderAdded, isOrderError } = useSelector((state) => state.orders);
-  const { coupons } = useSelector((state) => state.coupons);
+  const { coupons, couponError, isCouponSuccess } = useSelector(
+    (state) => state.coupons
+  );
 
   const [payment, setPayment] = useState("");
   const [couponCode, setCouponCode] = useState("");
@@ -33,16 +38,13 @@ const Checkout = () => {
     }
 
     dispatch(getCarts());
-    dispatch(getCoupons());
-
 
     if (isOrderAdded) {
       Swal.fire({
         title: "Order is being processed",
         text: "Please wait for the confirmation of your order.",
         icon: "success",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#f44336",
       });
       navigate("/cart");
     }
@@ -56,11 +58,86 @@ const Checkout = () => {
       navigate("/cart");
     }
 
+    if (couponError.length > 0) {
+      switch (couponError) {
+        case "notFound": {
+          Swal.fire({
+            title: "Coupon is invalid",
+            icon: "error",
+            text: "Please input a valid coupon",
+            confirmButtonColor: "#f44336",
+          });
+          break;
+        }
+        case "requiredAmountError": {
+          Swal.fire({
+            title: "Coupon is invalid",
+            icon: "error",
+            text: "Sorry, coupon requirement does not meet your order amount.",
+            confirmButtonColor: "#f44336",
+          });
+          break;
+        }
+        case "expired": {
+          Swal.fire({
+            title: "Coupon is invalid",
+            icon: "error",
+            text: "Coupon has expired",
+            confirmButtonColor: "#f44336",
+          });
+          break;
+        }
+        case "existingCoupon": {
+          Swal.fire({
+            title: "Coupon is invalid",
+            icon: "error",
+            text: "Sorry, you already use this coupon.",
+            confirmButtonColor: "#f44336",
+          });
+          break;
+        }
+        case "limitError": {
+          Swal.fire({
+            title: "Coupon is invalid",
+            icon: "error",
+            text: "Sorry, the coupon has already exceeded the limit of use.",
+            confirmButtonColor: "#f44336",
+          });
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    }
+
+    if (isCouponSuccess) {
+      console.log(coupons);
+      Swal.fire({
+        title: "Coupon is Verified",
+        text: coupons.description,
+        icon: "success",
+        confirmButtonColor: "#f44336",
+        cancelButtonColor: "#424242",
+      });
+      setDiscount(coupons.discount);
+    }
+
     return () => {
       dispatch(resetOrder());
       dispatch(resetCart());
+      dispatch(resetCoupon());
     };
-  }, [user, navigate, isOrderAdded, isOrderError, dispatch]);
+  }, [
+    user,
+    coupons,
+    isCouponSuccess,
+    navigate,
+    isOrderAdded,
+    isOrderError,
+    couponError,
+    dispatch,
+  ]);
 
   if (localStorage.getItem("cartCount") < 1) {
     Swal.fire({
@@ -79,7 +156,7 @@ const Checkout = () => {
   }, 0);
 
   let subtotal = 0;
-  let orders;
+  let orders = [];
 
   if (checked > 0) {
     subtotal = carts.reduce((sum, cart) => {
@@ -110,6 +187,10 @@ const Checkout = () => {
 
   const shippingFee = 0;
   const total = subtotal + shippingFee;
+
+  if (discount > 0) {
+    subtotal -= (subtotal * discount) / 100;
+  }
 
   const onSelectPayment = (e) => {
     setPayment(e.target.value);
@@ -201,7 +282,7 @@ const Checkout = () => {
 
   const onApply = () => {
     if (couponCode === "") {
-      toast.error(`Please input a valid coupon code.`, {
+      toast.error(`Please input a valid coupon.`, {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
@@ -212,34 +293,14 @@ const Checkout = () => {
         theme: "colored",
       });
       return;
-    } 
-
-    if (coupons.length > 0) {
-      const coupon = coupons.find((coupon) => {
-        return coupon.code === couponCode;
-      });
-
-      if (coupon) {
-        if (coupon.discountType === "percentage") {
-          setDiscount(subtotal * (coupon.discount / 100));
-        } else {
-          setDiscount(coupon.discount);
-        }
-      } else {
-        toast.error(`Coupon code is invalid.`, {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      }
     }
 
-    console.log(coupons)
+    const couponData = {
+      couponCode,
+      subtotal,
+    };
+
+    dispatch(validateCoupon(couponData));
   };
 
   return (
@@ -422,7 +483,7 @@ const Checkout = () => {
                           <div className="cart-list-head accordion-body">
                             <div className="cart-single-list">
                               <div className="col-md-12 align-items-right">
-                                <div className="steps-form-btn button">
+                                <div className="steps-form-btn-no-margin button">
                                   <button
                                     className="btn"
                                     data-bs-toggle="collapse"
@@ -626,7 +687,7 @@ const Checkout = () => {
                     <div className="form-input form">
                       <input
                         type="text"
-                        placeholder="Coupon Code"
+                        placeholder="Coupon"
                         value={couponCode}
                         onChange={onChange}
                       />
@@ -703,6 +764,13 @@ const Checkout = () => {
                     <div className="total-price">
                       <p className="value">Shipping Fee:</p>
                       <p className="price">₱ {shippingFee}</p>
+                    </div>
+                  </div>
+
+                  <div className="sub-total-price">
+                    <div className="total-price">
+                      <p className="value">Discount:</p>
+                      <p className="price">₱ {discount}</p>
                     </div>
                   </div>
 

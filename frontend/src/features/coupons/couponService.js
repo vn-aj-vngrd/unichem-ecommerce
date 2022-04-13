@@ -15,18 +15,21 @@ const getCoupons = async (token) => {
   return response.data;
 };
 
-// Get one coupon
-const getOneCoupon = async (couponCode, token) => {
-
+// Validate coupon
+const validateCoupon = async (couponData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.get(API_URL + "getOneCoupon/" + couponCode, config);
+  const response = await axios.post(
+    API_URL + "validateCoupon",
+    couponData,
+    config
+  );
 
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };
@@ -75,7 +78,7 @@ const deleteCoupon = async (couponId, token) => {
 
 const Couponservice = {
   setCoupon,
-  getOneCoupon,
+  validateCoupon,
   getCoupons,
   updateCoupon,
   deleteCoupon,

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getCoupons,
-  getOneCoupon,
+  validateCoupon,
   setCoupon,
   updateCoupon,
   deleteCoupon,
@@ -16,6 +16,6 @@ router
   .post(protect, setCoupon)
   .put(protect, updateCoupon);
 router.route("/:id").delete(protect, deleteCoupon);
-router.route("/getOneCoupon/:couponCode").get(protect, getOneCoupon);
+router.route("/validateCoupon").post(protect, validateCoupon);
 
 module.exports = router;

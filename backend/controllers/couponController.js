@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 
 const Coupon = require("../models/CouponModel");
+const Couponlog = require("../models/CouponlogModel");
+const moment = require("moment");
 
 // @desc    Get Coupons
 // @route   GET /api/coupons
@@ -14,11 +16,42 @@ const getCoupons = asyncHandler(async (req, res) => {
   res.status(200).json(coupons);
 });
 
-// @desc    Get Coupons
-// @route   GET /api/coupons
+// @desc    Validate Coupon
+// @route   POST /api/coupons/validateCoupon
 // @access  Private
-const getOneCoupon = asyncHandler(async (req, res) => {
-  const coupon = await Coupon.find({ couponCode: req.params.couponCode });
+const validateCoupon = asyncHandler(async (req, res) => {
+  const coupon = await Coupon.findOne({ couponCode: req.body.couponCode });
+  if (!coupon) {
+    return res.status(200).json("notFound");
+  }
+
+  const couponCount = await Couponlog.find({
+    couponID: coupon._id,
+  }).count();
+
+  const existingCoupon = await Couponlog.find({
+    couponID: coupon._id,
+    userID: req.user._id,
+  }).count();
+
+  const currentDate = moment();
+  const expiryDate = moment(coupon.expiryDate);
+
+  if (currentDate > expiryDate) {
+    return res.status(200).json("expired");
+  }
+
+  if (coupon.requiredAmount > req.body.subtotal) {
+    return res.status(200).json("requiredAmountError");
+  }
+
+  if (existingCoupon > 0) {
+    return res.status(200).json("existingCoupon");
+  }
+
+  if (couponCount > coupon.limit) {
+    return res.status(200).json("limitError");
+  }
 
   res.status(200).json(coupon);
 });
@@ -27,8 +60,15 @@ const getOneCoupon = asyncHandler(async (req, res) => {
 // @route   POST /api/coupons
 // @access  Private
 const setCoupon = asyncHandler(async (req, res) => {
-  const { couponCode, description, percentOff, requiredTotal, expiryDate } =
-    req.body;
+  const {
+    couponCode,
+    couponType,
+    description,
+    maxUse,
+    percentOff,
+    requiredTotal,
+    expiryDate,
+  } = req.body;
 
   const existingCoupon = await Coupon.findOne({
     couponCode,
@@ -41,11 +81,13 @@ const setCoupon = asyncHandler(async (req, res) => {
 
   // If Coupon does not exist then create.
   const newCoupon = await Coupon.create({
-    couponCode: couponCode,
-    description: description,
-    percentOff: percentOff,
-    requiredTotal: requiredTotal,
-    expiryDate: expiryDate,
+    couponCode,
+    couponType,
+    description,
+    maxUse,
+    percentOff,
+    requiredTotal,
+    expiryDate,
   });
 
   res.status(200).json(newCoupon);
@@ -82,10 +124,10 @@ const updateCoupon = asyncHandler(async (req, res) => {
 // @route   DELETE /api/coupons/:id
 // @access  Private
 const deleteCoupon = asyncHandler(async (req, res) => {
-  const Coupon = await Coupon.findById(req.params.id);
+  const coupon = await Coupon.findById(req.params.id);
 
   // Check for Coupon
-  if (!Coupon) {
+  if (!coupon) {
     res.status(400);
     throw new Error("Coupon not found");
   }
@@ -96,13 +138,13 @@ const deleteCoupon = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  // Make sure the logged in user matches the Coupon user
-  if (Coupon.userID.toString() !== req.user.id) {
+  // Make sure the logged in user matches the Coupon
+  if (coupon.userID.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
 
-  await Coupon.remove();
+  await coupon.remove();
 
   res.status(200).json({ id: req.params.id });
 });
@@ -128,7 +170,7 @@ const deleteAllCoupon = asyncHandler(async (req, res) => {
 
 module.exports = {
   getCoupons,
-  getOneCoupon,
+  validateCoupon,
   setCoupon,
   updateCoupon,
   deleteCoupon,

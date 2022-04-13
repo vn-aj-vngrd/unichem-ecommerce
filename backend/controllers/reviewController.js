@@ -105,7 +105,7 @@ const updateReview = asyncHandler(async (req, res) => {
 // @route   DELETE /api/Reviews/:id
 // @access  Private
 const deleteReview = asyncHandler(async (req, res) => {
-  console.log(req.params)
+  console.log(req.params);
   const review = await Review.findById(req.params.id);
   // Check for review
   if (!review) {
