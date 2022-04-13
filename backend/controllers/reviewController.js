@@ -25,6 +25,28 @@ const getReviews = asyncHandler(async (req, res) => {
   // res.status(200).json(reviews);
 });
 
+// @desc    Get Reviews by user
+// @route   GET /api/reviews
+// @access  Private
+const getUserReviews = asyncHandler(async (req, res) => {
+  const userID = req.user._id;
+  console.log(userID)
+  const reviews = await Review.find({userID: userID}).sort({
+    createdAt: "desc",
+  });
+  console.log(true)
+
+  let retData = [];
+  for (let i = 0; i < reviews.length; i++) {
+    let user = await User.findById(reviews[i].userID);
+    const temp = { ...reviews[i], user };
+    retData.push(temp);
+  }
+
+  res.status(200).json(retData);
+  // res.status(200).json(reviews);
+});
+
 // @desc    Set Review
 // @route   POST /api/reviews
 // @access  Private
@@ -126,6 +148,7 @@ const deleteReview = asyncHandler(async (req, res) => {
 
 module.exports = {
   getReviews,
+  getUserReviews,
   setReview,
   updateReview,
   deleteReview,

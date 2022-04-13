@@ -2,8 +2,7 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts, resetProduct } from "../features/products/productSlice";
-import { getReviews, resetReview } from "../features/reviews/reviewSlice";
+import { getUserReviews, resetReview } from "../features/reviews/reviewSlice";
 import Star from "./Star";
 import Spinner from "../components/Spinner";
 import ReactPaginate from "react-paginate";
@@ -17,36 +16,19 @@ function ProfileReviews() {
   const { reviews, isReviewLoading, isReviewError, reviewMessage } =
     useSelector((state) => state.reviews);
 
-  const { products, isProductLoading, isProductError, productMessage } =
-    useSelector((state) => state.products);
-
   useEffect(() => {
     if (isReviewError) {
       // console.log(reviewMessage);
     }
 
-    dispatch(getReviews());
+    dispatch(getUserReviews());
 
     return () => {
       dispatch(resetReview());
     };
   }, [isReviewError, reviewMessage, dispatch]);
 
-  useEffect(() => {
-    document.title = "Unichem Store | Product Details";
-
-    if (isProductError) {
-      // console.log(productMessage);
-    }
-
-    dispatch(getProducts());
-
-    return () => {
-      dispatch(resetProduct());
-    };
-  }, [navigate, isProductError, productMessage, dispatch]);
-
-  if (isReviewLoading || isProductLoading) {
+  if (isReviewLoading) {
     return (
       <>
         <div className="empty-container"></div>
@@ -56,7 +38,6 @@ function ProfileReviews() {
   }
 
   let allReviews = JSON.parse(JSON.stringify(reviews));
-  allReviews.filter((review) => review.userID === user._id);
 
   console.log(allReviews);
 
@@ -73,27 +54,27 @@ function ProfileReviews() {
             <div className="d-flex">
               <div className="">
                 <div className="review-product-image">
-                  <img src={review.product.images[0]} alt="#"></img>
+                  <img src={review._doc.images[0]} alt="#"></img>
                 </div>
               </div>
               <div className="">
                 <div className="product-info">
                   <h5 className="title">
-                    <Link to={`/product-details/${review.product.productName}`}>{review.product.productName}</Link>
+                    <Link to={`/product-details/${review._doc.productName}`}>{review._doc.productName}</Link>
                   </h5>
                   <div className="category">
                     <i className="lni lni-package"></i> Category:
-                    <Link to={`/products/category/${review.product.category}`}>
-                      {review.product.category}
+                    <Link to={`/products/category/${review._doc.category}`}>
+                      {review._doc.category}
                     </Link>
                   </div>
-                    Types / Color: {review.product.types}
+                    Brand: {review._doc.brand}
                 </div>
               </div>
             </div>
           </div>
           <div className="no-box-shadow">
-            <div className="order-total-row">
+            <div className="review-second-row">
               <div className="product-details-info">
                 <div className="">
                   <div className="reviews">
