@@ -141,7 +141,7 @@ function ReviewSingle({ reviewOne, editable }) {
               </div>
             </div>
 
-            <div className={isEditing && "hide-on-review-edit"}>
+            <div className={isEditing ? "hide-on-review-edit" : ""}>
               <div className="d-flex justify-content-between align-items-start">
                 <h4 className="">
                   {reviewOne.user.name}
