@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const couponlogsSchema = mongoose.Schema(
+const couponlogSchema = mongoose.Schema(
   {
     couponID: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Coupon",
     },
-    OrderID: {
+    orderID: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Order",
@@ -21,4 +21,4 @@ const couponlogsSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Couponlog", couponlogsSchema);
+module.exports = mongoose.model("Couponlog", couponlogSchema);

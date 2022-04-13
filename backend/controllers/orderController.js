@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 
 const Order = require("../models/orderModel");
 const Orderline = require("../models/orderlineModel");
+const Couponlog = require("../models/CouponlogModel");
 const Cart = require("../models/cartModel");
 
 // @desc    Get Orders by user
@@ -81,9 +82,20 @@ const setOrder = asyncHandler(async (req, res) => {
     newOrderline.push(orderline);
   }
 
+  // Create couponlogID
+  let newCouponlog;
+  if (req.body.couponlogID) {
+    newCouponlog = await Couponlog.create({
+      userID: req.user._id,
+      couponID: req.body.couponlogID,
+      orderID: newOrder._id,
+    });
+  }
+
   let retData = {
     order: newOrder,
     orderline: newOrderline,
+    couponlog: newCouponlog,
   };
 
   return res.status(200).json(retData);

@@ -10,24 +10,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
+import Spinner from "../../components/Spinner";
 
 const Checkout = () => {
   let itemSubtotal = 0;
-  let discountAmount = 0;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { carts } = useSelector((state) => state.cart);
+  const { carts, isCartLoading } = useSelector((state) => state.cart);
   const { isOrderAdded, isOrderError } = useSelector((state) => state.orders);
-  const { coupons, couponError, isCouponSuccess } = useSelector(
-    (state) => state.coupons
-  );
+  const { coupons, couponError, isCouponSuccess, isCouponLoading } =
+    useSelector((state) => state.coupons);
 
   const [payment, setPayment] = useState("");
   const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState({ value: 0, type: "" });
+  const [discount, setDiscount] = useState({ value: 0, type: "", _id: null });
 
   const onChange = (e) => {
     setCouponCode(e.target.value);
@@ -115,7 +114,6 @@ const Checkout = () => {
     }
 
     if (isCouponSuccess) {
-      console.log(coupons);
       Swal.fire({
         title: "Coupon is Verified",
         text: coupons.description,
@@ -123,7 +121,11 @@ const Checkout = () => {
         confirmButtonColor: "#f44336",
         cancelButtonColor: "#424242",
       });
-      setDiscount({ value: coupons.discount, type: coupons.couponType });
+      setDiscount({
+        value: coupons.discount,
+        type: coupons.couponType,
+        _id: coupons._id,
+      });
     }
 
     return () => {
@@ -210,6 +212,30 @@ const Checkout = () => {
 
   const total = subtotal - orderDiscount + shippingFee;
 
+  const onApply = () => {
+    if (couponCode === "") {
+      toast.error(`Please input a valid coupon.`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
+    const couponData = {
+      couponCode,
+      subtotal,
+    };
+
+    dispatch(validateCoupon(couponData));
+    setCouponCode("");
+  };
+
   const onSelectPayment = (e) => {
     setPayment(e.target.value);
   };
@@ -236,6 +262,11 @@ const Checkout = () => {
       return;
     }
 
+    let orderStatus = "to-ship";
+    if (payment === "bank-transfer" || payment === "in-store") {
+      orderStatus = "to-pay";
+    }
+
     let orderData = {
       order: {
         shippingDate: new Date(new Date().setDate(new Date().getDate() + 5)),
@@ -243,10 +274,11 @@ const Checkout = () => {
         shippingFee: shippingFee,
         discount: discount.value,
         totalPrice: total.toFixed(2),
-        orderStatus: "Pending",
+        orderStatus: orderStatus,
         paymentMethod: payment,
       },
       orderline: [],
+      couponlogID: discount._id,
     };
 
     Swal.fire({
@@ -298,28 +330,14 @@ const Checkout = () => {
     });
   };
 
-  const onApply = () => {
-    if (couponCode === "") {
-      toast.error(`Please input a valid coupon.`, {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-      return;
-    }
-
-    const couponData = {
-      couponCode,
-      subtotal,
-    };
-
-    dispatch(validateCoupon(couponData));
-  };
+  if (isCartLoading || isCouponLoading) {
+    return (
+      <>
+        <Spinner />
+        <div className="empty-container"></div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -632,11 +650,11 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-1"
-                                  value="cod"
+                                  value="cash-on-delivery"
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-1">
-                                  <p>COD</p>
+                                  <p>Cash-on-Delivery</p>
                                   <div className="single-payment-option-check">
                                     <i className="lni lni-checkmark"></i>
                                   </div>
@@ -651,7 +669,7 @@ const Checkout = () => {
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-2">
-                                  <p>In Store</p>
+                                  <p>In-Store Payment</p>
                                   <div className="single-payment-option-check">
                                     <i className="lni lni-checkmark"></i>
                                   </div>
@@ -666,7 +684,7 @@ const Checkout = () => {
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-3">
-                                  <p>Bank Transfer</p>
+                                  <p>Bank-Transfer</p>
                                   <div className="single-payment-option-check">
                                     <i className="lni lni-checkmark"></i>
                                   </div>
@@ -792,11 +810,7 @@ const Checkout = () => {
                     <div className="total-price">
                       <p className="value">Discount:</p>
                       <p className="price">
-                        <span hidden>
-                          {(discountAmount = subtotal * (discount.value / 100))}
-                          )
-                        </span>
-                        - ₱ {discountAmount.toFixed(2)} (%{discount.value})
+                        - ₱ {orderDiscount.toFixed(2)} (%{discount.value})
                       </p>
                     </div>
                   </div>
