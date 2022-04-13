@@ -49,7 +49,7 @@ function ProfileReviews() {
   if (isReviewLoading || isProductLoading) {
     return (
       <>
-        {/* <div className="empty-container"></div> */}
+        <div className="empty-container"></div>
         <Spinner />
       </>
     );
