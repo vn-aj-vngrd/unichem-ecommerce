@@ -216,13 +216,11 @@ const Checkout = () => {
     if (couponCode === "") {
       toast.error(`Please input a valid coupon.`, {
         position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
       return;
     }

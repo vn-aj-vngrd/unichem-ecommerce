@@ -22,15 +22,13 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message, {
+      toast.error("Your email or password is incorrect, please try again.", {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
     }
 
@@ -41,13 +39,11 @@ const Login = () => {
       const user = JSON.parse(temp);
       toast.success(`Welcome, ${user.name}`, {
         position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
-        theme: "light",
       });
 
       navigate("/");
@@ -69,13 +65,11 @@ const Login = () => {
     if (password.length < 8) {
       toast.error("Password must be at least 8 characters.", {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
       return;
     }

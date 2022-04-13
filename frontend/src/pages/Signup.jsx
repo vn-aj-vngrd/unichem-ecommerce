@@ -50,13 +50,11 @@ const Signup = () => {
     if (isError) {
       toast.error(message, {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
     }
 
@@ -67,13 +65,11 @@ const Signup = () => {
       const user = JSON.parse(temp);
       toast.success(`Welcome, ${user.name}`, {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
       navigate("/");
     }
@@ -86,7 +82,7 @@ const Signup = () => {
 
     if (birthday) {
       const today = new Date();
-      const birthDate = new Date(birthday); // create a date object directly from `dob1` argument
+      const birthDate = new Date(birthday);
       let age_now = today.getFullYear() - birthDate.getFullYear();
       const m = today.getMonth() - birthDate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -95,13 +91,11 @@ const Signup = () => {
       if (age_now < 18) {
         toast.error("You must be at least 18 years old to register.", {
           position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
+          autoClose: 2000,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined,
-          theme: "colored",
         });
         return;
       }
@@ -110,13 +104,11 @@ const Signup = () => {
     if (password !== confirmPassword) {
       toast.error("Passwords do not match", {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
       return;
     }
@@ -124,13 +116,11 @@ const Signup = () => {
     if (password.length < 8) {
       toast.error("Password must be at least 8 characters.", {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 2000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
       return;
     }
