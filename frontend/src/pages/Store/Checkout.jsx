@@ -123,7 +123,7 @@ const Checkout = () => {
         confirmButtonColor: "#f44336",
         cancelButtonColor: "#424242",
       });
-      // setDiscount({ value: coupons.discount, type: coupons.couponType });
+      setDiscount({ value: coupons.discount, type: coupons.couponType });
     }
 
     return () => {
@@ -159,7 +159,8 @@ const Checkout = () => {
   }, 0);
 
   let subtotal = 0;
-  let shippingFee = 0;
+  let shippingFee = 100;
+  let orderDiscount = 0;
   let orders = [];
 
   if (checked > 0) {
@@ -189,19 +190,25 @@ const Checkout = () => {
     return sum;
   }, 0);
 
-  if (discount.type === "order-discount") {
-    subtotal -= (subtotal * discount.value) / 100;
+  switch (discount.type) {
+    case "order-discount": {
+      orderDiscount = subtotal * (discount.value / 100);
+      break;
+    }
+    case "shipping-discount": {
+      shippingFee -= subtotal * (discount.value / 100);
+      break;
+    }
+    case "free-shipping": {
+      shippingFee -= shippingFee;
+      break;
+    }
+    default: {
+      break;
+    }
   }
 
-  if (discount.type === "shipping-discount") {
-    shippingFee -= (shippingFee * discount.value) / 100;
-  }
-
-  if (discount.type === "free-shipping") {
-    shippingFee = 0;
-  }
-
-  const total = subtotal + shippingFee;
+  const total = subtotal - orderDiscount + shippingFee;
 
   const onSelectPayment = (e) => {
     setPayment(e.target.value);
@@ -777,7 +784,7 @@ const Checkout = () => {
                   <div className="sub-total-price">
                     <div className="total-price">
                       <p className="value">Shipping Fee:</p>
-                      <p className="price">₱ {shippingFee}</p>
+                      <p className="price">₱ {shippingFee.toFixed(2)}</p>
                     </div>
                   </div>
 
@@ -786,9 +793,10 @@ const Checkout = () => {
                       <p className="value">Discount:</p>
                       <p className="price">
                         <span hidden>
-                          {(discountAmount = subtotal * (discount.value / 100))})
+                          {(discountAmount = subtotal * (discount.value / 100))}
+                          )
                         </span>
-                        ₱ {discountAmount.toFixed(2)} (%{discount.value})
+                        - ₱ {discountAmount.toFixed(2)} (%{discount.value})
                       </p>
                     </div>
                   </div>
