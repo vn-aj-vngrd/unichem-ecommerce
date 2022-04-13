@@ -11,6 +11,8 @@ const getOrders = asyncHandler(async (req, res) => {
   const userID = req.user._id;
   const Orders = await Order.find({
     userID: userID,
+  }).sort({
+    createdAt: "desc",
   });
 
   let retData = [];
