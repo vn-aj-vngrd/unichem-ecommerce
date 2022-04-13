@@ -12,6 +12,9 @@ import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
 
 const Checkout = () => {
+  let itemSubtotal = 0;
+  let discountAmount = 0;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,7 +27,7 @@ const Checkout = () => {
 
   const [payment, setPayment] = useState("");
   const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState(0);
+  const [discount, setDiscount] = useState({ value: 0, type: "" });
 
   const onChange = (e) => {
     setCouponCode(e.target.value);
@@ -120,7 +123,7 @@ const Checkout = () => {
         confirmButtonColor: "#f44336",
         cancelButtonColor: "#424242",
       });
-      setDiscount(coupons.discount);
+      // setDiscount({ value: coupons.discount, type: coupons.couponType });
     }
 
     return () => {
@@ -156,6 +159,7 @@ const Checkout = () => {
   }, 0);
 
   let subtotal = 0;
+  let shippingFee = 0;
   let orders = [];
 
   if (checked > 0) {
@@ -185,12 +189,19 @@ const Checkout = () => {
     return sum;
   }, 0);
 
-  const shippingFee = 0;
-  const total = subtotal + shippingFee;
-
-  if (discount > 0) {
-    subtotal -= (subtotal * discount) / 100;
+  if (discount.type === "order-discount") {
+    subtotal -= (subtotal * discount.value) / 100;
   }
+
+  if (discount.type === "shipping-discount") {
+    shippingFee -= (shippingFee * discount.value) / 100;
+  }
+
+  if (discount.type === "free-shipping") {
+    shippingFee = 0;
+  }
+
+  const total = subtotal + shippingFee;
 
   const onSelectPayment = (e) => {
     setPayment(e.target.value);
@@ -223,8 +234,8 @@ const Checkout = () => {
         shippingDate: new Date(new Date().setDate(new Date().getDate() + 5)),
         receivedDate: new Date(new Date().setDate(new Date().getDate() + 20)),
         shippingFee: shippingFee,
-        discount: discount,
-        totalPrice: total,
+        discount: discount.value,
+        totalPrice: total.toFixed(2),
         orderStatus: "Pending",
         paymentMethod: payment,
       },
@@ -267,7 +278,7 @@ const Checkout = () => {
             image: cart.product.images[0],
             productID: cart.product.id,
             productName: cart.product.productName,
-            productType: cart.product.productType[cart._doc.productType],
+            productType: cart.product.types[cart._doc.productType],
             quantity: cart._doc.quantity,
             price: cart.product.prices[cart._doc.productType],
             reviewed: false,
@@ -362,11 +373,11 @@ const Checkout = () => {
                                               </h5>
                                               <p className="product-des">
                                                 <span>
-                                                  <em>Category: </em>{" "}
+                                                  <em>Category: </em>
                                                   {cart.product.category}
                                                 </span>
                                                 <span>
-                                                  <em>Type / Color:</em>{" "}
+                                                  <em>Type / Color:</em>
                                                   {
                                                     cart.product.types[
                                                       cart._doc.productType
@@ -380,7 +391,7 @@ const Checkout = () => {
                                             </div>
                                             <div className="col-lg-2 col-md-2 col-12">
                                               <p>
-                                                ₱{" "}
+                                                ₱ {""}
                                                 {
                                                   cart.product.prices[
                                                     cart._doc.productType
@@ -389,15 +400,16 @@ const Checkout = () => {
                                               </p>
                                             </div>
                                             <div className="col-lg-2 col-md-2 col-12">
+                                              <div hidden>
+                                                {
+                                                  (itemSubtotal =
+                                                    cart.product.prices[
+                                                      cart._doc.productType
+                                                    ] * cart._doc.quantity)
+                                                }
+                                              </div>
                                               <p className="fw-bolder">
-                                                ₱{" "}
-                                                {Math.round(
-                                                  cart.product.prices[
-                                                    cart._doc.productType
-                                                  ] *
-                                                    cart._doc.quantity *
-                                                    100
-                                                ) / 100}
+                                                ₱ {itemSubtotal.toFixed(2)}
                                               </p>
                                             </div>
                                           </div>
@@ -435,11 +447,11 @@ const Checkout = () => {
                                           </h5>
                                           <p className="product-des">
                                             <span>
-                                              <em>Category: </em>{" "}
+                                              <em>Category: </em>
                                               {cart.product.category}
                                             </span>
                                             <span>
-                                              <em>Type / Color:</em>{" "}
+                                              <em>Type / Color:</em>
                                               {
                                                 cart.product.types[
                                                   cart._doc.productType
@@ -453,7 +465,7 @@ const Checkout = () => {
                                         </div>
                                         <div className="col-lg-2 col-md-2 col-12">
                                           <p>
-                                            ₱{" "}
+                                            ₱ {""}
                                             {
                                               cart.product.prices[
                                                 cart._doc.productType
@@ -461,16 +473,18 @@ const Checkout = () => {
                                             }
                                           </p>
                                         </div>
+
                                         <div className="col-lg-2 col-md-2 col-12">
+                                          <div hidden>
+                                            {
+                                              (itemSubtotal =
+                                                cart.product.prices[
+                                                  cart._doc.productType
+                                                ] * cart._doc.quantity)
+                                            }
+                                          </div>
                                           <p className="fw-bolder">
-                                            ₱{" "}
-                                            {Math.round(
-                                              cart.product.prices[
-                                                cart._doc.productType
-                                              ] *
-                                                cart._doc.quantity *
-                                                100
-                                            ) / 100}
+                                            ₱ {itemSubtotal.toFixed(2)}
                                           </p>
                                         </div>
                                       </div>
@@ -532,7 +546,7 @@ const Checkout = () => {
                               </li>
                               <li>
                                 <p>
-                                  <b>Phone:</b>{" "}
+                                  <b>Phone:</b>
                                   {
                                     user.address[user.primaryAddress]
                                       .phoneNumber
@@ -541,7 +555,7 @@ const Checkout = () => {
                               </li>
                               <li>
                                 <p>
-                                  <b>Address:</b>{" "}
+                                  <b>Address:</b>
                                   {`${
                                     user.address[user.primaryAddress].address1
                                   } ${
@@ -551,7 +565,7 @@ const Checkout = () => {
                               </li>
                               <li>
                                 <p>
-                                  <b>Postal Code:</b>{" "}
+                                  <b>Postal Code:</b>
                                   {user.address[user.primaryAddress].postalCode}
                                 </p>
                               </li>
@@ -709,44 +723,44 @@ const Checkout = () => {
                           (cart) =>
                             cart._doc.checked && (
                               <div key={cart._doc._id} className="total-price">
-                                {" "}
                                 <p className="value">
                                   {cart.product.productName}
                                 </p>
+                                <div hidden>
+                                  {
+                                    (itemSubtotal =
+                                      cart.product.prices[
+                                        cart._doc.productType
+                                      ] * cart._doc.quantity)
+                                  }
+                                </div>
                                 <p className="price">
-                                  {" "}
-                                  ₱{" "}
-                                  {Math.round(
-                                    cart.product.prices[cart._doc.productType] *
-                                      cart._doc.quantity *
-                                      100
-                                  ) / 100}
+                                  ₱ {itemSubtotal.toFixed(2)}
                                 </p>
                               </div>
                             )
-                        )}{" "}
+                        )}
                       </>
                     ) : (
                       <>
-                        {" "}
                         <>
                           {carts.map((cart) => (
                             <div key={cart._doc._id} className="total-price">
-                              {" "}
                               <p className="value">
                                 {cart.product.productName}
                               </p>
+                              <div hidden>
+                                {
+                                  (itemSubtotal =
+                                    cart.product.prices[cart._doc.productType] *
+                                    cart._doc.quantity)
+                                }
+                              </div>
                               <p className="price">
-                                {" "}
-                                ₱{" "}
-                                {Math.round(
-                                  cart.product.prices[cart._doc.productType] *
-                                    cart._doc.quantity *
-                                    100
-                                ) / 100}
+                                ₱ {itemSubtotal.toFixed(2)}
                               </p>
                             </div>
-                          ))}{" "}
+                          ))}
                         </>
                       </>
                     )}
@@ -756,7 +770,7 @@ const Checkout = () => {
                   <div className="sub-total-price">
                     <div className="total-price">
                       <p className="value">Subtotal:</p>
-                      <p className="price">₱ {subtotal}</p>
+                      <p className="price">₱ {subtotal.toFixed(2)}</p>
                     </div>
                   </div>
 
@@ -770,7 +784,12 @@ const Checkout = () => {
                   <div className="sub-total-price">
                     <div className="total-price">
                       <p className="value">Discount:</p>
-                      <p className="price">₱ {discount}</p>
+                      <p className="price">
+                        <span hidden>
+                          {(discountAmount = subtotal * (discount.value / 100))})
+                        </span>
+                        ₱ {discountAmount.toFixed(2)} (%{discount.value})
+                      </p>
                     </div>
                   </div>
 
@@ -778,7 +797,7 @@ const Checkout = () => {
                   <div className="sub-total-price">
                     <div className="total-price">
                       <p className="value fw-bolder">Order Total:</p>
-                      <p className="price fw-bolder">₱ {total}</p>
+                      <p className="price fw-bolder">₱ {total.toFixed(2)}</p>
                     </div>
                   </div>
                 </div>
