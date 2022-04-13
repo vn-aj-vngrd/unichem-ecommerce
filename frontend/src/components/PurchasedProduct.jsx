@@ -5,10 +5,15 @@ import Star from "./Star";
 const PurchasedProduct = ({ products, orderLines }) => {
   const navigate = useNavigate();
 
+  let subtotal = 0;
+
   return (
     <div>
       {orderLines.map((orderLine) => (
-        <div key={orderLine._id} className="single-product no-box-shadow order-single-product">
+        <div
+          key={orderLine._id}
+          className="single-product no-box-shadow order-single-product"
+        >
           <div key={orderLine._id} className="row align-items-center">
             <div className="col-lg-4 col-md-4 col-12">
               <div className="purchase-product-image product-image">
@@ -21,7 +26,10 @@ const PurchasedProduct = ({ products, orderLines }) => {
                   alt="#"
                 ></img>
                 <div className="button">
-                  <Link to={`/product-details/${orderLine.productID}`} className="btn">
+                  <Link
+                    to={`/product-details/${orderLine.productID}`}
+                    className="btn"
+                  >
                     <i className="lni lni-eye"></i> View
                   </Link>
                 </div>
@@ -49,7 +57,9 @@ const PurchasedProduct = ({ products, orderLines }) => {
                 </div>
 
                 <h4 className="title">
-                  <Link to={`/product-details/${orderLine.productID}`}>{orderLine.productName}</Link>
+                  <Link to={`/product-details/${orderLine.productID}`}>
+                    {orderLine.productName}
+                  </Link>
                 </h4>
 
                 <div className="">Type / Color: {orderLine.productType}</div>
@@ -68,7 +78,10 @@ const PurchasedProduct = ({ products, orderLines }) => {
                 <hr></hr>
                 <div className="price d-flex justify-content-between">
                   <div className="">Quantity: {orderLine.quantity}pcs</div>
-                  <span>${orderLine.price * orderLine.quantity}</span>
+                  <div hidden>
+                    {(subtotal = orderLine.price * orderLine.quantity)}
+                  </div>
+                  <span>₱{subtotal.toFixed(2)}</span>
                 </div>
               </div>
             </div>

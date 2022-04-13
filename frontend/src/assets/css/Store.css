@@ -3094,7 +3094,7 @@ ol {
 
 .review-btn {
   padding: 13px 30px;
-  background-color: #ffa000 !important;
+  background-color: #424242 !important;
   margin: 0 7px 0 0;
   color: #fff;
   border-radius: 4px;
@@ -3105,7 +3105,7 @@ ol {
 
 .review-btn:hover {
   color: #fff;
-  background-color: #d1890c !important;
+  background-color: #212121 !important;
 }
 
 .product-details-info .reviews .title {

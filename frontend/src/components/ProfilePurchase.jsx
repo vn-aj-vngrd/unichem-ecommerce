@@ -219,7 +219,7 @@ const ProfilePurchase = () => {
                   <div className="price d-flex justify-content-end align-items-center">
                     <div className="">Order Total:</div>
                     <div className="spacer"></div>
-                    <h4 className="unichem-text-color">${order.totalPrice}</h4>
+                    <h4 className="unichem-text-color">₱{order.totalPrice.toFixed(2)}</h4>
                   </div>
                   <br></br>
                   <div className="purchase-options">
