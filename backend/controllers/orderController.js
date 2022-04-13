@@ -52,9 +52,10 @@ const setOrder = asyncHandler(async (req, res) => {
   // Create Order
   const newOrder = await Order.create({
     userID: req.user._id,
-    shippingFee: req.body.order.shippingFee,
     shippingDate: req.body.order.shippingDate,
     receivedDate: req.body.order.receivedDate,
+    discount: req.body.order.discount,
+    shippingFee: req.body.order.shippingFee,
     totalPrice: req.body.order.totalPrice,
     orderStatus: req.body.order.orderStatus,
     paymentMethod: req.body.order.paymentMethod,
@@ -68,6 +69,7 @@ const setOrder = asyncHandler(async (req, res) => {
 
     const orderline = await Orderline.create({
       orderID: newOrder._id,
+      image: req.body.orderline[i].image,
       productID: req.body.orderline[i].productID,
       productName: req.body.orderline[i].productName,
       productType: req.body.orderline[i].productType,

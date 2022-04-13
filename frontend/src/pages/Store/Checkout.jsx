@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
 import { resetCart, getCarts } from "../../features/cart/cartSlice.js";
+import { getCoupons } from "../../features/coupons/couponSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Breadcrumb from "../../components/Breadcrumb";
@@ -13,13 +14,15 @@ const Checkout = () => {
 
   const { user } = useSelector((state) => state.auth);
   const { carts } = useSelector((state) => state.cart);
-  const { isOrderSuccess, isOrderError } = useSelector((state) => state.orders);
+  const { isOrderAdded, isOrderError } = useSelector((state) => state.orders);
+  const { coupons } = useSelector((state) => state.coupons);
 
   const [payment, setPayment] = useState("");
-  const [couponData, setCouponData] = useState("");
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
 
   const onChange = (e) => {
-    setCouponData(e.target.value);
+    setCouponCode(e.target.value);
   };
 
   useEffect(() => {
@@ -30,8 +33,10 @@ const Checkout = () => {
     }
 
     dispatch(getCarts());
+    dispatch(getCoupons());
 
-    if (isOrderSuccess) {
+
+    if (isOrderAdded) {
       Swal.fire({
         title: "Order is being processed",
         text: "Please wait for the confirmation of your order.",
@@ -55,7 +60,7 @@ const Checkout = () => {
       dispatch(resetOrder());
       dispatch(resetCart());
     };
-  }, [user, navigate, isOrderSuccess, isOrderError, dispatch]);
+  }, [user, navigate, isOrderAdded, isOrderError, dispatch]);
 
   if (localStorage.getItem("cartCount") < 1) {
     Swal.fire({
@@ -116,6 +121,7 @@ const Checkout = () => {
         title: "Failed to Checkout",
         icon: "error",
         text: "Please select a payment method.",
+        confirmButtonColor: "#d33",
       });
       return;
     }
@@ -133,9 +139,10 @@ const Checkout = () => {
 
     let orderData = {
       order: {
-        shippingFee: 0,
         shippingDate: new Date(new Date().setDate(new Date().getDate() + 5)),
         receivedDate: new Date(new Date().setDate(new Date().getDate() + 20)),
+        shippingFee: shippingFee,
+        discount: discount,
         totalPrice: total,
         orderStatus: "Pending",
         paymentMethod: payment,
@@ -157,6 +164,7 @@ const Checkout = () => {
           orders.forEach((order) => {
             const orderline = {
               cartID: order._doc._id,
+              image: order.product.images[0],
               productID: order.product._id,
               productName: order.product.productName,
               productType: order.product.types[order._doc.productType],
@@ -175,6 +183,7 @@ const Checkout = () => {
         carts.forEach((cart) => {
           const orderline = {
             cartID: cart._doc._id,
+            image: cart.product.images[0],
             productID: cart.product.id,
             productName: cart.product.productName,
             productType: cart.product.productType[cart._doc.productType],
@@ -191,7 +200,7 @@ const Checkout = () => {
   };
 
   const onApply = () => {
-    if (couponData === "") {
+    if (couponCode === "") {
       toast.error(`Please input a valid coupon code.`, {
         position: "top-center",
         autoClose: 1000,
@@ -203,8 +212,34 @@ const Checkout = () => {
         theme: "colored",
       });
       return;
+    } 
+
+    if (coupons.length > 0) {
+      const coupon = coupons.find((coupon) => {
+        return coupon.code === couponCode;
+      });
+
+      if (coupon) {
+        if (coupon.discountType === "percentage") {
+          setDiscount(subtotal * (coupon.discount / 100));
+        } else {
+          setDiscount(coupon.discount);
+        }
+      } else {
+        toast.error(`Coupon code is invalid.`, {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
     }
-    console.log(couponData);
+
+    console.log(coupons)
   };
 
   return (
@@ -386,8 +421,8 @@ const Checkout = () => {
                           </>
                           <div className="cart-list-head accordion-body">
                             <div className="cart-single-list">
-                              <div className="col-md-12">
-                                <div className="steps-form-btn-order button">
+                              <div className="col-md-12 align-items-right">
+                                <div className="steps-form-btn button">
                                   <button
                                     className="btn"
                                     data-bs-toggle="collapse"
@@ -587,23 +622,21 @@ const Checkout = () => {
               <div className="checkout-sidebar">
                 <div className="checkout-sidebar-coupon">
                   <p>Apply valid coupon here</p>
-                  <form action="#">
-                    <div className="single-form form-default">
-                      <div className="form-input form">
-                        <input
-                          type="text"
-                          placeholder="Coupon Code"
-                          value={couponData}
-                          onChange={onChange}
-                        />
-                      </div>
-                      <div className="button">
-                        <button className="btn" onClick={onApply}>
-                          apply
-                        </button>
-                      </div>
+                  <div className="single-form form-default">
+                    <div className="form-input form">
+                      <input
+                        type="text"
+                        placeholder="Coupon Code"
+                        value={couponCode}
+                        onChange={onChange}
+                      />
                     </div>
-                  </form>
+                    <div className="button">
+                      <button className="btn" onClick={onApply}>
+                        apply
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="checkout-sidebar-price-table mt-3">
