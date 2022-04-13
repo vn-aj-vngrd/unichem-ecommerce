@@ -46,6 +46,25 @@ export const getReviews = createAsyncThunk(
   }
 );
 
+// Get user reviews from user
+export const getUserReviews = createAsyncThunk(
+  "reviews/getUser",
+  async (userID, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await reviewService.getUserReviews(token);
+    } catch (error) {
+      const reviewMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.reviewMessage) ||
+        error.reviewMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(reviewMessage);
+    }
+  }
+);
+
 // Update user review from user
 export const updateReview = createAsyncThunk(
   "reviews/update",
@@ -71,7 +90,7 @@ export const deleteReview = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      console.log(false)
+      console.log(false);
       return await reviewService.deleteReview(id, token);
     } catch (error) {
       const reviewMessage =
@@ -116,6 +135,20 @@ export const reviewSlice = createSlice({
         state.reviews = action.payload;
       })
       .addCase(getReviews.rejected, (state, action) => {
+        state.isReviewLoading = false;
+        state.isReviewError = true;
+        state.reviewMessage = action.payload;
+      })
+
+      .addCase(getUserReviews.pending, (state) => {
+        state.isReviewLoading = true;
+      })
+      .addCase(getUserReviews.fulfilled, (state, action) => {
+        state.isReviewLoading = false;
+        state.isReviewSuccess = true;
+        state.reviews = action.payload;
+      })
+      .addCase(getUserReviews.rejected, (state, action) => {
         state.isReviewLoading = false;
         state.isReviewError = true;
         state.reviewMessage = action.payload;

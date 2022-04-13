@@ -3094,7 +3094,7 @@ ol {
 
 .review-btn {
   padding: 13px 30px;
-  background-color: #424242 !important;
+  background-color: #ffa000 !important;
   margin: 0 7px 0 0;
   color: #fff;
   border-radius: 4px;
@@ -3105,7 +3105,7 @@ ol {
 
 .review-btn:hover {
   color: #fff;
-  background-color: #212121 !important;
+  background-color: #d1890c !important;
 }
 
 .product-details-info .reviews .title {
@@ -3117,10 +3117,10 @@ ol {
 .product-details-info .reviews .single-review {
   position: relative;
   padding-left: 80px;
- 
+  margin-top:
 }
 
-.product-details-info .reviews .single-review:not(.single-review:only-child) {
+.product-details-info .reviews .single-review {
   margin-top: 30px;
 }
 
@@ -6032,6 +6032,13 @@ ol {
 
 .review-row {
   margin-bottom: 30px;
+}
+
+.review-second-row {
+  padding: 0px 30px 30px 30px;
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
 }
 
 .background-red {

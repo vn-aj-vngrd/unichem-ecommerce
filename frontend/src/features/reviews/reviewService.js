@@ -15,9 +15,24 @@ const setReview = async (reviewData, token) => {
   return response.data;
 };
 
-// Get user reviews
+// Get all reviews
 const getReviews = async () => {
   const response = await axios.get(API_URL);
+  // console.log(response.data);
+
+  return response.data;
+};
+
+// Get user reviews
+const getUserReviews = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL + "getUserReviews", config);
+  // const response = await axios.get(API_URL);
   // console.log(response.data);
 
   return response.data;
@@ -54,6 +69,7 @@ const deleteReview = async (reviewId, token) => {
 const reviewService = {
   setReview,
   getReviews,
+  getUserReviews,
   updateReview,
   deleteReview,
 };
