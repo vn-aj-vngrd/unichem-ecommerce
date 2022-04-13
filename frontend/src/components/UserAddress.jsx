@@ -171,7 +171,7 @@ const Profile = () => {
                     <div className="profile-address">
                       <ul>
                         <li className="address-header">
-                          <h6>{user.address[index].addressName}</h6>
+                          <h6><i className="lni lni-map-marker"></i>{" "}{user.address[index].addressName}</h6>
                         </li>
                         <li>
                           <p>
@@ -236,7 +236,7 @@ const Profile = () => {
                     <div className="profile-address">
                       <ul>
                         <li className="address-header">
-                          <h6>{user.address[index].addressName}</h6>
+                          <h6><i className="lni lni-map-marker"></i>{" "}{user.address[index].addressName}</h6>
                         </li>
                         <li>
                           <p>

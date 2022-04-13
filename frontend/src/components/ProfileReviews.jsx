@@ -54,7 +54,7 @@ function ProfileReviews() {
             <div className="d-flex">
               <div className="">
                 <div className="review-product-image">
-                  <img src={review._doc.images[0]} alt="#"></img>
+                  <img src={review._doc.images[0]} alt={review._doc.productName}></img>
                 </div>
               </div>
               <div className="">

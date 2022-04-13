@@ -4,7 +4,7 @@ import { getOrders, resetOrder } from "../features/orders/orderSlice";
 import { getProducts, resetProduct } from "../features/products/productSlice";
 import { useSelector, useDispatch } from "react-redux";
 import PurchasedProduct from "./PurchasedProduct";
-import Review from "./ReviewModal";
+
 import Spinner from "../components/Spinner";
 import ReactPaginate from "react-paginate";
 
@@ -17,11 +17,12 @@ const ProfilePurchase = () => {
     (state) => state.orders
   );
 
+  
   const { products, isProductLoading, isProductError, productMessage } =
-    useSelector((state) => state.products);
-
+  useSelector((state) => state.products);
+  
   const { user } = useSelector((state) => state.auth);
-
+  
   const [orderStatus, setOrderStatus] = useState("All");
 
   const [pageNumber, setPageNumber] = useState(0);
@@ -196,7 +197,7 @@ const ProfilePurchase = () => {
           <div key={order._id} className="purchase-row">
             <div className="negative-padding-custom box-shadow">
               <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
-                <div className="color-white">Order ID: {order._id}</div>
+                <div className="color-white"><i className="lni lni-question-circle"></i>{" "} Order Status log </div>
                 <div className="color-white purchase-update-time">
                   Order Date: {moment(order.createdAt).format("DD/MM/YY")}
                 </div>
@@ -208,6 +209,8 @@ const ProfilePurchase = () => {
               {/* ORDERLINE START HERE */}
 
               <PurchasedProduct
+                userID={user._id}
+                userImage={user.image}
                 products={products}
                 orderLines={order.orderLine}
               />
@@ -219,12 +222,13 @@ const ProfilePurchase = () => {
                   <div className="price d-flex justify-content-end align-items-center">
                     <div className="">Order Total:</div>
                     <div className="spacer"></div>
-                    <h4 className="unichem-text-color">₱{order.totalPrice.toFixed(2)}</h4>
+                    <h4 className="unichem-text-color">
+                      ₱{order.totalPrice.toFixed(2)}
+                    </h4>
                   </div>
                   <br></br>
                   <div className="purchase-options">
                     <div className="d-flex justify-content-end button">
-                      <Review />
                       <Link to="/product-details" className="btn">
                         Buy Again
                       </Link>

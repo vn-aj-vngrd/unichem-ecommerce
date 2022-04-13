@@ -17,12 +17,10 @@ function ReviewSingle({ reviewOne, editable }) {
   const [formData, setFormData] = useState({
     review: reviewOne._doc.review,
   });
-  //   console.log(reviewOne._doc.createdAt)
+
   const currentDate = moment();
   const createdtDate = moment(reviewOne._doc.createdAt);
   const expiryDate = moment(currentDate).add(30, "d");
-
-  //   console.log(reviewOne)
 
   const { review } = formData;
 
@@ -41,6 +39,7 @@ function ReviewSingle({ reviewOne, editable }) {
       productID: productID,
       review,
       reviewed: true,
+      rating: starRating,
     };
 
     dispatch(updateReview(reviewData));
@@ -74,7 +73,7 @@ function ReviewSingle({ reviewOne, editable }) {
     <>
       <form className="form" onSubmit={onSubmitReview}>
         <div key={reviewOne._doc._id} className="single-review">
-          <img src={reviewOne.user.image} alt="#" />
+          <img src={reviewOne.user.image} alt={reviewOne.user.image} />
           <div className="review-info">
             <div
               className={

@@ -71,6 +71,8 @@ const setReview = asyncHandler(async (req, res) => {
     throw new Error("Review already exists");
   }
 
+  const product = await Product.findById(productID);
+
   // If review does not exist then create.
   const newReview = await Review.create({
     productID,
@@ -78,6 +80,9 @@ const setReview = asyncHandler(async (req, res) => {
     subject,
     review,
     rating,
+    brand: product.brand,
+    images: product.images,
+    productName: product.productName,
   });
   return res.status(200).json(newReview);
 });

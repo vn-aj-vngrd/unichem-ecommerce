@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Star from "./Star";
+import Review from "./ReviewModal";
 
-const PurchasedProduct = ({ products, orderLines }) => {
+const PurchasedProduct = ({ userID, userImage, products, orderLines }) => {
   const navigate = useNavigate();
 
   let subtotal = 0;
@@ -63,24 +64,24 @@ const PurchasedProduct = ({ products, orderLines }) => {
                 </h4>
 
                 <div className="">Type / Color: {orderLine.productType}</div>
-                <Star
-                  star={
-                    products.find(
-                      (product) => product._doc._id === orderLine.productID
-                    ).market.averageRatings
-                  }
-                  reviews={
-                    products.find(
-                      (product) => product._doc._id === orderLine.productID
-                    ).market.reviewsCount
-                  }
-                />
+                <div className="d-flex align-items-center justify-content-between">
+                  <Star
+                    star={
+                      products.find(
+                        (product) => product._doc._id === orderLine.productID
+                      ).market.averageRatings
+                    }
+                  />
+                  <Review userID={userID} userImage={userImage} orderLineID={orderLine._id} productID={orderLine.productID} />
+                  
+                </div>
                 <hr></hr>
                 <div className="price d-flex justify-content-between">
                   <div className="">Quantity: {orderLine.quantity}pcs</div>
                   <div hidden>
                     {(subtotal = orderLine.price * orderLine.quantity)}
                   </div>
+
                   <span>₱{subtotal.toFixed(2)}</span>
                 </div>
               </div>
