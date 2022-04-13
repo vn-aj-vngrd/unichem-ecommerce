@@ -50,10 +50,10 @@ export const getCoupons = createAsyncThunk(
 // Get coupons
 export const getOneCoupon = createAsyncThunk(
   "coupons/getOne",
-  async (couponID, thunkAPI) => {
+  async (couponCode, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await couponService.getOneCoupon(couponID, token);
+      return await couponService.getOneCoupon(couponCode, token);
     } catch (error) {
       const couponMessage =
         (error.response &&
@@ -135,6 +135,20 @@ export const couponSlice = createSlice({
         state.coupons = action.payload;
       })
       .addCase(getCoupons.rejected, (state, action) => {
+        state.isCouponLoading = false;
+        state.isCouponError = true;
+        state.couponMessage = action.payload;
+      })
+
+      .addCase(getOneCoupon.pending, (state) => {
+        state.isCouponLoading = true;
+      })
+      .addCase(getOneCoupon.fulfilled, (state, action) => {
+        state.isCouponLoading = false;
+        state.isCouponSuccess = true;
+        state.coupons = action.payload;
+      })
+      .addCase(getOneCoupon.rejected, (state, action) => {
         state.isCouponLoading = false;
         state.isCouponError = true;
         state.couponMessage = action.payload;

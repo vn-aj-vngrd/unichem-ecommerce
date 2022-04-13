@@ -7,10 +7,6 @@ const orderSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    shippingFee: {
-      type: Number,
-      required: [true, "Shipping Fee is required."],
-    },
     shippingDate: {
       type: Date,
       required: [true, "Shopping Date is required."],
@@ -18,6 +14,14 @@ const orderSchema = mongoose.Schema(
     receivedDate: {
       type: Date,
       required: [true, "Received Date is required."],
+    },
+    shippingFee: {
+      type: Number,
+      required: [true, "Shipping Fee is required."],
+    },
+    discount: {
+      type: Number,
+      required: [true, "Discount is required."],
     },
     totalPrice: {
       type: Number,

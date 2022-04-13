@@ -10,11 +10,11 @@ const couponSchema = mongoose.Schema(
       type: Number,
       required: [true, "Descriptions is required"],
     },
-    percentOff: {
+    discount: {
       type: Number,
       required: [true, "Percent Off is required"],
     },
-    requiredTotal: {
+    requiredAmount: {
       type: Number,
       required: [true, "Required Total is required"],
     },

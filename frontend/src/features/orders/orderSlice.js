@@ -6,6 +6,7 @@ const initialState = {
   isOrderError: false,
   isOrderSuccess: false,
   isOrderLoading: false,
+  isOrderAdded: false,
   orderMessage: "",
 };
 
@@ -99,6 +100,7 @@ export const orderSlice = createSlice({
       .addCase(setOrder.fulfilled, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
+        state.isOrderAdded = true;
         // state.orders.push(action.payload);
       })
       .addCase(setOrder.rejected, (state, action) => {

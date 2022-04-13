@@ -16,17 +16,17 @@ const getCoupons = async (token) => {
 };
 
 // Get one coupon
-const getOneCoupon = async (couponID, token) => {
+const getOneCoupon = async (couponCode, token) => {
+
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.get(
-    API_URL + "getOneCoupon/" + couponID,
-    config
-  );
+  const response = await axios.get(API_URL + "getOneCoupon/" + couponCode, config);
+
+  console.log(response.data);
 
   return response.data;
 };

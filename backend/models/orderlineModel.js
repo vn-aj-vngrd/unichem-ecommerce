@@ -12,6 +12,10 @@ const orderlineSchema = mongoose.Schema(
       required: true,
       ref: "Product",
     },
+    image: {
+      type: String,
+      required: [true, "Image is required."],
+    },
     productName: {
       type: String,
       required: [true, "Product Name is required."],

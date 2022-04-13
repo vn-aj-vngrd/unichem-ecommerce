@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const mongoose = require("mongoose");
 
 const Coupon = require("../models/CouponModel");
 
@@ -17,9 +18,9 @@ const getCoupons = asyncHandler(async (req, res) => {
 // @route   GET /api/coupons
 // @access  Private
 const getOneCoupon = asyncHandler(async (req, res) => {
-  const coupons = await Coupon.findById(req.params.id);
+  const coupon = await Coupon.find({ couponCode: req.params.couponCode });
 
-  res.status(200).json(coupons);
+  res.status(200).json(coupon);
 });
 
 // @desc    Set Coupon
@@ -127,6 +128,7 @@ const deleteAllCoupon = asyncHandler(async (req, res) => {
 
 module.exports = {
   getCoupons,
+  getOneCoupon,
   setCoupon,
   updateCoupon,
   deleteCoupon,
