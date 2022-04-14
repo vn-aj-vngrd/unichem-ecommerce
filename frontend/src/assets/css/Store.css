@@ -5098,6 +5098,11 @@ ol {
   justify-content: end;
 }
 
+.checkout-steps-form-style .steps-form-btn-no-margin{
+  display: flex;
+  justify-content: end;
+}
+
 .checkout-steps-form-style .steps-form-btn-order {
   margin-top: 0px;
 }

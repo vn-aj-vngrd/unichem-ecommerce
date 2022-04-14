@@ -19,6 +19,8 @@ import Swal from "sweetalert2";
 // import { toast } from "react-toastify";
 
 const Cart = () => {
+  let itemSubtotal = 0;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -216,13 +218,15 @@ const Cart = () => {
                           <p>₱ {cart.product.prices[cart._doc.productType]}</p>
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
+                          <div hidden>
+                            {
+                              (itemSubtotal =
+                                cart.product.prices[cart._doc.productType] *
+                                cart._doc.quantity)
+                            }
+                          </div>
                           <p className="fw-bolder">
-                            ₱
-                            {Math.round(
-                              cart.product.prices[cart._doc.productType] *
-                                cart._doc.quantity *
-                                100
-                            ) / 100}
+                            ₱ {itemSubtotal.toFixed(2)}
                           </p>
                         </div>
                         <div className="col-lg-1 col-md-1 col-12">
@@ -292,13 +296,15 @@ const Cart = () => {
                           <p>₱ {cart.product.prices[cart._doc.productType]}</p>
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
+                          <div hidden>
+                            {
+                              (itemSubtotal =
+                                cart.product.prices[cart._doc.productType] *
+                                cart._doc.quantity)
+                            }
+                          </div>
                           <p className="fw-bolder">
-                            ₱
-                            {Math.round(
-                              cart.product.prices[cart._doc.productType] *
-                                cart._doc.quantity *
-                                100
-                            ) / 100}
+                            ₱{itemSubtotal.toFixed(2)}
                           </p>
                         </div>
                         <div className="col-lg-1 col-md-1 col-12">

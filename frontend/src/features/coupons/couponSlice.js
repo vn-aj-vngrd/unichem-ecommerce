@@ -7,6 +7,7 @@ const initialState = {
   isCouponSuccess: false,
   isCouponLoading: false,
   couponMessage: "",
+  couponError: "",
 };
 
 // Set  coupon
@@ -48,12 +49,12 @@ export const getCoupons = createAsyncThunk(
 );
 
 // Get coupons
-export const getOneCoupon = createAsyncThunk(
-  "coupons/getOne",
-  async (couponCode, thunkAPI) => {
+export const validateCoupon = createAsyncThunk(
+  "coupons/validate",
+  async (couponData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await couponService.getOneCoupon(couponCode, token);
+      return await couponService.validateCoupon(couponData, token);
     } catch (error) {
       const couponMessage =
         (error.response &&
@@ -140,15 +141,25 @@ export const couponSlice = createSlice({
         state.couponMessage = action.payload;
       })
 
-      .addCase(getOneCoupon.pending, (state) => {
+      .addCase(validateCoupon.pending, (state) => {
         state.isCouponLoading = true;
       })
-      .addCase(getOneCoupon.fulfilled, (state, action) => {
+      .addCase(validateCoupon.fulfilled, (state, action) => {
         state.isCouponLoading = false;
-        state.isCouponSuccess = true;
-        state.coupons = action.payload;
+        if (
+          action.payload === "notFound" ||
+          action.payload === "requiredAmountError" ||
+          action.payload === "expired" ||
+          action.payload === "existingCoupon" ||
+          action.payload === "limitError"
+        ) {
+          state.couponError = action.payload;
+        } else {
+          state.isCouponSuccess = true;
+          state.coupons = action.payload;
+        }
       })
-      .addCase(getOneCoupon.rejected, (state, action) => {
+      .addCase(validateCoupon.rejected, (state, action) => {
         state.isCouponLoading = false;
         state.isCouponError = true;
         state.couponMessage = action.payload;

@@ -52,14 +52,13 @@ const Navbar = ({ userType }) => {
     dispatch(logout());
     dispatch(resetUser());
     navigate("/");
-    toast.success("User has logged out", {
+    toast.success("User Logout", {
       position: "top-center",
-      autoClose: 1500,
-      hideProgressBar: false,
+      autoClose: 2000,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
     });
   };
 
