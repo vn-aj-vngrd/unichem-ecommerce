@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Star from "./Star";
 import Review from "./ReviewModal";
 
-const PurchasedProduct = ({ userID, userImage, orderLines }) => {
+const PurchasedProduct = ({ userID, userImage, orderLines, orderStatus }) => {
   const navigate = useNavigate();
 
   let subtotal = 0;
@@ -55,12 +55,14 @@ const PurchasedProduct = ({ userID, userImage, orderLines }) => {
                   </div>
                   <div className=" d-flex justify-content-between">
                     <span>₱{subtotal.toFixed(2)}</span>
-                    <Review
-                      userID={userID}
-                      userImage={userImage}
-                      orderLineID={orderLine._id}
-                      productID={orderLine.productID}
-                    />
+                    {orderStatus === "Delivered" && (
+                      <Review
+                        userID={userID}
+                        userImage={userImage}
+                        orderLineID={orderLine._id}
+                        productID={orderLine.productID}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

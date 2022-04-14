@@ -7,6 +7,7 @@ import PurchasedProduct from "./PurchasedProduct";
 
 import Spinner from "../components/Spinner";
 import ReactPaginate from "react-paginate";
+import { setReview } from "../features/reviews/reviewSlice";
 
 const ProfilePurchase = () => {
   const navigate = useNavigate();
@@ -59,26 +60,24 @@ const ProfilePurchase = () => {
   let statusOrders = JSON.parse(JSON.stringify(orders));
 
   switch (orderStatus) {
-    case "To Pay": {
-      statusOrders = statusOrders.filter((order) => order.orderStatus === "toPay");
+    case "Processing": {
+      statusOrders =statusOrders.filter((order) => order.orderStatus === "Processing");
       break;
     }
-    case "To Ship": {
-      let statusOrders =statusOrders.filter((order) => order.orderStatus === "Processing");
+    case "Packed": {
+      statusOrders = statusOrders.filter((order) => order.orderStatus === "Packed");
       break;
     }
-    case "To Receive": {
-      let statusOrders =statusOrders.filter((order) => order.orderStatus === "Packed");
+    case "Shipped": {
+      statusOrders = statusOrders.filter((order) => order.orderStatus === "Shipped");
       break;
     }
-    case "Completed": {
-      let statusOrders = statusOrders.filter((order) => order.orderStatus === "Shipped");
-      break;
-    }
-    case "Cancelled": {
-      let statusOrders = statusOrders.filter((order) => order.orderStatus === "Delivered");
+    case "Delivered": {
+      statusOrders = statusOrders.filter((order) => order.orderStatus === "Delivered");
     }
   }
+
+  // statusOrders.orderStatus === "Shipped"? setReviewSwitch(true) : setReviewSwitch(false);
 
   const pageCount = Math.ceil(statusOrders.length / ordersPerPage);
   statusOrders = statusOrders.slice(pagesVisited, pagesVisited + ordersPerPage);
@@ -183,6 +182,7 @@ const ProfilePurchase = () => {
                 userID={user._id}
                 userImage={user.image}
                 orderLines={order.orderLine}
+                orderStatus={order.orderStatus}
               />
 
               {/* END OF ORDERLINE */}
@@ -192,7 +192,7 @@ const ProfilePurchase = () => {
                   <div className="price d-flex justify-content-end align-items-center">
                     <div className="">Order Total:</div>
                     <div className="spacer"></div>
-                    <h4 className="unichem-text-color">
+                    <h4 className="order-total unichem-text-color">
                       ₱{order.totalPrice.toFixed(2)}
                     </h4>
                   </div>
