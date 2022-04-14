@@ -39,6 +39,10 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: [true, "Payment Method is required."],
     },
+    statusDates: {
+      type: Array,
+      required: [true, "Status Dates is required"],
+    },
   },
   {
     timestamps: true,

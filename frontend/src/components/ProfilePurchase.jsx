@@ -17,27 +17,11 @@ const ProfilePurchase = () => {
     (state) => state.orders
   );
 
-  
-  const { products, isProductLoading, isProductError, productMessage } =
-  useSelector((state) => state.products);
-  
   const { user } = useSelector((state) => state.auth);
-  
+
   const [orderStatus, setOrderStatus] = useState("All");
 
   const [pageNumber, setPageNumber] = useState(0);
-
-  useEffect(() => {
-    if (isProductError) {
-      console.log(productMessage);
-    }
-
-    dispatch(getProducts());
-
-    return () => {
-      dispatch(resetProduct());
-    };
-  }, [isProductError, productMessage, dispatch]);
 
   useEffect(() => {
     if (isOrderError) {
@@ -55,7 +39,7 @@ const ProfilePurchase = () => {
     };
   }, [user, navigate, isOrderError, orderMessage, dispatch]);
 
-  if (isOrderLoading || isProductLoading) {
+  if (isOrderLoading) {
     return (
       <>
         <div className="empty-container"></div>
@@ -72,58 +56,39 @@ const ProfilePurchase = () => {
     setPageNumber(selected);
   };
 
+  let statusOrders = JSON.parse(JSON.stringify(orders));
+
   switch (orderStatus) {
     case "To Pay": {
-      let statusOrders = orders.filter(
-        (order) => order.orderStatus === "toPay"
-      );
+      statusOrders = statusOrders.filter((order) => order.orderStatus === "toPay");
       break;
     }
     case "To Ship": {
-      let statusOrders = orders.filter(
-        (order) => order.orderStatus === "toShip"
-      );
+      let statusOrders =statusOrders.filter((order) => order.orderStatus === "Processing");
       break;
     }
     case "To Receive": {
-      let statusOrders = orders.filter(
-        (order) => order.orderStatus === "toReceive"
-      );
+      let statusOrders =statusOrders.filter((order) => order.orderStatus === "Packed");
       break;
     }
     case "Completed": {
-      let statusOrders = orders.filter(
-        (order) => order.orderStatus === "completed"
-      );
+      let statusOrders = statusOrders.filter((order) => order.orderStatus === "Shipped");
       break;
     }
     case "Cancelled": {
-      let statusOrders = orders.filter(
-        (order) => order.orderStatus === "cancelled"
-      );
-      break;
-    }
-    case "Failed": {
-      let statusOrders = orders.filter(
-        (order) => order.orderStatus === "failed"
-      );
-      break;
-    }
-    default: {
-      let statusOrders = orders;
-      break;
+      let statusOrders = statusOrders.filter((order) => order.orderStatus === "Delivered");
     }
   }
-
-  let statusOrders = JSON.parse(JSON.stringify(orders));
 
   const pageCount = Math.ceil(statusOrders.length / ordersPerPage);
   statusOrders = statusOrders.slice(pagesVisited, pagesVisited + ordersPerPage);
 
+  console.log(statusOrders);
+
   return (
     <div className="purchase-products-column">
       <div className="product-grid">
-        {/* <div className="d-flex product-filter align-items-center">
+        <div className="d-flex product-filter align-items-center">
           <label className="sort-element">Order Status: </label>
           <select
             value={orderStatus}
@@ -139,8 +104,8 @@ const ProfilePurchase = () => {
             <option>Shipped</option>
             <option>Delivered</option>
           </select>
-        </div> */}
-        <div className="order-status">
+        </div>
+        {/* <div className="order-status">
           <div className="order-status-progress">
             <div className="order-status-progress-bar progress-packed"></div>
           </div>
@@ -188,7 +153,7 @@ const ProfilePurchase = () => {
             </button>
             <p>Delivered</p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="product">
@@ -196,8 +161,14 @@ const ProfilePurchase = () => {
         {statusOrders.map((order) => (
           <div key={order._id} className="purchase-row">
             <div className="negative-padding-custom box-shadow">
-              <div className="purchase-row-banner d-flex justify-content-between d-flex align-items-center">
-                <div className="color-white"><i className="lni lni-question-circle"></i>{" "} Order Status log </div>
+              <div className="order-row-banner d-flex justify-content-between d-flex align-items-center">
+                <Link
+                  to={`/order-details/${order._id}`}
+                  type="button"
+                  className="btn order-status-log color-white"
+                >
+                  <i className="lni lni-question-circle"></i> Order Status log
+                </Link>
                 <div className="color-white purchase-update-time">
                   Order Date: {moment(order.createdAt).format("DD/MM/YY")}
                 </div>
@@ -211,7 +182,6 @@ const ProfilePurchase = () => {
               <PurchasedProduct
                 userID={user._id}
                 userImage={user.image}
-                products={products}
                 orderLines={order.orderLine}
               />
 

@@ -2386,13 +2386,13 @@ ol {
 }
 
 .single-product .product-info .price {
-  margin-top: 15px;
+  margin-top: 0px;
 }
 
 .single-product .product-info .price span {
   font-size: 17px;
   font-weight: 700;
-  color: #f44336;
+  color: #424242;
   display: inline-block;
 }
 
@@ -6115,7 +6115,7 @@ ol {
 }
 
 .lni-comments-alt {
-  background-color: #f8ca12 !important;
+  background-color: #f44336 !important;
   font-size: 18px;
   color: #fff;
   height: 30px;
@@ -6129,7 +6129,7 @@ ol {
 
 .lni-comments-alt:hover {
   color: #fff !important;
-  background-color: #c08b10 !important;
+  background-color: #b71c1c !important;
 }
 
 .review-modal-body {
@@ -6192,16 +6192,8 @@ ol {
   align-items: center;
   margin-bottom: 5px;
   border: none;
-  -webkit-transition: all 0.1s ease;
-  -moz-transition: all 0.1s ease;
 }
 
-.order-status-circle:hover:not(.true) {
-  background-color: rgb(186, 186, 186);
-  -webkit-transition: all 0.1s ease;
-  -moz-transition: all 0.1s ease;
-  color: #fff;
-}
 
 .one-status {
   display: flex;
@@ -6268,6 +6260,117 @@ ol {
   -moz-transition: all 0.1s ease;
 }
 
+.lni-support {
+  font-size: 18px;
+}
+
+.order-row-banner {
+  padding: 7px 30px;
+  background-color: #f44336;
+  border-radius: 4px;
+  color: white;
+}
+
+.order-status-log  {
+  font-size: 14px;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+}
+
+.order-status-log:hover  {
+  text-decoration: underline;
+  color: #fff;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+}
+
+/*======================================
+	Order Details CSS 
+========================================*/
+
+.order-status-log-details {
+  padding: 30px;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  margin-top: 30px;
+  border-radius: 4px;
+}
+
+.order-status-single-log {
+  display: flex;
+}
+
+.status-circle-log-checked {
+  display: flex;
+  background-color: #f44336;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.status-circle-log-unchecked {
+  display: flex;
+  background-color: #d8d8d8;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  color: #d8d8d8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.order-details-date {
+  width: 100px;
+}
+
+.order-details-status-progress {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  position: relative;
+  width: 100px;
+}
+
+.order-details-description {
+  width: 100%;
+}
+
+.order-details-description p {
+  margin: 5px 0 30px 0;
+}
+
+
+.order-details-status-progress .vertical-bar {
+  width: 1px;
+  height: 100%;
+  background-color: #d8d8d8;
+  border-radius: 3px;
+  position: absolute;
+  right: 48%;
+  z-index: 1;
+}
+
+.order-details-status-progress:last-child .vertical-bar {
+}
+
+.order-details-status-progress .vertical-bar .vertical-progress {
+  width: 1px;
+  height: 100%;
+  background-color: #f44336;
+  border-radius: 3px;
+}
+
+.order-details-column {
+  width: 100%;
+  margin-bottom: 90px;
+}
 
 /*======================================
 	Logout CSS 

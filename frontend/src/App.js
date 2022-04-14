@@ -23,6 +23,7 @@ import ProductDetails from "./pages/Product/ProductDetails";
 import Address from "./pages/Account/Address";
 import Profile from "./pages/Account/Profile";
 import Order from "./pages/Account/Order";
+import OrderDetails from "./pages/Account/OrderDetails";
 import Review from "./pages/Account/Review";
 import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
@@ -111,6 +112,7 @@ export const App = () => {
             <Route path="account/address" element={<Address />} />
             <Route path="account/profile" element={<Profile />} />
             <Route path="account/orders" element={<Order />} />
+            <Route path="order-details/:id" element={<OrderDetails />} />
             <Route path="account/reviews" element={<Review />} />
             <Route path="cart/checkout" element={<Checkout />} />
             <Route path="faq" element={<Faq />} />

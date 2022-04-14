@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Star from "./Star";
 import Review from "./ReviewModal";
 
-const PurchasedProduct = ({ userID, userImage, products, orderLines }) => {
+const PurchasedProduct = ({ userID, userImage, orderLines }) => {
   const navigate = useNavigate();
 
   let subtotal = 0;
@@ -18,14 +18,7 @@ const PurchasedProduct = ({ userID, userImage, products, orderLines }) => {
           <div key={orderLine._id} className="row align-items-center">
             <div className="col-lg-4 col-md-4 col-12">
               <div className="purchase-product-image product-image">
-                <img
-                  src={
-                    products.find(
-                      (product) => product._doc._id === orderLine.productID
-                    )._doc.images[0]
-                  }
-                  alt="#"
-                ></img>
+                <img src={orderLine.image} alt="#"></img>
                 <div className="button">
                   <Link
                     to={`/product-details/${orderLine.productID}`}
@@ -41,18 +34,8 @@ const PurchasedProduct = ({ userID, userImage, products, orderLines }) => {
                 <div className="category">
                   <div>
                     <i className="lni lni-package"></i>Category:
-                    <Link
-                      to={`/products/category/${
-                        products.find(
-                          (product) => product._doc._id === orderLine.productID
-                        )._doc.category
-                      }`}
-                    >
-                      {
-                        products.find(
-                          (product) => product._doc._id === orderLine.productID
-                        )._doc.category
-                      }
+                    <Link to={`/products/category/${orderLine.category}`}>
+                      {orderLine.category}
                     </Link>
                   </div>
                 </div>
@@ -64,25 +47,21 @@ const PurchasedProduct = ({ userID, userImage, products, orderLines }) => {
                 </h4>
 
                 <div className="">Type / Color: {orderLine.productType}</div>
-                <div className="d-flex align-items-center justify-content-between">
-                  <Star
-                    star={
-                      products.find(
-                        (product) => product._doc._id === orderLine.productID
-                      ).market.averageRatings
-                    }
-                  />
-                  <Review userID={userID} userImage={userImage} orderLineID={orderLine._id} productID={orderLine.productID} />
-                  
-                </div>
-                <hr></hr>
-                <div className="price d-flex justify-content-between">
+                {/* <div className="d-flex align-items-center justify-content-between"></div> */}
+                <div className=" price d-flex justify-content-between">
                   <div className="">Quantity: {orderLine.quantity}pcs</div>
                   <div hidden>
                     {(subtotal = orderLine.price * orderLine.quantity)}
                   </div>
-
-                  <span>₱{subtotal.toFixed(2)}</span>
+                  <div className=" d-flex justify-content-between">
+                    <span>₱{subtotal.toFixed(2)}</span>
+                    <Review
+                      userID={userID}
+                      userImage={userImage}
+                      orderLineID={orderLine._id}
+                      productID={orderLine.productID}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

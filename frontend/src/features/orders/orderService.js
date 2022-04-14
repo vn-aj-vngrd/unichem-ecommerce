@@ -15,6 +15,14 @@ const getOrders = async (token) => {
   return response.data;
 };
 
+// Get order by orderID
+const getOneOrder = async (id) => {
+  const response = await axios.get(API_URL + "getOneOrder/" + id);
+  console.log(response)
+  
+  return response.data;
+};
+
 // Set order
 const setOrder = async (orderData, token) => {
   const config = {
@@ -62,6 +70,7 @@ const deleteOrder = async (orderId, token) => {
 const orderService = {
   setOrder,
   getOrders,
+  getOneOrder,
   updateOrder,
   deleteOrder,
 };
