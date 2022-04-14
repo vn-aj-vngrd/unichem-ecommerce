@@ -7,7 +7,6 @@ import {
   resetCoupon,
 } from "../../features/coupons/couponSlice.js";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
 import Spinner from "../../components/Spinner";
@@ -244,16 +243,13 @@ const Checkout = () => {
     orderDiscountAmount.toFixed(2) +
     (shippingFee.toFixed(2) - shippingDiscountAmount.toFixed(2));
 
+  const [coupEm, setCoupEm] = useState();
+
   const onApply = () => {
+    setCoupEm();
+
     if (couponCode === "") {
-      toast.error(`Please input a valid coupon.`, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      setCoupEm("Coupon code is required");
       return;
     }
 
@@ -759,7 +755,7 @@ const Checkout = () => {
                     <div className="form-input form">
                       <input
                         type="text"
-                        placeholder="Coupon"
+                        placeholder="Coupon Code"
                         value={couponCode}
                         onChange={onChange}
                       />
@@ -769,6 +765,9 @@ const Checkout = () => {
                         apply
                       </button>
                     </div>
+                  </div>
+                  <div className="text-red text-center">
+                    {coupEm && <small className="text-red">{coupEm}</small>}
                   </div>
                 </div>
 
@@ -845,7 +844,8 @@ const Checkout = () => {
                       <p className="value">Order Discount:</p>
 
                       <p className="price">
-                        - ₱ {orderDiscountAmount.toFixed(2)} ({orderDiscount.value}%)
+                        - ₱ {orderDiscountAmount.toFixed(2)} (
+                        {orderDiscount.value}%)
                       </p>
                     </div>
                   </div>
@@ -854,7 +854,8 @@ const Checkout = () => {
                     <div className="total-price">
                       <p className="value">Shipping Discount:</p>
                       <p className="price">
-                        - ₱ {shippingDiscountAmount.toFixed(2)} ({shippingDiscount.value}%)
+                        - ₱ {shippingDiscountAmount.toFixed(2)} (
+                        {shippingDiscount.value}%)
                       </p>
                     </div>
                   </div>

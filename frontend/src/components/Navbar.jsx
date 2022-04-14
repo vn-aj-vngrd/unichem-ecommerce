@@ -47,19 +47,7 @@ const Navbar = ({ userType }) => {
 
   const onLogout = (e) => {
     e.preventDefault();
-
-    if (user.userType === "customer") {
-      toast.success("User has logout", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        textAlign: "center",
-      });
-    }
-
+    
     localStorage.clear();
     dispatch(logout());
     dispatch(resetUser());

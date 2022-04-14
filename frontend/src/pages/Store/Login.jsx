@@ -21,6 +21,9 @@ const Login = () => {
     (state) => state.auth
   );
 
+  const [passMin, setPassMin] = useState();
+  const [loginError, setLoginError] = useState();
+
   useEffect(() => {
     if (isError) {
       if (
@@ -35,14 +38,7 @@ const Login = () => {
           confirmButtonText: "Ok",
         });
       } else {
-        toast.error(message, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        setLoginError(message);
       }
     }
 
@@ -54,7 +50,7 @@ const Login = () => {
       toast.success(`Welcome, ${user.name}`, {
         position: "top-center",
         autoClose: 5000,
-        hideProgressBar: true,
+        hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -76,15 +72,11 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    setPassMin();
+    setLoginError();
+
     if (password.length < 8) {
-      toast.error("Password must be at least 8 characters.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      setPassMin("Must be at least 8 characters");
       return;
     }
 
@@ -118,7 +110,7 @@ const Login = () => {
               <form className="card login-form" onSubmit={onSubmit}>
                 <div className="card-body">
                   <div className="form-group input-group">
-                    <label>Email</label>
+                    <label>Email Address</label>
                     <input
                       type="email"
                       className="form-control"
@@ -148,6 +140,10 @@ const Login = () => {
                     <button className="btn" type="submit">
                       Log in
                     </button>
+                  </div>
+                  <div className="text-center mt-4">
+                    {passMin && <small className="text-red">{passMin}</small>}
+                    {loginError && <small className="text-red">{loginError}</small>}
                   </div>
                   <p className="outer-link">
                     Don't have an account yet?{" "}

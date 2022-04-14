@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { register, resetUser } from "../../features/auth/authSlice";
-import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Spinner from "../../components/Spinner";
 
@@ -33,6 +32,11 @@ const Signup = () => {
     confirmPassword,
   } = formData;
 
+  const [ageMin, setAgeMin] = useState();
+  const [passMis, setPassMis] = useState();
+  const [passMin, setPassMin] = useState();
+  const [emailEx, setEmailEx] = useState();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -49,14 +53,15 @@ const Signup = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      // toast.error(message, {
+      //   position: "top-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: true,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      // });
+      setEmailEx(message);
     }
 
     document.title = "Unichem Store | Sign up";
@@ -79,6 +84,11 @@ const Signup = () => {
     e.preventDefault();
 
     if (birthday) {
+      setAgeMin();
+      setPassMis();
+      setPassMin();
+      setEmailEx();
+
       const today = new Date();
       const birthDate = new Date(birthday);
       let age_now = today.getFullYear() - birthDate.getFullYear();
@@ -86,40 +96,20 @@ const Signup = () => {
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age_now--;
       }
+
       if (age_now < 18) {
-        toast.error("You must be at least 18 years old to register.", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        setAgeMin("Must be at least 18 years old");
         return;
       }
     }
 
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+    if (password.length < 8) {
+      setPassMin("Must be at least 8 characters");
       return;
     }
 
-    if (password.length < 8) {
-      toast.error("Password must be at least 8 characters.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+    if (password !== confirmPassword) {
+      setPassMis("Passwords do not match");
       return;
     }
 
@@ -155,16 +145,16 @@ const Signup = () => {
   }
 
   return (
-    <div class="account-login">
-      <div class="container">
+    <div className="account-login">
+      <div className="container">
         <div className="section-title">
           <h2>Sign up</h2>
           <p>Welcome to Unichem, please provide the necessary information.</p>
         </div>
-        <div class="row">
-          <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
-            <div class="register-form">
-              <form class="row" onSubmit={onSubmit}>
+        <div className="row">
+          <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+            <div className="register-form">
+              <form className="row" onSubmit={onSubmit}>
                 <div className="col-sm-12 fw-bold">
                   Personal Information
                   <hr />
@@ -192,6 +182,7 @@ const Signup = () => {
                     onChange={onChange}
                     required
                   />
+                  {emailEx && <small className="text-red">{emailEx}</small>}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Birthday</label>
@@ -204,6 +195,7 @@ const Signup = () => {
                     onChange={onChange}
                     required
                   />
+                  {ageMin && <small className="text-red">{ageMin}</small>}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Gender</label>
@@ -230,6 +222,8 @@ const Signup = () => {
                     onChange={onChange}
                     required
                   />
+
+                  {passMin && <small className="text-red">{passMin}</small>}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Confirm Password</label>
@@ -242,6 +236,7 @@ const Signup = () => {
                     onChange={onChange}
                     required
                   />
+                  {passMis && <small className="text-red">{passMis}</small>}
                 </div>
 
                 <div className="col-sm-12 fw-bold">
@@ -304,12 +299,12 @@ const Signup = () => {
                   />
                 </div>
 
-                <div class="button">
-                  <button class="btn" type="submit">
+                <div className="button">
+                  <button className="btn" type="submit">
                     Register
                   </button>
                 </div>
-                <p class="outer-link">
+                <p className="outer-link">
                   Already have an account? <Link to="/login">Login Now</Link>
                 </p>
               </form>
