@@ -2206,7 +2206,7 @@ ol {
 .single-product .product-image {
   overflow: hidden;
   position: relative;
-  /* border: 1px solid #e6e6e6e; */
+  border: 1px solid #e6e6e6;
   border-radius: 3px;
 }
 
@@ -2238,7 +2238,7 @@ ol {
 
 @media (min-width: 1199px) {
   .single-product .product-image img {
-    min-height: 290px;
+    /* min-height: 200px; */
   }
 }
 
@@ -6282,6 +6282,10 @@ ol {
   color: #fff;
   -webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;
+}
+
+.order-total {
+  color: #f44336 !important;
 }
 
 /*======================================
