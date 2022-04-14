@@ -37,7 +37,7 @@ const Login = () => {
       } else {
         toast.error(message, {
           position: "top-center",
-          autoClose: 6500,
+          autoClose: 5000,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
@@ -53,7 +53,7 @@ const Login = () => {
       const user = JSON.parse(temp);
       toast.success(`Welcome, ${user.name}`, {
         position: "top-center",
-        autoClose: 6500,
+        autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -79,7 +79,7 @@ const Login = () => {
     if (password.length < 8) {
       toast.error("Password must be at least 8 characters.", {
         position: "top-center",
-        autoClose: 6500,
+        autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -106,70 +106,62 @@ const Login = () => {
   }
 
   return (
-    <div className="login">
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <div className="section-title">
-              <h2>Log in</h2>
-              <p>Welcome to Unichem Store, please login.</p>
+    <>
+      <div className="account-login">
+        <div className="container">
+          <div className="section-title">
+            <h2>Log in</h2>
+            <p>Welcome to Unichem Store, please login.</p>
+          </div>
+          <div className="row">
+            <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+              <form className="card login-form" onSubmit={onSubmit}>
+                <div className="card-body">
+                  <div className="form-group input-group">
+                    <label>Email</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      value={email}
+                      onChange={onChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group input-group">
+                    <label>Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      name="password"
+                      value={password}
+                      onChange={onChange}
+                      required
+                    />
+                  </div>
+                  <div className="text-end outer-link">
+                    <Link to="/recover-account">Forgot password?</Link>
+                  </div>
+                  <div className="button">
+                    <button className="btn" type="submit">
+                      Log in
+                    </button>
+                  </div>
+                  <p className="outer-link">
+                    Don't have an account yet?{" "}
+                    <Link to="/signup" className="text-red">
+                      Sign Up
+                    </Link>
+                  </p>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-        <form
-          onSubmit={onSubmit}
-          className="container p-5 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12"
-        >
-          <div className="mb-3">
-            <label className="form-label">Email Address</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              onChange={onChange}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              onChange={onChange}
-              required
-            />
-          </div>
-
-          <p>
-            <Link className="text-red" to="/recover-account">
-              Forgot password?
-            </Link>
-          </p>
-
-          <div className="button text-center pt-3 pb-3">
-            <button type="submit" className="btn">
-              Log In
-            </button>
-          </div>
-
-          <hr />
-
-          <div className="text-center mt-4">
-            <p>
-              Don't have an account yet?{" "}
-              <Link to="/signup" className="text-red">
-                Sign Up
-              </Link>
-            </p>
-          </div>
-        </form>
       </div>
-    </div>
+    </>
   );
 };
 

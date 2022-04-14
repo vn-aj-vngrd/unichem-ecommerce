@@ -34,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     userType,
-    image: "https://img.icons8.com/ios-glyphs/344/user--v1.png",
+    image: "https://i.stack.imgur.com/l60Hf.png",
     verified: false,
   });
 
@@ -64,19 +64,6 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User could not be created");
   }
-
-  // res.status(201).json({
-  //   _id: user._id,
-  //   name: user.name,
-  //   email: user.email,
-  //   sex: user.sex,
-  //   birthday: user.birthday,
-  //   userType: user.userType,
-  //   image: user.image,
-  //   address: userAddress.address,
-  //   primaryAddress: userAddress.primaryAddress,
-  //   token: generateToken(user._id),
-  // });
 
   res.status(201).json({
     message:
