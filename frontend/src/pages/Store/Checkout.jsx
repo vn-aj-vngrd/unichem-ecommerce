@@ -177,6 +177,8 @@ const Checkout = () => {
     user,
     coupons,
     isCouponSuccess,
+    orderDiscount,
+    shippingDiscount,
     navigate,
     isOrderAdded,
     isOrderError,
@@ -843,7 +845,7 @@ const Checkout = () => {
                       <p className="value">Order Discount:</p>
 
                       <p className="price">
-                        - ₱ {orderDiscountAmount.toFixed(2)}
+                        - ₱ {orderDiscountAmount.toFixed(2)} ({orderDiscount.value}%)
                       </p>
                     </div>
                   </div>
@@ -852,7 +854,7 @@ const Checkout = () => {
                     <div className="total-price">
                       <p className="value">Shipping Discount:</p>
                       <p className="price">
-                        - ₱ {shippingDiscountAmount.toFixed(2)}
+                        - ₱ {shippingDiscountAmount.toFixed(2)} ({shippingDiscount.value}%)
                       </p>
                     </div>
                   </div>
