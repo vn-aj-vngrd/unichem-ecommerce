@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { login, resetUser } from "../features/auth/authSlice";
-import Spinner from "../components/Spinner";
+import { login, resetUser } from "../../features/auth/authSlice";
+import Spinner from "../../components/Spinner";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -22,14 +23,27 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error("Your email or password is incorrect, please try again.", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      if (
+        message ===
+        "A verification link has been sent to your email address. Please verify your email in one hour to login."
+      ) {
+        Swal.fire({
+          title: "Please verify your email",
+          text: "A verification link has been sent to your email address. Please verify your email in one hour to login.",
+          icon: "warning",
+          confirmButtonColor: "#f44336",
+          confirmButtonText: "Ok",
+        });
+      } else {
+        toast.error(message, {
+          position: "top-center",
+          autoClose: 6500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
     }
 
     document.title = "Unichem Store | Log in";
@@ -39,7 +53,7 @@ const Login = () => {
       const user = JSON.parse(temp);
       toast.success(`Welcome, ${user.name}`, {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 6500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -65,7 +79,7 @@ const Login = () => {
     if (password.length < 8) {
       toast.error("Password must be at least 8 characters.", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 6500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -98,7 +112,7 @@ const Login = () => {
           <div className="col-12">
             <div className="section-title">
               <h2>Log in</h2>
-              <p>Welcome to UniChem, please login.</p>
+              <p>Welcome to Unichem Store, please login.</p>
             </div>
           </div>
         </div>
@@ -107,7 +121,7 @@ const Login = () => {
           className="container p-5 col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12"
         >
           <div className="mb-3">
-            <label className="form-label">Email address</label>
+            <label className="form-label">Email Address</label>
             <input
               type="email"
               className="form-control"
@@ -130,7 +144,14 @@ const Login = () => {
               required
             />
           </div>
-          <div className="button text-center pt-1">
+
+          <p>
+            <Link className="text-red" to="/recover-account">
+              Forgot password?
+            </Link>
+          </p>
+
+          <div className="button text-center pt-3 pb-3">
             <button type="submit" className="btn">
               Log In
             </button>
@@ -138,10 +159,10 @@ const Login = () => {
 
           <hr />
 
-          <div className="text-center mt-3">
+          <div className="text-center mt-4">
             <p>
               Don't have an account yet?{" "}
-              <Link to="/signup" className="text-danger">
+              <Link to="/signup" className="text-red">
                 Sign Up
               </Link>
             </p>

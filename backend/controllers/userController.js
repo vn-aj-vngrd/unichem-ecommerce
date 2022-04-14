@@ -3,6 +3,9 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const Address = require("../models/addressModel");
+const Verification = require("../models/verificationModel");
+const sendEmail = require("../util/sendEmail");
+const crypto = require("crypto");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -32,7 +35,9 @@ const registerUser = asyncHandler(async (req, res) => {
     password: hashedPassword,
     userType,
     image: "https://img.icons8.com/ios-glyphs/344/user--v1.png",
+    verified: false,
   });
+
   const userAddress = await Address.create({
     userID: user._id,
     address: [
@@ -47,22 +52,35 @@ const registerUser = asyncHandler(async (req, res) => {
     primaryAddress: 0,
   });
 
-  if (!user && !userAddress) {
+  const verification = await Verification.create({
+    userID: user._id,
+    token: crypto.randomBytes(32).toString("hex"),
+  });
+
+  const url = `${process.env.BASE_URL}users/${user.id}/verify/${verification.token}`;
+  await sendEmail(user.email, "Unichem Store - Verify Email", url);
+
+  if (!user && !userAddress && !verification) {
     res.status(400);
     throw new Error("User could not be created");
   }
 
+  // res.status(201).json({
+  //   _id: user._id,
+  //   name: user.name,
+  //   email: user.email,
+  //   sex: user.sex,
+  //   birthday: user.birthday,
+  //   userType: user.userType,
+  //   image: user.image,
+  //   address: userAddress.address,
+  //   primaryAddress: userAddress.primaryAddress,
+  //   token: generateToken(user._id),
+  // });
+
   res.status(201).json({
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    sex: user.sex,
-    birthday: user.birthday,
-    userType: user.userType,
-    image: user.image,
-    address: userAddress.address,
-    primaryAddress: userAddress.primaryAddress,
-    token: generateToken(user._id),
+    message:
+      "A verification link has been sent to your email address. Please verify your email in one hour to login.",
   });
 });
 
@@ -75,29 +93,48 @@ const loginUser = asyncHandler(async (req, res) => {
   // check for user email
   const user = await User.findOne({ email });
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    const userID = user._id;
-    const userAddress = await Address.findOne({ userID });
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      sex: user.sex,
-      birthday: user.birthday,
-      userType: user.userType,
-      image: user.image,
-      address: userAddress.address,
-      primaryAddress: userAddress.primaryAddress,
-      token: generateToken(user._id),
-    });
-  } else {
+  // User does not exist and incorrect password
+  if (!user || !(await bcrypt.compare(password, user.password))) {
     res.status(400);
-    throw new Error("Invalid credentials");
+    throw new Error("Invalid Email or Password");
   }
+
+  // User exists but unverified
+  if (!user.verified) {
+    let verification = await Verification.findOne({ userID: user._id });
+    if (!verification) {
+      verification = await Verification.create({
+        userID: user._id,
+        token: crypto.randomBytes(32).toString("hex"),
+      });
+      const url = `${process.env.BASE_URL}/users/${user.id}/verify/${verification.token}`;
+      await sendEmail(user.email, "Unichem Store - Verify Email", url);
+    }
+    return res.status(400).json({
+      message:
+        "A verification link has been sent to your email address. Please verify your email in one hour to login.",
+    });
+  }
+
+  // Authenticate
+  const userID = user._id;
+  const userAddress = await Address.findOne({ userID });
+  res.json({
+    _id: userID,
+    name: user.name,
+    email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
+    userType: user.userType,
+    image: user.image,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: generateToken(user._id),
+  });
 });
 
 // @desc    Get user data
-// @route   GET /api/users/user
+// @route   GET /api/users/getUser
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
   if (!req.user) {
@@ -124,7 +161,7 @@ const getUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update user data
-// @route   PUT /api/users/user
+// @route   PUT /api/users/updateUser
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
   // Check for user
@@ -163,8 +200,6 @@ const updateUser = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  console.log(req.body);
-
   res.status(200).json({
     _id: updatedUser._id,
     name: updatedUser.name,
@@ -180,6 +215,31 @@ const updateUser = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Verify user data
+// @route   GET /api/users/user/:id/verify/:token
+// @access  Private
+const verifyUser = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id });
+  if (!user) {
+    res.status(400);
+    throw new Error("Invalid Link");
+  }
+
+  const verification = await Verification.findOne({
+    userID: req.params.id,
+    token: req.params.token,
+  });
+  if (!verification) {
+    res.status(400);
+    throw new Error("Invalid Link");
+  }
+
+  await User.updateOne({ _id: user._id }, { verified: true });
+  await verification.remove();
+
+  res.status(200).json({ message: "Email verified successfully" });
+});
+
 // Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -187,4 +247,4 @@ const generateToken = (id) => {
   });
 };
 
-module.exports = { registerUser, loginUser, getUser, updateUser };
+module.exports = { registerUser, loginUser, getUser, updateUser, verifyUser };

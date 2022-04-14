@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
+import { register, resetUser } from "../../features/auth/authSlice";
 import { toast } from "react-toastify";
-import { register, resetUser } from "../features/auth/authSlice";
-import Spinner from "../components/Spinner";
+import Swal from "sweetalert2";
+import Spinner from "../../components/Spinner";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -50,7 +51,7 @@ const Signup = () => {
     if (isError) {
       toast.error(message, {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 6500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -61,17 +62,14 @@ const Signup = () => {
     document.title = "Unichem Store | Sign up";
 
     if (isSuccess || user) {
-      const temp = localStorage.getItem("user");
-      const user = JSON.parse(temp);
-      toast.success(`Welcome, ${user.name}`, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
+      Swal.fire({
+        title: "Email Verification Sent",
+        text: message,
+        icon: "success",
+        confirmButtonColor: "#f44336",
       });
-      navigate("/");
+
+      navigate("/login");
     }
 
     dispatch(resetUser());
@@ -91,7 +89,7 @@ const Signup = () => {
       if (age_now < 18) {
         toast.error("You must be at least 18 years old to register.", {
           position: "top-center",
-          autoClose: 2000,
+          autoClose: 6500,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
@@ -104,7 +102,7 @@ const Signup = () => {
     if (password !== confirmPassword) {
       toast.error("Passwords do not match", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 6500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -116,7 +114,7 @@ const Signup = () => {
     if (password.length < 8) {
       toast.error("Password must be at least 8 characters.", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 6500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -321,7 +319,7 @@ const Signup = () => {
           <div className="text-center mt-3">
             <p>
               Already have an account?{" "}
-              <Link to="/login" className="text-danger">
+              <Link to="/login" className="text-red">
                 {" "}
                 Log in
               </Link>

@@ -141,8 +141,8 @@ span,
 a {
   display: inline-block;
   text-decoration: none;
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
+  /* -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease; */
   transition: all 0.4s ease;
 }
 
@@ -3117,7 +3117,7 @@ ol {
 .product-details-info .reviews .single-review {
   position: relative;
   padding-left: 80px;
-  margin-top:
+  /* margin-top: ; */
 }
 
 .product-details-info .reviews .single-review {
@@ -3129,7 +3129,6 @@ ol {
     padding-left: 60px;
   }
 }
-
 
 .product-details-info .reviews .single-review img {
   height: 60px;
@@ -5098,7 +5097,7 @@ ol {
   justify-content: end;
 }
 
-.checkout-steps-form-style .steps-form-btn-no-margin{
+.checkout-steps-form-style .steps-form-btn-no-margin {
   display: flex;
   justify-content: end;
 }
@@ -5574,6 +5573,89 @@ ol {
   color: #666;
 }
 
+
+/*======================================
+	Success CSS
+========================================*/
+.success-area {
+  text-align: center;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: #fff; */
+  position: relative;
+  /* background-image: url("../images/error/404-bg.png"); */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 300px;
+  padding-bottom: 225px;
+}
+
+.d-table {
+  width: 100%;
+  height: 100%;
+}
+
+.d-table {
+  display: table !important;
+}
+
+.d-table-cell {
+  vertical-align: middle;
+}
+
+.d-table-cell {
+  display: table-cell !important;
+}
+
+.success-area .success-content h1 {
+  font-size: 100px;
+  color: #2196f3;
+  margin-bottom: 25px;
+  font-weight: 800;
+  line-height: 100px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .success-area .success-content h1 {
+    font-size: 60px;
+    line-height: 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .success-area .success-content h1 {
+    font-size: 45px;
+    line-height: 30px;
+  }
+}
+
+.success-area .success-content h2 {
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: #424242;
+  font-weight: 700;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .success-area .success-content h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 767px) {
+  .success-area .success-content h2 {
+    font-size: 18px;
+  }
+}
+
+.success-area .success-content p {
+  font-weight: 400;
+  margin-bottom: 40px;
+  color: #666;
+}
+
+
 /*======================================
 	Manage CSS 
 ========================================*/
@@ -5635,14 +5717,14 @@ ol {
   transform: rotate(90deg);
   border: none;
   background-color: white;
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
+  /* -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease; */
 }
 
 .vertical-menu-button:hover {
   color: #424242;
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
+  /* -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease; */
 }
 
 .underline-link:hover {
@@ -5679,15 +5761,15 @@ ol {
   position: absolute;
   right: 5px;
   bottom: 5px;
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
+  /* -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease; */
   transition: all 0.4s ease;
   /* Style as you please, it will become the visible UI component. */
 }
 
 .upload-image-label:hover {
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
+  /* -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease; */
   transition: all 0.4s ease;
   background-color: #b71c1c;
 }
@@ -6080,7 +6162,6 @@ ol {
   margin-right: 5px;
 }
 
-
 .review-single-product .product-info .category a:hover,
 .review-single-product .product-info .title a:hover {
   color: #f44336;
@@ -6136,7 +6217,6 @@ ol {
   padding: 0px 30px 30px 30px !important;
 }
 
-
 /*======================================
 	Order CSS 
 ========================================*/
@@ -6168,7 +6248,6 @@ ol {
   margin-right: 5px;
 }
 
-
 .order-single-product .product-info .category a:hover,
 .order-single-product .product-info .title a:hover {
   color: #f44336;
@@ -6193,7 +6272,6 @@ ol {
   margin-bottom: 5px;
   border: none;
 }
-
 
 .one-status {
   display: flex;
@@ -6249,15 +6327,15 @@ ol {
 
 .one-status .true {
   background-color: #f44336;
-  -webkit-transition: all 0.1s ease;
-  -moz-transition: all 0.1s ease;
+  /* -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease; */
 }
 
 .one-status .true:hover {
   background-color: #b71c1c;
   color: #fff !important;
-  -webkit-transition: all 0.1s ease;
-  -moz-transition: all 0.1s ease;
+  /* -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease; */
 }
 
 .lni-support {
@@ -6271,17 +6349,17 @@ ol {
   color: white;
 }
 
-.order-status-log  {
+.order-status-log {
   font-size: 14px;
-  -webkit-transition: all 0.1s ease;
-  -moz-transition: all 0.1s ease;
+  /* -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease; */
 }
 
-.order-status-log:hover  {
+.order-status-log:hover {
   text-decoration: underline;
   color: #fff;
-  -webkit-transition: all 0.1s ease;
-  -moz-transition: all 0.1s ease;
+  /* -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease; */
 }
 
 /*======================================
@@ -6346,7 +6424,6 @@ ol {
   margin: 5px 0 30px 0;
 }
 
-
 .order-details-status-progress .vertical-bar {
   width: 1px;
   height: 100%;
@@ -6357,8 +6434,8 @@ ol {
   z-index: 1;
 }
 
-.order-details-status-progress:last-child .vertical-bar {
-}
+/* .order-details-status-progress:last-child .vertical-bar {
+} */
 
 .order-details-status-progress .vertical-bar .vertical-progress {
   width: 1px;
@@ -6410,8 +6487,8 @@ ol {
 
 .btn:active {
   transform: scale(0.9) !important;
-  -webkit-transition: all 0.1s ease !important;
-  -moz-transition: all 0.1s ease !important;
+  /* -webkit-transition: all 0.1s ease !important;
+  -moz-transition: all 0.1s ease !important; */
 }
 
 .pt-30 {

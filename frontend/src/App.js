@@ -11,14 +11,14 @@ import Spinner from "./components/Spinner";
 import Messenger from "./components/Messenger";
 import ScrollToTop from "./components/ScrollToTop";
 
-import Home from "./pages/Home";
+import Home from "./pages/Store/Home";
 import Products from "./pages/Product/Products";
 import About from "./pages/Store/About";
 import Cart from "./pages/Store/Cart";
 import Contact from "./pages/Store/Contact";
 import Wishlist from "./pages/Store/Wishlist";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./pages/Store/Login";
+import Signup from "./pages/Store/Signup";
 import ProductDetails from "./pages/Product/ProductDetails";
 import Address from "./pages/Account/Address";
 import Profile from "./pages/Account/Profile";
@@ -28,6 +28,7 @@ import Review from "./pages/Account/Review";
 import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
+import Verification from "./pages/Store/Verification";
 
 import Dashboard from "./pages/Admin/Dashboard";
 import UsersList from "./pages/Admin/UsersList";
@@ -99,8 +100,14 @@ export const App = () => {
           {/* Store Routes */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="products/category/:categoryName" element={<Products />} />
-            <Route path="products/product/:productName" element={<Products />} />
+            <Route
+              path="products/category/:categoryName"
+              element={<Products />}
+            />
+            <Route
+              path="products/product/:productName"
+              element={<Products />}
+            />
             <Route path="products/brand/:brandName" element={<Products />} />
             <Route path="product-details/:id" element={<ProductDetails />} />
             <Route path="about" element={<About />} />
@@ -116,6 +123,7 @@ export const App = () => {
             <Route path="account/reviews" element={<Review />} />
             <Route path="cart/checkout" element={<Checkout />} />
             <Route path="faq" element={<Faq />} />
+            <Route path="/users/:id/verify/:token" element={<Verification />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* Enable Live Chat in Deployment */}
