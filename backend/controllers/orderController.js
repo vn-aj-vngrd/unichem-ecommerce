@@ -55,7 +55,8 @@ const setOrder = asyncHandler(async (req, res) => {
     userID: req.user._id,
     shippingDate: req.body.order.shippingDate,
     receivedDate: req.body.order.receivedDate,
-    discount: req.body.order.discount,
+    orderDiscount: req.body.order.orderDiscount,
+    shippingDiscount: req.body.order.shippingDiscount,
     shippingFee: req.body.order.shippingFee,
     totalPrice: req.body.order.totalPrice,
     orderStatus: req.body.order.orderStatus,
@@ -82,20 +83,21 @@ const setOrder = asyncHandler(async (req, res) => {
     newOrderline.push(orderline);
   }
 
-  // Create couponlogID
-  let newCouponlog;
-  if (req.body.couponlogID) {
-    newCouponlog = await Couponlog.create({
+  // Create couponlogs
+  let newCouponlogs = [];
+  for (let i = 0; i < req.body.couponlogID.length; i++) {
+    const newCouponlog = await Couponlog.create({
       userID: req.user._id,
-      couponID: req.body.couponlogID,
+      couponID: req.body.couponlogID[i],
       orderID: newOrder._id,
     });
+    newCouponlogs.push(newCouponlog);
   }
 
   let retData = {
     order: newOrder,
     orderline: newOrderline,
-    couponlog: newCouponlog,
+    couponlog: newCouponlogs,
   };
 
   return res.status(200).json(retData);

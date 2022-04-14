@@ -26,7 +26,18 @@ const Checkout = () => {
 
   const [payment, setPayment] = useState("");
   const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState({ value: 0, type: "", _id: null });
+  const [orderDiscount, setOrderDiscount] = useState({
+    value: 0,
+    type: "",
+    _id: null,
+  });
+  const [shippingDiscount, setShippingDiscount] = useState({
+    value: 0,
+    type: "",
+    _id: null,
+  });
+
+  const [couponlogID, setCouponlogID] = useState([]);
 
   const onChange = (e) => {
     setCouponCode(e.target.value);
@@ -75,7 +86,7 @@ const Checkout = () => {
           Swal.fire({
             title: "Coupon is invalid",
             icon: "error",
-            text: "Sorry, coupon requirement does not meet your order amount.",
+            text: "Sorry, the coupon requirement does not meet your order subtotal amount.",
             confirmButtonColor: "#f44336",
           });
           break;
@@ -93,7 +104,7 @@ const Checkout = () => {
           Swal.fire({
             title: "Coupon is invalid",
             icon: "error",
-            text: "Sorry, you already use this coupon.",
+            text: "Sorry, you already used this coupon.",
             confirmButtonColor: "#f44336",
           });
           break;
@@ -121,11 +132,40 @@ const Checkout = () => {
         confirmButtonColor: "#f44336",
         cancelButtonColor: "#424242",
       });
-      setDiscount({
-        value: coupons.discount,
-        type: coupons.couponType,
-        _id: coupons._id,
-      });
+
+      if (coupons.couponType === "order-discount") {
+        if (!orderDiscount.value) {
+          setOrderDiscount({
+            value: coupons.discount,
+            type: coupons.couponType,
+            _id: coupons._id,
+          });
+          setCouponlogID((prev) => [...prev, coupons._id]);
+        } else {
+          Swal.fire({
+            title: "Coupon is invalid",
+            icon: "error",
+            text: "Sorry, you can only use one coupon for the order's subtotal discount per checkout.",
+            confirmButtonColor: "#f44336",
+          });
+        }
+      } else if (coupons.couponType === "shipping-discount") {
+        if (!shippingDiscount.value) {
+          setShippingDiscount({
+            value: coupons.discount,
+            type: coupons.couponType,
+            _id: coupons._id,
+          });
+          setCouponlogID((prev) => [...prev, coupons._id]);
+        } else {
+          Swal.fire({
+            title: "Coupon is invalid",
+            icon: "error",
+            text: "Sorry, you can only use one coupon for the order's shipping discount per checkout.",
+            confirmButtonColor: "#f44336",
+          });
+        }
+      }
     }
 
     return () => {
@@ -162,7 +202,6 @@ const Checkout = () => {
 
   let subtotal = 0;
   let shippingFee = 100;
-  let orderDiscount = 0;
   let orders = [];
 
   if (checked > 0) {
@@ -192,25 +231,16 @@ const Checkout = () => {
     return sum;
   }, 0);
 
-  switch (discount.type) {
-    case "order-discount": {
-      orderDiscount = subtotal * (discount.value / 100);
-      break;
-    }
-    case "shipping-discount": {
-      shippingFee -= subtotal * (discount.value / 100);
-      break;
-    }
-    case "free-shipping": {
-      shippingFee -= shippingFee;
-      break;
-    }
-    default: {
-      break;
-    }
-  }
+  const orderDiscountAmount = subtotal * (orderDiscount.value / 100);
+  // console.log(orderDiscountAmount);
 
-  const total = subtotal - orderDiscount + shippingFee;
+  const shippingDiscountAmount = shippingFee * (shippingDiscount.value / 100);
+  // console.log(shippingDiscountAmount);
+
+  const total =
+    subtotal.toFixed(2) -
+    orderDiscountAmount.toFixed(2) +
+    (shippingFee.toFixed(2) - shippingDiscountAmount.toFixed(2));
 
   const onApply = () => {
     if (couponCode === "") {
@@ -270,14 +300,17 @@ const Checkout = () => {
         shippingDate: new Date(new Date().setDate(new Date().getDate() + 5)),
         receivedDate: new Date(new Date().setDate(new Date().getDate() + 20)),
         shippingFee: shippingFee,
-        discount: discount.value,
         totalPrice: total.toFixed(2),
+        orderDiscount: orderDiscount.value,
+        shippingDiscount: shippingDiscount.value,
         orderStatus: orderStatus,
         paymentMethod: payment,
       },
       orderline: [],
-      couponlogID: discount._id,
+      couponlogID: couponlogID,
     };
+
+    console.log(orderData);
 
     Swal.fire({
       title: "Are you sure to checkout?",
@@ -307,23 +340,23 @@ const Checkout = () => {
           dispatch(setOrder(orderData));
 
           return;
+        } else {
+          carts.forEach((cart) => {
+            const orderline = {
+              cartID: cart._doc._id,
+              image: cart.product.images[0],
+              productID: cart.product.id,
+              productName: cart.product.productName,
+              productType: cart.product.types[cart._doc.productType],
+              quantity: cart._doc.quantity,
+              price: cart.product.prices[cart._doc.productType],
+              reviewed: false,
+            };
+            orderData.orderline.push(orderline);
+          });
+
+          dispatch(setOrder(orderData));
         }
-
-        carts.forEach((cart) => {
-          const orderline = {
-            cartID: cart._doc._id,
-            image: cart.product.images[0],
-            productID: cart.product.id,
-            productName: cart.product.productName,
-            productType: cart.product.types[cart._doc.productType],
-            quantity: cart._doc.quantity,
-            price: cart.product.prices[cart._doc.productType],
-            reviewed: false,
-          };
-          orderData.orderline.push(orderline);
-        });
-
-        dispatch(setOrder(orderData));
       }
     });
   };
@@ -804,11 +837,22 @@ const Checkout = () => {
                     </div>
                   </div>
 
+                  <h5 className="title"> </h5>
                   <div className="sub-total-price">
                     <div className="total-price">
-                      <p className="value">Discount:</p>
+                      <p className="value">Order Discount:</p>
+
                       <p className="price">
-                        - ₱ {orderDiscount.toFixed(2)} (%{discount.value})
+                        - ₱ {orderDiscountAmount.toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="sub-total-price">
+                    <div className="total-price">
+                      <p className="value">Shipping Discount:</p>
+                      <p className="price">
+                        - ₱ {shippingDiscountAmount.toFixed(2)}
                       </p>
                     </div>
                   </div>
