@@ -15,13 +15,17 @@ const orderSchema = mongoose.Schema(
       type: Date,
       required: [true, "Received Date is required."],
     },
+    orderDiscount: {
+      type: Number,
+      required: [true, "Order Discount is required."],
+    },
+    shippingDiscount: {
+      type: Number,
+      required: [true, "Shipping Discount is required."],
+    },
     shippingFee: {
       type: Number,
       required: [true, "Shipping Fee is required."],
-    },
-    discount: {
-      type: Number,
-      required: [true, "Discount is required."],
     },
     totalPrice: {
       type: Number,

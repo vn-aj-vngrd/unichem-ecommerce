@@ -26,7 +26,7 @@ const setOrder = async (orderData, token) => {
   console.log(orderData);
 
   const response = await axios.post(API_URL, orderData, config);
-  // console.log(response.data);
+  console.log(response.data);
 
   return response.data;
 };
