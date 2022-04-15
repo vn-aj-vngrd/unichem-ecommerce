@@ -53,20 +53,12 @@ const Signup = () => {
 
   useEffect(() => {
     if (isError) {
-      // toast.error(message, {
-      //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: true,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      // });
       setEmailEx(message);
     }
 
     document.title = "Unichem Store | Sign up";
 
-    if (isSuccess || user) {
+    if (isSuccess) {
       Swal.fire({
         title: "Email Verification Sent",
         text: message,
@@ -77,7 +69,13 @@ const Signup = () => {
       navigate("/login");
     }
 
-    dispatch(resetUser());
+    if (user) {
+      navigate("/");
+    }
+
+    return () => {
+      dispatch(resetUser());
+    };
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onSubmit = (e) => {
@@ -207,6 +205,9 @@ const Signup = () => {
                     onChange={onChange}
                     required
                   >
+                    <option value="" disabled>
+                      Select Gender
+                    </option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>

@@ -43,6 +43,24 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
+// Recover user
+export const recover = createAsyncThunk(
+  "auth/recover",
+  async (recoveryData, thunkAPI) => {
+    try {
+      return await authService.recover(recoveryData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Update user
 export const update = createAsyncThunk(
   "user/update",
@@ -103,13 +121,13 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload.message;
-        // state.user = action.payload;
+        state.user = null;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        // state.user = null;
+        state.user = null;
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -125,6 +143,22 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
+
+      .addCase(recover.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(recover.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = null;
+      })
+      .addCase(recover.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+
       .addCase(update.pending, (state) => {
         state.isLoading = true;
       })

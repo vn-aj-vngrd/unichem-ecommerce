@@ -8,8 +8,6 @@ import {
   resetWishlist,
 } from "../features/wishlist/wishlistSlice";
 import { getCarts, resetCart } from "../features/cart/cartSlice";
-
-import { toast } from "react-toastify";
 import logo from "../assets/images/logo.svg";
 
 const Navbar = ({ userType }) => {
@@ -47,7 +45,7 @@ const Navbar = ({ userType }) => {
 
   const onLogout = (e) => {
     e.preventDefault();
-    
+
     localStorage.clear();
     dispatch(logout());
     dispatch(resetUser());

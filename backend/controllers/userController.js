@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const Address = require("../models/addressModel");
-const Verification = require("../models/verificationModel");
+const Token = require("../models/tokenModel");
 const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
 
@@ -52,13 +52,14 @@ const registerUser = asyncHandler(async (req, res) => {
     primaryAddress: 0,
   });
 
-  const verification = await Verification.create({
+  const verification = await Token.create({
     userID: user._id,
     token: crypto.randomBytes(32).toString("hex"),
+    tokenType: "email-verification",
   });
 
   const url = `${process.env.BASE_URL}users/${user.id}/verify/${verification.token}`;
-  await sendEmail(user.email, "Unichem Store - Verify Email", url);
+  await sendEmail(user.email, "Email Verification", url);
 
   if (!user && !userAddress && !verification) {
     res.status(400);
@@ -67,7 +68,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   res.status(201).json({
     message:
-      "A verification link has been sent to your email address. Please verify your email in one hour to login.",
+      "A verification link has been sent to your email address. Please verify your email in 20 minutes.",
   });
 });
 
@@ -88,9 +89,9 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // User exists but unverified
   if (!user.verified) {
-    let verification = await Verification.findOne({ userID: user._id });
+    let verification = await Token.findOne({ userID: user._id });
     if (!verification) {
-      verification = await Verification.create({
+      verification = await Token.create({
         userID: user._id,
         token: crypto.randomBytes(32).toString("hex"),
       });
@@ -102,6 +103,48 @@ const loginUser = asyncHandler(async (req, res) => {
         "A verification link has been sent to your email address. Please verify your email in one hour to login.",
     });
   }
+
+  // Authenticate
+  const userID = user._id;
+  const userAddress = await Address.findOne({ userID });
+  res.json({
+    _id: userID,
+    name: user.name,
+    email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
+    userType: user.userType,
+    image: user.image,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: generateToken(user._id),
+  });
+});
+
+// @desc    Recover user
+// @route   POST /api/users/recover
+// @access  Public
+const recoverUser = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  // check for user email
+  const user = await User.findOne({ email });
+
+  // User exists but unverified
+
+  let verification = await Token.findOne({ userID: user._id });
+  if (!verification) {
+    verification = await Token.create({
+      userID: user._id,
+      token: crypto.randomBytes(32).toString("hex"),
+    });
+    const url = `${process.env.BASE_URL}/users/${user.id}/verify/${verification.token}`;
+    await sendEmail(user.email, "Unichem Store - Verify Email", url);
+  }
+  return res.status(400).json({
+    message:
+      "A verification link has been sent to your email address. Please verify your email in one hour to login.",
+  });
 
   // Authenticate
   const userID = user._id;
@@ -212,7 +255,7 @@ const verifyUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid Link");
   }
 
-  const verification = await Verification.findOne({
+  const verification = await Token.findOne({
     userID: req.params.id,
     token: req.params.token,
   });
@@ -234,4 +277,11 @@ const generateToken = (id) => {
   });
 };
 
-module.exports = { registerUser, loginUser, getUser, updateUser, verifyUser };
+module.exports = {
+  registerUser,
+  loginUser,
+  recoverUser,
+  getUser,
+  updateUser,
+  verifyUser,
+};

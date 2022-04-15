@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const verficationSchema = mongoose.Schema({
+const tokenSchema = mongoose.Schema({
   userID: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -11,11 +11,15 @@ const verficationSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  tokenType: {
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
-    expires: 3600, // 1 hour
+    expires: 1200, // 20 mins
   },
 });
 
-module.exports = mongoose.model("Verification", verficationSchema);
+module.exports = mongoose.model("Token", tokenSchema);

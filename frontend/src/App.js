@@ -29,6 +29,7 @@ import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 import Verification from "./pages/Store/Verification";
+import RecoverAccount from "./pages/Store/RecoverAccount";
 
 import Dashboard from "./pages/Admin/Dashboard";
 import UsersList from "./pages/Admin/UsersList";
@@ -84,7 +85,7 @@ export const App = () => {
       </Helmet>
       <ScrollToTop />
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -123,7 +124,8 @@ export const App = () => {
             <Route path="account/reviews" element={<Review />} />
             <Route path="cart/checkout" element={<Checkout />} />
             <Route path="faq" element={<Faq />} />
-            <Route path="/users/:id/verify/:token" element={<Verification />} />
+            <Route path="users/:id/verify/:token" element={<Verification />} />
+            <Route path="recover-account" element={<RecoverAccount />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* Enable Live Chat in Deployment */}

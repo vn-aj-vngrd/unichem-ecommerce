@@ -25,14 +25,16 @@ const Login = () => {
   const [loginError, setLoginError] = useState();
 
   useEffect(() => {
+    document.title = "Unichem Store | Log in";
+
     if (isError) {
       if (
         message ===
-        "A verification link has been sent to your email address. Please verify your email in one hour to login."
+        "A verification link has been sent to your email address. The link will expire in 20 minutes."
       ) {
         Swal.fire({
-          title: "Please verify your email",
-          text: "A verification link has been sent to your email address. Please verify your email in one hour to login.",
+          title: "Verify your Email",
+          text: message,
           icon: "warning",
           confirmButtonColor: "#f44336",
           confirmButtonText: "Ok",
@@ -42,14 +44,12 @@ const Login = () => {
       }
     }
 
-    document.title = "Unichem Store | Log in";
-
     if (isSuccess || user) {
       const temp = localStorage.getItem("user");
       const user = JSON.parse(temp);
       toast.success(`Welcome, ${user.name}`, {
-        position: "top-center",
-        autoClose: 5000,
+        position: "top-right",
+        autoClose: 4000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -59,7 +59,9 @@ const Login = () => {
       navigate("/");
     }
 
-    dispatch(resetUser());
+    return () => {
+      dispatch(resetUser());
+    };
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
@@ -143,7 +145,9 @@ const Login = () => {
                   </div>
                   <div className="text-center mt-4">
                     {passMin && <small className="text-red">{passMin}</small>}
-                    {loginError && <small className="text-red">{loginError}</small>}
+                    {loginError && (
+                      <small className="text-red">{loginError}</small>
+                    )}
                   </div>
                   <p className="outer-link">
                     Don't have an account yet?{" "}
