@@ -10,7 +10,7 @@ const Manage = () => {
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    document.title = "Unichem Store | Manage Acccount";
+    document.title = "Unichem Store | Address";
 
     if (!user) {
       navigate("/login");
