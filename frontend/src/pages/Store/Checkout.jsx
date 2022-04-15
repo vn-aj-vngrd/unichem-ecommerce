@@ -338,7 +338,7 @@ const Checkout = () => {
           });
 
           dispatch(setOrder(orderData));
-          console.log(orderData);
+          // console.log(orderData);
         } else {
           carts.forEach((cart) => {
             let quantities = [...cart.product.quantities];
@@ -360,7 +360,7 @@ const Checkout = () => {
           });
 
           dispatch(setOrder(orderData));
-          console.log(orderData);
+          // console.log(orderData);
         }
       }
     });
