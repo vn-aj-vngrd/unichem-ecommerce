@@ -4,6 +4,7 @@ const Order = require("../models/orderModel");
 const Orderline = require("../models/orderlineModel");
 const Couponlog = require("../models/CouponlogModel");
 const Cart = require("../models/cartModel");
+const Product = require("../models/productModel");
 
 // @desc    Get Orders by user
 // @route   GET /api/orders
@@ -28,7 +29,7 @@ const getOrders = asyncHandler(async (req, res) => {
       receivedDate: Orders[i].receivedDate,
       shippingDate: Orders[i].shippingDate,
       orderDiscount: Orders[i].orderDiscount,
-      shippingFee:  Orders[i].shippingFee,
+      shippingFee: Orders[i].shippingFee,
       totalPrice: Orders[i].totalPrice,
       paymentMethod: Orders[i].paymentMethod,
       orderStatus: Orders[i].orderStatus,
@@ -50,9 +51,9 @@ const getOneOrder = asyncHandler(async (req, res) => {
     res.status(200).json({});
   }
 
-  console.log(orderOne)
-  let orderLine = await Orderline.find({ orderID: req.params.id });
-  
+  // console.log(orderOne)
+  const orderLine = await Orderline.find({ orderID: req.params.id });
+
   const logs = [
     // Awaiting Payment
     {
@@ -105,9 +106,8 @@ const getOneOrder = asyncHandler(async (req, res) => {
       desc: "Order has been shipped/picked up, and receipt is confirmed; client has paid for their digital product, and their file(s) are available for download.",
     },
   ];
-  
-  
-  let temp = {
+
+  const temp = {
     _id: orderOne._id,
     userID: orderOne.userID,
     shippingFee: orderOne.shipingFee,
@@ -123,10 +123,10 @@ const getOneOrder = asyncHandler(async (req, res) => {
     statusDates: logs,
   };
 
-  const retData = [];
+  let retData = [];
   retData.push(temp);
 
-  console.log(retData);
+  // console.log(retData);
   res.status(200).json(retData);
 });
 
@@ -153,24 +153,32 @@ const setOrder = asyncHandler(async (req, res) => {
     paymentMethod: req.body.order.paymentMethod,
   });
 
+  console.log(req.body.orderlines);
+
   // Create Orderline
   let newOrderline = [];
-  for (let i = 0; i < req.body.orderline.length; i++) {
-    const deleteCart = await Cart.findById(req.body.orderline[i].cartID);
-    await deleteCart.remove();
+  for (let i = 0; i < req.body.orderlines.length; i++) {
+    await Cart.findByIdAndRemove(req.body.orderlines[i].cartID);
 
-    const orderline = await Orderline.create({
+    const test = await Product.findByIdAndUpdate(
+      req.body.orderlines[i].productID,
+      { quantities: req.body.orderlines[i].quantities },
+
+      { new: true }
+    );
+
+    const orderlines = await Orderline.create({
       orderID: newOrder._id,
-      image: req.body.orderline[i].image,
-      productID: req.body.orderline[i].productID,
-      productName: req.body.orderline[i].productName,
-      productType: req.body.orderline[i].productType,
-      quantity: req.body.orderline[i].quantity,
-      price: req.body.orderline[i].price,
-      reviewed: req.body.orderline[i].reviewed,
+      image: req.body.orderlines[i].image,
+      productID: req.body.orderlines[i].productID,
+      productName: req.body.orderlines[i].productName,
+      productType: req.body.orderlines[i].productType,
+      quantity: req.body.orderlines[i].quantity,
+      price: req.body.orderlines[i].price,
+      reviewed: req.body.orderlines[i].reviewed,
     });
 
-    newOrderline.push(orderline);
+    newOrderline.push(orderlines);
   }
 
   // Create couponlogs
@@ -186,7 +194,7 @@ const setOrder = asyncHandler(async (req, res) => {
 
   let retData = {
     order: newOrder,
-    orderline: newOrderline,
+    orderlines: newOrderline,
     couponlog: newCouponlogs,
   };
 

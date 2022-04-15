@@ -30,11 +30,11 @@ const getReviews = asyncHandler(async (req, res) => {
 // @access  Private
 const getUserReviews = asyncHandler(async (req, res) => {
   const userID = req.user._id;
-  console.log(userID)
+  // console.log(userID)
   const reviews = await Review.find({userID: userID}).sort({
     createdAt: "desc",
   });
-  console.log(true)
+  // console.log(true)
 
   let retData = [];
   for (let i = 0; i < reviews.length; i++) {
@@ -98,8 +98,8 @@ const updateReview = asyncHandler(async (req, res) => {
     userID,
   });
 
-  console.log(userID);
-  console.log(productID);
+  // console.log(userID);
+  // console.log(productID);
 
   // Check for review
   if (!reviewExists) {

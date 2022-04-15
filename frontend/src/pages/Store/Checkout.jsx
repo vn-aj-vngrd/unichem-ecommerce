@@ -304,11 +304,9 @@ const Checkout = () => {
         orderStatus: orderStatus,
         paymentMethod: payment,
       },
-      orderline: [],
+      orderlines: [],
       couponlogID: couponlogID,
     };
-
-    console.log(orderData);
 
     Swal.fire({
       title: "Are you sure to checkout?",
@@ -322,38 +320,47 @@ const Checkout = () => {
       if (result.isConfirmed) {
         if (checked > 0 && orders) {
           orders.forEach((order) => {
-            const orderline = {
+            let quantities = [...order.product.quantities];
+            quantities[order._doc.productType] -= order._doc.quantity;
+
+            const orderlines = {
               cartID: order._doc._id,
               image: order.product.images[0],
               productID: order.product._id,
               productName: order.product.productName,
               productType: order.product.types[order._doc.productType],
               quantity: order._doc.quantity,
+              quantities,
               price: order.product.prices[order._doc.productType],
               reviewed: false,
             };
-            orderData.orderline.push(orderline);
+            orderData.orderlines.push(orderlines);
           });
 
           dispatch(setOrder(orderData));
-
-          return;
+          console.log(orderData);
         } else {
           carts.forEach((cart) => {
-            const orderline = {
+            let quantities = [...cart.product.quantities];
+            quantities[cart._doc.productType] -= cart._doc.quantity;
+
+            const orderlines = {
               cartID: cart._doc._id,
               image: cart.product.images[0],
               productID: cart.product.id,
               productName: cart.product.productName,
+              type: cart._doc.productType,
               productType: cart.product.types[cart._doc.productType],
               quantity: cart._doc.quantity,
+              quantities: quantities,
               price: cart.product.prices[cart._doc.productType],
               reviewed: false,
             };
-            orderData.orderline.push(orderline);
+            orderData.orderlines.push(orderlines);
           });
 
           dispatch(setOrder(orderData));
+          console.log(orderData);
         }
       }
     });
