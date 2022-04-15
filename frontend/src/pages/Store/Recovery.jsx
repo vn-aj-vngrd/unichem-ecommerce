@@ -5,7 +5,7 @@ import { login, resetUser } from "../../features/auth/authSlice";
 import Spinner from "../../components/Spinner";
 import Swal from "sweetalert2";
 
-const RecoverAccount = () => {
+const Recovery = () => {
   const [formData, setFormData] = useState({
     email: "",
   });
@@ -89,8 +89,9 @@ const RecoverAccount = () => {
           <div className="section-title">
             <h2>Recover Account</h2>
             <p>
-              We'll send you a link to change your password. <br />
-              The link will expire in 20 minutes.
+              We'll send instructions to your email for recovery.
+              <br />
+              Please input your email address below.
             </p>
           </div>
           <div className="row">
@@ -136,4 +137,4 @@ const RecoverAccount = () => {
   );
 };
 
-export default RecoverAccount;
+export default Recovery;

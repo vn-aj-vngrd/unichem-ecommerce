@@ -16,7 +16,7 @@ router.post("/login", loginUser);
 router.post("/recover", createRecovery);
 router.get("/getUser", protect, getUser);
 router.put("/updateUser", protect, updateUser);
-router.get("/:id/verify/:token", verifyUser);
-router.get("/:id/recover/:token", recoverUser);
+router.post("/:id/verify/:token", verifyUser);
+router.post("/:id/recover/:token", recoverUser);
 
 module.exports = router;

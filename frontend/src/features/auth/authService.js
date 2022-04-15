@@ -22,9 +22,26 @@ const login = async (userData) => {
   return response.data;
 };
 
+// Verify user
+const verifyUser = async (verifyParams) => {
+  console.log(verifyParams);
+
+  const response = await axios.post(API_URL + verifyParams.id + "/verify/" + verifyParams.token);
+  // console.log(response);
+
+  return response.data;
+};
+
+// Create user recovery
+const createRecovery = async (recoveryData) => {
+  const response = await axios.post(API_URL + "createRecovery", recoveryData);
+
+  return response.data;
+};
+
 // Recover user
-const recover = async (recoveryData) => {
-  const response = await axios.post(API_URL + "recover", recoveryData);
+const recoverUser = async (recoveryData) => {
+  const response = await axios.post(API_URL + "recoverUser", recoveryData);
 
   return response.data;
 };
@@ -70,11 +87,13 @@ const logout = () => {
 
 const authService = {
   register,
-  logout,
-  recover,
   login,
-  getUser,
+  verifyUser,
+  recoverUser,
+  createRecovery,
   update,
+  getUser,
+  logout,
 };
 
 export default authService;

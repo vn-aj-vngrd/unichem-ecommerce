@@ -29,7 +29,7 @@ import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 import Verification from "./pages/Store/Verification";
-import RecoverAccount from "./pages/Store/RecoverAccount";
+import Recovery from "./pages/Store/Recovery";
 
 import Dashboard from "./pages/Admin/Dashboard";
 import UsersList from "./pages/Admin/UsersList";
@@ -125,7 +125,7 @@ export const App = () => {
             <Route path="cart/checkout" element={<Checkout />} />
             <Route path="faq" element={<Faq />} />
             <Route path="users/:id/verify/:token" element={<Verification />} />
-            <Route path="recover-account" element={<RecoverAccount />} />
+            <Route path="recover-account" element={<Recovery />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* Enable Live Chat in Deployment */}

@@ -1,28 +1,50 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { verifyUser, resetUser } from "../../features/auth/authSlice";
 import PageNotFound from "../PageNotFound";
+import Spinner from "../../components/Spinner";
 
 const Verification = () => {
   const [validUrl, setValidUrl] = useState(false);
   const param = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, isLoading, isSuccess } = useSelector((state) => state.auth);
+
+  const [call, setCall] = useState(false);
 
   useEffect(() => {
     document.title = "Unichem Store | Email Verification";
 
-    const verifyEmailUrl = async () => {
-      try {
-        const url = `/api/users/${param.id}/verify/${param.token}`;
-        const { data } = await axios.get(url);
-        console.log(data);
-        setValidUrl(true);
-      } catch (error) {
-        console.log(error);
-        setValidUrl(false);
-      }
+    if (user) {
+      navigate("/");
+    }
+
+    if (!call) {
+      dispatch(verifyUser(param));
+
+      setCall(true);
+    }
+
+    if (isSuccess) {
+      setValidUrl(true);
+    }
+
+    return () => {
+      dispatch(resetUser());
     };
-    verifyEmailUrl();
-  }, [param]);
+  }, [user, param, isSuccess, call, navigate, dispatch]);
+
+  if (isLoading) {
+    return (
+      <>
+        <Spinner />
+        <div className="empty-container"></div>
+      </>
+    );
+  }
 
   return (
     <>

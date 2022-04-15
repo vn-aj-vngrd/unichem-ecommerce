@@ -211,6 +211,7 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/user/:id/verify/:token
 // @access  Private
 const verifyUser = asyncHandler(async (req, res) => {
+  // console.log(req.params);
   const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(400);
@@ -222,6 +223,7 @@ const verifyUser = asyncHandler(async (req, res) => {
     token: req.params.token,
     tokenType: "email-verification",
   });
+  
   if (!verification) {
     res.status(400);
     throw new Error("Invalid Email Verification Link");
@@ -263,7 +265,7 @@ const createRecovery = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json({
-    message: "Recovery Link Sent",
+    message: "The recovery link will expire in 20 minutes.",
   });
 });
 

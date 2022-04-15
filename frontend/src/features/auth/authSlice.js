@@ -43,12 +43,49 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
-// Recover user
-export const recover = createAsyncThunk(
-  "auth/recover",
+// Verify user
+export const verifyUser = createAsyncThunk(
+  "auth/verifyUser",
+  async (verifyParams, thunkAPI) => {
+    try {
+      return await authService.verifyUser(verifyParams);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+
+// Create user recovery
+export const createRecovery = createAsyncThunk(
+  "auth/createRecovery",
   async (recoveryData, thunkAPI) => {
     try {
       return await authService.recover(recoveryData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Recover user
+export const recoverUser = createAsyncThunk(
+  "auth/recoverUser",
+  async (recoveryData, thunkAPI) => {
+    try {
+      return await authService.recoverUser(recoveryData);
     } catch (error) {
       const message =
         (error.response &&
@@ -144,15 +181,45 @@ export const authSlice = createSlice({
         state.user = null;
       })
 
-      .addCase(recover.pending, (state) => {
+      .addCase(verifyUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(recover.fulfilled, (state, action) => {
+      .addCase(verifyUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.user = null;
       })
-      .addCase(recover.rejected, (state, action) => {
+      .addCase(verifyUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        // state.message = action.payload;
+        state.user = null;
+      })
+
+      .addCase(createRecovery.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createRecovery.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = null;
+      })
+      .addCase(createRecovery.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+
+      .addCase(recoverUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(recoverUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = null;
+      })
+      .addCase(recoverUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
