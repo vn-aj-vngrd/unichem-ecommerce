@@ -59,7 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   const url = `${process.env.BASE_URL}users/${user.id}/verify/${verification.token}`;
-  await sendEmail(user.email, "Email Verification", url);
+  await sendEmail(user.email, "Email Verification from Unichem Store", url);
 
   if (!user && !userAddress && !verification) {
     res.status(400);
@@ -89,62 +89,24 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // User exists but unverified
   if (!user.verified) {
-    let verification = await Token.findOne({ userID: user._id });
+    let verification = await Token.findOne({
+      userID: user._id,
+      tokenType: "email-verification",
+    });
     if (!verification) {
       verification = await Token.create({
         userID: user._id,
         token: crypto.randomBytes(32).toString("hex"),
+        tokenType: "email-verification",
       });
       const url = `${process.env.BASE_URL}/users/${user.id}/verify/${verification.token}`;
-      await sendEmail(user.email, "Unichem Store - Verify Email", url);
+      await sendEmail(user.email, "Email Verification from Unichem Store", url);
     }
     return res.status(400).json({
       message:
         "A verification link has been sent to your email address. Please verify your email in one hour to login.",
     });
   }
-
-  // Authenticate
-  const userID = user._id;
-  const userAddress = await Address.findOne({ userID });
-  res.json({
-    _id: userID,
-    name: user.name,
-    email: user.email,
-    sex: user.sex,
-    birthday: user.birthday,
-    userType: user.userType,
-    image: user.image,
-    address: userAddress.address,
-    primaryAddress: userAddress.primaryAddress,
-    token: generateToken(user._id),
-  });
-});
-
-// @desc    Recover user
-// @route   POST /api/users/recover
-// @access  Public
-const recoverUser = asyncHandler(async (req, res) => {
-  const { email } = req.body;
-
-  // check for user email
-  const user = await User.findOne({ email });
-
-  // User exists but unverified
-
-  let verification = await Token.findOne({ userID: user._id });
-  if (!verification) {
-    verification = await Token.create({
-      userID: user._id,
-      token: crypto.randomBytes(32).toString("hex"),
-    });
-    const url = `${process.env.BASE_URL}/users/${user.id}/verify/${verification.token}`;
-    await sendEmail(user.email, "Unichem Store - Verify Email", url);
-  }
-  return res.status(400).json({
-    message:
-      "A verification link has been sent to your email address. Please verify your email in one hour to login.",
-  });
 
   // Authenticate
   const userID = user._id;
@@ -252,16 +214,77 @@ const verifyUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(400);
-    throw new Error("Invalid Link");
+    throw new Error("Invalid Email Verification Link");
   }
 
   const verification = await Token.findOne({
     userID: req.params.id,
     token: req.params.token,
+    tokenType: "email-verification",
   });
   if (!verification) {
     res.status(400);
-    throw new Error("Invalid Link");
+    throw new Error("Invalid Email Verification Link");
+  }
+
+  await User.updateOne({ _id: user._id }, { verified: true });
+  await verification.remove();
+
+  res.status(200).json({ message: "Email verified successfully" });
+});
+
+// @desc    Create recovery link
+// @route   POST /api/users/recover
+// @access  Public
+const createRecovery = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  // check for user email
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User does not exist");
+  }
+
+  // User exists
+  let recovery = await Token.findOne({
+    userID: user._id,
+    tokenType: "user-recovery",
+  });
+  if (!recovery) {
+    recovery = await Token.create({
+      userID: user._id,
+      token: crypto.randomBytes(32).toString("hex"),
+      tokenType: "user-recovery",
+    });
+    const url = `${process.env.BASE_URL}/users/${user.id}/verify/${recovery.token}`;
+    await sendEmail(user.email, "User Recovery from Unichem Store", url);
+  }
+
+  res.status(200).json({
+    message: "Recovery Link Sent",
+  });
+});
+
+// @desc    Recover user data
+// @route   GET /api/users/user/:id/recover/:token
+// @access  Private
+const recoverUser = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id });
+  if (!user) {
+    res.status(400);
+    throw new Error("Invalid User Recovery Link");
+  }
+
+  const verification = await Token.findOne({
+    userID: req.params.id,
+    token: req.params.token,
+    tokenType: "user-recovery",
+  });
+  if (!verification) {
+    res.status(400);
+    throw new Error("Invalid User Recovery Link");
   }
 
   await User.updateOne({ _id: user._id }, { verified: true });
@@ -280,8 +303,9 @@ const generateToken = (id) => {
 module.exports = {
   registerUser,
   loginUser,
-  recoverUser,
   getUser,
   updateUser,
   verifyUser,
+  createRecovery,
+  recoverUser,
 };
