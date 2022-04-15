@@ -223,7 +223,7 @@ const verifyUser = asyncHandler(async (req, res) => {
     token: req.params.token,
     tokenType: "email-verification",
   });
-  
+
   if (!verification) {
     res.status(400);
     throw new Error("Invalid Email Verification Link");
@@ -236,7 +236,7 @@ const verifyUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Create recovery link
-// @route   POST /api/users/recover
+// @route   POST /api/users/createRecovery
 // @access  Public
 const createRecovery = asyncHandler(async (req, res) => {
   const { email } = req.body;
@@ -260,8 +260,8 @@ const createRecovery = asyncHandler(async (req, res) => {
       token: crypto.randomBytes(32).toString("hex"),
       tokenType: "user-recovery",
     });
-    const url = `${process.env.BASE_URL}/users/${user.id}/verify/${recovery.token}`;
-    await sendEmail(user.email, "User Recovery from Unichem Store", url);
+    const url = `${process.env.BASE_URL}users/${user.id}/recover/${recovery.token}`;
+    await sendEmail(user.email, "Account Recovery from Unichem Store", url);
   }
 
   res.status(200).json({
@@ -269,14 +269,14 @@ const createRecovery = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc    Recover user data
-// @route   GET /api/users/user/:id/recover/:token
+// @desc    Validate user data
+// @route   GET /api/users/user/:id/validateRecovery/:token
 // @access  Private
-const recoverUser = asyncHandler(async (req, res) => {
+const validateRecovery = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(400);
-    throw new Error("Invalid User Recovery Link");
+    throw new Error("Invalid User Recovery Link, User Not Found");
   }
 
   const verification = await Token.findOne({
@@ -286,13 +286,40 @@ const recoverUser = asyncHandler(async (req, res) => {
   });
   if (!verification) {
     res.status(400);
-    throw new Error("Invalid User Recovery Link");
+    throw new Error("Invalid User Recovery Link, Token Not Found");
   }
 
-  await User.updateOne({ _id: user._id }, { verified: true });
+  res.status(200).json({ message: "Email verified successfully" });
+});
+
+// @desc    Recover user data
+// @route   POST /api/users/user/:id/recoverAccount/:token
+// @access  Private
+const recoverAccount = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id });
+  if (!user) {
+    res.status(400);
+    throw new Error("Invalid User Recovery Link, User Not Found");
+  }
+
+  const verification = await Token.findOne({
+    userID: req.params.id,
+    token: req.params.token,
+    tokenType: "user-recovery",
+  });
+  if (!verification) {
+    res.status(400);
+    throw new Error("Invalid User Recovery Link, Token Not Found");
+  }
+
+  // hash the password using bcrypt
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+  await User.updateOne({ _id: user._id }, { password: hashedPassword });
   await verification.remove();
 
-  res.status(200).json({ message: "Email verified successfully" });
+  res.status(200).json({ message: "Account's password has been updated" });
 });
 
 // Generate JWT Token
@@ -309,5 +336,6 @@ module.exports = {
   updateUser,
   verifyUser,
   createRecovery,
-  recoverUser,
+  validateRecovery,
+  recoverAccount,
 };

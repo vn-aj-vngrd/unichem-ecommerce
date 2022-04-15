@@ -1,51 +1,24 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { login, resetUser } from "../../features/auth/authSlice";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  validateRecovery,
+  recoverAccount,
+  resetUser,
+} from "../../features/auth/authSlice";
+import PageNotFound from "../PageNotFound";
 import Spinner from "../../components/Spinner";
 import Swal from "sweetalert2";
 
-const Recovery = () => {
+const Verification = () => {
+  const [call, setCall] = useState(false);
+  const [validUrl, setValidUrl] = useState(false);
+  const [error, setError] = useState();
+
   const [formData, setFormData] = useState({
-    email: "",
+    password1: "",
+    password2: "",
   });
-
-  const { email } = formData;
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
-
-  const [emailError, setEmailError] = useState();
-
-  useEffect(() => {
-    document.title = "Unichem Store | Recover Account";
-
-    if (isError) {
-      setEmailError(message);
-    }
-
-    if (isSuccess) {
-      Swal.fire({
-        title: "Recovery Link Sent",
-        text: message,
-        icon: "warning",
-        confirmButtonColor: "#f44336",
-        confirmButtonText: "Ok",
-      });
-
-      // navigate("/");
-    }
-
-    if (user) {
-      navigate("/");
-    }
-
-    dispatch(resetUser());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -54,87 +27,137 @@ const Recovery = () => {
     }));
   };
 
+  const { password1, password2 } = formData;
+
+  const param = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, isLoading, isSuccess, isAccountRecovered } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    document.title = "Unichem Store | Account Recovery";
+
+    if (user) {
+      navigate("/");
+    }
+
+    if (!call) {
+      dispatch(validateRecovery(param));
+      setCall(true);
+    }
+
+    if (isSuccess) {
+      setValidUrl(true);
+    }
+
+    if (isAccountRecovered) {
+      Swal.fire({
+        title: "Account Recovered",
+        text: "You may now proceed to login.",
+        icon: "success",
+        confirmButtonColor: "#f44336",
+      });
+      navigate("/login");
+    }
+
+    return () => {
+      dispatch(resetUser());
+    };
+  }, [user, param, isSuccess, isAccountRecovered, call, navigate, dispatch]);
+
   const onSubmit = (e) => {
     e.preventDefault();
 
-    setEmailError();
+    setError();
 
-    if (formData.email === "") {
-      setEmailError("Email address is required");
+    if (formData.password1.length < 8) {
+      setError("Password must be at least 8 characters");
+      return;
+    }
+
+    if (formData.password1 !== formData.password2) {
+      setError("Password does not match");
       return;
     }
 
     const recoveryData = {
-      email,
+      param,
+      password: password1,
     };
 
-    console.log(recoveryData);
-
-    // dispatch(login(userData));
+    dispatch(recoverAccount(recoveryData));
   };
 
   if (isLoading) {
     return (
       <>
         <Spinner />
-        <div className="empty-container-md"></div>
+        <div className="empty-container"></div>
       </>
     );
   }
 
   return (
     <>
-      <div className="account-login">
-        <div className="container">
-          <div className="section-title">
-            <h2>Recover Account</h2>
-            <p>
-              We'll send instructions to your email for recovery.
-              <br />
-              Please input your email address below.
-            </p>
-          </div>
-          <div className="row">
-            <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
-              <form className="card login-form" onSubmit={onSubmit}>
-                <div className="card-body">
-                  <div className="form-group input-group">
-                    <label>Email Address</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      name="email"
-                      value={email}
-                      onChange={onChange}
-                      required
-                    />
-                  </div>
+      {validUrl ? (
+        <div className="account-login">
+          <div className="container">
+            <div className="section-title">
+              <h2>Recover Account</h2>
+              <p>Please input your new password below.</p>
+            </div>
+            <div className="row">
+              <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+                <form className="card login-form" onSubmit={onSubmit}>
+                  <div className="card-body">
+                    <div className="form-group input-group">
+                      <label>New Password</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="password1"
+                        name="password1"
+                        value={password1}
+                        onChange={onChange}
+                        required
+                      />
+                    </div>
 
-                  <div className="button">
-                    <button className="btn" type="submit">
-                      Send
-                    </button>
+                    <div className="form-group input-group">
+                      <label>Confirm New Password</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="password2"
+                        name="password2"
+                        value={password2}
+                        onChange={onChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="button">
+                      <button className="btn" type="submit">
+                        Send
+                      </button>
+                    </div>
+                    <div className="text-center mt-4">
+                      {error && <small className="text-red">{error}</small>}
+                    </div>
                   </div>
-                  <div className="text-center mt-4">
-                    {emailError && (
-                      <small className="text-red">{emailError}</small>
-                    )}
-                  </div>
-                  <p className="outer-link">
-                    Don't have an account yet?{" "}
-                    <Link to="/signup" className="text-red">
-                      Sign Up
-                    </Link>
-                  </p>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <>
+          <PageNotFound />
+        </>
+      )}
     </>
   );
 };
 
-export default Recovery;
+export default Verification;

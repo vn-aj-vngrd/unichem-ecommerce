@@ -29,6 +29,7 @@ import Checkout from "./pages/Store/Checkout";
 import Faq from "./pages/Store/Faq";
 import PageNotFound from "./pages/PageNotFound";
 import Verification from "./pages/Store/Verification";
+import ForgotPassword from "./pages/Store/ForgotPassword";
 import Recovery from "./pages/Store/Recovery";
 
 import Dashboard from "./pages/Admin/Dashboard";
@@ -125,7 +126,9 @@ export const App = () => {
             <Route path="cart/checkout" element={<Checkout />} />
             <Route path="faq" element={<Faq />} />
             <Route path="users/:id/verify/:token" element={<Verification />} />
-            <Route path="recover-account" element={<Recovery />} />
+            <Route path="users/:id/recover/:token" element={<Recovery />} />
+            {/* <Route path="test" element={<Recovery />} /> */}
+            <Route path="recover-account" element={<ForgotPassword />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* Enable Live Chat in Deployment */}

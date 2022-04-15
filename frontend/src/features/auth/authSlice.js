@@ -9,6 +9,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
+  isAccountRecovered: false,
   message: "",
 };
 
@@ -61,13 +62,12 @@ export const verifyUser = createAsyncThunk(
   }
 );
 
-
 // Create user recovery
 export const createRecovery = createAsyncThunk(
   "auth/createRecovery",
   async (recoveryData, thunkAPI) => {
     try {
-      return await authService.recover(recoveryData);
+      return await authService.createRecovery(recoveryData);
     } catch (error) {
       const message =
         (error.response &&
@@ -80,12 +80,29 @@ export const createRecovery = createAsyncThunk(
   }
 );
 
-// Recover user
-export const recoverUser = createAsyncThunk(
-  "auth/recoverUser",
+// Validate recovery
+export const validateRecovery = createAsyncThunk(
+  "auth/validateRecovery",
   async (recoveryData, thunkAPI) => {
     try {
-      return await authService.recoverUser(recoveryData);
+      return await authService.validateRecovery(recoveryData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// Recover account
+export const recoverAccount = createAsyncThunk(
+  "auth/recoverAccount",
+  async (recoveryData, thunkAPI) => {
+    try {
+      return await authService.recoverAccount(recoveryData);
     } catch (error) {
       const message =
         (error.response &&
@@ -187,13 +204,11 @@ export const authSlice = createSlice({
       .addCase(verifyUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = null;
       })
       .addCase(verifyUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        // state.message = action.payload;
-        state.user = null;
+        state.message = action.payload;
       })
 
       .addCase(createRecovery.pending, (state) => {
@@ -202,28 +217,42 @@ export const authSlice = createSlice({
       .addCase(createRecovery.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = null;
+        state.message = action.payload.message;
       })
       .addCase(createRecovery.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
       })
 
-      .addCase(recoverUser.pending, (state) => {
+      .addCase(validateRecovery.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(recoverUser.fulfilled, (state, action) => {
+      .addCase(validateRecovery.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = null;
+        state.message = action.payload.message;
       })
-      .addCase(recoverUser.rejected, (state, action) => {
+      .addCase(validateRecovery.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
+      })
+
+      .addCase(recoverAccount.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(recoverAccount.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isAccountRecovered = true;
+        state.message = action.payload.message;
+      })
+      .addCase(recoverAccount.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isAccountRecovered = true;
+        state.message = action.payload;
       })
 
       .addCase(update.pending, (state) => {

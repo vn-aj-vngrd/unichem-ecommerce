@@ -6,14 +6,14 @@ import PageNotFound from "../PageNotFound";
 import Spinner from "../../components/Spinner";
 
 const Verification = () => {
+  const [call, setCall] = useState(false);
   const [validUrl, setValidUrl] = useState(false);
+
   const param = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { user, isLoading, isSuccess } = useSelector((state) => state.auth);
-
-  const [call, setCall] = useState(false);
 
   useEffect(() => {
     document.title = "Unichem Store | Email Verification";
