@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 
 const Order = require("../models/orderModel");
 const Orderline = require("../models/orderlineModel");
-const Couponlog = require("../models/CouponlogModel");
+const Couponlog = require("../models/couponlogModel");
 const Cart = require("../models/cartModel");
 const Product = require("../models/productModel");
 
