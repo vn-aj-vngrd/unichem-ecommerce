@@ -1,8 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 
-const Coupon = require("../models/CouponModel");
-const Couponlog = require("../models/CouponlogModel");
+const Coupon = require("../models/couponModel");
+const Couponlog = require("../models/couponlogModel");
 const moment = require("moment");
 
 // @desc    Get Coupons
