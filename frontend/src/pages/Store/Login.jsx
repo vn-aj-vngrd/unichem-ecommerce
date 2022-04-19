@@ -30,7 +30,7 @@ const Login = () => {
     if (isError) {
       if (
         message ===
-        "A verification link has been sent to your email address. The link will expire in 20 minutes."
+        "A verification link has been sent already to your email address. Please verify your email in 20 minutes."
       ) {
         Swal.fire({
           title: "Verify your Email",
