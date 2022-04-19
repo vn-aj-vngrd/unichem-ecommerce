@@ -2632,9 +2632,16 @@ ol {
 
 .lni-star,
 .lni-star-filled {
-  color: #ffbb00;
-  font-size: 16px;
-  margin: 2px;
+  color: #ffbb00 !important;
+  font-size: 16px !important;
+  margin: 2px !important;
+}
+
+.give-review ul li span {
+  color: #666;
+  display: inline-block;
+  margin-right: 8px;
+  min-width: 80px;
 }
 
 /*======================================

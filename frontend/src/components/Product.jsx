@@ -6,15 +6,7 @@ import Star from "./Star";
 import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
 
-const Product = ({
-  productName,
-  categoryName,
-  brandName,
-  range1,
-  range2,
-  range3,
-  range4,
-}) => {
+const Product = ({ productName, categoryName, brandName, filters, isFiltered }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sortDefault, setSortDefault] = useState("descendingOrder");
@@ -108,32 +100,164 @@ const Product = ({
       return product._doc.brand.toLowerCase().includes(brandName.toLowerCase());
     });
   }
+    
+  // Price Range Filters
+  if (filters.range1) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return product._doc.prices[0] >= 50 && product._doc.prices[0] <= 100;
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product._doc.prices[0] >= 50 && product._doc.prices[0] <= 100;
+      });
+    }
+  }
 
-  const pageCount = Math.ceil(allProducts.length / productsPerPage);
-  allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
-  // if (range1) {
-  //   allProducts = products.filter((product) => {
-  //     return product._doc.prices[0] >= 50 && product._doc.prices[0] <= 100;
-  //   });
-  // }
+  if (filters.range2) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
+      });
+    }
+  }
 
-  // if (range2) {
-  //   allProducts = products.filter((product) => {
-  //     return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
-  //   });
-  // }
+  if (filters.range3) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return (
+            product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000
+          );
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000;
+      });
+    }
+  }
 
-  // if (range3) {
-  //   allProducts = products.filter((product) => {
-  //     return product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000;
-  //   });
-  // }
+  if (filters.range4) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return (
+            product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
+          );
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return (
+          product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
+        );
+      });
+    }
+  }
 
-  // if (range4) {
-  //   allProducts = products.filter((product) => {
-  //     return product._doc.prices[0] >= 1001 && product._doc.prices[0] <= 5000;
-  //   });
-  // }
+  // Rating Filters
+  if (filters.rating0) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return product.market.averageRatings === 0;
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product.market.averageRatings === 0;
+      });
+    }
+  }
+
+  if (filters.rating1) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return product.market.averageRatings === 1;
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product.market.averageRatings === 1;
+      });
+    }
+  }
+
+  if (filters.rating2) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return product.market.averageRatings === 2;
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product.market.averageRatings === 2;
+      });
+    }
+  }
+
+  if (filters.rating3) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return product.market.averageRatings === 3;
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product.market.averageRatings === 3;
+      });
+    }
+  }
+
+  if (filters.rating4) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return product.market.averageRatings === 4;
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product.market.averageRatings === 4;
+      });
+    }
+  }
+
+  if (filters.rating5) {
+    if (isFiltered) {
+      allProducts = [
+        ...allProducts,
+        products.filter((product) => {
+          return product.market.averageRatings === 5;
+        }),
+      ];
+    } else {
+      allProducts = products.filter((product) => {
+        return product.market.averageRatings === 5;
+      });
+    }
+  }
 
   // switch(sortDefault) {
   //   case "descendingOrder":
@@ -153,6 +277,11 @@ const Product = ({
   // console.log(sortDefault);
   // console.log(allProducts);
 
+  console.log(filters);
+  console.log(isFiltered);
+
+  const pageCount = Math.ceil(allProducts.length / productsPerPage);
+  allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
   let salesPrice = 0;
 
   return (
@@ -211,7 +340,10 @@ const Product = ({
                         {product._doc.productName}
                       </h5>
                     </div>
-                    <Star star={product.market.averageRatings} reviews={product.market.reviewsCount} />
+                    <Star
+                      star={product.market.averageRatings}
+                      reviews={product.market.reviewsCount}
+                    />
                   </div>
                 </div>
                 <div className="order-total-row ">
