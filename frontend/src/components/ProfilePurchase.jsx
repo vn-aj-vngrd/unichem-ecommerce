@@ -61,19 +61,27 @@ const ProfilePurchase = () => {
 
   switch (orderStatus) {
     case "Processing": {
-      statusOrders =statusOrders.filter((order) => order.orderStatus === "Processing");
+      statusOrders = statusOrders.filter(
+        (order) => order.orderStatus === "Processing"
+      );
       break;
     }
     case "Packed": {
-      statusOrders = statusOrders.filter((order) => order.orderStatus === "Packed");
+      statusOrders = statusOrders.filter(
+        (order) => order.orderStatus === "Packed"
+      );
       break;
     }
     case "Shipped": {
-      statusOrders = statusOrders.filter((order) => order.orderStatus === "Shipped");
+      statusOrders = statusOrders.filter(
+        (order) => order.orderStatus === "Shipped"
+      );
       break;
     }
     case "Delivered": {
-      statusOrders = statusOrders.filter((order) => order.orderStatus === "Delivered");
+      statusOrders = statusOrders.filter(
+        (order) => order.orderStatus === "Delivered"
+      );
     }
   }
 
@@ -157,58 +165,68 @@ const ProfilePurchase = () => {
 
       <div className="product">
         {/* Product Purchase one */}
-        {statusOrders.map((order) => (
-          <div key={order._id} className="purchase-row">
-            <div className="negative-padding-custom box-shadow">
-              <div className="order-row-banner d-flex justify-content-between d-flex align-items-center">
-                <Link
-                  to={`/order-details/${order._id}`}
-                  type="button"
-                  className="btn order-status-log color-white"
-                >
-                  <i className="lni lni-question-circle"></i> Order Status log
-                </Link>
-                <div className="color-white purchase-update-time">
-                  Order Date: {moment(order.createdAt).format("DD/MM/YY")}
-                </div>
-                <h6 className="purchase-order-status">
-                  {order.orderStatus.toUpperCase()}
-                </h6>
-              </div>
-
-              {/* ORDERLINE START HERE */}
-
-              <PurchasedProduct
-                userID={user._id}
-                userImage={user.image}
-                orderLines={order.orderLine}
-                orderStatus={order.orderStatus}
-              />
-
-              {/* END OF ORDERLINE */}
-
-              <div className="no-box-shadow">
-                <div className="order-total-row">
-                  <div className="price d-flex justify-content-end align-items-center">
-                    <div className="">Order Total:</div>
-                    <div className="spacer"></div>
-                    <h4 className="order-total unichem-text-color">
-                      ₱{order.totalPrice.toFixed(2)}
-                    </h4>
+        {statusOrders.length > 0 ? (
+          statusOrders.map((order) => (
+            <div key={order._id} className="purchase-row">
+              <div className="negative-padding-custom box-shadow">
+                <div className="order-row-banner d-flex justify-content-between d-flex align-items-center">
+                  <Link
+                    to={`/order-details/${order._id}`}
+                    type="button"
+                    className="btn order-status-log color-white"
+                  >
+                    <i className="lni lni-question-circle"></i> Order Status log
+                  </Link>
+                  <div className="color-white purchase-update-time">
+                    Order Date: {moment(order.createdAt).format("DD/MM/YY")}
                   </div>
-                  <br></br>
-                  <div className="purchase-options">
-                    <div className="d-flex justify-content-end button">
-                      <Link to="/product-details" className="btn">
-                        Buy Again
-                      </Link>
+                  <h6 className="purchase-order-status">
+                    {order.orderStatus.toUpperCase()}
+                  </h6>
+                </div>
+
+                {/* ORDERLINE START HERE */}
+
+                <PurchasedProduct
+                  userID={user._id}
+                  userImage={user.image}
+                  orderLines={order.orderLine}
+                  orderStatus={order.orderStatus}
+                />
+
+                {/* END OF ORDERLINE */}
+
+                <div className="no-box-shadow">
+                  <div className="order-total-row">
+                    <div className="price d-flex justify-content-end align-items-center">
+                      <div className="">Order Total:</div>
+                      <div className="spacer"></div>
+                      <h4 className="order-total unichem-text-color">
+                        ₱{order.totalPrice.toFixed(2)}
+                      </h4>
+                    </div>
+                    <br></br>
+                    <div className="purchase-options">
+                      <div className="d-flex justify-content-end button">
+                        <Link to="/product-details" className="btn">
+                          Buy Again
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <>
+            <div className="empty-result">
+              <div className="orders">
+                <h4>No orders to display</h4>
+              </div>
+            </div>
+          </>
+        )}
 
         <nav>
           <ul className="product-pagination pagination justify-content-center">

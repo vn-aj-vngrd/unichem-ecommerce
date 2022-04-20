@@ -48,44 +48,59 @@ function ProfileReviews() {
       </div>
 
       {/* One Review */}
-      {allReviews.map((review) => (
-        <div key={review._doc._id} className="review-row box-shadow">
-          <div className="review-single-product">
-            <div className="d-flex">
-              <div className="">
-                <div className="review-product-image">
-                  <img src={review._doc.images[0]} alt={review._doc.productName}></img>
-                </div>
-              </div>
-              <div className="">
-                <div className="product-info">
-                  <h5 className="title">
-                    <Link to={`/product-details/${review._doc.productName}`}>{review._doc.productName}</Link>
-                  </h5>
-                  <div className="category">
-                    <i className="lni lni-package"></i> Category:
-                    <Link to={`/products/category/${review._doc.category}`}>
-                      {review._doc.category}
-                    </Link>
-                  </div>
-                    Brand: {review._doc.brand}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="no-box-shadow">
-            <div className="review-second-row">
-              <div className="product-details-info">
+      {allReviews.length > 0 ? (
+        allReviews.map((review) => (
+          <div key={review._doc._id} className="review-row box-shadow">
+            <div className="review-single-product">
+              <div className="d-flex">
                 <div className="">
-                  <div className="reviews">
-                    <ReviewSingle reviewOne={review} editable={true} />
+                  <div className="review-product-image">
+                    <img
+                      src={review._doc.images[0]}
+                      alt={review._doc.productName}
+                    ></img>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="product-info">
+                    <h5 className="title">
+                      <Link to={`/product-details/${review._doc.productName}`}>
+                        {review._doc.productName}
+                      </Link>
+                    </h5>
+                    <div className="category">
+                      <i className="lni lni-package"></i> Category:
+                      <Link to={`/products/category/${review._doc.category}`}>
+                        {review._doc.category}
+                      </Link>
+                    </div>
+                    Brand: {review._doc.brand}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="no-box-shadow">
+              <div className="review-second-row">
+                <div className="product-details-info">
+                  <div className="">
+                    <div className="reviews">
+                      <ReviewSingle reviewOne={review} editable={true} />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <>
+          <div className="empty-result">
+            <div className="reviews">
+              <h4>No reviews to display</h4>
+            </div>
+          </div>
+        </>
+      )}
 
       <nav>
         <ul className="product-pagination pagination justify-content-center">

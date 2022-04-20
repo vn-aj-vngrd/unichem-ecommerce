@@ -6,7 +6,7 @@ const Services = () => {
         <p>We present our online premium services.</p>
       </div>
       <div className="container">
-        <ul>
+        <ul className="box-shadow">
           <li>
             <div className="media-icon">
               <i className="lni lni-delivery"></i>

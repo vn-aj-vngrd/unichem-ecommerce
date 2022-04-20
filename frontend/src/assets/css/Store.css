@@ -572,8 +572,8 @@ ol {
 ========================================*/
 
 .section {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   position: relative;
 }
 
@@ -593,7 +593,7 @@ ol {
 
 .section-title {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   padding: 0px 300px;
   position: relative;
   z-index: 5;
@@ -2336,7 +2336,7 @@ ol {
 ========================================*/
 .shipping-info {
   background-color: whitesmoke;
-  padding: 90px 0;
+  padding: 50px 0;
 }
 
 .shipping-info ul {
@@ -2346,6 +2346,7 @@ ol {
 }
 
 .shipping-info li {
+  background-color: #fff;
   list-style: none;
   float: left;
   width: 25%;
@@ -3872,6 +3873,7 @@ ol {
   padding: 30px;
   background: #fff;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .sidebar-nav {
@@ -4032,13 +4034,6 @@ ol {
 }
 
 @media (max-width: 1200px) {
-  .product-grid {
-    flex-direction: column;
-    justify-content: space-between;
-    /* height: 140px; */
-    align-items: flex-start;
-  }
-
   .product-filter {
     min-width: 350px;
     max-width: 100%;
@@ -4393,7 +4388,7 @@ ol {
 
 .shopping-cart {
   margin-top: 20px;
-  margin-bottom: 90px;
+  margin-bottom: 50px;
 }
 
 .shopping-cart .total-amount .right ul li {
@@ -4681,11 +4676,11 @@ ol {
   position: relative;
   /* background-color: #fff; */
   margin-top: 220px;
-  padding-bottom: 90px;
+  padding-bottom: 50px;
 }
 
 .contact-us .contact-info .single-info-head {
-  margin-top: 30px;
+  /* margin-top: 30px; */
   background-color: #fff;
   padding: 30px;
   border: 1px solid #e6e6e6;
@@ -4693,11 +4688,11 @@ ol {
   padding-bottom: 38px;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .contact-us .contact-info .single-info-head {
     margin-top: 20px;
   }
-}
+} */
 
 .contact-us .contact-info .single-info {
   margin-bottom: 30px;
@@ -4755,10 +4750,6 @@ ol {
 
 .contact-us .contact-info .single-info ul li a:hover {
   color: #f44336;
-}
-
-.contact-form-head {
-  margin-top: 30px;
 }
 
 .contact-form-head .contact-inner-title h2 {
@@ -5474,8 +5465,8 @@ ol {
 ========================================*/
 
 .featured-categories {
-  padding-bottom: 90px;
-  padding-top: 90px;
+  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 .featured-categories .section-title {
@@ -6738,4 +6729,68 @@ ol {
 
 a:hover {
   color: #c62828;
+}
+
+.empty-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.empty-result .products {
+  margin: 30px 0 0 0;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-result .reviews,
+.empty-result .orders {
+  margin: 30px 0 0 0;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 1400px) {
+  .empty-result .products,
+  .empty-result .reviews,
+  .empty-result .orders  {
+    width: 941px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .empty-result .products,
+  .empty-result .reviews,
+  .empty-result .orders {
+    width: 761px;
+  }
+}
+
+@media only screen and (min-width: 991px) and (max-width: 1199px) {
+  .empty-result .products,
+  .empty-result .reviews,
+  .empty-result .orders {
+    width: 581px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 990px) {
+  .empty-result .products,
+  .empty-result .reviews,
+  .empty-result .orders {
+    width: 696px;
+  }
+}
+
+@media (max-width: 767px) {
+  .empty-result .products,
+  .empty-result .reviews,
+  .empty-result .orders {
+    width: 402px;
+  }
 }
