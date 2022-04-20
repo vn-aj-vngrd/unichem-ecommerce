@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"; //useRef
+import { useEffect, useState } from "react"; //useRef
 import { useParams } from "react-router-dom";
 import Product from "../../components/Product";
 // import Sidebar from "../../components/Sidebar";
@@ -22,29 +22,9 @@ const Products = () => {
     rating5: false,
   });
 
-  const [isFiltered, setIsFiltered] = useState(false);
   let { productName } = useParams();
   let { categoryName } = useParams();
   let { brandName } = useParams();
-
-  useMemo(() => {
-    if (
-      filters.range1 ||
-      filters.range2 ||
-      filters.range3 ||
-      filters.range4 ||
-      filters.rating0 ||
-      filters.rating1 ||
-      filters.rating2 ||
-      filters.rating3 ||
-      filters.rating4 ||
-      filters.rating5
-    ) {
-      setIsFiltered(true);
-    } else {
-      setIsFiltered(false);
-    }
-  }, [isFiltered]);
 
   return (
     <div>
@@ -237,7 +217,6 @@ const Products = () => {
           categoryName={categoryName}
           brandName={brandName}
           filters={filters}
-          isFiltered={isFiltered}
         />
       </div>
     </div>

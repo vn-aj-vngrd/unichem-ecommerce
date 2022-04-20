@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, resetProduct } from "../features/products/productSlice";
@@ -6,14 +6,31 @@ import Star from "./Star";
 import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
 
-const Product = ({ productName, categoryName, brandName, filters, isFiltered }) => {
+const Product = ({ productName, categoryName, brandName, filters }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sortDefault, setSortDefault] = useState("descendingOrder");
   const [pageNumber, setPageNumber] = useState(0);
-
+  let isFiltered = false;
   const { products, isProductLoading, isProductError, productMessage } =
     useSelector((state) => state.products);
+
+  useMemo(() => {
+    if (
+      !filters.range1 ||
+      !filters.range2 ||
+      !filters.range3 ||
+      !filters.range4 ||
+      !filters.rating0 ||
+      !filters.rating1 ||
+      !filters.rating2 ||
+      !filters.rating3 ||
+      !filters.rating4 ||
+      !filters.rating5
+    ) {
+      isFiltered = false;
+    }
+  }, [filters]);
 
   useEffect(() => {
     if (isProductError) {
@@ -60,10 +77,11 @@ const Product = ({ productName, categoryName, brandName, filters, isFiltered }) 
   ];
 
   // Pagination
-  const productsPerPage = 3;
+  const productsPerPage = 12;
   const pagesVisited = pageNumber * productsPerPage;
 
   // Pagination
+  let preFilteredProducts = JSON.parse(JSON.stringify(products));
   let allProducts = JSON.parse(JSON.stringify(products));
 
   const changePage = ({ selected }) => {
@@ -79,6 +97,8 @@ const Product = ({ productName, categoryName, brandName, filters, isFiltered }) 
         .toLowerCase()
         .includes(productName.toLowerCase());
     });
+
+    preFilteredProducts = [...allProducts];
   }
 
   if (categoryName) {
@@ -90,6 +110,8 @@ const Product = ({ productName, categoryName, brandName, filters, isFiltered }) 
         .toLowerCase()
         .includes(categoryName.toLowerCase());
     });
+
+    preFilteredProducts = [...allProducts];
   }
 
   if (brandName) {
@@ -99,163 +121,168 @@ const Product = ({ productName, categoryName, brandName, filters, isFiltered }) 
     allProducts = products.filter((product) => {
       return product._doc.brand.toLowerCase().includes(brandName.toLowerCase());
     });
+
+    preFilteredProducts = [...allProducts];
   }
-    
+
   // Price Range Filters
   if (filters.range1) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return product._doc.prices[0] >= 50 && product._doc.prices[0] <= 100;
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product._doc.prices[0] >= 50 && product._doc.prices[0] <= 100;
       });
+      isFiltered = true;
     }
   }
 
   if (filters.range2) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
       });
+      isFiltered = true;
     }
   }
 
   if (filters.range3) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return (
             product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000
           );
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000;
       });
+      isFiltered = true;
     }
   }
 
   if (filters.range4) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return (
             product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
           );
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return (
           product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
         );
       });
+      isFiltered = true;
     }
   }
 
   // Rating Filters
   if (filters.rating0) {
+    {
+      console.log("filtered" + isFiltered);
+    }
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return product.market.averageRatings === 0;
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product.market.averageRatings === 0;
       });
+      isFiltered = true;
     }
   }
 
   if (filters.rating1) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return product.market.averageRatings === 1;
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product.market.averageRatings === 1;
       });
+      isFiltered = true;
     }
   }
 
   if (filters.rating2) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return product.market.averageRatings === 2;
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product.market.averageRatings === 2;
       });
+      isFiltered = true;
     }
   }
 
   if (filters.rating3) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return product.market.averageRatings === 3;
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product.market.averageRatings === 3;
       });
+      isFiltered = true;
     }
   }
 
   if (filters.rating4) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return product.market.averageRatings === 4;
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product.market.averageRatings === 4;
       });
+      isFiltered = true;
     }
   }
 
   if (filters.rating5) {
     if (isFiltered) {
-      allProducts = [
-        ...allProducts,
-        products.filter((product) => {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
           return product.market.averageRatings === 5;
-        }),
-      ];
+        })
+      );
     } else {
-      allProducts = products.filter((product) => {
+      allProducts = preFilteredProducts.filter((product) => {
         return product.market.averageRatings === 5;
       });
+      isFiltered = true;
     }
   }
 
@@ -277,6 +304,7 @@ const Product = ({ productName, categoryName, brandName, filters, isFiltered }) 
   // console.log(sortDefault);
   // console.log(allProducts);
 
+  console.log(allProducts);
   console.log(filters);
   console.log(isFiltered);
 
