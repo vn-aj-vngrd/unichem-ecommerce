@@ -11,7 +11,6 @@ const ReviewsSection = ({ productID }) => {
   const moment = require("moment");
   const [pageNumber, setPageNumber] = useState(0);
 
-  
   const { reviews, isReviewLoading, isReviewError, reviewMessage } =
     useSelector((state) => state.reviews);
 
@@ -61,7 +60,12 @@ const ReviewsSection = ({ productID }) => {
   }
 
   const pageCount = Math.ceil(productReviews.length / reviewsPerPage);
-  productReviews = productReviews.slice(pagesVisited, pagesVisited + reviewsPerPage);
+  productReviews = productReviews.slice(
+    pagesVisited,
+    pagesVisited + reviewsPerPage
+  );
+
+  console.log(productReviews)
 
   return (
     <div className="product-details">
@@ -118,11 +122,23 @@ const ReviewsSection = ({ productID }) => {
             <div className="single-block">
               <div className="reviews">
                 <h4 className="title">Latest Reviews</h4>
-                {productReviews.map((review) => (
-                  <ReviewSingle reviewOne={review} editable={false}/>
-                ))}
+                {productReviews.length > 0 &&
+                  productReviews.map((review) => (
+                    <div key={review._doc._id}>
+                      <ReviewSingle reviewOne={review} editable={false} />
+                    </div>
+                  ))}
               </div>
             </div>
+            {productReviews.length === 0 && (
+              <>
+                <div className="empty-result">
+                  <div className="product-reviews">
+                    <h4>No reviews to display</h4>
+                  </div>
+                </div>
+              </>
+            )}
             <nav>
               <ul className="product-pagination pagination justify-content-center">
                 <ReactPaginate

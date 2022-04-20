@@ -6755,9 +6755,18 @@ a:hover {
   align-items: center;
 }
 
+.empty-result .product-reviews {
+  margin: 30px 0 0 0;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 1400px) {
   .empty-result .products,
   .empty-result .reviews,
+  .empty-result .product-reviews,
   .empty-result .orders  {
     width: 941px;
   }
@@ -6766,6 +6775,7 @@ a:hover {
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .empty-result .products,
   .empty-result .reviews,
+  .empty-result .product-reviews,
   .empty-result .orders {
     width: 761px;
   }
@@ -6774,6 +6784,7 @@ a:hover {
 @media only screen and (min-width: 991px) and (max-width: 1199px) {
   .empty-result .products,
   .empty-result .reviews,
+  .empty-result .product-reviews,
   .empty-result .orders {
     width: 581px;
   }
@@ -6782,6 +6793,7 @@ a:hover {
 @media only screen and (min-width: 768px) and (max-width: 990px) {
   .empty-result .products,
   .empty-result .reviews,
+  .empty-result .product-reviews,
   .empty-result .orders {
     width: 696px;
   }
@@ -6790,6 +6802,7 @@ a:hover {
 @media (max-width: 767px) {
   .empty-result .products,
   .empty-result .reviews,
+  .empty-result .product-reviews,
   .empty-result .orders {
     width: 402px;
   }
