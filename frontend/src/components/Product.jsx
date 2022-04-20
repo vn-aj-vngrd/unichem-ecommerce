@@ -9,7 +9,7 @@ import ReactPaginate from "react-paginate";
 const Product = ({ productName, categoryName, brandName, filters }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [sortDefault, setSortDefault] = useState("descendingOrder");
+  const [sortDefault, setSortDefault] = useState("none");
   const [pageNumber, setPageNumber] = useState(0);
   let isFiltered = false;
   const { products, isProductLoading, isProductError, productMessage } =
@@ -55,12 +55,16 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
 
   const options = [
     {
+      label: "None",
+      value: "none",
+    },
+    {
       label: "A - Z Order",
-      value: "ascendingOrder",
+      value: "descendingOrder",
     },
     {
       label: "Z - A Order",
-      value: "descendingOrder",
+      value: "ascendingOrder",
     },
     {
       label: "Low - High Price",
@@ -286,27 +290,50 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
     }
   }
 
-  // switch(sortDefault) {
-  //   case "descendingOrder":
-  //     allProducts.sort((a,b) => b.productName.toLowerCase() - a.productName.toLowerCase());
-  //     break;
-  //   case "lowHigh":
-  //     allProducts.sort((a,b) => a.prices[0] - b.prices[0]);
-  //     break;
-  //   case "highLow":
-  //     allProducts.sort((a,b) => b.prices[0] - a.prices[0]);
-  //     break;
-  //   default:
-  //     allProducts.sort((a,b) => a.productName.toLowerCase() - b.productName.toLowerCase());
-  //     break;
-  // }
-
-  // console.log(sortDefault);
-  // console.log(allProducts);
-
+  // Sort
+  console.log(sortDefault);
   console.log(allProducts);
-  console.log(filters);
-  console.log(isFiltered);
+  if (allProducts) {
+    switch (sortDefault) {
+      case "ascendingOrder":
+        allProducts.sort((a, b) =>
+          a._doc.productName
+            .toLowerCase()
+            .localeCompare(b._doc.productName.toLowerCase())
+        );
+        break;
+      case "descendingOrder":
+        allProducts.sort((a, b) =>
+          b._doc.productName
+            .toLowerCase()
+            .localeCompare(a._doc.productName.toLowerCase())
+        );
+        break;
+      case "lowHigh":
+        allProducts.sort(
+          (a, b) =>
+            a._doc.prices[0] -
+            a._doc.prices[0] * a._doc.salePercent -
+            (b._doc.prices[0] - b._doc.prices[0] * b._doc.salePercent)
+        );
+        break;
+      case "highLow":
+        allProducts.sort(
+          (a, b) =>
+            b._doc.prices[0] -
+            b._doc.prices[0] * b._doc.salePercent -
+            (a._doc.prices[0] - a._doc.prices[0] * a._doc.salePercent)
+        );
+        break;
+      default:
+        allProducts.sort((a, b) =>
+          a._doc.productName
+            .toLowerCase()
+            .localeCompare(b._doc.productName.toLowerCase())
+        );
+        break;
+    }
+  }
 
   const pageCount = Math.ceil(allProducts.length / productsPerPage);
   allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
