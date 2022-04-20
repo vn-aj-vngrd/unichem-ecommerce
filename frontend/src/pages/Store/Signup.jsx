@@ -196,7 +196,7 @@ const Signup = () => {
                   {ageMin && <small className="text-red">{ageMin}</small>}
                 </div>
                 <div className="col-6 mb-3">
-                  <label className="form-label">Gender</label>
+                  <label className="form-label">Sex</label>
                   <select
                     className="form-select"
                     id="sex"
@@ -206,7 +206,7 @@ const Signup = () => {
                     required
                   >
                     <option value="" disabled>
-                      Select Gender
+                      Select Sex
                     </option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>

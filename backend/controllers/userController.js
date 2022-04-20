@@ -104,7 +104,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
     return res.status(400).json({
       message:
-        "A verification link has been sent to your email address. Please verify your email in one hour to login.",
+        "A verification link has been sent already to your email address. Please verify your email in 20 minutes.",
     });
   }
 
