@@ -50,8 +50,12 @@ const Product = ({
 
   const options = [
     {
-      label: "None",
-      value: "none",
+      label: "High - Low Sales",
+      value: "highLowSales",
+    },
+    {
+      label: "Low - High Sales",
+      value: "highLowSales",
     },
     {
       label: "A - Z Order",
@@ -63,16 +67,12 @@ const Product = ({
     },
     {
       label: "Low - High Price",
-      value: "lowHigh",
+      value: "lowHighPrice",
     },
     {
       label: "High - Low Price",
-      value: "highLow",
+      value: "highLowPrice",
     },
-    // {
-    //   label: "Average Rating",
-    //   value: "averageRating"
-    // },
   ];
 
   // Pagination
@@ -204,8 +204,22 @@ const Product = ({
   }
 
   // Sort
+
+  // {
+  //   label: "High - Low Sales",
+  //   value: "highLowSales",
+  // },
+  // {
+  //   label: "Low - High Sales",
+  //   value: "lowHighSales",
+  // },
+
+  console.log(allProducts);
   if (allProducts) {
     switch (sortDefault) {
+      case "lowHighSales":
+        allProducts.sort((a, b) => b.market.sold - a.market.sold);
+        break;
       case "ascendingOrder":
         allProducts.sort((a, b) =>
           a._doc.productName
@@ -220,15 +234,15 @@ const Product = ({
             .localeCompare(a._doc.productName.toLowerCase())
         );
         break;
-      case "lowHigh":
+      case "lowHighPrice":
         allProducts.sort(
           (a, b) =>
             a._doc.prices[0] -
-            a._doc.prices[0] * a._doc.salePercent -
-            (b._doc.prices[0] - b._doc.prices[0] * b._doc.salePercent)
+            (a._doc.prices[0] * a._doc.salePercent) / 100 -
+            (b._doc.prices[0] - (b._doc.prices[0] * b._doc.salePercent) / 100)
         );
         break;
-      case "highLow":
+      case "highLowPrice":
         allProducts.sort(
           (a, b) =>
             b._doc.prices[0] -
@@ -237,11 +251,7 @@ const Product = ({
         );
         break;
       default:
-        allProducts.sort((a, b) =>
-          a._doc.productName
-            .toLowerCase()
-            .localeCompare(b._doc.productName.toLowerCase())
-        );
+        allProducts.sort((a, b) => a.market.sold - b.market.sold);
         break;
     }
   }
