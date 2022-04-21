@@ -6,7 +6,13 @@ import Star from "./Star";
 import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
 
-const Product = ({ productName, categoryName, brandName, filters }) => {
+const Product = ({
+  productName,
+  categoryName,
+  brandName,
+  filters,
+  setFilters,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sortDefault, setSortDefault] = useState("none");
@@ -16,18 +22,7 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
     useSelector((state) => state.products);
 
   useMemo(() => {
-    if (
-      !filters.range1 ||
-      !filters.range2 ||
-      !filters.range3 ||
-      !filters.range4 ||
-      !filters.rating0 ||
-      !filters.rating1 ||
-      !filters.rating2 ||
-      !filters.rating3 ||
-      !filters.rating4 ||
-      !filters.rating5
-    ) {
+    if (!filters.range && !filters.rating !== 0) {
       isFiltered = false;
     }
   }, [filters]);
@@ -55,8 +50,12 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
 
   const options = [
     {
-      label: "None",
-      value: "none",
+      label: "High - Low Sales",
+      value: "highLowSales",
+    },
+    {
+      label: "Low - High Sales",
+      value: "highLowSales",
     },
     {
       label: "A - Z Order",
@@ -68,16 +67,12 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
     },
     {
       label: "Low - High Price",
-      value: "lowHigh",
+      value: "lowHighPrice",
     },
     {
       label: "High - Low Price",
-      value: "highLow",
+      value: "highLowPrice",
     },
-    // {
-    //   label: "Average Rating",
-    //   value: "averageRating"
-    // },
   ];
 
   // Pagination
@@ -129,67 +124,31 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
     preFilteredProducts = [...allProducts];
   }
 
+  console.log(allProducts);
   // Price Range Filters
-  if (filters.range1) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product._doc.prices[0] >= 50 && product._doc.prices[0] <= 100;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product._doc.prices[0] >= 50 && product._doc.prices[0] <= 100;
-      });
-      isFiltered = true;
-    }
-  }
-
-  if (filters.range2) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
-      });
-      isFiltered = true;
-    }
-  }
-
-  if (filters.range3) {
+  if (filters.minRange || filters.maxRange) {
     if (isFiltered) {
       allProducts = allProducts.concat(
         preFilteredProducts.filter((product) => {
           return (
-            product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000
-          );
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000;
-      });
-      isFiltered = true;
-    }
-  }
-
-  if (filters.range4) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return (
-            product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
+            product._doc.prices[0] -
+              product._doc.prices[0] * (product._doc.salePercent / 100) >=
+              filters.minRange &&
+            product._doc.prices[0] -
+              product._doc.prices[0] * (product._doc.salePercent / 100) <=
+              filters.maxRange
           );
         })
       );
     } else {
       allProducts = preFilteredProducts.filter((product) => {
         return (
-          product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
+          product._doc.prices[0] -
+            product._doc.prices[0] * (product._doc.salePercent / 100) >=
+            filters.minRange &&
+          product._doc.prices[0] -
+            product._doc.prices[0] * (product._doc.salePercent / 100) <=
+            filters.maxRange
         );
       });
       isFiltered = true;
@@ -197,104 +156,70 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
   }
 
   // Rating Filters
-  if (filters.rating0) {
-    {
-      console.log("filtered" + isFiltered);
-    }
+  if (filters.rating !== 0) {
     if (isFiltered) {
       allProducts = allProducts.concat(
         preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 0;
+          return product.market.averageRatings >= filters.rating;
         })
       );
     } else {
       allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 0;
+        return product.market.averageRatings >= filters.rating;
       });
       isFiltered = true;
     }
   }
 
-  if (filters.rating1) {
+  //Ready Stock Filters
+  if (filters.readyStock) {
     if (isFiltered) {
       allProducts = allProducts.concat(
         preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 1;
+          return !product._doc.quantities.includes(0);
         })
       );
     } else {
       allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 1;
+        return !product._doc.quantities.includes(0);
       });
       isFiltered = true;
     }
   }
 
-  if (filters.rating2) {
+  //With Discount Filters
+  if (filters.withDiscount) {
     if (isFiltered) {
       allProducts = allProducts.concat(
         preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 2;
+          return product._doc.salePercent > 0;
         })
       );
     } else {
       allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 2;
-      });
-      isFiltered = true;
-    }
-  }
-
-  if (filters.rating3) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 3;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 3;
-      });
-      isFiltered = true;
-    }
-  }
-
-  if (filters.rating4) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 4;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 4;
-      });
-      isFiltered = true;
-    }
-  }
-
-  if (filters.rating5) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 5;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 5;
+        return product._doc.salePercent > 0;
       });
       isFiltered = true;
     }
   }
 
   // Sort
-  console.log(sortDefault);
+
+  // {
+  //   label: "High - Low Sales",
+  //   value: "highLowSales",
+  // },
+  // {
+  //   label: "Low - High Sales",
+  //   value: "lowHighSales",
+  // },
+
   console.log(allProducts);
   if (allProducts) {
     switch (sortDefault) {
+      case "lowHighSales":
+        allProducts.sort((a, b) => b.market.sold - a.market.sold);
+        break;
       case "ascendingOrder":
         allProducts.sort((a, b) =>
           a._doc.productName
@@ -309,15 +234,15 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
             .localeCompare(a._doc.productName.toLowerCase())
         );
         break;
-      case "lowHigh":
+      case "lowHighPrice":
         allProducts.sort(
           (a, b) =>
             a._doc.prices[0] -
-            a._doc.prices[0] * a._doc.salePercent -
-            (b._doc.prices[0] - b._doc.prices[0] * b._doc.salePercent)
+            (a._doc.prices[0] * a._doc.salePercent) / 100 -
+            (b._doc.prices[0] - (b._doc.prices[0] * b._doc.salePercent) / 100)
         );
         break;
-      case "highLow":
+      case "highLowPrice":
         allProducts.sort(
           (a, b) =>
             b._doc.prices[0] -
@@ -326,11 +251,7 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
         );
         break;
       default:
-        allProducts.sort((a, b) =>
-          a._doc.productName
-            .toLowerCase()
-            .localeCompare(b._doc.productName.toLowerCase())
-        );
+        allProducts.sort((a, b) => a.market.sold - b.market.sold);
         break;
     }
   }
@@ -338,6 +259,27 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
   const pageCount = Math.ceil(allProducts.length / productsPerPage);
   allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
   let salesPrice = 0;
+
+  const removeAllFilter = () => {
+    removeRangeFilter();
+    removeRatingFilter();
+  };
+
+  const removeRangeFilter = () => {
+    setFilters((prevState) => ({
+      ...prevState,
+      range: false,
+      minRange: 0,
+      maxRange: 0,
+    }));
+  };
+
+  const removeRatingFilter = () => {
+    setFilters((prevState) => ({
+      ...prevState,
+      rating: 0,
+    }));
+  };
 
   return (
     <div className="">
@@ -356,6 +298,40 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
         </select>
         {allProducts.length} items
       </div>
+
+      {isFiltered && (
+        <div className="filters-breadcrumbs">
+          {filters.range && (
+            <div className="one-filter">
+              <p>
+                ₱: {filters.minRange} - {filters.maxRange}
+              </p>
+              <div className="one-filter-dequeue">
+                <i
+                  className="btn lni lni-close"
+                  onClick={removeRangeFilter}
+                ></i>
+              </div>
+            </div>
+          )}
+
+          {filters.rating !== 0 && (
+            <div className="one-filter">
+              <p>{filters.rating}+ Stars</p>
+              <div className="one-filter-dequeue">
+                <i
+                  className="btn lni lni-close"
+                  onClick={removeRatingFilter}
+                ></i>
+              </div>
+            </div>
+          )}
+
+          <p className="btn clear-all-filter" onClick={removeAllFilter}>
+            Clear All
+          </p>
+        </div>
+      )}
 
       <div className="product">
         <div className="row">

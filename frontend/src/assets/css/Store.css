@@ -6678,9 +6678,115 @@ ol {
   color: #f44336;
 }
 
+
+
+/*======================================
+	Filters CSS 
+========================================*/
+
+.filters .form-group  {
+  margin: 20px 0 10px 0;
+}
+
+.filters .form-group .form-control {
+  padding: 0 18px;
+  -webkit-transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+  transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  color: #505050;
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 46px;
+  border-radius: 4px !important;
+  overflow: hidden;
+  width: 100%;
+  -webkit-appearance: none !important;
+}
+
+.filters .form-group p {
+  margin: 0 10px;
+}
+
+.filters-apply {
+  width: 100%;
+}
+
+.filters .form-group input[type=number] {
+  -moz-appearance: textfield !important;
+}
+
+.filters .product-sidebar .button {
+  margin: 20px 0 0 0;
+}
+
+.filters .product-sidebar .error-message {
+  margin: 15px 0 0 0;
+}
+
+.filters-breadcrumbs {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filters-breadcrumbs .one-filter {
+  position: relative;
+  background-color: #424242;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.filters-breadcrumbs .one-filter p {
+  color: #fff;
+}
+
+.filters-breadcrumbs .one-filter .lni-close {
+  color: #8a8a8a;
+  margin-left: 15px;
+  font-weight: 700;
+  padding: 0px !important;
+}
+
+.filters-breadcrumbs .one-filter .lni-close:hover {
+  color: #fff;
+}
+
+.filters-breadcrumbs .clear-all-filter {
+  font-weight: 600;
+  font-size: 14px;
+  color: #424242;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+}
+
+.filters-breadcrumbs .clear-all-filter:hover {
+  color: #f44336;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+}
+
 /*======================================
 	Overrider CSS 
 ========================================*/
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
 
 .no-margin {
   margin-top: 0px;
@@ -6691,8 +6797,8 @@ ol {
 }
 
 .box-shadow {
-  -webkit-box-shadow: 0px 0px 20px #00000012;
-  box-shadow: 0px 0px 20px #00000012;
+  -webkit-box-shadow: 0px 0px 15px #d6d6d6;
+  box-shadow: 0px 0px 15px #d6d6d6;
 }
 
 .no-box-shadow {
@@ -6745,7 +6851,7 @@ a:hover {
 
 .empty-result .products {
   margin: 30px 0 0 0;
-  height: 400px;
+  height: 570px;
   display: flex;
   justify-content: center;
   align-items: center;

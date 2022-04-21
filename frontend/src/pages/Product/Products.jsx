@@ -1,88 +1,114 @@
 import { useEffect, useState } from "react"; //useRef
 import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import Product from "../../components/Product";
 // import Sidebar from "../../components/Sidebar";
 import Star from "../../components/Star";
+import { toast } from "react-toastify";
 
 const Products = () => {
   useEffect(() => {
     document.title = "Unichem Store | Products";
   });
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const minRange = watch("minRange");
+  const maxRange = watch("maxRange");
+
   const [filters, setFilters] = useState({
-    range1: false,
-    range2: false,
-    range3: false,
-    range4: false,
-    rating0: false,
-    rating1: false,
-    rating2: false,
-    rating3: false,
-    rating4: false,
-    rating5: false,
+    range: false,
+    minRange: 0,
+    maxRange: 0,
+    rating: 0,
+    readyStock: false,
+    withDiscount: false
   });
 
   let { productName } = useParams();
   let { categoryName } = useParams();
   let { brandName } = useParams();
 
+  const onSubmit = (data) => {
+    setFilters((prevState) => ({
+      ...prevState,
+      range: true,
+      minRange: data.minRange,
+      maxRange: data.maxRange,
+    }));
+  };
+
+  console.log(minRange)
+  console.log(maxRange)
+
   return (
     <div>
       <div className="container main-product-section">
-        <div className="">
+        <div className="filters">
           <div>
             <div className="product-sidebar single-widget condition">
               <h5>Filter by Price</h5>
               <hr></hr>
 
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  onChange={() =>
-                    setFilters({ ...filters, range1: !filters.range1 })
-                  }
-                ></input>
-                <label className="sidebar-label form-check-label">
-                  ₱ 50 - ₱ 100
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  onChange={() =>
-                    setFilters({ ...filters, range2: !filters.range2 })
-                  }
-                ></input>
-                <label className="sidebar-label form-check-label">
-                  ₱ 101 - ₱ 500
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  onChange={() =>
-                    setFilters({ ...filters, range3: !filters.range3 })
-                  }
-                ></input>
-                <label className="sidebar-label form-check-label">
-                  ₱ 501 - ₱ 1,000
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  onChange={() =>
-                    setFilters({ ...filters, range4: !filters.range4 })
-                  }
-                ></input>
-                <label className="sidebar-label form-check-label">
-                  ₱ 1,001 - ₱ 5,000
-                </label>
-              </div>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="d-flex justify-content-between align-items-center form-group">
+                  <input
+                    className="form-control"
+                    type="number"
+                    {...register("minRange", {
+                      required: { value: true, message: "Minimum is required" },
+                      min: {
+                        value: 0,
+                        message: "Miniumm must be greater than 0",
+                      },
+                      max: {
+                        value: maxRange,
+                        message: "Miniumm must be less than maximum",
+                      },
+                    })}
+                    style={{
+                      border: errors.minRange ? "1px solid #f44336" : "",
+                    }}
+                    placeholder="Min"
+                  ></input>
+
+                  <p>to</p>
+                  <input
+                    className="form-control"
+                    type="number"
+                    {...register("maxRange", {
+                      required: { value: true, message: "Maximum is required" },
+                      min: {
+                        value: minRange,
+                        message: "Maximum must be greater than minimum",
+                      },
+                    })}
+                    style={{
+                      border: errors.maxRange ? "1px solid #f44336" : "",
+                    }}
+                    placeholder="Max"
+                  ></input>
+                </div>
+                {errors.minRange && (
+                  <p className="error-message">⚠ {errors.minRange.message}</p>
+                )}
+                {errors.maxRange && (
+                  <p className="error-message">⚠ {errors.maxRange.message}</p>
+                )}
+                <div className="button">
+                  <button
+                    className="btn btn-primary filters-apply"
+                    type="submit"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
 
@@ -95,9 +121,10 @@ const Products = () => {
                   <div className="form-check ">
                     <input
                       className="form-check-input"
-                      type="checkbox"
+                      type="radio"
+                      name="rating"
                       onChange={() =>
-                        setFilters({ ...filters, rating5: !filters.rating5 })
+                        setFilters((prevState) => ({ ...prevState, rating: 5 }))
                       }
                     ></input>
                     <label className="sidebar-label form-check-label">
@@ -114,14 +141,15 @@ const Products = () => {
                   <div className="form-check ">
                     <input
                       className="form-check-input"
-                      type="checkbox"
+                      type="radio"
+                      name="rating"
                       onChange={() =>
-                        setFilters({ ...filters, rating4: !filters.rating4 })
+                        setFilters((prevState) => ({ ...prevState, rating: 4 }))
                       }
                     ></input>
                     <label className="sidebar-label form-check-label">
                       <li>
-                        <span>4 stars </span>
+                        <span>4+ stars </span>
                         <i className="lni lni-star-filled"></i>
                         <i className="lni lni-star-filled"></i>
                         <i className="lni lni-star-filled"></i>
@@ -133,14 +161,15 @@ const Products = () => {
                   <div className="form-check">
                     <input
                       className="form-check-input"
-                      type="checkbox"
+                      type="radio"
+                      name="rating"
                       onChange={() =>
-                        setFilters({ ...filters, rating3: !filters.rating3 })
+                        setFilters((prevState) => ({ ...prevState, rating: 3 }))
                       }
                     ></input>
                     <label className="sidebar-label form-check-label">
                       <li>
-                        <span>3 stars </span>
+                        <span>3+ stars </span>
                         <i className="lni lni-star-filled"></i>
                         <i className="lni lni-star-filled"></i>
                         <i className="lni lni-star-filled"></i>
@@ -152,14 +181,15 @@ const Products = () => {
                   <div className="form-check">
                     <input
                       className="form-check-input"
-                      type="checkbox"
+                      type="radio"
+                      name="rating"
                       onChange={() =>
-                        setFilters({ ...filters, rating2: !filters.rating2 })
+                        setFilters((prevState) => ({ ...prevState, rating: 2 }))
                       }
                     ></input>
                     <label className="sidebar-label form-check-label">
                       <li>
-                        <span>2 stars </span>
+                        <span>2+ stars </span>
                         <i className="lni lni-star-filled"></i>
                         <i className="lni lni-star-filled"></i>
                         <i className="lni lni-star"></i>
@@ -171,14 +201,15 @@ const Products = () => {
                   <div className="form-check">
                     <input
                       className="form-check-input"
-                      type="checkbox"
+                      type="radio"
+                      name="rating"
                       onChange={() =>
-                        setFilters({ ...filters, rating1: !filters.rating1 })
+                        setFilters((prevState) => ({ ...prevState, rating: 1 }))
                       }
                     ></input>
                     <label className="sidebar-label form-check-label">
                       <li>
-                        <span>1 star </span>
+                        <span>1+ stars </span>
                         <i className="lni lni-star-filled"></i>
                         <i className="lni lni-star"></i>
                         <i className="lni lni-star"></i>
@@ -187,25 +218,51 @@ const Products = () => {
                       </li>
                     </label>
                   </div>
-                  <div className="form-check">
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="product-sidebar single-widget condition">
+              <h5>Filter by Service</h5>
+              <hr></hr>
+              <div className="single-block give-review">
+                <ul>
+                <div className="form-check ">
                     <input
                       className="form-check-input"
                       type="checkbox"
+                      name="readyStock"
                       onChange={() =>
-                        setFilters({ ...filters, rating0: !filters.rating0 })
+                        setFilters((prevState) => ({ ...prevState, readyStock: !filters.readyStock }))
                       }
                     ></input>
                     <label className="sidebar-label form-check-label">
                       <li>
-                        <span>0 star </span>
-                        <i className="lni lni-star"></i>
-                        <i className="lni lni-star"></i>
-                        <i className="lni lni-star"></i>
-                        <i className="lni lni-star"></i>
-                        <i className="lni lni-star"></i>
+                        <span>Ready Stock </span>
                       </li>
                     </label>
                   </div>
+
+                  <div className="form-check ">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      name="readyStock"
+                      onChange={() =>
+                        setFilters((prevState) => ({ ...prevState, withDiscount: !filters.withDiscount }))
+                      }
+                    ></input>
+                    <label className="sidebar-label form-check-label">
+                      <li>
+                        <span>With Discount </span>
+                      </li>
+                    </label>
+                  </div>
+                  
+                  
                 </ul>
               </div>
             </div>
@@ -217,6 +274,7 @@ const Products = () => {
           categoryName={categoryName}
           brandName={brandName}
           filters={filters}
+          setFilters={setFilters}
         />
       </div>
     </div>
