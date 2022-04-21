@@ -106,6 +106,7 @@ const Login = () => {
                           message: "Email is badly formatted",
                         },
                       })}
+                      style={{ border: errors.email ? "1px solid #f44336" : "" }}
                     />
                     {errors.email && (
                       <p className="error-message">⚠ {errors.email.message}</p>
@@ -116,10 +117,22 @@ const Login = () => {
                     <input
                       type="password"
                       className="form-control"
-                      {...register("password", { required: {value: true, message: "Password is required"}, minLength: {value: 8, message: "Password must be at least 8 characters"} })}
+                      {...register("password", {
+                        required: {
+                          value: true,
+                          message: "Password is required",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "Password must be at least 8 characters",
+                        },
+                      })}
+                      style={{ border: errors.password ? "1px solid #f44336" : "" }}
                     />
                     {errors.password && (
-                      <p className="error-message">⚠ {errors.password.message}</p>
+                      <p className="error-message">
+                        ⚠ {errors.password.message}
+                      </p>
                     )}
                   </div>
                   <div className="text-end outer-link">
