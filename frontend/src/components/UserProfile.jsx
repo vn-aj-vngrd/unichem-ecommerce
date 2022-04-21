@@ -1,5 +1,6 @@
 // import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { update, resetUser } from "../features/auth/authSlice";
 import Spinner from "./Spinner";
@@ -7,50 +8,31 @@ import { toast } from "react-toastify";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-
+ 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-
-  const [formData, setFormData] = useState({
-    name: user.name,
-    birthday: user.birthday,
-    sex: user.sex,
-    email: user.email,
-    // image: "",
-  });
-
-  const [formPassword, setFormPassword] = useState({
-    newPassword: "",
-    confirmNewPassword: "",
-    currentPassword: "",
-  });
-
+  
   const {
-    name,
-    birthday,
-    sex,
-    email,
-    // image,
-  } = formData;
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: user.name,
+      birthday: user.birthday,
+      sex: user.sex,
+      email: user.email,
+      newPassword: "",
+      confirmNewPassword: "",
+      currentPassword: "",
+    },
+  });
 
-  const { newPassword, confirmNewPassword, currentPassword } = formPassword;
+  const [emailEx, setEmailEx] = useState();
 
-  const onChangeData = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-    // console.log(e.target.files[0]);
-  };
-
-  const onChangePassword = (e) => {
-    setFormPassword((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-    // console.log(e.target.files[0]);
-  };
+  const newPassword = watch("newPassword");
 
   useEffect(() => {
     if (isError) {
@@ -72,14 +54,12 @@ const UserProfile = () => {
     };
   }, [isError, isSuccess, message, dispatch]);
 
-  const onSubmitData = (e) => {
-    e.preventDefault();
-
+  const onSubmitData = (data) => {
     const userData = {
-      name,
-      birthday,
-      sex,
-      email,
+      name: data.name,
+      birthday: data.birthday,
+      sex: data.sex,
+      email: data.email,
       // image,
     };
 
@@ -96,44 +76,12 @@ const UserProfile = () => {
     });
   };
 
-  const onSubmitPassword = (e) => {
-    e.preventDefault();
-
-    if (newPassword !== confirmNewPassword) {
-      toast.error("Passwords do not match", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-      return;
-    }
-
-    if (newPassword.length < 8) {
-      toast.error("Password must contain atleast 8 characters", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-      return;
-    }
-
+  const onSubmitPassword = (data) => {
     const userData = {
-      password: newPassword,
-      currentPassword,
+      password: data.newPassword,
+      currentPassword: data.currentPassword,
     };
 
-    // console.log(userData);
-    setFormPassword(formData);
     dispatch(update(userData));
     toast.success("User updated successfully", {
       position: "top-center",
@@ -145,6 +93,20 @@ const UserProfile = () => {
       progress: undefined,
       theme: "colored",
     });
+  };
+
+  const validateAge = (bday) => {
+    const today = new Date();
+    const birthDate = new Date(bday);
+
+    let age_now = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age_now--;
+    }
+
+    return age_now >= 18;
   };
 
   if (isLoading) {
@@ -161,7 +123,7 @@ const UserProfile = () => {
         <div className="checkout-steps-form-style">
           <ul id="accordionExample">
             <li className=" box-shadow">
-              <form className="form" onSubmit={onSubmitData}>
+              <form className="form" onSubmit={handleSubmit(onSubmitData)}>
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -210,12 +172,27 @@ const UserProfile = () => {
                         <label className="form-label">Name</label>
                         <div className="form-input form">
                           <input
-                            name="name"
                             type="text"
-                            value={name}
-                            onChange={onChangeData}
-                            required
+                            className="form-control"
+                            {...register("name", {
+                              required: {
+                                value: true,
+                                message: "Name is required",
+                              },
+                              minLength: {
+                                value: 3,
+                                message: "Name must be at least 3 characters",
+                              },
+                            })}
+                            style={{
+                              border: errors.name ? "1px solid #f44336" : "",
+                            }}
                           />
+                          {errors.name && (
+                            <p className="error-message">
+                              ⚠ {errors.name.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -224,12 +201,32 @@ const UserProfile = () => {
                         <label className="form-label">Birthday</label>
                         <div className="form-input form">
                           <input
-                            name="birthday"
                             type="date"
-                            value={birthday}
-                            onChange={onChangeData}
-                            required
+                            className="form-control"
+                            {...register("birthday", {
+                              required: {
+                                value: true,
+                                message: "Birthday is required",
+                              },
+                              min: {
+                                value: "1900-01-01",
+                                message: "Age is invalid",
+                              },
+                              validate: (value) =>
+                                validateAge(value) === true ||
+                                "You must be at least 18 years old",
+                            })}
+                            style={{
+                              border: errors.birthday
+                                ? "1px solid #f44336"
+                                : "",
+                            }}
                           />
+                          {errors.birthday && (
+                            <p className="error-message">
+                              ⚠ {errors.birthday.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -238,12 +235,33 @@ const UserProfile = () => {
                         <label className="form-label">Email Address</label>
                         <div className="form-input form">
                           <input
-                            name="email"
                             type="email"
-                            value={email}
-                            onChange={onChangeData}
-                            disabled
+                            className="form-control"
+                            {...register("email", {
+                              required: {
+                                value: true,
+                                message: "Email is required",
+                              },
+                              pattern: {
+                                value: /\S+@\S+\.\S+/,
+                                message: "Email is badly formatted",
+                              },
+                            })}
+                            style={{
+                              border:
+                                errors.email || emailEx
+                                  ? "1px solid #f44336"
+                                  : "",
+                            }}
                           />
+                          {errors.email && (
+                            <p className="error-message">
+                              ⚠ {errors.email.message}
+                            </p>
+                          )}
+                          {emailEx && (
+                            <p className="error-message">⚠ {emailEx}</p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -253,23 +271,27 @@ const UserProfile = () => {
                         <div className="form-input form">
                           <select
                             className="form-select"
-                            name="sex"
-                            value={sex}
-                            onChange={onChangeData}
-                            required
+                            {...register("sex", {
+                              required: {
+                                value: true,
+                                message: "Sex is required",
+                              },
+                              validate: (value) =>
+                                "" !== value || "Sex is required",
+                            })}
+                            style={{
+                              border: errors.sex ? "1px solid #f44336" : "",
+                            }}
                           >
-                            {user.sex === "Male" ? (
-                              <>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                              </>
-                            ) : (
-                              <>
-                                <option value="Female">Female</option>
-                                <option value="Male">Male</option>
-                              </>
-                            )}
+                            <option value="">Select Sex</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                           </select>
+                          {errors.sex && (
+                            <p className="error-message">
+                              ⚠ {errors.sex.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -286,7 +308,7 @@ const UserProfile = () => {
             </li>
 
             <li className=" box-shadow">
-              <form className="form" onSubmit={onSubmitPassword}>
+              <form className="form" onSubmit={handleSubmit(onSubmitPassword)}>
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -308,12 +330,30 @@ const UserProfile = () => {
                         <label className="form-label">New Password</label>
                         <div className="form-input form">
                           <input
-                            name="newPassword"
                             type="password"
-                            value={newPassword}
-                            onChange={onChangePassword}
-                            required
+                            className="form-control"
+                            {...register("newPassword", {
+                              required: {
+                                value: true,
+                                message: "Password is required",
+                              },
+                              minLength: {
+                                value: 8,
+                                message:
+                                  "Password must be at least 8 characters.",
+                              },
+                            })}
+                            style={{
+                              border: errors.newPassword
+                                ? "1px solid #f44336"
+                                : "",
+                            }}
                           />
+                          {errors.newPassword && (
+                            <p className="error-message">
+                              ⚠ {errors.newPassword.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -322,12 +362,28 @@ const UserProfile = () => {
                         <label className="form-label">Confirm Password</label>
                         <div className="form-input form">
                           <input
-                            name="confirmNewPassword"
                             type="password"
-                            value={confirmNewPassword}
-                            onChange={onChangePassword}
-                            required
+                            className="form-control"
+                            {...register("confirmNewPassword", {
+                              required: {
+                                value: true,
+                                message: "Confirm new password is required",
+                              },
+                              validate: (value) =>
+                                newPassword === value ||
+                                "New passwords do not match",
+                            })}
+                            style={{
+                              border: errors.confirmNewPassword
+                                ? "1px solid #f44336"
+                                : "",
+                            }}
                           />
+                          {errors.confirmNewPassword && (
+                            <p className="error-message">
+                              ⚠ {errors.confirmNewPassword.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -339,10 +395,29 @@ const UserProfile = () => {
                           <input
                             name="currentPassword"
                             type="password"
-                            value={currentPassword}
-                            onChange={onChangePassword}
-                            required
+                            className="form-control"
+                            {...register("password", {
+                              required: {
+                                value: true,
+                                message: "Password is required",
+                              },
+                              minLength: {
+                                value: 8,
+                                message:
+                                  "Password must be at least 8 characters.",
+                              },
+                            })}
+                            style={{
+                              border: errors.password
+                                ? "1px solid #f44336"
+                                : "",
+                            }}
                           />
+                          {errors.password && (
+                            <p className="error-message">
+                              ⚠ {errors.password.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>

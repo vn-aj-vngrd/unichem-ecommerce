@@ -1,34 +1,25 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { update, resetUser } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 import EditAdddress from "../components/EditAddress";
 
-const Profile = () => {
+const UserAddress = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const dispatch = useDispatch();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-
-  const [formData, setFormData] = useState({
-    addressName: "",
-    address1: "",
-    address2: "",
-    postalCode: "",
-    phoneNumber: "",
-  });
-
-  const { addressName, address1, address2, postalCode, phoneNumber } = formData;
-
-  const onChangeCreate = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   useEffect(() => {
     if (isError) {
@@ -50,16 +41,14 @@ const Profile = () => {
   }, [isError, isSuccess, message, dispatch]);
 
   // Create user address
-  const onSubmitCreate = (e) => {
-    e.preventDefault();
-
+  const onSubmit = (data) => {
     const address = JSON.parse(JSON.stringify(user.address));
     address.push({
-      addressName,
-      address1,
-      address2,
-      postalCode,
-      phoneNumber,
+      addressName: data.addressName,
+      address1: data.address1,
+      address2: data.address2,
+      postalCode: data.postalCode,
+      phoneNumber: data.phoneNumber,
     });
 
     const userData = {
@@ -101,7 +90,7 @@ const Profile = () => {
 
     const address = JSON.parse(JSON.stringify(user.address));
 
-    console.log(newPrimaryAddress);
+    console.log(errors);
 
     address.splice(index, 1);
 
@@ -171,7 +160,10 @@ const Profile = () => {
                     <div className="profile-address">
                       <ul>
                         <li className="address-header">
-                          <h6><i className="lni lni-map-marker"></i>{" "}{user.address[index].addressName}</h6>
+                          <h6>
+                            <i className="lni lni-map-marker"></i>{" "}
+                            {user.address[index].addressName}
+                          </h6>
                         </li>
                         <li>
                           <p>
@@ -236,7 +228,10 @@ const Profile = () => {
                     <div className="profile-address">
                       <ul>
                         <li className="address-header">
-                          <h6><i className="lni lni-map-marker"></i>{" "}{user.address[index].addressName}</h6>
+                          <h6>
+                            <i className="lni lni-map-marker"></i>{" "}
+                            {user.address[index].addressName}
+                          </h6>
                         </li>
                         <li>
                           <p>
@@ -294,7 +289,7 @@ const Profile = () => {
         <div className="checkout-steps-form-style">
           <ul id="accordionExample">
             <li className=" box-shadow">
-              <form className="form" onSubmit={onSubmitCreate}>
+              <form className="form" onSubmit={handleSubmit(onSubmit)}>
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -318,11 +313,21 @@ const Profile = () => {
                           type="text"
                           className="form-control"
                           id="addressName"
-                          name="addressName"
-                          value={addressName}
-                          onChange={onChangeCreate}
-                          required
+                          {...register("addressName", {
+                            required: {
+                              value: true,
+                              message: "Address name is required.",
+                            },
+                          })}
+                          style={{
+                            border: errors.addressName ? "1px solid #f44336" : "",
+                          }}
                         />
+                        {errors.addressName && (
+                          <p className="error-message">
+                            ⚠ {errors.addressName.message}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -335,11 +340,26 @@ const Profile = () => {
                           type="text"
                           className="form-control"
                           id="address1"
-                          name="address1"
-                          value={address1}
-                          onChange={onChangeCreate}
-                          required
+                          {...register("address1", {
+                            required: {
+                              value: true,
+                              message:
+                                "Region, Province, City, Barangay is required",
+                            },
+                            minLength: {
+                              value: 3,
+                              message: "Must be at least 5 characters",
+                            },
+                          })}
+                          style={{
+                            border: errors.address1 ? "1px solid #f44336" : "",
+                          }}
                         />
+                        {errors.address1 && (
+                          <p className="error-message">
+                            ⚠ {errors.address1.message}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -352,11 +372,26 @@ const Profile = () => {
                           type="text"
                           className="form-control"
                           id="address2"
-                          name="address2"
-                          value={address2}
-                          onChange={onChangeCreate}
-                          required
+                          {...register("address2", {
+                            required: {
+                              value: true,
+                              message:
+                                "Street Name, Building, House No. is required",
+                            },
+                            minLength: {
+                              value: 3,
+                              message: "Must be at least 5 characters",
+                            },
+                          })}
+                          style={{
+                            border: errors.address2 ? "1px solid #f44336" : "",
+                          }}
                         />
+                        {errors.address2 && (
+                          <p className="error-message">
+                            ⚠ {errors.address2.message}
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div className="col-6">
@@ -366,11 +401,27 @@ const Profile = () => {
                           type="text"
                           className="form-control"
                           id="postalCode"
-                          name="postalCode"
-                          value={postalCode}
-                          onChange={onChangeCreate}
-                          required
+                          {...register("postalCode", {
+                            required: {
+                              value: true,
+                              message: "Postal Code is required",
+                            },
+                            minLength: {
+                              value: 4,
+                              message: "Must be at least 4 characters",
+                            },
+                          })}
+                          style={{
+                            border: errors.postalCode
+                              ? "1px solid #f44336"
+                              : "",
+                          }}
                         />
+                        {errors.postalCode && (
+                          <p className="error-message">
+                            ⚠ {errors.postalCode.message}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -381,11 +432,27 @@ const Profile = () => {
                           type="text"
                           className="form-control"
                           id="phoneNumber"
-                          name="phoneNumber"
-                          value={phoneNumber}
-                          onChange={onChangeCreate}
-                          required
+                          {...register("phoneNumber", {
+                            required: {
+                              value: true,
+                              message: "Phone Number is required",
+                            },
+                            minLength: {
+                              value: 11,
+                              message: "Must consist of 11 digits",
+                            },
+                          })}
+                          style={{
+                            border: errors.phoneNumber
+                              ? "1px solid #f44336"
+                              : "",
+                          }}
                         />
+                        {errors.phoneNumber && (
+                          <p className="error-message">
+                            ⚠ {errors.phoneNumber.message}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -407,4 +474,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserAddress;

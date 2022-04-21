@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { update, resetUser } from "../features/auth/authSlice";
 import Spinner from "./Spinner";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 const EditAddress = ({ index }) => {
   const dispatch = useDispatch();
@@ -12,41 +12,31 @@ const EditAddress = ({ index }) => {
     (state) => state.auth
   );
 
-  const [formDataUpdate, setFormDataUpdate] = useState({
-    addressNameUpdate: user.address[index].addressName,
-    address1Update: user.address[index].address1,
-    address2Update: user.address[index].address2,
-    postalCodeUpdate: user.address[index].postalCode,
-    phoneNumberUpdate: user.address[index].phoneNumber,
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      addressNameUpdate: user.address[index].addressName,
+      address1Update: user.address[index].address1,
+      address2Update: user.address[index].address2,
+      postalCodeUpdate: user.address[index].postalCode,
+      phoneNumberUpdate: user.address[index].phoneNumber,
+    }
   });
 
-  const {
-    addressNameUpdate,
-    address1Update,
-    address2Update,
-    postalCodeUpdate,
-    phoneNumberUpdate,
-  } = formDataUpdate;
-
-  const onChangeUpdate = (e) => {
-    setFormDataUpdate((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   // Update user address
-  const onSubmitUpdate = (index) => (e) => {
-    e.preventDefault();
-
+  const onSubmitUpdate = (data) => {
     const address = JSON.parse(JSON.stringify(user.address));
 
     address[index] = {
-      addressName: addressNameUpdate,
-      address1: address1Update,
-      address2: address2Update,
-      postalCode: postalCodeUpdate,
-      phoneNumber: phoneNumberUpdate,
+      addressName: data.addressNameUpdate,
+      address1: data.address1Update,
+      address2: data.address2Update,
+      postalCode: data.postalCodeUpdate,
+      phoneNumber: data.phoneNumberUpdate,
     };
 
     const userData = {
@@ -71,7 +61,7 @@ const EditAddress = ({ index }) => {
       <div className="checkout-steps-form-style">
         <ul id="accordionExample">
           <li>
-            <form className="form" onSubmit={onSubmitUpdate(index)}>
+            <form className="form" onSubmit={handleSubmit(onSubmitUpdate)}>
               <section
                 className=" collapse"
                 id={"collapse" + index.toString()}
@@ -85,11 +75,23 @@ const EditAddress = ({ index }) => {
                       type="text"
                       className="form-control"
                       id="addressNameUpdate"
-                      name="addressNameUpdate"
-                      value={addressNameUpdate}
-                      onChange={onChangeUpdate}
-                      required
+                      {...register("addressNameUpdate", {
+                        required: {
+                          value: true,
+                          message: "Address name is required.",
+                        },
+                      })}
+                      style={{
+                        border: errors.addressNameUpdate
+                          ? "1px solid #f44336"
+                          : "",
+                      }}
                     />
+                    {errors.addressNameUpdate && (
+                      <p className="error-message">
+                        ⚠ {errors.addressNameUpdate.message}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -103,11 +105,28 @@ const EditAddress = ({ index }) => {
                         type="text"
                         className="form-control"
                         id="address1Update"
-                        name="address1Update"
-                        value={address1Update}
-                        onChange={onChangeUpdate}
-                        required
+                        {...register("address1Update", {
+                          required: {
+                            value: true,
+                            message:
+                              "Region, Province, City, Barangay is required",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Must be at least 5 characters",
+                          },
+                        })}
+                        style={{
+                          border: errors.address1Update
+                            ? "1px solid #f44336"
+                            : "",
+                        }}
                       />
+                      {errors.address1Update && (
+                        <p className="error-message">
+                          ⚠ {errors.address1Update.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -120,11 +139,28 @@ const EditAddress = ({ index }) => {
                         type="text"
                         className="form-control"
                         id="address2Update"
-                        name="address2Update"
-                        value={address2Update}
-                        onChange={onChangeUpdate}
-                        required
+                        {...register("address2Update", {
+                          required: {
+                            value: true,
+                            message:
+                              "Street Name, Building, House No. is required",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Must be at least 5 characters",
+                          },
+                        })}
+                        style={{
+                          border: errors.address2Update
+                            ? "1px solid #f44336"
+                            : "",
+                        }}
                       />
+                      {errors.address2Update && (
+                        <p className="error-message">
+                          ⚠ {errors.address2Update.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="col-6">
@@ -134,11 +170,27 @@ const EditAddress = ({ index }) => {
                         type="text"
                         className="form-control"
                         id="postalCodeUpdate"
-                        name="postalCodeUpdate"
-                        value={postalCodeUpdate}
-                        onChange={onChangeUpdate}
-                        required
+                        {...register("postalCodeUpdate", {
+                          required: {
+                            value: true,
+                            message: "Postal Code is required",
+                          },
+                          minLength: {
+                            value: 4,
+                            message: "Must be at least 4 characters",
+                          },
+                        })}
+                        style={{
+                          border: errors.postalCodeUpdate
+                            ? "1px solid #f44336"
+                            : "",
+                        }}
                       />
+                      {errors.postalCodeUpdate && (
+                        <p className="error-message">
+                          ⚠ {errors.postalCodeUpdate.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -149,11 +201,27 @@ const EditAddress = ({ index }) => {
                         type="text"
                         className="form-control"
                         id="phoneNumberUpdate"
-                        name="phoneNumberUpdate"
-                        value={phoneNumberUpdate}
-                        onChange={onChangeUpdate}
-                        required
+                        {...register("phoneNumberUpdate", {
+                          required: {
+                            value: true,
+                            message: "Phone Number is required",
+                          },
+                          minLength: {
+                            value: 11,
+                            message: "Must consist of 11 digits",
+                          },
+                        })}
+                        style={{
+                          border: errors.phoneNumberUpdate
+                            ? "1px solid #f44336"
+                            : "",
+                        }}
                       />
+                      {errors.phoneNumberUpdate && (
+                        <p className="error-message">
+                          ⚠ {errors.phoneNumberUpdate.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 
