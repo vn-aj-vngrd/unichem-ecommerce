@@ -16,7 +16,6 @@ import Spinner from "../../components/Spinner";
 import CartSummary from "../../components/CartSummary";
 import Quantity from "../../components/Quantity";
 import Swal from "sweetalert2";
-// import { toast } from "react-toastify";
 
 const Cart = () => {
   let itemSubtotal = 0;
@@ -47,12 +46,6 @@ const Cart = () => {
     };
   }, [user, navigate, isCartError, cartMessage, dispatch]);
 
-  // const checkoutItems = carts.filter(
-  //   (cart) =>
-  //     cart._doc.checked > 0 && cart.product.quantities[cart._doc.productType]
-  // );
-  // console.log(checkoutItems);
-
   const cartCount = carts.reduce((count, cart) => {
     if (cart.product.quantities[cart._doc.productType] > 0) {
       return count + 1;
@@ -71,7 +64,7 @@ const Cart = () => {
     return sum;
   }, 0);
 
-  const shippingFee = 0; //Initial Value
+  const shippingFee = 100; //Initial Value
   const total = shippingFee + subtotal;
 
   const selectAll =

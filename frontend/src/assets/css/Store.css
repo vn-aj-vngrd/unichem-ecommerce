@@ -50,7 +50,7 @@ p {
 }
 
 .error-message {
-  color: #f44336;
+  color: #f44336 !important;
   margin-top: 5px;
 }
 
@@ -6772,7 +6772,7 @@ a:hover {
   .empty-result .products,
   .empty-result .reviews,
   .empty-result .product-reviews,
-  .empty-result .orders  {
+  .empty-result .orders {
     width: 941px;
   }
 }

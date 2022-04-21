@@ -50,7 +50,7 @@ const Details = ({ product }) => {
   useEffect(() => {
     if (isCartError) {
       Swal.fire({
-        title: "Item not added to cart",
+        title: "Failed to Add to Cart",
         icon: "error",
         text: "You may have exceed your purchase limit.",
       });
@@ -58,23 +58,17 @@ const Details = ({ product }) => {
 
     if (isWishlistError) {
       Swal.fire({
-        title: "Item is already added to your wishlist",
-        text: "To view your wishlist, please proceed to the wishlist page.",
-        icon: "success",
-        showCancelButton: true,
+        title: "Failed to Add to Wishlist",
+        icon: "error",
+        text: "Item is already in your wishlist.",
         confirmButtonColor: "#f44336",
-        cancelButtonColor: "#424242",
-        confirmButtonText: "<Link to='/wishlist'>Go to Wishlist</Link>",
-        cancelButtonText: "Close",
-      }).then((result) => {
-        if (result.isConfirmed) navigate("/wishlist");
       });
     }
 
     if (isWishlistAdded) {
       Swal.fire({
-        title: "Item added to your wishlist.",
-        text: "To view your wishlist, please proceed to the wishlist page.",
+        title: "Added to Wishlist",
+        text: "Item is added to your wishlist.",
         icon: "success",
         showCancelButton: true,
         confirmButtonColor: "#f44336",
@@ -88,8 +82,8 @@ const Details = ({ product }) => {
 
     if (isCartAdded) {
       Swal.fire({
-        title: "Item added to your cart.",
-        text: "To checkout, please proceed to the cart page.",
+        title: "Added to Cart",
+        text: "Item is added to your cart.",
         icon: "success",
         showCancelButton: true,
         confirmButtonColor: "#f44336",

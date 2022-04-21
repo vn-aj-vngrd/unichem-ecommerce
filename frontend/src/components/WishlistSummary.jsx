@@ -17,8 +17,8 @@ const WishlistSummary = ({ wishlists, count }) => {
     };
 
     Swal.fire({
-      title: "Are you sure to clear your wishlist?",
-      text: "Select YES to proceed, otherwise select CANCEL.",
+      title: "Clear Wishlist?",
+      text: "Select YES to clear, otherwise select CANCEL.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#f44336",
@@ -48,8 +48,8 @@ const WishlistSummary = ({ wishlists, count }) => {
     });
 
     Swal.fire({
-      title: "Items were added to your cart.",
-      text: "To checkout, please proceed to the cart page.",
+      title: "Items added to cart",
+      text: "To checkout, please proceed to cart.",
       icon: "success",
       showCancelButton: true,
       confirmButtonColor: "#f44336",
@@ -86,7 +86,7 @@ const WishlistSummary = ({ wishlists, count }) => {
                   <div className="order-total-row">
                     {count > 0 ? (
                       <>
-                        <div className="button mt-4">
+                        <div className="button">
                           <button
                             className="btn checkout-btn"
                             onClick={addAlltoCart}

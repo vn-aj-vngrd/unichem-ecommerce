@@ -31,7 +31,8 @@ const Login = () => {
       setLoginError("");
       if (
         message ===
-        "A verification link has been sent already to your email." || message === "A new verification link has been sent to your email."
+          "A verification link has been sent already to your email." ||
+        message === "A new verification link has been sent to your email."
       ) {
         Swal.fire({
           title: "Verify your Email",
