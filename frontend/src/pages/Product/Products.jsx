@@ -26,6 +26,8 @@ const Products = () => {
     minRange: 0,
     maxRange: 0,
     rating: 0,
+    readyStock: false,
+    withDiscount: false
   });
 
   let { productName } = useParams();
@@ -216,6 +218,50 @@ const Products = () => {
                       </li>
                     </label>
                   </div>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="product-sidebar single-widget condition">
+              <h5>Filter by Service</h5>
+              <hr></hr>
+              <div className="single-block give-review">
+                <ul>
+                <div className="form-check ">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      name="readyStock"
+                      onChange={() =>
+                        setFilters((prevState) => ({ ...prevState, readyStock: !filters.readyStock }))
+                      }
+                    ></input>
+                    <label className="sidebar-label form-check-label">
+                      <li>
+                        <span>Ready Stock </span>
+                      </li>
+                    </label>
+                  </div>
+
+                  <div className="form-check ">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      name="readyStock"
+                      onChange={() =>
+                        setFilters((prevState) => ({ ...prevState, withDiscount: !filters.withDiscount }))
+                      }
+                    ></input>
+                    <label className="sidebar-label form-check-label">
+                      <li>
+                        <span>With Discount </span>
+                      </li>
+                    </label>
+                  </div>
+                  
                   
                 </ul>
               </div>

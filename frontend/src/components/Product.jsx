@@ -171,6 +171,38 @@ const Product = ({
     }
   }
 
+  //Ready Stock Filters
+  if (filters.readyStock) {
+    if (isFiltered) {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
+          return !product._doc.quantities.includes(0);
+        })
+      );
+    } else {
+      allProducts = preFilteredProducts.filter((product) => {
+        return !product._doc.quantities.includes(0);
+      });
+      isFiltered = true;
+    }
+  }
+
+  //With Discount Filters
+  if (filters.withDiscount) {
+    if (isFiltered) {
+      allProducts = allProducts.concat(
+        preFilteredProducts.filter((product) => {
+          return product._doc.salePercent > 0;
+        })
+      );
+    } else {
+      allProducts = preFilteredProducts.filter((product) => {
+        return product._doc.salePercent > 0;
+      });
+      isFiltered = true;
+    }
+  }
+
   // Sort
   if (allProducts) {
     switch (sortDefault) {
