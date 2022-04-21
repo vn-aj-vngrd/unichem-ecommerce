@@ -101,10 +101,14 @@ const loginUser = asyncHandler(async (req, res) => {
       });
       const url = `${process.env.BASE_URL}/users/${user.id}/verify/${verification.token}`;
       await sendEmail(user.email, "Email Verification from Unichem Store", url);
+
+      return res.status(400).json({
+        message: "A new verification link has been sent to your email.",
+      });
     }
     return res.status(400).json({
       message:
-        "A verification link has been sent already to your email address. Please verify your email in 20 minutes.",
+        "A verification link has been sent already to your email.",
     });
   }
 
@@ -262,10 +266,14 @@ const createRecovery = asyncHandler(async (req, res) => {
     });
     const url = `${process.env.BASE_URL}users/${user.id}/recover/${recovery.token}`;
     await sendEmail(user.email, "Account Recovery from Unichem Store", url);
+
+    res.status(200).json({
+      message: "A recovery link has been sent to your email. The recovery link will expire in 20 minutes.",
+    });
   }
 
   res.status(200).json({
-    message: "The recovery link will expire in 20 minutes.",
+    message: "The recovery link has been already sent to your email.",
   });
 });
 
