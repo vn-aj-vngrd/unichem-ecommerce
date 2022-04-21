@@ -33,7 +33,7 @@ p {
 
 .form-select-custom {
   border: 1px solid #e6e2f5;
-  min-height: 52px;
+  min-height: 46px;
   padding-left: 20px;
   font-size: 0.9rem;
   color: #333;
@@ -61,7 +61,21 @@ p {
 }
 
 .form-control {
-  border: 1px solid rgb(224, 224, 224);
+  padding: 0 18px;
+  -webkit-transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+  transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  color: #505050;
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 46px;
+  border-radius: 4px !important;
+  overflow: hidden;
+  width: 100%;
+  -webkit-appearance: none !important;
 }
 
 .form-control:focus,
@@ -4882,7 +4896,7 @@ ol {
 }
 
 .contact-form-head .form-main .form .form-group input {
-  height: 52px;
+  height: 46px;
   line-height: 52px;
   width: 100%;
   border: 1px solid #e6e6e6;
@@ -5375,7 +5389,7 @@ ol {
   top: 0;
 }
 .checkout-sidebar-coupon .single-form .button .btn {
-  height: 46px;
+  height: 52px;
 }
 .checkout-sidebar-coupon p {
   font-size: 14px;
@@ -6576,6 +6590,12 @@ ol {
 .order-total {
   color: #f44336 !important;
 }
+
+.order-options .btn-alt {
+  margin: 0 7px 0 0;
+}
+
+
 
 /*======================================
 	Order Details CSS 

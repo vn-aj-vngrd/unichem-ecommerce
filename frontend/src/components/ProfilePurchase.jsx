@@ -59,22 +59,37 @@ const ProfilePurchase = () => {
 
   let statusOrders = JSON.parse(JSON.stringify(orders));
 
+
+// --
+// Awaiting Payment (Processing)
+// --
+// Awaiting Shipment (Packed)
+// --
+// Shiped (Shipped)
+// Awaiting Pickup
+// --
+// Delivered (Delivered)
+// --
+// Cancelled
+// Refunded
+
+
   switch (orderStatus) {
     case "Processing": {
       statusOrders = statusOrders.filter(
-        (order) => order.orderStatus === "Processing"
+        (order) => order.orderStatus === "Awaiting Payment"
       );
       break;
     }
     case "Packed": {
       statusOrders = statusOrders.filter(
-        (order) => order.orderStatus === "Packed"
+        (order) => order.orderStatus === "Awaiting Shipment"
       );
       break;
     }
     case "Shipped": {
       statusOrders = statusOrders.filter(
-        (order) => order.orderStatus === "Shipped"
+        (order) => order.orderStatus === "Shiped" || order.orderStatus === "Awaiting Pickup"
       );
       break;
     }
@@ -207,7 +222,13 @@ const ProfilePurchase = () => {
                     </div>
                     <br></br>
                     <div className="purchase-options">
-                      <div className="d-flex justify-content-end button">
+                      <div className="d-flex justify-content-end button order-options">
+                        {order.orderStatus === "Processing" && (
+                          <Link to="/product-details" className="btn-alt">
+                            Cancel
+                          </Link>
+                        )}
+
                         <Link to="/product-details" className="btn">
                           Buy Again
                         </Link>
