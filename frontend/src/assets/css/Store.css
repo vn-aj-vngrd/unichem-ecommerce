@@ -6726,6 +6726,52 @@ ol {
   margin: 15px 0 0 0;
 }
 
+.filters-breadcrumbs {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filters-breadcrumbs .one-filter {
+  position: relative;
+  background-color: #424242;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.filters-breadcrumbs .one-filter p {
+  color: #fff;
+}
+
+.filters-breadcrumbs .one-filter .lni-close {
+  color: #8a8a8a;
+  margin-left: 15px;
+  font-weight: 700;
+  padding: 0px !important;
+}
+
+.filters-breadcrumbs .one-filter .lni-close:hover {
+  color: #fff;
+}
+
+.filters-breadcrumbs .clear-all-filter {
+  font-weight: 600;
+  font-size: 14px;
+  color: #424242;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+}
+
+.filters-breadcrumbs .clear-all-filter:hover {
+  color: #f44336;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+}
 
 /*======================================
 	Overrider CSS 

@@ -33,7 +33,6 @@ const Products = () => {
   let { brandName } = useParams();
 
   const onSubmit = (data) => {
-    console.log(data);
     setFilters((prevState) => ({
       ...prevState,
       range: true,
@@ -42,7 +41,8 @@ const Products = () => {
     }));
   };
 
-  console.log(errors);
+  console.log(minRange)
+  console.log(maxRange)
 
   return (
     <div>
@@ -59,9 +59,14 @@ const Products = () => {
                     className="form-control"
                     type="number"
                     {...register("minRange", {
+                      required: { value: true, message: "Minimum is required" },
                       min: {
                         value: 0,
                         message: "Miniumm must be greater than 0",
+                      },
+                      max: {
+                        value: maxRange,
+                        message: "Miniumm must be less than maximum",
                       },
                     })}
                     style={{
@@ -75,13 +80,11 @@ const Products = () => {
                     className="form-control"
                     type="number"
                     {...register("maxRange", {
+                      required: { value: true, message: "Maximum is required" },
                       min: {
-                        value: 0,
-                        message: "Miniumm must be greater than 0",
+                        value: minRange,
+                        message: "Maximum must be greater than minimum",
                       },
-                      validate: (value) =>
-                        minRange <= maxRange ||
-                        "Maximum must be greater than minimum",
                     })}
                     style={{
                       border: errors.maxRange ? "1px solid #f44336" : "",
@@ -204,7 +207,7 @@ const Products = () => {
                     ></input>
                     <label className="sidebar-label form-check-label">
                       <li>
-                        <span>1+ star </span>
+                        <span>1+ stars </span>
                         <i className="lni lni-star-filled"></i>
                         <i className="lni lni-star"></i>
                         <i className="lni lni-star"></i>
@@ -213,6 +216,7 @@ const Products = () => {
                       </li>
                     </label>
                   </div>
+                  
                 </ul>
               </div>
             </div>
@@ -224,6 +228,7 @@ const Products = () => {
           categoryName={categoryName}
           brandName={brandName}
           filters={filters}
+          setFilters={setFilters}
         />
       </div>
     </div>
