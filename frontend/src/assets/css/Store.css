@@ -49,6 +49,11 @@ p {
   color: #424242;
 }
 
+.error-message {
+  color: #f44336;
+  margin-top: 10px;
+}
+
 .form-select {
   color: #424242;
   height: 45px;

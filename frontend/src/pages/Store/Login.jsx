@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -7,13 +8,6 @@ import Spinner from "../../components/Spinner";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const { email, password } = formData;
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,7 +15,6 @@ const Login = () => {
     (state) => state.auth
   );
 
-  const [passMin, setPassMin] = useState();
   const [loginError, setLoginError] = useState();
 
   useEffect(() => {
@@ -64,30 +57,16 @@ const Login = () => {
     };
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    setPassMin();
-    setLoginError();
-
-    if (password.length < 8) {
-      setPassMin("Must be at least 8 characters");
-      return;
-    }
-
-    const userData = {
-      email,
-      password,
-    };
-
-    dispatch(login(userData));
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(login(data));
   };
 
   if (isLoading) {
@@ -109,31 +88,39 @@ const Login = () => {
           </div>
           <div className="row">
             <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
-              <form className="card login-form" onSubmit={onSubmit}>
+              <form
+                className="card login-form"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div className="card-body">
                   <div className="form-group input-group">
                     <label>Email Address</label>
                     <input
-                      type="email"
+                      type="text"
                       className="form-control"
                       id="email"
-                      name="email"
-                      value={email}
-                      onChange={onChange}
-                      required
+                      {...register("email", {
+                        required: { value: true, message: "Email is required" },
+                        pattern: {
+                          value: /\S+@\S+\.\S+/,
+                          message: "Email is badly formatted",
+                        },
+                      })}
                     />
+                    {errors.email && (
+                      <p className="error-message">⚠ {errors.email.message}</p>
+                    )}
                   </div>
                   <div className="form-group input-group">
                     <label>Password</label>
                     <input
                       type="password"
                       className="form-control"
-                      id="password"
-                      name="password"
-                      value={password}
-                      onChange={onChange}
-                      required
+                      {...register("password", { required: {value: true, message: "Password is required"}, minLength: {value: 8, message: "Password must be at least 8 characters"} })}
                     />
+                    {errors.password && (
+                      <p className="error-message">⚠ {errors.password.message}</p>
+                    )}
                   </div>
                   <div className="text-end outer-link">
                     <Link to="/recover-account">Forgot password?</Link>
@@ -144,14 +131,13 @@ const Login = () => {
                     </button>
                   </div>
                   <div className="text-center mt-4">
-                    {passMin && <small className="text-red">{passMin}</small>}
                     {loginError && (
-                      <small className="text-red">{loginError}</small>
+                      <p className="error-message">{loginError}</p>
                     )}
                   </div>
                   <p className="outer-link">
                     Don't have an account yet?{" "}
-                    <Link to="/signup" className="text-red">
+                    <Link to="/signup" className="error-message">
                       Sign Up
                     </Link>
                   </p>
