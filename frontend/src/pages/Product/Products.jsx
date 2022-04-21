@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Product from "../../components/Product";
 // import Sidebar from "../../components/Sidebar";
-import Star from "../../components/Star";
-import { toast } from "react-toastify";
+// import Star from "../../components/Star";
+// import { toast } from "react-toastify";
 
 const Products = () => {
   useEffect(() => {

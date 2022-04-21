@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPromos, resetPromo } from "../features/promos/promoSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,8 +11,6 @@ import "swiper/css";
 import { Navigation } from "swiper";
 
 import { Autoplay, Pagination } from "swiper";
-
-const HeroTest = [1, 2, 3, 4, 5];
 
 const Hero = () => {
   const dispatch = useDispatch();
