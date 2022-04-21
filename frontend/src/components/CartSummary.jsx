@@ -18,8 +18,8 @@ const PricingTable = ({
 
   const clearCart = () => {
     Swal.fire({
-      title: "Are you sure to clear your cart?",
-      text: "Select YES to proceed, otherwise select CANCEL.",
+      title: "Clear Cart?",
+      text: "Select YES to clear, otherwise select CANCEL.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#f44336",

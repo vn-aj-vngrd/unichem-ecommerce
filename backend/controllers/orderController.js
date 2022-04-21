@@ -153,17 +153,16 @@ const setOrder = asyncHandler(async (req, res) => {
     paymentMethod: req.body.order.paymentMethod,
   });
 
-  console.log(req.body.orderlines);
+  // console.log(req.body.orderlines);
 
   // Create Orderline
   let newOrderline = [];
   for (let i = 0; i < req.body.orderlines.length; i++) {
     await Cart.findByIdAndRemove(req.body.orderlines[i].cartID);
 
-    const test = await Product.findByIdAndUpdate(
+    await Product.findByIdAndUpdate(
       req.body.orderlines[i].productID,
       { quantities: req.body.orderlines[i].quantities },
-
       { new: true }
     );
 

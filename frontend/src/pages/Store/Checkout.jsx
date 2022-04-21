@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { setOrder, resetOrder } from "../../features/orders/orderSlice.js";
 import { resetCart, getCarts } from "../../features/cart/cartSlice.js";
@@ -14,6 +15,13 @@ import Spinner from "../../components/Spinner";
 const Checkout = () => {
   let itemSubtotal = 0;
 
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    formState: { errors },
+  } = useForm();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,7 +32,6 @@ const Checkout = () => {
     useSelector((state) => state.coupons);
 
   const [payment, setPayment] = useState("");
-  const [couponCode, setCouponCode] = useState("");
   const [orderDiscount, setOrderDiscount] = useState({
     value: 0,
     type: "",
@@ -38,10 +45,6 @@ const Checkout = () => {
 
   const [couponlogID, setCouponlogID] = useState([]);
 
-  const onChange = (e) => {
-    setCouponCode(e.target.value);
-  };
-
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
@@ -53,7 +56,7 @@ const Checkout = () => {
 
     if (isOrderAdded) {
       Swal.fire({
-        title: "Order is being processed",
+        title: "Order is Processed",
         text: "Please wait for the confirmation of your order.",
         icon: "success",
         confirmButtonColor: "#f44336",
@@ -65,7 +68,7 @@ const Checkout = () => {
       Swal.fire({
         title: "Failed to Checkout",
         icon: "error",
-        text: "There is a problem with your order process, please try again",
+        text: "There is a problem with your order process, please try again.",
       });
       navigate("/cart");
     }
@@ -74,16 +77,16 @@ const Checkout = () => {
       switch (couponError) {
         case "notFound": {
           Swal.fire({
-            title: "Coupon is invalid",
+            title: "Coupon is Invalid",
             icon: "error",
-            text: "Please input a valid coupon",
+            text: "Please input a valid coupon.",
             confirmButtonColor: "#f44336",
           });
           break;
         }
         case "requiredAmountError": {
           Swal.fire({
-            title: "Coupon is invalid",
+            title: "Coupon is Invalid",
             icon: "error",
             text: "Sorry, the coupon requirement does not meet your order subtotal amount.",
             confirmButtonColor: "#f44336",
@@ -92,7 +95,7 @@ const Checkout = () => {
         }
         case "expired": {
           Swal.fire({
-            title: "Coupon is invalid",
+            title: "Coupon is Invalid",
             icon: "error",
             text: "Coupon has expired",
             confirmButtonColor: "#f44336",
@@ -101,7 +104,7 @@ const Checkout = () => {
         }
         case "existingCoupon": {
           Swal.fire({
-            title: "Coupon is invalid",
+            title: "Coupon is Invalid",
             icon: "error",
             text: "Sorry, you already used this coupon.",
             confirmButtonColor: "#f44336",
@@ -110,7 +113,7 @@ const Checkout = () => {
         }
         case "limitError": {
           Swal.fire({
-            title: "Coupon is invalid",
+            title: "Coupon is Invalid",
             icon: "error",
             text: "Sorry, the coupon has already exceeded the limit of use.",
             confirmButtonColor: "#f44336",
@@ -118,6 +121,12 @@ const Checkout = () => {
           break;
         }
         default: {
+          Swal.fire({
+            title: "Failed to Validate Coupon",
+            icon: "error",
+            text: "Sorry, there is an error upon coupon validation. Please try again.",
+            confirmButtonColor: "#f44336",
+          });
           break;
         }
       }
@@ -187,9 +196,10 @@ const Checkout = () => {
 
   if (localStorage.getItem("cartCount") < 1) {
     Swal.fire({
-      title: "Cannot Checkout",
+      title: "Failed to Checkout",
       icon: "error",
       text: "You don't have any items in your cart.",
+      confirmButtonColor: "#f44336",
     });
     navigate("/cart");
   }
@@ -243,23 +253,24 @@ const Checkout = () => {
     orderDiscountAmount.toFixed(2) +
     (shippingFee.toFixed(2) - shippingDiscountAmount.toFixed(2));
 
-  const [coupEm, setCoupEm] = useState();
-
-  const onApply = () => {
-    setCoupEm();
-
-    if (couponCode === "") {
-      setCoupEm("Coupon code is required");
+  const onApply = (data) => {
+    if (data.couponCode === "") {
+      Swal.fire({
+        title: "Coupon is Blank",
+        icon: "error",
+        text: "Please input a valid coupon.",
+        confirmButtonColor: "#f44336",
+      });
       return;
     }
 
     const couponData = {
-      couponCode,
+      couponCode: data.couponCode,
       subtotal,
     };
 
     dispatch(validateCoupon(couponData));
-    setCouponCode("");
+    // setCouponCode("");
   };
 
   const onSelectPayment = (e) => {
@@ -288,9 +299,9 @@ const Checkout = () => {
       return;
     }
 
-    let orderStatus = "to-ship";
-    if (payment === "bank-transfer" || payment === "in-store") {
-      orderStatus = "to-pay";
+    let orderStatus = "Awaiting Shipment";
+    if (payment === "Bank Transfer" || payment === "In-Store") {
+      orderStatus = "Awaiting Payment";
     }
 
     let orderData = {
@@ -309,8 +320,8 @@ const Checkout = () => {
     };
 
     Swal.fire({
-      title: "Are you sure to checkout?",
-      text: "Select YES to proceed, otherwise select CANCEL.",
+      title: "Confirm your Order",
+      text: "Select YES to confirm, otherwise select CANCEL.",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#f44336",
@@ -686,11 +697,11 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-1"
-                                  value="cash-on-delivery"
+                                  value="Cash on Delivery"
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-1">
-                                  <p>Cash-on-Delivery</p>
+                                  <p>Cash on Delivery</p>
                                   <div className="single-payment-option-check">
                                     <i className="lni lni-checkmark"></i>
                                   </div>
@@ -701,7 +712,7 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-2"
-                                  value="in-store"
+                                  value="In-Store"
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-2">
@@ -716,11 +727,11 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-3"
-                                  value="bank-transfer"
+                                  value="Bank Transfer"
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-3">
-                                  <p>Bank-Transfer</p>
+                                  <p>Bank Transfer</p>
                                   <div className="single-payment-option-check">
                                     <i className="lni lni-checkmark"></i>
                                   </div>
@@ -759,23 +770,38 @@ const Checkout = () => {
                 <div className="checkout-sidebar-coupon">
                   <p>Apply valid coupon here</p>
                   <div className="single-form form-default">
-                    <div className="form-input form">
-                      <input
-                        type="text"
-                        placeholder="Coupon Code"
-                        value={couponCode}
-                        onChange={onChange}
-                      />
-                    </div>
-                    <div className="button">
-                      <button className="btn" onClick={onApply}>
-                        apply
-                      </button>
-                    </div>
+                    <form onSubmit={handleSubmit(onApply)}>
+                      <div className="form-input form">
+                        <input
+                          type="text"
+                          placeholder="Coupon Code"
+                          {...register("couponCode", {
+                            // required: {
+                            //   value: true,
+                            //   message: "Coupon Code is optional",
+                            // },
+                            minLength: {
+                              value: 3,
+                              message: "Must be at least 3 characters",
+                            },
+                          })}
+                          style={{
+                            border: errors.couponCode
+                              ? "1px solid #f44336"
+                              : "",
+                          }}
+                        />
+                      </div>
+                      <div className="button">
+                        <button className="btn">apply</button>
+                      </div>
+                    </form>
                   </div>
-                  <div className="text-red text-center">
-                    {coupEm && <small className="text-red">{coupEm}</small>}
-                  </div>
+                  {errors.couponCode && (
+                    <p className="error-message">
+                      ⚠ {errors.couponCode.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="checkout-sidebar-price-table mt-3">

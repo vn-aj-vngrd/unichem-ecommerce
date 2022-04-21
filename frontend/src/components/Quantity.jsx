@@ -1,18 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateCart, resetCart } from "../features/cart/cartSlice";
+import { updateCart } from "../features/cart/cartSlice";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
 
 const Quantity = ({ cartID, max, quantity, type }) => {
   const [counter, setCounter] = useState(quantity);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    return () => {
-      // dispatch(resetCart());
-    };
-  }, [dispatch]);
 
   let decrement, increment;
 
@@ -53,7 +46,7 @@ const Quantity = ({ cartID, max, quantity, type }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: "light",
       });
       setCounter(max);
     } else if (e.target.value < 1) {
@@ -65,7 +58,7 @@ const Quantity = ({ cartID, max, quantity, type }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: "light",
       });
     } else {
       const cartParams = {
