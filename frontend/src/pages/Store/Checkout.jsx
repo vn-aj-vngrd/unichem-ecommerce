@@ -299,9 +299,9 @@ const Checkout = () => {
       return;
     }
 
-    let orderStatus = "to-ship";
-    if (payment === "bank-transfer" || payment === "in-store") {
-      orderStatus = "to-pay";
+    let orderStatus = "Awaiting Shipment";
+    if (payment === "Bank Transfer" || payment === "In-Store") {
+      orderStatus = "Awaiting Payment";
     }
 
     let orderData = {
@@ -697,11 +697,11 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-1"
-                                  value="cash-on-delivery"
+                                  value="Cash on Delivery"
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-1">
-                                  <p>Cash-on-Delivery</p>
+                                  <p>Cash on Delivery</p>
                                   <div className="single-payment-option-check">
                                     <i className="lni lni-checkmark"></i>
                                   </div>
@@ -712,7 +712,7 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-2"
-                                  value="in-store"
+                                  value="In-Store"
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-2">
@@ -727,11 +727,11 @@ const Checkout = () => {
                                   type="radio"
                                   name="payment"
                                   id="payment-3"
-                                  value="bank-transfer"
+                                  value="Bank Transfer"
                                   onClick={onSelectPayment}
                                 />
                                 <label htmlFor="payment-3">
-                                  <p>Bank-Transfer</p>
+                                  <p>Bank Transfer</p>
                                   <div className="single-payment-option-check">
                                     <i className="lni lni-checkmark"></i>
                                   </div>

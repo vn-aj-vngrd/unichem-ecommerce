@@ -45,7 +45,7 @@ const WishlistRow = ({ wishlist }) => {
             </div>
             <div className="col-lg-3 col-md-3 col-12">
               <h5 className="">
-                <Link to="/">{wishlist.product.productName}</Link>
+                <Link to={`/product-details/${wishlist.product._id}`}>{wishlist.product.productName}</Link>
               </h5>
               <p className="product-des">
                 <span>
