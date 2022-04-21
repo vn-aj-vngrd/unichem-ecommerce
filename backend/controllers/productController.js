@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const Product = require("../models/productModel");
 const Review = require("../models/reviewModel");
 const Order = require("../models/orderModel");
+const Orderline = require("../models/orderlineModel");
 
 // @desc    Get all products
 // @route   GET /api/products
@@ -20,12 +21,12 @@ const getProducts = asyncHandler(async (req, res) => {
   let retData = [];
   for (let i = 0; i < products.length; i++) {
     const reviews = await Review.find({ productID: products[i]._id });
-    const orders = await Order.find({ productID: products[i]._id });
+    const orderlines = await Orderline.find({ productID: products[i]._id });
 
     const reviewCount = await Review.find({
       productID: products[i]._id,
     }).count();
-    const ordersCount = await Order.find({
+    const orderlineCount = await Orderline.find({
       productID: products[i]._id,
     }).count();
 
@@ -39,10 +40,13 @@ const getProducts = asyncHandler(async (req, res) => {
       market.averageRatings += reviews[j].rating;
     }
 
-    if (ordersCount > 0) {
-      for (let k = 0; k < orders.length; k++) {
-        if (orders[k].orderStatus === "completed") {
-          market.sold += orders[k].quantity;
+    if (orderlineCount > 0) {
+      for (let k = 0; k < orderlines.length; k++) {
+        const order = await Order.findById(orderlines[k].orderID);
+        if (order) {
+          if (order.orderStatus === "Delivered") {
+            market.sold += orderlines[k].quantity;
+          }
         }
       }
     }
@@ -72,12 +76,12 @@ const getOneProduct = asyncHandler(async (req, res) => {
   let retData = [];
 
   const reviews = await Review.find({ productID: product._id });
-  const orders = await Order.find({ productID: product._id });
+  const orderlines = await Orderline.find({ productID: product._id });
 
   const reviewCount = await Review.find({
     productID: product._id,
   }).count();
-  const ordersCount = await Order.find({
+  const orderlineCount = await Orderline.find({
     productID: product._id,
   }).count();
 
@@ -91,10 +95,13 @@ const getOneProduct = asyncHandler(async (req, res) => {
     market.averageRatings += reviews[j].rating;
   }
 
-  if (ordersCount > 0) {
-    for (let k = 0; k < orders.length; k++) {
-      if (orders[k].orderStatus === "completed") {
-        market.sold += orders[k].quantity;
+  if (orderlineCount > 0) {
+    for (let k = 0; k < orderlines.length; k++) {
+      const order = await Order.findById(orderlines[k].orderID);
+      if (order) {
+        if (order.orderStatus === "Delivered") {
+          market.sold += orderlines[k].quantity;
+        }
       }
     }
   }
@@ -126,12 +133,12 @@ const getFeaturedProducts = asyncHandler(async (req, res) => {
   let retData = [];
   for (let i = 0; i < products.length; i++) {
     const reviews = await Review.find({ productID: products[i]._id });
-    const orders = await Order.find({ productID: products[i]._id });
+    const orderlines = await Orderline.find({ productID: products[i]._id });
 
     const reviewCount = await Review.find({
       productID: products[i]._id,
     }).count();
-    const ordersCount = await Order.find({
+    const orderlineCount = await Orderline.find({
       productID: products[i]._id,
     }).count();
 
@@ -145,10 +152,13 @@ const getFeaturedProducts = asyncHandler(async (req, res) => {
       market.averageRatings += reviews[j].rating;
     }
 
-    if (ordersCount > 0) {
-      for (let k = 0; k < orders.length; k++) {
-        if (orders[k].orderStatus === "completed") {
-          market.sold += orders[k].quantity;
+    if (orderlineCount > 0) {
+      for (let k = 0; k < orderlines.length; k++) {
+        const order = await Order.findById(orderlines[k].orderID);
+        if (order) {
+          if (order.orderStatus === "Delivered") {
+            market.sold += orderlines[k].quantity;
+          }
         }
       }
     }
