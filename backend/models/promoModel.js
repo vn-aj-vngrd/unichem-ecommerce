@@ -4,15 +4,23 @@ const promoSchema = mongoose.Schema(
   {
     promoName: {
       type: String,
-      required: true,
+      required: [true, "Promo Name is required"],
+    },
+    description: {
+      type: String,
+      required: [true, "Description is required"],
     },
     image: {
       type: String,
-      required: true,
+      required: [true, "Image is required"],
     },
-    pusblished: {
-      type: Boolean,
-      required: true,
+    startDate: {
+      type: Date,
+      required: [true, "Start Date is required"],
+    },
+    expiryDate: {
+      type: Date,
+      required: [true, "Expiry Date is required"],
     },
   },
   {

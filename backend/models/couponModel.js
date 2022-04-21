@@ -12,7 +12,7 @@ const couponSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      required: [true, "Descriptions is required"],
+      required: [true, "Description is required"],
     },
     discount: {
       type: Number,
@@ -25,6 +25,10 @@ const couponSchema = mongoose.Schema(
     requiredAmount: {
       type: Number,
       required: [true, "Required Total is required"],
+    },
+    startDate: {
+      type: Date,
+      required: [true, "Start Date is required"],
     },
     expiryDate: {
       type: Date,

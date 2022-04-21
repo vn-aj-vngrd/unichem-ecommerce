@@ -18,6 +18,7 @@ const Checkout = () => {
   const {
     register,
     handleSubmit,
+    resetField,
     // watch,
     formState: { errors },
   } = useForm();
@@ -270,7 +271,7 @@ const Checkout = () => {
     };
 
     dispatch(validateCoupon(couponData));
-    // setCouponCode("");
+    resetField("couponCode");
   };
 
   const onSelectPayment = (e) => {

@@ -35,7 +35,12 @@ const validateCoupon = asyncHandler(async (req, res) => {
   }).count();
 
   const currentDate = moment();
+  const startDate = moment(coupon.startDate);
   const expiryDate = moment(coupon.expiryDate);
+
+  if (startDate > currentDate) {
+    return res.status(200).json("notFound");
+  }
 
   if (currentDate > expiryDate) {
     return res.status(200).json("expired");
@@ -64,9 +69,10 @@ const setCoupon = asyncHandler(async (req, res) => {
     couponCode,
     couponType,
     description,
-    maxUse,
+    limit,
     percentOff,
     requiredTotal,
+    startDate,
     expiryDate,
   } = req.body;
 
@@ -76,7 +82,7 @@ const setCoupon = asyncHandler(async (req, res) => {
 
   if (existingCoupon) {
     res.status(400);
-    throw new Error("Product quantity exceeds maximum quantity");
+    throw new Error("Coupon Code already exists.");
   }
 
   // If Coupon does not exist then create.
@@ -84,9 +90,10 @@ const setCoupon = asyncHandler(async (req, res) => {
     couponCode,
     couponType,
     description,
-    maxUse,
+    limit,
     percentOff,
     requiredTotal,
+    startDate,
     expiryDate,
   });
 
@@ -106,7 +113,7 @@ const updateCoupon = asyncHandler(async (req, res) => {
     throw new Error("Coupon not found");
   }
 
-  // Check for user
+  // Check for user and admin privilege
   if (!req.user && req.user.userType !== "admin") {
     res.status(401);
     throw new Error("Access is denied.");
@@ -153,7 +160,7 @@ const deleteCoupon = asyncHandler(async (req, res) => {
 // @route   DELETE /api/coupons/deleteAll
 // @access  Private
 const deleteAllCoupon = asyncHandler(async (req, res) => {
-  const Coupon = await Coupon.find({ userID: req.params.id });
+  const Coupon = await Coupon.find();
 
   // Check for user
   if (!req.user) {
