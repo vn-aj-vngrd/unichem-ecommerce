@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css";
+import { Navigation } from "swiper";
 
 import { Autoplay, Pagination } from "swiper";
 import Star from "./Star";
@@ -171,6 +172,7 @@ const Details = ({ product }) => {
                       <Swiper
                         spaceBetween={30}
                         centeredSlides={true}
+                        navigation={true} 
                         autoplay={{
                           delay: 5500,
                           disableOnInteraction: false,
@@ -178,7 +180,7 @@ const Details = ({ product }) => {
                         pagination={{
                           clickable: true,
                         }}
-                        modules={[Autoplay, Pagination]}
+                        modules={[Autoplay, Pagination, Navigation]}
                         className="mySwiper"
                       >
                         {product._doc.images.map((image, index) => (

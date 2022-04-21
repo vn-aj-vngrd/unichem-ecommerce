@@ -6678,13 +6678,11 @@ ol {
   color: #f44336;
 }
 
-
-
 /*======================================
 	Filters CSS 
 ========================================*/
 
-.filters .form-group  {
+.filters .form-group {
   margin: 20px 0 10px 0;
 }
 
@@ -6714,7 +6712,7 @@ ol {
   width: 100%;
 }
 
-.filters .form-group input[type=number] {
+.filters .form-group input[type="number"] {
   -moz-appearance: textfield !important;
 }
 
@@ -6779,13 +6777,13 @@ ol {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
 }
 
 .no-margin {
@@ -6917,4 +6915,22 @@ a:hover {
   .empty-result .orders {
     width: 402px;
   }
+}
+
+/*======================================
+  Swiper CSS
+========================================*/
+.swiper-button-next {
+  color: #ff4436;
+  margin-right: 20px;
+}
+
+.swiper-button-prev {
+  color: #ff4436;
+  margin-left: 20px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ff4436;
+  opacity: 1;
 }

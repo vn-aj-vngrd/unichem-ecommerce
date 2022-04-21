@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css";
+import { Navigation } from "swiper";
 
 import { Autoplay, Pagination } from "swiper";
 
@@ -20,6 +21,7 @@ const Hero = () => {
               <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
+                navigation={true} 
                 autoplay={{
                   delay: 5500,
                   disableOnInteraction: false,
@@ -28,7 +30,7 @@ const Hero = () => {
                   clickable: true,
                   style: { color: "white" },
                 }}
-                modules={[Autoplay, Pagination]}
+                modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper"
               >
                 {HeroTest.map((count, index) => (

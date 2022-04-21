@@ -45,10 +45,10 @@ const About = () => {
             <div className="col-12">
               <div className="section-title">
                 <h2 className="wow fadeInUp" data-wow-delay=".4s">
-                  Our Developer Team
+                  Our Unichem Team
                 </h2>
                 <p className="wow fadeInUp" data-wow-delay=".6s">
-                  Meet the developers of Unichem E-store.
+                  Meet the team members of Unichem.
                 </p>
               </div>
             </div>

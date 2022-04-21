@@ -71,7 +71,7 @@ const Login = () => {
                 </div>
                 <div className="col-lg-8 col-md-12 col-12">
                   <div className="contact-form-head">
-                    <div className="box-shadow form-main">
+                    <div className="form-main">
                       <Map />
                     </div>
                   </div>
