@@ -6797,8 +6797,8 @@ input[type=number] {
 }
 
 .box-shadow {
-  -webkit-box-shadow: 0px 0px 20px #00000012;
-  box-shadow: 0px 0px 20px #00000012;
+  -webkit-box-shadow: 0px 0px 15px #d6d6d6;
+  box-shadow: 0px 0px 15px #d6d6d6;
 }
 
 .no-box-shadow {
