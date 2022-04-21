@@ -1,41 +1,20 @@
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { register, resetUser } from "../../features/auth/authSlice";
+import { signup, resetUser } from "../../features/auth/authSlice";
 import Swal from "sweetalert2";
 import Spinner from "../../components/Spinner";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    birthday: "",
-    sex: "",
-    email: "",
-    address1: "",
-    address2: "",
-    postalCode: "",
-    phoneNumber: "",
-    password: "",
-    confirmPassword: "",
-  });
-
   const {
-    name,
-    birthday,
-    sex,
-    email,
-    address1,
-    address2,
-    postalCode,
-    phoneNumber,
-    password,
-    confirmPassword,
-  } = formData;
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const [ageMin, setAgeMin] = useState();
-  const [passMis, setPassMis] = useState();
-  const [passMin, setPassMin] = useState();
-  const [emailEx, setEmailEx] = useState();
+  const password = watch("password");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,12 +23,7 @@ const Signup = () => {
     (state) => state.auth
   );
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const [emailEx, setEmailEx] = useState();
 
   useEffect(() => {
     if (isError) {
@@ -78,59 +52,39 @@ const Signup = () => {
     };
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    if (birthday) {
-      setAgeMin();
-      setPassMis();
-      setPassMin();
-      setEmailEx();
-
-      const today = new Date();
-      const birthDate = new Date(birthday);
-      let age_now = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age_now--;
-      }
-
-      if (age_now < 18) {
-        setAgeMin("Must be at least 18 years old");
-        return;
-      }
-    }
-
-    if (password.length < 8) {
-      setPassMin("Must be at least 8 characters");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setPassMis("Passwords do not match");
-      return;
-    }
-
-    const addressName = "Primary Address";
-
+  const onSubmit = (data) => {
+    
     const userData = {
-      name,
-      birthday,
-      sex,
-      email,
+      name: data.name,
+      birthday: data.birthday,
+      sex: data.sex,
+      email: data.email,
       address: {
-        addressName,
-        address1,
-        address2,
-        postalCode,
-        phoneNumber,
+        addressName: "Default Address",
+        address1: data.address1,
+        address2: data.address2,
+        postalCode: data.postalCode,
+        phoneNumber: data.phoneNumber,
       },
-      password,
-      confirmPassword,
+      password: data.password,
     };
-    // console.log(userData);
 
-    dispatch(register(userData));
+    console.log(userData);
+    dispatch(signup(userData));
+  };
+
+  const validateAge = (bday) => {
+    const today = new Date();
+    const birthDate = new Date(bday);
+
+    let age_now = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age_now--;
+    }
+
+    return age_now >= 18;
   };
 
   if (isLoading) {
@@ -152,7 +106,7 @@ const Signup = () => {
         <div className="row">
           <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
             <div className="register-form">
-              <form className="row" onSubmit={onSubmit}>
+              <form className="row" onSubmit={handleSubmit(onSubmit)}>
                 <div className="col-sm-12 fw-bold">
                   Personal Information
                   <hr />
@@ -162,82 +116,130 @@ const Signup = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="name"
-                    name="name"
-                    value={name}
-                    onChange={onChange}
-                    required
+                    {...register("name", {
+                      required: { value: true, message: "Name is required" },
+                      minLength: {
+                        value: 3,
+                        message: "Name must be at least 3 characters",
+                      },
+                    })}
+                    style={{ border: errors.name ? "1px solid #f44336" : "" }}
                   />
+                  {errors.name && (
+                    <p className="error-message">⚠ {errors.name.message}</p>
+                  )}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Email Address</label>
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
-                    name="email"
-                    value={email}
-                    onChange={onChange}
-                    required
+                    {...register("email", {
+                      required: { value: true, message: "Email is required" },
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Email is badly formatted",
+                      },
+                    })}
+                    style={{
+                      border:
+                        errors.email || emailEx ? "1px solid #f44336" : "",
+                    }}
                   />
-                  {emailEx && <small className="text-red">{emailEx}</small>}
+                  {errors.email && (
+                    <p className="error-message">⚠ {errors.email.message}</p>
+                  )}
+                  {emailEx && <p className="error-message">⚠ {emailEx}</p>}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Birthday</label>
                   <input
                     type="date"
                     className="form-control"
-                    id="birthday"
-                    name="birthday"
-                    value={birthday}
-                    onChange={onChange}
-                    required
+                    {...register("birthday", {
+                      required: {
+                        value: true,
+                        message: "Birthday is required",
+                      },
+                      min: {
+                        value: "1900-01-01",
+                        message: "Age is invalid",
+                      },
+                      validate: (value) =>
+                        validateAge(value) === true ||
+                        "You must be at least 18 years old",
+                    })}
+                    style={{
+                      border: errors.birthday ? "1px solid #f44336" : "",
+                    }}
                   />
-                  {ageMin && <small className="text-red">{ageMin}</small>}
+                  {errors.birthday && (
+                    <p className="error-message">⚠ {errors.birthday.message}</p>
+                  )}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Sex</label>
                   <select
                     className="form-select"
-                    id="sex"
-                    name="sex"
-                    value={sex}
-                    onChange={onChange}
-                    required
+                    {...register("sex", {
+                      required: { value: true, message: "Sex is required" },
+                      validate: (value) => "" !== value || "Sex is required",
+                    })}
+                    style={{ border: errors.sex ? "1px solid #f44336" : "" }}
                   >
-                    <option value="" disabled>
-                      Select Sex
-                    </option>
+                    <option value="">Select Sex</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
+                  {errors.sex && (
+                    <p className="error-message">⚠ {errors.sex.message}</p>
+                  )}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Password</label>
                   <input
                     type="password"
                     className="form-control"
-                    id="password"
-                    name="password"
-                    value={password}
-                    onChange={onChange}
-                    required
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password is required",
+                      },
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters.",
+                      },
+                    })}
+                    style={{
+                      border: errors.password ? "1px solid #f44336" : "",
+                    }}
                   />
-
-                  {passMin && <small className="text-red">{passMin}</small>}
+                  {errors.password && (
+                    <p className="error-message">⚠ {errors.password.message}</p>
+                  )}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Confirm Password</label>
                   <input
                     type="password"
                     className="form-control"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    onChange={onChange}
-                    required
+                    {...register("confirmPassword", {
+                      required: {
+                        value: true,
+                        message: "Confirm Password is required",
+                      },
+                      validate: (value) =>
+                        password === value || "Passwords do not match",
+                    })}
+                    style={{
+                      border: errors.confirmPassword ? "1px solid #f44336" : "",
+                    }}
                   />
-                  {passMis && <small className="text-red">{passMis}</small>}
+                  {errors.confirmPassword && (
+                    <p className="error-message">
+                      ⚠ {errors.confirmPassword.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="col-sm-12 fw-bold">
@@ -252,12 +254,23 @@ const Signup = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="address1"
-                    name="address1"
-                    value={address1}
-                    onChange={onChange}
-                    required
+                    {...register("address1", {
+                      required: {
+                        value: true,
+                        message: "Region, Province, City, Barangay is required",
+                      },
+                      minLength: {
+                        value: 3,
+                        message: "Must be at least 5 characters",
+                      },
+                    })}
+                    style={{
+                      border: errors.address1 ? "1px solid #f44336" : "",
+                    }}
                   />
+                  {errors.address1 && (
+                    <p className="error-message">⚠ {errors.address1.message}</p>
+                  )}
                 </div>
 
                 <div className="col-6 mb-3">
@@ -267,24 +280,48 @@ const Signup = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="address2"
-                    name="address2"
-                    value={address2}
-                    onChange={onChange}
-                    required
+                    {...register("address2", {
+                      required: {
+                        value: true,
+                        message: "Street Name, Building, House No. is required",
+                      },
+                      minLength: {
+                        value: 3,
+                        message: "Must be at least 5 characters",
+                      },
+                    })}
+                    style={{
+                      border: errors.address2 ? "1px solid #f44336" : "",
+                    }}
                   />
+                  {errors.address2 && (
+                    <p className="error-message">⚠ {errors.address2.message}</p>
+                  )}
                 </div>
                 <div className="col-6 mb-3">
                   <label className="form-label">Postal Code</label>
                   <input
                     type="text"
                     className="form-control"
-                    id="postalCode"
-                    name="postalCode"
-                    value={postalCode}
-                    onChange={onChange}
-                    required
+                    {...register("postalCode", {
+                      required: {
+                        value: true,
+                        message: "Postal Code is required",
+                      },
+                      minLength: {
+                        value: 4,
+                        message: "Must be at least 4 characters",
+                      },
+                    })}
+                    style={{
+                      border: errors.postalCode ? "1px solid #f44336" : "",
+                    }}
                   />
+                  {errors.postalCode && (
+                    <p className="error-message">
+                      ⚠ {errors.postalCode.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="col-6 mb-3">
@@ -292,12 +329,25 @@ const Signup = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={phoneNumber}
-                    onChange={onChange}
-                    required
+                    {...register("phoneNumber", {
+                      required: {
+                        value: true,
+                        message: "Phone Number is required",
+                      },
+                      minLength: {
+                        value: 11,
+                        message: "Must consist of 11 digits",
+                      },
+                    })}
+                    style={{
+                      border: errors.phoneNumber ? "1px solid #f44336" : "",
+                    }}
                   />
+                  {errors.phoneNumber && (
+                    <p className="error-message">
+                      ⚠ {errors.phoneNumber.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="button">

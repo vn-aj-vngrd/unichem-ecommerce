@@ -15,6 +15,13 @@ const Login = () => {
     (state) => state.auth
   );
 
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    formState: { errors },
+  } = useForm();
+
   const [loginError, setLoginError] = useState();
 
   useEffect(() => {
@@ -57,15 +64,8 @@ const Login = () => {
     };
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     dispatch(login(data));
   };
 
@@ -98,7 +98,6 @@ const Login = () => {
                     <input
                       type="text"
                       className="form-control"
-                      id="email"
                       {...register("email", {
                         required: { value: true, message: "Email is required" },
                         pattern: {
@@ -106,7 +105,9 @@ const Login = () => {
                           message: "Email is badly formatted",
                         },
                       })}
-                      style={{ border: errors.email ? "1px solid #f44336" : "" }}
+                      style={{
+                        border: errors.email ? "1px solid #f44336" : "",
+                      }}
                     />
                     {errors.email && (
                       <p className="error-message">⚠ {errors.email.message}</p>
@@ -127,7 +128,9 @@ const Login = () => {
                           message: "Password must be at least 8 characters",
                         },
                       })}
-                      style={{ border: errors.password ? "1px solid #f44336" : "" }}
+                      style={{
+                        border: errors.password ? "1px solid #f44336" : "",
+                      }}
                     />
                     {errors.password && (
                       <p className="error-message">
@@ -145,12 +148,12 @@ const Login = () => {
                   </div>
                   <div className="text-center mt-4">
                     {loginError && (
-                      <p className="error-message">{loginError}</p>
+                      <p className="error-message">⚠ {loginError}</p>
                     )}
                   </div>
                   <p className="outer-link">
                     Don't have an account yet?{" "}
-                    <Link to="/signup" className="error-message">
+                    <Link to="/signup" className="text-red">
                       Sign Up
                     </Link>
                   </p>
