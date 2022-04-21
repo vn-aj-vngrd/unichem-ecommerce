@@ -53,7 +53,6 @@ const Signup = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onSubmit = (data) => {
-    
     const userData = {
       name: data.name,
       birthday: data.birthday,

@@ -17,16 +17,8 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
 
   useMemo(() => {
     if (
-      !filters.range1 ||
-      !filters.range2 ||
-      !filters.range3 ||
-      !filters.range4 ||
-      !filters.rating0 ||
-      !filters.rating1 ||
-      !filters.rating2 ||
-      !filters.rating3 ||
-      !filters.rating4 ||
-      !filters.rating5
+      !filters.range &&
+      !filters.rating !== 0
     ) {
       isFiltered = false;
     }
@@ -145,154 +137,150 @@ const Product = ({ productName, categoryName, brandName, filters }) => {
     }
   }
 
-  if (filters.range2) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
-      });
-      isFiltered = true;
-    }
-  }
+  // if (filters.range2) {
+  //   if (isFiltered) {
+  //     allProducts = allProducts.concat(
+  //       preFilteredProducts.filter((product) => {
+  //         return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
+  //       })
+  //     );
+  //   } else {
+  //     allProducts = preFilteredProducts.filter((product) => {
+  //       return product._doc.prices[0] >= 101 && product._doc.prices[0] <= 500;
+  //     });
+  //     isFiltered = true;
+  //   }
+  // }
 
-  if (filters.range3) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return (
-            product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000
-          );
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000;
-      });
-      isFiltered = true;
-    }
-  }
+  // if (filters.range3) {
+  //   if (isFiltered) {
+  //     allProducts = allProducts.concat(
+  //       preFilteredProducts.filter((product) => {
+  //         return (
+  //           product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000
+  //         );
+  //       })
+  //     );
+  //   } else {
+  //     allProducts = preFilteredProducts.filter((product) => {
+  //       return product._doc.prices[0] >= 501 && product._doc.prices[0] <= 1000;
+  //     });
+  //     isFiltered = true;
+  //   }
+  // }
 
-  if (filters.range4) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return (
-            product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
-          );
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return (
-          product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
-        );
-      });
-      isFiltered = true;
-    }
-  }
+  // if (filters.range4) {
+  //   if (isFiltered) {
+  //     allProducts = allProducts.concat(
+  //       preFilteredProducts.filter((product) => {
+  //         return (
+  //           product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
+  //         );
+  //       })
+  //     );
+  //   } else {
+  //     allProducts = preFilteredProducts.filter((product) => {
+  //       return (
+  //         product._doc.prices[0] >= 1001 && product.market.prices[0] <= 5000
+  //       );
+  //     });
+  //     isFiltered = true;
+  //   }
+  // }
 
   // Rating Filters
-  if (filters.rating0) {
-    {
-      console.log("filtered" + isFiltered);
-    }
+  if (filters.rating !== 0) {
     if (isFiltered) {
       allProducts = allProducts.concat(
         preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 0;
+          return product.market.averageRatings >= filters.rating;
         })
       );
     } else {
       allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 0;
+        return product.market.averageRatings >= filters.rating;
       });
       isFiltered = true;
     }
   }
 
-  if (filters.rating1) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 1;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 1;
-      });
-      isFiltered = true;
-    }
-  }
+  // if (filters.rating1) {
+  //   if (isFiltered) {
+  //     allProducts = allProducts.concat(
+  //       preFilteredProducts.filter((product) => {
+  //         return product.market.averageRatings === 1;
+  //       })
+  //     );
+  //   } else {
+  //     allProducts = preFilteredProducts.filter((product) => {
+  //       return product.market.averageRatings === 1;
+  //     });
+  //     isFiltered = true;
+  //   }
+  // }
 
-  if (filters.rating2) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 2;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 2;
-      });
-      isFiltered = true;
-    }
-  }
+  // if (filters.rating2) {
+  //   if (isFiltered) {
+  //     allProducts = allProducts.concat(
+  //       preFilteredProducts.filter((product) => {
+  //         return product.market.averageRatings === 2;
+  //       })
+  //     );
+  //   } else {
+  //     allProducts = preFilteredProducts.filter((product) => {
+  //       return product.market.averageRatings === 2;
+  //     });
+  //     isFiltered = true;
+  //   }
+  // }
 
-  if (filters.rating3) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 3;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 3;
-      });
-      isFiltered = true;
-    }
-  }
+  // if (filters.rating3) {
+  //   if (isFiltered) {
+  //     allProducts = allProducts.concat(
+  //       preFilteredProducts.filter((product) => {
+  //         return product.market.averageRatings === 3;
+  //       })
+  //     );
+  //   } else {
+  //     allProducts = preFilteredProducts.filter((product) => {
+  //       return product.market.averageRatings === 3;
+  //     });
+  //     isFiltered = true;
+  //   }
+  // }
 
-  if (filters.rating4) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 4;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 4;
-      });
-      isFiltered = true;
-    }
-  }
+  // if (filters.rating4) {
+  //   if (isFiltered) {
+  //     allProducts = allProducts.concat(
+  //       preFilteredProducts.filter((product) => {
+  //         return product.market.averageRatings === 4;
+  //       })
+  //     );
+  //   } else {
+  //     allProducts = preFilteredProducts.filter((product) => {
+  //       return product.market.averageRatings === 4;
+  //     });
+  //     isFiltered = true;
+  //   }
+  // }
 
-  if (filters.rating5) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings === 5;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
-        return product.market.averageRatings === 5;
-      });
-      isFiltered = true;
-    }
-  }
+  // if (filters.rating5) {
+  //   if (isFiltered) {
+  //     allProducts = allProducts.concat(
+  //       preFilteredProducts.filter((product) => {
+  //         return product.market.averageRatings === 5;
+  //       })
+  //     );
+  //   } else {
+  //     allProducts = preFilteredProducts.filter((product) => {
+  //       return product.market.averageRatings === 5;
+  //     });
+  //     isFiltered = true;
+  //   }
+  // }
 
   // Sort
-  console.log(sortDefault);
-  console.log(allProducts);
+
   if (allProducts) {
     switch (sortDefault) {
       case "ascendingOrder":

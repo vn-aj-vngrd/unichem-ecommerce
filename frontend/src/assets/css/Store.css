@@ -6678,9 +6678,69 @@ ol {
   color: #f44336;
 }
 
+
+
+/*======================================
+	Filters CSS 
+========================================*/
+
+.filters .form-group  {
+  margin: 20px 0 10px 0;
+}
+
+.filters .form-group .form-control {
+  padding: 0 18px;
+  -webkit-transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+  transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  color: #505050;
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 46px;
+  border-radius: 4px !important;
+  overflow: hidden;
+  width: 100%;
+  -webkit-appearance: none !important;
+}
+
+.filters .form-group p {
+  margin: 0 10px;
+}
+
+.filters-apply {
+  width: 100%;
+}
+
+.filters .form-group input[type=number] {
+  -moz-appearance: textfield !important;
+}
+
+.filters .product-sidebar .button {
+  margin: 20px 0 0 0;
+}
+
+.filters .product-sidebar .error-message {
+  margin: 15px 0 0 0;
+}
+
+
 /*======================================
 	Overrider CSS 
 ========================================*/
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
 
 .no-margin {
   margin-top: 0px;
