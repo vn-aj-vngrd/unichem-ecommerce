@@ -50,7 +50,7 @@ const Details = ({ product }) => {
   useEffect(() => {
     if (isCartError) {
       Swal.fire({
-        title: "Failed to add item to your cart",
+        title: "Item not added to cart",
         icon: "error",
         text: "You may have exceed your purchase limit.",
       });
@@ -123,6 +123,20 @@ const Details = ({ product }) => {
 
   const addToCart = (e) => {
     e.preventDefault();
+
+    if (counter <= 0) {
+      Swal.fire({
+        title: "Invalid Quantity",
+        text: "Please enter a valid quantity.",
+        icon: "error",
+      });
+      return;
+    }
+
+    if (String(counter)[0] === "0") {
+      const temp = String(counter).slice(1);
+      counter = parseInt(temp);
+    }
 
     const cartData = {
       productID: product._doc._id,
