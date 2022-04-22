@@ -8,7 +8,7 @@
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend \"purgecss --css build/static/css/*.css --content build/index.html build/static/js/*.js --output build/static/css\""
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^4.1.3",
     "nodemon": "^2.0.15"
   }
 }
