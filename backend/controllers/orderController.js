@@ -242,36 +242,68 @@ const updateOrder = asyncHandler(async (req, res) => {
 // @route   PUT /api/orders
 // @access  Private
 const cancelOrder = asyncHandler(async (req, res) => {
-  const userID = req.user._id;
-  const { productID } = req.body;
-  let OrderExists = await Order.findOne({
-    productID,
-    userID,
-  });
+  const orderOne = await Order.findById(req.body.orderID);
 
-  // Check for Order
-  if (!OrderExists) {
-    res.status(400);
-    throw new Error("Order not found");
+  if (!orderOne) {
+    res.status(200).json({});
   }
 
-  // Make sure the logged in user matches the Order user
-  if (OrderExists.userID.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
-  }
+  const orderLine = await Orderline.find({ orderID: req.body.orderID });
 
   // Update Order
   const updatedOrder = await Order.findOneAndUpdate(
+    { _id: req.body.orderID },
     {
-      userID: userID,
-      productID: productID,
+      orderStatus: "Cancelled",
     },
-    req.body,
     { new: true }
   );
 
-  res.status(200).json(updatedOrder);
+  // Update product quantities
+  for (let i = 0; i < orderLine.length; i++) {
+    let product = await Product.findById(orderLine[i].productID);
+    let typeIndex = product.types.indexOf(orderLine[i].productType);
+    let updatedQuantity = product.quantities;
+    updatedQuantity[typeIndex] = updatedQuantity[typeIndex] + orderLine[i].quantity;
+    let updatedProduct = await Product.findByIdAndUpdate(
+      orderLine[i].productID,
+      {
+        quantities: updatedQuantity,
+      },
+      { new: true }
+    );
+  }
+
+  // Re-get products for state
+  const userID = req.user._id;
+  const Orders = await Order.find({
+    userID: userID,
+  }).sort({
+    createdAt: "desc",
+  });
+
+  let retData = [];
+  for (let i = 0; i < Orders.length; i++) {
+    let orderID = Orders[i]._id;
+    // console.log(orderID);
+    let orderLine = await Orderline.find({ orderID: orderID });
+    let temp = {
+      _id: Orders[i]._id,
+      userID: userID,
+      shippingFee: Orders[i].shipingFee,
+      receivedDate: Orders[i].receivedDate,
+      shippingDate: Orders[i].shippingDate,
+      orderDiscount: Orders[i].orderDiscount,
+      shippingFee: Orders[i].shippingFee,
+      totalPrice: Orders[i].totalPrice,
+      paymentMethod: Orders[i].paymentMethod,
+      orderStatus: Orders[i].orderStatus,
+      orderLine,
+    };
+    retData.push(temp);
+  }
+
+  res.status(200).json(retData);
 });
 
 // @desc    Delete Order

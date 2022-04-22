@@ -4,6 +4,7 @@ const {
   getOrders,
   setOrder,
   updateOrder,
+  cancelOrder,
   deleteOrder,
   getOneOrder,
 } = require("../controllers/orderController");
@@ -17,5 +18,6 @@ router
   .put(protect, updateOrder);
 router.route("/:id").delete(protect, deleteOrder);
 router.route("/getOneOrder/:id").get(getOneOrder);
+router.put("/cancelOrder", protect, cancelOrder);
 
 module.exports = router;

@@ -54,6 +54,19 @@ const updateOrder = async (orderParams, token) => {
   return response.data;
 };
 
+// Cancel user order
+const cancelOrder = async (orderID, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.put(API_URL + "cancelOrder", orderID, config);
+  // console.log(response.data);
+
+  return response.data;
+};
+
 // Delete user order
 const deleteOrder = async (orderId, token) => {
   const config = {
@@ -72,6 +85,7 @@ const orderService = {
   getOrders,
   getOneOrder,
   updateOrder,
+  cancelOrder,
   deleteOrder,
 };
 

@@ -86,6 +86,25 @@ export const updateOrder = createAsyncThunk(
   }
 );
 
+// Cancel user order from user
+export const cancelOrder = createAsyncThunk(
+  "orders/cancel",
+  async (orderID, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await orderService.cancelOrder(orderID, token);
+    } catch (error) {
+      const orderMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.orderMessage) ||
+        error.orderMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(orderMessage);
+    }
+  }
+);
+
 // Delete user order from user
 export const deleteOrder = createAsyncThunk(
   "orders/delete",
@@ -154,7 +173,7 @@ export const orderSlice = createSlice({
         state.isOrderLoading = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
-      });
+      })
 
     // .addCase(updateOrder.pending, (state) => {
     //   state.isOrderLoading = true;
@@ -172,6 +191,20 @@ export const orderSlice = createSlice({
     //   state.isOrderError = true;
     //   state.orderMessage = action.payload;
     // })
+
+    .addCase(cancelOrder.pending, (state) => {
+      state.isOrderLoading = true;
+    })
+    .addCase(cancelOrder.fulfilled, (state, action) => {
+      state.isOrderLoading = false;
+      state.isOrderSuccess = true;
+      state.orders = action.payload;                                                       
+    })
+    .addCase(cancelOrder.rejected, (state, action) => {
+      state.isOrderLoading = false;
+      state.isOrderError = true;
+      state.orderMessage = action.payload;
+    });
 
     // .addCase(deleteOrder.pending, (state) => {
     //   state.isOrderLoading = true;

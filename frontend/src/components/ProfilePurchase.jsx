@@ -1,13 +1,15 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getOrders, resetOrder } from "../features/orders/orderSlice";
-import { getProducts, resetProduct } from "../features/products/productSlice";
+import {
+  getOrders,
+  cancelOrder,
+  resetOrder,
+} from "../features/orders/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
 import PurchasedProduct from "./PurchasedProduct";
-
+import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import ReactPaginate from "react-paginate";
-import { setReview } from "../features/reviews/reviewSlice";
 
 const ProfilePurchase = () => {
   const navigate = useNavigate();
@@ -23,6 +25,20 @@ const ProfilePurchase = () => {
   const [orderStatus, setOrderStatus] = useState("All");
 
   const [pageNumber, setPageNumber] = useState(0);
+
+  const handleCancelOrder = (orderID) => {
+    dispatch(cancelOrder({ orderID: orderID }));
+    toast.success("Order cancelled successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
 
   useEffect(() => {
     if (isOrderError) {
@@ -59,20 +75,18 @@ const ProfilePurchase = () => {
 
   let statusOrders = JSON.parse(JSON.stringify(orders));
 
-
-// --
-// Awaiting Payment (Processing)
-// --
-// Awaiting Shipment (Packed)
-// --
-// Shiped (Shipped)
-// Awaiting Pickup
-// --
-// Delivered (Delivered)
-// --
-// Cancelled
-// Refunded
-
+  // --
+  // Awaiting Payment (Processing)
+  // --
+  // Awaiting Shipment (Packed)
+  // --
+  // Shiped (Shipped)
+  // Awaiting Pickup
+  // --
+  // Delivered (Delivered)
+  // --
+  // Cancelled
+  // Refunded
 
   switch (orderStatus) {
     case "Processing": {
@@ -89,7 +103,9 @@ const ProfilePurchase = () => {
     }
     case "Shipped": {
       statusOrders = statusOrders.filter(
-        (order) => order.orderStatus === "Shiped" || order.orderStatus === "Awaiting Pickup"
+        (order) =>
+          order.orderStatus === "Shiped" ||
+          order.orderStatus === "Awaiting Pickup"
       );
       break;
     }
@@ -104,6 +120,8 @@ const ProfilePurchase = () => {
   statusOrders = statusOrders.slice(pagesVisited, pagesVisited + ordersPerPage);
 
   console.log(statusOrders);
+
+  
 
   return (
     <div className="purchase-products-column">
@@ -222,9 +240,12 @@ const ProfilePurchase = () => {
                     <div className="purchase-options">
                       <div className="d-flex justify-content-end button order-options">
                         {order.orderStatus === "Processing" && (
-                          <Link to="/product-details" className="btn-alt">
+                          <button
+                            className="btn-alt"
+                            onClick={() => handleCancelOrder(order._id)}
+                          >
                             Cancel
-                          </Link>
+                          </button>
                         )}
 
                         <Link to="/product-details" className="btn">
