@@ -82,9 +82,21 @@ const ManageProducts = () => {
   return (
     <div className="content">
       <Header />
-      <SectionTitle type="products" />
+
+      <div class="d-flex">
+        <div class="me-auto">
+          <SectionTitle
+            title="Manage Products"
+            subtitle="Below are the list of products."
+            directory="Products"
+          />
+        </div>
+        <div>
+          <CreateProduct />
+        </div>
+      </div>
+
       <div className="row mt-3 mb-4">
-        <CreateProduct />
         <DataTable title="Products" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />

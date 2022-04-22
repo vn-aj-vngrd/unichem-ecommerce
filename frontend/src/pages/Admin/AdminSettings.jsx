@@ -11,7 +11,7 @@ const AdminSettings = () => {
   return (
     <div className="content">
       <Header />
-      <SectionTitle type="settings" />
+      <SectionTitle title="Settings" subtitle="Manage admin settings" directory="Settings"  />
       <div className="row mt-3">
         <div className="col-12 col-xl-8">
           <div className="card card-body border-0 shadow mb-4">

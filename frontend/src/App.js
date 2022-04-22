@@ -37,6 +37,7 @@ import ManageUsers from "./pages/Admin/ManageUsers";
 import ManageOrders from "./pages/Admin/ManageOrders";
 import ManageProducts from "./pages/Admin/ManageProducts";
 import ManagePromotions from "./pages/Admin/ManagePromotions";
+import ManageCoupons from "./pages/Admin/ManageCoupons";
 import Settings from "./pages/Admin/AdminSettings";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -144,6 +145,7 @@ export const App = () => {
             <Route path="manageorders" element={<ManageOrders />} />
             <Route path="manageproducts" element={<ManageProducts />} />
             <Route path="managepromotions" element={<ManagePromotions />} />
+            <Route path="managecoupons" element={<ManageCoupons />} />
             <Route path="settings" element={<Settings />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

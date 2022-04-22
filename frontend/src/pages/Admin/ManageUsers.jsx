@@ -71,15 +71,19 @@ const ManageUsers = () => {
   ];
 
   useEffect(() => {
-    document.title = "Unichem Store | User List";
+    document.title = "Unichem Store | Users";
   });
 
   return (
     <div className="content">
       <Header />
-      <SectionTitle type="userslist" />
+      <SectionTitle
+        title="Manage Users"
+        directory="Users"
+        subtitle="Below are the list of users."
+      />
       <div className="row mt-3 mb-4">
-        <DataTable title="ManageUsers List" columns={columns} data={data} />
+        <DataTable title="Users" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />
     </div>

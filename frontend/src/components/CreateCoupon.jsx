@@ -1,4 +1,4 @@
-const CreatePromotion = () => {
+const CreateCoupon = () => {
   return (
     <div>
       <div className="col-12 mt-5">
@@ -8,7 +8,7 @@ const CreatePromotion = () => {
           data-bs-toggle="modal"
           data-bs-target="#create-promotion-modal"
         >
-          Create Promotion
+          Create Coupon
         </button>
         <div
           className="modal fade"
@@ -94,4 +94,4 @@ const CreatePromotion = () => {
   );
 };
 
-export default CreatePromotion;
+export default CreateCoupon;

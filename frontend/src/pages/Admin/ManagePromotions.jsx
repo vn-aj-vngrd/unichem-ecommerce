@@ -37,9 +37,21 @@ const ManagePromotions = () => {
   return (
     <div className="content">
       <Header />
-      <SectionTitle type="promotions" />
+
+      <div className="d-flex">
+        <div className="me-auto">
+          <SectionTitle
+            title="Manage Promotions"
+            subtitle="Below are the list of promotions."
+            directory="Promotions"
+          />
+        </div>
+        <div>
+          <CreatePromotion />
+        </div>
+      </div>
+
       <div className="row mt-3 mb-4">
-        <CreatePromotion />
         <DataTable title="Promotions" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />
