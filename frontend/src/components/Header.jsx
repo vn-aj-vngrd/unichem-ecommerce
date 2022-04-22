@@ -13,9 +13,9 @@ const Header = () => {
     dispatch(logout());
     dispatch(resetUser());
     navigate("/");
-    toast.success("User Logged Out", {
-      position: "top-center",
-      autoClose: 2000,
+    toast.success("See you around, Admin!", {
+      position: "top-right",
+      autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

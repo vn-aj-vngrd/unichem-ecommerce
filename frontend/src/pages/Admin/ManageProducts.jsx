@@ -28,11 +28,7 @@ const ManageProducts = () => {
 
   const data = [
     [
-      <img
-        className="avatar  border-gray-100"
-        alt="img"
-        src="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-1/265045880_4664465363610412_3077703784126999012_n.jpg?stp=dst-jpg_p100x100&_nc_cat=105&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeG6OCYCZ3CHvDCnn3gkw4f07VEmKdmD4HrtUSYp2YPgeijaAgkLlVvIZi6OkafPGr9I9Ew1JO3LnF6iAYvJVZH-&_nc_ohc=R_Ut2OKr7rYAX_fWA-c&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fceb6-1.fna&oh=00_AT_3yf_OfUe6nfYGrjiXaBTCciNNCn3FpGZJl_pgLL2cAQ&oe=6246A9C3"
-      />,
+      <img className="avatar  border-gray-100" alt="img" src="" />,
 
       "622c063496e12c68961c34ac",
       "Loctite",
@@ -51,11 +47,7 @@ const ManageProducts = () => {
       <UpdateProduct />,
     ],
     [
-      <img
-        className="avatar  border-gray-100"
-        alt="img"
-        src="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-1/265045880_4664465363610412_3077703784126999012_n.jpg?stp=dst-jpg_p100x100&_nc_cat=105&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeG6OCYCZ3CHvDCnn3gkw4f07VEmKdmD4HrtUSYp2YPgeijaAgkLlVvIZi6OkafPGr9I9Ew1JO3LnF6iAYvJVZH-&_nc_ohc=R_Ut2OKr7rYAX_fWA-c&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fceb6-1.fna&oh=00_AT_3yf_OfUe6nfYGrjiXaBTCciNNCn3FpGZJl_pgLL2cAQ&oe=6246A9C3"
-      />,
+      <img className="avatar  border-gray-100" alt="img" src="" />,
 
       "622c063496e12c68961c34ac",
       "Loctite",
