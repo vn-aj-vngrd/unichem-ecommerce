@@ -29,6 +29,7 @@
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
+    "mailgen": "^2.0.22",
     "moment": "^2.29.2",
     "mongoose": "^6.2.3",
     "nodemailer": "^6.7.3",

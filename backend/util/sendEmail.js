@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-module.exports = async (email, subject, text) => {
+module.exports = async (email, subject, emailBody) => {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.HOST,
@@ -14,10 +14,11 @@ module.exports = async (email, subject, text) => {
     });
 
     await transporter.sendMail({
-      from: process.env.USER,
+      from: `Unichem Store <${process.env.USER}>`,
       to: email,
       subject: subject,
-      text: `${text}`,
+      // text: `${text}`,
+      html: emailBody,
     });
     console.log("email sent successfully");
   } catch (error) {
