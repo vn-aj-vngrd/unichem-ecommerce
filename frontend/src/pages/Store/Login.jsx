@@ -47,9 +47,9 @@ const Login = () => {
     }
 
     if (isSuccess || user) {
-      const temp = localStorage.getItem("user");
-      const user = JSON.parse(temp);
-      toast.success(`Welcome, ${user.name}`, {
+      // const temp = localStorage.getItem("user");
+      // const user = JSON.parse(temp);
+      toast.success(`Welcome to Unichem Store, ${user.name.split(" ")[0]}!`, {
         position: "top-right",
         autoClose: 4000,
         hideProgressBar: false,

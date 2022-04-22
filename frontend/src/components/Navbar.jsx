@@ -9,6 +9,7 @@ import {
 } from "../features/wishlist/wishlistSlice";
 import { getCarts, resetCart } from "../features/cart/cartSlice";
 import logo from "../assets/images/logo.svg";
+import { toast } from "react-toastify";
 
 const Navbar = ({ userType }) => {
   const navigate = useNavigate();
@@ -45,6 +46,15 @@ const Navbar = ({ userType }) => {
 
   const onLogout = (e) => {
     e.preventDefault();
+
+    toast.success(`See you around, ${user.name.split(" ")[0]}!`, {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
 
     localStorage.clear();
     dispatch(logout());
