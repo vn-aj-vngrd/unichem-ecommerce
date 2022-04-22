@@ -5,7 +5,7 @@ import SectionTitle from "../../components/SectionTitle";
 import DataTable from "../../components/DataTable";
 import UpdateUser from "../../components/UpdateUser";
 
-const UsersList = () => {
+const ManageUsers = () => {
   const columns = [
     "User Image",
     "UserID",
@@ -79,11 +79,11 @@ const UsersList = () => {
       <Header />
       <SectionTitle type="userslist" />
       <div className="row mt-3 mb-4">
-        <DataTable title="Users List" columns={columns} data={data} />
+        <DataTable title="ManageUsers List" columns={columns} data={data} />
       </div>
       <Footer userType="admin" />
     </div>
   );
 };
 
-export default UsersList;
+export default ManageUsers;

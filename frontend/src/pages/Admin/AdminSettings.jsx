@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import SectionTitle from "../../components/SectionTitle";
 import logo from "../../assets/images/logo.svg";
 
-const Settings = () => {
+const AdminSettings = () => {
   useEffect(() => {
     document.title = "Unichem Store | Settings";
   });
@@ -92,4 +92,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default AdminSettings;

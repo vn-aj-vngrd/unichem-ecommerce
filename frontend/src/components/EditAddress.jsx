@@ -1,21 +1,20 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { update, resetUser } from "../features/auth/authSlice";
-import Spinner from "./Spinner";
+import { update } from "../features/auth/authSlice"; //resetUser
+// import Spinner from "./Spinner";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const EditAddress = ({ index }) => {
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  //  isLoading, isError, isSuccess, message
+  const { user } = useSelector((state) => state.auth);
 
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -24,7 +23,7 @@ const EditAddress = ({ index }) => {
       address2Update: user.address[index].address2,
       postalCodeUpdate: user.address[index].postalCode,
       phoneNumberUpdate: user.address[index].phoneNumber,
-    }
+    },
   });
 
   // Update user address
@@ -44,15 +43,15 @@ const EditAddress = ({ index }) => {
     };
 
     dispatch(update(userData));
-    toast.success("Address created successfully", {
-      position: "top-center",
+    toast.success("Address updated successfully", {
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "light",
     });
   };
 

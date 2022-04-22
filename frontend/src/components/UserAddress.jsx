@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
+import { useEffect } from "react"; // useState
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { update, resetUser } from "../features/auth/authSlice";
@@ -11,7 +11,7 @@ const UserAddress = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm();
 
@@ -24,14 +24,14 @@ const UserAddress = () => {
   useEffect(() => {
     if (isError) {
       toast.error(message, {
-        position: "top-center",
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: "light",
       });
     }
 
@@ -58,15 +58,15 @@ const UserAddress = () => {
     console.log(userData);
 
     dispatch(update(userData));
-    toast.success("Address created successfully", {
-      position: "top-center",
+    toast.success("Address updated successfully", {
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "light",
     });
   };
 
@@ -76,14 +76,14 @@ const UserAddress = () => {
 
     if (index === newPrimaryAddress) {
       toast.error("Cannot delete a default address", {
-        position: "top-center",
-        autoClose: 7000,
+        position: "top-right",
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: "light",
       });
       return;
     }
@@ -101,14 +101,14 @@ const UserAddress = () => {
 
     dispatch(update(userData));
     toast.success("Address deleted successfully", {
-      position: "top-center",
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "light",
     });
   };
 
@@ -121,14 +121,14 @@ const UserAddress = () => {
     dispatch(update(userData));
 
     toast.success("Address updated successfully", {
-      position: "top-center",
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "light",
     });
   };
 
@@ -320,7 +320,9 @@ const UserAddress = () => {
                             },
                           })}
                           style={{
-                            border: errors.addressName ? "1px solid #f44336" : "",
+                            border: errors.addressName
+                              ? "1px solid #f44336"
+                              : "",
                           }}
                         />
                         {errors.addressName && (

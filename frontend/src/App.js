@@ -33,11 +33,11 @@ import ForgotPassword from "./pages/Store/ForgotPassword";
 import Recovery from "./pages/Store/Recovery";
 
 import Dashboard from "./pages/Admin/Dashboard";
-import UsersList from "./pages/Admin/UsersList";
+import ManageUsers from "./pages/Admin/ManageUsers";
 import ManageOrders from "./pages/Admin/ManageOrders";
 import ManageProducts from "./pages/Admin/ManageProducts";
 import ManagePromotions from "./pages/Admin/ManagePromotions";
-import Settings from "./pages/Admin/Settings";
+import Settings from "./pages/Admin/AdminSettings";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import StoreCSS from "!!raw-loader!./assets/css/Store.css";
@@ -140,7 +140,7 @@ export const App = () => {
           {/* Admin Routes */}
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="userslist" element={<UsersList />} />
+            <Route path="userslist" element={<ManageUsers />} />
             <Route path="manageorders" element={<ManageOrders />} />
             <Route path="manageproducts" element={<ManageProducts />} />
             <Route path="managepromotions" element={<ManagePromotions />} />

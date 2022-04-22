@@ -51,7 +51,7 @@ const Details = ({ product }) => {
   useEffect(() => {
     if (isCartError) {
       Swal.fire({
-        title: "Failed to Add to Cart",
+        title: "Can't add to Cart",
         icon: "error",
         text: "You may have exceed your purchase limit.",
       });
@@ -59,7 +59,7 @@ const Details = ({ product }) => {
 
     if (isWishlistError) {
       Swal.fire({
-        title: "Failed to Add to Wishlist",
+        title: "Can't add to Wishlist",
         icon: "error",
         text: "Item is already in your wishlist.",
         confirmButtonColor: "#f44336",
