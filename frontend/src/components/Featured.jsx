@@ -12,7 +12,7 @@ const Featured = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
   const { products, isProductLoading, isProductError, productMessage } =
     useSelector((state) => state.products);
 
@@ -26,7 +26,7 @@ const Featured = () => {
     return () => {
       dispatch(resetProduct());
     };
-  }, [user, navigate, isProductError, productMessage, dispatch]);
+  }, [navigate, isProductError, productMessage, dispatch]); //user
 
   if (isProductLoading) {
     return <Spinner />;

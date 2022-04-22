@@ -3,19 +3,19 @@ const router = express.Router();
 const {
   registerUser,
   loginUser,
-  getUser,
+  getUsers,
   updateUser,
   verifyUser,
   createRecovery,
   validateRecovery,
-  recoverAccount
+  recoverAccount,
 } = require("../controllers/userController");
 const { protect } = require("../middleware/authMiddleware");
 
 router.post("/signup", registerUser);
 router.post("/login", loginUser);
 
-router.get("/getUser", protect, getUser);
+router.get("/getUsers", protect, getUsers);
 router.put("/updateUser", protect, updateUser);
 
 router.post("/:id/verify/:token", verifyUser);

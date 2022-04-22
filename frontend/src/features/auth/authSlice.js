@@ -11,6 +11,7 @@ const initialState = {
   isLoading: false,
   isAccountRecovered: false,
   message: "",
+  users: [],
 };
 
 // Register user
@@ -97,6 +98,7 @@ export const validateRecovery = createAsyncThunk(
     }
   }
 );
+
 // Recover account
 export const recoverAccount = createAsyncThunk(
   "auth/recoverAccount",
@@ -135,20 +137,23 @@ export const update = createAsyncThunk(
 );
 
 // Get user
-export const getUser = createAsyncThunk("user/get", async (_, thunkAPI) => {
-  try {
-    const token = thunkAPI.getState().auth.user.token;
-    return await authService.getUser(token);
-  } catch (error) {
-    const cartMessage =
-      (error.response &&
-        error.response.data &&
-        error.response.data.cartMessage) ||
-      error.cartMessage ||
-      error.toString();
-    return thunkAPI.rejectWithValue(cartMessage);
+export const getUsers = createAsyncThunk(
+  "users/getAll",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await authService.getUsers(token);
+    } catch (error) {
+      const cartMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.cartMessage) ||
+        error.cartMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(cartMessage);
+    }
   }
-});
+);
 
 // Logout user
 export const logout = createAsyncThunk("auth/logout", async () => {
@@ -168,6 +173,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Signup Case
       .addCase(signup.pending, (state) => {
         state.isLoading = true;
       })
@@ -183,6 +189,7 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
+      // Login Case
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
@@ -197,7 +204,7 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
-
+      // Verify User Case
       .addCase(verifyUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -210,7 +217,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-
+      // Create Recovery Case
       .addCase(createRecovery.pending, (state) => {
         state.isLoading = true;
       })
@@ -224,7 +231,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-
+      // Validate Recovery Case
       .addCase(validateRecovery.pending, (state) => {
         state.isLoading = true;
       })
@@ -238,7 +245,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-
+      // Recover Account Case
       .addCase(recoverAccount.pending, (state) => {
         state.isLoading = true;
       })
@@ -254,7 +261,7 @@ export const authSlice = createSlice({
         state.isAccountRecovered = true;
         state.message = action.payload;
       })
-
+      // Update Case
       .addCase(update.pending, (state) => {
         state.isLoading = true;
       })
@@ -269,20 +276,21 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
-      .addCase(getUser.pending, (state) => {
+      // Get Users Case
+      .addCase(getUsers.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getUser.fulfilled, (state, action) => {
+      .addCase(getUsers.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.users = action.payload;
       })
-      .addCase(getUser.rejected, (state, action) => {
+      .addCase(getUsers.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
       })
+      // Logout Case
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
       });

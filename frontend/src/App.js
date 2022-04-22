@@ -141,7 +141,7 @@ export const App = () => {
           {/* Admin Routes */}
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="userslist" element={<ManageUsers />} />
+            <Route path="users" element={<ManageUsers />} />
             <Route path="manageorders" element={<ManageOrders />} />
             <Route path="manageproducts" element={<ManageProducts />} />
             <Route path="managepromotions" element={<ManagePromotions />} />

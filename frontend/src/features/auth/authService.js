@@ -54,7 +54,10 @@ const validateRecovery = async (recoveryData) => {
 // Recover account
 const recoverAccount = async (recoveryData) => {
   const response = await axios.post(
-    API_URL + recoveryData.param.id + "/recoverAccount/" + recoveryData.param.token,
+    API_URL +
+      recoveryData.param.id +
+      "/recoverAccount/" +
+      recoveryData.param.token,
     recoveryData
   );
   // console.log(response.data);
@@ -79,19 +82,16 @@ const update = async (userData, token) => {
   return response.data;
 };
 
-const getUser = async (token) => {
+// Get all users
+const getUsers = async (token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.get(API_URL, config);
+  const response = await axios.get(API_URL + "getUsers", config);
   // console.log(response.data);
-
-  if (response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data));
-  }
 
   return response.data;
 };
@@ -109,7 +109,7 @@ const authService = {
   validateRecovery,
   recoverAccount,
   update,
-  getUser,
+  getUsers,
   logout,
 };
 

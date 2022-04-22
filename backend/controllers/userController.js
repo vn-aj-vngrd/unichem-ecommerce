@@ -215,28 +215,10 @@ const loginUser = asyncHandler(async (req, res) => {
 // @desc    Get user data
 // @route   GET /api/users/getUser
 // @access  Private
-const getUser = asyncHandler(async (req, res) => {
-  if (!req.user) {
-    res.status(401);
-    throw new Error("User not found");
-  }
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find();
 
-  const userID = req.user._id;
-  const user = await User.findById({ userID });
-  const userAddress = await Address.findOne({ userID });
-
-  res.status(200).json({
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    sex: user.sex,
-    birthday: user.birthday,
-    userType: user.userType,
-    image: user.image,
-    address: userAddress.address,
-    primaryAddress: userAddress.primaryAddress,
-    token: generateToken(user._id),
-  });
+  res.status(200).json(users);
 });
 
 // @desc    Update user data
@@ -466,7 +448,7 @@ const generateToken = (id) => {
 module.exports = {
   registerUser,
   loginUser,
-  getUser,
+  getUsers,
   updateUser,
   verifyUser,
   createRecovery,
