@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { getReviews, resetReview } from "../features/reviews/reviewSlice";
 import { useSelector, useDispatch } from "react-redux";
-import Star from "./Star";
+// import Star from "./Star";
 import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
 import ReviewSingle from "./ReviewSingle";
 
 const ReviewsSection = ({ productID }) => {
   const dispatch = useDispatch();
-  const moment = require("moment");
+  // const moment = require("moment");
   const [pageNumber, setPageNumber] = useState(0);
 
   const { reviews, isReviewLoading, isReviewError, reviewMessage } =
@@ -65,7 +65,7 @@ const ReviewsSection = ({ productID }) => {
     pagesVisited + reviewsPerPage
   );
 
-  console.log(productReviews)
+  // console.log(productReviews)
 
   return (
     <div className="product-details">

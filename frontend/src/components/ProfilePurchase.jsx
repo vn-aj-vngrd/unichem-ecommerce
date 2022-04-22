@@ -42,7 +42,7 @@ const ProfilePurchase = () => {
 
   useEffect(() => {
     if (isOrderError) {
-      console.log(orderMessage);
+      // console.log(orderMessage);
     }
 
     if (!user) {
@@ -113,15 +113,17 @@ const ProfilePurchase = () => {
       statusOrders = statusOrders.filter(
         (order) => order.orderStatus === "Delivered"
       );
+      break;
+    }
+    default: {
+      break;
     }
   }
 
   const pageCount = Math.ceil(statusOrders.length / ordersPerPage);
   statusOrders = statusOrders.slice(pagesVisited, pagesVisited + ordersPerPage);
 
-  console.log(statusOrders);
-
-  
+  // console.log(statusOrders);
 
   return (
     <div className="purchase-products-column">

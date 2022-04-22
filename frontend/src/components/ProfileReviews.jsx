@@ -39,7 +39,7 @@ function ProfileReviews() {
 
   let allReviews = JSON.parse(JSON.stringify(reviews));
 
-  console.log(allReviews);
+  // console.log(allReviews);
 
   return (
     <div className="profile-information-column">
