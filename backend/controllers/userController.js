@@ -6,6 +6,7 @@ const Address = require("../models/addressModel");
 const Token = require("../models/tokenModel");
 const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
+const Mailgen = require("mailgen");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -59,7 +60,48 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   const url = `${process.env.BASE_URL}users/${user.id}/verify/${verification.token}`;
-  await sendEmail(user.email, "Email Verification from Unichem Store", url);
+
+  const mailGenerator = new Mailgen({
+    theme: "default",
+    product: {
+      // Appears in header & footer of e-mails
+      name: "Unichem Store",
+      link: "https://unichem.herokuapp.com/",
+      // Optional product logo
+      // logo: "https://unichem.herokuapp.com/static/media/logo.2f2828760e344d57bf311fb1261e6c40.svg",
+    },
+  });
+
+  const emailContent = {
+    body: {
+      name: user.name,
+      intro:
+        "Welcome to Unichem Store! We're very excited to have you on board.",
+      action: {
+        instructions:
+          "To get started with Unichem Store, please verify your email address by clicking on the button below.",
+        button: {
+          color: "#f44336", // Optional action button color
+          text: "Verify Account",
+          link: url,
+        },
+      },
+      outro:
+        "Need help, or have questions? Just reply to this email, we'd love to help.",
+    },
+  };
+
+  // Generate an HTML email with the provided contents
+  var emailBody = mailGenerator.generate(emailContent);
+
+  // Generate the plaintext version of the e-mail (for clients that do not support HTML)
+  var emailText = mailGenerator.generatePlaintext(emailContent);
+
+  await sendEmail(
+    user.email,
+    "Email Verification from Unichem Store",
+    emailBody
+  );
 
   if (!user && !userAddress && !verification) {
     res.status(400);
@@ -99,16 +141,57 @@ const loginUser = asyncHandler(async (req, res) => {
         token: crypto.randomBytes(32).toString("hex"),
         tokenType: "email-verification",
       });
-      const url = `${process.env.BASE_URL}/users/${user.id}/verify/${verification.token}`;
-      await sendEmail(user.email, "Email Verification from Unichem Store", url);
+
+      const url = `${process.env.BASE_URL}users/${user.id}/verify/${verification.token}`;
+
+      const mailGenerator = new Mailgen({
+        theme: "default",
+        product: {
+          // Appears in header & footer of e-mails
+          name: "Unichem Store",
+          link: "https://unichem.herokuapp.com/",
+          // Optional product logo
+          // logo: "https://unichem.herokuapp.com/static/media/logo.2f2828760e344d57bf311fb1261e6c40.svg",
+        },
+      });
+
+      const emailContent = {
+        body: {
+          name: user.name,
+          intro:
+            "Welcome to Unichem Store! We're very excited to have you on board.",
+          action: {
+            instructions:
+              "To get started with Unichem Store, please verify your email address by clicking on the button below.",
+            button: {
+              color: "#f44336", // Optional action button color
+              text: "Verify Account",
+              link: url,
+            },
+          },
+          outro:
+            "Need help, or have questions? Just reply to this email, we'd love to help.",
+        },
+      };
+
+      // Generate an HTML email with the provided contents
+      var emailBody = mailGenerator.generate(emailContent);
+
+      // Generate the plaintext version of the e-mail (for clients that do not support HTML)
+      var emailText = mailGenerator.generatePlaintext(emailContent);
+
+      await sendEmail(
+        user.email,
+        "Email Verification from Unichem Store",
+        emailBody
+      );
 
       return res.status(400).json({
         message: "A new verification link has been sent to your email.",
       });
     }
     return res.status(400).json({
-      message:
-        "A verification link has been sent already to your email.",
+      message: "A verification link has been sent already to your email.",
     });
   }
 
@@ -264,11 +347,54 @@ const createRecovery = asyncHandler(async (req, res) => {
       token: crypto.randomBytes(32).toString("hex"),
       tokenType: "user-recovery",
     });
+
     const url = `${process.env.BASE_URL}users/${user.id}/recover/${recovery.token}`;
-    await sendEmail(user.email, "Account Recovery from Unichem Store", url);
+
+    const mailGenerator = new Mailgen({
+      theme: "default",
+      product: {
+        // Appears in header & footer of e-mails
+        name: "Unichem Store",
+        link: "https://unichem.herokuapp.com/",
+        // Optional product logo
+        // logo: "https://unichem.herokuapp.com/static/media/logo.2f2828760e344d57bf311fb1261e6c40.svg",
+      },
+    });
+
+    const emailContent = {
+      body: {
+        name: user.name,
+        intro:
+          "Welcome to Unichem Store! We're very excited to have you on board.",
+        action: {
+          instructions:
+            "To reset your password, please click on the button below. It will redirect you to the reset password page.",
+          button: {
+            color: "#f44336", // Optional action button color
+            text: "Reset Password",
+            link: url,
+          },
+        },
+        outro:
+          "Need help, or have questions? Just reply to this email, we'd love to help.",
+      },
+    };
+
+    // Generate an HTML email with the provided contents
+    var emailBody = mailGenerator.generate(emailContent);
+
+    // Generate the plaintext version of the e-mail (for clients that do not support HTML)
+    var emailText = mailGenerator.generatePlaintext(emailContent);
+
+    await sendEmail(
+      user.email,
+      "Account Recovery from Unichem Store",
+      emailBody
+    );
 
     res.status(200).json({
-      message: "A recovery link has been sent to your email. The recovery link will expire in 20 minutes.",
+      message:
+        "A recovery link has been sent to your email. The recovery link will expire in 20 minutes.",
     });
   }
 
