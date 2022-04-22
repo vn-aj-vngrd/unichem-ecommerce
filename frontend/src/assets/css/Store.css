@@ -3875,6 +3875,10 @@ ol {
   .dev-card {
     min-width: 300px;
   }
+
+  .product-sidebar {
+    max-width: 325px;
+  }
 }
 
 .product-sidebar,

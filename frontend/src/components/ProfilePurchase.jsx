@@ -100,8 +100,6 @@ const ProfilePurchase = () => {
     }
   }
 
-  // statusOrders.orderStatus === "Shipped"? setReviewSwitch(true) : setReviewSwitch(false);
-
   const pageCount = Math.ceil(statusOrders.length / ordersPerPage);
   statusOrders = statusOrders.slice(pagesVisited, pagesVisited + ordersPerPage);
 

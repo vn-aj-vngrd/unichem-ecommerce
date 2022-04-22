@@ -27,7 +27,7 @@ const Products = () => {
     maxRange: 0,
     rating: 0,
     readyStock: false,
-    withDiscount: false
+    withDiscount: false,
   });
 
   let { productName } = useParams();
@@ -43,8 +43,10 @@ const Products = () => {
     }));
   };
 
-  console.log(minRange)
-  console.log(maxRange)
+  console.log(minRange);
+  console.log(maxRange);
+
+  console.log(filters.rating);
 
   return (
     <div>
@@ -123,6 +125,7 @@ const Products = () => {
                       className="form-check-input"
                       type="radio"
                       name="rating"
+                      checked={filters.rating === 5}
                       onChange={() =>
                         setFilters((prevState) => ({ ...prevState, rating: 5 }))
                       }
@@ -143,6 +146,7 @@ const Products = () => {
                       className="form-check-input"
                       type="radio"
                       name="rating"
+                      checked={filters.rating === 4}
                       onChange={() =>
                         setFilters((prevState) => ({ ...prevState, rating: 4 }))
                       }
@@ -163,6 +167,7 @@ const Products = () => {
                       className="form-check-input"
                       type="radio"
                       name="rating"
+                      checked={filters.rating === 3}
                       onChange={() =>
                         setFilters((prevState) => ({ ...prevState, rating: 3 }))
                       }
@@ -183,6 +188,7 @@ const Products = () => {
                       className="form-check-input"
                       type="radio"
                       name="rating"
+                      checked={filters.rating === 2}
                       onChange={() =>
                         setFilters((prevState) => ({ ...prevState, rating: 2 }))
                       }
@@ -203,6 +209,7 @@ const Products = () => {
                       className="form-check-input"
                       type="radio"
                       name="rating"
+                      checked={filters.rating === 1}
                       onChange={() =>
                         setFilters((prevState) => ({ ...prevState, rating: 1 }))
                       }
@@ -218,7 +225,6 @@ const Products = () => {
                       </li>
                     </label>
                   </div>
-                  
                 </ul>
               </div>
             </div>
@@ -230,13 +236,16 @@ const Products = () => {
               <hr></hr>
               <div className="single-block give-review">
                 <ul>
-                <div className="form-check ">
+                  <div className="form-check ">
                     <input
                       className="form-check-input"
                       type="checkbox"
                       name="readyStock"
                       onChange={() =>
-                        setFilters((prevState) => ({ ...prevState, readyStock: !filters.readyStock }))
+                        setFilters((prevState) => ({
+                          ...prevState,
+                          readyStock: !filters.readyStock,
+                        }))
                       }
                     ></input>
                     <label className="sidebar-label form-check-label">
@@ -252,7 +261,10 @@ const Products = () => {
                       type="checkbox"
                       name="readyStock"
                       onChange={() =>
-                        setFilters((prevState) => ({ ...prevState, withDiscount: !filters.withDiscount }))
+                        setFilters((prevState) => ({
+                          ...prevState,
+                          withDiscount: !filters.withDiscount,
+                        }))
                       }
                     ></input>
                     <label className="sidebar-label form-check-label">
@@ -261,8 +273,6 @@ const Products = () => {
                       </li>
                     </label>
                   </div>
-                  
-                  
                 </ul>
               </div>
             </div>

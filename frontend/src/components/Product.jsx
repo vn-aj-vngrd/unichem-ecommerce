@@ -21,11 +21,9 @@ const Product = ({
   const { products, isProductLoading, isProductError, productMessage } =
     useSelector((state) => state.products);
 
-  useMemo(() => {
-    if (!filters.range && !filters.rating !== 0) {
-      isFiltered = false;
-    }
-  }, [filters]);
+  if (!filters.range && !filters.rating !== 0) {
+    isFiltered = false;
+  }
 
   useEffect(() => {
     if (isProductError) {
@@ -263,6 +261,8 @@ const Product = ({
   const removeAllFilter = () => {
     removeRangeFilter();
     removeRatingFilter();
+    removeReadyStockFilter();
+    removeWithDiscountFilter();
   };
 
   const removeRangeFilter = () => {
@@ -280,6 +280,20 @@ const Product = ({
       rating: 0,
     }));
   };
+
+  const removeReadyStockFilter = () => {
+    setFilters((prevState) => ({
+      ...prevState,
+      readyStock: false,
+    }));
+  }
+
+  const removeWithDiscountFilter = () => {
+    setFilters((prevState) => ({
+      ...prevState,
+      withDiscount: false,
+    }));
+  }
 
   return (
     <div className="">
@@ -322,6 +336,30 @@ const Product = ({
                 <i
                   className="btn lni lni-close"
                   onClick={removeRatingFilter}
+                ></i>
+              </div>
+            </div>
+          )}
+
+          {filters.readyStock && (
+            <div className="one-filter">
+              <p>Ready Stock</p>
+              <div className="one-filter-dequeue">
+                <i
+                  className="btn lni lni-close"
+                  onClick={removeReadyStockFilter}
+                ></i>
+              </div>
+            </div>
+          )}
+
+          {filters.withDiscount && (
+            <div className="one-filter">
+              <p>With Discount</p>
+              <div className="one-filter-dequeue">
+                <i
+                  className="btn lni lni-close"
+                  onClick={removeWithDiscountFilter}
                 ></i>
               </div>
             </div>
