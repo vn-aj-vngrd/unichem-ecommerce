@@ -13,7 +13,7 @@ const CreateCoupon = () => {
         <div
           className="modal fade"
           id="create-promotion-modal"
-          tabindex="-1"
+          tabIndex="-1"
           role="dialog"
           aria-labelledby="modal-form"
           aria-hidden="true"

@@ -16,6 +16,10 @@ const ManageUsers = () => {
     "Birthday",
     "Password",
     "Role",
+    "Image",
+    "Verified",
+    "Created",
+    "Updated",
   ];
 
   const dispatch = useDispatch();
@@ -39,6 +43,10 @@ const ManageUsers = () => {
   }, [dispatch, isError, message]);
 
   const data = users.map(Object.values);
+  data.forEach((item) => {
+    item[8] = item[8] ? "Yes" : "No";
+  });
+
   // console.log(data);
 
   if (isLoading) {
@@ -53,8 +61,8 @@ const ManageUsers = () => {
         directory="Users"
         subtitle="Below are the list of users."
       />
-      <div className="row mt-3 mb-4">
-        <DataTable title="Users" columns={columns} data={data} />
+      <div className="mt-3 mb-4">
+        <DataTable title="Users" columns={columns} data={data} isempty={data}/>
       </div>
       <Footer userType="admin" />
     </div>

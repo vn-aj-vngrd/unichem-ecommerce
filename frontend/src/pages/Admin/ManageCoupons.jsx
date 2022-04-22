@@ -18,11 +18,7 @@ const ManageCoupons = () => {
 
   const data = [
     [
-      <img
-        className="avatar border-gray-100"
-        alt="img"
-        src=""
-      />,
+      <img className="avatar border-gray-100" alt="img" src="" />,
       "622c063496e12c68961c34ac",
       "Product Sale - 4/4/2022",
       "2022-03-26",
@@ -38,8 +34,8 @@ const ManageCoupons = () => {
     <div className="content">
       <Header />
 
-      <div class="d-flex">
-        <div class="me-auto">
+      <div className="d-flex">
+        <div className="me-auto">
           <SectionTitle
             title="Manage Coupons"
             subtitle="Below are the list of coupons."

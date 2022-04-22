@@ -441,9 +441,9 @@ const Navbar = ({ userType }) => {
               <div className="d-flex align-items-center">
                 <div className="avatar-lg me-4">
                   <img
-                    src="https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-1/271657462_4899150540105361_3610241298101667884_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeFlBi2QrWTsC6h8G6x_yldUISWEXve9bfohJYRe971t-nY_yoEBIbmpAfl8Fl9bN4QBHO6GTFtJ9-adM6MoQwQR&_nc_ohc=Hj62DarEIWwAX-y1cpD&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fceb2-1.fna&oh=00_AT9w74DRCTtbaJum76ttU-HyP3QOc_o-YwejkzUjzKLeVg&oe=6245FD24"
+                    // src="https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-1/271657462_4899150540105361_3610241298101667884_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeFlBi2QrWTsC6h8G6x_yldUISWEXve9bfohJYRe971t-nY_yoEBIbmpAfl8Fl9bN4QBHO6GTFtJ9-adM6MoQwQR&_nc_ohc=Hj62DarEIWwAX-y1cpD&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fceb2-1.fna&oh=00_AT9w74DRCTtbaJum76ttU-HyP3QOc_o-YwejkzUjzKLeVg&oe=6245FD24"
                     className="card-img-top rounded-circle border-white"
-                    alt="Administrator"
+                    alt="#"
                   />
                 </div>
                 <div className="d-block">
