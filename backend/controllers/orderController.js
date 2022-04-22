@@ -261,8 +261,6 @@ const cancelOrder = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  // CHECK IF DATE IS PAST 30
-
   // Update Order
   const updatedOrder = await Order.findOneAndUpdate(
     {
@@ -306,5 +304,6 @@ module.exports = {
   getOneOrder,
   setOrder,
   updateOrder,
+  cancelOrder,
   deleteOrder,
 };
