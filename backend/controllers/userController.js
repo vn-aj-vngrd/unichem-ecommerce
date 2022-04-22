@@ -216,7 +216,14 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/getUser
 // @access  Private
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find().sort({
+    createdAt: "desc",
+  });
+
+  if (!req.user && req.user.userType !== "admin") {
+    res.status(400);
+    throw new Error("Access Denied");
+  }
 
   res.status(200).json(users);
 });

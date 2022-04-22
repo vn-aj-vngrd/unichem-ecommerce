@@ -27,7 +27,7 @@ const ManageUsers = () => {
   useEffect(() => {
     document.title = "Unichem Store | Users";
 
-    // dispatch(getUsers());
+    dispatch(getUsers());
 
     if (isError) {
       // console.log(message);
