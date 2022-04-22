@@ -201,9 +201,47 @@ const setOrder = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update Order
-// @route   PUT /api/orders/:id
+// @route   PUT /api/orders
 // @access  Private
 const updateOrder = asyncHandler(async (req, res) => {
+  const userID = req.user._id;
+  const { productID } = req.body;
+  let OrderExists = await Order.findOne({
+    productID,
+    userID,
+  });
+
+  // Check for Order
+  if (!OrderExists) {
+    res.status(400);
+    throw new Error("Order not found");
+  }
+
+  // Make sure the logged in user matches the Order user
+  if (OrderExists.userID.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+
+  // CHECK IF DATE IS PAST 30
+
+  // Update Order
+  const updatedOrder = await Order.findOneAndUpdate(
+    {
+      userID: userID,
+      productID: productID,
+    },
+    req.body,
+    { new: true }
+  );
+
+  res.status(200).json(updatedOrder);
+});
+
+// @desc    Cancel Order
+// @route   PUT /api/orders
+// @access  Private
+const cancelOrder = asyncHandler(async (req, res) => {
   const userID = req.user._id;
   const { productID } = req.body;
   let OrderExists = await Order.findOne({

@@ -21,11 +21,9 @@ const Product = ({
   const { products, isProductLoading, isProductError, productMessage } =
     useSelector((state) => state.products);
 
-  useMemo(() => {
-    if (!filters.range && !filters.rating !== 0) {
-      isFiltered = false;
-    }
-  }, [filters]);
+  if (!filters.range && !filters.rating !== 0) {
+    isFiltered = false;
+  }
 
   useEffect(() => {
     if (isProductError) {
