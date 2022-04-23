@@ -119,7 +119,7 @@ export const recoverAccount = createAsyncThunk(
 
 // Update user
 export const update = createAsyncThunk(
-  "user/update",
+  "auth/update",
   async (userData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -137,12 +137,28 @@ export const update = createAsyncThunk(
 );
 
 // Get user
-export const getUsers = createAsyncThunk(
-  "user/getAll",
-  async (_, thunkAPI) => {
+export const getUsers = createAsyncThunk("auth/getAll", async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await authService.getUsers(token);
+  } catch (error) {
+    const cartMessage =
+      (error.response &&
+        error.response.data &&
+        error.response.data.cartMessage) ||
+      error.cartMessage ||
+      error.toString();
+    return thunkAPI.rejectWithValue(cartMessage);
+  }
+});
+
+// Delete user
+export const deleteUser = createAsyncThunk(
+  "auth/delete",
+  async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await authService.getUsers(token);
+      return await authService.deleteUser(id, token);
     } catch (error) {
       const cartMessage =
         (error.response &&
@@ -154,9 +170,6 @@ export const getUsers = createAsyncThunk(
     }
   }
 );
-
-// Delete user
-
 
 // Logout user
 export const logout = createAsyncThunk("auth/logout", async () => {
@@ -289,6 +302,22 @@ export const authSlice = createSlice({
         state.users = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      // Delete User Case
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.users = state.users.filter(
+          (user) => user._id !== action.payload.id
+        );
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -221,7 +221,7 @@ const getUsers = asyncHandler(async (req, res) => {
     throw new Error("Access Denied");
   }
 
-  const users = await User.find({userType: "customer"});
+  const users = await User.find({ userType: "customer" });
 
   res.status(200).json(users);
 });
@@ -290,7 +290,12 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("Access Denied");
   }
 
-  const user = await User.find(req.params.id);
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  }
+
   await user.remove();
   res.status(200).json({ id: req.params.id });
 });

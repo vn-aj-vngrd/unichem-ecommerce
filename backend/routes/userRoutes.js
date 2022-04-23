@@ -18,7 +18,7 @@ router.post("/login", loginUser);
 
 router.get("/getUsers", protect, getUsers);
 router.put("/updateUser", protect, updateUser);
-router.delete("/deleteUser", protect, deleteUser);
+router.delete("/deleteUser/:id", protect, deleteUser);
 
 router.post("/:id/verify/:token", verifyUser);
 

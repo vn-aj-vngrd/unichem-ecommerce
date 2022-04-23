@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SectionTitle from "../../components/SectionTitle";
 import DataTable from "../../components/DataTable";
-import { getUsers, resetUser } from "../../features/auth/authSlice";
+import { getUsers, deleteUser, resetUser } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner";
 
@@ -24,45 +24,42 @@ const ManageUsers = () => {
 
   const dispatch = useDispatch();
 
-  const { users, isLoading, isError, message } = useSelector(
-    (state) => state.auth
-  );
+  const { users, isLoading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.title = "Unichem Store | Users";
 
     dispatch(getUsers());
 
-    if (isError) {
-      // console.log(message);
-    }
-
     return () => {
       dispatch(resetUser());
     };
-  }, [dispatch, isError, message]);
+  }, [dispatch]);
 
   const data = users.map(Object.values);
   data.forEach((item) => {
     item[8] = item[8] ? "Yes" : "No";
   });
 
-  // console.log(data);
-
-  if (isLoading) {
-    <Spinner />;
-  }
-
   const options = {
-    // filterType: "checkbox",
+    filterType: "checkbox",
     elevation: 0,
     textAlign: "right",
     onRowsDelete: (rowsDeleted) => {
-      // const idsToDelete = rowsDeleted.data.map((d) => data[d.dataIndex][0]); // array of all ids to to be deleted
-      // console.log(idsToDelete);
-      rowsDeleted.data.forEach((item) => {console.log(data[item.dataIndex][0])});
+      rowsDeleted.data.forEach((item) => {
+        console.log(data[item.dataIndex][0]);
+        dispatch(deleteUser(data[item.dataIndex][0]));
+      });
     },
   };
+
+  if (isLoading) {
+    return (
+      <>
+        <Spinner />;
+      </>
+    );
+  }
 
   return (
     <div className="content">

@@ -96,6 +96,20 @@ const getUsers = async (token) => {
   return response.data;
 };
 
+// Delete user
+const deleteUser = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(API_URL + "deleteUser/" + id, config);
+  // console.log(response.data);
+
+  return response.data;
+};
+
 // Logout user
 const logout = () => {
   localStorage.removeItem("user");
@@ -110,6 +124,7 @@ const authService = {
   recoverAccount,
   update,
   getUsers,
+  deleteUser,
   logout,
 };
 
