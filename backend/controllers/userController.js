@@ -216,14 +216,12 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/getUser
 // @access  Private
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find().sort({
-    createdAt: "desc",
-  });
-
   if (!req.user && req.user.userType !== "admin") {
     res.status(400);
     throw new Error("Access Denied");
   }
+
+  const users = await User.find({userType: "customer"});
 
   res.status(200).json(users);
 });
@@ -281,6 +279,20 @@ const updateUser = asyncHandler(async (req, res) => {
     primaryAddress: updatedAddress.primaryAddress,
     token: generateToken(updatedUser._id),
   });
+});
+
+// @desc    Delete user data
+// @route   DELETE /api/users/deleteUser/:id
+// @access  Private
+const deleteUser = asyncHandler(async (req, res) => {
+  if (!req.user && req.user.userType !== "admin") {
+    res.status(400);
+    throw new Error("Access Denied");
+  }
+
+  const user = await User.find(req.params.id);
+  await user.remove();
+  res.status(200).json({ id: req.params.id });
 });
 
 // @desc    Verify user data
@@ -457,6 +469,7 @@ module.exports = {
   loginUser,
   getUsers,
   updateUser,
+  deleteUser,
   verifyUser,
   createRecovery,
   validateRecovery,

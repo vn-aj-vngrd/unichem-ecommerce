@@ -10,16 +10,16 @@ import Spinner from "../../components/Spinner";
 const ManageUsers = () => {
   const columns = [
     "ID",
-    "Name",
-    "Email",
-    "Sex",
-    "Birthday",
-    "Password",
-    "Role",
-    "Image",
-    "Verified",
-    "Created",
-    "Updated",
+    "NAME",
+    "EMAIL",
+    "SEX",
+    "BIRTHDAY",
+    "PASSWORD",
+    "ROLE",
+    "IMAGE",
+    "VERIFIED",
+    "CREATED",
+    "UPDATED",
   ];
 
   const dispatch = useDispatch();
@@ -53,6 +53,17 @@ const ManageUsers = () => {
     <Spinner />;
   }
 
+  const options = {
+    // filterType: "checkbox",
+    elevation: 0,
+    textAlign: "right",
+    onRowsDelete: (rowsDeleted) => {
+      // const idsToDelete = rowsDeleted.data.map((d) => data[d.dataIndex][0]); // array of all ids to to be deleted
+      // console.log(idsToDelete);
+      rowsDeleted.data.forEach((item) => {console.log(data[item.dataIndex][0])});
+    },
+  };
+
   return (
     <div className="content">
       <Header />
@@ -61,8 +72,14 @@ const ManageUsers = () => {
         directory="Users"
         subtitle="Below are the list of users."
       />
-      <div className="mt-3 mb-4">
-        <DataTable title="Users" columns={columns} data={data} isempty={data}/>
+      <div className="row mt-3 mb-4">
+        <DataTable
+          title="Users"
+          columns={columns}
+          data={data}
+          isempty={data}
+          options={options}
+        />
       </div>
       <Footer userType="admin" />
     </div>

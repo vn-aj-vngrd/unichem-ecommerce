@@ -5,6 +5,7 @@ const {
   loginUser,
   getUsers,
   updateUser,
+  deleteUser,
   verifyUser,
   createRecovery,
   validateRecovery,
@@ -17,6 +18,7 @@ router.post("/login", loginUser);
 
 router.get("/getUsers", protect, getUsers);
 router.put("/updateUser", protect, updateUser);
+router.delete("/deleteUser", protect, deleteUser);
 
 router.post("/:id/verify/:token", verifyUser);
 

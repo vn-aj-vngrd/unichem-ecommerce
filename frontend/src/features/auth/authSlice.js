@@ -138,7 +138,7 @@ export const update = createAsyncThunk(
 
 // Get user
 export const getUsers = createAsyncThunk(
-  "users/getAll",
+  "user/getAll",
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -154,6 +154,9 @@ export const getUsers = createAsyncThunk(
     }
   }
 );
+
+// Delete user
+
 
 // Logout user
 export const logout = createAsyncThunk("auth/logout", async () => {

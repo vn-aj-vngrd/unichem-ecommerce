@@ -1,11 +1,6 @@
 import MUIDataTable from "mui-datatables";
 
-const DataTable = ( {title, data, columns} ) => {
-  const options = {
-    filterType: "checkbox",
-    // elevation: 0.9,
-  };
-
+const DataTable = ({ title, data, columns, options }) => {
   return (
     <div>
       <MUIDataTable
@@ -13,6 +8,7 @@ const DataTable = ( {title, data, columns} ) => {
         data={data}
         columns={columns}
         options={options}
+        align="left"
       />
     </div>
   );
