@@ -118,12 +118,12 @@ export const recoverAccount = createAsyncThunk(
 );
 
 // Update user
-export const update = createAsyncThunk(
-  "auth/update",
+export const updateUser = createAsyncThunk(
+  "auth/updateUser",
   async (userData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await authService.update(userData, token);
+      return await authService.updateUser(userData, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -278,15 +278,15 @@ export const authSlice = createSlice({
         state.message = action.payload;
       })
       // Update Case
-      .addCase(update.pending, (state) => {
+      .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(update.fulfilled, (state, action) => {
+      .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload;
       })
-      .addCase(update.rejected, (state, action) => {
+      .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

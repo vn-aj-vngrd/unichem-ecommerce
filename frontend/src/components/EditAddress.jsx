@@ -1,6 +1,6 @@
 // import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { update } from "../features/auth/authSlice"; //resetUser
+import { updateUser } from "../features/auth/authSlice"; //resetUser
 // import Spinner from "./Spinner";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -42,7 +42,7 @@ const EditAddress = ({ index }) => {
       address: address,
     };
 
-    dispatch(update(userData));
+    dispatch(updateUser(userData));
     toast.success("Address updated successfully", {
       position: "top-right",
       autoClose: 5000,

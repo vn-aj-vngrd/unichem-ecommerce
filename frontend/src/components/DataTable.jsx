@@ -8,7 +8,6 @@ const DataTable = ({ title, data, columns, options }) => {
         data={data}
         columns={columns}
         options={options}
-        align="left"
       />
     </div>
   );

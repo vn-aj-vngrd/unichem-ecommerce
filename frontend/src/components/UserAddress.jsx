@@ -2,7 +2,7 @@
 import { useEffect } from "react"; // useState
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { update, resetUser } from "../features/auth/authSlice";
+import { updateUser, resetUser } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 import EditAdddress from "../components/EditAddress";
@@ -57,7 +57,7 @@ const UserAddress = () => {
 
     console.log(userData);
 
-    dispatch(update(userData));
+    dispatch(updateUser(userData));
     toast.success("Address updated successfully", {
       position: "top-right",
       autoClose: 5000,
@@ -99,7 +99,7 @@ const UserAddress = () => {
       primaryAddress: newPrimaryAddress,
     };
 
-    dispatch(update(userData));
+    dispatch(updateUser(userData));
     toast.success("Address deleted successfully", {
       position: "top-right",
       autoClose: 5000,
@@ -118,7 +118,7 @@ const UserAddress = () => {
       primaryAddress: index,
     };
 
-    dispatch(update(userData));
+    dispatch(updateUser(userData));
 
     toast.success("Address updated successfully", {
       position: "top-right",

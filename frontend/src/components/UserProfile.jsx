@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { update, resetUser } from "../features/auth/authSlice";
+import { updateUser, resetUser } from "../features/auth/authSlice";
 import Spinner from "./Spinner";
 import { toast } from "react-toastify";
 
@@ -63,7 +63,7 @@ const UserProfile = () => {
       // image,
     };
 
-    dispatch(update(userData));
+    dispatch(updateUser(userData));
     toast.success("User updated successfully", {
       position: "top-center",
       autoClose: 5000,
@@ -82,7 +82,7 @@ const UserProfile = () => {
       currentPassword: data.currentPassword,
     };
 
-    dispatch(update(userData));
+    dispatch(updateUser(userData));
     toast.success("User updated successfully", {
       position: "top-center",
       autoClose: 5000,

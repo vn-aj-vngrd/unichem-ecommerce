@@ -1,7 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
-  getOrders,
+  getUserOrders,
   cancelOrder,
   resetOrder,
 } from "../features/orders/orderSlice";
@@ -49,7 +49,7 @@ const ProfilePurchase = () => {
       navigate("/login");
     }
 
-    dispatch(getOrders());
+    dispatch(getUserOrders());
 
     return () => {
       dispatch(resetOrder());

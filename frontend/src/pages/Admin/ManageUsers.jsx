@@ -10,16 +10,16 @@ import Spinner from "../../components/Spinner";
 const ManageUsers = () => {
   const columns = [
     "ID",
-    "NAME",
-    "EMAIL",
-    "SEX",
-    "BIRTHDAY",
-    "PASSWORD",
-    "ROLE",
-    "IMAGE",
-    "VERIFIED",
-    "CREATED",
-    "UPDATED",
+    "Name",
+    "Email",
+    "Sex",
+    "Birthday",
+    "Password",
+    "Role",
+    "Image",
+    "Verified",
+    "Created",
+    "Updated",
   ];
 
   const dispatch = useDispatch();
@@ -42,9 +42,8 @@ const ManageUsers = () => {
   });
 
   const options = {
-    filterType: "checkbox",
+    // filterType: "checkbox",
     elevation: 0,
-    textAlign: "right",
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
         console.log(data[item.dataIndex][0]);

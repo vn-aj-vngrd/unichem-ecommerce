@@ -4,78 +4,97 @@ import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import UpdateOrder from "../../components/UpdateOrder";
+import {
+  getAllOrders,
+  deleteOrder,
+  resetOrder,
+  updateOrder,
+} from "../../features/orders/orderSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Spinner from "../../components/Spinner";
 
 const ManageOrders = () => {
   const columns = [
-    "OrderID",
-    "UserID",
-    "ProductID",
-    "Quantity",
-    "Order Date",
+    "Order ID",
+    "User ID",
+    "Shipping Discount",
+    "Order Discount",
+    "Shipping Fee",
+    "Total Price",
+    "Payment Method",
+    "Order Status",
     "Shipping Date",
     "Received Date",
-    "Total",
-    "Status",
-    "Created",
-    "Updated",
     "",
   ];
 
-  const data = [
-    [
-      "622c063496e12c68961c34ac",
-      "623c063496e12c68961c34ac",
-      "624c063496e12c68961c34ac",
-      "2",
-      "3-29-2022",
-      "3-30-2022",
-      "4-4-2022",
-      "450.50",
-      "Shipped",
-      "2022-03-26",
-      "2022-03-26",
-      <UpdateOrder />,
-    ],
-    [
-      "622c063496e12c68961c34ac",
-      "623c063496e12c68961c34ac",
-      "624c063496e12c68961c34ac",
-      "2",
-      "3-29-2022",
-      "3-30-2022",
-      "4-4-2022",
-      "450.50",
-      "Shipped",
-      "2022-03-26",
-      "2022-03-26",
-      <UpdateOrder />,
-    ],
-    [
-      "622c063496e12c68961c34ac",
-      "623c063496e12c68961c34ac",
-      "624c063496e12c68961c34ac",
-      "2",
-      "3-29-2022",
-      "3-30-2022",
-      "4-4-2022",
-      "450.50",
-      "Shipped",
-      "2022-03-26",
-      "2022-03-26",
-      <UpdateOrder />,
-    ],
-  ];
+  const dispatch = useDispatch();
+  const { orders, isOrderLoading } = useSelector((state) => state.orders);
 
   useEffect(() => {
     document.title = "Unichem Store | Orders";
+
+    dispatch(getAllOrders());
+
+    return () => {
+      dispatch(resetOrder());
+    };
+  }, [dispatch]);
+
+  // console.log(orders);
+  // const data = orders.map(Object.values);
+
+  let data = [];
+  orders.forEach((order) => {
+    data.push([
+      order._id,
+      order.userID,
+      order.shippingDiscount + "%",
+      order.orderDiscount + "%",
+      "PHP " + order.shippingFee,
+      "PHP " + order.totalPrice,
+      order.paymentMethod,
+      order.orderStatus,
+      order.shippingDate,
+      order.receivedDate,
+      <UpdateOrder />,
+    ]);
   });
+
+  const options = {
+    filterType: "checkbox",
+    elevation: 0,
+    onRowsDelete: (rowsDeleted) => {
+      rowsDeleted.data.forEach((item) => {
+        console.log(data[item.dataIndex][0]);
+        // dispatch(deleteUser(data[item.dataIndex][0]));
+      });
+    },
+  };
+
+  if (isOrderLoading) {
+    return (
+      <>
+        <Spinner />
+      </>
+    );
+  }
 
   return (
     <div className="content">
       <Header />
-      <SectionTitle title="Manage Orders" subtitle="Below are the orders of customers." directory="Orders" />
+      <SectionTitle
+        title="Manage Orders"
+        subtitle="Below are the orders of customers."
+        directory="Orders"
+      />
       <div className="row mt-3 mb-4">
-        <DataTable title="Orders" columns={columns} data={data} />
+        <DataTable
+          title="Orders"
+          columns={columns}
+          data={data}
+          options={options}
+        />
       </div>
       <Footer userType="admin" />
     </div>

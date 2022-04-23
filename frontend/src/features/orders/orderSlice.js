@@ -29,13 +29,32 @@ export const setOrder = createAsyncThunk(
   }
 );
 
-// Get user orders from user
-export const getOrders = createAsyncThunk(
-  "orders/getAll",
+// Get all orders
+export const getAllOrders = createAsyncThunk(
+  "orders/geAll",
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await orderService.getOrders(token);
+      return await orderService.getAllOrders(token);
+    } catch (error) {
+      const orderMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.orderMessage) ||
+        error.orderMessage ||
+        error.toString();
+      return thunkAPI.rejectWithValue(orderMessage);
+    }
+  }
+);
+
+// Get orders
+export const getUserOrders = createAsyncThunk(
+  "orders/getUserOrders",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await orderService.getUserOrders(token);
     } catch (error) {
       const orderMessage =
         (error.response &&
@@ -53,7 +72,7 @@ export const getOneOrder = createAsyncThunk(
   "orders/getOne",
   async (id, thunkAPI) => {
     try {
-      console.log(id)
+      console.log(id);
       return await orderService.getOneOrder(id);
     } catch (error) {
       const orderMessage =
@@ -67,7 +86,7 @@ export const getOneOrder = createAsyncThunk(
   }
 );
 
-// Update user order from user
+// Update order
 export const updateOrder = createAsyncThunk(
   "orders/update",
   async (orderParams, thunkAPI) => {
@@ -86,7 +105,7 @@ export const updateOrder = createAsyncThunk(
   }
 );
 
-// Cancel user order from user
+// Cancel order
 export const cancelOrder = createAsyncThunk(
   "orders/cancel",
   async (orderID, thunkAPI) => {
@@ -105,7 +124,7 @@ export const cancelOrder = createAsyncThunk(
   }
 );
 
-// Delete user order from user
+// Delete order
 export const deleteOrder = createAsyncThunk(
   "orders/delete",
   async (id, thunkAPI) => {
@@ -132,6 +151,7 @@ export const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Set Order Case
       .addCase(setOrder.pending, (state) => {
         state.isOrderLoading = true;
       })
@@ -146,81 +166,95 @@ export const orderSlice = createSlice({
         state.isOrderError = true;
         state.orderMessage = action.payload;
       })
-
-      .addCase(getOrders.pending, (state) => {
+      // Get All Orders Case
+      .addCase(getAllOrders.pending, (state) => {
         state.isOrderLoading = true;
       })
-      .addCase(getOrders.fulfilled, (state, action) => {
+      .addCase(getAllOrders.fulfilled, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
         state.orders = action.payload;
       })
-      .addCase(getOrders.rejected, (state, action) => {
+      .addCase(getAllOrders.rejected, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
       })
-
+      // Get User Orders Case
+      .addCase(getUserOrders.pending, (state) => {
+        state.isOrderLoading = true;
+      })
+      .addCase(getUserOrders.fulfilled, (state, action) => {
+        state.isOrderLoading = false;
+        state.isOrderSuccess = true;
+        state.orders = action.payload;
+      })
+      .addCase(getUserOrders.rejected, (state, action) => {
+        state.isOrderLoading = false;
+        state.isOrderError = true;
+        state.orderMessage = action.payload;
+      })
+      // Get One Order Case
       .addCase(getOneOrder.pending, (state) => {
         state.isOrderLoading = true;
       })
       .addCase(getOneOrder.fulfilled, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
-        state.orders = action.payload;                                                       
+        state.orders = action.payload;
       })
       .addCase(getOneOrder.rejected, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
       })
-
-    // .addCase(updateOrder.pending, (state) => {
-    //   state.isOrderLoading = true;
-    // })
-    // .addCase(updateOrder.fulfilled, (state, action) => {
-    //   state.isOrderLoading = false;
-    //   state.isOrderSuccess = true;
-    //   const idx = state.orders.findIndex(
-    //     (obj) => obj._doc._id === action.payload._id
-    //   );
-    //   state.orders[idx]._doc = action.payload;
-    // })
-    // .addCase(updateOrder.rejected, (state, action) => {
-    //   state.isOrderLoading = false;
-    //   state.isOrderError = true;
-    //   state.orderMessage = action.payload;
-    // })
-
-    .addCase(cancelOrder.pending, (state) => {
-      state.isOrderLoading = true;
-    })
-    .addCase(cancelOrder.fulfilled, (state, action) => {
-      state.isOrderLoading = false;
-      state.isOrderSuccess = true;
-      state.orders = action.payload;                                                       
-    })
-    .addCase(cancelOrder.rejected, (state, action) => {
-      state.isOrderLoading = false;
-      state.isOrderError = true;
-      state.orderMessage = action.payload;
-    });
-
-    // .addCase(deleteOrder.pending, (state) => {
-    //   state.isOrderLoading = true;
-    // })
-    // .addCase(deleteOrder.fulfilled, (state, action) => {
-    //   state.isOrderLoading = false;
-    //   state.isOrderSuccess = true;
-    //   state.orders = state.orders.filter(
-    //     (order) => order._doc._id !== action.payload.id
-    //   );
-    // })
-    // .addCase(deleteOrder.rejected, (state, action) => {
-    //   state.isOrderLoading = false;
-    //   state.isOrderError = true;
-    //   state.orderMessage = action.payload;
-    // });
+      // Update Order Case
+      .addCase(updateOrder.pending, (state) => {
+        state.isOrderLoading = true;
+      })
+      .addCase(updateOrder.fulfilled, (state, action) => {
+        state.isOrderLoading = false;
+        state.isOrderSuccess = true;
+        const idx = state.orders.findIndex(
+          (obj) => obj._doc._id === action.payload._id
+        );
+        state.orders[idx]._doc = action.payload;
+      })
+      .addCase(updateOrder.rejected, (state, action) => {
+        state.isOrderLoading = false;
+        state.isOrderError = true;
+        state.orderMessage = action.payload;
+      })
+      // Cancel Order Case
+      .addCase(cancelOrder.pending, (state) => {
+        state.isOrderLoading = true;
+      })
+      .addCase(cancelOrder.fulfilled, (state, action) => {
+        state.isOrderLoading = false;
+        state.isOrderSuccess = true;
+        state.orders = action.payload;
+      })
+      .addCase(cancelOrder.rejected, (state, action) => {
+        state.isOrderLoading = false;
+        state.isOrderError = true;
+        state.orderMessage = action.payload;
+      })
+      // Delete Order Case
+      .addCase(deleteOrder.pending, (state) => {
+        state.isOrderLoading = true;
+      })
+      .addCase(deleteOrder.fulfilled, (state, action) => {
+        state.isOrderLoading = false;
+        state.isOrderSuccess = true;
+        state.orders = state.orders.filter(
+          (order) => order._doc._id !== action.payload.id
+        );
+      })
+      .addCase(deleteOrder.rejected, (state, action) => {
+        state.isOrderLoading = false;
+        state.isOrderError = true;
+        state.orderMessage = action.payload;
+      });
   },
 });
 

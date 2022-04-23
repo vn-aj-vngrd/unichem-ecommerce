@@ -66,7 +66,7 @@ const recoverAccount = async (recoveryData) => {
 };
 
 // Update user
-const update = async (userData, token) => {
+const updateUser = async (userData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -122,7 +122,7 @@ const authService = {
   createRecovery,
   validateRecovery,
   recoverAccount,
-  update,
+  updateUser,
   getUsers,
   deleteUser,
   logout,

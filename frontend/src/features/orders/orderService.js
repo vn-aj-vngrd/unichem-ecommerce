@@ -2,8 +2,37 @@ import axios from "axios";
 
 const API_URL = "/api/orders/";
 
+// Set order
+const setOrder = async (orderData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  console.log(orderData);
+
+  const response = await axios.post(API_URL, orderData, config);
+  console.log(response.data);
+
+  return response.data;
+};
+
 // Get user orders
-const getOrders = async (token) => {
+const getAllOrders = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL + "getAllOrders", config);
+
+  return response.data;
+};
+
+// Get user orders
+const getUserOrders = async (token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -18,23 +47,7 @@ const getOrders = async (token) => {
 // Get order by orderID
 const getOneOrder = async (id) => {
   const response = await axios.get(API_URL + "getOneOrder/" + id);
-  console.log(response)
-  
-  return response.data;
-};
-
-// Set order
-const setOrder = async (orderData, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  console.log(orderData);
-
-  const response = await axios.post(API_URL, orderData, config);
-  console.log(response.data);
+  console.log(response);
 
   return response.data;
 };
@@ -61,6 +74,7 @@ const cancelOrder = async (orderID, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
+
   const response = await axios.put(API_URL + "cancelOrder", orderID, config);
   // console.log(response.data);
 
@@ -82,7 +96,8 @@ const deleteOrder = async (orderId, token) => {
 
 const orderService = {
   setOrder,
-  getOrders,
+  getAllOrders,
+  getUserOrders,
   getOneOrder,
   updateOrder,
   cancelOrder,

@@ -6,10 +6,124 @@ const Couponlog = require("../models/couponlogModel");
 const Cart = require("../models/cartModel");
 const Product = require("../models/productModel");
 
-// @desc    Get Orders by user
-// @route   GET /api/orders
+// @desc    Set Order
+// @route   POST /api/orders
 // @access  Private
-const getOrders = asyncHandler(async (req, res) => {
+const setOrder = asyncHandler(async (req, res) => {
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("Access Denied");
+  }
+
+  // Create Order
+  const newOrder = await Order.create({
+    userID: req.user._id,
+    shippingDate: req.body.order.shippingDate,
+    receivedDate: req.body.order.receivedDate,
+    orderDiscount: req.body.order.orderDiscount,
+    shippingDiscount: req.body.order.shippingDiscount,
+    shippingFee: req.body.order.shippingFee,
+    totalPrice: req.body.order.totalPrice,
+    orderStatus: req.body.order.orderStatus,
+    paymentMethod: req.body.order.paymentMethod,
+  });
+
+  // console.log(req.body.orderlines);
+
+  // Create Orderline
+  let newOrderline = [];
+  for (let i = 0; i < req.body.orderlines.length; i++) {
+    await Cart.findByIdAndRemove(req.body.orderlines[i].cartID);
+
+    await Product.findByIdAndUpdate(
+      req.body.orderlines[i].productID,
+      { quantities: req.body.orderlines[i].quantities },
+      { new: true }
+    );
+
+    const orderlines = await Orderline.create({
+      orderID: newOrder._id,
+      image: req.body.orderlines[i].image,
+      productID: req.body.orderlines[i].productID,
+      productName: req.body.orderlines[i].productName,
+      productType: req.body.orderlines[i].productType,
+      quantity: req.body.orderlines[i].quantity,
+      price: req.body.orderlines[i].price,
+      reviewed: req.body.orderlines[i].reviewed,
+    });
+
+    newOrderline.push(orderlines);
+  }
+
+  // Create couponlogs
+  let newCouponlogs = [];
+  for (let i = 0; i < req.body.couponlogID.length; i++) {
+    const newCouponlog = await Couponlog.create({
+      userID: req.user._id,
+      couponID: req.body.couponlogID[i],
+      orderID: newOrder._id,
+    });
+    newCouponlogs.push(newCouponlog);
+  }
+
+  let retData = {
+    order: newOrder,
+    orderlines: newOrderline,
+    couponlog: newCouponlogs,
+  };
+
+  return res.status(200).json(retData);
+});
+
+// @desc    Get All Orders
+// @route   POST /api/orders/getAllOrders
+// @access  Private
+const getAllOrders = asyncHandler(async (req, res) => {
+  if (!req.user && req.user.userType !== "admin") {
+    res.status(401);
+    throw new Error("Access Denied");
+  }
+
+  const userID = req.user._id;
+  const Orders = await Order.find({}).sort({
+    createdAt: "desc",
+  });
+
+  let retData = [];
+  for (let i = 0; i < Orders.length; i++) {
+    let orderID = Orders[i]._id;
+    // console.log(orderID);
+    let orderLine = await Orderline.find({ orderID: orderID });
+    let temp = {
+      _id: Orders[i]._id,
+      userID: userID,
+      shippingDiscount: Orders[i].shippingDiscount,
+      orderDiscount: Orders[i].orderDiscount,
+      shippingFee: Orders[i].shippingFee,
+      totalPrice: Orders[i].totalPrice,
+      paymentMethod: Orders[i].paymentMethod,
+      orderStatus: Orders[i].orderStatus,
+      shippingDate: Orders[i].shippingDate,
+      receivedDate: Orders[i].receivedDate,
+      orderLine,
+    };
+    retData.push(temp);
+  }
+
+  res.status(200).json(retData);
+});
+
+// @desc    Get User Orders
+// @route   GET /api/orders/
+// @access  Private
+const getUserOrders = asyncHandler(async (req, res) => {
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("Access Denied");
+  }
+
   const userID = req.user._id;
   const Orders = await Order.find({
     userID: userID,
@@ -25,14 +139,14 @@ const getOrders = asyncHandler(async (req, res) => {
     let temp = {
       _id: Orders[i]._id,
       userID: userID,
-      shippingFee: Orders[i].shipingFee,
-      receivedDate: Orders[i].receivedDate,
-      shippingDate: Orders[i].shippingDate,
       orderDiscount: Orders[i].orderDiscount,
+      shippingDiscount: Orders[i].shippingDiscount,
       shippingFee: Orders[i].shippingFee,
       totalPrice: Orders[i].totalPrice,
       paymentMethod: Orders[i].paymentMethod,
       orderStatus: Orders[i].orderStatus,
+      shippingDate: Orders[i].shippingDate,
+      receivedDate: Orders[i].receivedDate,
       orderLine,
     };
     retData.push(temp);
@@ -41,10 +155,16 @@ const getOrders = asyncHandler(async (req, res) => {
   res.status(200).json(retData);
 });
 
-// @desc    Get Orders by Order ID
-// @route   GET /api/orders
+// @desc    Get One Order
+// @route   GET /api/orders/getOneOrder/:id
 // @access  Private
 const getOneOrder = asyncHandler(async (req, res) => {
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("Access Denied");
+  }
+
   const orderOne = await Order.findById(req.params.id);
 
   if (!orderOne) {
@@ -130,80 +250,16 @@ const getOneOrder = asyncHandler(async (req, res) => {
   res.status(200).json(retData);
 });
 
-// @desc    Set Order
-// @route   POST /api/orders
+// @desc    Update Order
+// @route   PUT /api/orders/updateOrder/:id
 // @access  Private
-const setOrder = asyncHandler(async (req, res) => {
+const updateOrder = asyncHandler(async (req, res) => {
   // Check for user
   if (!req.user) {
     res.status(401);
-    throw new Error("User not found");
+    throw new Error("Access Denied");
   }
 
-  // Create Order
-  const newOrder = await Order.create({
-    userID: req.user._id,
-    shippingDate: req.body.order.shippingDate,
-    receivedDate: req.body.order.receivedDate,
-    orderDiscount: req.body.order.orderDiscount,
-    shippingDiscount: req.body.order.shippingDiscount,
-    shippingFee: req.body.order.shippingFee,
-    totalPrice: req.body.order.totalPrice,
-    orderStatus: req.body.order.orderStatus,
-    paymentMethod: req.body.order.paymentMethod,
-  });
-
-  // console.log(req.body.orderlines);
-
-  // Create Orderline
-  let newOrderline = [];
-  for (let i = 0; i < req.body.orderlines.length; i++) {
-    await Cart.findByIdAndRemove(req.body.orderlines[i].cartID);
-
-    await Product.findByIdAndUpdate(
-      req.body.orderlines[i].productID,
-      { quantities: req.body.orderlines[i].quantities },
-      { new: true }
-    );
-
-    const orderlines = await Orderline.create({
-      orderID: newOrder._id,
-      image: req.body.orderlines[i].image,
-      productID: req.body.orderlines[i].productID,
-      productName: req.body.orderlines[i].productName,
-      productType: req.body.orderlines[i].productType,
-      quantity: req.body.orderlines[i].quantity,
-      price: req.body.orderlines[i].price,
-      reviewed: req.body.orderlines[i].reviewed,
-    });
-
-    newOrderline.push(orderlines);
-  }
-
-  // Create couponlogs
-  let newCouponlogs = [];
-  for (let i = 0; i < req.body.couponlogID.length; i++) {
-    const newCouponlog = await Couponlog.create({
-      userID: req.user._id,
-      couponID: req.body.couponlogID[i],
-      orderID: newOrder._id,
-    });
-    newCouponlogs.push(newCouponlog);
-  }
-
-  let retData = {
-    order: newOrder,
-    orderlines: newOrderline,
-    couponlog: newCouponlogs,
-  };
-
-  return res.status(200).json(retData);
-});
-
-// @desc    Update Order
-// @route   PUT /api/orders
-// @access  Private
-const updateOrder = asyncHandler(async (req, res) => {
   const userID = req.user._id;
   const { productID } = req.body;
   let OrderExists = await Order.findOne({
@@ -239,9 +295,15 @@ const updateOrder = asyncHandler(async (req, res) => {
 });
 
 // @desc    Cancel Order
-// @route   PUT /api/orders
+// @route   PUT /api/orders/updateOrder/:id
 // @access  Private
 const cancelOrder = asyncHandler(async (req, res) => {
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("Access Denied");
+  }
+
   const orderOne = await Order.findById(req.body.orderID);
 
   if (!orderOne) {
@@ -264,7 +326,8 @@ const cancelOrder = asyncHandler(async (req, res) => {
     let product = await Product.findById(orderLine[i].productID);
     let typeIndex = product.types.indexOf(orderLine[i].productType);
     let updatedQuantity = product.quantities;
-    updatedQuantity[typeIndex] = updatedQuantity[typeIndex] + orderLine[i].quantity;
+    updatedQuantity[typeIndex] =
+      updatedQuantity[typeIndex] + orderLine[i].quantity;
     let updatedProduct = await Product.findByIdAndUpdate(
       orderLine[i].productID,
       {
@@ -307,9 +370,15 @@ const cancelOrder = asyncHandler(async (req, res) => {
 });
 
 // @desc    Delete Order
-// @route   DELETE /api/orders/:id
+// @route   DELETE /api/orders/deleteOrder/:id
 // @access  Private
 const deleteOrder = asyncHandler(async (req, res) => {
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("Access Denied");
+  }
+
   const order = await Order.findById(req.params.id);
 
   // Check for Order
@@ -332,9 +401,10 @@ const deleteOrder = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getOrders,
-  getOneOrder,
   setOrder,
+  getAllOrders,
+  getUserOrders,
+  getOneOrder,
   updateOrder,
   cancelOrder,
   deleteOrder,
