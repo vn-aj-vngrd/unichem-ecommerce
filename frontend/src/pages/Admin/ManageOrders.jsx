@@ -27,6 +27,7 @@ const ManageOrders = () => {
     "Shipping Date",
     "Received Date",
     "",
+    "",
   ];
 
   const dispatch = useDispatch();
@@ -44,7 +45,6 @@ const ManageOrders = () => {
 
   let data = [];
   orders.forEach((order) => {
-    const shippingDate = moment(order.shippingDate);
     data.push([
       order._id,
       order.userID,
@@ -54,9 +54,9 @@ const ManageOrders = () => {
       "PHP " + order.totalPrice,
       order.paymentMethod,
       order.orderStatus,
-      order.createdAt,
-      order.shippingDate,
-      order.receivedDate,
+      moment(order.createdAt).format("YYYY-MM-D"),
+      moment(order.shippingDate).format("YYYY-MM-D"),
+      moment(order.receivedDate).format("YYYY-MM-D"),
       <UpdateOrder order={order} />,
     ]);
   });

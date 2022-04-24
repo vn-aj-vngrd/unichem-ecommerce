@@ -216,9 +216,9 @@ export const orderSlice = createSlice({
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
         const idx = state.orders.findIndex(
-          (obj) => obj._doc._id === action.payload._id
+          (obj) => obj._id === action.payload._id
         );
-        state.orders[idx]._doc = action.payload;
+        state.orders[idx] = action.payload;
       })
       .addCase(updateOrder.rejected, (state, action) => {
         state.isOrderLoading = false;

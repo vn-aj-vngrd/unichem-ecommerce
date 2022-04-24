@@ -68,7 +68,7 @@ const Signup = () => {
       password: data.password,
     };
 
-    console.log(userData);
+    // console.log(userData);
     dispatch(signup(userData));
   };
 

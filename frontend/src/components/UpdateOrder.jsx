@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Spinner from "../components/Spinner";
 import { updateOrder } from "../features/orders/orderSlice";
 const moment = require("moment");
 
@@ -14,8 +13,6 @@ const UpdateOrder = ({ order }) => {
   } = useForm();
 
   const dispatch = useDispatch();
-
-  const { isOrderLoading } = useSelector((state) => state.orders);
 
   const shippingDate = moment(order.shippingDate).format("YYYY-MM-D");
   const receivedDate = moment(order.receivedDate).format("YYYY-MM-D");
@@ -30,8 +27,15 @@ const UpdateOrder = ({ order }) => {
   ];
 
   const onSubmit = (data) => {
-    console.log(data);
-    dispatch(updateOrder(data));
+    const orderParams = {
+      id: order._id,
+      shippingDate: data.shippingDate,
+      receivedDate: data.receivedDate,
+      orderStatus: data.orderStatus,
+    };
+    // console.log(orderParams);
+    dispatch(updateOrder(orderParams));
+    toast.success(`Order has been updated.`);
   };
 
   return (
@@ -137,7 +141,7 @@ const UpdateOrder = ({ order }) => {
                         <div className="input-group">
                           <select
                             className="form-select"
-                            value={order.orderStatus}
+                            defaultValue={order.orderStatus}
                             {...register("orderStatus", {
                               required: {
                                 value: true,
@@ -150,17 +154,11 @@ const UpdateOrder = ({ order }) => {
                                 : "",
                             }}
                           >
-                            {orderStatuses.map((status, index) =>
-                              status !== order.orderStatus ? (
-                                <option key={index} value={status}>
-                                  {status}
-                                </option>
-                              ) : (
-                                <option key={index} value={status}>
-                                  {status}
-                                </option>
-                              )
-                            )}
+                            {orderStatuses.map((status, index) => (
+                              <option key={index} value={status}>
+                                {status}
+                              </option>
+                            ))}
                           </select>
                           {errors.orderStatus && (
                             <p className="error-message">
@@ -172,7 +170,12 @@ const UpdateOrder = ({ order }) => {
                     </div>
 
                     <div className="d-grid button">
-                      <button type="submit" className=" btn">
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
                         Save Changes
                       </button>
                     </div>

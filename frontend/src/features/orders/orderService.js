@@ -61,7 +61,11 @@ const updateOrder = async (orderParams, token) => {
   };
 
   // console.log(orderParams);
-  const response = await axios.put(API_URL, orderParams, config);
+  const response = await axios.put(
+    API_URL + `updateOrder/${orderParams.id}`,
+    orderParams,
+    config
+  );
   // console.log(response.data);
 
   return response.data;

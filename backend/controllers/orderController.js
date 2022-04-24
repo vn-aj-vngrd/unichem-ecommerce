@@ -5,7 +5,6 @@ const Orderline = require("../models/orderlineModel");
 const Couponlog = require("../models/couponlogModel");
 const Cart = require("../models/cartModel");
 const Product = require("../models/productModel");
-const moment = require("moment");
 
 // @desc    Set Order
 // @route   POST /api/orders
@@ -105,9 +104,9 @@ const getAllOrders = asyncHandler(async (req, res) => {
       totalPrice: Orders[i].totalPrice,
       paymentMethod: Orders[i].paymentMethod,
       orderStatus: Orders[i].orderStatus,
-      shippingDate: moment(Orders[i].shippingDate).format("YYYY-MM-D"),
-      receivedDate: moment(Orders[i].receivedDate).format("YYYY-MM-D"),
-      createdAt: moment(Orders[i].createdAt).format("YYYY-MM-D"),
+      shippingDate: Orders[i].shippingDate,
+      receivedDate: Orders[i].receivedDate,
+      createdAt: Orders[i].createdAt,
       orderLine,
     };
     retData.push(temp);
@@ -257,40 +256,42 @@ const getOneOrder = asyncHandler(async (req, res) => {
 // @access  Private
 const updateOrder = asyncHandler(async (req, res) => {
   // Check for user
-  if (!req.user) {
+  if (!req.user && req.user.userType !== "admin") {
     res.status(401);
     throw new Error("Access Denied");
   }
 
-  const userID = req.user._id;
-  const { productID } = req.body;
-  let OrderExists = await Order.findOne({
-    productID,
-    userID,
-  });
+  const order = await Order.findById(req.params.id);
 
-  // Check for Order
-  if (!OrderExists) {
-    res.status(400);
+  if (!order) {
+    res.status(404);
     throw new Error("Order not found");
   }
 
-  // Make sure the logged in user matches the Order user
-  if (OrderExists.userID.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
-  }
+  // switch (req.body.orderStatus) {
+  //   case "Awaiting Payment": {
+  //     break;
+  //   }
 
-  // CHECK IF DATE IS PAST 30
+  //   default: {
+  //     res.status(400);
+  //     throw new Error("Invalid Order Status");
+  //     break;
+  //   }
+  // }
 
-  // Update Order
-  const updatedOrder = await Order.findOneAndUpdate(
+  console.log(req.body);
+
+  const updatedOrder = await Order.findByIdAndUpdate(
+    req.params.id,
     {
-      userID: userID,
-      productID: productID,
+      orderStatus: req.body.orderStatus,
+      shippingDate: req.body.shippingDate,
+      receivedDate: req.body.receivedDate,
     },
-    req.body,
-    { new: true }
+    {
+      new: true,
+    }
   );
 
   res.status(200).json(updatedOrder);
