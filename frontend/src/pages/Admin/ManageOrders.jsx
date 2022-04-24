@@ -8,10 +8,10 @@ import {
   getAllOrders,
   deleteOrder,
   resetOrder,
-  updateOrder,
 } from "../../features/orders/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner";
+const moment = require("moment");
 
 const ManageOrders = () => {
   const columns = [
@@ -23,6 +23,7 @@ const ManageOrders = () => {
     "Total Price",
     "Payment Method",
     "Order Status",
+    "Order Date",
     "Shipping Date",
     "Received Date",
     "",
@@ -41,11 +42,9 @@ const ManageOrders = () => {
     };
   }, [dispatch]);
 
-  // console.log(orders);
-  // const data = orders.map(Object.values);
-
   let data = [];
   orders.forEach((order) => {
+    const shippingDate = moment(order.shippingDate);
     data.push([
       order._id,
       order.userID,
@@ -55,9 +54,10 @@ const ManageOrders = () => {
       "PHP " + order.totalPrice,
       order.paymentMethod,
       order.orderStatus,
+      order.createdAt,
       order.shippingDate,
       order.receivedDate,
-      <UpdateOrder />,
+      <UpdateOrder order={order} />,
     ]);
   });
 

@@ -5,6 +5,7 @@ const Orderline = require("../models/orderlineModel");
 const Couponlog = require("../models/couponlogModel");
 const Cart = require("../models/cartModel");
 const Product = require("../models/productModel");
+const moment = require("moment");
 
 // @desc    Set Order
 // @route   POST /api/orders
@@ -92,10 +93,10 @@ const getAllOrders = asyncHandler(async (req, res) => {
 
   let retData = [];
   for (let i = 0; i < Orders.length; i++) {
-    let orderID = Orders[i]._id;
-    // console.log(orderID);
-    let orderLine = await Orderline.find({ orderID: orderID });
-    let temp = {
+    const orderID = Orders[i]._id;
+    const orderLine = await Orderline.find({ orderID: orderID });
+
+    const temp = {
       _id: Orders[i]._id,
       userID: userID,
       shippingDiscount: Orders[i].shippingDiscount,
@@ -104,8 +105,9 @@ const getAllOrders = asyncHandler(async (req, res) => {
       totalPrice: Orders[i].totalPrice,
       paymentMethod: Orders[i].paymentMethod,
       orderStatus: Orders[i].orderStatus,
-      shippingDate: Orders[i].shippingDate,
-      receivedDate: Orders[i].receivedDate,
+      shippingDate: moment(Orders[i].shippingDate).format("YYYY-MM-D"),
+      receivedDate: moment(Orders[i].receivedDate).format("YYYY-MM-D"),
+      createdAt: moment(Orders[i].createdAt).format("YYYY-MM-D"),
       orderLine,
     };
     retData.push(temp);
@@ -133,10 +135,10 @@ const getUserOrders = asyncHandler(async (req, res) => {
 
   let retData = [];
   for (let i = 0; i < Orders.length; i++) {
-    let orderID = Orders[i]._id;
-    // console.log(orderID);
-    let orderLine = await Orderline.find({ orderID: orderID });
-    let temp = {
+    const orderID = Orders[i]._id;
+    const orderLine = await Orderline.find({ orderID: orderID });
+
+    const temp = {
       _id: Orders[i]._id,
       userID: userID,
       orderDiscount: Orders[i].orderDiscount,

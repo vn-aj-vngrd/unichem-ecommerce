@@ -1,19 +1,57 @@
-const UpdateOrder = () => {
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
+import { updateOrder } from "../features/orders/orderSlice";
+const moment = require("moment");
+
+const UpdateOrder = ({ order }) => {
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    formState: { errors },
+  } = useForm();
+
+  const dispatch = useDispatch();
+
+  const { isOrderLoading } = useSelector((state) => state.orders);
+
+  const shippingDate = moment(order.shippingDate).format("YYYY-MM-D");
+  const receivedDate = moment(order.receivedDate).format("YYYY-MM-D");
+
+  const orderStatuses = [
+    "Awaiting Payment",
+    "Awaiting Shipment",
+    "Shipped",
+    "Delivered",
+    "Cancelled",
+    "Refunded",
+  ];
+
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(updateOrder(data));
+  };
+
   return (
     <>
       <div className="col-lg-4">
-        <button
-          type="button"
-          className="btn btn-block btn-gray-800 mb-3"
-          data-bs-toggle="modal"
-          data-bs-target="#modal-form"
-        >
-          View/Update
-        </button>
+        <div className="button">
+          <button
+            type="button"
+            className=" btn"
+            data-bs-toggle="modal"
+            data-bs-target={`#modal${order._id}`}
+          >
+            Update
+          </button>
+        </div>
+
         <div
           className="modal fade"
-          id="modal-form"
-          tabindex="-1"
+          id={`modal${order._id}`}
+          tabIndex="-1"
           role="dialog"
           aria-labelledby="modal-form"
           aria-hidden="true"
@@ -27,40 +65,39 @@ const UpdateOrder = () => {
                     className="btn-close ms-auto"
                     data-bs-dismiss="modal"
                     aria-label="Close"
-                  ></button>
-                  <div className="text-center text-md-center mb-4 mt-md-0">
+                  />
+                  <div className="text-center text-md-center mb-2 mt-md-0">
                     <h1 className="mb-0 h4">Order Information</h1>
                   </div>
 
-                  <form action="#" className="mt-4">
-                    <div className="form-group">
-                      <div className="form-group mb-4">
-                        <label>Order Date</label>
-                        <div className="input-group">
-                          <input
-                            type="date"
-                            name="orderDate"
-                            id="orderDate"
-                            value="sample"
-                            className="form-control"
-                            required
-                          />
-                        </div>
-                      </div>
-                    </div>
+                  <p className="text-center">Order ID: {order._id}</p>
 
+                  <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
                     <div className="form-group">
                       <div className="form-group mb-4">
                         <label>Shipping Date</label>
                         <div className="input-group">
                           <input
                             type="date"
-                            name="shippingDate"
-                            id="shippingDate"
-                            value="sample"
+                            defaultValue={shippingDate}
                             className="form-control"
-                            required
+                            {...register("shippingDate", {
+                              required: {
+                                value: true,
+                                message: "Email is required",
+                              },
+                            })}
+                            style={{
+                              border: errors.shippingDate
+                                ? "1px solid #f44336"
+                                : "",
+                            }}
                           />
+                          {errors.shippingDate && (
+                            <p className="error-message">
+                              ⚠ {errors.shippingDate.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -71,12 +108,25 @@ const UpdateOrder = () => {
                         <div className="input-group">
                           <input
                             type="date"
-                            name="receivedDate"
-                            id="receivedDate"
-                            value="sample"
                             className="form-control"
-                            required
+                            defaultValue={receivedDate}
+                            {...register("receivedDate", {
+                              required: {
+                                value: true,
+                                message: "Received Date is required",
+                              },
+                            })}
+                            style={{
+                              border: errors.receivedDate
+                                ? "1px solid #f44336"
+                                : "",
+                            }}
                           />
+                          {errors.receivedDate && (
+                            <p className="error-message">
+                              ⚠ {errors.receivedDate.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -87,23 +137,42 @@ const UpdateOrder = () => {
                         <div className="input-group">
                           <select
                             className="form-select"
-                            id="orderStatus"
-                            name="orderStatus"
-                            value="sample"
-                            required
+                            value={order.orderStatus}
+                            {...register("orderStatus", {
+                              required: {
+                                value: true,
+                                message: "Order Status is required",
+                              },
+                            })}
+                            style={{
+                              border: errors.orderStatus
+                                ? "1px solid #f44336"
+                                : "",
+                            }}
                           >
-                            <option value="">Awaiting Payment</option>
-                            <option value="">Packed</option>
-                            <option value="">Shipped</option>
-                            <option value="">Completed</option>
-                            <option value="">Cancelled</option>
+                            {orderStatuses.map((status, index) =>
+                              status !== order.orderStatus ? (
+                                <option key={index} value={status}>
+                                  {status}
+                                </option>
+                              ) : (
+                                <option key={index} value={status}>
+                                  {status}
+                                </option>
+                              )
+                            )}
                           </select>
+                          {errors.orderStatus && (
+                            <p className="error-message">
+                              ⚠ {errors.orderStatus.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
 
-                    <div className="d-grid">
-                      <button type="submit" className="btn btn-gray-800">
+                    <div className="d-grid button">
+                      <button type="submit" className=" btn">
                         Save Changes
                       </button>
                     </div>
