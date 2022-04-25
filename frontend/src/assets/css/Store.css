@@ -6600,7 +6600,6 @@ ol {
 }
 
 
-
 /*======================================
 	Order Details CSS 
 ========================================*/
@@ -6785,14 +6784,14 @@ ol {
   font-weight: 600;
   font-size: 14px;
   color: #424242;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
+  /* -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease; */
 }
 
 .filters-breadcrumbs .clear-all-filter:hover {
   color: #f44336;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
+  /* -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease; */
 }
 
 /*======================================

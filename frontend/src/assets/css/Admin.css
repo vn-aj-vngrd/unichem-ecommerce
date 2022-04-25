@@ -21,23 +21,6 @@
 .close i:hover {
   color: red;
 }
-.button .btn {
-  display: inline-block;
-  text-transform: capitalize;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 13px 30px;
-  background-color: #f44336;
-  color: #fff;
-  border: none;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  border-radius: 4px;
-  position: relative;
-  z-index: 1;
-  /* margin-right: 7px; */
-  overflow: hidden;
-}
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .button .btn {
@@ -85,8 +68,31 @@
 .button .btn:hover {
   color: #fff;
   background-color: #b71c1c;
-  -webkit-box-shadow: 0px 4px 4px #0000000f;
-  box-shadow: 0px 4px 4px #0000000f;
+  border-color: transparent;
+}
+
+.button .btn-alt {
+  display: inline-block;
+  text-transform: capitalize;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 13px 15px;
+  background-color: #424242;
+  color: #fff;
+  border: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+  margin-right: 7px;
+  overflow: hidden;
+}
+
+.button .btn-alt:hover {
+  color: #fff;
+  background-color: #212121;
+  border-color: transparent;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -103,11 +109,6 @@
     font-size: 14px;
     font-weight: 500;
   }
-}
-
-.button .btn-alt:hover {
-  background-color: #424242 !important;
-  color: #fff !important;
 }
 
 .error-area {

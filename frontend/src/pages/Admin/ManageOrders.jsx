@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
+import ViewOrder from "../../components/ViewOrder";
 import UpdateOrder from "../../components/UpdateOrder";
 import {
   getAllOrders,
@@ -57,6 +58,7 @@ const ManageOrders = () => {
       moment(order.createdAt).format("YYYY-MM-D"),
       moment(order.shippingDate).format("YYYY-MM-D"),
       moment(order.receivedDate).format("YYYY-MM-D"),
+      <ViewOrder order={order} />,
       <UpdateOrder order={order} />,
     ]);
   });
