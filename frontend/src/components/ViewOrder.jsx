@@ -32,20 +32,24 @@ const ViewOrder = ({ order }) => {
                   aria-label="Close"
                 />
                 <div className="text-center text-md-center mb-2 mt-md-0">
-                  <h1 className="mb-0 h4">Order Information</h1>
+                  <h1 className="mb-0 h4">Product Information</h1>
                 </div>
 
                 <p className="text-center">Order ID: {order._id}</p>
 
                 <div className="mt-2">
                   {order.orderLine.map((orderline, index) => (
-                    <div className="d-flex justify-content-center align-items-center">
+                    <div key={index} className="d-flex justify-content-center align-items-center mb-4">
                       <div className="w-25">
                         <img src={orderline.image} alt="#" />
                       </div>
                       <div className="ms-3">
-                        Product Name: {orderline.productName} <br />
-                        Product Name: {orderline.productType} <br />
+                        ID: {orderline.orderID}
+                        <br />
+                        Name: {orderline.productName}
+                        <br />
+                        Type: {orderline.productType}
+                        <br />
                         Quantity: {orderline.quantity}
                       </div>
                     </div>
