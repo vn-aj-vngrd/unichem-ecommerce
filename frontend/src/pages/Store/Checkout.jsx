@@ -213,7 +213,7 @@ const Checkout = () => {
   }, 0);
 
   let subtotal = 0;
-  let shippingFee = 100;
+  let shippingFee = 0;
   let orders = [];
 
   if (checked > 0) {
@@ -794,7 +794,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="button">
-                        <button className="btn">apply</button>
+                        <button className="btn-coupon">apply</button>
                       </div>
                     </form>
                   </div>
@@ -806,7 +806,8 @@ const Checkout = () => {
                 </div>
 
                 <div className="checkout-sidebar-price-table mt-3">
-                  <h5 className="title">Order Summary</h5>
+                  <h5 className="heading">Cart Summary</h5>
+                  <h5 className="title"> </h5>
                   <div className="sub-total-price">
                     {checked > 0 ? (
                       <>
@@ -856,27 +857,10 @@ const Checkout = () => {
                       </>
                     )}
                   </div>
-
-                  <h5 className="title"> </h5>
-                  <div className="sub-total-price">
-                    <div className="total-price">
-                      <p className="value">Subtotal:</p>
-                      <p className="price">₱ {subtotal.toFixed(2)}</p>
-                    </div>
-                  </div>
-
-                  <div className="sub-total-price">
-                    <div className="total-price">
-                      <p className="value">Shipping Fee:</p>
-                      <p className="price">₱ {shippingFee.toFixed(2)}</p>
-                    </div>
-                  </div>
-
                   <h5 className="title"> </h5>
                   <div className="sub-total-price">
                     <div className="total-price">
                       <p className="value">Order Discount:</p>
-
                       <p className="price">
                         - ₱ {orderDiscountAmount.toFixed(2)} (
                         {orderDiscount.value}%)
@@ -897,10 +881,30 @@ const Checkout = () => {
                   <h5 className="title"> </h5>
                   <div className="sub-total-price">
                     <div className="total-price">
+                      <p className="value">Subtotal:</p>
+                      <p className="price">₱ {subtotal.toFixed(2)}</p>
+                    </div>
+                  </div>
+
+                  <div className="sub-total-price">
+                    <div className="total-price">
+                      <p className="value">Shipping Fee:</p>
+                      <p className="price">₱ {shippingFee.toFixed(2)}</p>
+                    </div>
+                  </div>
+
+                  <h5 className="title"> </h5>
+                  <div className="sub-total-price">
+                    <div className="total-price">
                       <p className="value fw-bolder">Order Total:</p>
                       <p className="price fw-bolder">₱ {total.toFixed(2)}</p>
                     </div>
                   </div>
+                  <h5 className="title"> </h5>
+                  <p align="justify">
+                    Note: Please take note that a shipping fee is added after
+                    the confirmation of your order.
+                  </p>
                 </div>
               </div>
             </div>

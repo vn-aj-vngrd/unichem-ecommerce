@@ -64,14 +64,20 @@ const PricingTable = ({
                         <p className="fw-bold">₱ {subtotal.toFixed(2)}</p>
                       </span>
                     </li>
-                    <li>
+                    {/* <li>
                       Shipping Fee
                       <span>
                         <p className="fw-bold">₱ {shippingFee.toFixed(2)}</p>
                       </span>
-                    </li>
+                    </li> */}
                   </ul>
-                  <hr></hr>
+
+                  <hr />
+                  <div className="price d-flex justify-content-between align-items-center">
+                    <div>Order Total:</div>
+                    <div className="spacer"></div>
+                    <h5 className="text-danger">₱ {total.toFixed(2)}</h5>
+                  </div>
 
                   {/* {total > 0 ? (
                     <>
@@ -87,12 +93,12 @@ const PricingTable = ({
                   <div className="order-total-row">
                     {checkoutCount > 0 ? (
                       <>
-                        <div className="price d-flex justify-content-between align-items-center">
+                        {/* <div className="price d-flex justify-content-between align-items-center">
                           <div>Order Total:</div>
                           <div className="spacer"></div>
                           <h5 className="text-danger">₱ {total.toFixed(2)}</h5>
-                        </div>
-                        <div className="button mt-4">
+                        </div> */}
+                        <div className="button">
                           <button
                             className="btn checkout-btn"
                             onClick={checkout}
@@ -103,12 +109,12 @@ const PricingTable = ({
                       </>
                     ) : (
                       <>
-                        <div className="price d-flex justify-content-between align-items-center">
+                        {/* <div className="price d-flex justify-content-between align-items-center">
                           <div>Order Total:</div>
                           <div className="spacer"></div>
                           <h5 className="text-danger">₱ {total.toFixed(2)}</h5>
-                        </div>
-                        <div className="button mt-4">
+                        </div> */}
+                        <div className="button">
                           <button className="btn checkout-btn" disabled>
                             Checkout
                           </button>
