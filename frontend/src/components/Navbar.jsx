@@ -328,10 +328,8 @@ const Navbar = ({ userType }) => {
                             <Link to="/account/reviews">My Reviews</Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/">
-                              <button className="logout-btn" onClick={onLogout}>
-                                Log out
-                              </button>
+                            <Link to="/" onClick={onLogout}>
+                              Logout
                             </Link>
                           </li>
                         </ul>
@@ -374,13 +372,8 @@ const Navbar = ({ userType }) => {
                                 <Link to="/account/reviews">My Reviews</Link>
                               </li>
                               <li className="nav-item">
-                                <Link to="/">
-                                  <button
-                                    className="logout-btn"
-                                    onClick={onLogout}
-                                  >
-                                    Log out
-                                  </button>
+                                <Link to="/" onClick={onLogout}>
+                                  Logout
                                 </Link>
                               </li>
                             </ul>

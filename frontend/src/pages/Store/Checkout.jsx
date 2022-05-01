@@ -300,10 +300,7 @@ const Checkout = () => {
       return;
     }
 
-    let orderStatus = "Awaiting Shipment";
-    if (payment === "Bank Transfer" || payment === "In-Store") {
-      orderStatus = "Awaiting Payment";
-    }
+    let orderStatus = "Awaiting Confirmation";
 
     let orderData = {
       order: {

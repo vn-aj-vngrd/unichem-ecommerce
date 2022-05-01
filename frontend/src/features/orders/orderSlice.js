@@ -247,7 +247,7 @@ export const orderSlice = createSlice({
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
         state.orders = state.orders.filter(
-          (order) => order._doc._id !== action.payload.id
+          (order) => order._id !== action.payload.id
         );
       })
       .addCase(deleteOrder.rejected, (state, action) => {

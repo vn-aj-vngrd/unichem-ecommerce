@@ -377,7 +377,7 @@ const cancelOrder = asyncHandler(async (req, res) => {
 // @access  Private
 const deleteOrder = asyncHandler(async (req, res) => {
   // Check for user
-  if (!req.user) {
+  if (!req.user && req.user.userType !== "admin") {
     res.status(401);
     throw new Error("Access Denied");
   }
@@ -390,15 +390,8 @@ const deleteOrder = asyncHandler(async (req, res) => {
     throw new Error("Order not found");
   }
 
-  // Make sure the logged in user matches the Order user
-  if (order.userID.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
-  }
-
-  // CHECK IF DATE IS PAST 30
-
   await order.remove();
+  await Orderline.deleteMany({ orderID: req.params.id });
 
   res.status(200).json({ id: req.params.id });
 });

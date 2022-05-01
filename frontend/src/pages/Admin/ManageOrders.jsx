@@ -68,8 +68,8 @@ const ManageOrders = () => {
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        console.log(data[item.dataIndex][0]);
-        // dispatch(deleteUser(data[item.dataIndex][0]));
+        // console.log(data[item.dataIndex][0]);
+        dispatch(deleteOrder(data[item.dataIndex][0]));
       });
     },
   };

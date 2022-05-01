@@ -53,7 +53,7 @@ const Header = () => {
                     <span className="mb-0 font-small fw-bold text-gray-900">
                       Administrator
                     </span>
-                    <i class="lni lni-chevron-down ms-2"></i>
+                    <i className="lni lni-chevron-down ms-2"></i>
                   </div>
                 </div>
               </a>
