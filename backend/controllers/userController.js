@@ -126,7 +126,7 @@ const loginUser = asyncHandler(async (req, res) => {
   // User does not exist and incorrect password
   if (!user || !(await bcrypt.compare(password, user.password))) {
     res.status(400);
-    throw new Error("Invalid Email or Password");
+    throw new Error("You've entered a wrong email or password. Please try again.");
   }
 
   // User exists but unverified

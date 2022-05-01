@@ -13,7 +13,7 @@ const setOrder = async (orderData, token) => {
   console.log(orderData);
 
   const response = await axios.post(API_URL, orderData, config);
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };
@@ -47,7 +47,7 @@ const getUserOrders = async (token) => {
 // Get order by orderID
 const getOneOrder = async (id) => {
   const response = await axios.get(API_URL + "getOneOrder/" + id);
-  console.log(response);
+  // console.log(response);
 
   return response.data;
 };
