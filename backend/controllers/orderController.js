@@ -96,7 +96,7 @@ const getAllOrders = asyncHandler(async (req, res) => {
 
     const temp = {
       _id: Orders[i]._id,
-      userID: userID,
+      userID: Orders[i].userID,
       shippingDiscount: Orders[i].shippingDiscount,
       orderDiscount: Orders[i].orderDiscount,
       shippingFee: Orders[i].shippingFee,
@@ -138,7 +138,7 @@ const getUserOrders = asyncHandler(async (req, res) => {
 
     const temp = {
       _id: Orders[i]._id,
-      userID: userID,
+      userID: Orders[i].userID,
       shippingDiscount: Orders[i].shippingDiscount,
       orderDiscount: Orders[i].orderDiscount,
       shippingFee: Orders[i].shippingFee,
@@ -224,7 +224,24 @@ const updateOrder = asyncHandler(async (req, res) => {
     }
   );
 
-  res.status(200).json(updatedOrder);
+  let retData = [];
+  const temp = {
+    _id: updatedOrder._id,
+    userID: userID,
+    shippingDiscount: updatedOrder.shippingDiscount,
+    orderDiscount: updatedOrder.orderDiscount,
+    shippingFee: updatedOrder.shippingFee,
+    totalPrice: updatedOrder.totalPrice,
+    paymentMethod: updatedOrder.paymentMethod,
+    orderStatus: updatedOrder.orderStatus,
+    statusDates: updatedOrder.statusDates,
+    createdAt: updatedOrder.createdAt,
+    updatedAt: updatedOrder.updatedAt,
+    orderLine,
+  };
+  retData.push(temp);
+
+  res.status(200).json(retData);
 });
 
 // @desc    Cancel Order
@@ -290,7 +307,7 @@ const cancelOrder = asyncHandler(async (req, res) => {
     let orderLine = await Orderline.find({ orderID: orderID });
     let temp = {
       _id: Orders[i]._id,
-      userID: userID,
+      userID: Orders[i].userID,
       shippingFee: Orders[i].shipingFee,
       orderDiscount: Orders[i].orderDiscount,
       shippingFee: Orders[i].shippingFee,

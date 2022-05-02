@@ -45,23 +45,25 @@ const ManageOrders = () => {
   }, [dispatch]);
 
   let data = [];
-  orders.forEach((order) => {
-    data.push([
-      order._id,
-      order.userID,
-      order.shippingDiscount + "%",
-      order.orderDiscount + "%",
-      "PHP " + order.shippingFee.toFixed(2),
-      "PHP " + order.totalPrice.toFixed(2),
-      order.paymentMethod,
-      order.orderStatus,
-      moment(order.createdAt).format("YYYY-MM-DD"),
-      moment(order.statusDates[6].date).format("YYYY-MM-DD"),
-      order.updatedAt,
-      <ViewOrder order={order} />,
-      <UpdateOrder order={order} />,
-    ]);
-  });
+  if (orders) {
+    orders.forEach((order) => {
+      data.push([
+        order._id,
+        order.userID,
+        order.shippingDiscount + "%",
+        order.orderDiscount + "%",
+        "PHP " + order.shippingFee.toFixed(2),
+        "PHP " + order.totalPrice.toFixed(2),
+        order.paymentMethod,
+        order.orderStatus,
+        moment(order.createdAt).format("YYYY-MM-DD"),
+        moment(order.statusDates[6].date).format("YYYY-MM-DD"),
+        order.updatedAt,
+        <ViewOrder order={order} />,
+        <UpdateOrder order={order} />,
+      ]);
+    });
+  }
 
   const options = {
     filterType: "checkbox",

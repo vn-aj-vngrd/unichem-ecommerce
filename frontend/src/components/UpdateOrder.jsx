@@ -63,14 +63,14 @@ const UpdateOrder = ({ order }) => {
 
       // 1 - Awaiting Payment
       {
-        date:  data.awaitingPaymentDate,
+        date: data.awaitingPaymentDate,
         status: "Awaiting Payment",
         desc: "You have completed the checkout process, but payment has yet to be confirmed.",
       },
 
       // 2 - Awaiting Fulfillment
       {
-        date:  data.awaitingFulfillmentDate,
+        date: data.awaitingFulfillmentDate,
         status: "Awaiting Fulfillment",
         desc: "You have completed the checkout process and payment has been confirmed.",
       },
@@ -84,7 +84,7 @@ const UpdateOrder = ({ order }) => {
 
       // 4 - Shipped
       {
-        date:  data.shippedDate,
+        date: data.shippedDate,
         status: "Shipped",
         desc: "Your order has been shipped and is on its way to you.",
       },
@@ -138,7 +138,7 @@ const UpdateOrder = ({ order }) => {
       orderStatus: data.orderStatus,
       statusDates,
     };
-    console.log(orderParams);
+    // console.log(orderParams);
     dispatch(updateOrder(orderParams));
     toast.success(`Order has been updated.`);
   };
