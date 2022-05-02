@@ -14,26 +14,131 @@ const UpdateOrder = ({ order }) => {
 
   const dispatch = useDispatch();
 
-  const shippingDate = moment(order.shippingDate).format("YYYY-MM-D");
-  const receivedDate = moment(order.receivedDate).format("YYYY-MM-D");
+  const awaitingConfirmationDate = moment(order.statusDates[0].date).format(
+    "YYYY-MM-DD"
+  );
+  const awaitingPaymentDate = moment(order.statusDates[1].date).format(
+    "YYYY-MM-DD"
+  );
+  const awaitingFulfillmentDate = moment(order.statusDates[2].date).format(
+    "YYYY-MM-DD"
+  );
+  const awaitingShipmentDate = moment(order.statusDates[3].date).format(
+    "YYYY-MM-DD"
+  );
+  const shippedDate = moment(order.statusDates[4].date).format("YYYY-MM-DD");
+  const awaitingPickupDate = moment(order.statusDates[5].date).format(
+    "YYYY-MM-DD"
+  );
+  const completedDate = moment(order.statusDates[6].date).format("YYYY-MM-DD");
+  const cancelledDate = moment(order.statusDates[7].date).format("YYYY-MM-DD");
+  const declinedDate = moment(order.statusDates[8].date).format("YYYY-MM-DD");
+  const awaitingReturnDate = moment(order.statusDates[9].date).format(
+    "YYYY-MM-DD"
+  );
+  const returnedDate = moment(order.statusDates[10].date).format("YYYY-MM-DD");
 
   const orderStatuses = [
+    "Awaiting Confirmation",
     "Awaiting Payment",
+    "Awaiting Fulfillment",
     "Awaiting Shipment",
     "Shipped",
-    "Delivered",
+    "Awaiting Pickup",
+    "Completed",
     "Cancelled",
-    "Refunded",
+    "Declined",
+    "Awaiting Return",
+    "Returned",
   ];
 
   const onSubmit = (data) => {
+    const statusDates = [
+      // 0 - Awaiting Confirmation
+      {
+        date: data.awaitingConfirmationDate,
+        status: "Awaiting confirmation",
+        desc: "Please wait for the confirmation of your order.",
+      },
+
+      // 1 - Awaiting Payment
+      {
+        date:  data.awaitingPaymentDate,
+        status: "Awaiting Payment",
+        desc: "You have completed the checkout process, but payment has yet to be confirmed.",
+      },
+
+      // 2 - Awaiting Fulfillment
+      {
+        date:  data.awaitingFulfillmentDate,
+        status: "Awaiting Fulfillment",
+        desc: "You have completed the checkout process and payment has been confirmed.",
+      },
+
+      // 3 - Awaiting Shipment
+      {
+        date: data.awaitingShipmentDate,
+        status: "Awaiting Shipment",
+        desc: "Your order has been pulled and packaged and is awaiting collection from a shipping provider.",
+      },
+
+      // 4 - Shipped
+      {
+        date:  data.shippedDate,
+        status: "Shipped",
+        desc: "Your order has been shipped and is on its way to you.",
+      },
+
+      // 5 - Awaiting Pickup
+      {
+        date: data.awaitingPickupDate,
+        status: "Awaiting Pickup",
+        desc: "Your order has been packaged and is awaiting customer pickup from a seller-specified location.",
+      },
+
+      // 6 - Completed
+      {
+        date: data.completedDate,
+        status: "Completed",
+        desc: "Your order has been shipped/picked up, and receipt is confirmed.",
+      },
+
+      // 7 - Cancelled
+      {
+        date: data.cancelledDate,
+        status: "Cancelled",
+        desc: "Your order has been cancelled due to the customer's reason.",
+      },
+
+      // 8 - Declined
+      {
+        date: data.declinedDate,
+        status: "Declined",
+        desc: "Your order has been declined due to a stock inconsistency by the admin.",
+      },
+
+      // 9 - Awaiting Return
+      {
+        date: data.awaitingReturnDate,
+        status: "Awaiting Return",
+        desc: "The return process is on-going. We are waiting for the customer to return the item.",
+      },
+
+      // 10 - Returned
+      {
+        date: data.returnedDate,
+        status: "Returned",
+        desc: "Your order has been returned and refunded based on the company's policy.",
+      },
+    ];
+
     const orderParams = {
       id: order._id,
-      shippingDate: data.shippingDate,
-      receivedDate: data.receivedDate,
+      shippingFee: data.shippingFee,
       orderStatus: data.orderStatus,
+      statusDates,
     };
-    // console.log(orderParams);
+    console.log(orderParams);
     dispatch(updateOrder(orderParams));
     toast.success(`Order has been updated.`);
   };
@@ -78,58 +183,15 @@ const UpdateOrder = ({ order }) => {
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
                   <div className="form-group">
                     <div className="form-group mb-4">
-                      <label>Shipping Date</label>
+                      <label>Shipping Fee (PHP)</label>
                       <div className="input-group">
                         <input
-                          type="date"
-                          defaultValue={shippingDate}
+                          type="number"
+                          step=".01"
                           className="form-control"
-                          {...register("shippingDate", {
-                            required: {
-                              value: true,
-                              message: "Email is required",
-                            },
-                          })}
-                          style={{
-                            border: errors.shippingDate
-                              ? "1px solid #f44336"
-                              : "",
-                          }}
+                          defaultValue={order.shippingFee}
+                          {...register("shippingFee")}
                         />
-                        {errors.shippingDate && (
-                          <p className="error-message">
-                            ⚠ {errors.shippingDate.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <div className="form-group mb-4">
-                      <label>Received Date</label>
-                      <div className="input-group">
-                        <input
-                          type="date"
-                          className="form-control"
-                          defaultValue={receivedDate}
-                          {...register("receivedDate", {
-                            required: {
-                              value: true,
-                              message: "Received Date is required",
-                            },
-                          })}
-                          style={{
-                            border: errors.receivedDate
-                              ? "1px solid #f44336"
-                              : "",
-                          }}
-                        />
-                        {errors.receivedDate && (
-                          <p className="error-message">
-                            ⚠ {errors.receivedDate.message}
-                          </p>
-                        )}
                       </div>
                     </div>
                   </div>
@@ -164,6 +226,160 @@ const UpdateOrder = ({ order }) => {
                             ⚠ {errors.orderStatus.message}
                           </p>
                         )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Awaiting Confirmation Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={awaitingConfirmationDate}
+                          {...register("awaitingConfirmationDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Awaiting Payment Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={awaitingPaymentDate}
+                          {...register("awaitingPaymentDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Awaiting Fulfillment Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={awaitingFulfillmentDate}
+                          {...register("awaitingFulfillmentDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Awaiting Shipment Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={awaitingShipmentDate}
+                          {...register("awaitingShipmentDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Shipped Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={shippedDate}
+                          {...register("shippedDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Awaiting Pickup Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={awaitingPickupDate}
+                          {...register("awaitingPickupDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Completed Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={completedDate}
+                          {...register("completedDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Cancelled Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={cancelledDate}
+                          {...register("cancelledDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Awaiting Return Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={awaitingReturnDate}
+                          {...register("awaitingReturnDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Returned Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={returnedDate}
+                          {...register("returnedDate")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="form-group mb-4">
+                      <label>Declined Date</label>
+                      <div className="input-group">
+                        <input
+                          type="date"
+                          className="form-control"
+                          defaultValue={declinedDate}
+                          {...register("declinedDate")}
+                        />
                       </div>
                     </div>
                   </div>

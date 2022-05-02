@@ -35,26 +35,32 @@ const ViewOrder = ({ order }) => {
                   <h1 className="mb-0 h4">Product Information</h1>
                 </div>
 
-                <p className="text-center">Order ID: {order._id}</p>
-
-                <div className="mt-2">
-                  {order.orderLine.map((orderline, index) => (
-                    <div key={index} className="d-flex justify-content-center align-items-center mb-4">
-                      <div className="w-25">
-                        <img src={orderline.image} alt="#" />
-                      </div>
-                      <div className="ms-3">
-                        ID: {orderline.orderID}
-                        <br />
-                        Name: {orderline.productName}
-                        <br />
-                        Type: {orderline.productType}
-                        <br />
-                        Quantity: {orderline.quantity}
-                      </div>
+                {order && order.count > 0 && (
+                  <>
+                    <p className="text-center">Order ID: {order._id}</p>
+                    <div className="mt-2">
+                      {order.orderLine.map((orderline, index) => (
+                        <div
+                          key={index}
+                          className="d-flex justify-content-center align-items-center mb-4"
+                        >
+                          <div className="w-25">
+                            <img src={orderline.image} alt="#" />
+                          </div>
+                          <div className="ms-3">
+                            ID: {orderline.orderID}
+                            <br />
+                            Name: {orderline.productName}
+                            <br />
+                            Type: {orderline.productType}
+                            <br />
+                            Quantity: {orderline.quantity}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -302,10 +302,88 @@ const Checkout = () => {
 
     let orderStatus = "Awaiting Confirmation";
 
+    const statusDates = [
+      // 0 - Awaiting Confirmation
+      {
+        date: new Date(),
+        status: "Awaiting confirmation",
+        desc: "Please wait for the confirmation of your order.",
+      },
+
+      // 1 - Awaiting Payment
+      {
+        date: "0000-00-00 00:00:00",
+        status: "Awaiting Payment",
+        desc: "You have completed the checkout process, but payment has yet to be confirmed.",
+      },
+
+      // 2 - Awaiting Fulfillment
+      {
+        date: "0000-00-00 00:00:00",
+        status: "Awaiting Fulfillment",
+        desc: "You have completed the checkout process and payment has been confirmed.",
+      },
+
+      // 3 - Awaiting Shipment
+      {
+        date: new Date().setDate(new Date().getDate() + 5),
+        status: "Awaiting Shipment",
+        desc: "Your order has been pulled and packaged and is awaiting collection from a shipping provider.",
+      },
+
+      // 4 - Shipped
+      {
+        date: "0000-00-00 00:00:00",
+        status: "Shipped",
+        desc: "Your order has been shipped and is on its way to you.",
+      },
+
+      // 5 - Awaiting Pickup
+      {
+        date: "0000-00-00 00:00:00",
+        status: "Awaiting Pickup",
+        desc: "Your order has been packaged and is awaiting customer pickup from a seller-specified location.",
+      },
+
+      // 6 - Completed
+      {
+        date: new Date().setDate(new Date().getDate() + 20),
+        status: "Completed",
+        desc: "Your order has been shipped/picked up, and receipt is confirmed.",
+      },
+
+      // 7 - Cancelled
+      {
+        date: "0000-00-00 00:00:00",
+        status: "Cancelled",
+        desc: "Your order has been cancelled due to the customer's reason.",
+      },
+
+      // 8 - Declined
+      {
+        date: "0000-00-00 00:00:00",
+        status: "Declined",
+        desc: "Your order has been declined due to a stock inconsistency by the admin.",
+      },
+
+      // 9 - Awaiting Return
+      {
+        date: "0000-00-00 00:00:00",
+        status: "Awaiting Return",
+        desc: "The return process is on-going. We are waiting for the customer to return the item.",
+      },
+
+      // 10 - Returned
+      {
+        date: "0000-00-00 00:00:00",
+        status: "Returned",
+        desc: "Your order has been returned and refunded based on the company's policy.",
+      },
+    ];
+
     let orderData = {
       order: {
-        shippingDate: new Date(new Date().setDate(new Date().getDate() + 5)),
-        receivedDate: new Date(new Date().setDate(new Date().getDate() + 20)),
+        statusDates: statusDates,
         shippingFee: shippingFee,
         totalPrice: total.toFixed(2),
         orderDiscount: orderDiscount.value,

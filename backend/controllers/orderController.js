@@ -19,13 +19,12 @@ const setOrder = asyncHandler(async (req, res) => {
   // Create Order
   const newOrder = await Order.create({
     userID: req.user._id,
-    shippingDate: req.body.order.shippingDate,
-    receivedDate: req.body.order.receivedDate,
     orderDiscount: req.body.order.orderDiscount,
     shippingDiscount: req.body.order.shippingDiscount,
     shippingFee: req.body.order.shippingFee,
     totalPrice: req.body.order.totalPrice,
     orderStatus: req.body.order.orderStatus,
+    statusDates: req.body.order.statusDates,
     paymentMethod: req.body.order.paymentMethod,
   });
 
@@ -104,9 +103,9 @@ const getAllOrders = asyncHandler(async (req, res) => {
       totalPrice: Orders[i].totalPrice,
       paymentMethod: Orders[i].paymentMethod,
       orderStatus: Orders[i].orderStatus,
-      shippingDate: Orders[i].shippingDate,
-      receivedDate: Orders[i].receivedDate,
+      statusDates: Orders[i].statusDates,
       createdAt: Orders[i].createdAt,
+      updatedAt: Orders[i].updatedAt,
       orderLine,
     };
     retData.push(temp);
@@ -140,14 +139,14 @@ const getUserOrders = asyncHandler(async (req, res) => {
     const temp = {
       _id: Orders[i]._id,
       userID: userID,
-      orderDiscount: Orders[i].orderDiscount,
       shippingDiscount: Orders[i].shippingDiscount,
+      orderDiscount: Orders[i].orderDiscount,
       shippingFee: Orders[i].shippingFee,
       totalPrice: Orders[i].totalPrice,
       paymentMethod: Orders[i].paymentMethod,
       orderStatus: Orders[i].orderStatus,
-      shippingDate: Orders[i].shippingDate,
-      receivedDate: Orders[i].receivedDate,
+      statusDates: Orders[i].statusDates,
+      createdAt: Orders[i].createdAt,
       orderLine,
     };
     retData.push(temp);
@@ -175,73 +174,18 @@ const getOneOrder = asyncHandler(async (req, res) => {
   // console.log(orderOne)
   const orderLine = await Orderline.find({ orderID: req.params.id });
 
-  const logs = [
-    // Awaiting Payment
-    {
-      date: orderOne.statusDates[0],
-      label: "Awaiting Payment",
-      desc: "You have completed the checkout process, but payment has yet to be confirmed. Authorize only transactions that are not yet captured have this status.",
-    },
-    // Awaiting Fulfillment
-    {
-      date: orderOne.statusDates[1],
-      label: "Awaiting Fulfillment",
-      desc: "You have completed the checkout process and payment has been confirmed.",
-    },
-    {
-      date: orderOne.statusDates[2],
-      label: "Arrived at Sort Center",
-      desc: "Your package has arrived at the sortation center and being prepared for shipment.",
-    },
-    // Shipped
-    {
-      date: orderOne.statusDates[3],
-      label: "Departed from Sort Center",
-      desc: "Your package has departed the sortation center.",
-    },
-    {
-      date: orderOne.statusDates[4],
-      label: "Arrived at Logistics Hub",
-      desc: "Your package has arrived at the local hub in your area.",
-    },
-    {
-      date: orderOne.statusDates[5],
-      label: "Departed from Logistics Hub",
-      desc: "Your package has departed the logistics hub and will be out for delivery soon.",
-    },
-    {
-      date: orderOne.statusDates[6],
-      label: "Out for Delivery",
-      desc: "LEX PH will attempt to deliver your parcel today! Please keep your lines open so our courier can contact you. If you are not available, please have an authorized representative to receive on your behalf. Prepare the exact amount for COD orders.",
-    },
-    // Awaiting Pickup
-    {
-      date: orderOne.statusDates[7],
-      label: "Awaiting Pickup",
-      desc: "Your order has been packaged and is awaiting customer pickup from a seller-specified location.",
-    },
-    // Delivered / Completed
-    {
-      date: orderOne.statusDates[8],
-      label: "Delivered",
-      desc: "Order has been shipped/picked up, and receipt is confirmed; client has paid for their digital product, and their file(s) are available for download.",
-    },
-  ];
-
   const temp = {
     _id: orderOne._id,
     userID: orderOne.userID,
     shippingFee: orderOne.shipingFee,
-    shippingDate: orderOne.shippingDate,
-    receivedDate: orderOne.receivedDate,
     discount: orderOne.discount,
     totalPrice: orderOne.totalPrice,
     orderStatus: orderOne.orderStatus,
+    statusDates: orderOne.statusDates,
     paymentMethod: orderOne.paymentMethod,
     createdAt: orderOne.createdAt,
     updatedAt: orderOne.createdAt,
     orderLine,
-    statusDates: logs,
   };
 
   let retData = [];
@@ -268,26 +212,12 @@ const updateOrder = asyncHandler(async (req, res) => {
     throw new Error("Order not found");
   }
 
-  // switch (req.body.orderStatus) {
-  //   case "Awaiting Payment": {
-  //     break;
-  //   }
-
-  //   default: {
-  //     res.status(400);
-  //     throw new Error("Invalid Order Status");
-  //     break;
-  //   }
-  // }
-
-  console.log(req.body);
-
   const updatedOrder = await Order.findByIdAndUpdate(
     req.params.id,
     {
       orderStatus: req.body.orderStatus,
-      shippingDate: req.body.shippingDate,
-      receivedDate: req.body.receivedDate,
+      shippingFee: req.body.shippingFee,
+      statusDates: req.body.statusDates,
     },
     {
       new: true,
@@ -324,6 +254,11 @@ const cancelOrder = asyncHandler(async (req, res) => {
     { new: true }
   );
 
+  if (!updatedOrder) {
+    res.status(400);
+    throw new Error("Order not found");
+  }
+
   // Update product quantities
   for (let i = 0; i < orderLine.length; i++) {
     let product = await Product.findById(orderLine[i].productID);
@@ -357,13 +292,12 @@ const cancelOrder = asyncHandler(async (req, res) => {
       _id: Orders[i]._id,
       userID: userID,
       shippingFee: Orders[i].shipingFee,
-      receivedDate: Orders[i].receivedDate,
-      shippingDate: Orders[i].shippingDate,
       orderDiscount: Orders[i].orderDiscount,
       shippingFee: Orders[i].shippingFee,
       totalPrice: Orders[i].totalPrice,
       paymentMethod: Orders[i].paymentMethod,
       orderStatus: Orders[i].orderStatus,
+      statusDates: Orders[i].statusDates,
       orderLine,
     };
     retData.push(temp);
