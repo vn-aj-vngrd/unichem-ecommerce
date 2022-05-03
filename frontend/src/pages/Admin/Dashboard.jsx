@@ -1,64 +1,37 @@
 import { useEffect, useState } from "react";
-import {
-  getDashboardReport,
-  resetReport,
-} from "../../features/reports/reportSlice";
-import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import LineChart from "../../components/LineChart";
-import Spinner from "../../components/Spinner";
 
 const UserData = [
   {
-    month: "January 2022",
+    id: 1,
+    month: 1,
     sales: 80000,
   },
   {
-    month: "February 2021",
+    id: 2,
+    month: 2,
     sales: 45677,
   },
   {
-    month: "February 2021",
+    id: 3,
+    month: 3,
     sales: 78888,
   },
   {
-    month: "February 2021",
+    id: 4,
+    month: 4,
     sales: 90000,
   },
   {
-    month: "February 2021",
-    sales: 4300,
-  },
-  {
-    month: "February 2021",
-    sales: 4300,
-  },
-  {
-    month: "February 2021",
-    sales: 4300,
-  },
-  {
-    month: "February 2021",
+    id: 5,
+    month: 5,
     sales: 4300,
   },
 ];
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-  const { report, isReportLoading } = useSelector((state) => state.reports);
-
-  useEffect(() => {
-    document.title = "Unichem Store | Dashboard";
-
-    dispatch(getDashboardReport());
-
-    return () => {
-      dispatch(resetReport());
-    };
-  }, [dispatch]);
-
-  console.log(report);
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.month),
     datasets: [
@@ -71,7 +44,7 @@ const Dashboard = () => {
           "#f3ba2f",
           "#2a71d0",
         ],
-        borderColor: "#424242",
+        borderColor: "black",
         borderWidth: 2,
       },
     ],
@@ -87,14 +60,9 @@ const Dashboard = () => {
     maintainAspectRatio: false,
   });
 
-  if (isReportLoading) {
-    return (
-      <>
-        <Spinner />
-      </>
-    );
-  }
-
+  useEffect(() => {
+    document.title = "Unichem Store | Dashboard";
+  });
   return (
     <div className="content">
       <Header />
@@ -103,12 +71,12 @@ const Dashboard = () => {
           <div className="card border-0 shadow">
             <div className="card-header d-sm-flex flex-row align-items-center flex-0">
               <div className="d-block mb-3 mb-sm-0">
-                <div className="fs-5 fw-normal mb-2">Total Sales</div>
-                {/* <h2 className="fs-3 fw-extrabold">₱{report && report.yearlySales.toFixed(2)}</h2> */}
+                <div className="fs-5 fw-normal mb-2">Sales Value</div>
+                <h2 className="fs-3 fw-extrabold">₱10,567</h2>
                 <div className="small mt-2">
-                  <span className="fw-normal me-2">By Year</span>
+                  <span className="fw-normal me-2">Yesterday</span>
                   <span className="fas fa-angle-up text-success"></span>
-                  {/* <span className="text-success fw-bold">10.57%</span> */}
+                  <span className="text-success fw-bold">10.57%</span>
                 </div>
               </div>
             </div>

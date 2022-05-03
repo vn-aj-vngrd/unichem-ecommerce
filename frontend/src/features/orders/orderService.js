@@ -93,10 +93,7 @@ const deleteOrder = async (orderId, token) => {
     },
   };
 
-  const response = await axios.delete(
-    API_URL + `deleteOrder/${orderId}`,
-    config
-  );
+  const response = await axios.delete(API_URL + `deleteOrder/${orderId}`, config);
 
   return response.data;
 };

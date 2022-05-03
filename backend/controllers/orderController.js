@@ -5,7 +5,6 @@ const Orderline = require("../models/orderlineModel");
 const Couponlog = require("../models/couponlogModel");
 const Cart = require("../models/cartModel");
 const Product = require("../models/productModel");
-const moment = require("moment");
 
 // @desc    Set Order
 // @route   POST /api/orders
@@ -116,7 +115,7 @@ const getAllOrders = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get User Orders
-// @route   GET /api/orders
+// @route   GET /api/orders/
 // @access  Private
 const getUserOrders = asyncHandler(async (req, res) => {
   // Check for user
@@ -225,12 +224,10 @@ const updateOrder = asyncHandler(async (req, res) => {
     }
   );
 
-  const orderLine = await Orderline.find({ orderID: req.params.id });
-
   let retData = [];
   const temp = {
     _id: updatedOrder._id,
-    userID: updatedOrder._id,
+    userID: userID,
     shippingDiscount: updatedOrder.shippingDiscount,
     orderDiscount: updatedOrder.orderDiscount,
     shippingFee: updatedOrder.shippingFee,
@@ -349,7 +346,6 @@ const deleteOrder = asyncHandler(async (req, res) => {
 
   res.status(200).json({ id: req.params.id });
 });
-
 
 module.exports = {
   setOrder,

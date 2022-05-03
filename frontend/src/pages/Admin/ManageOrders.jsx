@@ -45,7 +45,7 @@ const ManageOrders = () => {
   }, [dispatch]);
 
   let data = [];
-  if (orders && orders.length > 0) {
+  if (orders) {
     orders.forEach((order) => {
       data.push([
         order._id,
@@ -75,8 +75,6 @@ const ManageOrders = () => {
       });
     },
   };
-
-  // console.log(orders);
 
   if (isOrderLoading) {
     return (

@@ -174,8 +174,6 @@ export const orderSlice = createSlice({
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
         state.orders = action.payload;
-        state.data = action.payload;
-        console.log(state.data)
       })
       .addCase(getAllOrders.rejected, (state, action) => {
         state.isOrderLoading = false;
@@ -217,12 +215,10 @@ export const orderSlice = createSlice({
       .addCase(updateOrder.fulfilled, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
-        console.log(state.data);
-        // const idx = state.data.findIndex(
-        //   (obj) => obj._id === action.payload._id
-        // );
-        // state.data[idx] = action.payload;
-        // state.orders = state.data;
+        const idx = state.orders.findIndex(
+          (obj) => obj._id === action.payload._id
+        );
+        state.orders[idx] = action.payload;
       })
       .addCase(updateOrder.rejected, (state, action) => {
         state.isOrderLoading = false;
