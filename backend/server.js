@@ -21,6 +21,7 @@ app.use("/api/reviews", require("./routes/reviewRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
 app.use("/api/coupons", require("./routes/couponRoutes"));
 app.use("/api/promos", require("./routes/promoRoutes"));
+app.use("/api/reports", require("./routes/reportRoutes"));
 
 // Serve Frontend
 if (process.env.NODE_ENV === "production") {
