@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "/api/products/";
 
 // Create new product
-// const createProduct = async (productData, token) => {
+// const setProduct = async (productData, token) => {
 //   const config = {
 //     headers: {
 //       Authorization: `Bearer ${token}`,
@@ -52,26 +52,39 @@ const updateProduct = async (productData, token) => {
   return response.data;
 };
 
+const setProduct = async (productData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post(API_URL, productData, config);
+  console.log(response.data);
+
+  return response.data;
+};
+
 // Delete product
-// const deleteProduct = async (productId, token) => {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
+const deleteProduct = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  console.log(id.id)
 
-//   const response = await axios.delete(API_URL + productId, config);
+  const response = await axios.delete(API_URL + id.id, config);
 
-//   return response.data;
-// };
+  return response.data;
+};
 
 const productService = {
-  //   createProduct,
   getProducts,
   updateProduct,
+  setProduct,
   getOneProduct,
   getFeaturedProducts,
-  //   deleteProduct,
+  deleteProduct,
 };
 
 export default productService;

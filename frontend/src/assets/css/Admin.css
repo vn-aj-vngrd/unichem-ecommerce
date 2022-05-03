@@ -24467,6 +24467,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   color: #fff;
   cursor: pointer;
   font-style: normal;
+  margin-top: 4px;
 }
 
 .add-type {
@@ -24479,7 +24480,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   align-items: center;
   color: #fff;
   margin-bottom: 20px;
-  width: 170px;
+  width: 190px;
 }
 
 .add-type:hover {

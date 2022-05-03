@@ -59,7 +59,6 @@ const getProducts = asyncHandler(async (req, res) => {
     const productAndReviews = { ...products[i], market };
     retData.push(productAndReviews);
   }
-
   res.status(200).json(retData);
 });
 
@@ -185,6 +184,12 @@ const setProduct = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
     res.status(401);
@@ -201,12 +206,25 @@ const setProduct = asyncHandler(async (req, res) => {
     prices: req.body.prices,
     salePrices: req.body.salePrices,
     isSale: req.body.isSale,
+    salePercent: req.body.salePercent,
     description: req.body.description,
     images: req.body.image,
     featured: req.body.featured,
   });
 
-  res.status(200).json(product);
+  let market = {
+    reviewsCount: 0,
+    averageRatings: 0,
+    sold: 0,
+  };
+
+  let retData = {
+    market: market,
+    _doc: product,
+  };
+
+  console.log(retData);
+  res.status(200).json(retData);
 });
 
 // @desc    Update Product
@@ -220,7 +238,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 
-  console.log(product)
+  console.log(product);
 
   // Check user
   if (!req.user) {
@@ -249,21 +267,14 @@ const updateProduct = asyncHandler(async (req, res) => {
 // @route   DELETE /api/products/:id
 // @access  Private
 const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById({
-    productID: req.body.productID,
-    productType: req.body.productType,
-  });
+  console.log(req.params.id);
+
+  const product = await Product.findById(req.params.id);
+  console.log(product);
 
   if (!product) {
     res.status(400);
     throw new Error("Product not found");
-  }
-
-  // Check user
-  const user = await user.findById(req.user.id);
-  if (!user) {
-    res.status(400);
-    throw new Error("User not found");
   }
 
   // Check if user is admin
@@ -272,10 +283,8 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  await Product.remove();
-  res
-    .status(200)
-    .json({ productID: req.body.productID, productType: req.body.productType });
+  await product.remove();
+  res.status(200).json({ _id: req.params.id });
 });
 
 module.exports = {

@@ -31,18 +31,40 @@ const setPromo = asyncHandler(async (req, res) => {
 // @desc    Update a promo
 // @route   PUT /api/promos
 // @access  Private
+// const updatePromo = asyncHandler(async (req, res) => {
+//   const promo = await Promo.findById(req.params.id);
+
+//   if (!promo) {
+//     res.status(400);
+//     throw new Error("Promo not found");
+//   }
+
+//   // Check for user
+//   if (!req.user) {
+//     res.status(401);
+//     throw new Error("User not found");
+//   }
+
+//   // Check for user and admin privilege
+//   if (!req.user && req.user.userType !== "admin") {
+//     res.status(401);
+//     throw new Error("Access is denied.");
+//   }
+
+//   const updatedPromo = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+//     new: true,
+//   });
+
+//   res.status(200).json(updatedPromo);
+// });
+
 const updatePromo = asyncHandler(async (req, res) => {
-  const promo = await Promo.findById(req.params.id);
+  console.log(req.body);
+  const promo = await Promo.findById(req.body._id);
 
   if (!promo) {
     res.status(400);
     throw new Error("Promo not found");
-  }
-
-  // Check for user
-  if (!req.user) {
-    res.status(401);
-    throw new Error("User not found");
   }
 
   // Check for user and admin privilege
@@ -51,10 +73,15 @@ const updatePromo = asyncHandler(async (req, res) => {
     throw new Error("Access is denied.");
   }
 
-  const updatedPromo = await Goal.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
+  const updatedPromo = await Promo.findByIdAndUpdate(
+    {
+      _id: req.body._id,
+    },
+    req.body,
+    { new: true }
+  );
 
+  console.log(updatedPromo);
   res.status(200).json(updatedPromo);
 });
 

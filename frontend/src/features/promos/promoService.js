@@ -23,19 +23,34 @@ const getPromos = async () => {
   return response.data;
 };
 
-// Get specific product
-const updatePromo = async (id, token) => {
+// Update Promo
+const updatePromo = async (promoData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.update(API_URL + id, config);
+  const response = await axios.put(API_URL + "updatePromo", promoData, config);
   // console.log(response.data);
 
   return response.data;
 };
+
+
+// // Get specific product
+// const updatePromo = async (id, token) => {
+//   const config = {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   };
+
+//   const response = await axios.update(API_URL + id, config);
+//   // console.log(response.data);
+
+//   return response.data;
+// };
 
 // Delete product
 const deletePromo = async (id, token) => {

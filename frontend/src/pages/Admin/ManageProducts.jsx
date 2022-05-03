@@ -5,6 +5,7 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 import UpdateProduct from "../../components/UpdateProduct";
+import DeleteProduct from "../../components/DeleteProduct";
 import {
   getProducts,
   resetProduct,
@@ -44,7 +45,6 @@ const ManageProducts = () => {
     );
   }
 
-  console.log(products);
 
   const columns = [
     "Product Image",
@@ -59,12 +59,14 @@ const ManageProducts = () => {
     "Prices",
     "Sale Prices",
     "Sale Status",
+    "Sale Percent",
     "Featured Status",
     "Updated",
     "Created",
     "",
+    "",
   ];
-
+  
   let data = [];
   const maxLength = 50;
   if (products) {
@@ -79,14 +81,11 @@ const ManageProducts = () => {
       temp.push(product._doc.category);
       temp.push(product._doc.specifications.toString().split(",").join(", "));
       temp.push(product._doc.types.toString().split(",").join(", "));
-
       product._doc.description.length > maxLength
         ? temp.push(product._doc.description.substr(0, maxLength).concat("..."))
         : temp.push(product._doc.description.substr(0, maxLength));
-
       temp.push(product._doc.quantities.toString().split(",").join(", "));
       temp.push(product._doc.prices.toString().split(",").join(", "));
-
       let tempSalePrices = [];
       for (let i = 0; i < product._doc.prices.length; i++) {
         tempSalePrices.push(
@@ -94,9 +93,14 @@ const ManageProducts = () => {
             (product._doc.prices[i] * product._doc.salePercent) / 100
         );
       }
-
       temp.push(tempSalePrices.toString().split(",").join(", "));
       temp.push(product._doc.isSale.toString().toUpperCase());
+      
+      if(product._doc.salePercent) {
+        temp.push(product._doc.salePercent.toString().concat("%"));
+      } else {
+        temp.push("0%")
+      }
       temp.push(product._doc.featured.toString().toUpperCase());
       temp.push(
         moment(product._doc.updatedAt).format("YYYY-MM-DD HH:mm:ss").toString()
@@ -105,10 +109,12 @@ const ManageProducts = () => {
         moment(product._doc.createdAt).format("YYYY-MM-DD HH:mm:ss").toString()
       );
       if (product) {
-        console.log(product)
-        temp.push(<UpdateProduct key={product._doc._id} product={product} />);
+        temp.push(<UpdateProduct product={product} />);
       }
 
+      if (product) {
+        temp.push(<DeleteProduct id={product._doc._id} />);
+      }
       data.push(temp);
     });
   }
@@ -125,7 +131,7 @@ const ManageProducts = () => {
             directory="Products"
           />
         </div>
-        {/* <div><CreateProduct /></div> */}
+        <div><CreateProduct /></div>
       </div>
 
       <div className="row mt-3 mb-4">
