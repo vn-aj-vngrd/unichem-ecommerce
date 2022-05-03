@@ -59,8 +59,6 @@ const getProducts = asyncHandler(async (req, res) => {
     const productAndReviews = { ...products[i], market };
     retData.push(productAndReviews);
   }
-  console.log(retData)
-
   res.status(200).json(retData);
 });
 
@@ -217,9 +215,9 @@ const setProduct = asyncHandler(async (req, res) => {
   let retData = {
     market: market,
     _doc: product,
-  }
+  };
 
-  console.log(retData)
+  console.log(retData);
   res.status(200).json(retData);
 });
 
@@ -228,13 +226,13 @@ const setProduct = asyncHandler(async (req, res) => {
 // @access  Private
 const updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.body._id);
-
+   
   if (!product) {
     res.status(400);
     throw new Error("Product not found");
   }
 
-  console.log(product)
+  console.log(product);
 
   // Check user
   if (!req.user) {
@@ -261,23 +259,16 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 // @desc    Delete Product
 // @route   DELETE /api/products/:id
-// @access  Private
+// @access  Private 
 const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById({
-    productID: req.body.productID,
-    productType: req.body.productType,
-  });
+  console.log(req.params.id);
+  
+  const product = await Product.findById(req.params.id);
+  console.log(product);
 
   if (!product) {
     res.status(400);
     throw new Error("Product not found");
-  }
-
-  // Check user
-  const user = await user.findById(req.user.id);
-  if (!user) {
-    res.status(400);
-    throw new Error("User not found");
   }
 
   // Check if user is admin
@@ -286,10 +277,8 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  await Product.remove();
-  res
-    .status(200)
-    .json({ productID: req.body.productID, productType: req.body.productType });
+  await product.remove();
+  res.status(200).json({ _id: req.params.id });
 });
 
 module.exports = {

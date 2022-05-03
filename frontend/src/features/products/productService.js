@@ -65,15 +65,16 @@ const setProduct = async (productData, token) => {
 };
 
 // Delete product
-const deleteProduct = async (productId, token) => {
+const deleteProduct = async (id, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
+  console.log(id.id)
 
-  const response = await axios.delete(API_URL + productId, config);
-  console.log(response.data);
+  const response = await axios.delete(API_URL + id.id, config);
+
   return response.data;
 };
 

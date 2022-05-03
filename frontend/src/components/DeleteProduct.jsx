@@ -1,16 +1,14 @@
 import React from "react";
-import { useForm, useFieldArray } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { deleteProduct } from "../features/products/productSlice";
 import { toast } from "react-toastify";
-import { useState } from "react";
 
-const UpdateProduct = (productID) => {
- 
+const DeleteProduct = (id) => {
   const dispatch = useDispatch();
 
-  const onClick = () => {
-    console.log(productID);
-    dispatch(deleteProduct(productID));
+  const handleDelete = () => {
+
+    dispatch(deleteProduct(id));
     toast.success("Product deleted successfully", {
       position: "top-right",
       autoClose: 5000,
@@ -28,16 +26,14 @@ const UpdateProduct = (productID) => {
       <div className="button">
         <button
           type="button"
-          className="btn"
-          onClick={onClick}
+          className="btn-alt"
+          onClick={handleDelete}
         >
           Delete
         </button>
       </div>
-
-      
     </>
   );
 };
 
-export default UpdateProduct;
+export default DeleteProduct;

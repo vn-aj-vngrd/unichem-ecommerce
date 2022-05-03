@@ -5,7 +5,7 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 import UpdateProduct from "../../components/UpdateProduct";
-import DeleteProduct from "../../components/UpdateProduct";
+import DeleteProduct from "../../components/DeleteProduct";
 import {
   getProducts,
   resetProduct,
@@ -64,6 +64,7 @@ const ManageProducts = () => {
     "Updated",
     "Created",
     "",
+    "",
   ];
   
   let data = [];
@@ -80,14 +81,11 @@ const ManageProducts = () => {
       temp.push(product._doc.category);
       temp.push(product._doc.specifications.toString().split(",").join(", "));
       temp.push(product._doc.types.toString().split(",").join(", "));
-
       product._doc.description.length > maxLength
         ? temp.push(product._doc.description.substr(0, maxLength).concat("..."))
         : temp.push(product._doc.description.substr(0, maxLength));
-
       temp.push(product._doc.quantities.toString().split(",").join(", "));
       temp.push(product._doc.prices.toString().split(",").join(", "));
-
       let tempSalePrices = [];
       for (let i = 0; i < product._doc.prices.length; i++) {
         tempSalePrices.push(
@@ -95,7 +93,6 @@ const ManageProducts = () => {
             (product._doc.prices[i] * product._doc.salePercent) / 100
         );
       }
-
       temp.push(tempSalePrices.toString().split(",").join(", "));
       temp.push(product._doc.isSale.toString().toUpperCase());
       
@@ -104,7 +101,6 @@ const ManageProducts = () => {
       } else {
         temp.push("0%")
       }
-
       temp.push(product._doc.featured.toString().toUpperCase());
       temp.push(
         moment(product._doc.updatedAt).format("YYYY-MM-DD HH:mm:ss").toString()
@@ -117,9 +113,8 @@ const ManageProducts = () => {
       }
 
       if (product) {
-        temp.push(<DeleteProduct product={product._doc._id} />);
+        temp.push(<DeleteProduct id={product._doc._id} />);
       }
-
       data.push(temp);
     });
   }

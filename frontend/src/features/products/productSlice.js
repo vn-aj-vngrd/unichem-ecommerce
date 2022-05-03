@@ -103,7 +103,7 @@ export const updateProduct = createAsyncThunk(
 
 // Delete product
 export const deleteProduct = createAsyncThunk(
-  'products/delete',
+  'products/deleteProduct',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
@@ -201,23 +201,23 @@ export const productSlice = createSlice({
         state.isProductLoading = false;
         state.isProductError = true;
         state.productMessage = action.payload;
-      });
+      })
 
-    //   .addCase(deleteProduct.pending, (state) => {
-    //     state.isProductLoading = true
-    //   })
-    //   .addCase(deleteProduct.fulfilled, (state, action) => {
-    //     state.isProductLoading = false
-    //     state.isProductSuccess = true
-    //     state.products = state.products.filter(
-    //       (product) => product._id !== action.payload.id
-    //     )
-    //   })
-    //   .addCase(deleteProduct.rejected, (state, action) => {
-    //     state.isProductLoading = false
-    //     state.isProductError = true
-    //     state.productMessage = action.payload
-    //   })
+      .addCase(deleteProduct.pending, (state) => {
+        state.isProductLoading = true
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.isProductLoading = false
+        state.isProductSuccess = true
+        state.products = state.products.filter(
+          (product) => product._doc._id !== action.payload._id
+        )
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.isProductLoading = false
+        state.isProductError = true
+        state.productMessage = action.payload
+      })
   },
 });
 
