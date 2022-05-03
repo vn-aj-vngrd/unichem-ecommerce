@@ -59,6 +59,7 @@ const getProducts = asyncHandler(async (req, res) => {
     const productAndReviews = { ...products[i], market };
     retData.push(productAndReviews);
   }
+  console.log(retData)
 
   res.status(200).json(retData);
 });
@@ -201,12 +202,25 @@ const setProduct = asyncHandler(async (req, res) => {
     prices: req.body.prices,
     salePrices: req.body.salePrices,
     isSale: req.body.isSale,
+    salePercent: req.body.salePercent,
     description: req.body.description,
     images: req.body.image,
     featured: req.body.featured,
   });
 
-  res.status(200).json(product);
+  let market = {
+    reviewsCount: 0,
+    averageRatings: 0,
+    sold: 0,
+  };
+
+  let retData = {
+    market: market,
+    _doc: product,
+  }
+
+  console.log(retData)
+  res.status(200).json(retData);
 });
 
 // @desc    Update Product

@@ -5,6 +5,7 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 import UpdateProduct from "../../components/UpdateProduct";
+import DeleteProduct from "../../components/UpdateProduct";
 import {
   getProducts,
   resetProduct,
@@ -44,7 +45,6 @@ const ManageProducts = () => {
     );
   }
 
-  console.log(products);
 
   const columns = [
     "Product Image",
@@ -59,12 +59,13 @@ const ManageProducts = () => {
     "Prices",
     "Sale Prices",
     "Sale Status",
+    "Sale Percent",
     "Featured Status",
     "Updated",
     "Created",
     "",
   ];
-
+  
   let data = [];
   const maxLength = 50;
   if (products) {
@@ -97,6 +98,13 @@ const ManageProducts = () => {
 
       temp.push(tempSalePrices.toString().split(",").join(", "));
       temp.push(product._doc.isSale.toString().toUpperCase());
+      
+      if(product._doc.salePercent) {
+        temp.push(product._doc.salePercent.toString().concat("%"));
+      } else {
+        temp.push("0%")
+      }
+
       temp.push(product._doc.featured.toString().toUpperCase());
       temp.push(
         moment(product._doc.updatedAt).format("YYYY-MM-DD HH:mm:ss").toString()
@@ -105,8 +113,11 @@ const ManageProducts = () => {
         moment(product._doc.createdAt).format("YYYY-MM-DD HH:mm:ss").toString()
       );
       if (product) {
-        console.log(product)
-        temp.push(<UpdateProduct key={product._doc._id} product={product} />);
+        temp.push(<UpdateProduct product={product} />);
+      }
+
+      if (product) {
+        temp.push(<DeleteProduct product={product._doc._id} />);
       }
 
       data.push(temp);
@@ -125,7 +136,7 @@ const ManageProducts = () => {
             directory="Products"
           />
         </div>
-        {/* <div><CreateProduct /></div> */}
+        <div><CreateProduct /></div>
       </div>
 
       <div className="row mt-3 mb-4">

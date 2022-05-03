@@ -25,9 +25,13 @@ const UpdateProduct = (product) => {
     });
   });
 
+  let tempSalePercent = product.product._doc.salePercent
+    ? product.product._doc.salePercent
+    : 0;
+
   const [specificationEmpty, setSpecificationEmpty] = useState(false);
   const [typesEmpty, setTypesEmpty] = useState(false);
-  
+
   const {
     register,
     control,
@@ -44,7 +48,7 @@ const UpdateProduct = (product) => {
       specifications: tempSpecifications,
       types: tempTypes,
       isSale: product.product._doc.isSale,
-      salePercent: product.product._doc.salePercent,
+      salePercent: tempSalePercent,
       featured: product.product._doc.featured,
     },
   });
@@ -66,10 +70,9 @@ const UpdateProduct = (product) => {
     control,
     name: "specifications",
   });
-  
+
   const isSale = watch("isSale");
   // const [isSale, setisSale] = useState(isSaleWatch);
-
 
   const dispatch = useDispatch();
   // console.log(isSale);
@@ -584,10 +587,12 @@ const UpdateProduct = (product) => {
                       <div className="form-group mb-4">
                         <label>Sale Percent</label>
                         <div className="input-group">
-                        {console.log(isSale)}
+                          {console.log(isSale)}
                           <input
                             type="number"
-                            disabled={!isSale || isSale === "false" ? "disabled" : ""}
+                            disabled={
+                              !isSale || isSale === "false" ? "disabled" : ""
+                            }
                             className="form-control"
                             id="types"
                             {...register("salePercent", {
