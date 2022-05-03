@@ -184,6 +184,12 @@ const setProduct = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
     res.status(401);
@@ -226,7 +232,7 @@ const setProduct = asyncHandler(async (req, res) => {
 // @access  Private
 const updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.body._id);
-   
+
   if (!product) {
     res.status(400);
     throw new Error("Product not found");
@@ -259,10 +265,10 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 // @desc    Delete Product
 // @route   DELETE /api/products/:id
-// @access  Private 
+// @access  Private
 const deleteProduct = asyncHandler(async (req, res) => {
   console.log(req.params.id);
-  
+
   const product = await Product.findById(req.params.id);
   console.log(product);
 
