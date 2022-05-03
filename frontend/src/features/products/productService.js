@@ -39,6 +39,19 @@ const getFeaturedProducts = async () => {
   return response.data;
 };
 
+// Update product
+const updateProduct = async (productData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.put(API_URL + "updateProduct", productData, config);
+  // console.log(response.data);
+
+  return response.data;
+};
+
 // Delete product
 // const deleteProduct = async (productId, token) => {
 //   const config = {
@@ -55,6 +68,7 @@ const getFeaturedProducts = async () => {
 const productService = {
   //   createProduct,
   getProducts,
+  updateProduct,
   getOneProduct,
   getFeaturedProducts,
   //   deleteProduct,

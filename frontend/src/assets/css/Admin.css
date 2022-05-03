@@ -18,6 +18,12 @@
     0 1px 1px rgba(17, 24, 39, 0.075);
 }
 
+.error-message {
+  color: #f44336 !important;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
 .close i:hover {
   color: red;
 }
@@ -7642,6 +7648,7 @@ fieldset:disabled .btn {
     border-radius: 0;
   }
 }
+
 .tooltip {
   position: absolute;
   z-index: 1070;
@@ -24411,6 +24418,81 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   height: 100%;
 }
 
+/*======================================
+  Products css
+========================================*/
+
+.product-types-modal > :first-child,
+.product-sale-modal > :first-child,
+.product-specifications-modal > :first-child {
+  padding-right: 5px;
+}
+
+.product-types-modal > :nth-child(2),
+.product-specifications-modal > :nth-child(2) {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.product-types-modal > :nth-child(3) {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.product-types-modal > :last-child,
+.product-sale-modal > :last-child,
+.product-specifications-modal > :last-child {
+  padding-left: 5px;
+}
+
+.remove-type {
+  margin: 28px 0 24px 0;
+  cursor: pointer;
+  border: none;
+}
+
+.remove-type:hover i {
+  background-color: #161d27;
+}
+
+.remove-type-icon {
+  width: 39px;
+  height: 39px;
+  display: flex;
+  background-color: #424242;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: #fff;
+  cursor: pointer;
+  font-style: normal;
+}
+
+.add-type {
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f44336;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin-bottom: 20px;
+  width: 170px;
+}
+
+.add-type:hover {
+  background-color: #b71c1c;
+}
+
+.add-type-icon {
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  font-style: normal;
+  margin-left: 10px;
+}
 /*======================================
   Datatable css
 ========================================*/

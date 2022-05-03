@@ -210,15 +210,17 @@ const setProduct = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update Product
-// @route   PUT /api/products/:id
+// @route   PUT /api/products/updateProduct
 // @access  Private
 const updateProduct = asyncHandler(async (req, res) => {
-  const product = await Product.find(req.body._id);
+  const product = await Product.findById(req.body._id);
 
   if (!product) {
     res.status(400);
     throw new Error("Product not found");
   }
+
+  console.log(product)
 
   // Check user
   if (!req.user) {
@@ -232,10 +234,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  const updatedProduct = await Product.findAndUpdate(
+  const updatedProduct = await Product.findByIdAndUpdate(
     {
-      _id: req.body.productID,
-      productType: req.body.productType,
+      _id: req.body._id,
     },
     req.body,
     { new: true }

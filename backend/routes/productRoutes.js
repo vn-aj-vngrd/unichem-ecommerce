@@ -12,7 +12,8 @@ const {
 const { protect } = require("../middleware/authMiddleware");
 
 router.route("/").get(getProducts).post(protect, setProduct);
-router.route("/:id").put(protect, updateProduct).delete(protect, deleteProduct);
+router.route("/:id").delete(protect, deleteProduct);
+router.put("/updateProduct", protect, updateProduct);
 router.route("/getOneProduct/:id").get(getOneProduct);
 router.route("/getFeaturedProducts").get(getFeaturedProducts);
 

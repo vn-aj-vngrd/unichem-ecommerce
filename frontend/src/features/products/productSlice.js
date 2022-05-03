@@ -82,6 +82,25 @@ export const getFeaturedProducts = createAsyncThunk(
   }
 );
 
+// Update Product
+export const updateProduct = createAsyncThunk(
+  "auth/updateProduct",
+  async (productData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await productService.updateProduct(productData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Delete product
 // export const deleteProduct = createAsyncThunk(
 //   'products/delete',
@@ -159,6 +178,26 @@ export const productSlice = createSlice({
         state.products = action.payload;
       })
       .addCase(getFeaturedProducts.rejected, (state, action) => {
+        state.isProductLoading = false;
+        state.isProductError = true;
+        state.productMessage = action.payload;
+      })
+
+      .addCase(updateProduct.pending, (state) => {
+        state.isProductLoading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.isProductLoading = false;
+        state.isProductSuccess = true;
+        // state.products = {...state.products, action.payload};
+        console.log(state.products)
+        console.log(action.payload)
+        const idx = state.products.findIndex(
+          (obj) => obj._doc._id === action.payload._id
+        );
+        state.products[idx]._doc = action.payload;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.isProductLoading = false;
         state.isProductError = true;
         state.productMessage = action.payload;

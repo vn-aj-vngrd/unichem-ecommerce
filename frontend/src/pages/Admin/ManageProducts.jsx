@@ -5,7 +5,10 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 import UpdateProduct from "../../components/UpdateProduct";
-import { getProducts, resetProduct } from "../../features/products/productSlice";
+import {
+  getProducts,
+  resetProduct,
+} from "../../features/products/productSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../components/Spinner";
 
@@ -14,7 +17,7 @@ const ManageProducts = () => {
   const moment = require("moment");
 
   const { products, isProductLoading, isProductError, productMessage } =
-  useSelector((state) => state.products);
+    useSelector((state) => state.products);
 
   useEffect(() => {
     document.title = "Unichem Store | Products";
@@ -41,7 +44,7 @@ const ManageProducts = () => {
     );
   }
 
-  console.log(products)
+  console.log(products);
 
   const columns = [
     "Product Image",
@@ -64,78 +67,51 @@ const ManageProducts = () => {
 
   let data = [];
   const maxLength = 50;
-  products.forEach((product) => {
-    let temp = [];
-    temp.push(`<img className='avatar  border-gray-100' alt='img' src='${product._doc.images[0]}' />`);
-    temp.push(product._doc._id);
-    temp.push(product._doc.productName);
-    temp.push(product._doc.brand);
-    temp.push(product._doc.category);
-    temp.push(product._doc.specifications.toString().split(',').join(', '));
-    temp.push(product._doc.types.toString().split(',').join(', '));
-    temp.push(product._doc.description.substr(0, maxLength));
-    temp.push(product._doc.quantities.toString().split(',').join(', '));
-    temp.push(product._doc.prices.toString().split(',').join(', '));
+  if (products) {
+    products.forEach((product) => {
+      let temp = [];
+      temp.push(
+        <img className="avatar" alt="img" src={product._doc.images[0]} />
+      );
+      temp.push(product._doc._id);
+      temp.push(product._doc.productName);
+      temp.push(product._doc.brand);
+      temp.push(product._doc.category);
+      temp.push(product._doc.specifications.toString().split(",").join(", "));
+      temp.push(product._doc.types.toString().split(",").join(", "));
 
-    let tempSalePrices = [];
-    for(let i = 0; i < product._doc.prices.length; i++) {
-      tempSalePrices.push(product._doc.prices[i] - (product._doc.prices[i] * product._doc.salePercent) / 100);
-    } 
+      product._doc.description.length > maxLength
+        ? temp.push(product._doc.description.substr(0, maxLength).concat("..."))
+        : temp.push(product._doc.description.substr(0, maxLength));
 
-    temp.push(tempSalePrices.toString().split(',').join(', '));
-    temp.push(product._doc.isSale.toString().toUpperCase());
-    temp.push(product._doc.featured.toString().toUpperCase());
-    temp.push(product._doc.updatedAt);
-    temp.push(product._doc.createdAt);
+      temp.push(product._doc.quantities.toString().split(",").join(", "));
+      temp.push(product._doc.prices.toString().split(",").join(", "));
 
-    data.push(temp);
-  })
+      let tempSalePrices = [];
+      for (let i = 0; i < product._doc.prices.length; i++) {
+        tempSalePrices.push(
+          product._doc.prices[i] -
+            (product._doc.prices[i] * product._doc.salePercent) / 100
+        );
+      }
 
+      temp.push(tempSalePrices.toString().split(",").join(", "));
+      temp.push(product._doc.isSale.toString().toUpperCase());
+      temp.push(product._doc.featured.toString().toUpperCase());
+      temp.push(
+        moment(product._doc.updatedAt).format("YYYY-MM-DD HH:mm:ss").toString()
+      );
+      temp.push(
+        moment(product._doc.createdAt).format("YYYY-MM-DD HH:mm:ss").toString()
+      );
+      if (product) {
+        console.log(product)
+        temp.push(<UpdateProduct key={product._doc._id} product={product} />);
+      }
 
-
-  console.log(data);
-
-  // const data = [
-  //   [
-  //     <img className="avatar  border-gray-100" alt="img" src="" />,
-
-  //     "622c063496e12c68961c34ac",
-  //     "Loctite",
-  //     "Unilever",
-  //     "Adhesives",
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     "Large",
-  //     "Very Good",
-  //     "1",
-  //     "299.99",
-  //     "None",
-  //     "false",
-  //     "false",
-  //     "2022-03-26",
-  //     "2022-03-26",
-  //     // <UpdateProduct />,
-  //   ],
-  //   [
-  //     <img className="avatar  border-gray-100" alt="img" src="" />,
-
-  //     "622c063496e12c68961c34ac",
-  //     "Loctite",
-  //     "Unilever",
-  //     "Adhesives",
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     "Large",
-  //     "Very Good",
-  //     "1",
-  //     "299.99",
-  //     "None",
-  //     "false",
-  //     "false",
-  //     "2022-03-26",
-  //     "2022-03-26",
-  //     // <UpdateProduct />,
-  //   ],
-  // ];
-
+      data.push(temp);
+    });
+  }
 
   return (
     <div className="content">
@@ -149,9 +125,7 @@ const ManageProducts = () => {
             directory="Products"
           />
         </div>
-        <div>
-          {/* <CreateProduct /> */}
-        </div>
+        {/* <div><CreateProduct /></div> */}
       </div>
 
       <div className="row mt-3 mb-4">
