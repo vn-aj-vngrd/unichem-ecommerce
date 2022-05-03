@@ -752,6 +752,31 @@ ol {
   box-shadow: 0px 4px 4px #0000000f;
 }
 
+.btn-coupon {
+  display: inline-block;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 30px;
+  height: 45px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.btn-coupon .btn:hover {
+  color: #fff;
+  background-color: #b71c1c;
+  -webkit-box-shadow: 0px 4px 4px #0000000f;
+  box-shadow: 0px 4px 4px #0000000f;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .button .btn {
     padding: 12px 25px;
@@ -6598,7 +6623,6 @@ ol {
 .order-options .btn-alt {
   margin: 0 7px 0 0;
 }
-
 
 /*======================================
 	Order Details CSS 

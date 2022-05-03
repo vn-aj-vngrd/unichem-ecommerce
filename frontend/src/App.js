@@ -142,10 +142,10 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="users" element={<ManageUsers />} />
-            <Route path="manageorders" element={<ManageOrders />} />
-            <Route path="manageproducts" element={<ManageProducts />} />
-            <Route path="managepromotions" element={<ManagePromotions />} />
-            <Route path="managecoupons" element={<ManageCoupons />} />
+            <Route path="orders" element={<ManageOrders />} />
+            <Route path="products" element={<ManageProducts />} />
+            <Route path="promotions" element={<ManagePromotions />} />
+            <Route path="coupons" element={<ManageCoupons />} />
             <Route path="settings" element={<Settings />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

@@ -19,19 +19,19 @@ const Categories = () => {
               <hr></hr>
               <ul>
                 <li>
-                  <Link to="/products">Construction Adhesives</Link>
+                  <Link to="/products/category/construction_adhesives">Construction Adhesives</Link>
                 </li>
                 <li>
-                  <Link to="/products">Threadlockers</Link>
+                  <Link to="/products/category/threadlockers">Threadlockers</Link>
                 </li>
                 <li>
-                  <Link to="/products">Foam Sealants</Link>
+                  <Link to="/products/category/form_sealants">Foam Sealants</Link>
                 </li>
                 <li>
-                  <Link to="/products">Sealants</Link>
+                  <Link to="/products/category/sealants">Sealants</Link>
                 </li>
                 <li>
-                  <Link to="/products">Epoxies</Link>
+                  <Link to="/products/category/expoxies">Epoxies</Link>
                 </li>
               </ul>
             </div>
@@ -42,16 +42,16 @@ const Categories = () => {
               <hr></hr>
               <ul>
                 <li>
-                  <Link to="/products">Tapes</Link>
+                  <Link to="/products/category/tapes">Tapes</Link>
                 </li>
                 <li>
-                  <Link to="/products">Adhesives</Link>
+                  <Link to="/products/category/adhesives">Adhesives</Link>
                 </li>
                 <li>
-                  <Link to="/products">Window Films</Link>
+                  <Link to="/products/category/window_films">Window Films</Link>
                 </li>
                 <li>
-                  <Link to="/products">Car Tints</Link>
+                  <Link to="/products/category/car_tints">Car Tints</Link>
                 </li>
                 <li>
                   <Link to="/products" className="invisible">
@@ -67,7 +67,7 @@ const Categories = () => {
               <hr></hr>
               <ul>
                 <li>
-                  <Link to="/products">Industrial Oils</Link>
+                  <Link to="/products/category/industrial_oils">Industrial Oils</Link>
                 </li>
                 <li>
                   <Link to="/products" className="invisible">
@@ -93,16 +93,16 @@ const Categories = () => {
               <hr></hr>
               <ul>
                 <li>
-                  <Link to="/products">Housekeeping</Link>
+                  <Link to="/products/category/housekeeping">Housekeeping</Link>
                 </li>
                 <li>
-                  <Link to="/products">Kitchen</Link>
+                  <Link to="/products/category/kitchen">Kitchen</Link>
                 </li>
                 <li>
-                  <Link to="/products">Laundry</Link>
+                  <Link to="/products/category/laundry">Laundry</Link>
                 </li>
                 <li>
-                  <Link to="/products">Restroom</Link>
+                  <Link to="/products/category/restroom">Restroom</Link>
                 </li>
               </ul>
             </div>

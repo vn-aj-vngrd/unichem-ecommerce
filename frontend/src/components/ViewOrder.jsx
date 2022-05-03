@@ -1,5 +1,5 @@
 const ViewOrder = ({ order }) => {
-  console.log(order);
+  // console.log(order);
   return (
     <>
       <div className="button">
@@ -36,24 +36,27 @@ const ViewOrder = ({ order }) => {
                 </div>
 
                 <p className="text-center">Order ID: {order._id}</p>
-
                 <div className="mt-2">
-                  {order.orderLine.map((orderline, index) => (
-                    <div key={index} className="d-flex justify-content-center align-items-center mb-4">
-                      <div className="w-25">
-                        <img src={orderline.image} alt="#" />
+                  {order.orderLine &&
+                    order.orderLine.map((orderline, index) => (
+                      <div
+                        key={index}
+                        className="d-flex justify-content-center align-items-center mb-4"
+                      >
+                        <div className="w-25">
+                          <img src={orderline.image} alt="#" />
+                        </div>
+                        <div className="ms-3">
+                          ID: {orderline.orderID}
+                          <br />
+                          Name: {orderline.productName}
+                          <br />
+                          Type: {orderline.productType}
+                          <br />
+                          Quantity: {orderline.quantity}
+                        </div>
                       </div>
-                      <div className="ms-3">
-                        ID: {orderline.orderID}
-                        <br />
-                        Name: {orderline.productName}
-                        <br />
-                        Type: {orderline.productType}
-                        <br />
-                        Quantity: {orderline.quantity}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             </div>

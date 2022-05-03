@@ -94,6 +94,11 @@ const Login = () => {
                 className="card login-form"
                 onSubmit={handleSubmit(onSubmit)}
               >
+                {loginError && (
+                  <div className="alert alert-danger text-center" role="alert">
+                    <div>⚠ {loginError}</div> 
+                  </div>
+                )}
                 <div className="card-body">
                   <div className="form-group input-group">
                     <label>Email Address</label>
@@ -147,11 +152,6 @@ const Login = () => {
                     <button className="btn" type="submit">
                       Log in
                     </button>
-                  </div>
-                  <div className="text-center mt-4">
-                    {loginError && (
-                      <p className="error-message">⚠ {loginError}</p>
-                    )}
                   </div>
                   <p className="outer-link">
                     Don't have an account yet?{" "}

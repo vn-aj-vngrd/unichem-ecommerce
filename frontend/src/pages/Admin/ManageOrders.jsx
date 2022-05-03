@@ -25,8 +25,8 @@ const ManageOrders = () => {
     "Payment Method",
     "Order Status",
     "Order Date",
-    "Shipping Date",
     "Received Date",
+    "Updated At",
     "",
     "",
   ];
@@ -45,31 +45,33 @@ const ManageOrders = () => {
   }, [dispatch]);
 
   let data = [];
-  orders.forEach((order) => {
-    data.push([
-      order._id,
-      order.userID,
-      order.shippingDiscount + "%",
-      order.orderDiscount + "%",
-      "PHP " + order.shippingFee,
-      "PHP " + order.totalPrice,
-      order.paymentMethod,
-      order.orderStatus,
-      moment(order.createdAt).format("YYYY-MM-D"),
-      moment(order.shippingDate).format("YYYY-MM-D"),
-      moment(order.receivedDate).format("YYYY-MM-D"),
-      <ViewOrder order={order} />,
-      <UpdateOrder order={order} />,
-    ]);
-  });
+  if (orders) {
+    orders.forEach((order) => {
+      data.push([
+        order._id,
+        order.userID,
+        order.shippingDiscount + "%",
+        order.orderDiscount + "%",
+        "PHP " + order.shippingFee.toFixed(2),
+        "PHP " + order.totalPrice.toFixed(2),
+        order.paymentMethod,
+        order.orderStatus,
+        moment(order.createdAt).format("YYYY-MM-DD"),
+        moment(order.statusDates[6].date).format("YYYY-MM-DD"),
+        order.updatedAt,
+        <ViewOrder order={order} />,
+        <UpdateOrder order={order} />,
+      ]);
+    });
+  }
 
   const options = {
     filterType: "checkbox",
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        console.log(data[item.dataIndex][0]);
-        // dispatch(deleteUser(data[item.dataIndex][0]));
+        // console.log(data[item.dataIndex][0]);
+        dispatch(deleteOrder(data[item.dataIndex][0]));
       });
     },
   };

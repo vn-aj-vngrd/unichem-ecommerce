@@ -328,10 +328,8 @@ const Navbar = ({ userType }) => {
                             <Link to="/account/reviews">My Reviews</Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/">
-                              <button className="logout-btn" onClick={onLogout}>
-                                Log out
-                              </button>
+                            <Link to="/" onClick={onLogout}>
+                              Logout
                             </Link>
                           </li>
                         </ul>
@@ -374,13 +372,8 @@ const Navbar = ({ userType }) => {
                                 <Link to="/account/reviews">My Reviews</Link>
                               </li>
                               <li className="nav-item">
-                                <Link to="/">
-                                  <button
-                                    className="logout-btn"
-                                    onClick={onLogout}
-                                  >
-                                    Log out
-                                  </button>
+                                <Link to="/" onClick={onLogout}>
+                                  Logout
                                 </Link>
                               </li>
                             </ul>
@@ -526,7 +519,7 @@ const Navbar = ({ userType }) => {
               </li>
 
               <li className="nav-item">
-                <Link to="/manageorders" className="nav-link">
+                <Link to="/orders" className="nav-link">
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
@@ -547,7 +540,7 @@ const Navbar = ({ userType }) => {
               </li>
 
               <li className="nav-item">
-                <Link to="/manageproducts" className="nav-link">
+                <Link to="/products" className="nav-link">
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
@@ -568,7 +561,7 @@ const Navbar = ({ userType }) => {
               </li>
 
               <li className="nav-item">
-                <Link to="/managepromotions" className="nav-link">
+                <Link to="/promotions" className="nav-link">
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"
@@ -587,7 +580,7 @@ const Navbar = ({ userType }) => {
               </li>
 
               <li className="nav-item">
-                <Link to="/managecoupons" className="nav-link">
+                <Link to="/coupons" className="nav-link">
                   <span className="sidebar-icon">
                     <svg
                       className="icon icon-xs me-2"

@@ -64,7 +64,7 @@ const Cart = () => {
     return sum;
   }, 0);
 
-  const shippingFee = 100; //Initial Value
+  const shippingFee = 0; //Initial Value
   const total = shippingFee + subtotal;
 
   const selectAll =
