@@ -208,7 +208,7 @@ const setProduct = asyncHandler(async (req, res) => {
     isSale: req.body.isSale,
     salePercent: req.body.salePercent,
     description: req.body.description,
-    images: req.body.image,
+    images: req.body.images,
     featured: req.body.featured,
   });
 
@@ -267,10 +267,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 // @route   DELETE /api/products/:id
 // @access  Private
 const deleteProduct = asyncHandler(async (req, res) => {
-  console.log(req.params.id);
-
   const product = await Product.findById(req.params.id);
-  console.log(product);
 
   if (!product) {
     res.status(400);
