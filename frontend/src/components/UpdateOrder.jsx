@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { updateOrder } from "../features/orders/orderSlice";
+import { updateOrder, getAllOrders } from "../features/orders/orderSlice";
 const moment = require("moment");
 
 const UpdateOrder = ({ order }) => {
@@ -13,6 +14,14 @@ const UpdateOrder = ({ order }) => {
   } = useForm();
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(getAllOrders());
+    return () => {
+      // dispatch(getAllOrders());
+      // dispatch(resetOrder);
+    };
+  }, [dispatch]);
 
   const awaitingConfirmationDate = moment(order.statusDates[0].date).format(
     "YYYY-MM-DD"
