@@ -25,7 +25,7 @@ const ManageOrders = () => {
     "Payment Method",
     "Order Status",
     "Order Date",
-    "Received Date",
+    "Completed Date",
     "Updated At",
     "",
     "",
@@ -57,12 +57,22 @@ const ManageOrders = () => {
         order.paymentMethod,
         order.orderStatus,
         moment(order.createdAt).format("YYYY-MM-DD"),
-        moment(order.statusDates[6].date).format("YYYY-MM-DD"),
-        order.updatedAt,
+        order.statusDates[6].date ? order.statusDates[6].date : "N/A",
+        moment(order.updatedAt).format("lllll"),
         <ViewOrder order={order} />,
         <UpdateOrder order={order} />,
       ]);
     });
+  }
+
+  if (isOrderLoading) {
+    dispatch(getAllOrders());
+
+    return (
+      <>
+        <Spinner />
+      </>
+    );
   }
 
   const options = {
@@ -75,16 +85,6 @@ const ManageOrders = () => {
       });
     },
   };
-
-  // console.log(orders);
-
-  if (isOrderLoading) {
-    return (
-      <>
-        <Spinner />
-      </>
-    );
-  }
 
   return (
     <div className="content">

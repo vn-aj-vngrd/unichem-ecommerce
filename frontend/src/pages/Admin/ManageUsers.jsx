@@ -6,6 +6,7 @@ import DataTable from "../../components/DataTable";
 import { getUsers, deleteUser, resetUser } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner";
+const moment = require("moment");
 
 const ManageUsers = () => {
   const columns = [
@@ -39,6 +40,8 @@ const ManageUsers = () => {
   const data = users.map(Object.values);
   data.forEach((item) => {
     item[8] = item[8] ? "Yes" : "No";
+    item[9] = moment(item[9]).format('lllll');
+    item[10] = moment(item[10]).format('lllll');
   });
 
   const options = {

@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
 import Spinner from "../../components/Spinner";
+const moment = require("moment");
 
 const Checkout = () => {
   let itemSubtotal = 0;
@@ -302,80 +303,82 @@ const Checkout = () => {
 
     let orderStatus = "Awaiting Confirmation";
 
+    const today = moment();
+
     const statusDates = [
       // 0 - Awaiting Confirmation
       {
-        date: new Date(),
+        date: today.format("YYYY-MM-DD"),
         status: "Awaiting confirmation",
         desc: "Please wait for the confirmation of your order.",
       },
 
       // 1 - Awaiting Payment
       {
-        date: "0000-00-00 00:00:00",
+        date: "",
         status: "Awaiting Payment",
         desc: "You have completed the checkout process, but payment has yet to be confirmed.",
       },
 
       // 2 - Awaiting Fulfillment
       {
-        date: "0000-00-00 00:00:00",
+        date: "",
         status: "Awaiting Fulfillment",
         desc: "You have completed the checkout process and payment has been confirmed.",
       },
 
       // 3 - Awaiting Shipment
       {
-        date: new Date().setDate(new Date().getDate() + 5),
+        date: "",
         status: "Awaiting Shipment",
         desc: "Your order has been pulled and packaged and is awaiting collection from a shipping provider.",
       },
 
       // 4 - Shipped
       {
-        date: "0000-00-00 00:00:00",
+        date: "",
         status: "Shipped",
         desc: "Your order has been shipped and is on its way to you.",
       },
 
       // 5 - Awaiting Pickup
       {
-        date: "0000-00-00 00:00:00",
+        date: "",
         status: "Awaiting Pickup",
         desc: "Your order has been packaged and is awaiting customer pickup from a seller-specified location.",
       },
 
       // 6 - Completed
       {
-        date: new Date().setDate(new Date().getDate() + 20),
+        date: "",
         status: "Completed",
         desc: "Your order has been shipped/picked up, and receipt is confirmed.",
       },
 
       // 7 - Cancelled
       {
-        date: "0000-00-00 00:00:00",
+        date: "",
         status: "Cancelled",
         desc: "Your order has been cancelled due to the customer's reason.",
       },
 
       // 8 - Declined
       {
-        date: "0000-00-00 00:00:00",
+        date: "",
         status: "Declined",
         desc: "Your order has been declined due to a stock inconsistency by the admin.",
       },
 
       // 9 - Awaiting Return
       {
-        date: "0000-00-00 00:00:00",
+        date: "",
         status: "Awaiting Return",
         desc: "The return process is on-going. We are waiting for the customer to return the item.",
       },
 
       // 10 - Returned
       {
-        date: "0000-00-00 00:00:00",
+        date: "",
         status: "Returned",
         desc: "Your order has been returned and refunded based on the company's policy.",
       },
