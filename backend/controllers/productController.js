@@ -283,6 +283,12 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
   // Check if user is admin
   if (req.user.userType.toString() !== "admin") {
     res.status(401);
