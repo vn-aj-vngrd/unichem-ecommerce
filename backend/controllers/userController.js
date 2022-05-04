@@ -223,7 +223,9 @@ const getUsers = asyncHandler(async (req, res) => {
     throw new Error("Access Denied");
   }
 
-  const users = await User.find({ userType: "customer" });
+  const users = await User.find({ userType: "customer" }).sort({
+    createdAt: "desc",
+  });
 
   res.status(200).json(users);
 });

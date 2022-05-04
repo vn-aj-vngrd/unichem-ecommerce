@@ -109,7 +109,7 @@ const Dashboard = () => {
           data.datasets[0].data = report.todayMode.map((data) => data.sales);
 
           reportDesc.label = "Today";
-          reportDesc.sales = report.todayData.todaySales;
+          reportDesc.sales = report.todayData.todaySales.toFixed(2);
           reportDesc.users = report.todayData.todayUsers;
           reportDesc.orders = report.todayData.todayOrders;
           reportDesc.products = report.todayData.todayProducts;
@@ -125,7 +125,7 @@ const Dashboard = () => {
           data.datasets[0].data = report.weekMode.map((data) => data.sales);
 
           reportDesc.label = "This Week";
-          reportDesc.sales = report.weeklyData.weeklySales;
+          reportDesc.sales = report.weeklyData.weeklySales.toFixed(2);
           reportDesc.users = report.weeklyData.weeklyUsers;
           reportDesc.orders = report.weeklyData.weeklyOrders;
           reportDesc.products = report.weeklyData.weeklyProducts;
@@ -142,7 +142,7 @@ const Dashboard = () => {
           data.datasets[0].data = report.monthMode.map((data) => data.sales);
 
           reportDesc.label = "This Month";
-          reportDesc.sales = report.monthlyData.monthlySales;
+          reportDesc.sales = report.monthlyData.monthlySales.toFixed(2);
           reportDesc.users = report.monthlyData.monthlyUsers;
           reportDesc.orders = report.monthlyData.monthlyOrders;
           reportDesc.products = report.monthlyData.monthlyProducts;
@@ -158,7 +158,7 @@ const Dashboard = () => {
           data.datasets[0].data = report.yearMode.map((data) => data.sales);
 
           reportDesc.label = "This Year";
-          reportDesc.sales = report.yearlyData.yearlySales;
+          reportDesc.sales = report.yearlyData.yearlySales.toFixed(2);
           reportDesc.users = report.yearlyData.yearlyUsers;
           reportDesc.orders = report.yearlyData.yearlyOrders;
           reportDesc.products = report.yearlyData.yearlyProducts;
@@ -172,7 +172,7 @@ const Dashboard = () => {
           data.datasets[0].data = report.totalMode.map((data) => data.sales);
 
           reportDesc.label = "Total";
-          reportDesc.sales = report.totalData.totalSales;
+          reportDesc.sales = report.totalData.totalSales.toFixed(2);
           reportDesc.users = report.totalData.totalUsers;
           reportDesc.orders = report.totalData.totalOrders;
           reportDesc.products = report.totalData.totalProducts;

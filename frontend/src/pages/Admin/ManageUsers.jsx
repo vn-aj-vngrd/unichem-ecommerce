@@ -15,7 +15,6 @@ const ManageUsers = () => {
     "Email",
     "Sex",
     "Birthday",
-    "Password",
     "Role",
     "Profile",
     "Verified",
@@ -37,13 +36,27 @@ const ManageUsers = () => {
     };
   }, [dispatch]);
 
-  const data = users.map(Object.values);
-  data.forEach((item) => {
-    item[7] = <img src={item[7]} alt="" className="avatar rounded-circle border-gray-100" />;
-    item[8] = item[8] ? "Yes" : "No";
-    item[9] = moment(item[9]).format("llll");
-    item[10] = moment(item[10]).format("llll");
-  });
+  let data = [];
+  if (users && users.length > 0) {
+    users.forEach((user) => {
+      data.push([
+        user._id,
+        user.name,
+        user.email,
+        user.sex,
+        user.birthday,
+        user.userType,
+        <img
+          src={user.image}
+          alt=""
+          className="avatar rounded-circle border-gray-100"
+        />,
+        user.verified ? "Yes" : "No",
+        moment(user.createdAt).format("llll"),
+        moment(user.updatedAt).format("llll"),
+      ]);
+    });
+  }
 
   const options = {
     // filterType: "checkbox",
