@@ -32,9 +32,9 @@ const Header = () => {
         >
           <div className="d-flex align-items-center"></div>
           <ul className="navbar-nav align-items-center">
-            <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <Notification />
-            </li>
+            </li> */}
             <li className="nav-item dropdown ms-lg-3">
               <a
                 className="nav-link dropdown-toggle pt-1 px-0"
