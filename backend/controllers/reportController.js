@@ -51,7 +51,7 @@ const getDashboardReport = asyncHandler(async (req, res) => {
     { $group: { _id: null, value: { $count: {} } } },
   ]);
 
-  const userCount = await User.find().count();
+  const userCount = await User.find({ userType: "customer" }).count();
   const productCount = await Product.find().count();
 
   const todayMode = await Order.aggregate([
