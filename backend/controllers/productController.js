@@ -196,6 +196,15 @@ const setProduct = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
+  const existingProduct = await Product.findOne({
+    productName: req.body.productName,
+  });
+
+  if (existingProduct) {
+    res.status(400);
+    throw new Error("Product name already exists.");
+  }
+
   const product = await Product.create({
     productName: req.body.productName,
     brand: req.body.brand,

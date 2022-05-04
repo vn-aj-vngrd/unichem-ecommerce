@@ -41,7 +41,6 @@ const setCoupon = async (couponData, token) => {
   };
 
   const response = await axios.post(API_URL, couponData, config);
-  console.log(response.data);
 
   return response.data;
 };

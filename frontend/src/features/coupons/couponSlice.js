@@ -119,7 +119,7 @@ export const couponSlice = createSlice({
       .addCase(setCoupon.fulfilled, (state, action) => {
         state.isCouponLoading = false;
         state.isCouponSuccess = true;
-        state.products = [...state.products, action.payload]
+        state.coupons = [...state.coupons, action.payload]
       })
       .addCase(setCoupon.rejected, (state, action) => {
         state.isCouponLoading = false;

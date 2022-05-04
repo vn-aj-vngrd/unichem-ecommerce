@@ -99,7 +99,7 @@ const ManageCoupons = () => {
           />
         </div>
         <div>
-          {/* <CreateCoupon /> */}
+          <CreateCoupon />
         </div>
       </div>
 

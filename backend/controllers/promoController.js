@@ -17,10 +17,6 @@ const getPromos = asyncHandler(async (req, res) => {
 // @route   POST /api/promos
 // @access  Private
 const setPromo = asyncHandler(async (req, res) => {
-  if (!req.user) {
-    res.status(400);
-    throw new Error("User not found");
-  }
 
   // Check for user
   if (!req.user) {
@@ -34,8 +30,6 @@ const setPromo = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  console.log(req.body);
-  console.log("precreate");
   const promo = await Promo.create({
     promoName: req.body.promoName,
     description: req.body.description,
@@ -44,8 +38,6 @@ const setPromo = asyncHandler(async (req, res) => {
     expiryDate: req.body.expiryDate,
   });
 
-  console.log("test");
-  console.log(promo);
   res.status(200).json(promo);
 });
 

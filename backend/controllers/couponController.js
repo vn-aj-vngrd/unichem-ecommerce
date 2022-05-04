@@ -65,39 +65,41 @@ const validateCoupon = asyncHandler(async (req, res) => {
 // @route   POST /api/coupons
 // @access  Private
 const setCoupon = asyncHandler(async (req, res) => {
-  const {
-    couponCode,
-    couponType,
-    description,
-    limit,
-    percentOff,
-    requiredTotal,
-    startDate,
-    expiryDate,
-  } = req.body;
+  console.log(req.body);
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  // Check if user is not an admin
+  if (req.user.userType !== "admin") {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
 
   const existingCoupon = await Coupon.findOne({
-    couponCode,
+    couponCode: req.body.couponCode,
   });
 
   if (existingCoupon) {
     res.status(400);
     throw new Error("Coupon Code already exists.");
   }
-
+  
   // If Coupon does not exist then create.
-  const newCoupon = await Coupon.create({
-    couponCode,
-    couponType,
-    description,
-    limit,
-    percentOff,
-    requiredTotal,
-    startDate,
-    expiryDate,
+  const coupon = await Coupon.create({
+    couponCode: req.body.couponCode,
+    couponType: req.body.couponType,
+    description: req.body.description,
+    discount: req.body.discount,
+    limit: req.body.limit,
+    requiredAmount: req.body.requiredAmount,
+    startDate: req.body.startDate,
+    expiryDate: req.body.expiryDate,
   });
 
-  res.status(200).json(newCoupon);
+  res.status(200).json(coupon);
 });
 
 // @desc    Update Coupon
