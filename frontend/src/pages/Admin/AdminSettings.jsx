@@ -1,23 +1,64 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header";
+import { updateAdmin, resetUser } from "../../features/auth/authSlice";
 import Footer from "../../components/Footer";
 import SectionTitle from "../../components/SectionTitle";
 import logo from "../../assets/images/logo.svg";
+import Spinner from "../../components/Spinner";
+import { toast } from "react-toastify";
 
 const AdminSettings = () => {
   const {
     register,
     handleSubmit,
-    // watch,
+    watch,
+    reset,
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
+  const { isLoading, message, isError, isSuccess } = useSelector(
+    (state) => state.auth
+  );
+
   useEffect(() => {
     document.title = "Unichem Store | Settings";
-  });
 
-  const onSubmit = (data) => {};
+    if (isSuccess) {
+      toast.success("Password updated successfully");
+    }
+
+    if (isError) {
+      toast.error(message);
+    }
+
+    return () => {
+      dispatch(resetUser());
+    };
+  }, [dispatch, isSuccess, isError, message]);
+
+  const password = watch("newPassword");
+
+  const onSubmit = (data) => {
+    const orderParams = {
+      currentPassword: data.currentPassword,
+      password: data.newPassword,
+    };
+
+    // console.log(orderParams);
+    reset();
+    dispatch(updateAdmin(orderParams));
+  };
+
+  if (isLoading) {
+    return (
+      <>
+        <Spinner />
+      </>
+    );
+  }
 
   return (
     <div className="content">
@@ -46,7 +87,8 @@ const AdminSettings = () => {
                         },
                         minLength: {
                           value: 8,
-                          message: "Current Password must be at least 8 characters",
+                          message:
+                            "Current Password must be at least 8 characters",
                         },
                       })}
                       style={{
@@ -100,13 +142,13 @@ const AdminSettings = () => {
                           value: true,
                           message: "Confirm New Password is required",
                         },
-                        minLength: {
-                          value: 8,
-                          message: "Confirm New Password must be at least 8 characters",
-                        },
+                        validate: (value) =>
+                          password === value || "Passwords do not match",
                       })}
                       style={{
-                        border: errors.confirmNewPassword ? "1px solid #f44336" : "",
+                        border: errors.confirmNewPassword
+                          ? "1px solid #f44336"
+                          : "",
                       }}
                     />
                     {errors.confirmNewPassword && (

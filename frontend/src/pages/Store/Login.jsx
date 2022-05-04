@@ -49,14 +49,7 @@ const Login = () => {
     if (isSuccess || user) {
       // const temp = localStorage.getItem("user");
       // const user = JSON.parse(temp);
-      toast.success(`Welcome to Unichem Store, ${user.name.split(" ")[0]}!`, {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.success(`Welcome to Unichem Store, ${user.name.split(" ")[0]}!`);
 
       navigate("/");
     }
@@ -96,7 +89,7 @@ const Login = () => {
               >
                 {loginError && (
                   <div className="alert alert-danger text-center" role="alert">
-                    <div>⚠ {loginError}</div> 
+                    <div>⚠ {loginError}</div>
                   </div>
                 )}
                 <div className="card-body">

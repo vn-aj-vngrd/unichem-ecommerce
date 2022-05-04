@@ -126,7 +126,9 @@ const loginUser = asyncHandler(async (req, res) => {
   // User does not exist and incorrect password
   if (!user || !(await bcrypt.compare(password, user.password))) {
     res.status(400);
-    throw new Error("You've entered a wrong email or password. Please try again.");
+    throw new Error(
+      "You've entered a wrong email or password. Please try again."
+    );
   }
 
   // User exists but unverified
@@ -462,6 +464,36 @@ const recoverAccount = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Account's password has been updated" });
 });
 
+// @desc    Update admin data
+// @route   POST /api/users/updateAdmin
+// @access  Private
+const updateAdmin = asyncHandler(async (req, res) => {
+  if (!req.user && req.user.userType !== "admin") {
+    res.status(401);
+    throw new Error("Access Denied");
+  }
+
+  const user = await User.findById(req.user._id);
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  }
+
+  if (req.body.currentPassword) {
+    if (await bcrypt.compare(req.body.currentPassword, user.password)) {
+      // hash the password using bcrypt
+      const salt = await bcrypt.genSalt(10);
+      req.body.password = await bcrypt.hash(req.body.password, salt);
+    } else {
+      res.status(400);
+      throw new Error("Your current password is incorrect.");
+    }
+  }
+
+  res.status(200).json({ message: "Password updated successfully" });
+});
+
 // Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -479,4 +511,5 @@ module.exports = {
   createRecovery,
   validateRecovery,
   recoverAccount,
+  updateAdmin,
 };

@@ -10,20 +10,23 @@ const {
   createRecovery,
   validateRecovery,
   recoverAccount,
+  updateAdmin,
 } = require("../controllers/userController");
 const { protect } = require("../middleware/authMiddleware");
 
 router.post("/signup", registerUser);
 router.post("/login", loginUser);
+router.post("/:id/recoverAccount/:token", recoverAccount);
 
 router.get("/getUsers", protect, getUsers);
+router.get("/:id/validateRecovery/:token", validateRecovery);
+
 router.put("/updateUser", protect, updateUser);
-router.delete("/deleteUser/:id", protect, deleteUser);
+router.put("/updateAdmin", protect, updateAdmin);
 
 router.post("/:id/verify/:token", verifyUser);
-
 router.post("/createRecovery", createRecovery);
-router.get("/:id/validateRecovery/:token", validateRecovery);
-router.post("/:id/recoverAccount/:token", recoverAccount);
+
+router.delete("/deleteUser/:id", protect, deleteUser);
 
 module.exports = router;
