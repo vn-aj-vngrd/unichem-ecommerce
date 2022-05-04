@@ -174,8 +174,6 @@ export const orderSlice = createSlice({
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
         state.orders = action.payload;
-        state.data = action.payload;
-        console.log(state.data)
       })
       .addCase(getAllOrders.rejected, (state, action) => {
         state.isOrderLoading = false;
@@ -195,6 +193,7 @@ export const orderSlice = createSlice({
         state.isOrderLoading = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
+        state.isOrders = true;
       })
       // Get One Order Case
       .addCase(getOneOrder.pending, (state) => {
@@ -217,12 +216,11 @@ export const orderSlice = createSlice({
       .addCase(updateOrder.fulfilled, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
-        console.log(state.data);
-        // const idx = state.data.findIndex(
-        //   (obj) => obj._id === action.payload._id
-        // );
-        // state.data[idx] = action.payload;
-        // state.orders = state.data;
+        const idx = state.orders.findIndex(
+          (order) => order._id === action.payload._id
+        );
+        state.orders[idx] = action.payload;
+        // state.orders = [];
       })
       .addCase(updateOrder.rejected, (state, action) => {
         state.isOrderLoading = false;

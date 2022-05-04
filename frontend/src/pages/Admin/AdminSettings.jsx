@@ -1,63 +1,126 @@
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SectionTitle from "../../components/SectionTitle";
 import logo from "../../assets/images/logo.svg";
 
 const AdminSettings = () => {
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    formState: { errors },
+  } = useForm();
+
   useEffect(() => {
     document.title = "Unichem Store | Settings";
   });
+
+  const onSubmit = (data) => {};
+
   return (
     <div className="content">
       <Header />
-      <SectionTitle title="Settings" subtitle="Manage admin settings" directory="Settings"  />
+      <SectionTitle
+        title="Settings"
+        subtitle="Manage admin settings here."
+        directory="Settings"
+      />
       <div className="row mt-3">
         <div className="col-12 col-xl-8">
           <div className="card card-body border-0 shadow mb-4">
-            <h2 className="h5 mb-4">Admin Information</h2>
-            <form>
+            <h2 className="h5 mb-4">Change Password</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <div>
-                    <label>Email</label>
-                    <input
-                      className="form-control"
-                      type="email"
-                      value="Sample Text..."
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div>
-                    <label>Name</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      value="Sample Text..."
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <div>
-                    <label>Password</label>
+                    <label>Current Password</label>
                     <input
                       className="form-control"
                       type="password"
-                      value="Sample Text..."
-                      required
+                      {...register("currentPassword", {
+                        required: {
+                          value: true,
+                          message: "Current Password is required",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "Current Password must be at least 8 characters",
+                        },
+                      })}
+                      style={{
+                        border: errors.currentPassword
+                          ? "1px solid #f44336"
+                          : "",
+                      }}
                     />
+                    {errors.currentPassword && (
+                      <p className="error-message">
+                        ⚠ {errors.currentPassword.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <div>
+                    <label>New Password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      {...register("newPassword", {
+                        required: {
+                          value: true,
+                          message: "New Password is required",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "New Password must be at least 8 characters",
+                        },
+                      })}
+                      style={{
+                        border: errors.newPassword ? "1px solid #f44336" : "",
+                      }}
+                    />
+                    {errors.newPassword && (
+                      <p className="error-message">
+                        ⚠ {errors.newPassword.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div>
+                    <label>Confirm New Password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      {...register("confirmNewPassword", {
+                        required: {
+                          value: true,
+                          message: "Confirm New Password is required",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "Confirm New Password must be at least 8 characters",
+                        },
+                      })}
+                      style={{
+                        border: errors.confirmNewPassword ? "1px solid #f44336" : "",
+                      }}
+                    />
+                    {errors.confirmNewPassword && (
+                      <p className="error-message">
+                        ⚠ {errors.confirmNewPassword.message}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
+              <div className="button mt-4">
+                <button className="btn">Save Changes</button>
+              </div>
             </form>
-            <div className="button mt-3">
-              <button className="btn">Save Changes</button>
-            </div>
           </div>
         </div>
         <div className="col-12 col-xl-4">
@@ -65,7 +128,7 @@ const AdminSettings = () => {
             <div className="col-12 mb-4">
               <div
                 className="card shadow border-0 text-center p-0"
-                style={{ height: `326px` }}
+                style={{ height: `320px` }}
               >
                 <div
                   className="container p-3"

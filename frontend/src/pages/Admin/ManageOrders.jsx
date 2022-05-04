@@ -21,11 +21,12 @@ const ManageOrders = () => {
     "Shipping Discount",
     "Order Discount",
     "Shipping Fee",
+    "Subtotal",
     "Total Price",
     "Payment Method",
     "Order Status",
     "Order Date",
-    "Received Date",
+    "Completed Date",
     "Updated At",
     "",
     "",
@@ -53,16 +54,29 @@ const ManageOrders = () => {
         order.shippingDiscount + "%",
         order.orderDiscount + "%",
         "PHP " + order.shippingFee.toFixed(2),
+        "PHP " + order.subtotal.toFixed(2),
         "PHP " + order.totalPrice.toFixed(2),
         order.paymentMethod,
         order.orderStatus,
-        moment(order.createdAt).format("YYYY-MM-DD"),
-        moment(order.statusDates[6].date).format("YYYY-MM-DD"),
-        order.updatedAt,
+        moment(order.createdAt).format("llll"),
+        order.statusDates[6].date
+          ? moment(order.statusDates[6].date).format("llll")
+          : "N/A",
+        moment(order.updatedAt).format("llll"),
         <ViewOrder order={order} />,
         <UpdateOrder order={order} />,
       ]);
     });
+  }
+
+  if (isOrderLoading) {
+    dispatch(getAllOrders());
+
+    return (
+      <>
+        <Spinner />
+      </>
+    );
   }
 
   const options = {
@@ -76,16 +90,6 @@ const ManageOrders = () => {
     },
   };
 
-  // console.log(orders);
-
-  if (isOrderLoading) {
-    return (
-      <>
-        <Spinner />
-      </>
-    );
-  }
-
   return (
     <div className="content">
       <Header />
@@ -95,12 +99,14 @@ const ManageOrders = () => {
         directory="Orders"
       />
       <div className="row mt-3 mb-4">
-        <DataTable
-          title="Orders"
-          columns={columns}
-          data={data}
-          options={options}
-        />
+        {orders && orders.length >= 0 && (
+          <DataTable
+            title="Orders"
+            columns={columns}
+            data={data}
+            options={options}
+          />
+        )}
       </div>
       <Footer userType="admin" />
     </div>

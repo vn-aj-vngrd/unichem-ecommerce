@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import {
   getDashboardReport,
   resetReport,
@@ -9,42 +10,9 @@ import Footer from "../../components/Footer";
 import LineChart from "../../components/LineChart";
 import Spinner from "../../components/Spinner";
 
-const UserData = [
-  {
-    month: "January 2022",
-    sales: 80000,
-  },
-  {
-    month: "February 2021",
-    sales: 45677,
-  },
-  {
-    month: "February 2021",
-    sales: 78888,
-  },
-  {
-    month: "February 2021",
-    sales: 90000,
-  },
-  {
-    month: "February 2021",
-    sales: 4300,
-  },
-  {
-    month: "February 2021",
-    sales: 4300,
-  },
-  {
-    month: "February 2021",
-    sales: 4300,
-  },
-  {
-    month: "February 2021",
-    sales: 4300,
-  },
-];
-
 const Dashboard = () => {
+  const { register, watch } = useForm();
+
   const dispatch = useDispatch();
   const { report, isReportLoading } = useSelector((state) => state.reports);
 
@@ -58,34 +26,91 @@ const Dashboard = () => {
     };
   }, [dispatch]);
 
-  console.log(report);
-  const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.month),
+  // console.log(watch("chartMode"));
+  // console.log(report);
+
+  let data = {
+    labels: null,
     datasets: [
       {
-        data: UserData.map((data) => data.sales),
+        data: null,
         backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
+          "#f44336",
+          "#e91e63",
+          "#9c27b0",
+          "#673ab7",
+          "#3f51b5",
+          "#2196f3",
+          "#03a9f4",
+          "#00bcd4",
+          "#009688",
+          "#4caf50",
+          "#8bc34a",
+          "#cddc39",
+          "#ffeb3b",
+          "#ffc107",
+          "#ff9800",
+          "#ff5722",
+          "#795548",
+          "#9e9e9e",
+          "#607d8b",
         ],
         borderColor: "#424242",
         borderWidth: 2,
       },
     ],
-  });
+  };
 
-  const [optionsData, setOptionsData] = useState({
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    maintainAspectRatio: false,
-  });
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  if (report) {
+    switch (watch("chartMode")) {
+      case "today":
+        if (report.todayMode) {
+          data.labels = report.todayMode.map((data) => `Hour ${data.hour}`);
+          data.datasets[0].data = report.todayMode.map((data) => data.sales);
+        }
+        break;
+      case "week":
+        if (report.weekMode) {
+          data.labels = report.weekMode.map(
+            (data) =>
+              `Week ${data.week} - ${months[data.month - 1]} ${data.year}`
+          );
+          data.datasets[0].data = report.weekMode.map((data) => data.sales);
+        }
+        break;
+      case "month":
+        if (report.monthMode) {
+          data.labels = report.monthMode.map(
+            (data) => `${months[data.month - 1]} ${data.year}`
+          );
+          data.datasets[0].data = report.monthMode.map((data) => data.sales);
+        }
+        break;
+      case "year":
+        if (report.yearMode) {
+          data.labels = report.yearMode.map((data) => data.year);
+          data.datasets[0].data = report.yearMode.map((data) => data.sales);
+        }
+        break;
+      default:
+        break;
+    }
+  }
 
   if (isReportLoading) {
     return (
@@ -104,16 +129,26 @@ const Dashboard = () => {
             <div className="card-header d-sm-flex flex-row align-items-center flex-0">
               <div className="d-block mb-3 mb-sm-0">
                 <div className="fs-5 fw-normal mb-2">Total Sales</div>
-                {/* <h2 className="fs-3 fw-extrabold">₱{report && report.yearlySales.toFixed(2)}</h2> */}
+                <h2 className="fs-3 fw-extrabold">
+                  ₱{report && report.yearlySales.toFixed(2)}
+                </h2>
                 <div className="small mt-2">
-                  <span className="fw-normal me-2">By Year</span>
-                  <span className="fas fa-angle-up text-success"></span>
+                  <span className="fw-normal me-2">For this Year</span>
+                  <span className="fas fa-angle-up"></span>
                   {/* <span className="text-success fw-bold">10.57%</span> */}
                 </div>
               </div>
+              <div className="d-flex ms-auto">
+                <select className="form-select" {...register("chartMode")}>
+                  <option value="today">Today&emsp;&emsp;</option>
+                  <option value="week">Week&emsp;&emsp;</option>
+                  <option value="month">Month</option>
+                  <option value="year">Year</option>
+                </select>
+              </div>
             </div>
             <div className="card-body p-2">
-              <LineChart chartData={userData} chartOptions={optionsData} />
+              <LineChart chartData={data} />
             </div>
           </div>
         </div>
@@ -135,13 +170,17 @@ const Dashboard = () => {
                   </div>
                   <div className="d-sm-none">
                     <h2 className="h5">Users</h2>
-                    <h3 className="fw-extrabold mb-1">230</h3>
+                    <h3 className="fw-extrabold mb-1">
+                      {report && report.userCount}
+                    </h3>
                   </div>
                 </div>
                 <div className="col-12 col-xl-7 px-xl-0">
                   <div className="d-none d-sm-block">
                     <h2 className="h5">Users</h2>
-                    <h3 className="fw-extrabold mb-1">230</h3>
+                    <h3 className="fw-extrabold mb-1">
+                      {report && report.userCount}
+                    </h3>
                   </div>
                   <small className="d-flex align-items-center">
                     Total Users
@@ -174,13 +213,15 @@ const Dashboard = () => {
                   </div>
                   <div className="d-sm-none">
                     <h2 className="fw-extrabold h5">Products</h2>
-                    <h3 className="mb-1">50</h3>
+                    <h3 className="mb-1">{report && report.productCount}</h3>
                   </div>
                 </div>
                 <div className="col-12 col-xl-7 px-xl-0">
                   <div className="d-none d-sm-block">
                     <h2 className="h5">Products</h2>
-                    <h3 className="fw-extrabold mb-1">50</h3>
+                    <h3 className="fw-extrabold mb-1">
+                      {report && report.productCount}
+                    </h3>
                   </div>
                   <small>Total Products</small>
                 </div>
@@ -209,14 +250,18 @@ const Dashboard = () => {
                     </svg>
                   </div>
                   <div className="d-sm-none">
-                    <h2 className="fw-extrabold h5">Revenue</h2>
-                    <h3 className="mb-1">₱43,594</h3>
+                    <h2 className="fw-extrabold h5">Sales</h2>
+                    <h3 className="mb-1">
+                      ₱{report && report.monthlySales.toFixed(2)}
+                    </h3>
                   </div>
                 </div>
                 <div className="col-12 col-xl-7 px-xl-0">
                   <div className="d-none d-sm-block">
-                    <h2 className="h5">Revenue</h2>
-                    <h3 className="fw-extrabold mb-1">₱43,594</h3>
+                    <h2 className="h5">Sales</h2>
+                    <h3 className="fw-extrabold mb-1">
+                      ₱{report && report.monthlySales.toFixed(2)}
+                    </h3>
                   </div>
                   <small className="d-flex align-items-center">
                     For this Month
@@ -248,13 +293,15 @@ const Dashboard = () => {
                   </div>
                   <div className="d-sm-none">
                     <h2 className="fw-extrabold h5">Orders</h2>
-                    <h3 className="mb-1">20</h3>
+                    <h3 className="mb-1">{report && report.monthlyOrders}</h3>
                   </div>
                 </div>
                 <div className="col-12 col-xl-7 px-xl-0">
                   <div className="d-none d-sm-block">
                     <h2 className="h5">Orders</h2>
-                    <h3 className="fw-extrabold mb-1">20</h3>
+                    <h3 className="fw-extrabold mb-1">
+                      {report && report.monthlyOrders}
+                    </h3>
                   </div>
                   <small>For this Month</small>
                 </div>
