@@ -9,9 +9,7 @@ const setOrder = async (orderData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
-  console.log(orderData);
-
+  // console.log(orderData);
   const response = await axios.post(API_URL, orderData, config);
   // console.log(response.data);
 

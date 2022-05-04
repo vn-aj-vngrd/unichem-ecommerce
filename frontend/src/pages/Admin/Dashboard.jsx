@@ -80,7 +80,10 @@ const Dashboard = () => {
     switch (watch("chartMode")) {
       case "today":
         if (report.todayMode) {
-          data.labels = report.todayMode.map((data) => `Hour ${data.hour}`);
+          data.labels = report.todayMode.map(
+            (data) =>
+              `${data.hour <= 16 ? data.hour + 8 + ":00": data.hour - 16 + ":00"} `
+          );
           data.datasets[0].data = report.todayMode.map((data) => data.sales);
         }
         break;
