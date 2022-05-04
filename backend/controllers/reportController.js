@@ -15,18 +15,6 @@ const getDashboardReport = asyncHandler(async (req, res) => {
     throw new Error("Access Denied");
   }
 
-  const yearlySales = await Order.aggregate([
-    {
-      $match: {
-        createdAt: {
-          $gte: moment().startOf("year").toDate(),
-          $lt: moment().endOf("year").toDate(),
-        },
-      },
-    },
-    { $group: { _id: null, value: { $sum: "$totalPrice" } } },
-  ]);
-
   const monthlySales = await Order.aggregate([
     {
       $match: {
@@ -85,20 +73,58 @@ const getDashboardReport = asyncHandler(async (req, res) => {
   ]);
 
   const weekMode = await Order.aggregate([
-    // {
-    //   $match: {
-    //     createdAt: {
-    //       $gte: moment().startOf("week").toDate(),
-    //       $lte: moment().endOf("week").toDate(),
-    //     },
-    //   },
-    // },
+    {
+      $match: {
+        createdAt: {
+          $gte: moment().startOf("week").toDate(),
+          $lte: moment().endOf("week").toDate(),
+        },
+      },
+    },
     {
       $project: {
         formattedDate: {
           $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
         },
+        createdAtDay: { $dayOfWeek: "$createdAt" },
         createdAtWeek: { $week: "$createdAt" },
+        createdAtMonth: { $month: "$createdAt" },
+        createdAtYear: { $year: "$createdAt" },
+        totalPrice: 1,
+      },
+    },
+    {
+      $group: {
+        _id: "$createdAtDay",
+        day: { $first: "$createdAtDay" },
+        week: { $first: "$createdAtWeek" },
+        month: { $first: "$createdAtMonth" },
+        year: { $first: "$createdAtYear" },
+        sales: { $sum: "$totalPrice" },
+      },
+    },
+    {
+      $sort: { day: 1, week: 1, month: 1, year: 1 },
+    },
+  ]);
+
+  const monthMode = await Order.aggregate([
+    {
+      $match: {
+        createdAt: {
+          $gte: moment().startOf("month").toDate(),
+          $lte: moment().endOf("month").toDate(),
+        },
+      },
+    },
+    {
+      $project: {
+        formattedDate: {
+          $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+        },
+        createdAtWeek: {
+          $floor: { $divide: [{ $dayOfMonth: "$createdAt" }, 7] },
+        },
         createdAtMonth: { $month: "$createdAt" },
         createdAtYear: { $year: "$createdAt" },
         totalPrice: 1,
@@ -114,19 +140,19 @@ const getDashboardReport = asyncHandler(async (req, res) => {
       },
     },
     {
-      $sort: { year: 1, month: 1, week: 1 },
+      $sort: { week: 1, month: 1, year: 1 },
     },
   ]);
 
-  const monthMode = await Order.aggregate([
-    // {
-    //   $match: {
-    //     createdAt: {
-    //       $gte: moment().startOf("year").toDate(),
-    //       $lte: moment().endOf("year").toDate(),
-    //     },
-    //   },
-    // },
+  const yearMode = await Order.aggregate([
+    {
+      $match: {
+        createdAt: {
+          $gte: moment().startOf("year").toDate(),
+          $lte: moment().endOf("year").toDate(),
+        },
+      },
+    },
     {
       $project: {
         formattedDate: {
@@ -146,42 +172,11 @@ const getDashboardReport = asyncHandler(async (req, res) => {
       },
     },
     {
-      $sort: { year: 1, month: 1 },
-    },
-  ]);
-
-  const yearMode = await Order.aggregate([
-    // {
-    //   $match: {
-    //     createdAt: {
-    //       $gte: moment().startOf("year").toDate(),
-    //       $lte: moment().endOf("year").toDate(),
-    //     },
-    //   },
-    // },
-    {
-      $project: {
-        formattedDate: {
-          $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
-        },
-        createdAtYear: { $year: "$createdAt" },
-        totalPrice: 1,
-      },
-    },
-    {
-      $group: {
-        _id: "$createdAtYear",
-        year: { $first: "$createdAtYear" },
-        sales: { $sum: "$totalPrice" },
-      },
-    },
-    {
-      $sort: { year: 1 },
+      $sort: { month: 1, year: 1 },
     },
   ]);
 
   res.status(200).json({
-    yearlySales: yearlySales.length > 0 ? yearlySales[0].value : 0,
     monthlySales: monthlySales.length > 0 ? monthlySales[0].value : 0,
     monthlyOrders: monthlyOrders.length > 0 ? monthlyOrders[0].value : 0,
     userCount,

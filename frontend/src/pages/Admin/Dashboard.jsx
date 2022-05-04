@@ -76,38 +76,77 @@ const Dashboard = () => {
     "December",
   ];
 
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let salesDesc = {
+    totalSales: 0,
+    label: "",
+  };
+
   if (report) {
     switch (watch("chartMode")) {
       case "today":
         if (report.todayMode) {
           data.labels = report.todayMode.map(
             (data) =>
-              `${data.hour <= 16 ? data.hour + 8 + ":00": data.hour - 16 + ":00"} `
+              `${
+                data.hour <= 16 ? data.hour + 8 + ":00" : data.hour - 16 + ":00"
+              } `
           );
           data.datasets[0].data = report.todayMode.map((data) => data.sales);
+          salesDesc.totalSales = report.todayMode.reduce(
+            (total, data) => total + data.sales,
+            0
+          );
+          salesDesc.label = "Today";
         }
         break;
       case "week":
         if (report.weekMode) {
           data.labels = report.weekMode.map(
-            (data) =>
-              `Week ${data.week} - ${months[data.month - 1]} ${data.year}`
+            (data) => `${days[data.day - 1]}` //- Week ${data.week}
           );
           data.datasets[0].data = report.weekMode.map((data) => data.sales);
+          salesDesc.totalSales = report.weekMode.reduce(
+            (total, data) => total + data.sales,
+            0
+          );
+          salesDesc.label = "This Week";
         }
         break;
       case "month":
         if (report.monthMode) {
           data.labels = report.monthMode.map(
-            (data) => `${months[data.month - 1]} ${data.year}`
+            (data) =>
+              `Week ${data.week + 1} - ${months[data.month - 1]} ${data.year}`
           );
           data.datasets[0].data = report.monthMode.map((data) => data.sales);
+          salesDesc.totalSales = report.monthMode.reduce(
+            (total, data) => total + data.sales,
+            0
+          );
+          salesDesc.label = "This Month";
         }
         break;
       case "year":
         if (report.yearMode) {
-          data.labels = report.yearMode.map((data) => data.year);
+          data.labels = report.yearMode.map(
+            (data) => `${months[data.month - 1]} ${data.year}`
+          );
           data.datasets[0].data = report.yearMode.map((data) => data.sales);
+          salesDesc.totalSales = report.yearMode.reduce(
+            (total, data) => total + data.sales,
+            0
+          );
+          salesDesc.label = "This Year";
         }
         break;
       default:
@@ -132,11 +171,9 @@ const Dashboard = () => {
             <div className="card-header d-sm-flex flex-row align-items-center flex-0">
               <div className="d-block mb-3 mb-sm-0">
                 <div className="fs-5 fw-normal mb-2">Total Sales</div>
-                <h2 className="fs-3 fw-extrabold">
-                  ₱{report && report.yearlySales.toFixed(2)}
-                </h2>
+                <h2 className="fs-3 fw-extrabold">₱{salesDesc.totalSales}</h2>
                 <div className="small mt-2">
-                  <span className="fw-normal me-2">For this Year</span>
+                  <span className="fw-normal me-2">{salesDesc.label}</span>
                   <span className="fas fa-angle-up"></span>
                   {/* <span className="text-success fw-bold">10.57%</span> */}
                 </div>
@@ -144,9 +181,9 @@ const Dashboard = () => {
               <div className="d-flex ms-auto">
                 <select className="form-select" {...register("chartMode")}>
                   <option value="today">Today&emsp;&emsp;</option>
-                  <option value="week">Week&emsp;&emsp;</option>
-                  <option value="month">Month</option>
-                  <option value="year">Year</option>
+                  <option value="week">This Week&emsp;&emsp;</option>
+                  <option value="month">This Month</option>
+                  <option value="year">This Year</option>
                 </select>
               </div>
             </div>
