@@ -176,6 +176,28 @@ const getDashboardReport = asyncHandler(async (req, res) => {
     },
   ]);
 
+  const anuallyMode = await Order.aggregate([
+    {
+      $project: {
+        formattedDate: {
+          $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+        },
+        createdAtYear: { $year: "$createdAt" },
+        totalPrice: 1,
+      },
+    },
+    {
+      $group: {
+        _id: "$createdAtYear",
+        year: { $first: "$createdAtYear" },
+        sales: { $sum: "$totalPrice" },
+      },
+    },
+    {
+      $sort: { year: 1 },
+    },
+  ]);
+
   res.status(200).json({
     monthlySales: monthlySales.length > 0 ? monthlySales[0].value : 0,
     monthlyOrders: monthlyOrders.length > 0 ? monthlyOrders[0].value : 0,
@@ -185,6 +207,7 @@ const getDashboardReport = asyncHandler(async (req, res) => {
     weekMode,
     monthMode,
     yearMode,
+    anuallyMode,
   });
 });
 

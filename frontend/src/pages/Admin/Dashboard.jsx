@@ -106,7 +106,7 @@ const Dashboard = () => {
             (total, data) => total + data.sales,
             0
           );
-          salesDesc.label = "Today";
+          salesDesc.label = "For Today";
         }
         break;
       case "week":
@@ -119,7 +119,7 @@ const Dashboard = () => {
             (total, data) => total + data.sales,
             0
           );
-          salesDesc.label = "This Week";
+          salesDesc.label = "For this Week";
         }
         break;
       case "month":
@@ -133,7 +133,7 @@ const Dashboard = () => {
             (total, data) => total + data.sales,
             0
           );
-          salesDesc.label = "This Month";
+          salesDesc.label = "For this Month";
         }
         break;
       case "year":
@@ -146,7 +146,20 @@ const Dashboard = () => {
             (total, data) => total + data.sales,
             0
           );
-          salesDesc.label = "This Year";
+          salesDesc.label = "For this Year";
+        }
+        break;
+      case "anually":
+        if (report.anuallyMode) {
+          data.labels = report.anuallyMode.map(
+            (data) => `Year ${data.year}`
+          );
+          data.datasets[0].data = report.anuallyMode.map((data) => data.sales);
+          salesDesc.totalSales = report.anuallyMode.reduce(
+            (total, data) => total + data.sales,
+            0
+          );
+          salesDesc.label = "For all Years";
         }
         break;
       default:
@@ -184,6 +197,7 @@ const Dashboard = () => {
                   <option value="week">This Week&emsp;&emsp;</option>
                   <option value="month">This Month</option>
                   <option value="year">This Year</option>
+                  <option value="anually">Anually</option>
                 </select>
               </div>
             </div>
