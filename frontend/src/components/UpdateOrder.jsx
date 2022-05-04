@@ -187,7 +187,7 @@ const UpdateOrder = ({ order }) => {
 
     const orderParams = {
       id: order._id,
-      shippingFee: shippingFee.toFixed(2),
+      shippingFee: shippingFee,
       totalPrice: total,
       orderStatus: orderStatus,
       statusDates,
