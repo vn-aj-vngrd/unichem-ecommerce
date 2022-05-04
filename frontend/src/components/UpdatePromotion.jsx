@@ -219,8 +219,8 @@ const UpdatePromotion = (promo) => {
                     </div>
                   </div>
 
-                  <div className="d-grid">
-                    <button type="submit" className="btn btn-gray-800">
+                  <div className="d-grid button">
+                    <button type="submit" className="btn">
                       Save Changes
                     </button>
                   </div>

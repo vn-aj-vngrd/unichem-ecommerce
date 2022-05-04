@@ -9,7 +9,6 @@ const setPromo = async (productData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
   const response = await axios.post(API_URL, productData, config);
 
   return response.data;
@@ -60,7 +59,7 @@ const deletePromo = async (id, token) => {
     },
   };
 
-  const response = await axios.delete(API_URL + id, config);
+  const response = await axios.delete(API_URL + id.id, config);
 
   return response.data;
 };

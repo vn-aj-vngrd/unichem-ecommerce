@@ -3,17 +3,16 @@ import axios from "axios";
 const API_URL = "/api/products/";
 
 // Create new product
-// const setProduct = async (productData, token) => {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
+const setProduct = async (productData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post(API_URL, productData, config);
 
-//   const response = await axios.post(API_URL, productData, config);
-
-//   return response.data;
-// };
+  return response.data;
+};
 
 // Get all products
 const getProducts = async () => {
@@ -52,17 +51,7 @@ const updateProduct = async (productData, token) => {
   return response.data;
 };
 
-const setProduct = async (productData, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.post(API_URL, productData, config);
-  console.log(response.data);
 
-  return response.data;
-};
 
 // Delete product
 const deleteProduct = async (id, token) => {

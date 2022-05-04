@@ -70,10 +70,10 @@ export const validateCoupon = createAsyncThunk(
 // Update coupon
 export const updateCoupon = createAsyncThunk(
   "coupons/update",
-  async (couponParams, thunkAPI) => {
+  async (couponData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await couponService.updateCoupon(couponParams, token);
+      return await couponService.updateCoupon(couponData, token);
     } catch (error) {
       const couponMessage =
         (error.response &&
@@ -119,7 +119,7 @@ export const couponSlice = createSlice({
       .addCase(setCoupon.fulfilled, (state, action) => {
         state.isCouponLoading = false;
         state.isCouponSuccess = true;
-        // state.coupons.push(action.payload);
+        state.coupons = [...state.coupons, action.payload]
       })
       .addCase(setCoupon.rejected, (state, action) => {
         state.isCouponLoading = false;
@@ -172,9 +172,9 @@ export const couponSlice = createSlice({
         state.isCouponLoading = false;
         state.isCouponSuccess = true;
         const idx = state.coupons.findIndex(
-          (obj) => obj._doc._id === action.payload._id
+          (obj) => obj._id === action.payload._id
         );
-        state.coupons[idx]._doc = action.payload;
+        state.coupons[idx] = action.payload;
       })
       .addCase(updateCoupon.rejected, (state, action) => {
         state.isCouponLoading = false;

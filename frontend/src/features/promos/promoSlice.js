@@ -100,7 +100,7 @@ export const promoSlice = createSlice({
       .addCase(setPromo.fulfilled, (state, action) => {
         state.isPromoLoading = false;
         state.isPromoSuccess = true;
-        // state.promos.push(action.payload);
+        state.promos = [...state.promos, action.payload]
       })
       .addCase(setPromo.rejected, (state, action) => {
         state.isPromoLoading = false;
