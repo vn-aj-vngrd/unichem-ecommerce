@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { updateOrder } from "../features/orders/orderSlice";
+const moment = require("moment");
 
 const UpdateOrder = ({ order }) => {
   const [formData, setFormData] = useState({});
@@ -12,17 +13,50 @@ const UpdateOrder = ({ order }) => {
     setFormData({
       shippingFee: order.shippingFee,
       orderStatus: order.orderStatus,
-      awaitingConfirmationDate: order.statusDates[0].date,
-      awaitingPaymentDate: order.statusDates[1].date,
-      awaitingFulfillmentDate: order.statusDates[2].date,
-      awaitingShipmentDate: order.statusDates[3].date,
-      shippedDate: order.statusDates[4].date,
-      awaitingPickupDate: order.statusDates[5].date,
-      completedDate: order.statusDates[6].date,
-      cancelledDate: order.statusDates[7].date,
-      declinedDate: order.statusDates[8].date,
-      awaitingReturnDate: order.statusDates[9].date,
-      returnedDate: order.statusDates[10].date,
+      awaitingConfirmationDate:
+        order.statusDates[0].date !== ""
+          ? moment(order.statusDates[0].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      awaitingPaymentDate:
+        order.statusDates[1].date !== ""
+          ? moment(order.statusDates[1].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      awaitingFulfillmentDate:
+        order.statusDates[2].date !== ""
+          ? moment(order.statusDates[2].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      awaitingShipmentDate:
+        order.statusDates[3].date !== ""
+          ? moment(order.statusDates[3].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      shippedDate:
+        order.statusDates[4].date !== ""
+          ? moment(order.statusDates[4].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      awaitingPickupDate:
+        order.statusDates[5].date !== ""
+          ? moment(order.statusDates[5].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      completedDate:
+        order.statusDates[6].date !== ""
+          ? moment(order.statusDates[6].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      cancelledDate:
+        order.statusDates[7].date !== ""
+          ? moment(order.statusDates[7].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      declinedDate:
+        order.statusDates[8].date !== ""
+          ? moment(order.statusDates[8].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      awaitingReturnDate:
+        order.statusDates[9].date !== ""
+          ? moment(order.statusDates[9].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
+      returnedDate:
+        order.statusDates[10].date !== ""
+          ? moment(order.statusDates[10].date).format("YYYY-MM-DDTHH:mm:ss")
+          : "",
     });
   }, [order]);
 
@@ -147,9 +181,14 @@ const UpdateOrder = ({ order }) => {
       },
     ];
 
+    const total =
+      order.subtotal +
+      (shippingFee - (shippingFee * order.shippingDiscount) / 100);
+
     const orderParams = {
       id: order._id,
-      shippingFee: shippingFee,
+      shippingFee: shippingFee.toFixed(2),
+      totalPrice: total,
       orderStatus: orderStatus,
       statusDates,
     };
@@ -205,7 +244,7 @@ const UpdateOrder = ({ order }) => {
                           step=".01"
                           className="form-control"
                           name="shippingFee"
-                          value={shippingFee}
+                          defaultValue={shippingFee}
                           onChange={onChange}
                         />
                       </div>
@@ -237,10 +276,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Awaiting Confirmation Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="awaitingConfirmationDate"
-                          value={awaitingConfirmationDate}
+                          defaultValue={awaitingConfirmationDate}
                           onChange={onChange}
                         />
                       </div>
@@ -252,10 +291,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Awaiting Payment Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="awaitingPaymentDate"
-                          value={awaitingPaymentDate}
+                          defaultValue={awaitingPaymentDate}
                           onChange={onChange}
                         />
                       </div>
@@ -267,10 +306,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Awaiting Fulfillment Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="awaitingFulfillmentDate"
-                          value={awaitingFulfillmentDate}
+                          defaultValue={awaitingFulfillmentDate}
                           onChange={onChange}
                         />
                       </div>
@@ -282,10 +321,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Awaiting Shipment Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="awaitingShipmentDate"
-                          value={awaitingShipmentDate}
+                          defaultValue={awaitingShipmentDate}
                           onChange={onChange}
                         />
                       </div>
@@ -297,10 +336,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Shipped Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="shippedDate"
-                          value={shippedDate}
+                          defaultValue={shippedDate}
                           onChange={onChange}
                         />
                       </div>
@@ -312,10 +351,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Awaiting Pickup Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="awaitingPickupDate"
-                          value={awaitingPickupDate}
+                          defaultValue={awaitingPickupDate}
                           onChange={onChange}
                         />
                       </div>
@@ -327,10 +366,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Completed Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="completedDate"
-                          value={completedDate}
+                          defaultValue={completedDate}
                           onChange={onChange}
                         />
                       </div>
@@ -342,10 +381,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Cancelled Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="cancelledDate"
-                          value={cancelledDate}
+                          defaultValue={cancelledDate}
                           onChange={onChange}
                         />
                       </div>
@@ -357,10 +396,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Awaiting Return Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="awaitingReturnDate"
-                          value={awaitingReturnDate}
+                          defaultValue={awaitingReturnDate}
                           onChange={onChange}
                         />
                       </div>
@@ -372,10 +411,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Returned Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="returnedDate"
-                          value={returnedDate}
+                          defaultValue={returnedDate}
                           onChange={onChange}
                         />
                       </div>
@@ -387,10 +426,10 @@ const UpdateOrder = ({ order }) => {
                       <label>Declined Date</label>
                       <div className="input-group">
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           name="declinedDate"
-                          value={declinedDate}
+                          defaultValue={declinedDate}
                           onChange={onChange}
                         />
                       </div>

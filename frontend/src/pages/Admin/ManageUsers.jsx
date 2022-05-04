@@ -40,8 +40,8 @@ const ManageUsers = () => {
   const data = users.map(Object.values);
   data.forEach((item) => {
     item[8] = item[8] ? "Yes" : "No";
-    item[9] = moment(item[9]).format('lllll');
-    item[10] = moment(item[10]).format('lllll');
+    item[9] = moment(item[9]).format('llll');
+    item[10] = moment(item[10]).format('llll');
   });
 
   const options = {

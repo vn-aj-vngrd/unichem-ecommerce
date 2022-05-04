@@ -303,12 +303,12 @@ const Checkout = () => {
 
     let orderStatus = "Awaiting Confirmation";
 
-    const today = moment();
+    // const today = moment();
 
     const statusDates = [
       // 0 - Awaiting Confirmation
       {
-        date: today.format("YYYY-MM-DD"),
+        date: "",
         status: "Awaiting confirmation",
         desc: "Please wait for the confirmation of your order.",
       },
@@ -387,7 +387,8 @@ const Checkout = () => {
     let orderData = {
       order: {
         statusDates: statusDates,
-        shippingFee: shippingFee,
+        shippingFee: shippingFee.toFixed(2),
+        subtotal: total.toFixed(2),
         totalPrice: total.toFixed(2),
         orderDiscount: orderDiscount.value,
         shippingDiscount: shippingDiscount.value,

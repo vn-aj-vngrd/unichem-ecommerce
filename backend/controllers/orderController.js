@@ -23,6 +23,7 @@ const setOrder = asyncHandler(async (req, res) => {
     orderDiscount: req.body.order.orderDiscount,
     shippingDiscount: req.body.order.shippingDiscount,
     shippingFee: req.body.order.shippingFee,
+    subtotal: req.body.order.subtotal,
     totalPrice: req.body.order.totalPrice,
     orderStatus: req.body.order.orderStatus,
     statusDates: req.body.order.statusDates,
@@ -101,6 +102,7 @@ const getAllOrders = asyncHandler(async (req, res) => {
       shippingDiscount: Orders[i].shippingDiscount,
       orderDiscount: Orders[i].orderDiscount,
       shippingFee: Orders[i].shippingFee,
+      subtotal: Orders[i].subtotal,
       totalPrice: Orders[i].totalPrice,
       paymentMethod: Orders[i].paymentMethod,
       orderStatus: Orders[i].orderStatus,
@@ -218,6 +220,7 @@ const updateOrder = asyncHandler(async (req, res) => {
     {
       orderStatus: req.body.orderStatus,
       shippingFee: req.body.shippingFee,
+      totalPrice: req.body.totalPrice,
       statusDates: req.body.statusDates,
     },
     {
@@ -349,7 +352,6 @@ const deleteOrder = asyncHandler(async (req, res) => {
 
   res.status(200).json({ id: req.params.id });
 });
-
 
 module.exports = {
   setOrder,

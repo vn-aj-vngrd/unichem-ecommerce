@@ -21,6 +21,7 @@ const ManageOrders = () => {
     "Shipping Discount",
     "Order Discount",
     "Shipping Fee",
+    "Subtotal",
     "Total Price",
     "Payment Method",
     "Order Status",
@@ -53,12 +54,15 @@ const ManageOrders = () => {
         order.shippingDiscount + "%",
         order.orderDiscount + "%",
         "PHP " + order.shippingFee.toFixed(2),
+        "PHP " + order.subtotal.toFixed(2),
         "PHP " + order.totalPrice.toFixed(2),
         order.paymentMethod,
         order.orderStatus,
-        moment(order.createdAt).format("YYYY-MM-DD"),
-        order.statusDates[6].date ? order.statusDates[6].date : "N/A",
-        moment(order.updatedAt).format("lllll"),
+        moment(order.createdAt).format("llll"),
+        order.statusDates[6].date
+          ? moment(order.statusDates[6].date).format("llll")
+          : "N/A",
+        moment(order.updatedAt).format("llll"),
         <ViewOrder order={order} />,
         <UpdateOrder order={order} />,
       ]);
@@ -95,12 +99,14 @@ const ManageOrders = () => {
         directory="Orders"
       />
       <div className="row mt-3 mb-4">
-        <DataTable
-          title="Orders"
-          columns={columns}
-          data={data}
-          options={options}
-        />
+        {orders && orders.length >= 0 && (
+          <DataTable
+            title="Orders"
+            columns={columns}
+            data={data}
+            options={options}
+          />
+        )}
       </div>
       <Footer userType="admin" />
     </div>

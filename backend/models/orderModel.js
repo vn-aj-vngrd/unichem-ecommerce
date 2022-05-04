@@ -19,6 +19,10 @@ const orderSchema = mongoose.Schema(
       type: Number,
       required: [true, "Shipping Fee is required."],
     },
+    subtotal: {
+      type: Number,
+      required: [true, "Subtotal is required."],
+    },
     totalPrice: {
       type: Number,
       required: [true, "Total Price is required."],
