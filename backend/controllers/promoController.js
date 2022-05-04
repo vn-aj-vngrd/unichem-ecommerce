@@ -50,7 +50,6 @@ const setPromo = asyncHandler(async (req, res) => {
 });
 
 const updatePromo = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const promo = await Promo.findById(req.body._id);
 
   if (!promo) {

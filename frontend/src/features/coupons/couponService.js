@@ -29,8 +29,6 @@ const validateCoupon = async (couponData, token) => {
     config
   );
 
-  // console.log(response.data);
-
   return response.data;
 };
 
@@ -49,16 +47,14 @@ const setCoupon = async (couponData, token) => {
 };
 
 // Update coupons
-const updateCoupon = async (couponParams, token) => {
+const updateCoupon = async (couponData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  // console.log(couponParams);
-  const response = await axios.put(API_URL, couponParams, config);
-  // console.log(response.data);
+  const response = await axios.put(API_URL + "updateCoupon", couponData, config);
 
   return response.data;
 };

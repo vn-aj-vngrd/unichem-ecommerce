@@ -69,8 +69,8 @@ const ManagePromotions = () => {
     );
 
     promo.description.length > maxLength
-      ? promo.description.substr(0, maxLength).concat("...")
-      : promo.description.substr(0, maxLength);
+      ? temp.push(promo.description.substr(0, maxLength).concat("..."))
+      : temp.push(promo.description.substr(0, maxLength));
     
     temp.push(
       moment(promo.startDate).format("YYYY-MM-DD HH:mm:ss").toString(),

@@ -210,7 +210,7 @@ const CreatePromotion = () => {
                   </div>
 
                   <div className="d-grid">
-                    <button type="submit" className="btn btn-gray-800">
+                    <button type="submit" className="btn ">
                       Save Changes
                     </button>
                   </div>

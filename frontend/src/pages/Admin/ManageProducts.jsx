@@ -20,6 +20,8 @@ const ManageProducts = () => {
   const { products, isProductLoading, isProductError, productMessage } =
     useSelector((state) => state.products);
 
+    console.log(products)
+
   useEffect(() => {
     document.title = "Unichem Store | Products";
   });

@@ -134,7 +134,7 @@ export const productSlice = createSlice({
         .addCase(setProduct.fulfilled, (state, action) => {
           state.isProductLoading = false
           state.isProductSuccess = true
-          state.products.push(action.payload)
+          state.products = [...state.products, action.payload]
         })
         .addCase(setProduct.rejected, (state, action) => {
           state.isProductLoading = false
@@ -190,8 +190,6 @@ export const productSlice = createSlice({
         state.isProductLoading = false;
         state.isProductSuccess = true;
         // state.products = {...state.products, action.payload};
-        console.log(state.products)
-        console.log(action.payload)
         const idx = state.products.findIndex(
           (obj) => obj._doc._id === action.payload._id
         );

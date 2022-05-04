@@ -556,7 +556,6 @@ const UpdateProduct = (product) => {
                         <label>Product Sale</label>
                         <div className="input-group">
                           <select
-                            type="number"
                             className="form-select"
                             id="isSale"
                             {...register("isSale", {
@@ -650,10 +649,10 @@ const UpdateProduct = (product) => {
                       )}
                     </div>
                   </div>
-                  <div className="d-grid">
+                  <div className="d-grid button">
                     <button
                       type="submit"
-                      className="btn btn-gray-800"
+                      className="btn"
                       data-bs-dismiss="modal"
                       aria-label="Close"
                     >

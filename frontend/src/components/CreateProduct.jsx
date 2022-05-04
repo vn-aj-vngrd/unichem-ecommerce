@@ -73,11 +73,17 @@ const CreateProduct = () => {
 
     data.types.forEach((type) => {
       tempTypesData.push(type.type);
-      tempQuantitiesData.push(type.quantity);
-      tempPricesData.push(type.price);
+      tempQuantitiesData.push(parseFloat(type.quantity));
+      tempPricesData.push(parseFloat(type.price));
     });
 
-    let tempSalePercent = !data.isSale || data.isSale === "false" ? 0 : data.salePercent;
+    console.log(tempQuantitiesData);
+    console.log(tempPricesData);
+
+    let tempSalePercent =
+      !data.isSale || data.isSale === "false"
+        ? 0
+        : parseFloat(data.salePercent);
 
     const productData = {
       images: data.images,
@@ -145,7 +151,7 @@ const CreateProduct = () => {
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h1 className="mb-0 h4">Product Information</h1>
                 </div>
-                
+
                 <form
                   action="#"
                   className="mt-4"
@@ -273,7 +279,8 @@ const CreateProduct = () => {
                     </div>
                   </div>
 
-                  <br></br><br></br>
+                  <br></br>
+                  <br></br>
                   <h5>Product Specifications</h5>
                   {specificationEmpty && (
                     <p className="error-message">
@@ -377,7 +384,8 @@ const CreateProduct = () => {
                     Add specification <i className="add-type-icon">+</i>
                   </div>
 
-                  <br></br><br></br>
+                  <br></br>
+                  <br></br>
                   <h5>Product Color/Types</h5>
                   {typesEmpty && (
                     <p className="error-message">
@@ -505,7 +513,7 @@ const CreateProduct = () => {
                       </div>
                     </div>
                   ))}
-                  
+
                   <div
                     className="col-auto add-type"
                     onClick={() => typeAppend({})}
@@ -563,7 +571,8 @@ const CreateProduct = () => {
                             id="types"
                             {...register("salePercent", {
                               required: {
-                                value: !isSale || isSale === "false" ? false : true,
+                                value:
+                                  !isSale || isSale === "false" ? false : true,
                                 message: "Sale Percent is required.",
                               },
                               min: {
@@ -621,16 +630,17 @@ const CreateProduct = () => {
                       )}
                     </div>
                   </div>
-                  <div className="d-grid">
+                  <div className="d-grid button">
                     <button
                       type="submit"
-                      className="btn btn-gray-800"
+                      className="btn"
                       data-bs-dismiss="modal"
                       aria-label="Close"
                     >
                       Save Changes
                     </button>
                   </div>
+                  <br></br>
                 </form>
               </div>
             </div>

@@ -14,8 +14,8 @@ router
   .route("/")
   .get(protect, getCoupons)
   .post(protect, setCoupon)
-  .put(protect, updateCoupon);
 router.route("/:id").delete(protect, deleteCoupon);
 router.route("/validateCoupon").post(protect, validateCoupon);
+router.put("/updateCoupon", protect, updateCoupon);
 
 module.exports = router;

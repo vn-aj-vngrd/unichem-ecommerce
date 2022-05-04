@@ -104,11 +104,10 @@ const setCoupon = asyncHandler(async (req, res) => {
 // @route   PUT /api/coupons/
 // @access  Private
 const updateCoupon = asyncHandler(async (req, res) => {
-  const _id = req.body.id;
-  let existingCoupon = await Coupon.findById(_id);
+  let coupon = await Coupon.findById(req.body._id);
 
   // Check for Coupon
-  if (!existingCoupon) {
+  if (!coupon) {
     res.status(400);
     throw new Error("Coupon not found");
   }
@@ -120,9 +119,13 @@ const updateCoupon = asyncHandler(async (req, res) => {
   }
 
   // Update Coupon
-  const updatedCoupon = await Coupon.findByIdAndUpdate(_id, req.body, {
-    new: true,
-  });
+  const updatedCoupon = await Coupon.findByIdAndUpdate(
+    {
+      _id: req.body._id,
+    },
+    req.body,
+    { new: true }
+  );
 
   res.status(200).json(updatedCoupon);
 });
