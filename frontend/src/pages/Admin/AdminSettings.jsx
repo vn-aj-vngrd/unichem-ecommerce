@@ -37,7 +37,7 @@ const AdminSettings = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [dispatch, isSuccess, isError, message]);
+  }, [dispatch, isSuccess, isError, message, reset]);
 
   const password = watch("newPassword");
 
@@ -48,8 +48,8 @@ const AdminSettings = () => {
     };
 
     // console.log(orderParams);
-    reset();
     dispatch(updateAdmin(orderParams));
+    reset();
   };
 
   if (isLoading) {
