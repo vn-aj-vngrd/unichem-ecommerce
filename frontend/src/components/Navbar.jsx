@@ -24,6 +24,7 @@ const Navbar = ({ userType }) => {
   const [input, setInput] = useState("");
   const username = user.name.split(" ")[0];
   
+  
   useEffect(() => {
     if (user && user.userType === "customer") {
       dispatch(getWishlists());
