@@ -126,7 +126,9 @@ const loginUser = asyncHandler(async (req, res) => {
   // User does not exist and incorrect password
   if (!user || !(await bcrypt.compare(password, user.password))) {
     res.status(400);
-    throw new Error("You've entered a wrong email or password. Please try again.");
+    throw new Error(
+      "You've entered a wrong email or password. Please try again."
+    );
   }
 
   // User exists but unverified
@@ -243,6 +245,21 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  console.log(req.body)
+  console.log(req.file)
+
+  let tempImage;
+  if (req.file) {
+    let removeImagePath = user.image;
+    if (removeImagePath) {
+      fs.unlinkSync(removeImagePath);
+    }
+
+    tempImage = req.file.path;
+  } else {
+    tempImage = user.image;
+  }
+
   if (req.body.currentPassword) {
     if (await bcrypt.compare(req.body.currentPassword, user.password)) {
       // hash the password using bcrypt
@@ -254,9 +271,20 @@ const updateUser = asyncHandler(async (req, res) => {
     }
   }
 
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
-    new: true,
-  });
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    {
+      name: req.body.name,
+      email: req.body.email,
+      sex: req.body.sex,
+      birthday: req.body.birthday,
+      userType: req.body.userType,
+      image: tempImage,
+    },
+    {
+      new: true,
+    }
+  );
 
   const updatedAddress = await Address.findOneAndUpdate(
     {
@@ -294,6 +322,11 @@ const deleteUser = asyncHandler(async (req, res) => {
   if (!user) {
     res.status(400);
     throw new Error("User not found");
+  }
+
+  let removeImagePath = user.image;
+  if (removeImagePath) {
+    fs.unlinkSync(removeImagePath);
   }
 
   await user.remove();

@@ -16,7 +16,6 @@ const UserProfile = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -24,6 +23,16 @@ const UserProfile = () => {
       birthday: user.birthday,
       sex: user.sex,
       email: user.email,
+    },
+  });
+
+  const {
+    register: registerPassword,
+    handleSubmit: handleSubmitPassword,
+    watch,
+    formState: { errors: errorsPassword },
+  } = useForm({
+    defaultValues: {
       newPassword: "",
       confirmNewPassword: "",
       currentPassword: "",
@@ -60,8 +69,16 @@ const UserProfile = () => {
       birthday: data.birthday,
       sex: data.sex,
       email: data.email,
-      // image,
     };
+
+    let formData = new FormData();
+
+    formData.append("image", data.image[0]);
+    
+    for (var key in userData) {
+      console.log(key, userData[key]);
+      formData.append(key, userData[key]);
+    }
 
     dispatch(updateUser(userData));
     toast.success("User updated successfully", {
@@ -123,7 +140,7 @@ const UserProfile = () => {
         <div className="checkout-steps-form-style">
           <ul id="accordionExample">
             <li className=" box-shadow">
-              <form className="form" onSubmit={handleSubmit(onSubmitData)}>
+              <form className="form" onSubmit={handleSubmit(onSubmitData)} encType="multipart/form-data">
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -156,9 +173,10 @@ const UserProfile = () => {
                         </label>
                         <input
                           type="file"
-                          name="image"
-                          // value={image}
-                          // onChange={onChange}
+                          {...register("image")}
+                          style={{
+                            border: errors.image ? "1px solid #f44336" : "",
+                          }}
                           id="upload-photo"
                         />
                       </div>
@@ -308,7 +326,7 @@ const UserProfile = () => {
             </li>
 
             <li className=" box-shadow">
-              <form className="form" onSubmit={handleSubmit(onSubmitPassword)}>
+              <form className="form" onSubmit={handleSubmitPassword(onSubmitPassword)}>
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -332,7 +350,7 @@ const UserProfile = () => {
                           <input
                             type="password"
                             className="form-control"
-                            {...register("newPassword", {
+                            {...registerPassword("newPassword", {
                               required: {
                                 value: true,
                                 message: "Password is required",
@@ -344,14 +362,14 @@ const UserProfile = () => {
                               },
                             })}
                             style={{
-                              border: errors.newPassword
+                              border: errorsPassword.newPassword
                                 ? "1px solid #f44336"
                                 : "",
                             }}
                           />
-                          {errors.newPassword && (
+                          {errorsPassword.newPassword && (
                             <p className="error-message">
-                              ⚠ {errors.newPassword.message}
+                              ⚠ {errorsPassword.newPassword.message}
                             </p>
                           )}
                         </div>
@@ -364,7 +382,7 @@ const UserProfile = () => {
                           <input
                             type="password"
                             className="form-control"
-                            {...register("confirmNewPassword", {
+                            {...registerPassword("confirmNewPassword", {
                               required: {
                                 value: true,
                                 message: "Confirm new password is required",
@@ -374,14 +392,14 @@ const UserProfile = () => {
                                 "New passwords do not match",
                             })}
                             style={{
-                              border: errors.confirmNewPassword
+                              border: errorsPassword.confirmNewPassword
                                 ? "1px solid #f44336"
                                 : "",
                             }}
                           />
-                          {errors.confirmNewPassword && (
+                          {errorsPassword.confirmNewPassword && (
                             <p className="error-message">
-                              ⚠ {errors.confirmNewPassword.message}
+                              ⚠ {errorsPassword.confirmNewPassword.message}
                             </p>
                           )}
                         </div>
@@ -396,7 +414,7 @@ const UserProfile = () => {
                             name="currentPassword"
                             type="password"
                             className="form-control"
-                            {...register("password", {
+                            {...registerPassword("password", {
                               required: {
                                 value: true,
                                 message: "Password is required",
@@ -408,14 +426,14 @@ const UserProfile = () => {
                               },
                             })}
                             style={{
-                              border: errors.password
+                              border: errorsPassword.password
                                 ? "1px solid #f44336"
                                 : "",
                             }}
                           />
-                          {errors.password && (
+                          {errorsPassword.password && (
                             <p className="error-message">
-                              ⚠ {errors.password.message}
+                              ⚠ {errorsPassword.password.message}
                             </p>
                           )}
                         </div>

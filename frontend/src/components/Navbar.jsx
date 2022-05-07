@@ -14,13 +14,16 @@ import { toast } from "react-toastify";
 const Navbar = ({ userType }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  
   const { user } = useSelector((state) => state.auth);
   useSelector((state) => state.wishlist);
   useSelector((state) => state.cart);
-
+  
+  // console.log(user)
+  
   const [input, setInput] = useState("");
-
+  const username = user.name.split(" ")[0];
+  
   useEffect(() => {
     if (user && user.userType === "customer") {
       dispatch(getWishlists());
@@ -36,6 +39,7 @@ const Navbar = ({ userType }) => {
 
   let wishlistCount = 0;
   let cartCount = 0;
+
   if (user) {
     wishlistCount = localStorage.getItem("wishlistCount");
     cartCount = localStorage.getItem("cartCount");
@@ -44,7 +48,7 @@ const Navbar = ({ userType }) => {
   const onLogout = (e) => {
     e.preventDefault();
 
-    toast.success(`See you around, ${user.name.split(" ")[0]}!`, {
+    toast.success(`See you around, ${username}!`, {
       position: "top-right",
       autoClose: 4000,
       hideProgressBar: false,
@@ -311,7 +315,7 @@ const Navbar = ({ userType }) => {
                             className="nav-profile-image"
                             alt=""
                           ></img>
-                          {user.name.split(" ")[0]}
+                          {username}
                         </button>
 
                         <ul className="mobile-profile-collapse profile-collapse">
@@ -353,7 +357,7 @@ const Navbar = ({ userType }) => {
                                 className="nav-profile-image"
                                 alt=""
                               ></img>
-                              {user.name.split(" ")[0]}
+                              {username}
                             </Link>
                             <ul
                               className="sub-menu collapse profile-collapse"

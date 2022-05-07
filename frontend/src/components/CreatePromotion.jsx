@@ -18,16 +18,24 @@ const CreatePromotion = () => {
   const expiryDate = watch("expiryDate");
 
   const onSubmit = (data) => {
+    console.log(data);
+    // image: data.image,
+
     const promoData = {
-      image: "",
       promoName: data.promoName,
       description: data.description,
       startDate: data.startDate,
       expiryDate: data.expiryDate,
     };
 
-    console.log(promoData);
-    dispatch(setPromo(promoData));
+    let formData = new FormData();
+    formData.append("image", data.image[0]);
+    for (var key in promoData) {
+      console.log(key, promoData[key]);
+      formData.append(key, promoData[key]);
+    }
+
+    dispatch(setPromo(formData));
     toast.success("Product created successfully", {
       position: "top-right",
       autoClose: 5000,
@@ -46,7 +54,7 @@ const CreatePromotion = () => {
         type="button"
         className="btn btn-block btn-gray-800 mb-3"
         data-bs-toggle="modal"
-        data-bs-target="#modal-form-create-promotion" 
+        data-bs-target="#modal-form-create-promotion"
       >
         Create Promotion
       </button>
@@ -75,6 +83,7 @@ const CreatePromotion = () => {
                   action="#"
                   className="mt-4"
                   onSubmit={handleSubmit(onSubmit)}
+                  enctype="multipart/form-data"
                 >
                   <div className="form-group">
                     <div className="form-group mb-4">
@@ -83,10 +92,22 @@ const CreatePromotion = () => {
                         <input
                           type="file"
                           className="form-control"
-                          name="image"
-                          id="image"
+                          {...register("image", {
+                            required: {
+                              value: true,
+                              message: "Product image is required.",
+                            },
+                          })}
+                          style={{
+                            border: errors.image ? "1px solid #f44336" : "",
+                          }}
                         />
                       </div>
+                      {errors.image && (
+                        <p className="error-message">
+                          ⚠ {errors.image.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -209,8 +230,13 @@ const CreatePromotion = () => {
                     </div>
                   </div>
 
-                  <div className="d-grid">
-                    <button type="submit" className="btn ">
+                  <div className="d-grid button">
+                    <button
+                      type="submit"
+                      className="btn"
+                      // data-bs-dismiss="modal"
+                      // aria-label="Close"
+                    >
                       Save Changes
                     </button>
                   </div>

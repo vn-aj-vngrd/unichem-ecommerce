@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const fs = require("fs");
 
 const Product = require("../models/productModel");
 const Review = require("../models/reviewModel");
@@ -196,6 +197,11 @@ const setProduct = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
+  if (!req.files) {
+    res.status(401);
+    throw new Error("There was a problem uploading the image");
+  }
+
   const existingProduct = await Product.findOne({
     productName: req.body.productName,
   });
@@ -203,6 +209,12 @@ const setProduct = asyncHandler(async (req, res) => {
   if (existingProduct) {
     res.status(400);
     throw new Error("Product name already exists.");
+  }
+
+  let tempFiles = [];
+  for (let i = 0; i < req.files.length; i++) {
+    console.log(req.files[i].path);
+    tempFiles.push(req.files[i].path);
   }
 
   const product = await Product.create({
@@ -217,7 +229,7 @@ const setProduct = asyncHandler(async (req, res) => {
     isSale: req.body.isSale,
     salePercent: req.body.salePercent,
     description: req.body.description,
-    images: req.body.images,
+    images: tempFiles,
     featured: req.body.featured,
   });
 
@@ -247,8 +259,6 @@ const updateProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 
-  console.log(product);
-
   // Check user
   if (!req.user) {
     res.status(400);
@@ -260,12 +270,45 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not authorized");
   }
+  
+  console.log(product.images)
+  let tempFiles = [];
+  if (req.files.length > 0) {
+    for (let i = 0; i < product.images.length; i++) {
+      let removeImagePath = "../" + product.images[i].replaceAll("\\", "/");
+      console.log(removeImagePath)
+      if (removeImagePath) {
+        fs.unlinkSync(removeImagePath);
+      }
+    }
+
+    for (let i = 0; i < req.files.length; i++) {
+      console.log(req.files[i].path);
+      tempFiles.push(req.files[i].path);
+    }
+  } else {
+    tempFiles = product.images;
+  }
 
   const updatedProduct = await Product.findByIdAndUpdate(
     {
       _id: req.body._id,
     },
-    req.body,
+    {
+      productName: req.body.productName,
+      brand: req.body.brand,
+      category: req.body.category,
+      types: req.body.types,
+      specifications: req.body.specifications,
+      quantities: req.body.quantities,
+      prices: req.body.prices,
+      salePrices: req.body.salePrices,
+      isSale: req.body.isSale,
+      salePercent: req.body.salePercent,
+      description: req.body.description,
+      images: tempFiles,
+      featured: req.body.featured,
+    },
     { new: true }
   );
 
@@ -293,6 +336,14 @@ const deleteProduct = asyncHandler(async (req, res) => {
   if (req.user.userType.toString() !== "admin") {
     res.status(401);
     throw new Error("User not authorized");
+  }
+  
+  for (let i = 0; i < product.images.length; i++) {
+    let removeImagePath = "../" + product.images[i].replaceAll("\\", "/");
+    console.log(removeImagePath)
+    if (removeImagePath) {
+      fs.unlinkSync(removeImagePath);
+    }
   }
 
   await product.remove();

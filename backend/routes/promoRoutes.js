@@ -8,10 +8,16 @@ const {
 } = require("../controllers/promoController");
 
 const { protect } = require("../middleware/authMiddleware");
+const {
+  uploadPromotionSingle,
+  uploadValidation,
+} = require("../middleware/uploadMiddleware");
 
-router.route("/").get(getPromos).post(protect, setPromo);
-// router.route("/:id").put(protect, updatePromo).delete(protect, deletePromo);
+router
+  .route("/")
+  .get(getPromos)
+  .post(protect, uploadPromotionSingle, uploadValidation, setPromo);
 router.route("/:id").delete(protect, deletePromo);
-router.put("/updatePromo", protect, updatePromo);
+router.put("/updatePromo", protect, uploadPromotionSingle, uploadValidation, updatePromo);
 
 module.exports = router;

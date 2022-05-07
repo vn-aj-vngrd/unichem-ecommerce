@@ -3,13 +3,14 @@ import axios from "axios";
 const API_URL = "/api/promos/";
 
 // Set new promo
-const setPromo = async (productData, token) => {
+const setPromo = async (promoData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.post(API_URL, productData, config);
+  console.log(promoData)
+  const response = await axios.post(API_URL, promoData, config);
 
   return response.data;
 };
@@ -29,7 +30,7 @@ const updatePromo = async (promoData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
+  promoData? console.log(true) : console.log(false);
   const response = await axios.put(API_URL + "updatePromo", promoData, config);
   // console.log(response.data);
 

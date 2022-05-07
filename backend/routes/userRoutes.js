@@ -12,12 +12,16 @@ const {
   recoverAccount,
 } = require("../controllers/userController");
 const { protect } = require("../middleware/authMiddleware");
+const {
+  uploadUserSingle,
+  uploadValidation,
+} = require("../middleware/uploadMiddleware");
 
 router.post("/signup", registerUser);
 router.post("/login", loginUser);
 
 router.get("/getUsers", protect, getUsers);
-router.put("/updateUser", protect, updateUser);
+router.put("/updateUser", protect, uploadUserSingle, uploadValidation, updateUser);
 router.delete("/deleteUser/:id", protect, deleteUser);
 
 router.post("/:id/verify/:token", verifyUser);

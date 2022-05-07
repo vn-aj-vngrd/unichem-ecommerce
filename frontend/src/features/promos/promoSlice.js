@@ -149,7 +149,7 @@ export const promoSlice = createSlice({
         state.isPromoLoading = false;
         state.isPromoSuccess = true;
         state.promos = state.promos.filter(
-          (promo) => promo._id !== action.payload.id
+          (promo) => promo._id !== action.payload._id
         );
       })
       .addCase(deletePromo.rejected, (state, action) => {
