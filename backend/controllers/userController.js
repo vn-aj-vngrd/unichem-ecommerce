@@ -316,6 +316,7 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route   DELETE /api/users/deleteUser/:id
 // @access  Private
 const deleteUser = asyncHandler(async (req, res) => {
+  console.log("delete")
   if (!req.user && req.user.userType !== "admin") {
     res.status(400);
     throw new Error("Access Denied");
@@ -327,9 +328,9 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  let removeImagePath = user.image;
-  if (removeImagePath) {
-    fs.unlinkSync(removeImagePath);
+  const destination = "frontend\\public";
+  if (user.image) {
+    fs.unlinkSync(destination + user.image);
   }
 
   await user.remove();

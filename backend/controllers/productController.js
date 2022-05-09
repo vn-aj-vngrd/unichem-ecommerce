@@ -212,9 +212,10 @@ const setProduct = asyncHandler(async (req, res) => {
   }
 
   let tempFiles = [];
+  const destination = "frontend\\public";
   for (let i = 0; i < req.files.length; i++) {
-    console.log(req.files[i].path);
-    tempFiles.push(req.files[i].path);
+    console.log(req.files[i].path.slice(destination.length));
+    tempFiles.push(req.files[i].path.slice(destination.length));
   }
 
   const product = await Product.create({
@@ -270,21 +271,23 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not authorized");
   }
-  
-  console.log(product.images)
+
+  console.log(product.images);
   let tempFiles = [];
+  const destination = "frontend\\public";
+
   if (req.files.length > 0) {
     for (let i = 0; i < product.images.length; i++) {
-      let removeImagePath = "../" + product.images[i].replaceAll("\\", "/");
-      console.log(removeImagePath)
+      let removeImagePath = product.images[i];
+      console.log(removeImagePath);
       if (removeImagePath) {
-        fs.unlinkSync(removeImagePath);
+        fs.unlinkSync(destination + removeImagePath);
       }
     }
 
     for (let i = 0; i < req.files.length; i++) {
       console.log(req.files[i].path);
-      tempFiles.push(req.files[i].path);
+      tempFiles.push(req.files[i].path.slice(destination.length));
     }
   } else {
     tempFiles = product.images;
@@ -337,12 +340,15 @@ const deleteProduct = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not authorized");
   }
-  
-  for (let i = 0; i < product.images.length; i++) {
-    let removeImagePath = "../" + product.images[i].replaceAll("\\", "/");
-    console.log(removeImagePath)
-    if (removeImagePath) {
-      fs.unlinkSync(removeImagePath);
+
+  const destination = "frontend\\public";
+  if (product.images.length > 0) {
+    for (let i = 0; i < product.images.length; i++) {
+      let removeImagePath = product.images[i];
+      console.log(removeImagePath);
+      if (removeImagePath) {
+        fs.unlinkSync(destination + removeImagePath);
+      }
     }
   }
 

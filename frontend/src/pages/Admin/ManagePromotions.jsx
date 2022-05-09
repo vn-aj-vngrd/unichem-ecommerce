@@ -67,7 +67,7 @@ const ManagePromotions = () => {
     let temp = [];
 
     // temp.push(<RowImage src={".." + promo.image.replaceAll("\\", "/").slice(imagePath.length)} alt={promo.promoName}/>, promo._id, promo.promoName);
-    temp.push(<RowImage src={promo.image.replaceAll("\\", "/").slice(imagePath.length)} alt={promo.promoName}/>, promo._id, promo.promoName);
+    temp.push(<RowImage src={promo.image} alt={promo.promoName}/>, promo._id, promo.promoName);
 
     promo.description.length > maxLength
       ? temp.push(promo.description.substr(0, maxLength).concat("..."))

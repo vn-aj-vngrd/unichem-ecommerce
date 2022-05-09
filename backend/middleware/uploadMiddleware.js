@@ -79,7 +79,7 @@ const uploadValidation = (req, res, next) => {
     }
 
     // Check if file size is greater than 1 mb
-    if (req.file.size > 1024 * 1024) {
+    if (req.file.size > 1024 * 1024 * 10) {
       // remove file
       fs.unlinkSync(image);
       res.status(400);
@@ -106,7 +106,7 @@ const uploadArrayValidation = (req, res, next) => {
       }
 
       // Check if file size is greater than 4 mb
-      if (req.files[i].size > 1024 * 1024) {
+      if (req.files[i].size > 1024 * 1024 * 10) {
         // remove file
         fs.unlinkSync(image);
         res.status(400);

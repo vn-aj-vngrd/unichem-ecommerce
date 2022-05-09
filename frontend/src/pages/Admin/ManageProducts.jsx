@@ -6,6 +6,7 @@ import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 import UpdateProduct from "../../components/UpdateProduct";
 import DeleteProduct from "../../components/DeleteProduct";
+import RowImage from "../../components/RowImage";
 import {
   getProducts,
   resetProduct,
@@ -20,7 +21,6 @@ const ManageProducts = () => {
   const { products, isProductLoading, isProductError, productMessage } =
     useSelector((state) => state.products);
 
-    console.log(products)
 
   useEffect(() => {
     document.title = "Unichem Store | Products";
@@ -73,9 +73,10 @@ const ManageProducts = () => {
   const maxLength = 50;
   if (products) {
     products.forEach((product) => {
+      console.log(product.images)
       let temp = [];
       temp.push(
-        <img className="avatar" alt="img" src={product._doc.images[0]} />
+        <RowImage src={product._doc.images[0]} alt={product._doc.productName}/>,
       );
       temp.push(product._doc._id);
       temp.push(product._doc.productName);

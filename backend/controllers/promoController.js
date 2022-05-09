@@ -35,10 +35,22 @@ const setPromo = asyncHandler(async (req, res) => {
     throw new Error("There was a problem uploading the image");
   }
 
+  let tempImage;
+  if (req.file) {
+    let removeImagePath = user.image;
+    const destination = "frontend\\public";
+
+    if (removeImagePath) {
+      fs.unlinkSync(destination + removeImagePath);
+    }
+
+    tempImage = req.file.path.slice(destination.length);
+  }
+
   const promo = await Promo.create({
     promoName: req.body.promoName,
     description: req.body.description,
-    image: req.file.path,
+    image: tempImage,
     startDate: req.body.startDate,
     expiryDate: req.body.expiryDate,
   });
@@ -70,10 +82,11 @@ const updatePromo = asyncHandler(async (req, res) => {
 
   if (req.file) {
     let removeImagePath = promo.image;
+    const destination = "frontend\\public";
     if (removeImagePath) {
-      fs.unlinkSync(removeImagePath);
+      fs.unlinkSync(destination + removeImagePath);
     }
-    tempImage = req.file.path;
+    tempImage = req.file.path.slice(destination.length);
   } else {
     tempImage = promo.image;
   }
@@ -119,9 +132,9 @@ const deletePromo = asyncHandler(async (req, res) => {
     throw new Error("User not authorized.");
   }
 
-  let removeImagePath = promo.image;
-  if (removeImagePath) {
-    fs.unlinkSync(removeImagePath);
+  const destination = "frontend\\public";
+  if (promo.image !== "") {
+    fs.unlinkSync(destination + promo.image);
   }
 
   await promo.remove();
