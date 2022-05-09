@@ -12,7 +12,7 @@ const UserProfile = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-  
+  console.log(user);
   const {
     register,
     handleSubmit,
@@ -80,7 +80,7 @@ const UserProfile = () => {
       formData.append(key, userData[key]);
     }
 
-    dispatch(updateUser(userData));
+    dispatch(updateUser(formData));
     toast.success("User updated successfully", {
       position: "top-center",
       autoClose: 5000,

@@ -4,7 +4,7 @@ const fs = require("fs");
 // User Destination
 const storageUser = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "frontend/src/uploads/users");
+    cb(null, "frontend/public/uploads/users");
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -15,7 +15,7 @@ const storageUser = multer.diskStorage({
 // Product Destination
 const storageProduct = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "frontend/src/uploads/products");
+    cb(null, "frontend/public/uploads/products");
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -26,7 +26,7 @@ const storageProduct = multer.diskStorage({
 // Promos Destination
 const storagePromotion = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "frontend/src/uploads/promos");
+    cb(null, "frontend/public/uploads/promos");
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);

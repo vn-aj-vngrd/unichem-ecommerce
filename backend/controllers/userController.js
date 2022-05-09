@@ -7,6 +7,7 @@ const Token = require("../models/tokenModel");
 const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
 const Mailgen = require("mailgen");
+const fs = require("fs");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -35,7 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     userType,
-    image: "https://i.stack.imgur.com/l60Hf.png",
+    image: "frontend\\src\\uploads\\user-placeholder",
     verified: false,
   });
 
@@ -251,11 +252,13 @@ const updateUser = asyncHandler(async (req, res) => {
   let tempImage;
   if (req.file) {
     let removeImagePath = user.image;
-    if (removeImagePath) {
-      fs.unlinkSync(removeImagePath);
+    const destination = "frontend\\public";
+
+    if (removeImagePath && removeImagePath !== "\\uploads\\users\\user-placeholder.png") {
+      fs.unlinkSync(destination + removeImagePath);
     }
 
-    tempImage = req.file.path;
+    tempImage = req.file.path.slice(destination.length);
   } else {
     tempImage = user.image;
   }

@@ -22,9 +22,9 @@ const Navbar = ({ userType }) => {
   // console.log(user)
   
   const [input, setInput] = useState("");
-  const username = user.name.split(" ")[0];
-  
-  
+  const username = "";
+  // const username = username = user.name.split(" ")[0];
+
   useEffect(() => {
     if (user && user.userType === "customer") {
       dispatch(getWishlists());
@@ -312,7 +312,8 @@ const Navbar = ({ userType }) => {
                       <div className=" mobile-dropdown-hover">
                         <button className="hover-button">
                           <img
-                            src={user.image}
+                                // src={"\\uploads\\users\\user-placeholder"}
+                                src={user.image}
                             className="nav-profile-image"
                             alt=""
                           ></img>
@@ -354,6 +355,7 @@ const Navbar = ({ userType }) => {
                               aria-label="Toggle navigation"
                             >
                               <img
+                                // src={"\\uploads\\users\\user-placeholder"}
                                 src={user.image}
                                 className="nav-profile-image"
                                 alt=""
