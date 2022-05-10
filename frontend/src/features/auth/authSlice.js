@@ -176,6 +176,25 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout();
 });
 
+// Update admin password
+export const updateAdmin = createAsyncThunk(
+  "auth/updateAdmin",
+  async (updateParams, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await authService.updateAdmin(updateParams, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -325,6 +344,19 @@ export const authSlice = createSlice({
       // Logout Case
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+      })
+      // Update Admin Password Case
+      .addCase(updateAdmin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAdmin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(updateAdmin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });

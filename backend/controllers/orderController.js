@@ -86,7 +86,6 @@ const getAllOrders = asyncHandler(async (req, res) => {
     throw new Error("Access Denied");
   }
 
-  const userID = req.user._id;
   const Orders = await Order.find({}).sort({
     createdAt: "desc",
   });

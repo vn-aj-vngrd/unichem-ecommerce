@@ -439,16 +439,16 @@ const Navbar = ({ userType }) => {
           <div className="sidebar-inner px-4 pt-3">
             <div className="user-card d-flex d-md-none justify-content-between justify-content-md-center pb-4">
               <div className="d-flex align-items-center">
-                <div className="avatar-lg me-4">
+                {/* <div className="avatar-lg me-4">
                   <img
-                    // src="https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-1/271657462_4899150540105361_3610241298101667884_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeFlBi2QrWTsC6h8G6x_yldUISWEXve9bfohJYRe971t-nY_yoEBIbmpAfl8Fl9bN4QBHO6GTFtJ9-adM6MoQwQR&_nc_ohc=Hj62DarEIWwAX-y1cpD&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fceb2-1.fna&oh=00_AT9w74DRCTtbaJum76ttU-HyP3QOc_o-YwejkzUjzKLeVg&oe=6245FD24"
+                    src={logo}
                     className="card-img-top rounded-circle border-white"
                     alt="#"
                   />
                 </div>
                 <div className="d-block">
                   <h2 className="h5">Administrator</h2>
-                </div>
+                </div> */}
               </div>
               <div className="collapse-close d-md-none">
                 <a
@@ -478,7 +478,7 @@ const Navbar = ({ userType }) => {
               <li>
                 <Link to="/" className="nav-link d-flex align-items-center">
                   <span className="sidebar-icon">
-                    <img src={logo} height="20" width="20" alt="Volt Logo" />
+                    <img src={logo} height="40" width="40" alt="#" />
                   </span>
                   <span className="mt-1 sidebar-text fw-bolder">
                     Unichem Store

@@ -115,6 +115,24 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+// Update admin password
+const updateAdmin = async (updateParams, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(
+    API_URL + "updateAdmin",
+    updateParams,
+    config
+  );
+  console.log(response.data);
+
+  return response.data;
+};
+
 const authService = {
   signup,
   login,
@@ -126,6 +144,7 @@ const authService = {
   getUsers,
   deleteUser,
   logout,
+  updateAdmin,
 };
 
 export default authService;
