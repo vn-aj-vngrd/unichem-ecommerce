@@ -57,9 +57,9 @@ const ManageProducts = () => {
     "Quantities",
     "Prices",
     "Sale Prices",
-    "Sale Status",
+    "Sale",
     "Sale Percent",
-    "Featured Status",
+    "Featured",
     "Updated",
     "Created",
     "",
@@ -94,14 +94,14 @@ const ManageProducts = () => {
         );
       }
       temp.push(tempSalePrices.toString().split(",").join(", "));
-      temp.push(product._doc.isSale.toString().toUpperCase());
+      temp.push(product._doc.isSale ? "Yes" : "No");
 
       if (product._doc.salePercent) {
         temp.push(product._doc.salePercent.toString().concat("%"));
       } else {
         temp.push("0%");
       }
-      temp.push(product._doc.featured.toString().toUpperCase());
+      temp.push(product._doc.featured ? "Yes" : "No");
       temp.push(
         moment(product._doc.updatedAt).format("llll").toString()
       );
