@@ -40,6 +40,7 @@ const CreateProduct = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
+    console.log(data)
     if (data.specifications.length === 0) {
       setSpecificationEmpty(true);
     } else {
@@ -86,7 +87,7 @@ const CreateProduct = () => {
         : parseFloat(data.salePercent);
 
     const productData = {
-      images: data.images,
+      // images: data.images,
       productName: data.productName,
       brand: data.brand,
       category: data.category,
@@ -100,8 +101,20 @@ const CreateProduct = () => {
       featured: data.featured,
     };
 
+    let formData = new FormData();
+    
+    for (let i = 0; i < data.images.length; i++) {
+      console.log(data.images[i]);
+      formData.append("images", data.images[i]);
+    }
+    
+    for (var key in productData) {
+      console.log(key, productData[key]);
+      formData.append(key, productData[key]);
+    }
+
     console.log(productData);
-    dispatch(setProduct(productData));
+    dispatch(setProduct(formData));
     toast.success("Product created successfully", {
       position: "top-right",
       autoClose: 5000,
@@ -151,11 +164,11 @@ const CreateProduct = () => {
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h1 className="mb-0 h4">Product Information</h1>
                 </div>
-
                 <form
                   action="#"
                   className="mt-4"
                   onSubmit={handleSubmit(onSubmit)}
+                  enctype="multipart/form-data"
                 >
                   <div className="form-group">
                     <div className="form-group mb-4">
@@ -163,11 +176,26 @@ const CreateProduct = () => {
                       <div className="input-group">
                         <input
                           type="file"
-                          name="image"
-                          id="image"
                           className="form-control"
+                          multiple
+                          {...register("images", {
+                            required: {
+                              value: true,
+                              message: "Product image is required.",
+                            },
+                          })}
+                          style={{
+                            border: errors.images
+                              ? "1px solid #f44336"
+                              : "",
+                          }}
                         />
                       </div>
+                      {errors.images && (
+                        <p className="error-message">
+                          ⚠ {errors.images.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="form-group">
@@ -634,13 +662,12 @@ const CreateProduct = () => {
                     <button
                       type="submit"
                       className="btn"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
+                      // data-bs-dismiss="modal"
+                      // aria-label="Close"
                     >
                       Save Changes
                     </button>
                   </div>
-                  <br></br>
                 </form>
               </div>
             </div>

@@ -7,6 +7,7 @@ const Token = require("../models/tokenModel");
 const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
 const Mailgen = require("mailgen");
+const fs = require("fs");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -35,7 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     userType,
-    image: "https://i.stack.imgur.com/l60Hf.png",
+    image: "frontend\\src\\uploads\\user-placeholder",
     verified: false,
   });
 
@@ -247,6 +248,23 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  console.log(req.body)
+  console.log(req.file)
+
+  let tempImage;
+  if (req.file) {
+    let removeImagePath = user.image;
+    const destination = "frontend\\public";
+
+    if (removeImagePath && removeImagePath !== "\\uploads\\users\\user-placeholder.png") {
+      fs.unlinkSync(destination + removeImagePath);
+    }
+
+    tempImage = req.file.path.slice(destination.length);
+  } else {
+    tempImage = user.image;
+  }
+
   if (req.body.currentPassword) {
     if (await bcrypt.compare(req.body.currentPassword, user.password)) {
       // hash the password using bcrypt
@@ -258,9 +276,20 @@ const updateUser = asyncHandler(async (req, res) => {
     }
   }
 
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
-    new: true,
-  });
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    {
+      name: req.body.name,
+      email: req.body.email,
+      sex: req.body.sex,
+      birthday: req.body.birthday,
+      userType: req.body.userType,
+      image: tempImage,
+    },
+    {
+      new: true,
+    }
+  );
 
   const updatedAddress = await Address.findOneAndUpdate(
     {
@@ -289,6 +318,7 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route   DELETE /api/users/deleteUser/:id
 // @access  Private
 const deleteUser = asyncHandler(async (req, res) => {
+  console.log("delete")
   if (!req.user && req.user.userType !== "admin") {
     res.status(400);
     throw new Error("Access Denied");
@@ -298,6 +328,11 @@ const deleteUser = asyncHandler(async (req, res) => {
   if (!user) {
     res.status(400);
     throw new Error("User not found");
+  }
+
+  const destination = "frontend\\public";
+  if (user.image) {
+    fs.unlinkSync(destination + user.image);
   }
 
   await user.remove();

@@ -130,8 +130,21 @@ const UpdateProduct = (product) => {
       featured: data.featured,
     };
 
+    let formData = new FormData();
+
+    for (let i = 0; i < data.images.length; i++) {
+      console.log(data.images[i]);
+      formData.append("images", data.images[i]);
+    } 
+    
     console.log(productData);
-    dispatch(updateProduct(productData));
+    for (var key in productData) {
+      console.log(key, productData[key]);
+      formData.append(key, productData[key]);
+    }
+
+    console.log("dispatch");
+    dispatch(updateProduct(formData));
     toast.success("Product updated successfully", {
       position: "top-right",
       autoClose: 5000,
@@ -189,6 +202,7 @@ const UpdateProduct = (product) => {
                   action="#"
                   className="mt-4"
                   onSubmit={handleSubmit(onSubmit)}
+                  enctype="multipart/form-data"
                 >
                   <div className="form-group">
                     <div className="form-group mb-4">
@@ -196,11 +210,19 @@ const UpdateProduct = (product) => {
                       <div className="input-group">
                         <input
                           type="file"
-                          name="image"
-                          id="image"
                           className="form-control"
+                          multiple
+                          {...register("images")}
+                          style={{
+                            border: errors.images ? "1px solid #f44336" : "",
+                          }}
                         />
                       </div>
+                      {errors.images && (
+                        <p className="error-message">
+                          ⚠ {errors.images.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="form-group">
@@ -326,7 +348,7 @@ const UpdateProduct = (product) => {
                       key={specification.id}
                       className="product-specifications-modal d-flex"
                     >
-                      <div className="form-group col-7">
+                      <div className="form-group col-6">
                         <div className="form-group mb-4">
                           <label>Label</label>
                           <div className="input-group">
@@ -426,7 +448,7 @@ const UpdateProduct = (product) => {
                       key={productType.id}
                       className="product-types-modal d-flex"
                     >
-                      <div className="form-group col-7">
+                      <div className="form-group col-6">
                         <div className="form-group mb-4">
                           <label>Type</label>
                           <div className="input-group">
@@ -551,7 +573,7 @@ const UpdateProduct = (product) => {
                   <h5>Market Status</h5>
                   <br></br>
                   <div className="product-sale-modal d-flex">
-                    <div className="form-group col-7">
+                    <div className="form-group col-6">
                       <div className="form-group mb-4">
                         <label>Product Sale</label>
                         <div className="input-group">

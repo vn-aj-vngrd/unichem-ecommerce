@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const fs = require("fs");
 
 const Promo = require("../models/promoModel");
 
@@ -9,7 +10,6 @@ const getPromos = asyncHandler(async (req, res) => {
   const promos = await Promo.find().sort({
     createdAt: "desc",
   });
-
   res.status(200).json(promos);
 });
 
@@ -17,7 +17,6 @@ const getPromos = asyncHandler(async (req, res) => {
 // @route   POST /api/promos
 // @access  Private
 const setPromo = asyncHandler(async (req, res) => {
-
   // Check for user
   if (!req.user) {
     res.status(401);
@@ -30,10 +29,28 @@ const setPromo = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
+  // Check if user is not an admin
+  if (!req.file.path) {
+    res.status(401);
+    throw new Error("There was a problem uploading the image");
+  }
+
+  let tempImage;
+  if (req.file) {
+    let removeImagePath = user.image;
+    const destination = "frontend\\public";
+
+    if (removeImagePath) {
+      fs.unlinkSync(destination + removeImagePath);
+    }
+
+    tempImage = req.file.path.slice(destination.length);
+  }
+
   const promo = await Promo.create({
     promoName: req.body.promoName,
     description: req.body.description,
-    image: "https://images.unsplash.com/photo-1577387196112-579d95312c6d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    image: tempImage,
     startDate: req.body.startDate,
     expiryDate: req.body.expiryDate,
   });
@@ -42,24 +59,49 @@ const setPromo = asyncHandler(async (req, res) => {
 });
 
 const updatePromo = asyncHandler(async (req, res) => {
+  console.log(req.body);
   const promo = await Promo.findById(req.body._id);
-
   if (!promo) {
     res.status(400);
     throw new Error("Promo not found");
   }
 
-  // Check for user and admin privilege
-  if (!req.user && req.user.userType !== "admin") {
-    res.status(401);
-    throw new Error("User not authorized.");
+  // // Check for user
+  // if (!req.user) {
+  //   res.status(401);
+  //   throw new Error("User not found");
+  // }
+
+  // // Check for user and admin privilege
+  // if (!req.user && req.user.userType !== "admin") {
+  //   res.status(401);
+  //   throw new Error("User not authorized.");
+  // }
+
+  let tempImage;
+
+  if (req.file) {
+    let removeImagePath = promo.image;
+    const destination = "frontend\\public";
+    if (removeImagePath) {
+      fs.unlinkSync(destination + removeImagePath);
+    }
+    tempImage = req.file.path.slice(destination.length);
+  } else {
+    tempImage = promo.image;
   }
 
   const updatedPromo = await Promo.findByIdAndUpdate(
     {
       _id: req.body._id,
     },
-    req.body,
+    {
+      promoName: req.body.promoName,
+      description: req.body.description,
+      image: tempImage,
+      startDate: req.body.startDate,
+      expiryDate: req.body.expiryDate,
+    },
     { new: true }
   );
 
@@ -88,6 +130,11 @@ const deletePromo = asyncHandler(async (req, res) => {
   if (!req.user && req.user.userType !== "admin") {
     res.status(401);
     throw new Error("User not authorized.");
+  }
+
+  const destination = "frontend\\public";
+  if (promo.image !== "") {
+    fs.unlinkSync(destination + promo.image);
   }
 
   await promo.remove();

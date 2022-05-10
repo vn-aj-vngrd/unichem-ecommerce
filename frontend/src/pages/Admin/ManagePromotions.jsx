@@ -7,6 +7,7 @@ import SectionTitle from "../../components/SectionTitle";
 import CreatePromotion from "../../components/CreatePromotion";
 import UpdatePromotion from "../../components/UpdatePromotion";
 import DeletePromotion from "../../components/DeletePromotion";
+import RowImage from "../../components/RowImage";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../components/Spinner";
 
@@ -18,8 +19,9 @@ const ManagePromotions = () => {
     document.title = "Unichem Store | Promotions";
   });
 
-  const { promos, isPromoLoading, isPromoError, promoMessage } =
-    useSelector((state) => state.promos);
+  const { promos, isPromoLoading, isPromoError, promoMessage } = useSelector(
+    (state) => state.promos
+  );
 
   useEffect(() => {
     if (isPromoError) {
@@ -42,7 +44,7 @@ const ManagePromotions = () => {
     );
   }
 
-   console.log(promos)
+  console.log(promos);
 
   const columns = [
     "Promo Image",
@@ -56,36 +58,34 @@ const ManagePromotions = () => {
     "",
     "",
   ];
-  
+
+  const imagePath = "frontend/src";
   let data = [];
   const maxLength = 50;
   promos.forEach((promo) => {
+    console.log(promo);
     let temp = [];
-    temp.push(
-      <img className="avatar border-gray-100" alt="img" src={promo.image} />,
-      promo._id,
-      promo.promoName,
-      promo.description,
-    );
+
+    // temp.push(<RowImage src={".." + promo.image.replaceAll("\\", "/").slice(imagePath.length)} alt={promo.promoName}/>, promo._id, promo.promoName);
+    temp.push(<RowImage src={promo.image} alt={promo.promoName}/>, promo._id, promo.promoName);
 
     promo.description.length > maxLength
       ? temp.push(promo.description.substr(0, maxLength).concat("..."))
       : temp.push(promo.description.substr(0, maxLength));
-    
+
     temp.push(
       moment(promo.startDate).format("YYYY-MM-DD HH:mm:ss").toString(),
       moment(promo.expiryDate).format("YYYY-MM-DD HH:mm:ss").toString(),
       moment(promo.updatedAt).format("YYYY-MM-DD HH:mm:ss").toString(),
       moment(promo.createdAt).format("YYYY-MM-DD HH:mm:ss").toString(),
-      <UpdatePromotion promo={promo}/>,
-      <DeletePromotion id={promo._id} />,
-    )
-      
+      <UpdatePromotion promo={promo} />,
+      <DeletePromotion id={promo._id} />
+    );
+
     data.push(temp);
   });
 
-  console.log(data)
-
+  console.log(data);
 
   return (
     <div className="content">

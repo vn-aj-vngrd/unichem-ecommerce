@@ -189,7 +189,7 @@ export const couponSlice = createSlice({
         state.isCouponLoading = false;
         state.isCouponSuccess = true;
         state.coupons = state.coupons.filter(
-          (coupon) => coupon._doc._id !== action.payload.id
+          (coupon) => coupon._id !== action.payload.id
         );
       })
       .addCase(deleteCoupon.rejected, (state, action) => {

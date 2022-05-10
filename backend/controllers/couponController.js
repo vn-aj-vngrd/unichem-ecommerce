@@ -150,12 +150,11 @@ const deleteCoupon = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  // Make sure the logged in user matches the Coupon
-  if (coupon.userID.toString() !== req.user.id) {
+  // Check if user is admin
+  if (req.user.userType.toString() !== "admin") {
     res.status(401);
     throw new Error("User not authorized");
   }
-
   await coupon.remove();
 
   res.status(200).json({ id: req.params.id });

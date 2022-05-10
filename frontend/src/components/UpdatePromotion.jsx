@@ -33,11 +33,25 @@ const UpdatePromotion = (promo) => {
     console.log(data);
     const promoData = {
       _id: promo.promo._id,
-      ...data
+      promoName: data.promoName,
+      description: data.description,
+      startDate: data.startDate,
+      expiryDate: data.expiryDate
     };
 
+    let formData = new FormData();
+    
+    if (data.image) {
+      formData.append("image", data.image[0]);
+    }
+
+    for (var key in promoData) {
+      console.log(key, promoData[key]);
+      formData.append(key, promoData[key]);
+    }
+
     console.log(promoData);
-    dispatch(updatePromo(promoData));
+    dispatch(updatePromo(formData));
     toast.success("Product updated successfully", {
       position: "top-right",
       autoClose: 5000,
@@ -85,18 +99,26 @@ const UpdatePromotion = (promo) => {
                   action="#"
                   className="mt-4"
                   onSubmit={handleSubmit(onSubmit)}
+                  enctype="multipart/form-data"
                 >
                   <div className="form-group">
-                    <div className="form-group mb-4">
+                  <div className="form-group mb-4">
                       <label>Promo Image</label>
                       <div className="input-group">
                         <input
                           type="file"
                           className="form-control"
-                          name="image"
-                          id="image"
+                          {...register("image")}
+                          style={{
+                            border: errors.image ? "1px solid #f44336" : "",
+                          }}
                         />
                       </div>
+                      {errors.image && (
+                        <p className="error-message">
+                          ⚠ {errors.image.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 

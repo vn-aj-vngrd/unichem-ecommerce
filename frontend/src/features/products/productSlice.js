@@ -14,6 +14,10 @@ export const setProduct = createAsyncThunk(
   "products/setProduct",
   async (productData, thunkAPI) => {
     try {
+      for (var key in productData) {
+        console.log(key, productData[key]);
+      }
+
       const token = thunkAPI.getState().auth.user.token;
       return await productService.setProduct(productData, token);
     } catch (error) {
@@ -86,6 +90,7 @@ export const getFeaturedProducts = createAsyncThunk(
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async (productData, thunkAPI) => {
+    console.log("slice")
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await productService.updateProduct(productData, token);
@@ -103,22 +108,22 @@ export const updateProduct = createAsyncThunk(
 
 // Delete product
 export const deleteProduct = createAsyncThunk(
-  'products/deleteProduct',
+  "products/deleteProduct",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
-      return await productService.deleteProduct(id, token)
+      const token = thunkAPI.getState().auth.user.token;
+      return await productService.deleteProduct(id, token);
     } catch (error) {
       const productMessage =
         (error.response &&
           error.response.data &&
           error.response.data.productMessage) ||
         error.productMessage ||
-        error.toString()
-      return thunkAPI.rejectWithValue(productMessage)
+        error.toString();
+      return thunkAPI.rejectWithValue(productMessage);
     }
   }
-)
+);
 
 export const productSlice = createSlice({
   name: "product",
@@ -128,19 +133,19 @@ export const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-        .addCase(setProduct.pending, (state) => {
-          state.isProductLoading = true
-        })
-        .addCase(setProduct.fulfilled, (state, action) => {
-          state.isProductLoading = false
-          state.isProductSuccess = true
-          state.products = [...state.products, action.payload]
-        })
-        .addCase(setProduct.rejected, (state, action) => {
-          state.isProductLoading = false
-          state.isProductError = true
-          state.productMessage = action.payload
-        })
+      .addCase(setProduct.pending, (state) => {
+        state.isProductLoading = true;
+      })
+      .addCase(setProduct.fulfilled, (state, action) => {
+        state.isProductLoading = false;
+        state.isProductSuccess = true;
+        state.products = [...state.products, action.payload];
+      })
+      .addCase(setProduct.rejected, (state, action) => {
+        state.isProductLoading = false;
+        state.isProductError = true;
+        state.productMessage = action.payload;
+      })
       .addCase(getProducts.pending, (state) => {
         state.isProductLoading = true;
       })
@@ -202,20 +207,20 @@ export const productSlice = createSlice({
       })
 
       .addCase(deleteProduct.pending, (state) => {
-        state.isProductLoading = true
+        state.isProductLoading = true;
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
-        state.isProductLoading = false
-        state.isProductSuccess = true
+        state.isProductLoading = false;
+        state.isProductSuccess = true;
         state.products = state.products.filter(
           (product) => product._doc._id !== action.payload._id
-        )
+        );
       })
       .addCase(deleteProduct.rejected, (state, action) => {
-        state.isProductLoading = false
-        state.isProductError = true
-        state.productMessage = action.payload
-      })
+        state.isProductLoading = false;
+        state.isProductError = true;
+        state.productMessage = action.payload;
+      });
   },
 });
 

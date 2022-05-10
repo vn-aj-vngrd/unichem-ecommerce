@@ -59,14 +59,14 @@ const updateCoupon = async (couponData, token) => {
 };
 
 // Delete coupons
-const deleteCoupon = async (couponId, token) => {
+const deleteCoupon = async (id, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.delete(API_URL + couponId, config);
+  const response = await axios.delete(API_URL + id.id, config);
 
   return response.data;
 };
