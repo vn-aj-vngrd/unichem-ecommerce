@@ -6,6 +6,7 @@ import DataTable from "../../components/DataTable";
 import { getUsers, deleteUser, resetUser } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner";
+import { toast } from "react-toastify";
 const moment = require("moment");
 
 const ManageUsers = () => {
@@ -63,8 +64,9 @@ const ManageUsers = () => {
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        console.log(data[item.dataIndex][0]);
+        // console.log(data[item.dataIndex][0]);
         dispatch(deleteUser(data[item.dataIndex][0]));
+        toast.success("User deleted successfully");
       });
     },
   };

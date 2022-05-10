@@ -12,6 +12,7 @@ import {
 } from "../../features/orders/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner";
+import { toast } from "react-toastify";
 const moment = require("moment");
 
 const ManageOrders = () => {
@@ -86,6 +87,7 @@ const ManageOrders = () => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
         dispatch(deleteOrder(data[item.dataIndex][0]));
+        toast.success("Order deleted successfully");
       });
     },
   };
