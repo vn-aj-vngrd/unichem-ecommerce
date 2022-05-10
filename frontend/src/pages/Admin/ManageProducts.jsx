@@ -21,7 +21,6 @@ const ManageProducts = () => {
   const { products, isProductLoading, isProductError, productMessage } =
     useSelector((state) => state.products);
 
-
   useEffect(() => {
     document.title = "Unichem Store | Products";
   });
@@ -41,12 +40,10 @@ const ManageProducts = () => {
   if (isProductLoading) {
     return (
       <>
-        <div className="empty-container"></div>
         <Spinner />
       </>
     );
   }
-
 
   const columns = [
     "Product Image",
@@ -68,15 +65,15 @@ const ManageProducts = () => {
     "",
     "",
   ];
-  
+
   let data = [];
   const maxLength = 50;
   if (products) {
     products.forEach((product) => {
-      console.log(product.images)
+      console.log(product.images);
       let temp = [];
       temp.push(
-        <RowImage src={product._doc.images[0]} alt={product._doc.productName}/>,
+        <RowImage src={product._doc.images[0]} alt={product._doc.productName} />
       );
       temp.push(product._doc._id);
       temp.push(product._doc.productName);
@@ -98,18 +95,18 @@ const ManageProducts = () => {
       }
       temp.push(tempSalePrices.toString().split(",").join(", "));
       temp.push(product._doc.isSale.toString().toUpperCase());
-      
-      if(product._doc.salePercent) {
+
+      if (product._doc.salePercent) {
         temp.push(product._doc.salePercent.toString().concat("%"));
       } else {
-        temp.push("0%")
+        temp.push("0%");
       }
       temp.push(product._doc.featured.toString().toUpperCase());
       temp.push(
-        moment(product._doc.updatedAt).format("YYYY-MM-DD HH:mm:ss").toString()
+        moment(product._doc.updatedAt).format("llll").toString()
       );
       temp.push(
-        moment(product._doc.createdAt).format("YYYY-MM-DD HH:mm:ss").toString()
+        moment(product._doc.createdAt).format("llll").toString()
       );
       if (product) {
         temp.push(<UpdateProduct product={product} />);
@@ -134,12 +131,15 @@ const ManageProducts = () => {
             directory="Products"
           />
         </div>
-        <div><CreateProduct /></div>
+        <div>
+          <CreateProduct />
+        </div>
       </div>
 
       <div className="row mt-3 mb-4">
         <DataTable title="Products" columns={columns} data={data} />
       </div>
+
       <Footer userType="admin" />
     </div>
   );

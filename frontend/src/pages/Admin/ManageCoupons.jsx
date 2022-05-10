@@ -39,7 +39,6 @@ const ManageCoupons = () => {
   if (isCouponLoading) {
     return (
       <>
-        <div className="empty-container"></div>
         <Spinner />
       </>
     );
@@ -77,10 +76,10 @@ const ManageCoupons = () => {
       coupon.discount.toString().concat("%"),
       coupon.requiredAmount,
       coupon.limit,
-      moment(coupon.startDate).format("YYYY-MM-DD HH:mm:ss").toString(),
-      moment(coupon.expiryDate).format("YYYY-MM-DD HH:mm:ss").toString(),
-      moment(coupon.updatedAt).format("YYYY-MM-DD HH:mm:ss").toString(),
-      moment(coupon.createdAt).format("YYYY-MM-DD HH:mm:ss").toString(),
+      moment(coupon.startDate).format("llll").toString(),
+      moment(coupon.expiryDate).format("llll").toString(),
+      moment(coupon.updatedAt).format("llll").toString(),
+      moment(coupon.createdAt).format("llll").toString(),
       <UpdateCoupon coupon={coupon}/>,
       <DeleteCoupon id={coupon._id} />,
     )

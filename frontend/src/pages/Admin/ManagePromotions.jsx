@@ -38,7 +38,6 @@ const ManagePromotions = () => {
   if (isPromoLoading) {
     return (
       <>
-        <div className="empty-container"></div>
         <Spinner />
       </>
     );
@@ -74,10 +73,10 @@ const ManagePromotions = () => {
       : temp.push(promo.description.substr(0, maxLength));
 
     temp.push(
-      moment(promo.startDate).format("YYYY-MM-DD HH:mm:ss").toString(),
-      moment(promo.expiryDate).format("YYYY-MM-DD HH:mm:ss").toString(),
-      moment(promo.updatedAt).format("YYYY-MM-DD HH:mm:ss").toString(),
-      moment(promo.createdAt).format("YYYY-MM-DD HH:mm:ss").toString(),
+      moment(promo.startDate).format("llll").toString(),
+      moment(promo.expiryDate).format("llll").toString(),
+      moment(promo.updatedAt).format("llll").toString(),
+      moment(promo.createdAt).format("llll").toString(),
       <UpdatePromotion promo={promo} />,
       <DeletePromotion id={promo._id} />
     );

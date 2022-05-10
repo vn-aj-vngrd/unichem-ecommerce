@@ -93,11 +93,13 @@ const ManageOrders = () => {
   return (
     <div className="content">
       <Header />
+
       <SectionTitle
         title="Manage Orders"
         subtitle="Below are the orders of customers."
         directory="Orders"
       />
+
       <div className="row mt-3 mb-4">
         {orders && orders.length >= 0 && (
           <DataTable
@@ -108,6 +110,7 @@ const ManageOrders = () => {
           />
         )}
       </div>
+      
       <Footer userType="admin" />
     </div>
   );
