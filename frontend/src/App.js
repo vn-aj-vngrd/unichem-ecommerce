@@ -186,7 +186,7 @@ export const App = () => {
         viewBox="0 0 256 256"
         width="20"
         height="20"
-        style={{ float: "left" }}
+        style={{ left: "2rem", right: "auto", bottom: "2rem" }}
       />
     </>
   ) : (
