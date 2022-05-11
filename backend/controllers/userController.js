@@ -331,7 +331,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 
   const destination = "frontend\\public";
-  if (user.image) {
+  if (user.image && user.image !== "\\uploads\\users\\user-placeholder.png") {
     fs.unlinkSync(destination + user.image);
   }
 
