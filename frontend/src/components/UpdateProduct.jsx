@@ -111,8 +111,8 @@ const UpdateProduct = (product) => {
 
     data.types.forEach((type) => {
       tempTypesData.push(type.type);
-      tempQuantitiesData.push(type.quantity);
-      tempPricesData.push(type.price);
+      tempQuantitiesData.push(parseFloat(type.quantity));
+      tempPricesData.push(parseFloat(type.price));
     });
 
     const productData = {

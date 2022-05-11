@@ -20,6 +20,8 @@ const OrderLogInformation = () => {
     (state) => state.orders
   );
 
+  console.log(orders);
+
   useEffect(() => {
     if (isOrderError) {
       console.log(orderMessage);
@@ -45,7 +47,8 @@ const OrderLogInformation = () => {
     );
   }
 
-  console.log(orders[0]);
+  console.log(orders)
+
   return (
     <>
       {orders.length > 0 && (
@@ -53,28 +56,55 @@ const OrderLogInformation = () => {
           <div className="product-grid">
             <div className="order-status">
               <div className="order-status-progress">
-                <div className="order-status-progress-bar progress-packed"></div>
+                <div className={"order-status-progress-bar " + "progress-" + orders[0].orderStatus.toLowerCase().replaceAll(" ", "-")}></div>
               </div>
               <div className="one-status">
-                <button className="order-status-circle true">
-                  <i className="lni lni-cogs"></i>
+                <button
+                  className={
+                    orders[0].orderStatus == "Awaiting Confirmation" ||
+                    orders[0].orderStatus == "Awaiting Payment" ||
+                    orders[0].orderStatus == "Awaiting Fulfillment"
+                      ? "order-status-circle true"
+                      : "order-status-circle"
+                  }
+                >
+                  +<i className="lni lni-cogs"></i>
                 </button>
                 <p>Processing</p>
               </div>
               <div className="one-status">
-                <button className="order-status-circle true">
+                <button
+                  className={
+                    orders[0].orderStatus == "Awaiting Shipment"
+                      ? "order-status-circle true"
+                      : "order-status-circle"
+                  }
+                >
                   <i className="lni lni-archive"></i>
                 </button>
                 <p>Packed</p>
               </div>
               <div className="one-status">
-                <button className="order-status-circle">
+                <button
+                  className={
+                    orders[0].orderStatus == "Shipped" ||
+                    orders[0].orderStatus == "Awaiting Pickup"
+                      ? "order-status-circle true"
+                      : "order-status-circle"
+                  }
+                >
                   <i className="lni lni-ship"></i>
                 </button>
                 <p>Shipped</p>
               </div>
               <div className="one-status">
-                <button className="order-status-circle">
+                <button
+                  className={
+                    orders[0].orderStatus == "Completed"
+                      ? "order-status-circle true"
+                      : "order-status-circle"
+                  }
+                >
                   <i className="lni lni-checkmark"></i>
                 </button>
                 <p>Delivered</p>
@@ -83,28 +113,41 @@ const OrderLogInformation = () => {
           </div>
 
           <div className="order-status-log-details">
-            {orders[0].statusDates && orders[0].statusDates.map((log, index) => (
-              <div key={index} className="order-status-single-log">
-                <div className="order-details-date">
-                  {log.date? moment(log.date).format("DD/MM/YY") : ("")}
-                </div>
-                <div className="order-details-status-progress">
-                  {index < orders[0].statusDates.length - 1 && (
-                    <div className="vertical-bar">
-                      <div className={orders[0].statusDates[index+1].date? "vertical-progress" : ("")}></div>
-                    </div>
-                  )}
+            {orders[0].statusDates &&
+              orders[0].statusDates.map((log, index) => (
+                <div key={index} className="order-status-single-log">
+                  <div className="order-details-date">
+                    {log.date ? moment(log.date).format("DD/MM/YY") : ""}
+                  </div>
+                  <div className="order-details-status-progress">
+                    {index < orders[0].statusDates.length - 1 && (
+                      <div className="vertical-bar">
+                        <div
+                          className={
+                            orders[0].statusDates[index + 1].date
+                              ? "vertical-progress"
+                              : ""
+                          }
+                        ></div>
+                      </div>
+                    )}
 
-                  <div className={log.date? "status-circle-log-checked" : "status-circle-log-unchecked"}>
-                    <i className="lni lni-checkmark"></i>
+                    <div
+                      className={
+                        log.date
+                          ? "status-circle-log-checked"
+                          : "status-circle-log-unchecked"
+                      }
+                    >
+                      <i className="lni lni-checkmark"></i>
+                    </div>
+                  </div>
+                  <div className="order-details-description">
+                    <h6>{log.label}</h6>
+                    <p>{log.desc}</p>
                   </div>
                 </div>
-                <div className="order-details-description">
-                  <h6>{log.label}</h6>
-                  <p>{log.desc}</p>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           <div className="product">
