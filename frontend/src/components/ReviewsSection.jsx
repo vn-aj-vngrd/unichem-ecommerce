@@ -14,6 +14,8 @@ const ReviewsSection = ({ productID }) => {
   const { reviews, isReviewLoading, isReviewError, reviewMessage } =
     useSelector((state) => state.reviews);
 
+    console.log(reviews)
+
   useEffect(() => {
     if (isReviewError) {
       // console.log(reviewMessage);
@@ -65,7 +67,7 @@ const ReviewsSection = ({ productID }) => {
     pagesVisited + reviewsPerPage
   );
 
-  // console.log(productReviews)
+  console.log(productReviews)
 
   return (
     <div className="product-details">
