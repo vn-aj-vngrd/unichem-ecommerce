@@ -1,5 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getOneOrder, resetOrder } from "../features/orders/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -36,7 +36,7 @@ const OrderLogInformation = () => {
     return () => {
       dispatch(resetOrder());
     };
-  }, [navigate, id, isOrderError, orderMessage, dispatch]);
+  }, [user, navigate, id, isOrderError, orderMessage, dispatch]);
 
   if (isOrderLoading) {
     return (
@@ -56,14 +56,14 @@ const OrderLogInformation = () => {
           <div className="product-grid">
             <div className="order-status">
               <div className="order-status-progress">
-                <div className={"order-status-progress-bar " + "progress-" + orders[0].orderStatus.toLowerCase().replaceAll(" ", "-")}></div>
+                <div className={"order-status-progress-bar progress-" + orders[0].orderStatus.toLowerCase().replaceAll(" ", "-")}></div>
               </div>
               <div className="one-status">
                 <button
                   className={
-                    orders[0].orderStatus == "Awaiting Confirmation" ||
-                    orders[0].orderStatus == "Awaiting Payment" ||
-                    orders[0].orderStatus == "Awaiting Fulfillment"
+                    orders[0].orderStatus === "Awaiting Confirmation" ||
+                    orders[0].orderStatus === "Awaiting Payment" ||
+                    orders[0].orderStatus === "Awaiting Fulfillment"
                       ? "order-status-circle true"
                       : "order-status-circle"
                   }
@@ -75,7 +75,7 @@ const OrderLogInformation = () => {
               <div className="one-status">
                 <button
                   className={
-                    orders[0].orderStatus == "Awaiting Shipment"
+                    orders[0].orderStatus === "Awaiting Shipment"
                       ? "order-status-circle true"
                       : "order-status-circle"
                   }
@@ -87,8 +87,8 @@ const OrderLogInformation = () => {
               <div className="one-status">
                 <button
                   className={
-                    orders[0].orderStatus == "Shipped" ||
-                    orders[0].orderStatus == "Awaiting Pickup"
+                    orders[0].orderStatus === "Shipped" ||
+                    orders[0].orderStatus === "Awaiting Pickup"
                       ? "order-status-circle true"
                       : "order-status-circle"
                   }
@@ -100,7 +100,7 @@ const OrderLogInformation = () => {
               <div className="one-status">
                 <button
                   className={
-                    orders[0].orderStatus == "Completed"
+                    orders[0].orderStatus === "Completed"
                       ? "order-status-circle true"
                       : "order-status-circle"
                   }
