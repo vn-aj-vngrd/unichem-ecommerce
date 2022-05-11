@@ -8,7 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Spinner from "./components/Spinner";
-import Messenger from "./components/Messenger";
+// import Messenger from "./components/Messenger";
+import { MessengerChat } from "react-messenger-chat-plugin";
 import AutoScrollToTop from "./components/AutoScrollToTop";
 import ScrollToTop from "react-scroll-to-top";
 
@@ -141,7 +142,35 @@ export const App = () => {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* Enable Live Chat in Deployment */}
-          <Messenger />
+          {/* <Messenger /> */}
+          <MessengerChat
+            pageId="101323719167913"
+            language="sv_SE"
+            themeColor={"#f44336"}
+            bottomSpacing={300}
+            loggedInGreeting="Welcome to the Unichem support service. We are here to assist you."
+            loggedOutGreeting="Thank you for your interest in Unichem. We are glad to assist you."
+            greetingDialogDisplay={"show"}
+            debugMode={true}
+            onMessengerShow={() => {
+              console.log("onMessengerShow");
+            }}
+            onMessengerHide={() => {
+              console.log("onMessengerHide");
+            }}
+            onMessengerDialogShow={() => {
+              console.log("onMessengerDialogShow");
+            }}
+            onMessengerDialogHide={() => {
+              console.log("onMessengerDialogHide");
+            }}
+            onMessengerMounted={() => {
+              console.log("onMessengerMounted");
+            }}
+            onMessengerLoad={() => {
+              console.log("onMessengerLoad");
+            }}
+          />
           <Footer userType={userTypeData.userType} />
         </>
       ) : (
