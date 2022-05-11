@@ -9,7 +9,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Spinner from "./components/Spinner";
 import Messenger from "./components/Messenger";
-import ScrollToTop from "./components/ScrollToTop";
+import AutoScrollToTop from "./components/AutoScrollToTop";
+import ScrollToTop from "react-scroll-to-top";
 
 import Home from "./pages/Store/Home";
 import Products from "./pages/Product/Products";
@@ -85,7 +86,15 @@ export const App = () => {
           {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
         </style>
       </Helmet>
-      <ScrollToTop />
+      <AutoScrollToTop />
+      <ScrollToTop
+        smooth="true"
+        color="#f44336"
+        viewBox="0 0 256 256"
+        width="20"
+        height="20"
+        style={{float: "left"}}
+      />
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -128,12 +137,11 @@ export const App = () => {
             <Route path="faq" element={<Faq />} />
             <Route path="users/:id/verify/:token" element={<Verification />} />
             <Route path="users/:id/recover/:token" element={<Recovery />} />
-            {/* <Route path="test" element={<Recovery />} /> */}
             <Route path="recover-account" element={<ForgotPassword />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* Enable Live Chat in Deployment */}
-          {/* <Messenger /> */}
+          <Messenger />
           <Footer userType={userTypeData.userType} />
         </>
       ) : (
