@@ -119,6 +119,16 @@ const ManageProducts = () => {
     });
   }
 
+  const options = {
+    filterType: "checkbox",
+    elevation: 0,
+    onRowsDelete: (rowsDeleted) => {
+      rowsDeleted.data.forEach((item) => {
+        // console.log(data[item.dataIndex][0]);
+      });
+    },
+  }
+
   return (
     <div className="content">
       <Header />
@@ -137,7 +147,7 @@ const ManageProducts = () => {
       </div>
 
       <div className="row mt-3 mb-4">
-        <DataTable title="Products" columns={columns} data={data} />
+        <DataTable title="Products" columns={columns} data={data} options={options}/>
       </div>
 
       <Footer userType="admin" />

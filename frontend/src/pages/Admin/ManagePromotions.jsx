@@ -86,6 +86,16 @@ const ManagePromotions = () => {
 
   console.log(data);
 
+  const options = {
+    filterType: "checkbox",
+    elevation: 0,
+    onRowsDelete: (rowsDeleted) => {
+      rowsDeleted.data.forEach((item) => {
+        // console.log(data[item.dataIndex][0]);
+      });
+    },
+  }
+
   return (
     <div className="content">
       <Header />
@@ -104,7 +114,7 @@ const ManagePromotions = () => {
       </div>
 
       <div className="row mt-3 mb-4">
-        <DataTable title="Promotions" columns={columns} data={data} />
+        <DataTable title="Promotions" columns={columns} data={data} options={options}/>
       </div>
       <Footer userType="admin" />
     </div>
