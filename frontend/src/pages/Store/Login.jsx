@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import { login, resetUser } from "../../features/auth/authSlice";
 import Spinner from "../../components/Spinner";
 import Swal from "sweetalert2";
@@ -47,10 +46,6 @@ const Login = () => {
     }
 
     if (isSuccess || user) {
-      // const temp = localStorage.getItem("user");
-      // const user = JSON.parse(temp);
-      // toast.success(`Welcome to Unichem Store, ${user.name.split(" ")[0]}!`);
-
       navigate("/");
     }
 
@@ -60,7 +55,6 @@ const Login = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onSubmit = (data) => {
-    // console.log(data);
     dispatch(login(data));
   };
 
