@@ -87,14 +87,14 @@ export const App = () => {
         </style>
       </Helmet>
       <AutoScrollToTop />
-      <ScrollToTop
+      {/* <ScrollToTop
         smooth="true"
         color="#f44336"
         viewBox="0 0 256 256"
         width="20"
         height="20"
         style={{float: "left"}}
-      />
+      /> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
