@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Spinner from "./components/Spinner";
-// import Messenger from "./components/Messenger";
+import Messenger from "./components/Messenger";
 import { MessengerChat } from "react-messenger-chat-plugin";
 import AutoScrollToTop from "./components/AutoScrollToTop";
 import ScrollToTop from "react-scroll-to-top";
@@ -142,10 +142,10 @@ export const App = () => {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* Enable Live Chat in Deployment */}
-          {/* <Messenger /> */}
-          <MessengerChat
+          <Messenger />
+          {/* <MessengerChat
             pageId="101323719167913"
-            language="sv_SE"
+            language="en_US"
             themeColor={"#f44336"}
             bottomSpacing={300}
             loggedInGreeting="Welcome to the Unichem support service. We are here to assist you."
@@ -170,7 +170,7 @@ export const App = () => {
             onMessengerLoad={() => {
               console.log("onMessengerLoad");
             }}
-          />
+          /> */}
           <Footer userType={userTypeData.userType} />
         </>
       ) : (
