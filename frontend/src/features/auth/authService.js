@@ -112,6 +112,7 @@ const deleteUser = async (id, token) => {
 
 // Logout user
 const logout = () => {
+  localStorage.clear();
   localStorage.removeItem("user");
 };
 

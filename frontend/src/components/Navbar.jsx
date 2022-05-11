@@ -49,11 +49,10 @@ const Navbar = ({ userType }) => {
   const onLogout = (e) => {
     e.preventDefault();
 
-    if (user.userType === "customer") {
-      toast.success(`See you around, ${username}!`);
-    }
+    // if (user.userType === "customer") {
+    //   toast.success(`See you around, ${username}!`);
+    // }
 
-    localStorage.clear();
     dispatch(logout());
     dispatch(resetUser());
     navigate("/");
