@@ -6995,15 +6995,15 @@ a:hover {
 } */
 
 /* The following are for the chat box, on display and on hide */
-iframe.fb_customer_chat_bounce_in_v2 {
+/* iframe.fb_customer_chat_bounce_in_v2 {
   left: 9pt;
 }
 iframe.fb_customer_chat_bounce_out_v2 {
   left: 9pt;
-}
+} */
 
 .fb_dialog.fb_dialog_advanced iframe {
   right: auto !important;
   left: 2rem;
-  bottom: 2rem !important;
+  bottom: 15rem !important;
 }
