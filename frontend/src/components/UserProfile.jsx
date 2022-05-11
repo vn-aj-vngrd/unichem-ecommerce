@@ -255,31 +255,9 @@ const UserProfile = () => {
                           <input
                             type="email"
                             className="form-control"
-                            {...register("email", {
-                              required: {
-                                value: true,
-                                message: "Email is required",
-                              },
-                              pattern: {
-                                value: /\S+@\S+\.\S+/,
-                                message: "Email is badly formatted",
-                              },
-                            })}
-                            style={{
-                              border:
-                                errors.email || emailEx
-                                  ? "1px solid #f44336"
-                                  : "",
-                            }}
+                            {...register("email")}
+                            disabled
                           />
-                          {errors.email && (
-                            <p className="error-message">
-                              ⚠ {errors.email.message}
-                            </p>
-                          )}
-                          {emailEx && (
-                            <p className="error-message">⚠ {emailEx}</p>
-                          )}
                         </div>
                       </div>
                     </div>

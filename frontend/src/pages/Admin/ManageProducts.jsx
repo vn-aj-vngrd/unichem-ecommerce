@@ -10,9 +10,11 @@ import RowImage from "../../components/RowImage";
 import {
   getProducts,
   resetProduct,
+  deleteProduct,
 } from "../../features/products/productSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../components/Spinner";
+import { toast } from "react-toastify";
 
 const ManageProducts = () => {
   const dispatch = useDispatch();
@@ -63,7 +65,6 @@ const ManageProducts = () => {
     "Updated",
     "Created",
     "",
-    "",
   ];
 
   let data = [];
@@ -103,18 +104,18 @@ const ManageProducts = () => {
       }
       temp.push(product._doc.featured ? "Yes" : "No");
       temp.push(
-        moment(product._doc.updatedAt).format("llll").toString()
+        moment(product._doc.updatedAt).format("llll")
       );
       temp.push(
-        moment(product._doc.createdAt).format("llll").toString()
+        moment(product._doc.createdAt).format("llll")
       );
       if (product) {
         temp.push(<UpdateProduct product={product} />);
       }
 
-      if (product) {
-        temp.push(<DeleteProduct id={product._doc._id} />);
-      }
+      // if (product) {
+      //   temp.push(<DeleteProduct id={product._doc._id} />);
+      // }
       data.push(temp);
     });
   }
@@ -125,6 +126,8 @@ const ManageProducts = () => {
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
+        dispatch(deleteProduct(data[item.dataIndex][1]));
+        toast.success("Product deleted successfully");
       });
     },
   }

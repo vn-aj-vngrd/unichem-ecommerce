@@ -9,9 +9,11 @@ import DeleteCoupon from "../../components/DeleteCoupon";
 import {
   getCoupons,
   resetCoupon,
+  deleteCoupon,
 } from "../../features/coupons/couponSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../components/Spinner";
+import { toast } from "react-toastify";
 
 const ManageCoupons = () => {
   const dispatch = useDispatch();
@@ -57,7 +59,6 @@ const ManageCoupons = () => {
     "Updated At",
     "Created At",
     "",
-    "",
   ];
 
   let data = [];
@@ -81,7 +82,7 @@ const ManageCoupons = () => {
       moment(coupon.updatedAt).format("llll").toString(),
       moment(coupon.createdAt).format("llll").toString(),
       <UpdateCoupon coupon={coupon}/>,
-      <DeleteCoupon id={coupon._id} />,
+      // <DeleteCoupon id={coupon._id} />,
     )
     data.push(temp);
   })
@@ -94,6 +95,8 @@ const ManageCoupons = () => {
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
+        dispatch(deleteCoupon(data[item.dataIndex][0]));
+        toast.success("Coupon deleted successfully");
       });
     },
   }

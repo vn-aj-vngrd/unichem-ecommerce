@@ -19,18 +19,21 @@ const getPromos = asyncHandler(async (req, res) => {
 const setPromo = asyncHandler(async (req, res) => {
   // Check for user
   if (!req.user) {
+    fs.unlinkSync(req.file.path.path);
     res.status(401);
     throw new Error("User not found");
   }
 
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
+    fs.unlinkSync(req.file.path.path);
     res.status(401);
     throw new Error("User not authorized");
   }
 
   // Check if user is not an admin
   if (!req.file.path) {
+    fs.unlinkSync(req.file.path.path);
     res.status(401);
     throw new Error("There was a problem uploading the image");
   }
@@ -62,21 +65,24 @@ const updatePromo = asyncHandler(async (req, res) => {
   console.log(req.body);
   const promo = await Promo.findById(req.body._id);
   if (!promo) {
+    fs.unlinkSync(req.file.path.path);
     res.status(400);
     throw new Error("Promo not found");
   }
 
-  // // Check for user
-  // if (!req.user) {
-  //   res.status(401);
-  //   throw new Error("User not found");
-  // }
+  // Check for user
+  if (!req.user) {
+    fs.unlinkSync(req.file.path.path);
+    res.status(401);
+    throw new Error("User not found");
+  }
 
-  // // Check for user and admin privilege
-  // if (!req.user && req.user.userType !== "admin") {
-  //   res.status(401);
-  //   throw new Error("User not authorized.");
-  // }
+  // Check for user and admin privilege
+  if (!req.user && req.user.userType !== "admin") {
+    fs.unlinkSync(req.file.path.path);
+    res.status(401);
+    throw new Error("User not authorized.");
+  }
 
   let tempImage;
 

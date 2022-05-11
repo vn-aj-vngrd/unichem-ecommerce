@@ -181,23 +181,47 @@ const getFeaturedProducts = asyncHandler(async (req, res) => {
 const setProduct = asyncHandler(async (req, res) => {
   // Check user
   if (!req.user) {
+    for (let i = 0; i < req.files.length; i++) {
+      let removeImagePath = req.files[i].path;
+      if (removeImagePath) {
+        fs.unlinkSync(removeImagePath);
+      }
+    }
     res.status(400);
     throw new Error("User not found");
   }
 
   // Check for user
   if (!req.user) {
+    for (let i = 0; i < req.files.length; i++) {
+      let removeImagePath = req.files[i].path;
+      if (removeImagePath) {
+        fs.unlinkSync(removeImagePath);
+      }
+    }
     res.status(401);
     throw new Error("User not found");
   }
 
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
+    for (let i = 0; i < req.files.length; i++) {
+      let removeImagePath = req.files[i].path;
+      if (removeImagePath) {
+        fs.unlinkSync(removeImagePath);
+      }
+    }
     res.status(401);
     throw new Error("User not authorized");
   }
 
   if (!req.files) {
+    for (let i = 0; i < req.files.length; i++) {
+      let removeImagePath = req.files[i].path;
+      if (removeImagePath) {
+        fs.unlinkSync(removeImagePath);
+      }
+    }
     res.status(401);
     throw new Error("There was a problem uploading the image");
   }
@@ -256,18 +280,36 @@ const updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.body._id);
 
   if (!product) {
+    for (let i = 0; i < req.files.length; i++) {
+      let removeImagePath = req.files[i].path;
+      if (removeImagePath) {
+        fs.unlinkSync(removeImagePath);
+      }
+    }
     res.status(400);
     throw new Error("Product not found");
   }
 
   // Check user
   if (!req.user) {
+    for (let i = 0; i < req.files.length; i++) {
+      let removeImagePath = req.files[i].path;
+      if (removeImagePath) {
+        fs.unlinkSync(removeImagePath);
+      }
+    }
     res.status(400);
     throw new Error("User not found");
   }
 
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
+    for (let i = 0; i < req.files.length; i++) {
+      let removeImagePath = req.files[i].path;
+      if (removeImagePath) {
+        fs.unlinkSync(removeImagePath);
+      }
+    }
     res.status(401);
     throw new Error("User not authorized");
   }

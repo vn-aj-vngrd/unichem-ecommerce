@@ -33,7 +33,7 @@ const UpdateCoupon = (coupon) => {
 
     console.log(couponData);
     dispatch(setCoupon(couponData));
-    toast.success("Product created successfully", {
+    toast.success("Coupon created successfully", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,

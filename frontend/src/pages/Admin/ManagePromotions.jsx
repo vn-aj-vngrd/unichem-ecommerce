@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getPromos, resetPromo } from "../../features/promos/promoSlice";
+import { getPromos, resetPromo, deletePromo } from "../../features/promos/promoSlice";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
@@ -9,6 +9,7 @@ import UpdatePromotion from "../../components/UpdatePromotion";
 import DeletePromotion from "../../components/DeletePromotion";
 import RowImage from "../../components/RowImage";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner";
 
 const ManagePromotions = () => {
@@ -73,12 +74,12 @@ const ManagePromotions = () => {
       : temp.push(promo.description.substr(0, maxLength));
 
     temp.push(
-      moment(promo.startDate).format("llll").toString(),
-      moment(promo.expiryDate).format("llll").toString(),
-      moment(promo.updatedAt).format("llll").toString(),
-      moment(promo.createdAt).format("llll").toString(),
+      moment(promo.startDate).format("llll"),
+      moment(promo.expiryDate).format("llll"),
+      moment(promo.updatedAt).format("llll"),
+      moment(promo.createdAt).format("llll"),
       <UpdatePromotion promo={promo} />,
-      <DeletePromotion id={promo._id} />
+      // <DeletePromotion id={promo._id} />
     );
 
     data.push(temp);
@@ -92,6 +93,8 @@ const ManagePromotions = () => {
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
+        dispatch(deletePromo(data[item.dataIndex][1]));
+        toast.success("Promotion deleted successfully");
       });
     },
   }
