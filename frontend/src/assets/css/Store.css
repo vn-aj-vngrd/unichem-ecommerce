@@ -7001,3 +7001,9 @@ a:hover {
 iframe.fb_customer_chat_bounce_out_v2 {
   left: 9pt;
 } */
+
+.fb_dialog.fb_dialog_advanced iframe {
+  right: auto !important;
+  left: 2rem;
+  bottom: 2rem !important;
+}
