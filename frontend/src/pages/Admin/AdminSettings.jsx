@@ -76,36 +76,6 @@ const AdminSettings = () => {
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <div>
-                    <label>Current Password</label>
-                    <input
-                      className="form-control"
-                      type="password"
-                      {...register("currentPassword", {
-                        required: {
-                          value: true,
-                          message: "Current Password is required",
-                        },
-                        minLength: {
-                          value: 8,
-                          message:
-                            "Current Password must be at least 8 characters",
-                        },
-                      })}
-                      style={{
-                        border: errors.currentPassword
-                          ? "1px solid #f44336"
-                          : "",
-                      }}
-                    />
-                    {errors.currentPassword && (
-                      <p className="error-message">
-                        ⚠ {errors.currentPassword.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <div>
                     <label>New Password</label>
                     <input
                       className="form-control"
@@ -154,6 +124,36 @@ const AdminSettings = () => {
                     {errors.confirmNewPassword && (
                       <p className="error-message">
                         ⚠ {errors.confirmNewPassword.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <div>
+                    <label>Current Password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      {...register("currentPassword", {
+                        required: {
+                          value: true,
+                          message: "Current Password is required",
+                        },
+                        minLength: {
+                          value: 8,
+                          message:
+                            "Current Password must be at least 8 characters",
+                        },
+                      })}
+                      style={{
+                        border: errors.currentPassword
+                          ? "1px solid #f44336"
+                          : "",
+                      }}
+                    />
+                    {errors.currentPassword && (
+                      <p className="error-message">
+                        ⚠ {errors.currentPassword.message}
                       </p>
                     )}
                   </div>
