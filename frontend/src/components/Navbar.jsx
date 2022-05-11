@@ -14,13 +14,13 @@ import { toast } from "react-toastify";
 const Navbar = ({ userType }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const { user } = useSelector((state) => state.auth);
   useSelector((state) => state.wishlist);
   useSelector((state) => state.cart);
-  
+
   // console.log(user)
-  
+
   const [input, setInput] = useState("");
   const username = "";
   // const username = username = user.name.split(" ")[0];
@@ -49,14 +49,9 @@ const Navbar = ({ userType }) => {
   const onLogout = (e) => {
     e.preventDefault();
 
-    toast.success(`See you around, ${username}!`, {
-      position: "top-right",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+    if (user.userType === "customer") {
+      toast.success(`See you around, ${username}!`);
+    }
 
     localStorage.clear();
     dispatch(logout());
@@ -312,8 +307,8 @@ const Navbar = ({ userType }) => {
                       <div className=" mobile-dropdown-hover">
                         <button className="hover-button">
                           <img
-                                // src={"\\uploads\\users\\user-placeholder"}
-                                src={user.image}
+                            // src={"\\uploads\\users\\user-placeholder"}
+                            src={user.image}
                             className="nav-profile-image"
                             alt=""
                           ></img>
