@@ -135,6 +135,14 @@ export const App = () => {
           {/* Enable Live Chat in Deployment */}
           <Messenger />
           <Footer userType={userTypeData.userType} />
+          <ScrollToTop
+            smooth="true"
+            color="#f44336"
+            viewBox="0 0 256 256"
+            width="20"
+            height="20"
+            style={{ left: "2rem", right: "auto", bottom: "2rem" }}
+          />
         </>
       ) : (
         <>
@@ -149,16 +157,16 @@ export const App = () => {
             <Route path="settings" element={<Settings />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
+          <ScrollToTop
+            smooth="true"
+            color="#f44336"
+            viewBox="0 0 256 256"
+            width="20"
+            height="20"
+            style={{ right: "2rem", left: "auto", bottom: "2rem" }}
+          />
         </>
       )}
-      <ScrollToTop
-        smooth="true"
-        color="#f44336"
-        viewBox="0 0 256 256"
-        width="20"
-        height="20"
-        style={{ left: "2rem", right: "auto", bottom: "2rem" }}
-      />
     </>
   ) : (
     <>
