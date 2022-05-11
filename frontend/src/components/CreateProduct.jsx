@@ -78,9 +78,6 @@ const CreateProduct = () => {
       tempPricesData.push(parseFloat(type.price));
     });
 
-    console.log(tempQuantitiesData);
-    console.log(tempPricesData);
-
     let tempSalePercent =
       !data.isSale || data.isSale === "false"
         ? 0

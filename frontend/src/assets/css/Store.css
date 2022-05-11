@@ -6555,25 +6555,28 @@ ol {
   height: 3px;
 }
 
-.progress-processing {
+.progress-awaiting-confirmation,
+.progress-awaiting-payment,
+.progress-awaiting-fulfillment {
   width: 13%;
   border-radius: 4px;
   z-index: 2;
 }
 
-.progress-packed {
+.progress-awaiting-shipment {
   width: 37%;
   border-radius: 4px;
   z-index: 2;
 }
 
-.progress-shiped {
+.progress-shipped,
+.progress-awaiting-pickup {
   width: 63%;
   border-radius: 4px;
   z-index: 2;
 }
 
-.progress-delivered {
+.progress-completed {
   width: 100%;
   border-radius: 4px;
   z-index: 2;
