@@ -7,7 +7,7 @@ const PurchasedProduct = ({ userID, userImage, orderLines, orderStatus }) => {
   const navigate = useNavigate();
 
   let subtotal = 0;
-
+  console.log(orderLines)
   return (
     <div>
       {orderLines.map((orderLine) => (
@@ -55,12 +55,13 @@ const PurchasedProduct = ({ userID, userImage, orderLines, orderStatus }) => {
                   </div>
                   <div className=" d-flex justify-content-between">
                     <span>₱{subtotal.toFixed(2)}</span>
-                    {orderStatus === "Delivered" && (
+                    {orderStatus === "Completed" && (
                       <Review
                         userID={userID}
                         userImage={userImage}
                         orderLineID={orderLine._id}
                         productID={orderLine.productID}
+                        reviewed={orderLine.reviewed}
                       />
                     )}
                   </div>

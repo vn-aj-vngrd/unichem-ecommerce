@@ -72,8 +72,8 @@ export const getOneOrder = createAsyncThunk(
   "orders/getOne",
   async (id, thunkAPI) => {
     try {
-      console.log(id);
-      return await orderService.getOneOrder(id);
+      const token = thunkAPI.getState().auth.user.token;
+      return await orderService.getOneOrder(id, token);
     } catch (error) {
       const orderMessage =
         (error.response &&

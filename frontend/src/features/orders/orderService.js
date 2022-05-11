@@ -43,8 +43,14 @@ const getUserOrders = async (token) => {
 };
 
 // Get order by orderID
-const getOneOrder = async (id) => {
-  const response = await axios.get(API_URL + "getOneOrder/" + id);
+const getOneOrder = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL + "getOneOrder/" + id, config);
   // console.log(response);
 
   return response.data;

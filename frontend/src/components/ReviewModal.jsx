@@ -3,7 +3,7 @@ import { setReview } from "../features/reviews/reviewSlice";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const ReviewModal = ({ userID, userImage, orderLineID, productID }) => {
+const ReviewModal = ({ userID, userImage, orderLineID, productID, reviewed }) => {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -53,6 +53,7 @@ const ReviewModal = ({ userID, userImage, orderLineID, productID }) => {
         data-bs-toggle="modal"
         data-bs-target={"#modal" + orderLineID}
         className="btn lni lni-comments-alt"
+        disabled={reviewed}
       ></button>
 
       <div

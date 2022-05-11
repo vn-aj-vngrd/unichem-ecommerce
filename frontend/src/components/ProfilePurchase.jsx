@@ -75,23 +75,25 @@ const ProfilePurchase = () => {
 
   let statusOrders = JSON.parse(JSON.stringify(orders));
 
-  // --
-  // Awaiting Payment (Processing)
-  // --
-  // Awaiting Shipment (Packed)
-  // --
-  // Shiped (Shipped)
-  // Awaiting Pickup
-  // --
-  // Delivered (Delivered)
-  // --
-  // Cancelled
-  // Refunded
+  // 0 - Awaiting Confirmation
+  // 1 - Awaiting Payment
+  // 2 - Awaiting Fulfillment
+  // 3 - Awaiting Shipment
+  // 4 - Shipped
+  // 5 - Awaiting Pickup
+  // 6 - Completed
+  // 7 - Cancelled
+  // 8 - Declined
+  // 9 - Awaiting Return
+  // 10 - Returned
 
   switch (orderStatus) {
     case "Processing": {
       statusOrders = statusOrders.filter(
-        (order) => order.orderStatus === "Awaiting Payment"
+        (order) =>
+          order.orderStatus === "Awaiting Payment" ||
+          order.orderStatus === "Awaiting Confirmation" ||
+          order.orderStatus === "Awaiting Fulfillment"
       );
       break;
     }
@@ -109,9 +111,29 @@ const ProfilePurchase = () => {
       );
       break;
     }
-    case "Delivered": {
+    case "Completed": {
       statusOrders = statusOrders.filter(
-        (order) => order.orderStatus === "Delivered"
+        (order) => order.orderStatus === "Completed"
+      );
+      break;
+    }
+    case "Cancelled": {
+      statusOrders = statusOrders.filter(
+        (order) => order.orderStatus === "Cancelled"
+      );
+      break;
+    }
+    case "Declined": {
+      statusOrders = statusOrders.filter(
+        (order) =>
+          order.orderStatus === "Declined" ||
+          order.orderStatus === "Awaiting Return"
+      );
+      break;
+    }
+    case "Returned": {
+      statusOrders = statusOrders.filter(
+        (order) => order.orderStatus === "Returned"
       );
       break;
     }
@@ -142,7 +164,10 @@ const ProfilePurchase = () => {
             <option>Processing</option>
             <option>Packed</option>
             <option>Shipped</option>
-            <option>Delivered</option>
+            <option>Completed</option>
+            <option>Cancelled</option>
+            <option>Declined</option>
+            <option>Returned</option>
           </select>
         </div>
         {/* <div className="order-status">
