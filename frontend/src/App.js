@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { injectStyle } from "react-toastify/dist/inject-style";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -56,6 +57,8 @@ export const App = () => {
   const handleLoading = () => {
     setIsLoading(false);
   };
+
+  injectStyle();
 
   useEffect(() => {
     if (user) {
