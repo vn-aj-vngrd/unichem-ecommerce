@@ -19,14 +19,14 @@ const AdminSettings = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-  const { isLoading, message, isError, isSuccess } = useSelector(
+  const { isLoading, message, isError, isAdminUpdated } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
     document.title = "Unichem Store | Settings";
 
-    if (isSuccess) {
+    if (isAdminUpdated) {
       toast.success("Password updated successfully");
     }
 
@@ -37,7 +37,7 @@ const AdminSettings = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [dispatch, isSuccess, isError, message, reset]);
+  }, [dispatch, isAdminUpdated, isError, message, reset]);
 
   const password = watch("newPassword");
 

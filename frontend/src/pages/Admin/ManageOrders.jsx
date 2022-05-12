@@ -72,12 +72,6 @@ const ManageOrders = () => {
 
   if (isOrderLoading) {
     dispatch(getAllOrders());
-
-    return (
-      <>
-        <Spinner globalSpinner="true" />
-      </>
-    );
   }
 
   const options = {
@@ -102,16 +96,22 @@ const ManageOrders = () => {
         directory="Orders"
       />
 
-      <div className="row mt-3 mb-4">
-        {orders && orders.length >= 0 && (
-          <DataTable
-            title="Orders"
-            columns={columns}
-            data={data}
-            options={options}
-          />
-        )}
-      </div>
+      {isOrderLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <div className="row mt-3 mb-4">
+          {orders && orders.length >= 0 && (
+            <DataTable
+              title="Orders"
+              columns={columns}
+              data={data}
+              options={options}
+            />
+          )}
+        </div>
+      )}
 
       <Footer userType="admin" />
     </div>

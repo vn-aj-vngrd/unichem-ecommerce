@@ -71,31 +71,32 @@ const ManageUsers = () => {
     },
   };
 
-  if (isLoading) {
-    return (
-      <>
-        <Spinner globalSpinner="true" />
-      </>
-    );
-  }
-
   return (
     <div className="content">
       <Header />
+
       <SectionTitle
         title="Manage Users"
         directory="Users"
         subtitle="Below are the list of users."
       />
-      <div className="row mt-3 mb-4">
-        <DataTable
-          title="Users"
-          columns={columns}
-          data={data}
-          isempty={data}
-          options={options}
-        />
-      </div>
+
+      {isLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <div className="row mt-3 mb-4">
+          <DataTable
+            title="Users"
+            columns={columns}
+            data={data}
+            isempty={data}
+            options={options}
+          />
+        </div>
+      )}
+
       <Footer userType="admin" />
     </div>
   );

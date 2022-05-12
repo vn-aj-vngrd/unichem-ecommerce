@@ -39,14 +39,6 @@ const ManageProducts = () => {
     };
   }, [isProductError, productMessage, dispatch]);
 
-  if (isProductLoading) {
-    return (
-      <>
-        <Spinner globalSpinner="true" />
-      </>
-    );
-  }
-
   const columns = [
     "Product Image",
     "ProductID",
@@ -145,14 +137,20 @@ const ManageProducts = () => {
         </div>
       </div>
 
-      <div className="row mt-3 mb-4">
-        <DataTable
-          title="Products"
-          columns={columns}
-          data={data}
-          options={options}
-        />
-      </div>
+      {isProductLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <div className="row mt-3 mb-4">
+          <DataTable
+            title="Products"
+            columns={columns}
+            data={data}
+            options={options}
+          />
+        </div>
+      )}
 
       <Footer userType="admin" />
     </div>

@@ -40,14 +40,6 @@ const ManagePromotions = () => {
     };
   }, [isPromoError, promoMessage, dispatch]);
 
-  if (isPromoLoading) {
-    return (
-      <>
-        <Spinner globalSpinner="true" />
-      </>
-    );
-  }
-
   console.log(promos);
 
   const columns = [
@@ -124,14 +116,21 @@ const ManagePromotions = () => {
         </div>
       </div>
 
-      <div className="row mt-3 mb-4">
-        <DataTable
-          title="Promotions"
-          columns={columns}
-          data={data}
-          options={options}
-        />
-      </div>
+      {isPromoLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <div className="row mt-3 mb-4">
+          <DataTable
+            title="Promotions"
+            columns={columns}
+            data={data}
+            options={options}
+          />
+        </div>
+      )}
+
       <Footer userType="admin" />
     </div>
   );

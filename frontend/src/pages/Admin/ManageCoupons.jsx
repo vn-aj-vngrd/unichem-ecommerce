@@ -38,14 +38,6 @@ const ManageCoupons = () => {
     };
   }, [isCouponError, couponMessage, dispatch]);
 
-  if (isCouponLoading) {
-    return (
-      <>
-        <Spinner globalSpinner="true" />
-      </>
-    );
-  }
-
   const columns = [
     "Coupon ID",
     "Coupon Code",
@@ -114,14 +106,21 @@ const ManageCoupons = () => {
         </div>
       </div>
 
-      <div className="row mt-3 mb-4">
-        <DataTable
-          title="Coupons"
-          columns={columns}
-          data={data}
-          options={options}
-        />
-      </div>
+      {isCouponLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <div className="row mt-3 mb-4">
+          <DataTable
+            title="Coupons"
+            columns={columns}
+            data={data}
+            options={options}
+          />
+        </div>
+      )}
+
       <Footer userType="admin" />
     </div>
   );

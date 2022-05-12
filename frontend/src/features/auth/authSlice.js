@@ -10,6 +10,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   isAccountRecovered: false,
+  isAdminUpdated: false,
   message: "",
   users: [],
 };
@@ -204,6 +205,8 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+      state.isAdminUpdated = false;
+      state.isAccountRecovered = false;
     },
   },
   extraReducers: (builder) => {
@@ -352,6 +355,7 @@ export const authSlice = createSlice({
       .addCase(updateAdmin.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isAdminUpdated = true;
       })
       .addCase(updateAdmin.rejected, (state, action) => {
         state.isLoading = false;
