@@ -10,6 +10,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   isAccountRecovered: false,
+  isAccountDeleted: false,
   isAdminUpdated: false,
   isCustomerUpdated: false,
   message: "",
@@ -209,6 +210,7 @@ export const authSlice = createSlice({
       state.isAdminUpdated = false;
       state.isCustomerUpdated = false;
       state.isAccountRecovered = false;
+      state.isAccountDeleted = false;
     },
   },
   extraReducers: (builder) => {
@@ -337,6 +339,7 @@ export const authSlice = createSlice({
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isAccountDeleted = true;
         state.users = state.users.filter(
           (user) => user._id !== action.payload.id
         );

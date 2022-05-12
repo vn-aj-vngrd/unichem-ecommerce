@@ -3,6 +3,11 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const Address = require("../models/addressModel");
+const Orders = require("../models/orderModel");
+const Review = require("../models/reviewModel");
+const Wishlist = require("../models/wishlistModel");
+const Cart = require("../models/cartModel");
+const Couponlog = require("../models/couponlogModel");
 const Token = require("../models/tokenModel");
 const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
@@ -36,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     userType,
-    image: "frontend\\src\\uploads\\user-placeholder",
+    image: "\\uploads\\users\\user-placeholder.png",
     verified: false,
   });
 
@@ -334,12 +339,21 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  await user.remove();
+
+  await Orders.deleteMany({ userID: req.params.id });
+  await Review.deleteMany({ userID: req.params.id });
+  await Address.deleteMany({ userID: req.params.id });
+  await Token.deleteMany({ userID: req.params.id });
+  await Wishlist.deleteMany({ userID: req.params.id });
+  await Cart.deleteMany({ userID: req.params.id });
+  await Couponlog.findByIdAndDelete(req.params.id);
+
   const destination = "frontend\\public";
   if (user.image && user.image !== "\\uploads\\users\\user-placeholder.png") {
     fs.unlinkSync(destination + user.image);
   }
 
-  await user.remove();
   res.status(200).json({ id: req.params.id });
 });
 

@@ -25,17 +25,23 @@ const ManageUsers = () => {
 
   const dispatch = useDispatch();
 
-  const { users, isLoading } = useSelector((state) => state.auth);
+  const { users, isLoading, isAccountDeleted } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     document.title = "Unichem Store | Users";
 
     dispatch(getUsers());
 
+    if (isAccountDeleted) {
+      toast.success("User deleted successfully");
+    }
+
     return () => {
       dispatch(resetUser());
     };
-  }, [dispatch]);
+  }, [dispatch, isAccountDeleted]);
 
   let data = [];
   if (users && users.length > 0) {
@@ -66,7 +72,6 @@ const ManageUsers = () => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
         dispatch(deleteUser(data[item.dataIndex][0]));
-        toast.success("User deleted successfully");
       });
     },
   };
