@@ -377,16 +377,18 @@ const Navbar = ({ userType }) => {
                     </div>
                   </>
                 ) : (
-                  <ul>
-                    <li className="authlink">
-                      <Link to="/login" className="pe-2 border-end">
+                  <div className="d-flex flex-row authlink">
+                    <div className="p-2 bd-highlight">
+                      <Link to="/login" className="pe-3 border-end">
                         Log In
                       </Link>
+                    </div>
+                    <div className="pt-2">
                       <Link to="/signup" className="ps-2">
                         Sign Up
                       </Link>
-                    </li>
-                  </ul>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>

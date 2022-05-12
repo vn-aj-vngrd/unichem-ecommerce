@@ -101,7 +101,7 @@ const AdminSettings = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-6 mb-3">
                   <div>
                     <label>Confirm New Password</label>
                     <input
@@ -128,7 +128,7 @@ const AdminSettings = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="col-md-12">
                   <div>
                     <label>Current Password</label>
                     <input
@@ -170,7 +170,7 @@ const AdminSettings = () => {
             <div className="col-12 mb-4">
               <div
                 className="card shadow border-0 text-center p-0"
-                style={{ height: `320px` }}
+                style={{ height: `318px` }}
               >
                 <div
                   className="container p-3"
