@@ -19,7 +19,7 @@ const Navbar = ({ userType }) => {
   useSelector((state) => state.cart);
 
   const [input, setInput] = useState("");
-  let username = "";
+  // let username = "";
 
   useEffect(() => {
     if (user && user.userType === "customer") {
@@ -40,7 +40,7 @@ const Navbar = ({ userType }) => {
   if (user) {
     wishlistCount = localStorage.getItem("wishlistCount");
     cartCount = localStorage.getItem("cartCount");
-    username = user.name.split(" ")[0];
+    // username = user.name.split(" ")[0];
   }
 
   const onLogout = (e) => {
@@ -304,7 +304,7 @@ const Navbar = ({ userType }) => {
                             className="nav-profile-image"
                             alt=""
                           ></img>
-                          {username}
+                          {/* {username} */}
                         </button>
 
                         <ul className="mobile-profile-collapse profile-collapse">
@@ -347,7 +347,7 @@ const Navbar = ({ userType }) => {
                                 className="nav-profile-image"
                                 alt=""
                               ></img>
-                              {username}
+                              {/* {username} */}
                             </Link>
                             <ul
                               className="sub-menu sub-menu-align-2 collapse profile-collapse"
