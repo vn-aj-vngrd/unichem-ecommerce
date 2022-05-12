@@ -31,7 +31,6 @@ const ReviewsSection = ({ productID }) => {
   if (isReviewLoading) {
     return (
       <>
-        {/* <div className="empty-container"></div> */}
         <Spinner />
       </>
     );
@@ -66,8 +65,6 @@ const ReviewsSection = ({ productID }) => {
     pagesVisited,
     pagesVisited + reviewsPerPage
   );
-
-  console.log(productReviews)
 
   return (
     <div className="product-details">

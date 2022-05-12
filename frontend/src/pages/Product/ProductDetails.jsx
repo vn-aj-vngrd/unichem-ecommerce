@@ -34,29 +34,21 @@ const ProductDetails = () => {
     };
   }, [navigate, id, isProductError, productMessage, dispatch]);
 
-  if (isProductLoading) {
-    return (
-      <>
-        <div className="empty-container"></div>
-        <Spinner />
-      </>
-    );
-  }
-
-  // console.log(products);
-
   return (
     <>
       <Breadcrumb type="product" />
 
-      {products.length > 0 ? (
+      {products.length > 0 && (
         <>
           <Details product={products[0]} />
-          <Specifications product={products[0]} />
+          {isProductLoading ? (
+            <Spinner />
+          ) : (
+            <Specifications product={products[0]} />
+          )}
         </>
-      ) : (
-        <></>
       )}
+
       <ReviewsSection productID={id} />
     </>
   );

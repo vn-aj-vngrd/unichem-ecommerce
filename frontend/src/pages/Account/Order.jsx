@@ -24,7 +24,9 @@ const Order = () => {
           <div className="container main-profile-section">
             <ProfileSidebar />
             <div className="spacer"></div>
-            <ProfilePurchase />
+            <div className="container">
+              <ProfilePurchase />
+            </div>
           </div>
         </>
       )}

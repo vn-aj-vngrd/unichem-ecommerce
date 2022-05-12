@@ -1,5 +1,4 @@
-// import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser, resetUser } from "../features/auth/authSlice";
@@ -8,11 +7,11 @@ import { toast } from "react-toastify";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
- 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+
+  const { user, isLoading, isError, isCustomerUpdated, message } = useSelector(
     (state) => state.auth
   );
-  console.log(user);
+
   const {
     register,
     handleSubmit,
@@ -30,6 +29,7 @@ const UserProfile = () => {
     register: registerPassword,
     handleSubmit: handleSubmitPassword,
     watch,
+    reset,
     formState: { errors: errorsPassword },
   } = useForm({
     defaultValues: {
@@ -39,29 +39,21 @@ const UserProfile = () => {
     },
   });
 
-  const [emailEx, setEmailEx] = useState();
-
   const newPassword = watch("newPassword");
 
   useEffect(() => {
     if (isError) {
-      toast.error(message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toast.error(message);
     }
 
-    // dispatch(get());
+    if (isCustomerUpdated) {
+      toast.success("User updated successfully");
+    }
+
     return () => {
       dispatch(resetUser());
     };
-  }, [isError, isSuccess, message, dispatch]);
+  }, [isError, isCustomerUpdated, message, dispatch]);
 
   const onSubmitData = (data) => {
     const userData = {
@@ -74,23 +66,12 @@ const UserProfile = () => {
     let formData = new FormData();
 
     formData.append("image", data.image[0]);
-    
+
     for (var key in userData) {
-      console.log(key, userData[key]);
       formData.append(key, userData[key]);
     }
 
     dispatch(updateUser(formData));
-    toast.success("User updated successfully", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
   };
 
   const onSubmitPassword = (data) => {
@@ -100,16 +81,7 @@ const UserProfile = () => {
     };
 
     dispatch(updateUser(userData));
-    toast.success("User updated successfully", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
+    reset();
   };
 
   const validateAge = (bday) => {
@@ -140,7 +112,11 @@ const UserProfile = () => {
         <div className="checkout-steps-form-style">
           <ul id="accordionExample">
             <li className=" box-shadow">
-              <form className="form" onSubmit={handleSubmit(onSubmitData)} encType="multipart/form-data">
+              <form
+                className="form"
+                onSubmit={handleSubmit(onSubmitData)}
+                encType="multipart/form-data"
+              >
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -304,7 +280,10 @@ const UserProfile = () => {
             </li>
 
             <li className=" box-shadow">
-              <form className="form" onSubmit={handleSubmitPassword(onSubmitPassword)}>
+              <form
+                className="form"
+                onSubmit={handleSubmitPassword(onSubmitPassword)}
+              >
                 <div
                   className="title collapsed"
                   data-bs-toggle="collapse"
@@ -389,10 +368,9 @@ const UserProfile = () => {
                         <label className="form-label">Current Password</label>
                         <div className="form-input form">
                           <input
-                            name="currentPassword"
                             type="password"
                             className="form-control"
-                            {...registerPassword("password", {
+                            {...registerPassword("currentPassword", {
                               required: {
                                 value: true,
                                 message: "Password is required",
@@ -404,14 +382,14 @@ const UserProfile = () => {
                               },
                             })}
                             style={{
-                              border: errorsPassword.password
+                              border: errorsPassword.currentPassword
                                 ? "1px solid #f44336"
                                 : "",
                             }}
                           />
                           {errorsPassword.password && (
                             <p className="error-message">
-                              ⚠ {errorsPassword.password.message}
+                              ⚠ {errorsPassword.currentPassword.message}
                             </p>
                           )}
                         </div>

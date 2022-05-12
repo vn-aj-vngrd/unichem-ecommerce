@@ -43,10 +43,10 @@ const Products = () => {
     }));
   };
 
-  console.log(minRange);
-  console.log(maxRange);
+  // console.log(minRange);
+  // console.log(maxRange);
 
-  console.log(filters.rating);
+  // console.log(filters.rating);
 
   return (
     <div>
@@ -279,13 +279,15 @@ const Products = () => {
           </div>
         </div>
         <div className="spacer"></div>
-        <Product
-          productName={productName}
-          categoryName={categoryName}
-          brandName={brandName}
-          filters={filters}
-          setFilters={setFilters}
-        />
+        <div className="container">
+          <Product
+            productName={productName}
+            categoryName={categoryName}
+            brandName={brandName}
+            filters={filters}
+            setFilters={setFilters}
+          />
+        </div>
       </div>
     </div>
   );

@@ -24,7 +24,9 @@ const Review = () => {
           <div className="container main-profile-section">
             <ProfileSidebar />
             <div className="spacer"></div>
-            <ProfileReviews />
+            <div className="container">
+              <ProfileReviews />
+            </div>
           </div>
         </>
       )}

@@ -58,7 +58,6 @@ const ProfilePurchase = () => {
   if (isOrderLoading) {
     return (
       <>
-        <div className="empty-container"></div>
         <Spinner />
       </>
     );

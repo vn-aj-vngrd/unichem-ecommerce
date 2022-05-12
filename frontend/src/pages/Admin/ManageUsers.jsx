@@ -25,17 +25,23 @@ const ManageUsers = () => {
 
   const dispatch = useDispatch();
 
-  const { users, isLoading } = useSelector((state) => state.auth);
+  const { users, isLoading, isAccountDeleted } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     document.title = "Unichem Store | Users";
 
     dispatch(getUsers());
 
+    if (isAccountDeleted) {
+      toast.success("User deleted successfully");
+    }
+
     return () => {
       dispatch(resetUser());
     };
-  }, [dispatch]);
+  }, [dispatch, isAccountDeleted]);
 
   let data = [];
   if (users && users.length > 0) {
@@ -66,36 +72,36 @@ const ManageUsers = () => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
         dispatch(deleteUser(data[item.dataIndex][0]));
-        toast.success("User deleted successfully");
       });
     },
   };
 
-  if (isLoading) {
-    return (
-      <>
-        <Spinner />;
-      </>
-    );
-  }
-
   return (
     <div className="content">
       <Header />
+
       <SectionTitle
         title="Manage Users"
         directory="Users"
         subtitle="Below are the list of users."
       />
-      <div className="row mt-3 mb-4">
-        <DataTable
-          title="Users"
-          columns={columns}
-          data={data}
-          isempty={data}
-          options={options}
-        />
-      </div>
+
+      {isLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <div className="row mt-3 mb-4">
+          <DataTable
+            title="Users"
+            columns={columns}
+            data={data}
+            isempty={data}
+            options={options}
+          />
+        </div>
+      )}
+
       <Footer userType="admin" />
     </div>
   );

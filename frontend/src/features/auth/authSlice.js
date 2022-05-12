@@ -10,6 +10,9 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   isAccountRecovered: false,
+  isAccountDeleted: false,
+  isAdminUpdated: false,
+  isCustomerUpdated: false,
   message: "",
   users: [],
 };
@@ -204,6 +207,11 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+      state.isAdminUpdated = false;
+      state.isCustomerUpdated = false;
+      state.isAccountRecovered = false;
+      state.isAccountDeleted = false;
+      state.users = [];
     },
   },
   extraReducers: (builder) => {
@@ -303,13 +311,13 @@ export const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isCustomerUpdated = true;
         state.user = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
       })
       // Get Users Case
       .addCase(getUsers.pending, (state) => {
@@ -332,6 +340,7 @@ export const authSlice = createSlice({
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isAccountDeleted = true;
         state.users = state.users.filter(
           (user) => user._id !== action.payload.id
         );
@@ -352,6 +361,7 @@ export const authSlice = createSlice({
       .addCase(updateAdmin.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isAdminUpdated = true;
       })
       .addCase(updateAdmin.rejected, (state, action) => {
         state.isLoading = false;

@@ -1,9 +1,16 @@
 import React from "react";
 
-const Spinner = () => {
+const Spinner = ({ globalSpinner }) => {
+  if (globalSpinner !== undefined && globalSpinner === "true") {
+    return (
+      <div className="loading">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
   return (
-    <div className="spinner-border text-danger loading" role="status">
-      <span className="visually-hidden">Loading...</span>
+    <div className="spinner-container">
+      <div className="loading-spinner"></div>
     </div>
   );
 };

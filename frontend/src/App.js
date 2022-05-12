@@ -4,12 +4,14 @@ import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { injectStyle } from "react-toastify/dist/inject-style";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Spinner from "./components/Spinner";
 import Messenger from "./components/Messenger";
-import ScrollToTop from "./components/ScrollToTop";
+import AutoScrollToTop from "./components/AutoScrollToTop";
+import ScrollToTop from "react-scroll-to-top";
 
 import Home from "./pages/Store/Home";
 import Products from "./pages/Product/Products";
@@ -56,6 +58,8 @@ export const App = () => {
     setIsLoading(false);
   };
 
+  injectStyle();
+
   useEffect(() => {
     if (user) {
       const temp = localStorage.getItem("user");
@@ -85,12 +89,12 @@ export const App = () => {
           {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
         </style>
       </Helmet>
-      <ScrollToTop />
+      <AutoScrollToTop />
       <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
-        newestOnTop={false}
+        newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
@@ -128,13 +132,20 @@ export const App = () => {
             <Route path="faq" element={<Faq />} />
             <Route path="users/:id/verify/:token" element={<Verification />} />
             <Route path="users/:id/recover/:token" element={<Recovery />} />
-            {/* <Route path="test" element={<Recovery />} /> */}
             <Route path="recover-account" element={<ForgotPassword />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* Enable Live Chat in Deployment */}
-          {/* <Messenger /> */}
+          <Messenger />
           <Footer userType={userTypeData.userType} />
+          <ScrollToTop
+            smooth="true"
+            color="#f44336"
+            viewBox="0 0 256 256"
+            width="20"
+            height="20"
+            style={{ left: "2rem", right: "auto", bottom: "2rem" }}
+          />
         </>
       ) : (
         <>
@@ -149,6 +160,14 @@ export const App = () => {
             <Route path="settings" element={<Settings />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
+          <ScrollToTop
+            smooth="true"
+            color="#f44336"
+            viewBox="0 0 256 256"
+            width="20"
+            height="20"
+            style={{ right: "2rem", left: "auto", bottom: "2rem" }}
+          />
         </>
       )}
     </>
@@ -159,7 +178,7 @@ export const App = () => {
           {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
         </style>
       </Helmet>
-      <Spinner />
+      <Spinner globalSpinner="true" />
     </>
   );
 };

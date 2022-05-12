@@ -31,51 +31,48 @@ const Hero = () => {
     };
   }, [dispatch, isPromoError, promoMessage]);
 
-  if (isPromoLoading) {
-    return (
-      <>
-        <Spinner />
-        <div className="empty-container-md"></div>
-      </>
-    );
-  }
-
   return (
     <section className="hero-area">
-      <div className="container">
-        <div className="row">
-          <div className="slider-head">
-            <div className="hero-slider">
-              <Swiper
-                spaceBetween={30}
-                centeredSlides={true}
-                navigation={true}
-                autoplay={{
-                  delay: 5500,
-                  disableOnInteraction: false,
-                }}
-                pagination={{
-                  clickable: true,
-                  style: { color: "white" },
-                }}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
-              >
-                {promos.map((promo, index) => (
-                  <SwiperSlide key={index}>
-                    <div
-                      className="single-slider"
-                      style={{
-                        backgroundImage: `url(${promo.image})`,
-                      }}
-                    ></div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+      {isPromoLoading ? (
+        <div className="container">
+          <Spinner />
+        </div>
+      ) : (
+        <div className="container">
+          <div className="row">
+            <div className="slider-head">
+              <div className="hero-slider">
+                <Swiper
+                  spaceBetween={30}
+                  centeredSlides={true}
+                  navigation={true}
+                  autoplay={{
+                    delay: 5500,
+                    disableOnInteraction: false,
+                  }}
+                  pagination={{
+                    clickable: true,
+                    style: { color: "white" },
+                  }}
+                  modules={[Autoplay, Pagination, Navigation]}
+                  className="mySwiper"
+                >
+                  {promos.map((promo, index) => (
+                    <SwiperSlide key={index}>
+                      <div
+                        className="single-slider"
+                        style={{
+                          backgroundImage: `url(${promo.image})`,
+                        }}
+                      ></div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

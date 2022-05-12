@@ -33,7 +33,9 @@ const Verification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, isLoading, isSuccess, isAccountRecovered } = useSelector((state) => state.auth);
+  const { user, isLoading, isSuccess, isAccountRecovered } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     document.title = "Unichem Store | Account Recovery";
@@ -89,67 +91,64 @@ const Verification = () => {
     dispatch(recoverAccount(recoveryData));
   };
 
-  if (isLoading) {
-    return (
-      <>
-        <Spinner />
-        <div className="empty-container"></div>
-      </>
-    );
-  }
-
   return (
     <>
       {validUrl ? (
         <div className="account-login">
-          <div className="container">
-            <div className="section-title">
-              <h2>Recover Account</h2>
-              <p>Please input your new password below.</p>
+          {isLoading ? (
+            <div className="container">
+              <Spinner />
             </div>
-            <div className="row">
-              <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
-                <form className="card login-form" onSubmit={onSubmit}>
-                  <div className="card-body">
-                    <div className="form-group input-group">
-                      <label>New Password</label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="password1"
-                        name="password1"
-                        value={password1}
-                        onChange={onChange}
-                        required
-                      />
-                    </div>
+          ) : (
+            <div className="container">
+              <div className="section-title">
+                <h2>Recover Account</h2>
+                <p>Please input your new password below.</p>
+              </div>
+              <div className="row">
+                <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+                  <form className="card login-form" onSubmit={onSubmit}>
+                    <div className="card-body">
+                      <div className="form-group input-group">
+                        <label>New Password</label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="password1"
+                          name="password1"
+                          value={password1}
+                          onChange={onChange}
+                          required
+                        />
+                      </div>
 
-                    <div className="form-group input-group">
-                      <label>Confirm New Password</label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="password2"
-                        name="password2"
-                        value={password2}
-                        onChange={onChange}
-                        required
-                      />
-                    </div>
+                      <div className="form-group input-group">
+                        <label>Confirm New Password</label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="password2"
+                          name="password2"
+                          value={password2}
+                          onChange={onChange}
+                          required
+                        />
+                      </div>
 
-                    <div className="button">
-                      <button className="btn" type="submit">
-                        Send
-                      </button>
+                      <div className="button">
+                        <button className="btn" type="submit">
+                          Send
+                        </button>
+                      </div>
+                      <div className="text-center mt-4">
+                        {error && <small className="text-red">{error}</small>}
+                      </div>
                     </div>
-                    <div className="text-center mt-4">
-                      {error && <small className="text-red">{error}</small>}
-                    </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       ) : (
         <>

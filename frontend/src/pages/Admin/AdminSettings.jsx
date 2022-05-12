@@ -19,14 +19,14 @@ const AdminSettings = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-  const { isLoading, message, isError, isSuccess } = useSelector(
+  const { isLoading, message, isError, isAdminUpdated } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
     document.title = "Unichem Store | Settings";
 
-    if (isSuccess) {
+    if (isAdminUpdated) {
       toast.success("Password updated successfully");
     }
 
@@ -37,7 +37,7 @@ const AdminSettings = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [dispatch, isSuccess, isError, message, reset]);
+  }, [dispatch, isAdminUpdated, isError, message, reset]);
 
   const password = watch("newPassword");
 
@@ -55,7 +55,7 @@ const AdminSettings = () => {
   if (isLoading) {
     return (
       <>
-        <Spinner />
+        <Spinner globalSpinner="true" />
       </>
     );
   }
@@ -75,6 +75,60 @@ const AdminSettings = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-md-6 mb-3">
+                  <div>
+                    <label>New Password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      {...register("newPassword", {
+                        required: {
+                          value: true,
+                          message: "New Password is required",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "New Password must be at least 8 characters",
+                        },
+                      })}
+                      style={{
+                        border: errors.newPassword ? "1px solid #f44336" : "",
+                      }}
+                    />
+                    {errors.newPassword && (
+                      <p className="error-message">
+                        ⚠ {errors.newPassword.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <div>
+                    <label>Confirm New Password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      {...register("confirmNewPassword", {
+                        required: {
+                          value: true,
+                          message: "Confirm New Password is required",
+                        },
+                        validate: (value) =>
+                          password === value || "Passwords do not match",
+                      })}
+                      style={{
+                        border: errors.confirmNewPassword
+                          ? "1px solid #f44336"
+                          : "",
+                      }}
+                    />
+                    {errors.confirmNewPassword && (
+                      <p className="error-message">
+                        ⚠ {errors.confirmNewPassword.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-12">
                   <div>
                     <label>Current Password</label>
                     <input
@@ -104,60 +158,6 @@ const AdminSettings = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-md-6 mb-3">
-                  <div>
-                    <label>New Password</label>
-                    <input
-                      className="form-control"
-                      type="password"
-                      {...register("newPassword", {
-                        required: {
-                          value: true,
-                          message: "New Password is required",
-                        },
-                        minLength: {
-                          value: 8,
-                          message: "New Password must be at least 8 characters",
-                        },
-                      })}
-                      style={{
-                        border: errors.newPassword ? "1px solid #f44336" : "",
-                      }}
-                    />
-                    {errors.newPassword && (
-                      <p className="error-message">
-                        ⚠ {errors.newPassword.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div>
-                    <label>Confirm New Password</label>
-                    <input
-                      className="form-control"
-                      type="password"
-                      {...register("confirmNewPassword", {
-                        required: {
-                          value: true,
-                          message: "Confirm New Password is required",
-                        },
-                        validate: (value) =>
-                          password === value || "Passwords do not match",
-                      })}
-                      style={{
-                        border: errors.confirmNewPassword
-                          ? "1px solid #f44336"
-                          : "",
-                      }}
-                    />
-                    {errors.confirmNewPassword && (
-                      <p className="error-message">
-                        ⚠ {errors.confirmNewPassword.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
               </div>
               <div className="button mt-4">
                 <button className="btn">Save Changes</button>
@@ -170,7 +170,7 @@ const AdminSettings = () => {
             <div className="col-12 mb-4">
               <div
                 className="card shadow border-0 text-center p-0"
-                style={{ height: `320px` }}
+                style={{ height: `318px` }}
               >
                 <div
                   className="container p-3"

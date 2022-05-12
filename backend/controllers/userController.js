@@ -3,6 +3,11 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const Address = require("../models/addressModel");
+const Orders = require("../models/orderModel");
+const Review = require("../models/reviewModel");
+const Wishlist = require("../models/wishlistModel");
+const Cart = require("../models/cartModel");
+const Couponlog = require("../models/couponlogModel");
 const Token = require("../models/tokenModel");
 const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
@@ -36,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     userType,
-    image: "frontend\\src\\uploads\\user-placeholder",
+    image: "\\uploads\\users\\user-placeholder.png",
     verified: false,
   });
 
@@ -248,15 +253,18 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  console.log(req.body)
-  console.log(req.file)
+  // console.log(req.body);
+  // console.log(req.file);
 
   let tempImage;
   if (req.file) {
     let removeImagePath = user.image;
     const destination = "frontend\\public";
 
-    if (removeImagePath && removeImagePath !== "\\uploads\\users\\user-placeholder.png") {
+    if (
+      removeImagePath &&
+      removeImagePath !== "\\uploads\\users\\user-placeholder.png"
+    ) {
       fs.unlinkSync(destination + removeImagePath);
     }
 
@@ -270,9 +278,11 @@ const updateUser = asyncHandler(async (req, res) => {
       // hash the password using bcrypt
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
+      user.password = req.body.password;
+      await user.save();
     } else {
       res.status(400);
-      throw new Error("Your current password is incorrect.");
+      throw new Error("Current password is incorrect.");
     }
   }
 
@@ -318,7 +328,6 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route   DELETE /api/users/deleteUser/:id
 // @access  Private
 const deleteUser = asyncHandler(async (req, res) => {
-  console.log("delete")
   if (!req.user && req.user.userType !== "admin") {
     res.status(400);
     throw new Error("Access Denied");
@@ -330,12 +339,21 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  await user.remove();
+
+  await Orders.deleteMany({ userID: req.params.id });
+  await Review.deleteMany({ userID: req.params.id });
+  await Address.deleteMany({ userID: req.params.id });
+  await Token.deleteMany({ userID: req.params.id });
+  await Wishlist.deleteMany({ userID: req.params.id });
+  await Cart.deleteMany({ userID: req.params.id });
+  await Couponlog.findByIdAndDelete(req.params.id);
+
   const destination = "frontend\\public";
   if (user.image && user.image !== "\\uploads\\users\\user-placeholder.png") {
     fs.unlinkSync(destination + user.image);
   }
 
-  await user.remove();
   res.status(200).json({ id: req.params.id });
 });
 
@@ -522,9 +540,11 @@ const updateAdmin = asyncHandler(async (req, res) => {
       // hash the password using bcrypt
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
+      user.password = req.body.password;
+      await user.save();
     } else {
       res.status(400);
-      throw new Error("Your current password is incorrect.");
+      throw new Error("Current password is incorrect.");
     }
   }
 

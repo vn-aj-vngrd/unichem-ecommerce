@@ -9,21 +9,17 @@ import {
 } from "../features/wishlist/wishlistSlice";
 import { getCarts, resetCart } from "../features/cart/cartSlice";
 import logo from "../assets/images/logo.svg";
-import { toast } from "react-toastify";
 
 const Navbar = ({ userType }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const { user } = useSelector((state) => state.auth);
   useSelector((state) => state.wishlist);
   useSelector((state) => state.cart);
-  
-  // console.log(user)
-  
+
   const [input, setInput] = useState("");
-  const username = "";
-  // const username = username = user.name.split(" ")[0];
+  let username = "";
 
   useEffect(() => {
     if (user && user.userType === "customer") {
@@ -44,21 +40,12 @@ const Navbar = ({ userType }) => {
   if (user) {
     wishlistCount = localStorage.getItem("wishlistCount");
     cartCount = localStorage.getItem("cartCount");
+    username = user.name.split(" ")[0];
   }
 
   const onLogout = (e) => {
     e.preventDefault();
 
-    toast.success(`See you around, ${username}!`, {
-      position: "top-right",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-
-    localStorage.clear();
     dispatch(logout());
     dispatch(resetUser());
     navigate("/");
@@ -312,8 +299,8 @@ const Navbar = ({ userType }) => {
                       <div className=" mobile-dropdown-hover">
                         <button className="hover-button">
                           <img
-                                // src={"\\uploads\\users\\user-placeholder"}
-                                src={user.image}
+                            // src={"\\uploads\\users\\user-placeholder"}
+                            src={user.image}
                             className="nav-profile-image"
                             alt=""
                           ></img>
@@ -390,16 +377,18 @@ const Navbar = ({ userType }) => {
                     </div>
                   </>
                 ) : (
-                  <ul>
-                    <li className="authlink">
-                      <Link to="/login" className="pe-2 border-end">
+                  <div className="d-flex flex-row authlink">
+                    <div className="p-2 bd-highlight">
+                      <Link to="/login" className="pe-3 border-end">
                         Log In
                       </Link>
+                    </div>
+                    <div className="pt-2">
                       <Link to="/signup" className="ps-2">
                         Sign Up
                       </Link>
-                    </li>
-                  </ul>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -615,7 +604,7 @@ const Navbar = ({ userType }) => {
                         fillRule="evenodd"
                         d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
                         clipRule="evenodd"
-                      ></path>
+                      />
                     </svg>
                   </span>
                   <span className="sidebar-text">Settings</span>

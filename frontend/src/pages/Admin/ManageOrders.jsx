@@ -34,17 +34,23 @@ const ManageOrders = () => {
   ];
 
   const dispatch = useDispatch();
-  const { orders, isOrderLoading } = useSelector((state) => state.orders);
+  const { orders, isOrderLoading, isOrderDeleted } = useSelector(
+    (state) => state.orders
+  );
 
   useEffect(() => {
     document.title = "Unichem Store | Orders";
 
     dispatch(getAllOrders());
 
+    if (isOrderDeleted) {
+      toast.success("Order deleted successfully!");
+    }
+
     return () => {
       dispatch(resetOrder());
     };
-  }, [dispatch]);
+  }, [dispatch, isOrderDeleted]);
 
   let data = [];
   if (orders && orders.length > 0) {
@@ -72,12 +78,6 @@ const ManageOrders = () => {
 
   if (isOrderLoading) {
     dispatch(getAllOrders());
-
-    return (
-      <>
-        <Spinner />
-      </>
-    );
   }
 
   const options = {
@@ -85,9 +85,7 @@ const ManageOrders = () => {
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        // console.log(data[item.dataIndex][0]);
         dispatch(deleteOrder(data[item.dataIndex][0]));
-        toast.success("Order deleted successfully");
       });
     },
   };
@@ -102,17 +100,23 @@ const ManageOrders = () => {
         directory="Orders"
       />
 
-      <div className="row mt-3 mb-4">
-        {orders && orders.length >= 0 && (
-          <DataTable
-            title="Orders"
-            columns={columns}
-            data={data}
-            options={options}
-          />
-        )}
-      </div>
-      
+      {isOrderLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <div className="row mt-3 mb-4">
+          {orders && orders.length >= 0 && (
+            <DataTable
+              title="Orders"
+              columns={columns}
+              data={data}
+              options={options}
+            />
+          )}
+        </div>
+      )}
+
       <Footer userType="admin" />
     </div>
   );

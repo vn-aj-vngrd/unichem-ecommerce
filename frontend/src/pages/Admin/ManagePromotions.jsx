@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { getPromos, resetPromo, deletePromo } from "../../features/promos/promoSlice";
+import {
+  getPromos,
+  resetPromo,
+  deletePromo,
+} from "../../features/promos/promoSlice";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import DataTable from "../../components/DataTable";
@@ -36,14 +40,6 @@ const ManagePromotions = () => {
     };
   }, [isPromoError, promoMessage, dispatch]);
 
-  if (isPromoLoading) {
-    return (
-      <>
-        <Spinner />
-      </>
-    );
-  }
-
   console.log(promos);
 
   const columns = [
@@ -67,7 +63,11 @@ const ManagePromotions = () => {
     let temp = [];
 
     // temp.push(<RowImage src={".." + promo.image.replaceAll("\\", "/").slice(imagePath.length)} alt={promo.promoName}/>, promo._id, promo.promoName);
-    temp.push(<RowImage src={promo.image} alt={promo.promoName}/>, promo._id, promo.promoName);
+    temp.push(
+      <RowImage src={promo.image} alt={promo.promoName} />,
+      promo._id,
+      promo.promoName
+    );
 
     promo.description.length > maxLength
       ? temp.push(promo.description.substr(0, maxLength).concat("..."))
@@ -98,7 +98,7 @@ const ManagePromotions = () => {
         toast.success("Promotion deleted successfully");
       });
     },
-  }
+  };
 
   return (
     <div className="content">
@@ -117,9 +117,21 @@ const ManagePromotions = () => {
         </div>
       </div>
 
-      <div className="row mt-3 mb-4">
-        <DataTable title="Promotions" columns={columns} data={data} options={options}/>
-      </div>
+      {isPromoLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <div className="row mt-3 mb-4">
+          <DataTable
+            title="Promotions"
+            columns={columns}
+            data={data}
+            options={options}
+          />
+        </div>
+      )}
+
       <Footer userType="admin" />
     </div>
   );
