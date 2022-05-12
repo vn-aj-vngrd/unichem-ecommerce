@@ -211,6 +211,7 @@ export const authSlice = createSlice({
       state.isCustomerUpdated = false;
       state.isAccountRecovered = false;
       state.isAccountDeleted = false;
+      state.users = [];
     },
   },
   extraReducers: (builder) => {

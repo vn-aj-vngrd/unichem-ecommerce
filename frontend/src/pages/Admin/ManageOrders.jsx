@@ -34,17 +34,23 @@ const ManageOrders = () => {
   ];
 
   const dispatch = useDispatch();
-  const { orders, isOrderLoading } = useSelector((state) => state.orders);
+  const { orders, isOrderLoading, isOrderDeleted } = useSelector(
+    (state) => state.orders
+  );
 
   useEffect(() => {
     document.title = "Unichem Store | Orders";
 
     dispatch(getAllOrders());
 
+    if (isOrderDeleted) {
+      toast.success("Order deleted successfully!");
+    }
+
     return () => {
       dispatch(resetOrder());
     };
-  }, [dispatch]);
+  }, [dispatch, isOrderDeleted]);
 
   let data = [];
   if (orders && orders.length > 0) {
@@ -79,9 +85,7 @@ const ManageOrders = () => {
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        // console.log(data[item.dataIndex][0]);
         dispatch(deleteOrder(data[item.dataIndex][0]));
-        toast.success("Order deleted successfully");
       });
     },
   };

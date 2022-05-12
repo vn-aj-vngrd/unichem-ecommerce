@@ -7,6 +7,7 @@ const initialState = {
   isOrderSuccess: false,
   isOrderLoading: false,
   isOrderAdded: false,
+  isOrderDeleted: false,
   orderMessage: "",
 };
 
@@ -248,6 +249,7 @@ export const orderSlice = createSlice({
       .addCase(deleteOrder.fulfilled, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
+        state.isOrderDeleted = true;
         state.orders = state.orders.filter(
           (order) => order._id !== action.payload.id
         );
