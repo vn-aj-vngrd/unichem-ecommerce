@@ -248,15 +248,18 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  console.log(req.body)
-  console.log(req.file)
+  console.log(req.body);
+  console.log(req.file);
 
   let tempImage;
   if (req.file) {
     let removeImagePath = user.image;
     const destination = "frontend\\public";
 
-    if (removeImagePath && removeImagePath !== "\\uploads\\users\\user-placeholder.png") {
+    if (
+      removeImagePath &&
+      removeImagePath !== "\\uploads\\users\\user-placeholder.png"
+    ) {
       fs.unlinkSync(destination + removeImagePath);
     }
 
@@ -318,7 +321,7 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route   DELETE /api/users/deleteUser/:id
 // @access  Private
 const deleteUser = asyncHandler(async (req, res) => {
-  console.log("delete")
+  console.log("delete");
   if (!req.user && req.user.userType !== "admin") {
     res.status(400);
     throw new Error("Access Denied");
@@ -522,9 +525,11 @@ const updateAdmin = asyncHandler(async (req, res) => {
       // hash the password using bcrypt
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
+      user.password = req.body.password;
+      await user.save();
     } else {
       res.status(400);
-      throw new Error("Your current password is incorrect.");
+      throw new Error("Current password is incorrect.");
     }
   }
 
