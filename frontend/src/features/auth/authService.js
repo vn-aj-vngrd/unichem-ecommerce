@@ -5,7 +5,6 @@ const API_URL = "/api/users/";
 // Register user
 const signup = async (userData) => {
   const response = await axios.post(API_URL + "signup", userData);
-  // console.log(response.data);
 
   return response.data;
 };
@@ -13,7 +12,6 @@ const signup = async (userData) => {
 // Login user
 const login = async (userData) => {
   const response = await axios.post(API_URL + "login", userData);
-  // console.log(response.data);
 
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
@@ -24,12 +22,9 @@ const login = async (userData) => {
 
 // Verify user
 const verifyUser = async (verifyParams) => {
-  console.log(verifyParams);
-
   const response = await axios.post(
     API_URL + verifyParams.id + "/verify/" + verifyParams.token
   );
-  // console.log(response);
 
   return response.data;
 };
@@ -37,7 +32,6 @@ const verifyUser = async (verifyParams) => {
 // Create user recovery
 const createRecovery = async (recoveryData) => {
   const response = await axios.post(API_URL + "createRecovery", recoveryData);
-  // console.log(response.data);
 
   return response.data;
 };
@@ -60,7 +54,6 @@ const recoverAccount = async (recoveryData) => {
       recoveryData.param.token,
     recoveryData
   );
-  // console.log(response.data);
 
   return response.data;
 };
@@ -73,7 +66,6 @@ const updateUser = async (userData, token) => {
     },
   };
   const response = await axios.put(API_URL + "updateUser", userData, config);
-  // console.log(response.data);
 
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
@@ -91,7 +83,6 @@ const getUsers = async (token) => {
   };
 
   const response = await axios.get(API_URL + "getUsers", config);
-  // console.log(response.data);
 
   return response.data;
 };
@@ -105,15 +96,14 @@ const deleteUser = async (id, token) => {
   };
 
   const response = await axios.delete(API_URL + "deleteUser/" + id, config);
-  // console.log(response.data);
 
   return response.data;
 };
 
 // Logout user
 const logout = () => {
-  localStorage.clear();
   localStorage.removeItem("user");
+  localStorage.clear();
 };
 
 // Update admin password
@@ -129,7 +119,6 @@ const updateAdmin = async (updateParams, token) => {
     updateParams,
     config
   );
-  console.log(response.data);
 
   return response.data;
 };

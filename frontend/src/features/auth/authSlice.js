@@ -11,6 +11,7 @@ const initialState = {
   isLoading: false,
   isAccountRecovered: false,
   isAdminUpdated: false,
+  isCustomerUpdated: false,
   message: "",
   users: [],
 };
@@ -206,6 +207,7 @@ export const authSlice = createSlice({
       state.isError = false;
       state.message = "";
       state.isAdminUpdated = false;
+      state.isCustomerUpdated = false;
       state.isAccountRecovered = false;
     },
   },
@@ -306,13 +308,13 @@ export const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isCustomerUpdated = true;
         state.user = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
       })
       // Get Users Case
       .addCase(getUsers.pending, (state) => {
