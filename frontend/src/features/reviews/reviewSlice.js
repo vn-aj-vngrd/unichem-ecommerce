@@ -6,6 +6,9 @@ const initialState = {
   isReviewError: false,
   isReviewSuccess: false,
   isReviewLoading: false,
+  isReviewCreated: false,
+  isReviewDeleted: false,
+  isReviewUpdated: false,
   reviewMessage: "",
 };
 
@@ -160,6 +163,7 @@ export const reviewSlice = createSlice({
       .addCase(updateReview.fulfilled, (state, action) => {
         state.isReviewLoading = false;
         state.isReviewSuccess = true;
+        state.isReviewUpdated = true;
         const idx = state.reviews.findIndex(
           (obj) => obj._doc._id === action.payload._id
         );
@@ -177,6 +181,7 @@ export const reviewSlice = createSlice({
       .addCase(deleteReview.fulfilled, (state, action) => {
         state.isReviewLoading = false;
         state.isReviewSuccess = true;
+        state.isReviewDeleted = true;
         state.reviews = state.reviews.filter(
           (review) => review._doc._id !== action.payload.id
         );

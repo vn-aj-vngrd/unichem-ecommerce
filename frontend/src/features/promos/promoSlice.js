@@ -6,6 +6,9 @@ const initialState = {
   isPromoError: false,
   isPromoSuccess: false,
   isPromoLoading: false,
+  isPromoCreated: false,
+  isPromoDeleted: false,
+  isPromoUpdated: false,
   promoMessage: "",
 };
 
@@ -100,6 +103,7 @@ export const promoSlice = createSlice({
       .addCase(setPromo.fulfilled, (state, action) => {
         state.isPromoLoading = false;
         state.isPromoSuccess = true;
+        state.isPromoCreated = true;
         state.promos = [...state.promos, action.payload]
       })
       .addCase(setPromo.rejected, (state, action) => {
@@ -130,6 +134,7 @@ export const promoSlice = createSlice({
       .addCase(updatePromo.fulfilled, (state, action) => {
         state.isPromoLoading = false;
         state.isPromoSuccess = true;
+        state.isPromoUpdated = true;
         const idx = state.promos.findIndex(
           (promo) => promo._id === action.payload._id
         );
@@ -148,6 +153,7 @@ export const promoSlice = createSlice({
       .addCase(deletePromo.fulfilled, (state, action) => {
         state.isPromoLoading = false;
         state.isPromoSuccess = true;
+        state.isPromoDeleted = true;
         state.promos = state.promos.filter(
           (promo) => promo._id !== action.payload._id
         );
