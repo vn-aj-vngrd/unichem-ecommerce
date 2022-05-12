@@ -73,10 +73,10 @@ function ReviewSingle({ reviewOne, editable }) {
 
   return (
     <>
-      {reviewOne && (
+      {reviewOne && reviewOne.user && (
         <form className="form" onSubmit={onSubmitReview}>
-          <div key={reviewOne._doc._id} className="single-review">
-            <img src={reviewOne.user.image} alt={reviewOne.user.image} />
+          <div className="single-review">
+            {reviewOne.user.image && (<img src={reviewOne.user.image} alt={reviewOne.user.image} />)}
             <div className="review-info">
               <div
                 className={

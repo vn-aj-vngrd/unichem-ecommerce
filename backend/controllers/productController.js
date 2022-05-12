@@ -242,15 +242,26 @@ const setProduct = asyncHandler(async (req, res) => {
     tempFiles.push(req.files[i].path.slice(destination.length));
   }
 
+  console.log(req.body)
+  let tempQuantities = [];
+  req.body.quantities.split(',').forEach((quantity) => {
+    tempQuantities.push(parseFloat(quantity));
+  })
+
+  let tempPrices = [];
+  req.body.prices.split(',').forEach((price) => {
+    tempPrices.push(parseFloat(price));
+  })
+
   const product = await Product.create({
     productName: req.body.productName,
     brand: req.body.brand,
     category: req.body.category,
     types: req.body.types,
     specifications: req.body.specifications,
-    quantities: req.body.quantities,
-    prices: req.body.prices,
-    salePrices: req.body.salePrices,
+    quantities: tempQuantities,
+    prices: tempPrices,
+    // salePrices: req.body.salePrices,
     isSale: req.body.isSale,
     salePercent: req.body.salePercent,
     description: req.body.description,
@@ -334,6 +345,16 @@ const updateProduct = asyncHandler(async (req, res) => {
   } else {
     tempFiles = product.images;
   }
+  
+  let tempQuantities = [];
+  req.body.quantities.split(',').forEach((quantity) => {
+    tempQuantities.push(parseFloat(quantity));
+  })
+
+  let tempPrices = [];
+  req.body.prices.split(',').forEach((price) => {
+    tempPrices.push(parseFloat(price));
+  })
 
   const updatedProduct = await Product.findByIdAndUpdate(
     {
@@ -345,9 +366,9 @@ const updateProduct = asyncHandler(async (req, res) => {
       category: req.body.category,
       types: req.body.types,
       specifications: req.body.specifications,
-      quantities: req.body.quantities,
-      prices: req.body.prices,
-      salePrices: req.body.salePrices,
+      quantities: tempQuantities,
+      prices: tempPrices,
+      // salePrices: req.body.salePrices,
       isSale: req.body.isSale,
       salePercent: req.body.salePercent,
       description: req.body.description,

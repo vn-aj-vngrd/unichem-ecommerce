@@ -5,7 +5,7 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreateCoupon from "../../components/CreateCoupon";
 import UpdateCoupon from "../../components/UpdateCoupon";
-import DeleteCoupon from "../../components/DeleteCoupon";
+import ViewCoupon from "../../components/ViewCoupon";
 import {
   getCoupons,
   resetCoupon,
@@ -51,6 +51,7 @@ const ManageCoupons = () => {
     "Updated At",
     "Created At",
     "",
+    "",
   ];
 
   let data = [];
@@ -69,7 +70,8 @@ const ManageCoupons = () => {
       moment(coupon.expiryDate).format("llll").toString(),
       moment(coupon.updatedAt).format("llll").toString(),
       moment(coupon.createdAt).format("llll").toString(),
-      <UpdateCoupon coupon={coupon} />
+      <UpdateCoupon coupon={coupon}/>,
+      <ViewCoupon coupon={coupon}/>,
       // <DeleteCoupon id={coupon._id} />,
     );
     data.push(temp);

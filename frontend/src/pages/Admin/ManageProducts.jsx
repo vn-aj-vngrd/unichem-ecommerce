@@ -5,7 +5,7 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 import UpdateProduct from "../../components/UpdateProduct";
-import DeleteProduct from "../../components/DeleteProduct";
+import ViewProduct from "../../components/ViewProduct";
 import RowImage from "../../components/RowImage";
 import {
   getProducts,
@@ -57,6 +57,7 @@ const ManageProducts = () => {
     "Updated",
     "Created",
     "",
+    "",
   ];
 
   let data = [];
@@ -98,6 +99,7 @@ const ManageProducts = () => {
       temp.push(moment(product._doc.updatedAt).format("llll"));
       temp.push(moment(product._doc.createdAt).format("llll"));
       if (product) {
+        temp.push(<ViewProduct product={product} />);
         temp.push(<UpdateProduct product={product} />);
       }
 

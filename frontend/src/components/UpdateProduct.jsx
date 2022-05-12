@@ -75,7 +75,6 @@ const UpdateProduct = (product) => {
   // const [isSale, setisSale] = useState(isSaleWatch);
 
   const dispatch = useDispatch();
-  // console.log(isSale);
 
   const onSubmit = (data) => {
     if (data.specifications.length === 0) {
@@ -133,17 +132,13 @@ const UpdateProduct = (product) => {
     let formData = new FormData();
 
     for (let i = 0; i < data.images.length; i++) {
-      console.log(data.images[i]);
       formData.append("images", data.images[i]);
     } 
     
-    console.log(productData);
     for (var key in productData) {
-      console.log(key, productData[key]);
       formData.append(key, productData[key]);
     }
 
-    console.log("dispatch");
     dispatch(updateProduct(formData));
     toast.success("Product updated successfully", {
       position: "top-right",
@@ -202,7 +197,7 @@ const UpdateProduct = (product) => {
                   action="#"
                   className="mt-4"
                   onSubmit={handleSubmit(onSubmit)}
-                  enctype="multipart/form-data"
+                  encType="multipart/form-data"
                 >
                   <div className="form-group">
                     <div className="form-group mb-4">

@@ -135,7 +135,7 @@ const Navbar = ({ userType }) => {
         </div>
         <div className="container">
           <div className="row align-items-center nav-flex-on-thin-screen">
-            <div className="col-lg-8 col-md-6 col-12 left-nav-profile-section">
+            <div className="col-lg-8 col-md-6 col-3 left-nav-profile-section">
               <div className="nav-inner">
                 <div className="mega-category-menu">
                   <span className="cat-button">
@@ -291,7 +291,7 @@ const Navbar = ({ userType }) => {
                 </nav>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 col-12 right-nav-profile-section">
+            <div className="col-lg-4 col-md-6 col-6 right-nav-profile-section">
               <div className="d-flex justify-content-end nav-profile-section">
                 {user ? (
                   <>
@@ -350,7 +350,7 @@ const Navbar = ({ userType }) => {
                               {username}
                             </Link>
                             <ul
-                              className="sub-menu collapse profile-collapse"
+                              className="sub-menu sub-menu-align-2 collapse profile-collapse"
                               id="submenu-1-3"
                             >
                               <li className="nav-item">
