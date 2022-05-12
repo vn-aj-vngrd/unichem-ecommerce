@@ -24531,3 +24531,23 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .footer-element {
   border: 1px solid #e2e2e2;
 } */
+
+/*======================================
+    Admin View CSS
+========================================*/
+
+.view-image {
+  border-radius: 4px !important;
+  height: 108px;
+  width: 108px;
+  object-fit: cover;
+}
+
+.view-image-section {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 5px;
+  justify-content: center;
+}

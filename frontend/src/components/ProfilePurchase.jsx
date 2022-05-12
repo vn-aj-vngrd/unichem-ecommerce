@@ -42,7 +42,6 @@ const ProfilePurchase = () => {
 
   useEffect(() => {
     if (isOrderError) {
-      // console.log(orderMessage);
     }
 
     if (!user) {
@@ -145,7 +144,6 @@ const ProfilePurchase = () => {
   const pageCount = Math.ceil(statusOrders.length / ordersPerPage);
   statusOrders = statusOrders.slice(pagesVisited, pagesVisited + ordersPerPage);
 
-  // console.log(statusOrders);
 
   return (
     <div className="purchase-products-column">
@@ -266,7 +264,9 @@ const ProfilePurchase = () => {
                     <br></br>
                     <div className="purchase-options">
                       <div className="d-flex justify-content-end button order-options">
-                        {order.orderStatus === "Processing" && (
+                        {(order.orderStatus === "Awaiting Confirmation" ||
+                        order.orderStatus === "Awaiting Payment" ||
+                        order.orderStatus === "Awaiting Fulfillment") && (
                           <button
                             className="btn-alt"
                             onClick={() => handleCancelOrder(order._id)}

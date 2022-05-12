@@ -6,7 +6,7 @@ import DataTable from "../../components/DataTable";
 import SectionTitle from "../../components/SectionTitle";
 import CreatePromotion from "../../components/CreatePromotion";
 import UpdatePromotion from "../../components/UpdatePromotion";
-import DeletePromotion from "../../components/DeletePromotion";
+import ViewPromotion from "../../components/ViewPromotion";
 import RowImage from "../../components/RowImage";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -78,6 +78,7 @@ const ManagePromotions = () => {
       moment(promo.expiryDate).format("llll"),
       moment(promo.updatedAt).format("llll"),
       moment(promo.createdAt).format("llll"),
+      <ViewPromotion promo={promo} />,
       <UpdatePromotion promo={promo} />,
       // <DeletePromotion id={promo._id} />
     );

@@ -44,7 +44,7 @@ const ViewOrder = ({ order }) => {
                         className="d-flex justify-content-center align-items-center mb-4"
                       >
                         <div className="w-25">
-                          <img src={orderline.image} alt="#" />
+                          <img src={orderline.image} className="view-image" alt="#" />
                         </div>
                         <div className="ms-3">
                           ID: {orderline.orderID}
