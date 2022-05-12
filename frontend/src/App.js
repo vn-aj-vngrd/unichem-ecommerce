@@ -178,7 +178,7 @@ export const App = () => {
           {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
         </style>
       </Helmet>
-      <Spinner />
+      <Spinner globalSpinner="true" />
     </>
   );
 };

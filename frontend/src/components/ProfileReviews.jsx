@@ -31,7 +31,6 @@ function ProfileReviews() {
   if (isReviewLoading) {
     return (
       <>
-        <div className="empty-container"></div>
         <Spinner />
       </>
     );

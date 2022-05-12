@@ -55,7 +55,7 @@ const AdminSettings = () => {
   if (isLoading) {
     return (
       <>
-        <Spinner />
+        <Spinner globalSpinner="true" />
       </>
     );
   }

@@ -7,7 +7,7 @@ body {
   color: #424242;
   overflow-x: hidden;
   font-size: 14px;
-  background-color: whitesmoke;
+  background-color: #fafafa;
 }
 
 p {
@@ -482,7 +482,7 @@ ol {
   z-index: 1;
   text-align: left;
   /* border: 1px solid #e6e6e6; */
-  background-color: whitesmoke;
+  background-color: #fafafa;
   /* -webkit-box-shadow: 0px 7px 30px rgba(0, 0, 0, 0.075);
   box-shadow: 0px 7px 30px rgba(0, 0, 0, 0.075); */
 }
@@ -2335,7 +2335,7 @@ ol {
 ========================================*/
 .hero-area {
   position: relative;
-  background-color: whitesmoke;
+  background-color: #fafafa;
   margin-top: 220px;
 }
 
@@ -2379,7 +2379,7 @@ ol {
     Shipping Info CSS
 ========================================*/
 .shipping-info {
-  background-color: whitesmoke;
+  background-color: #fafafa;
   padding: 50px 0;
 }
 
@@ -2667,7 +2667,7 @@ ol {
 }
 
 .trending-product {
-  background-color: whitesmoke;
+  background-color: #fafafa;
   padding-top: 90px;
 }
 
@@ -2846,7 +2846,7 @@ ol {
     Item Details CSS
 ========================================*/
 .item-details {
-  background-color: whitesmoke;
+  background-color: #fafafa;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -4186,6 +4186,30 @@ ol {
   height: 100%;
 }
 
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3; 
+  border-top: 10px solid #f44336;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.spinner-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+}
+
 /*======================================
     Team CSS
 ========================================*/
@@ -4556,7 +4580,7 @@ ol {
 ========================================*/
 
 .about-us {
-  background-color: whitesmoke;
+  background-color: #fafafa;
   margin-top: 230px;
 }
 
@@ -4965,7 +4989,7 @@ ol {
 }
 
 .map-section {
-  background-color: whitesmoke;
+  background-color: #fafafa;
 }
 
 .map-section .mapouter {
@@ -4995,7 +5019,7 @@ ol {
 ========================================*/
 
 .checkout-wrapper {
-  background-color: whitesmoke;
+  background-color: #fafafa;
   margin-top: 20px;
   padding-bottom: 55px;
 }
@@ -5330,7 +5354,7 @@ ol {
 }
 
 .single-payment-option-disabled label {
-  background-color: whitesmoke;
+  background-color: #fafafa;
 }
 
 .checkout-steps-form-style
@@ -5587,7 +5611,7 @@ ol {
 ========================================*/
 .faq {
   padding-bottom: 90px;
-  background-color: whitesmoke;
+  background-color: #fafafa;
   margin-top: 220px;
 }
 
@@ -6984,25 +7008,3 @@ a:hover {
   background-color: #ff4436;
   opacity: 1;
 }
-
-/* ***************
- * FB on left side 
- ******************/
-
-/* .fb_dialog.fb_dialog_advanced {
-  left: 18pt;
-}
-
-iframe.fb_customer_chat_bounce_in_v2 {
-  left: 9pt;
-}
-iframe.fb_customer_chat_bounce_out_v2 {
-  left: 9pt;
-}
-
-.fb_dialog.fb_dialog_advanced iframe {
-  right: auto !important;
-  left: 2rem;
-  right: 2rem;
-  bottom: 7rem !important;
-} */

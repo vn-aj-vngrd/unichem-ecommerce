@@ -41,7 +41,7 @@ const ManageCoupons = () => {
   if (isCouponLoading) {
     return (
       <>
-        <Spinner />
+        <Spinner globalSpinner="true" />
       </>
     );
   }
@@ -65,14 +65,10 @@ const ManageCoupons = () => {
   const maxLength = 50;
   coupons.forEach((coupon) => {
     let temp = [];
-    temp.push(
-      coupon._id,
-      coupon.couponCode,
-      coupon.couponType,
-    )
+    temp.push(coupon._id, coupon.couponCode, coupon.couponType);
     coupon.description.length > maxLength
-        ? temp.push(coupon.description.substr(0, maxLength).concat("..."))
-        : temp.push(coupon.description.substr(0, maxLength));
+      ? temp.push(coupon.description.substr(0, maxLength).concat("..."))
+      : temp.push(coupon.description.substr(0, maxLength));
     temp.push(
       coupon.discount.toString().concat("%"),
       coupon.requiredAmount,
@@ -81,13 +77,13 @@ const ManageCoupons = () => {
       moment(coupon.expiryDate).format("llll").toString(),
       moment(coupon.updatedAt).format("llll").toString(),
       moment(coupon.createdAt).format("llll").toString(),
-      <UpdateCoupon coupon={coupon}/>,
+      <UpdateCoupon coupon={coupon} />
       // <DeleteCoupon id={coupon._id} />,
-    )
+    );
     data.push(temp);
-  })
+  });
 
-  console.log(data)
+  console.log(data);
 
   const options = {
     filterType: "checkbox",
@@ -99,7 +95,7 @@ const ManageCoupons = () => {
         toast.success("Coupon deleted successfully");
       });
     },
-  }
+  };
 
   return (
     <div className="content">
@@ -119,7 +115,12 @@ const ManageCoupons = () => {
       </div>
 
       <div className="row mt-3 mb-4">
-        <DataTable title="Coupons" columns={columns} data={data} options={options}/>
+        <DataTable
+          title="Coupons"
+          columns={columns}
+          data={data}
+          options={options}
+        />
       </div>
       <Footer userType="admin" />
     </div>

@@ -188,7 +188,7 @@ const Dashboard = () => {
   if (isReportLoading) {
     return (
       <>
-        <Spinner />
+        <Spinner globalSpinner="true" />
       </>
     );
   }

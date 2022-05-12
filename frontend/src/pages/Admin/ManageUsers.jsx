@@ -74,7 +74,7 @@ const ManageUsers = () => {
   if (isLoading) {
     return (
       <>
-        <Spinner />;
+        <Spinner globalSpinner="true" />
       </>
     );
   }

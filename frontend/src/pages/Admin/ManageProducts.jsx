@@ -42,7 +42,7 @@ const ManageProducts = () => {
   if (isProductLoading) {
     return (
       <>
-        <Spinner />
+        <Spinner globalSpinner="true" />
       </>
     );
   }
@@ -103,12 +103,8 @@ const ManageProducts = () => {
         temp.push("0%");
       }
       temp.push(product._doc.featured ? "Yes" : "No");
-      temp.push(
-        moment(product._doc.updatedAt).format("llll")
-      );
-      temp.push(
-        moment(product._doc.createdAt).format("llll")
-      );
+      temp.push(moment(product._doc.updatedAt).format("llll"));
+      temp.push(moment(product._doc.createdAt).format("llll"));
       if (product) {
         temp.push(<UpdateProduct product={product} />);
       }
@@ -130,7 +126,7 @@ const ManageProducts = () => {
         toast.success("Product deleted successfully");
       });
     },
-  }
+  };
 
   return (
     <div className="content">
@@ -150,7 +146,12 @@ const ManageProducts = () => {
       </div>
 
       <div className="row mt-3 mb-4">
-        <DataTable title="Products" columns={columns} data={data} options={options}/>
+        <DataTable
+          title="Products"
+          columns={columns}
+          data={data}
+          options={options}
+        />
       </div>
 
       <Footer userType="admin" />

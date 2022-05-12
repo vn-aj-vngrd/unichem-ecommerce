@@ -75,7 +75,7 @@ const ManageOrders = () => {
 
     return (
       <>
-        <Spinner />
+        <Spinner globalSpinner="true" />
       </>
     );
   }
@@ -112,7 +112,7 @@ const ManageOrders = () => {
           />
         )}
       </div>
-      
+
       <Footer userType="admin" />
     </div>
   );

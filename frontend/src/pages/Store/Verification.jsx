@@ -37,42 +37,37 @@ const Verification = () => {
     };
   }, [user, param, isSuccess, call, navigate, dispatch]);
 
-  if (isLoading) {
-    return (
-      <>
-        <Spinner />
-        <div className="empty-container"></div>
-      </>
-    );
-  }
-
   return (
     <>
       {validUrl ? (
         <div className="content">
-          <div className="success-area">
-            <div className="d-table">
-              <div className="d-table-cell">
-                <div className="container">
-                  <div className="success-content">
-                    <h1>
-                      <i className="lni lni-checkmark-circle"></i>
-                    </h1>
-                    <h2>Email Verified</h2>
-                    <p>
-                      Your email address has been verified, and you can now
-                      access your account.
-                    </p>
-                    <div className="button">
-                      <Link to="/login" className="btn">
-                        Log in
-                      </Link>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <div className="success-area">
+              <div className="d-table">
+                <div className="d-table-cell">
+                  <div className="container">
+                    <div className="success-content">
+                      <h1>
+                        <i className="lni lni-checkmark-circle"></i>
+                      </h1>
+                      <h2>Email Verified</h2>
+                      <p>
+                        Your email address has been verified, and you can now
+                        access your account.
+                      </p>
+                      <div className="button">
+                        <Link to="/login" className="btn">
+                          Log in
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       ) : (
         <>
