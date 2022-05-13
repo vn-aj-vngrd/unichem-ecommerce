@@ -16,7 +16,7 @@ const ProfilePurchase = () => {
   const dispatch = useDispatch();
   const moment = require("moment");
 
-  const { orders, isOrderLoading, isOrderError, orderMessage } = useSelector(
+  const { orders, isOrderLoading, isOrderError, orderMessage, isOrderUpdated } = useSelector(
     (state) => state.orders
   );
 
@@ -28,16 +28,6 @@ const ProfilePurchase = () => {
 
   const handleCancelOrder = (orderID) => {
     dispatch(cancelOrder({ orderID: orderID }));
-    toast.success("Order cancelled successfully", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
   };
 
   useEffect(() => {
@@ -48,12 +38,16 @@ const ProfilePurchase = () => {
       navigate("/login");
     }
 
+    if (isOrderUpdated) {
+      toast.success("Order updated successfully");
+    }
+
     dispatch(getUserOrders());
 
     return () => {
       dispatch(resetOrder());
     };
-  }, [user, navigate, isOrderError, orderMessage, dispatch]);
+  }, [user, navigate, isOrderError, orderMessage, isOrderUpdated, dispatch]);
 
   if (isOrderLoading) {
     return (

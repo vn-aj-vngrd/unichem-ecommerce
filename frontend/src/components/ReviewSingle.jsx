@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import {
   updateReview,
@@ -7,7 +7,6 @@ import {
   resetReview,
 } from "../features/reviews/reviewSlice";
 import Star from "./Star";
-import { toast } from "react-toastify";
 
 function ReviewSingle({ reviewOne, editable }) {
   const dispatch = useDispatch();
@@ -43,30 +42,10 @@ function ReviewSingle({ reviewOne, editable }) {
     };
 
     dispatch(updateReview(reviewData));
-    toast.success("Review created successfully", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
   };
 
   const onClickDeleteReview = (_id) => {
     dispatch(deleteReview(_id));
-    toast.success("Review created successfully", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
   };
 
   console.log(reviewOne)
