@@ -268,9 +268,9 @@ const ProfilePurchase = () => {
                           </button>
                         )}
 
-                        <Link to="/product-details" className="btn">
+                        {/* <Link to={`/product-details/${}`} className="btn">
                           Buy Again
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                   </div>

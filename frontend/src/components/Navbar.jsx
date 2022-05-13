@@ -9,6 +9,7 @@ import {
 } from "../features/wishlist/wishlistSlice";
 import { getCarts, resetCart } from "../features/cart/cartSlice";
 import logo from "../assets/images/logo.svg";
+import { toast } from "react-toastify";
 
 const Navbar = ({ userType }) => {
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ const Navbar = ({ userType }) => {
   const onLogout = (e) => {
     e.preventDefault();
 
+    toast.success(`See you around, ${username}!`);
     dispatch(logout());
     dispatch(resetUser());
     navigate("/");

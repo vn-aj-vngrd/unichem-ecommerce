@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { login, resetUser } from "../../features/auth/authSlice";
 import Spinner from "../../components/Spinner";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ const Login = () => {
     }
 
     if (isSuccess || user) {
+      toast.success(`Welcome to Unichem Store, ${user.name.split(" ")[0]}!`);
       navigate("/");
     }
 
