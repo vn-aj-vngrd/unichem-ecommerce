@@ -26,13 +26,13 @@ const ReviewModal = ({ userID, userImage, orderLineID, productID, reviewed }) =>
     e.preventDefault();
 
     const reviewData = {
+      orderLineID: orderLineID,
       userID: userID,
       productID: productID,
       review,
       reviewed: false,
       rating: starRating,
     };
-
     dispatch(setReview(reviewData));
   };
 
