@@ -3,7 +3,6 @@ const asyncHandler = require("express-async-handler");
 const Review = require("../models/reviewModel");
 const Product = require("../models/productModel");
 const User = require("../models/userModel");
-const OrderLine = require("../models/OrderLine");
 const moment = require("moment");
 
 // @desc    Get Reviews by user
@@ -32,7 +31,7 @@ const getReviews = asyncHandler(async (req, res) => {
 const getUserReviews = asyncHandler(async (req, res) => {
   const userID = req.user._id;
   // console.log(userID)
-  const reviews = await Review.find({ userID: userID }).sort({
+  const reviews = await Review.find({userID: userID}).sort({
     createdAt: "desc",
   });
   // console.log(true)
@@ -71,14 +70,6 @@ const setReview = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Review already exists");
   }
-
-  const updatedOrderLine = await OrderLine.findOneAndUpdate(
-    {
-      _id: req.body.orderLineID,
-    },
-    { reviewed: true },
-    { new: true }
-  );
 
   const product = await Product.findById(productID);
 
