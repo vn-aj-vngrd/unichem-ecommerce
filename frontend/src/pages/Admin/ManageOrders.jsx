@@ -34,23 +34,30 @@ const ManageOrders = () => {
   ];
 
   const dispatch = useDispatch();
-  const { orders, isOrderLoading, isOrderDeleted } = useSelector(
-    (state) => state.orders
-  );
+  const { orders, isOrderLoading, isOrderDeleted, isOrderError, orderMessage, isOrderUpdated } =
+    useSelector((state) => state.orders);
 
   useEffect(() => {
     document.title = "Unichem Store | Orders";
 
     dispatch(getAllOrders());
 
+    if (isOrderUpdated) {
+      toast.success("Order updated successfully!");
+    }
+
     if (isOrderDeleted) {
       toast.success("Order deleted successfully!");
+    }
+
+    if (isOrderError) {
+      toast.error(orderMessage);
     }
 
     return () => {
       dispatch(resetOrder());
     };
-  }, [dispatch, isOrderDeleted]);
+  }, [dispatch, isOrderDeleted, isOrderError, orderMessage, isOrderUpdated]);
 
   let data = [];
   if (orders && orders.length > 0) {
@@ -74,10 +81,6 @@ const ManageOrders = () => {
         <UpdateOrder order={order} />,
       ]);
     });
-  }
-
-  if (isOrderLoading) {
-    dispatch(getAllOrders());
   }
 
   const options = {
