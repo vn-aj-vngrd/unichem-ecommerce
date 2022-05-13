@@ -2341,7 +2341,11 @@ ol {
   }
 }
 
-.mobile-dropdown-hover:hover .mobile-profile-collapse {
+/* .mobile-dropdown-hover:hover .mobile-profile-collapse {
+  display: block;
+} */
+
+.hover-button:focus ~ .mobile-profile-collapse {
   display: block;
 }
 
@@ -2364,6 +2368,11 @@ ol {
   .right-nav-profile-section {
     width: 156px;
   }
+}
+
+.mobile-profile-collapse .nav-item:hover a {
+  color: #f44336;
+  transition: all 0.3s ease-out 0s;
 }
 
 /*======================================
