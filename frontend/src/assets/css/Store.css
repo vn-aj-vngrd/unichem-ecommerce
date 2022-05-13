@@ -2154,7 +2154,7 @@ ol {
 
 
 .navbar-nav .nav-item:hover .sub-menu-align-2 {
-  top: 58px !important;
+  top: 61px !important;
   /* left: -210px !important; */
 }
 
@@ -2263,14 +2263,14 @@ ol {
 
 
 .navbar-nav .nav-item .sub-menu-align-2 {
-  top: 63px !important;
-  left: -219px !important;
+  top: 69px !important;
+  left: -169px !important;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .navbar-nav .nav-item .sub-menu-align-2 {
     top: 63px !important;
-    left: -218px !important;
+    left: -169px !important;
   }
 }
 
@@ -2285,6 +2285,10 @@ ol {
 .hover-button {
   border: none;
   background-color: #fff;
+}
+
+.nav-profile-image {
+  margin-right: 15px !important;
 }
 
 .nav-item button i {
@@ -2323,7 +2327,17 @@ ol {
   }
 
   .mobile-profile-collapse {
-    left: -220px;
+    left: -170px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .mobile-profile-collapse .nav-item:not(:last-child) {
+    margin-bottom: 23px;
+  }
+
+  .mobile-profile-collapse {
+    left: -170px;
   }
 }
 
@@ -2344,11 +2358,11 @@ ol {
   }
 
   .left-nav-profile-section {
-    width: 281px;
+    width: 60%;
   }
 
   .right-nav-profile-section {
-    width: 135px;
+    width: 156px;
   }
 }
 
