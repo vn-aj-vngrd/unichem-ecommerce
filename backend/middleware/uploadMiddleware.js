@@ -61,9 +61,6 @@ const uploadPromotionSingle = uploadPromotion.single("image");
 
 // Upload Validation
 const uploadValidation = (req, res, next) => {
-  console.log("middleware")
-  console.log(req.body)
-  console.log(req.file)
   if (typeof req.file !== "undefined") {
     let image = req.file.path;
 

@@ -1,13 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updatePromo } from "../features/promos/promoSlice";
-import { toast } from "react-toastify";
 
 const UpdatePromotion = (promo) => {
   const moment = require("moment");
   const dispatch = useDispatch();
 
-  console.log(promo.promo);
   const {
     register,
     control,
@@ -30,17 +28,16 @@ const UpdatePromotion = (promo) => {
   const expiryDate = watch("expiryDate");
 
   const onSubmit = (data) => {
-    console.log(data);
     const promoData = {
       _id: promo.promo._id,
       promoName: data.promoName,
       description: data.description,
       startDate: data.startDate,
-      expiryDate: data.expiryDate
+      expiryDate: data.expiryDate,
     };
 
     let formData = new FormData();
-    
+
     if (data.image) {
       formData.append("image", data.image[0]);
     }
@@ -50,18 +47,7 @@ const UpdatePromotion = (promo) => {
       formData.append(key, promoData[key]);
     }
 
-    console.log(promoData);
     dispatch(updatePromo(formData));
-    toast.success("Product updated successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   return (
@@ -102,7 +88,7 @@ const UpdatePromotion = (promo) => {
                   enctype="multipart/form-data"
                 >
                   <div className="form-group">
-                  <div className="form-group mb-4">
+                    <div className="form-group mb-4">
                       <label>Promo Image</label>
                       <div className="input-group">
                         <input
@@ -242,7 +228,12 @@ const UpdatePromotion = (promo) => {
                   </div>
 
                   <div className="d-grid button">
-                    <button type="submit" className="btn">
+                    <button
+                      type="submit"
+                      className="btn"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    >
                       Save Changes
                     </button>
                   </div>

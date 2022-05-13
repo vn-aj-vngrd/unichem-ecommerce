@@ -17,27 +17,25 @@ const getPromos = asyncHandler(async (req, res) => {
 // @route   POST /api/promos
 // @access  Private
 const setPromo = asyncHandler(async (req, res) => {
-  // Check for user
-  if (!req.user) {
-    fs.unlinkSync(req.file.path.path);
-    res.status(401);
-    throw new Error("User not found");
-  }
+  // // Check for user
+  // if (!req.user) {
+  //   fs.unlinkSync(req.file.path.path);
+  //   res.status(401);
+  //   throw new Error("User not found");
+  // }
 
-  // Check if user is not an admin
-  if (req.user.userType !== "admin") {
-    fs.unlinkSync(req.file.path.path);
-    res.status(401);
-    throw new Error("User not authorized");
-  }
+  // // Check if user is not an admin
+  // if (req.user.userType !== "admin") {
+  //   fs.unlinkSync(req.file.path.path);
+  //   res.status(401);
+  //   throw new Error("User not authorized");
+  // }
 
-  // Check if user is not an admin
-  if (!req.file.path) {
-    fs.unlinkSync(req.file.path.path);
-    res.status(401);
-    throw new Error("There was a problem uploading the image");
-  }
-
+  // if (!req.file.path) {
+  //   fs.unlinkSync(req.file.path.path);
+  //   res.status(401);
+  //   throw new Error("There was a problem uploading the image");
+  // }
   let tempImage;
   if (req.file) {
     let removeImagePath = user.image;
@@ -62,7 +60,6 @@ const setPromo = asyncHandler(async (req, res) => {
 });
 
 const updatePromo = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const promo = await Promo.findById(req.body._id);
   if (!promo) {
     fs.unlinkSync(req.file.path.path);
@@ -111,7 +108,6 @@ const updatePromo = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  console.log(updatedPromo);
   res.status(200).json(updatedPromo);
 });
 

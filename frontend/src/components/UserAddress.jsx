@@ -17,28 +17,23 @@ const UserAddress = () => {
 
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message, isCustomerUpdated } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
     if (isError) {
-      toast.error(message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error(message);
+    }
+
+    if (isCustomerUpdated) {
+      toast.success("Address updated successfully");
     }
 
     return () => {
       dispatch(resetUser());
     };
-  }, [isError, isSuccess, message, dispatch]);
+  }, [isError, isSuccess, message, isCustomerUpdated, dispatch]);
 
   // Create user address
   const onSubmit = (data) => {
@@ -55,19 +50,7 @@ const UserAddress = () => {
       address: address,
     };
 
-    console.log(userData);
-
     dispatch(updateUser(userData));
-    toast.success("Address updated successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   // Delete user address
@@ -75,22 +58,11 @@ const UserAddress = () => {
     let newPrimaryAddress = user.primaryAddress;
 
     if (index === newPrimaryAddress) {
-      toast.error("Cannot delete a default address", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("Cannot delete a default address");
       return;
     }
 
     const address = JSON.parse(JSON.stringify(user.address));
-
-    console.log(errors);
 
     address.splice(index, 1);
 
@@ -100,16 +72,6 @@ const UserAddress = () => {
     };
 
     dispatch(updateUser(userData));
-    toast.success("Address deleted successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   // Set default user address
@@ -119,17 +81,6 @@ const UserAddress = () => {
     };
 
     dispatch(updateUser(userData));
-
-    toast.success("Address updated successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   if (isLoading) {

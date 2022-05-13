@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setPromo } from "../features/promos/promoSlice";
-import { toast } from "react-toastify";
 
 const CreatePromotion = () => {
   const dispatch = useDispatch();
@@ -18,9 +17,6 @@ const CreatePromotion = () => {
   const expiryDate = watch("expiryDate");
 
   const onSubmit = (data) => {
-    console.log(data);
-    // image: data.image,
-
     const promoData = {
       promoName: data.promoName,
       description: data.description,
@@ -31,21 +27,10 @@ const CreatePromotion = () => {
     let formData = new FormData();
     formData.append("image", data.image[0]);
     for (var key in promoData) {
-      console.log(key, promoData[key]);
       formData.append(key, promoData[key]);
     }
 
     dispatch(setPromo(formData));
-    toast.success("Product created successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   return (

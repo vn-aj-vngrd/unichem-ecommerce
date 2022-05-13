@@ -20,7 +20,7 @@ const ManageProducts = () => {
   const dispatch = useDispatch();
   const moment = require("moment");
 
-  const { products, isProductLoading, isProductError, productMessage } =
+  const { products, isProductLoading, isProductError, productMessage, isProductDeleted, isProductUpdated, isProductCreated } =
     useSelector((state) => state.products);
 
   useEffect(() => {
@@ -29,15 +29,27 @@ const ManageProducts = () => {
 
   useEffect(() => {
     if (isProductError) {
-      // console.log(productMessage);
+      toast.error(productMessage);
     }
 
     dispatch(getProducts());
 
+    if (isProductCreated) {
+      toast.success("Product created successfully");
+    }
+
+    if (isProductDeleted) {
+      toast.success("Product deleted successfully");
+    }
+
+    if (isProductUpdated) {
+      toast.success("Product updated successfully");
+    }
+
     return () => {
       dispatch(resetProduct());
     };
-  }, [isProductError, productMessage, dispatch]);
+  }, [isProductError, productMessage, isProductDeleted, isProductUpdated, isProductCreated, dispatch]);
 
   const columns = [
     "Product Image",
@@ -117,7 +129,6 @@ const ManageProducts = () => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
         dispatch(deleteProduct(data[item.dataIndex][1]));
-        toast.success("Product deleted successfully");
       });
     },
   };

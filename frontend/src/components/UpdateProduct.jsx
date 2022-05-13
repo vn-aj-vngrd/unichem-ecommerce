@@ -2,7 +2,6 @@ import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateProduct } from "../features/products/productSlice";
-import { toast } from "react-toastify";
 import { useState } from "react";
 
 const UpdateProduct = (product) => {
@@ -140,16 +139,6 @@ const UpdateProduct = (product) => {
     }
 
     dispatch(updateProduct(formData));
-    toast.success("Product updated successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   // const addProductType = () => {

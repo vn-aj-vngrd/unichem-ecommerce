@@ -2,7 +2,6 @@ import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setProduct } from "../features/products/productSlice";
-import { toast } from "react-toastify";
 import { useState } from "react";
 
 const CreateProduct = () => {
@@ -40,7 +39,6 @@ const CreateProduct = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log(data)
     if (data.specifications.length === 0) {
       setSpecificationEmpty(true);
     } else {
@@ -101,27 +99,14 @@ const CreateProduct = () => {
     let formData = new FormData();
     
     for (let i = 0; i < data.images.length; i++) {
-      console.log(data.images[i]);
       formData.append("images", data.images[i]);
     }
     
     for (var key in productData) {
-      console.log(key, productData[key]);
       formData.append(key, productData[key]);
     }
 
-    console.log(productData);
     dispatch(setProduct(formData));
-    toast.success("Product created successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   return (
