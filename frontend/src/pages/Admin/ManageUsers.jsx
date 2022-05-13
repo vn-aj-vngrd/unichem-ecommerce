@@ -25,7 +25,7 @@ const ManageUsers = () => {
 
   const dispatch = useDispatch();
 
-  const { users, isLoading, isAccountDeleted } = useSelector(
+  const { users, isLoading, isAccountDeleted, isError, message } = useSelector(
     (state) => state.auth
   );
 
@@ -38,10 +38,14 @@ const ManageUsers = () => {
       toast.success("User deleted successfully");
     }
 
+    if (isError) {
+      toast.error(message);
+    }
+
     return () => {
       dispatch(resetUser());
     };
-  }, [dispatch, isAccountDeleted]);
+  }, [dispatch, isAccountDeleted, isError, message]);
 
   let data = [];
   if (users && users.length > 0) {

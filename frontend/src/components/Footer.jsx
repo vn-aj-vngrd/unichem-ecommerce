@@ -132,17 +132,17 @@ const Footer = ({ userType }) => {
                 © {new Date().getFullYear()} |{" "}
                 <span className="current-year"></span>
                 <Link className="text-primary fw-normal" to="/">
-                  Unichem Admin
+                  Unichem 
                 </Link>
               </p>
             </div>
             <div className="col-12 col-md-8 col-xl-6 text-center text-lg-start">
               <ul className="list-inline list-group-flush list-group-borderless text-md-end mb-0">
-                <li className="list-inline-item">
+                {/* <li className="list-inline-item">
                   <div>Created by:</div>
-                </li>
+                </li> */}
                 <li className="list-inline-item">
-                  <div>Exclusive Developers</div>
+                  <div>Administrator</div>
                 </li>
               </ul>
             </div>

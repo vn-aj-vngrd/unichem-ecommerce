@@ -8,6 +8,7 @@ const initialState = {
   isOrderLoading: false,
   isOrderAdded: false,
   isOrderDeleted: false,
+  isOrderUpdated: false,
   orderMessage: "",
 };
 
@@ -217,11 +218,11 @@ export const orderSlice = createSlice({
       .addCase(updateOrder.fulfilled, (state, action) => {
         state.isOrderLoading = false;
         state.isOrderSuccess = true;
+        state.isOrderUpdated = true;
         const idx = state.orders.findIndex(
           (order) => order._id === action.payload._id
         );
         state.orders[idx] = action.payload;
-        // state.orders = [];
       })
       .addCase(updateOrder.rejected, (state, action) => {
         state.isOrderLoading = false;
