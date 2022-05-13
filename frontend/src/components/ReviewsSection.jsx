@@ -9,11 +9,17 @@ import { toast } from "react-toastify";
 
 const ReviewsSection = ({ productID }) => {
   const dispatch = useDispatch();
-  // const moment = require("moment");
+  const moment = require("moment");
   const [pageNumber, setPageNumber] = useState(0);
 
-  const { reviews, isReviewLoading, isReviewError, reviewMessage, isReviewDeleted, isReviewUpdated } =
-    useSelector((state) => state.reviews);
+  const {
+    reviews,
+    isReviewLoading,
+    isReviewError,
+    reviewMessage,
+    isReviewDeleted,
+    isReviewUpdated,
+  } = useSelector((state) => state.reviews);
 
   useEffect(() => {
     if (isReviewError) {
@@ -21,11 +27,11 @@ const ReviewsSection = ({ productID }) => {
     }
 
     if (isReviewUpdated) {
-      toast.success("Review updated successfully")
+      toast.success("Review updated successfully");
     }
 
     if (isReviewDeleted) {
-      toast.success("Review deleted successfully")
+      toast.success("Review deleted successfully");
     }
 
     dispatch(getReviews());
@@ -33,7 +39,13 @@ const ReviewsSection = ({ productID }) => {
     return () => {
       dispatch(resetReview());
     };
-  }, [isReviewError, reviewMessage, isReviewDeleted, isReviewUpdated, dispatch]);
+  }, [
+    isReviewError,
+    reviewMessage,
+    isReviewDeleted,
+    isReviewUpdated,
+    dispatch,
+  ]);
 
   if (isReviewLoading) {
     return (
@@ -73,6 +85,7 @@ const ReviewsSection = ({ productID }) => {
     pagesVisited + reviewsPerPage
   );
 
+  console.log(reviews);
   return (
     <div className="product-details">
       <div className="container product-details-info">
@@ -131,7 +144,10 @@ const ReviewsSection = ({ productID }) => {
                 {productReviews.length > 0 &&
                   productReviews.map((review) => (
                     <div key={review._doc._id}>
-                      <ReviewSingle reviewOne={review} editable={false} />
+                      {<ReviewSingle
+                        reviewOne={review}
+                        // editable={true}
+                      />}
                     </div>
                   ))}
               </div>

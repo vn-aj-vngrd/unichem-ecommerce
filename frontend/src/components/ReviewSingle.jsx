@@ -8,7 +8,7 @@ import {
 } from "../features/reviews/reviewSlice";
 import Star from "./Star";
 
-function ReviewSingle({ reviewOne, editable }) {
+function ReviewSingle({ reviewOne }) {
   const dispatch = useDispatch();
   const moment = require("moment");
   const [starRating, setStarRating] = useState(0);
@@ -131,9 +131,7 @@ function ReviewSingle({ reviewOne, editable }) {
                     </span>
                   </h4>
                   <div className="btn-group dropstart">
-                    {editable &&
-                      reviewOne._doc.reviewed === false &&
-                      currentDate.isBetween(createdtDate, expiryDate) && (
+                    {currentDate.isBetween(createdtDate, expiryDate) && (
                         <>
                           <button
                             type="button"
