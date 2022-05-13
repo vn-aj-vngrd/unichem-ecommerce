@@ -25,7 +25,9 @@ const Manage = () => {
           <div className="container main-profile-section">
             <ProfileSidebar />
             <div className="spacer"></div>
-            <UserAddress />
+            <div className="container">
+              <UserAddress />
+            </div>
           </div>
         </>
       )}

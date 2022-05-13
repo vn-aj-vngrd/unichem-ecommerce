@@ -301,7 +301,7 @@ const Navbar = ({ userType }) => {
                           <img
                             // src={"\\uploads\\users\\user-placeholder"}
                             src={user.image}
-                            className="nav-profile-image"
+                            className="nav-profile-image me-3"
                             alt=""
                           ></img>
                           {username}
@@ -344,7 +344,7 @@ const Navbar = ({ userType }) => {
                               <img
                                 // src={"\\uploads\\users\\user-placeholder"}
                                 src={user.image}
-                                className="nav-profile-image"
+                                className="nav-profile-image me-3"
                                 alt=""
                               ></img>
                               {username}
