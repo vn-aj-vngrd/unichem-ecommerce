@@ -41,7 +41,6 @@ const OrderLogInformation = () => {
   if (isOrderLoading) {
     return (
       <>
-        <div className="empty-container"></div>
         <Spinner />
       </>
     );

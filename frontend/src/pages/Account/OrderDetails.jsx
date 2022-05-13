@@ -11,7 +11,9 @@ const OrderDetails = () => {
         <ProfileSidebar />
         <div className="spacer"></div>
 
-        <OrderLogInformation />
+        <div className="container">
+          <OrderLogInformation />
+        </div>
       </div>
     </>
   );
