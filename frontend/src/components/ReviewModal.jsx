@@ -3,7 +3,13 @@ import { setReview } from "../features/reviews/reviewSlice";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const ReviewModal = ({ userID, userImage, orderLineID, productID, reviewed }) => {
+const ReviewModal = ({
+  userID,
+  userImage,
+  orderLineID,
+  productID,
+  reviewed,
+}) => {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -13,7 +19,7 @@ const ReviewModal = ({ userID, userImage, orderLineID, productID, reviewed }) =>
   const [starRating, setStarRating] = useState(0);
   const { review } = formData;
 
-  console.log(starRating) 
+  console.log(starRating);
 
   const onChangeReview = (e) => {
     setFormData((prevState) => ({
@@ -86,7 +92,6 @@ const ReviewModal = ({ userID, userImage, orderLineID, productID, reviewed }) =>
                                   name="review"
                                   value={review}
                                   onChange={onChangeReview}
-                                  required
                                   placeholder="Write a Review"
                                 ></textarea>
                               </div>
@@ -150,13 +155,20 @@ const ReviewModal = ({ userID, userImage, orderLineID, productID, reviewed }) =>
                       <br></br>
                       <div className="row d-flex">
                         <div className="button d-flex justify-content-end">
-                          <button type="submit" className="btn">
+                          <button
+                            type="submit"
+                            className="btn"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          >
                             Submit Review
                           </button>
                           <button
                             // onClick={() => setIsEditing(false)}
                             type="button"
                             className="btn btn-alt"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
                           >
                             Cancel
                           </button>

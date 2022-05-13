@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const Review = require("../models/reviewModel");
 const Product = require("../models/productModel");
 const User = require("../models/userModel");
-const OrderLine = require("../models/OrderLine");
+const OrderLine = require("../models/orderlineModel");
 const moment = require("moment");
 
 // @desc    Get Reviews by user
@@ -59,7 +59,7 @@ const setReview = asyncHandler(async (req, res) => {
   }
 
   const userID = req.user._id;
-  const { productID, subject, review, rating } = req.body;
+  const { orderLineID, productID, subject, review, rating } = req.body;
 
   // Check if review exists
   const reviewExists = await Review.findOne({
@@ -72,9 +72,9 @@ const setReview = asyncHandler(async (req, res) => {
     throw new Error("Review already exists");
   }
 
-  const updatedOrderLine = await OrderLine.findOneAndUpdate(
+  const updatedOrderLine = await OrderLine.findByIdAndUpdate(
     {
-      _id: req.body.orderLineID,
+      orderLineID
     },
     { reviewed: true },
     { new: true }

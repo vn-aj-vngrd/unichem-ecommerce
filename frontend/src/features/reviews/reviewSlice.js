@@ -115,19 +115,20 @@ export const reviewSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // .addCase(setReview.pending, (state) => {
-      //   state.isReviewLoading = true;
-      // })
-      // .addCase(setReview.fulfilled, (state, action) => {
-      //   state.isReviewLoading = false;
-      //   state.isReviewSuccess = true;
-      //   // state.reviews.push(action.payload);
-      // })
-      // .addCase(setReview.rejected, (state, action) => {
-      //   state.isReviewLoading = false;
-      //   state.isReviewError = true;
-      //   state.reviewMessage = action.payload;
-      // })
+      .addCase(setReview.pending, (state) => {
+        state.isReviewLoading = true;
+      })
+      .addCase(setReview.fulfilled, (state, action) => {
+        state.isReviewLoading = false;
+        state.isReviewSuccess = true;
+        state.isReviewCreated = true;
+        // state.promos = [...state.promos, action.payload]
+      })
+      .addCase(setReview.rejected, (state, action) => {
+        state.isReviewLoading = false;
+        state.isReviewError = true;
+        state.reviewMessage = action.payload;
+      })
 
       .addCase(getReviews.pending, (state) => {
         state.isReviewLoading = true;

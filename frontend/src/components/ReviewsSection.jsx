@@ -12,6 +12,10 @@ const ReviewsSection = ({ productID }) => {
   const moment = require("moment");
   const [pageNumber, setPageNumber] = useState(0);
 
+  const { user, isLoading } = useSelector(
+    (state) => state.auth
+  );
+
   const {
     reviews,
     isReviewLoading,
@@ -19,7 +23,9 @@ const ReviewsSection = ({ productID }) => {
     reviewMessage,
     isReviewDeleted,
     isReviewUpdated,
+    isReviewCreated,
   } = useSelector((state) => state.reviews);
+  
 
   useEffect(() => {
     if (isReviewError) {
@@ -34,6 +40,10 @@ const ReviewsSection = ({ productID }) => {
       toast.success("Review deleted successfully");
     }
 
+    if (isReviewCreated) {
+      toast.success("Review created successfully");
+    }
+
     dispatch(getReviews());
 
     return () => {
@@ -44,10 +54,11 @@ const ReviewsSection = ({ productID }) => {
     reviewMessage,
     isReviewDeleted,
     isReviewUpdated,
+    isReviewCreated,
     dispatch,
   ]);
 
-  if (isReviewLoading) {
+  if (isReviewLoading, isLoading) {
     return (
       <>
         <Spinner />
@@ -146,7 +157,7 @@ const ReviewsSection = ({ productID }) => {
                     <div key={review._doc._id}>
                       {<ReviewSingle
                         reviewOne={review}
-                        // editable={true}
+                        editable={user._id === review._doc.userID ? true : false}
                       />}
                     </div>
                   ))}
