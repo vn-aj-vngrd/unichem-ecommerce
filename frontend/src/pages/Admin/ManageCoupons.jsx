@@ -19,7 +19,7 @@ const ManageCoupons = () => {
   const dispatch = useDispatch();
   const moment = require("moment");
 
-  const { coupons, isCouponLoading, isCouponError, couponMessage } =
+  const { coupons, isCouponLoading, isCouponError, couponMessage, isCouponDeleted, isCouponUpdated, isCouponCreated } =
     useSelector((state) => state.coupons);
 
   useEffect(() => {
@@ -28,15 +28,27 @@ const ManageCoupons = () => {
 
   useEffect(() => {
     if (isCouponError) {
-      // console.log(couponMessage);
+      toast.error(couponMessage);
     }
 
     dispatch(getCoupons());
+    
+    if (isCouponCreated) {
+      toast.success("Coupon created successfully");
+    }
+
+    if (isCouponDeleted) {
+      toast.success("Coupon deleted successfully");
+    }
+
+    if (isCouponUpdated) {
+      toast.success("Coupon updated successfully");
+    }
 
     return () => {
       dispatch(resetCoupon());
     };
-  }, [isCouponError, couponMessage, dispatch]);
+  }, [isCouponError, couponMessage, isCouponCreated, isCouponDeleted, isCouponUpdated, dispatch]);
 
   const columns = [
     "Coupon ID",

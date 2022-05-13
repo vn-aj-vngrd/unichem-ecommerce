@@ -7,6 +7,7 @@ const initialState = {
   isOrderSuccess: false,
   isOrderLoading: false,
   isOrderAdded: false,
+  isOrderUpdated: false,
   isOrderDeleted: false,
   isOrderUpdated: false,
   orderMessage: "",

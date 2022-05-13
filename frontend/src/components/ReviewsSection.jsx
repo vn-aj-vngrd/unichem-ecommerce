@@ -5,20 +5,27 @@ import { useSelector, useDispatch } from "react-redux";
 import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
 import ReviewSingle from "./ReviewSingle";
+import { toast } from "react-toastify";
 
 const ReviewsSection = ({ productID }) => {
   const dispatch = useDispatch();
   // const moment = require("moment");
   const [pageNumber, setPageNumber] = useState(0);
 
-  const { reviews, isReviewLoading, isReviewError, reviewMessage } =
+  const { reviews, isReviewLoading, isReviewError, reviewMessage, isReviewDeleted, isReviewUpdated } =
     useSelector((state) => state.reviews);
-
-    console.log(reviews)
 
   useEffect(() => {
     if (isReviewError) {
-      // console.log(reviewMessage);
+      toast.error(reviewMessage);
+    }
+
+    if (isReviewUpdated) {
+      toast.success("Review updated successfully")
+    }
+
+    if (isReviewDeleted) {
+      toast.success("Review deleted successfully")
     }
 
     dispatch(getReviews());
@@ -26,7 +33,7 @@ const ReviewsSection = ({ productID }) => {
     return () => {
       dispatch(resetReview());
     };
-  }, [isReviewError, reviewMessage, dispatch]);
+  }, [isReviewError, reviewMessage, isReviewDeleted, isReviewUpdated, dispatch]);
 
   if (isReviewLoading) {
     return (

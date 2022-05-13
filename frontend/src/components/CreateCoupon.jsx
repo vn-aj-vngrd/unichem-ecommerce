@@ -1,12 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setCoupon } from "../features/coupons/couponSlice";
-import { toast } from "react-toastify";
 
 const UpdateCoupon = (coupon) => {
   const dispatch = useDispatch();
 
-  console.log(coupon.coupon);
   const {
     register,
     control,
@@ -19,7 +17,6 @@ const UpdateCoupon = (coupon) => {
   const expiryDate = watch("expiryDate");
 
   const onSubmit = (data) => {
-    console.log(data);
     const couponData = {
       couponCode: data.couponCode,
       couponType: data.couponType,
@@ -31,18 +28,7 @@ const UpdateCoupon = (coupon) => {
       expiryDate: data.expiryDate,
     };
 
-    console.log(couponData);
     dispatch(setCoupon(couponData));
-    toast.success("Coupon created successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   return (

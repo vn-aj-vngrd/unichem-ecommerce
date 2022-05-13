@@ -9,7 +9,7 @@ const setPromo = async (promoData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  console.log(promoData)
+  
   const response = await axios.post(API_URL, promoData, config);
 
   return response.data;
@@ -30,7 +30,6 @@ const updatePromo = async (promoData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  promoData? console.log(true) : console.log(false);
   const response = await axios.put(API_URL + "updatePromo", promoData, config);
   // console.log(response.data);
 

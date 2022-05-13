@@ -24,21 +24,33 @@ const ManagePromotions = () => {
     document.title = "Unichem Store | Promotions";
   });
 
-  const { promos, isPromoLoading, isPromoError, promoMessage } = useSelector(
+  const { promos, isPromoLoading, isPromoError, promoMessage, isPromoDeleted, isPromoUpdated, isPromoCreated } = useSelector(
     (state) => state.promos
   );
 
   useEffect(() => {
     if (isPromoError) {
-      // console.log(promoMessage);
+      toast.error(promoMessage);
     }
 
     dispatch(getPromos());
 
+    if (isPromoCreated) {
+      toast.success("Promotion created successfully");
+    }
+
+    if (isPromoDeleted) {
+      toast.success("Promotion deleted successfully");
+    }
+
+    if (isPromoUpdated) {
+      toast.success("Promotion updated successfully");
+    }
+
     return () => {
       dispatch(resetPromo());
     };
-  }, [isPromoError, promoMessage, dispatch]);
+  }, [isPromoError, promoMessage, isPromoDeleted, isPromoUpdated, isPromoCreated, dispatch]);
 
   console.log(promos);
 
@@ -55,14 +67,12 @@ const ManagePromotions = () => {
     "",
   ];
 
-  const imagePath = "frontend/src";
   let data = [];
   const maxLength = 50;
   promos.forEach((promo) => {
     console.log(promo);
     let temp = [];
 
-    // temp.push(<RowImage src={".." + promo.image.replaceAll("\\", "/").slice(imagePath.length)} alt={promo.promoName}/>, promo._id, promo.promoName);
     temp.push(
       <RowImage src={promo.image} alt={promo.promoName} />,
       promo._id,
@@ -80,7 +90,6 @@ const ManagePromotions = () => {
       moment(promo.createdAt).format("llll"),
       <ViewPromotion promo={promo} />,
       <UpdatePromotion promo={promo} />,
-      // <DeletePromotion id={promo._id} />
     );
 
     data.push(temp);
@@ -93,7 +102,6 @@ const ManagePromotions = () => {
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        // console.log(data[item.dataIndex][0]);
         dispatch(deletePromo(data[item.dataIndex][1]));
         toast.success("Promotion deleted successfully");
       });

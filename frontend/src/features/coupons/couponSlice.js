@@ -6,6 +6,9 @@ const initialState = {
   isCouponError: false,
   isCouponSuccess: false,
   isCouponLoading: false,
+  isCouponCreated: false,
+  isCouponDeleted: false,
+  isCouponUpdated: false,
   couponMessage: "",
   couponError: "",
 };
@@ -119,6 +122,7 @@ export const couponSlice = createSlice({
       .addCase(setCoupon.fulfilled, (state, action) => {
         state.isCouponLoading = false;
         state.isCouponSuccess = true;
+        state.isCouponCreated = true;
         state.coupons = [...state.coupons, action.payload]
       })
       .addCase(setCoupon.rejected, (state, action) => {
@@ -171,6 +175,7 @@ export const couponSlice = createSlice({
       .addCase(updateCoupon.fulfilled, (state, action) => {
         state.isCouponLoading = false;
         state.isCouponSuccess = true;
+        state.isCouponUpdated = true;
         const idx = state.coupons.findIndex(
           (obj) => obj._id === action.payload._id
         );
@@ -188,6 +193,7 @@ export const couponSlice = createSlice({
       .addCase(deleteCoupon.fulfilled, (state, action) => {
         state.isCouponLoading = false;
         state.isCouponSuccess = true;
+        state.isCouponDeleted = true;
         state.coupons = state.coupons.filter(
           (coupon) => coupon._id !== action.payload.id
         );
