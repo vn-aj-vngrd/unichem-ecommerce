@@ -224,7 +224,7 @@ const ProfilePurchase = () => {
                     type="button"
                     className="btn order-status-log color-white"
                   >
-                    <i className="lni lni-question-circle"></i> Order Status log
+                    <i className="lni lni-question-circle pe-1"></i> Order Status log
                   </Link>
                   <div className="color-white purchase-update-time">
                     Order Date: {moment(order.createdAt).format("DD/MM/YY")}
@@ -268,9 +268,9 @@ const ProfilePurchase = () => {
                           </button>
                         )}
 
-                        <Link to="/product-details" className="btn">
+                        {/* <Link to={`/product-details/${}`} className="btn">
                           Buy Again
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                   </div>
