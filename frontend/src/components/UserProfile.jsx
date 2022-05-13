@@ -8,9 +8,14 @@ import { toast } from "react-toastify";
 const UserProfile = () => {
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isCustomerUpdated, message } = useSelector(
-    (state) => state.auth
-  );
+  const {
+    user,
+    isLoading,
+    isError,
+    isCustomerProfileUpdated,
+    isCustomerPasswordUpdated,
+    message,
+  } = useSelector((state) => state.auth);
 
   const {
     register,
@@ -46,14 +51,24 @@ const UserProfile = () => {
       toast.error(message);
     }
 
-    if (isCustomerUpdated) {
-      toast.success("User updated successfully");
+    if (isCustomerProfileUpdated) {
+      toast.success("Profile updated successfully");
+    }
+
+    if (isCustomerPasswordUpdated) {
+      toast.success("Password updated successfully");
     }
 
     return () => {
       dispatch(resetUser());
     };
-  }, [isError, isCustomerUpdated, message, dispatch]);
+  }, [
+    isError,
+    isCustomerProfileUpdated,
+    isCustomerPasswordUpdated,
+    message,
+    dispatch,
+  ]);
 
   const onSubmitData = (data) => {
     const userData = {
@@ -346,7 +361,7 @@ const UserProfile = () => {
                               },
                               validate: (value) =>
                                 newPassword === value ||
-                                "New passwords do not match",
+                                "Passwords do not match",
                             })}
                             style={{
                               border: errorsPassword.confirmNewPassword

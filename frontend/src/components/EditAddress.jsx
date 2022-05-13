@@ -1,14 +1,10 @@
-// import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUser } from "../features/auth/authSlice"; //resetUser
-// import Spinner from "./Spinner";
-import { toast } from "react-toastify";
+import { updateUser } from "../features/auth/authSlice";
+
 import { useForm } from "react-hook-form";
 
 const EditAddress = ({ index }) => {
   const dispatch = useDispatch();
-
-  //  isLoading, isError, isSuccess, message
   const { user } = useSelector((state) => state.auth);
 
   const {
@@ -43,16 +39,6 @@ const EditAddress = ({ index }) => {
     };
 
     dispatch(updateUser(userData));
-    toast.success("Address updated successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
 
   return (

@@ -12,12 +12,13 @@ const UserAddress = () => {
     register,
     handleSubmit,
     // watch,
+    reset,
     formState: { errors },
   } = useForm();
 
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message, isCustomerUpdated } = useSelector(
+  const { user, isLoading, isError, isSuccess, message, isCustomerProfileUpdated } = useSelector(
     (state) => state.auth
   );
 
@@ -26,14 +27,14 @@ const UserAddress = () => {
       toast.error(message);
     }
 
-    if (isCustomerUpdated) {
+    if (isCustomerProfileUpdated) {
       toast.success("Address updated successfully");
     }
 
     return () => {
       dispatch(resetUser());
     };
-  }, [isError, isSuccess, message, isCustomerUpdated, dispatch]);
+  }, [isError, isSuccess, message, isCustomerProfileUpdated, dispatch]);
 
   // Create user address
   const onSubmit = (data) => {
@@ -51,6 +52,7 @@ const UserAddress = () => {
     };
 
     dispatch(updateUser(userData));
+    reset();
   };
 
   // Delete user address
@@ -87,7 +89,6 @@ const UserAddress = () => {
     return (
       <>
         <Spinner />
-        <div className="empty-container"></div>
       </>
     );
   }
@@ -351,7 +352,7 @@ const UserAddress = () => {
                       <div className="single-form form-default">
                         <label className="form-label">Postal Code</label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           id="postalCode"
                           {...register("postalCode", {
@@ -382,7 +383,7 @@ const UserAddress = () => {
                       <div className="single-form form-default">
                         <label className="form-label">Phone Number</label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           id="phoneNumber"
                           {...register("phoneNumber", {

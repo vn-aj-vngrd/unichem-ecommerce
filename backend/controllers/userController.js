@@ -273,13 +273,13 @@ const updateUser = asyncHandler(async (req, res) => {
     tempImage = user.image;
   }
 
+  let isPasswordUpdated = false;
   if (req.body.currentPassword) {
     if (await bcrypt.compare(req.body.currentPassword, user.password)) {
       // hash the password using bcrypt
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
-      user.password = req.body.password;
-      await user.save();
+      isPasswordUpdated = true;
     } else {
       res.status(400);
       throw new Error("Current password is incorrect.");
@@ -294,6 +294,7 @@ const updateUser = asyncHandler(async (req, res) => {
       sex: req.body.sex,
       birthday: req.body.birthday,
       userType: req.body.userType,
+      password: req.body.password,
       image: tempImage,
     },
     {
@@ -310,17 +311,20 @@ const updateUser = asyncHandler(async (req, res) => {
   );
 
   res.status(200).json({
-    _id: updatedUser._id,
-    name: updatedUser.name,
-    email: updatedUser.email,
-    sex: updatedUser.sex,
-    birthday: updatedUser.birthday,
-    userType: updatedUser.userType,
-    image: updatedUser.image,
-    userType: updatedUser.userType,
-    address: updatedAddress.address,
-    primaryAddress: updatedAddress.primaryAddress,
-    token: generateToken(updatedUser._id),
+    user: {
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      sex: updatedUser.sex,
+      birthday: updatedUser.birthday,
+      userType: updatedUser.userType,
+      image: updatedUser.image,
+      userType: updatedUser.userType,
+      address: updatedAddress.address,
+      primaryAddress: updatedAddress.primaryAddress,
+      token: generateToken(updatedUser._id),
+    },
+    isPasswordUpdated,
   });
 });
 
