@@ -1,3 +1,13 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css";
+import { Navigation } from "swiper";
+
+import { Autoplay, Pagination } from "swiper";
+
 const ViewProduct = ({ product }) => {
   return (
     <>
@@ -38,11 +48,32 @@ const ViewProduct = ({ product }) => {
                 <div className="mt-2">
                   <div className="mb-4">
                     <div className="view-image-section">
-                      {product._doc.images.map((image) => (
+                      {/* {product._doc.images.map((image) => (
                         <div>
                           <img className="view-image" src={image} alt={image} />
                         </div>
-                      ))}
+                      ))} */}
+                      <Swiper
+                        spaceBetween={30}
+                        centeredSlides={true}
+                        navigation={true}
+                        autoplay={{
+                          delay: 5500,
+                          disableOnInteraction: false,
+                        }}
+                        pagination={{
+                          clickable: true,
+                        }}
+                        modules={[Autoplay, Pagination, Navigation]}
+                        className="mySwiper"
+                      >
+                        {product._doc.images.map((image, index) => (
+                          <SwiperSlide key={index}>
+                            <div className="single-slider "></div>
+                            <img src={image} id="current view-image" alt="#" />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
                     </div>
                     <br />
                     <div className="ms-3">
@@ -81,7 +112,11 @@ const ViewProduct = ({ product }) => {
                                 <del>{"PHP " + product._doc.prices[index]}</del>
                               </div>
                               <div className="col-3">
-                                {"PHP " + (product._doc.prices[index] - (product._doc.prices[index] * product._doc.salePercent) / 100)}
+                                {"PHP " +
+                                  (product._doc.prices[index] -
+                                    (product._doc.prices[index] *
+                                      product._doc.salePercent) /
+                                      100)}
                               </div>
                             </>
                           ) : (

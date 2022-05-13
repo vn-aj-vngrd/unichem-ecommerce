@@ -24398,6 +24398,24 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 /*======================================
+  Swiper CSS
+========================================*/
+.swiper-button-next {
+  color: #ff4436;
+  margin-right: 20px;
+}
+
+.swiper-button-prev {
+  color: #ff4436;
+  margin-left: 20px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ff4436;
+  opacity: 1;
+}
+
+/*======================================
     Spinner CSS
 ========================================*/
 
