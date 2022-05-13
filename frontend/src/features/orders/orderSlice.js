@@ -9,7 +9,8 @@ const initialState = {
   isOrderAdded: false,
   isOrderUpdated: false,
   isOrderDeleted: false,
-  isOrderUpdated: false,
+  isDeleteLoading: false,
+  isUpdateLoding: false,
   orderMessage: "",
 };
 
@@ -214,11 +215,11 @@ export const orderSlice = createSlice({
       })
       // Update Order Case
       .addCase(updateOrder.pending, (state) => {
-        state.isOrderLoading = true;
+        state.isUpdateLoding = true;
       })
       .addCase(updateOrder.fulfilled, (state, action) => {
-        state.isOrderLoading = false;
         state.isOrderSuccess = true;
+        state.isUpdateLoding = true;
         state.isOrderUpdated = true;
         const idx = state.orders.findIndex(
           (order) => order._id === action.payload._id
@@ -226,7 +227,7 @@ export const orderSlice = createSlice({
         state.orders[idx] = action.payload;
       })
       .addCase(updateOrder.rejected, (state, action) => {
-        state.isOrderLoading = false;
+        state.sUpdateLoding = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
       })
@@ -246,10 +247,10 @@ export const orderSlice = createSlice({
       })
       // Delete Order Case
       .addCase(deleteOrder.pending, (state) => {
-        state.isOrderLoading = true;
+        state.isDeleteLoading = true;
       })
       .addCase(deleteOrder.fulfilled, (state, action) => {
-        state.isOrderLoading = false;
+        state.isDeleteLoading = false;
         state.isOrderSuccess = true;
         state.isOrderDeleted = true;
         state.orders = state.orders.filter(
@@ -257,7 +258,7 @@ export const orderSlice = createSlice({
         );
       })
       .addCase(deleteOrder.rejected, (state, action) => {
-        state.isOrderLoading = false;
+        state.isDeleteLoading = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
       });

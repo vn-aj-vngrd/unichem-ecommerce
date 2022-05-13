@@ -8,6 +8,7 @@ const initialState = {
   isProductLoading: false,
   isProductAdded: false,
   isProductDeleted: false,
+  isProductCreated: false,
   isProductUpdated: false,
   productMessage: "",
 };

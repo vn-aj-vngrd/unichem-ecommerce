@@ -12,6 +12,7 @@ const initialState = {
   isAccountRecovered: false,
   isAccountDeleted: false,
   isAdminUpdated: false,
+  isDeleteLoading: false,
   isCustomerUpdated: false,
   message: "",
   users: [],
@@ -211,6 +212,7 @@ export const authSlice = createSlice({
       state.isCustomerUpdated = false;
       state.isAccountRecovered = false;
       state.isAccountDeleted = false;
+      state.isDeleteLoading = false;
       state.users = [];
     },
   },
@@ -335,10 +337,10 @@ export const authSlice = createSlice({
       })
       // Delete User Case
       .addCase(deleteUser.pending, (state) => {
-        state.isLoading = true;
+        state.isDeleteLoading = true;
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isDeleteLoading = false;
         state.isSuccess = true;
         state.isAccountDeleted = true;
         state.users = state.users.filter(
@@ -346,7 +348,7 @@ export const authSlice = createSlice({
         );
       })
       .addCase(deleteUser.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isDeleteLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
