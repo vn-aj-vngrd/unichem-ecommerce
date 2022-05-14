@@ -7,15 +7,15 @@ import OrderLogInformation from "../../components/OrderLogInformation";
 
 const OrderDetails = () => {
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.title = "Unichem Store | Order Details";
 
-    if (!localStorage.getItem("user")) {
+    if (isLoggedIn) {
       navigate("/login");
     }
-  }, [navigate]);
+  }, [isLoggedIn, navigate]);
 
   return (
     <>

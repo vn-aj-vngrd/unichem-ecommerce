@@ -19,10 +19,12 @@ const Wishlist = () => {
   const { wishlists, isWishlistLoading, isWishlistError, wishlistMessage } =
     useSelector((state) => state.wishlist);
 
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   useEffect(() => {
     document.title = "Unichem Store | Wishlist";
 
-    if (!localStorage.getItem("user")) {
+    if (!isLoggedIn) {
       navigate("/login");
     }
 
@@ -36,7 +38,7 @@ const Wishlist = () => {
       dispatch(resetCart());
       dispatch(resetWishlist());
     };
-  }, [navigate, isWishlistError, wishlistMessage, dispatch]);
+  }, [isLoggedIn, navigate, isWishlistError, wishlistMessage, dispatch]);
 
   return (
     <>
