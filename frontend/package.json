@@ -14,7 +14,6 @@
     "axios": "^0.26.0",
     "bootstrap": "^5.1.3",
     "chart.js": "^3.7.1",
-    "crypto-js": "^4.1.1",
     "encrypt-storage": "^2.2.10",
     "faker": "^6.6.6",
     "mui-datatables": "^3.8.5",
@@ -36,6 +35,9 @@
     "sweetalert2": "^11.4.4",
     "swiper": "^8.0.6",
     "web-vitals": "^2.1.4"
+  },
+  "browser": {
+    "crypto": false
   },
   "scripts": {
     "start": "react-scripts start",
