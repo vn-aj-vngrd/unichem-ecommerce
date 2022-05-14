@@ -256,13 +256,12 @@ const getUser = asyncHandler(async (req, res) => {
 
   const userAddress = await Address.findOne({ userID: user._id });
 
-  // const userToken = jwt.decode(req.params.token);
-  // console.log(userToken.created.moment(), user.updatedAt.moment());
+  const userToken = jwt.decode(req.params.token);
 
-  // if (userToken.created.moment() < user.updatedAt.moment()) {
-  //   res.status(400);
-  //   throw new Error("Token expired");
-  // }
+  if (moment(userToken.created) < moment(user.updatedAt)) {
+    res.status(400);
+    throw new Error("Token expired");
+  }
 
   res.status(200).json({
     _id: user._id,

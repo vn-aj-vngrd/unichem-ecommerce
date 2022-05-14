@@ -9,7 +9,7 @@ const VerifyAuth = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (sessionStorage.getItem("tokens")) {
+    if (sessionStorage.getItem("token")) {
       dispatch(getUser());
     }
 
