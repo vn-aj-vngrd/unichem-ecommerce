@@ -74,19 +74,21 @@ const ViewProduct = ({ product }) => {
                           </SwiperSlide>
                         ))}
                       </Swiper>
+                      <div className="ms-3">
+                        Name: {product._doc.productName}
+                        <br />
+                        Brand: {product._doc.productName}
+                        <br />
+                        Category: {product._doc.category}
+                        <br />
+                        Featured: {product._doc.featured ? "Yes" : "No"}
+                        <br />
+                        Sale Percent: {product._doc.salePercent + "%"}
+                        <br />
+                      </div>
                     </div>
                     <br />
                     <div className="ms-3">
-                      Name: {product._doc.productName}
-                      <br />
-                      Brand: {product._doc.productName}
-                      <br />
-                      Category: {product._doc.category}
-                      <br />
-                      Featured: {product._doc.featured ? "Yes" : "No"}
-                      <br />
-                      Sale Percent: {product._doc.salePercent + "%"}
-                      <br />
                       <br />
                       <h6>Product Specifications</h6>
                       {product._doc.specifications.map(
@@ -109,14 +111,19 @@ const ViewProduct = ({ product }) => {
                           {product._doc.isSale === true ? (
                             <>
                               <div className="col-3">
-                                <del>{"PHP " + product._doc.prices[index]}</del>
+                                <del>
+                                  {"PHP " +
+                                    product._doc.prices[index].toFixed(2)}
+                                </del>
                               </div>
                               <div className="col-3">
                                 {"PHP " +
-                                  (product._doc.prices[index] -
+                                  (
+                                    product._doc.prices[index] -
                                     (product._doc.prices[index] *
                                       product._doc.salePercent) /
-                                      100)}
+                                      100
+                                  ).toFixed(2)}
                               </div>
                             </>
                           ) : (

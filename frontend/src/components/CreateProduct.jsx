@@ -554,9 +554,8 @@ const CreateProduct = () => {
                               border: errors.isSale ? "1px solid #f44336" : "",
                             }}
                           >
-                            <option value=""></option>
-                            <option value="true">Yes</option>
                             <option value="false">No</option>
+                            <option value="true">Yes</option>
                           </select>
                         </div>
                         {errors.isSale && (
@@ -628,9 +627,8 @@ const CreateProduct = () => {
                             border: errors.featured ? "1px solid #f44336" : "",
                           }}
                         >
-                          <option value=""></option>
-                          <option value="true">Yes</option>
                           <option value="false">No</option>
+                          <option value="true">Yes</option>
                         </select>
                       </div>
                       {errors.featured && (

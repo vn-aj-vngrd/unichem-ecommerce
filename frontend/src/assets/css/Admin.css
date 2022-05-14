@@ -24587,16 +24587,19 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .view-image {
   border-radius: 4px !important;
-  height: 108px;
-  width: 108px;
+  max-height: 108px !important;
+  max-width: 108px !important;
   object-fit: cover;
 }
 
 .view-image-section {
-  max-width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 5px;
   justify-content: center;
+  align-items: center;
+  padding: 0 60px;
+}
+
+.mySwiper {
+  height: 108px;
+  width: 108px;
 }

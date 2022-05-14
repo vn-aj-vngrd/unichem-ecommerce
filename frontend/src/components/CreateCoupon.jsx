@@ -31,6 +31,7 @@ const UpdateCoupon = (coupon) => {
     dispatch(setCoupon(couponData));
   };
 
+  console.log(errors)
   return (
     <div className="col-12 mt-5">
       <button
@@ -115,7 +116,7 @@ const UpdateCoupon = (coupon) => {
                               : "",
                           }}
                         >
-                          <option value=""></option>
+                          <option value="">Select option</option>
                           <option value="order-discount">order-discount</option>
                           <option value="shipping-discount">
                             shipping-discount
