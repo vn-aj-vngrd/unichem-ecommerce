@@ -6,7 +6,7 @@ import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 import UpdateProduct from "../../components/UpdateProduct";
 import ViewProduct from "../../components/ViewProduct";
-import RowImage from "../../components/RowImage";
+// import RowImage from "../../components/RowImage";
 import {
   getProducts,
   resetProduct,

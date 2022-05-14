@@ -11,7 +11,7 @@ import SectionTitle from "../../components/SectionTitle";
 import CreatePromotion from "../../components/CreatePromotion";
 import UpdatePromotion from "../../components/UpdatePromotion";
 import ViewPromotion from "../../components/ViewPromotion";
-import RowImage from "../../components/RowImage";
+// import RowImage from "../../components/RowImage";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner";
