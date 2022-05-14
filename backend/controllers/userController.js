@@ -265,7 +265,9 @@ const updateUser = asyncHandler(async (req, res) => {
       removeImagePath &&
       removeImagePath !== "\\uploads\\users\\user-placeholder.png"
     ) {
-      fs.unlinkSync(destination + removeImagePath);
+      if (fs.existsSync(destination + removeImagePath)) {
+        fs.unlinkSync(destination + removeImagePath);
+      }
     }
 
     tempImage = req.file.path.slice(destination.length);
@@ -355,7 +357,9 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   const destination = "frontend\\public";
   if (user.image && user.image !== "\\uploads\\users\\user-placeholder.png") {
-    fs.unlinkSync(destination + user.image);
+    if (fs.existsSync(destination + user.image)) {
+      fs.unlinkSync(destination + user.image);
+    }
   }
 
   res.status(200).json({ id: req.params.id });

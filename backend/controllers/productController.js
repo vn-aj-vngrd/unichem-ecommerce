@@ -184,7 +184,9 @@ const setProduct = asyncHandler(async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       let removeImagePath = req.files[i].path;
       if (removeImagePath) {
-        fs.unlinkSync(removeImagePath);
+        if (fs.existsSync(removeImagePath)) {
+          fs.unlinkSync(removeImagePath);
+        }
       }
     }
     res.status(400);
@@ -196,7 +198,9 @@ const setProduct = asyncHandler(async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       let removeImagePath = req.files[i].path;
       if (removeImagePath) {
-        fs.unlinkSync(removeImagePath);
+        if (fs.existsSync(removeImagePath)) {
+          fs.unlinkSync(removeImagePath);
+        }
       }
     }
     res.status(401);
@@ -208,7 +212,9 @@ const setProduct = asyncHandler(async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       let removeImagePath = req.files[i].path;
       if (removeImagePath) {
-        fs.unlinkSync(removeImagePath);
+        if (fs.existsSync(removeImagePath)) {
+          fs.unlinkSync(removeImagePath);
+        }
       }
     }
     res.status(401);
@@ -219,7 +225,9 @@ const setProduct = asyncHandler(async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       let removeImagePath = req.files[i].path;
       if (removeImagePath) {
-        fs.unlinkSync(removeImagePath);
+        if (fs.existsSync(removeImagePath)) {
+          fs.unlinkSync(removeImagePath);
+        }
       }
     }
     res.status(401);
@@ -242,16 +250,16 @@ const setProduct = asyncHandler(async (req, res) => {
     tempFiles.push(req.files[i].path.slice(destination.length));
   }
 
-  console.log(req.body)
+  console.log(req.body);
   let tempQuantities = [];
-  req.body.quantities.split(',').forEach((quantity) => {
+  req.body.quantities.split(",").forEach((quantity) => {
     tempQuantities.push(parseFloat(quantity));
-  })
+  });
 
   let tempPrices = [];
-  req.body.prices.split(',').forEach((price) => {
+  req.body.prices.split(",").forEach((price) => {
     tempPrices.push(parseFloat(price));
-  })
+  });
 
   const product = await Product.create({
     productName: req.body.productName,
@@ -294,7 +302,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       let removeImagePath = req.files[i].path;
       if (removeImagePath) {
-        fs.unlinkSync(removeImagePath);
+        if (fs.existsSync(removeImagePath)) {
+          fs.unlinkSync(removeImagePath);
+        }
       }
     }
     res.status(400);
@@ -306,7 +316,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       let removeImagePath = req.files[i].path;
       if (removeImagePath) {
-        fs.unlinkSync(removeImagePath);
+        if (fs.existsSync(removeImagePath)) {
+          fs.unlinkSync(removeImagePath);
+        }
       }
     }
     res.status(400);
@@ -318,7 +330,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       let removeImagePath = req.files[i].path;
       if (removeImagePath) {
-        fs.unlinkSync(removeImagePath);
+        if (fs.existsSync(removeImagePath)) {
+          fs.unlinkSync(removeImagePath);
+        }
       }
     }
     res.status(401);
@@ -334,7 +348,9 @@ const updateProduct = asyncHandler(async (req, res) => {
       let removeImagePath = product.images[i];
       console.log(removeImagePath);
       if (removeImagePath) {
-        fs.unlinkSync(destination + removeImagePath);
+        if (fs.existsSync(destination + removeImagePath)) {
+          fs.unlinkSync(destination + removeImagePath);
+        }
       }
     }
 
@@ -345,16 +361,16 @@ const updateProduct = asyncHandler(async (req, res) => {
   } else {
     tempFiles = product.images;
   }
-  
+
   let tempQuantities = [];
-  req.body.quantities.split(',').forEach((quantity) => {
+  req.body.quantities.split(",").forEach((quantity) => {
     tempQuantities.push(parseFloat(quantity));
-  })
+  });
 
   let tempPrices = [];
-  req.body.prices.split(',').forEach((price) => {
+  req.body.prices.split(",").forEach((price) => {
     tempPrices.push(parseFloat(price));
-  })
+  });
 
   const updatedProduct = await Product.findByIdAndUpdate(
     {
@@ -410,7 +426,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
       let removeImagePath = product.images[i];
       console.log(removeImagePath);
       if (removeImagePath) {
-        fs.unlinkSync(destination + removeImagePath);
+        if (fs.existsSync(destination + removeImagePath)) {
+          fs.unlinkSync(destination + removeImagePath);
+        }
       }
     }
   }

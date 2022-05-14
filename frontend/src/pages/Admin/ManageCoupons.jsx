@@ -98,7 +98,6 @@ const ManageCoupons = () => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
         dispatch(deleteCoupon(data[item.dataIndex][0]));
-        toast.success("Coupon deleted successfully");
       });
     },
   };

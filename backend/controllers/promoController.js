@@ -17,25 +17,28 @@ const getPromos = asyncHandler(async (req, res) => {
 // @route   POST /api/promos
 // @access  Private
 const setPromo = asyncHandler(async (req, res) => {
-  console.log(req.user)
-  console.log(req.body)
-  console.log(req.file)
   // Check for user
   if (!req.user) {
-    fs.unlinkSync(req.file.path.path);
+    if (fs.existsSync(req.file.path.path)) {
+      fs.unlinkSync(req.file.path.path);
+    }
     res.status(401);
     throw new Error("User not found");
   }
 
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
-    fs.unlinkSync(req.file.path.path);
+    if (fs.existsSync(req.file.path.path)) {
+      fs.unlinkSync(req.file.path.path);
+    }
     res.status(401);
     throw new Error("User not authorized");
   }
 
   if (!req.file.path) {
-    fs.unlinkSync(req.file.path.path);
+    if (fs.existsSync(req.file.path.path)) {
+      fs.unlinkSync(req.file.path.path);
+    }
     res.status(401);
     throw new Error("There was a problem uploading the image");
   }
@@ -55,21 +58,27 @@ const setPromo = asyncHandler(async (req, res) => {
 const updatePromo = asyncHandler(async (req, res) => {
   const promo = await Promo.findById(req.body._id);
   if (!promo) {
-    fs.unlinkSync(req.file.path.path);
+    if (fs.existsSync(req.file.path.path)) {
+      fs.unlinkSync(req.file.path.path);
+    }
     res.status(400);
     throw new Error("Promo not found");
   }
 
   // Check for user
   if (!req.user) {
-    fs.unlinkSync(req.file.path.path);
+    if (fs.existsSync(req.file.path.path)) {
+      fs.unlinkSync(req.file.path.path);
+    }
     res.status(401);
     throw new Error("User not found");
   }
 
   // Check for user and admin privilege
   if (!req.user && req.user.userType !== "admin") {
-    fs.unlinkSync(req.file.path.path);
+    if (fs.existsSync(req.file.path.path)) {
+      fs.unlinkSync(req.file.path.path);
+    }
     res.status(401);
     throw new Error("User not authorized.");
   }
@@ -80,7 +89,9 @@ const updatePromo = asyncHandler(async (req, res) => {
     let removeImagePath = promo.image;
     const destination = "frontend\\public";
     if (removeImagePath) {
-      fs.unlinkSync(destination + removeImagePath);
+      if (fs.existsSync(destination + removeImagePath)) {
+        fs.unlinkSync(destination + removeImagePath);
+      }
     }
     tempImage = req.file.path.slice(destination.length);
   } else {
@@ -129,7 +140,9 @@ const deletePromo = asyncHandler(async (req, res) => {
 
   const destination = "frontend\\public";
   if (promo.image !== "") {
-    fs.unlinkSync(destination + promo.image);
+    if (fs.existsSync(destination + promo.image)) {
+      fs.unlinkSync(destination + promo.image);
+    }
   }
 
   await promo.remove();
