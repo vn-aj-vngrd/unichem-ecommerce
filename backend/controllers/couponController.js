@@ -42,13 +42,13 @@ const validateCoupon = asyncHandler(async (req, res) => {
   if (startDate > currentDate) {
     // return res.status(200).json("notFound");
     res.status(400);
-    throw new Error("Coupon not yet valid");
+    throw new Error("Coupon is not valid");
   }
 
   if (currentDate >= expiryDate) {
     // return res.status(200).json("expired");
     res.status(400);
-    throw new Error("Coupon expired");
+    throw new Error("Coupon has been expired");
   }
 
   if (coupon.requiredAmount > req.body.subtotal) {
@@ -60,7 +60,7 @@ const validateCoupon = asyncHandler(async (req, res) => {
   if (existingCoupon > 0) {
     // return res.status(200).json("existingCoupon");
     res.status(400);
-    throw new Error("Coupon already used");
+    throw new Error("Coupon was already used");
   }
 
   if (couponCount > coupon.limit) {

@@ -28,10 +28,12 @@ const Cart = () => {
     (state) => state.cart
   );
 
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
-    if (!localStorage.getItem("user")) {
+    if (!isLoggedIn) {
       navigate("/login");
     }
 
@@ -45,7 +47,7 @@ const Cart = () => {
       dispatch(resetWishlist());
       dispatch(resetCart());
     };
-  }, [navigate, isCartError, cartMessage, dispatch]);
+  }, [isLoggedIn, navigate, isCartError, cartMessage, dispatch]);
 
   const cartCount = carts.reduce((count, cart) => {
     if (cart.product.quantities[cart._doc.productType] > 0) {

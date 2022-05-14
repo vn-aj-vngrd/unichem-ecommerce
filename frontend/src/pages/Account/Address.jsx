@@ -7,15 +7,15 @@ import UserAddress from "../../components/UserAddress";
 
 const Manage = () => {
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.title = "Unichem Store | Address";
 
-    if (!localStorage.getItem("user")) {
+    if (!isLoggedIn) {
       navigate("/login");
     }
-  }, [navigate]);
+  }, [isLoggedIn, navigate]);
 
   return (
     <>

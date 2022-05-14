@@ -26,7 +26,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth);
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
   const { carts, isCartLoading } = useSelector((state) => state.cart);
   const { isOrderAdded, isOrderError, orderMessage } = useSelector(
     (state) => state.orders
@@ -56,7 +56,7 @@ const Checkout = () => {
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
-    if (!localStorage.getItem("user")) {
+    if (!isLoggedIn) {
       navigate("/");
     }
 
@@ -88,65 +88,6 @@ const Checkout = () => {
         text: couponMessage,
       });
     }
-
-    // if (couponError.length > 0) {
-    //   switch (couponError) {
-    //     case "notFound": {
-    //       Swal.fire({
-    //         title: "Coupon is Invalid",
-    //         icon: "error",
-    //         text: "Please input a valid coupon.",
-    //         confirmButtonColor: "#f44336",
-    //       });
-    //       break;
-    //     }
-    //     case "requiredAmountError": {
-    //       Swal.fire({
-    //         title: "Coupon is Invalid",
-    //         icon: "error",
-    //         text: "Sorry, the coupon requirement does not meet your order subtotal amount.",
-    //         confirmButtonColor: "#f44336",
-    //       });
-    //       break;
-    //     }
-    //     case "expired": {
-    //       Swal.fire({
-    //         title: "Coupon is Invalid",
-    //         icon: "error",
-    //         text: "Coupon has expired",
-    //         confirmButtonColor: "#f44336",
-    //       });
-    //       break;
-    //     }
-    //     case "existingCoupon": {
-    //       Swal.fire({
-    //         title: "Coupon is Invalid",
-    //         icon: "error",
-    //         text: "Sorry, you already used this coupon.",
-    //         confirmButtonColor: "#f44336",
-    //       });
-    //       break;
-    //     }
-    //     case "limitError": {
-    //       Swal.fire({
-    //         title: "Coupon is Invalid",
-    //         icon: "error",
-    //         text: "Sorry, the coupon has already exceeded the limit of use.",
-    //         confirmButtonColor: "#f44336",
-    //       });
-    //       break;
-    //     }
-    //     default: {
-    //       Swal.fire({
-    //         title: "Failed to Validate Coupon",
-    //         icon: "error",
-    //         text: "Sorry, there is an error upon coupon validation. Please try again.",
-    //         confirmButtonColor: "#f44336",
-    //       });
-    //       break;
-    //     }
-    //   }
-    // }
 
     if (isCouponSuccess) {
       Swal.fire({
@@ -198,6 +139,7 @@ const Checkout = () => {
       dispatch(resetCoupon());
     };
   }, [
+    isLoggedIn,
     coupons,
     isCouponSuccess,
     orderDiscount,
