@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const VerifyAuth = () => {
-  const { isAuthError } = useSelector((state) => state.auth);
+  const { isAuthError, isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
+    if (isLoggedIn) {
       dispatch(getUser());
     }
 
@@ -22,7 +22,7 @@ const VerifyAuth = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [dispatch, isAuthError, navigate]);
+  }, [isLoggedIn, dispatch, isAuthError, navigate]);
   return <></>;
 };
 

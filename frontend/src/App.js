@@ -216,7 +216,7 @@ export const App = () => {
           </>
         </>
       )}
-      {/* <VerifyAuth /> */}
+      <VerifyAuth />
     </>
   ) : (
     <>
