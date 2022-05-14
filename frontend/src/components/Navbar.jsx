@@ -41,7 +41,7 @@ const Navbar = ({ userType }) => {
   if (user) {
     wishlistCount = localStorage.getItem("wishlistCount");
     cartCount = localStorage.getItem("cartCount");
-    username = user.name.split(" ")[0];
+    username = user.name ? user.name.split(" ")[0] : "";
   }
 
   const onLogout = (e) => {

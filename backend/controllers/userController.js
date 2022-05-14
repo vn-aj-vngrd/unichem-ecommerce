@@ -221,7 +221,7 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get user data
-// @route   GET /api/users/getUser
+// @route   GET /api/users/getUsers
 // @access  Private
 const getUsers = asyncHandler(async (req, res) => {
   if (!req.user && req.user.userType !== "admin") {
@@ -234,6 +234,38 @@ const getUsers = asyncHandler(async (req, res) => {
   });
 
   res.status(200).json(users);
+});
+
+// @desc    Get user data
+// @route   GET /api/users/getUser/:id
+// @access  Private
+const getUser = asyncHandler(async (req, res) => {
+  // console.log(req);
+  console.log(req.params);
+  if (!req.user) {
+    res.status(400);
+    throw new Error("Access Denied");
+  }
+
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const userAddress = await Address.findOne({ userID: user._id });
+  res.status(200).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
+    userType: user.userType,
+    image: user.image,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: req.params.token,
+  });
 });
 
 // @desc    Update user data
@@ -558,7 +590,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
 // Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
+    expiresIn: "20s",
   });
 };
 
@@ -566,6 +598,7 @@ module.exports = {
   registerUser,
   loginUser,
   getUsers,
+  getUser,
   updateUser,
   deleteUser,
   verifyUser,

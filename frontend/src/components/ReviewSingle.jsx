@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   updateReview,
   deleteReview,
-  resetReview,
+  // resetReview,
 } from "../features/reviews/reviewSlice";
 import Star from "./Star";
 
@@ -48,14 +48,16 @@ function ReviewSingle({ reviewOne, editable }) {
     dispatch(deleteReview(_id));
   };
 
-  console.log(reviewOne)
+  console.log(reviewOne);
 
   return (
     <>
       {reviewOne && reviewOne.user && (
         <form className="form" onSubmit={onSubmitReview}>
           <div className="single-review">
-            {reviewOne.user.image && (<img src={reviewOne.user.image} alt={reviewOne.user.image} />)}
+            {reviewOne.user.image && (
+              <img src={reviewOne.user.image} alt={reviewOne.user.image} />
+            )}
             <div className="review-info">
               <div
                 className={
@@ -113,7 +115,9 @@ function ReviewSingle({ reviewOne, editable }) {
                     ></li>
                     <li
                       className={
-                        starRating == 5 ? "lni lni-star-filled" : "lni lni-star"
+                        starRating === 5
+                          ? "lni lni-star-filled"
+                          : "lni lni-star"
                       }
                       id="star-review-5"
                       onClick={() => setStarRating(5)}
@@ -131,8 +135,8 @@ function ReviewSingle({ reviewOne, editable }) {
                     </span>
                   </h4>
                   <div className="btn-group dropstart">
-                    {editable && 
-                    currentDate.isBetween(createdtDate, expiryDate) && (
+                    {editable &&
+                      currentDate.isBetween(createdtDate, expiryDate) && (
                         <>
                           <button
                             type="button"

@@ -4,6 +4,7 @@ const {
   registerUser,
   loginUser,
   getUsers,
+  getUser,
   updateUser,
   deleteUser,
   verifyUser,
@@ -23,6 +24,7 @@ router.post("/login", loginUser);
 router.post("/:id/recoverAccount/:token", recoverAccount);
 
 router.get("/getUsers", protect, getUsers);
+router.get("/getUser/:token", protect, getUser);
 
 router.get("/:id/validateRecovery/:token", validateRecovery);
 

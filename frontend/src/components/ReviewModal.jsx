@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { setReview } from "../features/reviews/reviewSlice";
 import { useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const ReviewModal = ({
   userID,
@@ -19,7 +19,7 @@ const ReviewModal = ({
   const [starRating, setStarRating] = useState(0);
   const { review } = formData;
 
-  console.log(starRating);
+  // console.log(starRating);
 
   const onChangeReview = (e) => {
     setFormData((prevState) => ({
@@ -62,19 +62,19 @@ const ReviewModal = ({
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
                 Leave a Review
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body review-modal-body product-details-info">
+            <div className="modal-body review-modal-body product-details-info">
               <div className="reviews">
                 <form className="form" onSubmit={onSubmitReview}>
                   <div className="single-review">
@@ -139,7 +139,7 @@ const ReviewModal = ({
                             ></li>
                             <li
                               className={
-                                starRating == 5
+                                starRating === 5
                                   ? "lni lni-star-filled"
                                   : "lni lni-star"
                               }

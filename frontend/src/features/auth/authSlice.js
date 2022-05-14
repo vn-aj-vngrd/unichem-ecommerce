@@ -9,6 +9,8 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
+  isAuthError: false,
+  isAuthSuccess: false,
   isAccountRecovered: false,
   isAccountDeleted: false,
   isAdminUpdated: false,
@@ -142,6 +144,22 @@ export const updateUser = createAsyncThunk(
 );
 
 // Get user
+export const getUser = createAsyncThunk("auth/getUser", async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await authService.getUser(token);
+  } catch (error) {
+    const cartMessage =
+      (error.response &&
+        error.response.data &&
+        error.response.data.cartMessage) ||
+      error.cartMessage ||
+      error.toString();
+    return thunkAPI.rejectWithValue(cartMessage);
+  }
+});
+
+// Get users
 export const getUsers = createAsyncThunk("auth/getAll", async (_, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user.token;
@@ -216,6 +234,8 @@ export const authSlice = createSlice({
       state.isAccountDeleted = false;
       state.isDeleteLoading = false;
       state.users = [];
+      state.isAuthError = false;
+      state.isAuthSuccess = false;
     },
   },
   extraReducers: (builder) => {
@@ -326,6 +346,21 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      // Get user Case
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isAuthSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isAuthError = true;
+        state.message = action.payload;
+        state.user = null;
       })
       // Get Users Case
       .addCase(getUsers.pending, (state) => {

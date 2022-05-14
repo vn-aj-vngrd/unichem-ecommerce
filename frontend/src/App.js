@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import { getUser, resetUser } from "./features/auth/authSlice";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -50,37 +51,59 @@ import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
 // import "./assets/css/Store.css"
 
 export const App = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, authError } = useSelector((state) => state.auth);
+  const { isCartError } = useSelector((state) => state.cart);
+  const { isWishlistError } = useSelector((state) => state.wishlist);
   const [userTypeData, setUserType] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isGetUser, setIsGetUser] = useState(false);
 
   const handleLoading = () => {
     setIsLoading(false);
   };
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   injectStyle();
 
   useEffect(() => {
-    if (user) {
-      const temp = localStorage.getItem("user");
-      const user = JSON.parse(temp);
-      switch (user.userType) {
-        case "admin":
-          setUserType({ userType: "admin" });
-          break;
-        case "customer":
-          setUserType({ userType: "customer" });
-          break;
-        default:
-          setUserType({ userType: "customer" });
-          break;
-      }
-    } else {
-      setUserType({ userType: "customer" });
+    if (authError || isCartError || isWishlistError) {
+      window.location.reload(false);
+      // navigate("/");
     }
+
+    console.log(user);
+
+    setUserType({ userType: "customer" });
+
+    if (user && !isGetUser) {
+      setIsGetUser(true);
+      dispatch(getUser());
+    }
+
+    if (user && user.userType === "admin") {
+      setUserType({ userType: "admin" });
+    }
+
+    if (!user) {
+      localStorage.clear();
+    }
+
     window.addEventListener("load", handleLoading);
-    return () => window.removeEventListener("load", handleLoading);
-  }, [user]);
+    return () => {
+      window.removeEventListener("load", handleLoading);
+      dispatch(resetUser());
+    };
+  }, [
+    user,
+    dispatch,
+    authError,
+    navigate,
+    isGetUser,
+    isCartError,
+    isWishlistError,
+  ]);
 
   return !isLoading ? (
     <>

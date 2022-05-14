@@ -13,7 +13,7 @@ const signup = async (userData) => {
 const login = async (userData) => {
   const response = await axios.post(API_URL + "login", userData);
 
-  if (response.data) {
+  if (response.data && response.data.token) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }
 
@@ -67,8 +67,31 @@ const updateUser = async (userData, token) => {
   };
   const response = await axios.put(API_URL + "updateUser", userData, config);
 
-  if (response.data) {
+  if (response.data && response.data.token) {
     localStorage.setItem("user", JSON.stringify(response.data.user));
+  }
+
+  return response.data;
+};
+
+// Get user
+const getUser = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  console.log(token);
+
+  const response = await axios.get(
+    API_URL + "getUser/" + token,
+    config
+  );
+
+  localStorage.clear();
+  if (response.data && response.data.token) {
+    localStorage.setItem("user", JSON.stringify(response.data));
   }
 
   return response.data;
@@ -102,7 +125,6 @@ const deleteUser = async (id, token) => {
 
 // Logout user
 const logout = () => {
-  localStorage.removeItem("user");
   localStorage.clear();
 };
 
@@ -131,6 +153,7 @@ const authService = {
   validateRecovery,
   recoverAccount,
   updateUser,
+  getUser,
   getUsers,
   deleteUser,
   logout,

@@ -9,12 +9,10 @@ import { toast } from "react-toastify";
 
 const ReviewsSection = ({ productID }) => {
   const dispatch = useDispatch();
-  const moment = require("moment");
+  // const moment = require("moment");
   const [pageNumber, setPageNumber] = useState(0);
 
-  const { user, isLoading } = useSelector(
-    (state) => state.auth
-  );
+  const { user } = useSelector((state) => state.auth);
 
   const {
     reviews,
@@ -25,7 +23,6 @@ const ReviewsSection = ({ productID }) => {
     isReviewUpdated,
     isReviewCreated,
   } = useSelector((state) => state.reviews);
-  
 
   useEffect(() => {
     if (isReviewError) {
@@ -58,7 +55,7 @@ const ReviewsSection = ({ productID }) => {
     dispatch,
   ]);
 
-  if (isReviewLoading, isLoading) {
+  if (isReviewLoading) {
     return (
       <>
         <Spinner />
@@ -155,10 +152,14 @@ const ReviewsSection = ({ productID }) => {
                 {productReviews.length > 0 &&
                   productReviews.map((review) => (
                     <div key={review._doc._id}>
-                      {<ReviewSingle
-                        reviewOne={review}
-                        editable={user._id === review._doc.userID ? true : false}
-                      />}
+                      {
+                        <ReviewSingle
+                          reviewOne={review}
+                          editable={
+                            user._id === review._doc.userID ? true : false
+                          }
+                        />
+                      }
                     </div>
                   ))}
               </div>
