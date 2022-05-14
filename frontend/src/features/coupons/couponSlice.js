@@ -21,13 +21,13 @@ export const setCoupon = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await couponService.setCoupon(couponData, token);
     } catch (error) {
-      const couponMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.couponMessage) ||
-        error.couponMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(couponMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -40,13 +40,13 @@ export const getCoupons = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await couponService.getCoupons(token);
     } catch (error) {
-      const couponMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.couponMessage) ||
-        error.couponMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(couponMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -59,13 +59,13 @@ export const validateCoupon = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await couponService.validateCoupon(couponData, token);
     } catch (error) {
-      const couponMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.couponMessage) ||
-        error.couponMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(couponMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -78,13 +78,13 @@ export const updateCoupon = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await couponService.updateCoupon(couponData, token);
     } catch (error) {
-      const couponMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.couponMessage) ||
-        error.couponMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(couponMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -97,13 +97,13 @@ export const deleteCoupon = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await couponService.deleteCoupon(id, token);
     } catch (error) {
-      const couponMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.couponMessage) ||
-        error.couponMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(couponMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -123,7 +123,7 @@ export const couponSlice = createSlice({
         state.isCouponLoading = false;
         state.isCouponSuccess = true;
         state.isCouponCreated = true;
-        state.coupons = [...state.coupons, action.payload]
+        state.coupons = [...state.coupons, action.payload];
       })
       .addCase(setCoupon.rejected, (state, action) => {
         state.isCouponLoading = false;
@@ -150,25 +150,15 @@ export const couponSlice = createSlice({
       })
       .addCase(validateCoupon.fulfilled, (state, action) => {
         state.isCouponLoading = false;
-        if (
-          action.payload === "notFound" ||
-          action.payload === "requiredAmountError" ||
-          action.payload === "expired" ||
-          action.payload === "existingCoupon" ||
-          action.payload === "limitError"
-        ) {
-          state.couponError = action.payload;
-        } else {
-          state.isCouponSuccess = true;
-          state.coupons = action.payload;
-        }
+        state.isCouponSuccess = true;
+        state.coupons = action.payload;
       })
       .addCase(validateCoupon.rejected, (state, action) => {
         state.isCouponLoading = false;
         state.isCouponError = true;
         state.couponMessage = action.payload;
+        console.log(action.payload);
       })
-
       .addCase(updateCoupon.pending, (state) => {
         state.isCouponLoading = true;
       })

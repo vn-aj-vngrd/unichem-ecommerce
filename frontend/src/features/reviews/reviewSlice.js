@@ -20,13 +20,13 @@ export const setReview = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await reviewService.setReview(reviewData, token);
     } catch (error) {
-      const reviewMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.reviewMessage) ||
-        error.reviewMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(reviewMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -38,13 +38,13 @@ export const getReviews = createAsyncThunk(
     try {
       return await reviewService.getReviews();
     } catch (error) {
-      const reviewMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.reviewMessage) ||
-        error.reviewMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(reviewMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -57,13 +57,13 @@ export const getUserReviews = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await reviewService.getUserReviews(token);
     } catch (error) {
-      const reviewMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.reviewMessage) ||
-        error.reviewMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(reviewMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -76,13 +76,13 @@ export const updateReview = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await reviewService.updateReview(reviewData, token);
     } catch (error) {
-      const reviewMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.reviewMessage) ||
-        error.reviewMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(reviewMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -96,13 +96,13 @@ export const deleteReview = createAsyncThunk(
       console.log(false);
       return await reviewService.deleteReview(id, token);
     } catch (error) {
-      const reviewMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.reviewMessage) ||
-        error.reviewMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(reviewMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );

@@ -22,7 +22,8 @@ const getCoupons = asyncHandler(async (req, res) => {
 const validateCoupon = asyncHandler(async (req, res) => {
   const coupon = await Coupon.findOne({ couponCode: req.body.couponCode });
   if (!coupon) {
-    return res.status(200).json("notFound");
+    res.status(400);
+    throw new Error("Coupon code is not valid");
   }
 
   const couponCount = await Couponlog.find({
@@ -39,23 +40,33 @@ const validateCoupon = asyncHandler(async (req, res) => {
   const expiryDate = moment(coupon.expiryDate);
 
   if (startDate > currentDate) {
-    return res.status(200).json("notFound");
+    // return res.status(200).json("notFound");
+    res.status(400);
+    throw new Error("Coupon not yet valid");
   }
 
   if (currentDate >= expiryDate) {
-    return res.status(200).json("expired");
+    // return res.status(200).json("expired");
+    res.status(400);
+    throw new Error("Coupon expired");
   }
 
   if (coupon.requiredAmount > req.body.subtotal) {
-    return res.status(200).json("requiredAmountError");
+    // return res.status(200).json("requiredAmountError");
+    res.status(400);
+    throw new Error("Required amount not met");
   }
 
   if (existingCoupon > 0) {
-    return res.status(200).json("existingCoupon");
+    // return res.status(200).json("existingCoupon");
+    res.status(400);
+    throw new Error("Coupon already used");
   }
 
   if (couponCount > coupon.limit) {
-    return res.status(200).json("limitError");
+    // return res.status(200).json("limitError");
+    res.status(400);
+    throw new Error("Coupon limit exceeded");
   }
 
   res.status(200).json(coupon);
@@ -86,7 +97,7 @@ const setCoupon = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Coupon Code already exists.");
   }
-  
+
   // If Coupon does not exist then create.
   const coupon = await Coupon.create({
     couponCode: req.body.couponCode,

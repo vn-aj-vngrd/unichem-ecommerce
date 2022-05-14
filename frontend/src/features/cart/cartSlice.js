@@ -18,13 +18,13 @@ export const setCart = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.setCart(cartData, token);
     } catch (error) {
-      const cartcartMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.cartcartMessage) ||
-        error.cartcartMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartcartMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -37,13 +37,13 @@ export const getCarts = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.getCarts(token);
     } catch (error) {
-      const cartcartMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.cartcartMessage) ||
-        error.cartcartMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartcartMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -56,13 +56,13 @@ export const updateCart = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.updateCart(cartParams, token);
     } catch (error) {
-      const cartcartMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.cartcartMessage) ||
-        error.cartcartMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartcartMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -75,13 +75,13 @@ export const deleteCart = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.deleteCart(id, token);
     } catch (error) {
-      const cartcartMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.cartcartMessage) ||
-        error.cartcartMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartcartMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -94,13 +94,13 @@ export const deleteAllCart = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await cartService.deleteAllCart(userID, token);
     } catch (error) {
-      const cartcartMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.cartcartMessage) ||
-        error.cartcartMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartcartMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
