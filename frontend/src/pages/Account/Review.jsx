@@ -7,14 +7,14 @@ import ProfileReviews from "../../components/ProfileReviews";
 
 const Review = () => {
   const navigate = useNavigate();
-  const { user, isLoggedIn } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.title = "Unichem Store | Reviews";
-    if (!isLoggedIn) {
+    if (!localStorage.getItem("user")) {
       navigate("/login");
     }
-  }, [isLoggedIn, navigate]);
+  }, [user, navigate]);
 
   return (
     <>
