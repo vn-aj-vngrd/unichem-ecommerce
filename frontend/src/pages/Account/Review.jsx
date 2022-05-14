@@ -11,7 +11,7 @@ const Review = () => {
 
   useEffect(() => {
     document.title = "Unichem Store | Reviews";
-    if (!user) {
+    if (!localStorage.getItem("user")) {
       navigate("/login");
     }
   }, [user, navigate]);

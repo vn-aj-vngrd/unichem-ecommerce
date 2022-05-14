@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { injectStyle } from "react-toastify/dist/inject-style";
-import { getUser, resetUser, logout } from "./features/auth/authSlice";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -13,6 +12,7 @@ import Spinner from "./components/Spinner";
 import Messenger from "./components/Messenger";
 import AutoScrollToTop from "./components/AutoScrollToTop";
 import ScrollToTop from "react-scroll-to-top";
+import VerifyAuth from "./components/VerifyAuth";
 
 import Home from "./pages/Store/Home";
 import Products from "./pages/Product/Products";
@@ -51,37 +51,21 @@ import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
 // import "./assets/css/Store.css"
 
 export const App = () => {
-  const { user, isAuthError } = useSelector((state) => state.auth);
-  const { isCartError } = useSelector((state) => state.cart);
-  const { isWishlistError } = useSelector((state) => state.wishlist);
   const [isLoading, setIsLoading] = useState(true);
+  const { user } = useSelector((state) => state.auth);
 
   const handleLoading = () => {
     setIsLoading(false);
   };
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   injectStyle();
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      dispatch(getUser());
-    }
-
-    if (isAuthError) {
-      navigate("/");
-      window.location.reload(false);
-      dispatch(logout());
-    }
-
     window.addEventListener("load", handleLoading);
     return () => {
       window.removeEventListener("load", handleLoading);
-      dispatch(resetUser());
     };
-  }, [dispatch, isAuthError, navigate, isCartError, isWishlistError]);
+  }, []);
 
   return !isLoading ? (
     <>
@@ -107,6 +91,7 @@ export const App = () => {
         pauseOnHover
       />
       <Navbar userType={user ? user.userType : "customer"} />
+
       {user ? (
         user.userType === "customer" ? (
           <>
@@ -231,6 +216,7 @@ export const App = () => {
           </>
         </>
       )}
+      <VerifyAuth />
     </>
   ) : (
     <>

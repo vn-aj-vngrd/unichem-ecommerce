@@ -23,17 +23,16 @@ const Navbar = ({ userType }) => {
   let username = "";
 
   useEffect(() => {
-    if (user && user.userType === "customer") {
+    if (localStorage.getItem("user") && userType === "customer") {
       dispatch(getWishlists());
       dispatch(getCarts());
 
       return () => {
-        dispatch(resetUser());
         dispatch(resetWishlist());
         dispatch(resetCart());
       };
     }
-  }, [user, dispatch]);
+  }, [userType, dispatch]);
 
   let wishlistCount = 0;
   let cartCount = 0;

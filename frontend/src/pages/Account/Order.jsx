@@ -11,10 +11,10 @@ const Order = () => {
 
   useEffect(() => {
     document.title = "Unichem Store | Orders";
-    if (!user) {
+    if (!localStorage.getItem("user")) {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
   return (
     <>

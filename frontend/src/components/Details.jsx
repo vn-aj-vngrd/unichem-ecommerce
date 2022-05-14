@@ -53,7 +53,7 @@ const Details = ({ product }) => {
   useEffect(() => {
     if (isCartError) {
       Swal.fire({
-        title: "Can't add to Cart",
+        title: "Failed",
         icon: "error",
         text: cartMessage,
       });
@@ -61,7 +61,7 @@ const Details = ({ product }) => {
 
     if (isWishlistError) {
       Swal.fire({
-        title: "Can't add to Wishlist",
+        title: "Failed",
         icon: "error",
         text: wishlistMessage,
         confirmButtonColor: "#f44336",

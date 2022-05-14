@@ -10,24 +10,24 @@ import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
 import WishlistRow from "../../components/WishlistRow";
 import WishlistSummary from "../../components/WishlistSummary";
+import { toast } from "react-toastify";
 
 const Wishlist = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth);
   const { wishlists, isWishlistLoading, isWishlistError, wishlistMessage } =
     useSelector((state) => state.wishlist);
 
   useEffect(() => {
     document.title = "Unichem Store | Wishlist";
 
-    if (!user) {
+    if (!localStorage.getItem("user")) {
       navigate("/login");
     }
 
     if (isWishlistError) {
-      // console.log(wishlistMessage);
+      toast.error(wishlistMessage);
     }
 
     dispatch(getWishlists());
@@ -36,7 +36,7 @@ const Wishlist = () => {
       dispatch(resetCart());
       dispatch(resetWishlist());
     };
-  }, [user, navigate, isWishlistError, wishlistMessage, dispatch]);
+  }, [navigate, isWishlistError, wishlistMessage, dispatch]);
 
   return (
     <>

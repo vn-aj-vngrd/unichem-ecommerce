@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
 import Spinner from "../../components/Spinner";
-const moment = require("moment");
 
 const Checkout = () => {
   let itemSubtotal = 0;
@@ -29,7 +28,7 @@ const Checkout = () => {
 
   const { user } = useSelector((state) => state.auth);
   const { carts, isCartLoading } = useSelector((state) => state.cart);
-  const { isOrderAdded, isOrderError } = useSelector((state) => state.orders);
+  const { isOrderAdded, isOrderError, orderMessage } = useSelector((state) => state.orders);
   const { coupons, couponError, isCouponSuccess, isCouponLoading } =
     useSelector((state) => state.coupons);
 
@@ -70,7 +69,7 @@ const Checkout = () => {
       Swal.fire({
         title: "Failed to Checkout",
         icon: "error",
-        text: "There is a problem with your order process, please try again.",
+        text: orderMessage,
       });
       navigate("/cart");
     }
@@ -193,6 +192,7 @@ const Checkout = () => {
     isOrderAdded,
     isOrderError,
     couponError,
+    orderMessage,
     dispatch,
   ]);
 

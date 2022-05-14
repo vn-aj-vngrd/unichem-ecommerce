@@ -13,6 +13,7 @@ const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
 const Mailgen = require("mailgen");
 const fs = require("fs");
+const moment = require("moment");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -240,8 +241,8 @@ const getUsers = asyncHandler(async (req, res) => {
 // @route   GET /api/users/getUser/:id
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
-  // console.log(req);
-  console.log(req.params);
+  // console.log(req.params);
+
   if (!req.user) {
     res.status(400);
     throw new Error("Access Denied");
@@ -254,6 +255,10 @@ const getUser = asyncHandler(async (req, res) => {
   }
 
   const userAddress = await Address.findOne({ userID: user._id });
+
+  // const userToken = jwt.decode(req.params.token);
+  // console.log(userToken);
+
   res.status(200).json({
     _id: user._id,
     name: user.name,
@@ -589,7 +594,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
 
 // Generate JWT Token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id, created: moment() }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 };

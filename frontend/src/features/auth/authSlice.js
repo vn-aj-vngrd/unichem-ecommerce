@@ -9,6 +9,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
+  isAuthLoading: false,
   isAuthError: false,
   isAuthSuccess: false,
   isAccountRecovered: false,
@@ -236,6 +237,7 @@ export const authSlice = createSlice({
       state.users = [];
       state.isAuthError = false;
       state.isAuthSuccess = false;
+      state.isAuthLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -349,15 +351,15 @@ export const authSlice = createSlice({
       })
       // Get user Case
       .addCase(getUser.pending, (state) => {
-        state.isLoading = true;
+        state.isAuthLoading = true;
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isAuthLoading = false;
         state.isAuthSuccess = true;
         state.user = action.payload;
       })
       .addCase(getUser.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isAuthLoading = false;
         state.isAuthError = true;
         state.message = action.payload;
         state.user = null;
