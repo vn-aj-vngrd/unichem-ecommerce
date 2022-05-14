@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { injectStyle } from "react-toastify/dist/inject-style";
-import { getUser, resetUser } from "./features/auth/authSlice";
+import { getUser, resetUser, logout } from "./features/auth/authSlice";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -51,12 +51,10 @@ import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
 // import "./assets/css/Store.css"
 
 export const App = () => {
-  const { user, authError } = useSelector((state) => state.auth);
+  const { user, isAuthError } = useSelector((state) => state.auth);
   const { isCartError } = useSelector((state) => state.cart);
   const { isWishlistError } = useSelector((state) => state.wishlist);
-  const [userTypeData, setUserType] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isGetUser, setIsGetUser] = useState(false);
 
   const handleLoading = () => {
     setIsLoading(false);
@@ -68,26 +66,14 @@ export const App = () => {
   injectStyle();
 
   useEffect(() => {
-    if (authError || isCartError || isWishlistError) {
-      window.location.reload(false);
-      // navigate("/");
-    }
-
-    console.log(user);
-
-    setUserType({ userType: "customer" });
-
-    if (user && !isGetUser) {
-      setIsGetUser(true);
+    if (localStorage.getItem("user")) {
       dispatch(getUser());
     }
 
-    if (user && user.userType === "admin") {
-      setUserType({ userType: "admin" });
-    }
-
-    if (!user) {
-      localStorage.clear();
+    if (isAuthError) {
+      navigate("/");
+      window.location.reload(false);
+      dispatch(logout());
     }
 
     window.addEventListener("load", handleLoading);
@@ -95,21 +81,17 @@ export const App = () => {
       window.removeEventListener("load", handleLoading);
       dispatch(resetUser());
     };
-  }, [
-    user,
-    dispatch,
-    authError,
-    navigate,
-    isGetUser,
-    isCartError,
-    isWishlistError,
-  ]);
+  }, [dispatch, isAuthError, navigate, isCartError, isWishlistError]);
 
   return !isLoading ? (
     <>
       <Helmet>
         <style>
-          {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
+          {user
+            ? user.userType === "customer"
+              ? StoreCSS
+              : AdminCSS
+            : StoreCSS}
         </style>
       </Helmet>
       <AutoScrollToTop />
@@ -124,73 +106,129 @@ export const App = () => {
         draggable
         pauseOnHover
       />
-      <Navbar userType={userTypeData.userType} />
-      {userTypeData.userType === "customer" ? (
-        <>
-          {/* Store Routes */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="products/category/:categoryName"
-              element={<Products />}
+      <Navbar userType={user ? user.userType : "customer"} />
+      {user ? (
+        user.userType === "customer" ? (
+          <>
+            {/* Store Routes */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="products/category/:categoryName"
+                element={<Products />}
+              />
+              <Route
+                path="products/product/:productName"
+                element={<Products />}
+              />
+              <Route path="products/brand/:brandName" element={<Products />} />
+              <Route path="product-details/:id" element={<ProductDetails />} />
+              <Route path="about" element={<About />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="account/address" element={<Address />} />
+              <Route path="account/profile" element={<Profile />} />
+              <Route path="account/orders" element={<Order />} />
+              <Route path="order-details/:id" element={<OrderDetails />} />
+              <Route path="account/reviews" element={<Review />} />
+              <Route path="cart/checkout" element={<Checkout />} />
+              <Route path="faq" element={<Faq />} />
+              <Route
+                path="users/:id/verify/:token"
+                element={<Verification />}
+              />
+              <Route path="users/:id/recover/:token" element={<Recovery />} />
+              <Route path="recover-account" element={<ForgotPassword />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            {/* Enable Live Chat in Deployment */}
+            <Messenger />
+            <Footer userType={user ? user.userType : "customer"} />
+            <ScrollToTop
+              smooth="true"
+              color="#f44336"
+              viewBox="0 0 256 256"
+              width="20"
+              height="20"
+              style={{ left: "2rem", right: "auto", bottom: "2rem" }}
             />
-            <Route
-              path="products/product/:productName"
-              element={<Products />}
+          </>
+        ) : (
+          <>
+            {/* Admin Routes */}
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="login" element={<Login />} />
+              <Route path="users" element={<ManageUsers />} />
+              <Route path="orders" element={<ManageOrders />} />
+              <Route path="products" element={<ManageProducts />} />
+              <Route path="promotions" element={<ManagePromotions />} />
+              <Route path="coupons" element={<ManageCoupons />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            <ScrollToTop
+              smooth="true"
+              color="#f44336"
+              viewBox="0 0 256 256"
+              width="20"
+              height="20"
+              style={{ right: "2rem", left: "auto", bottom: "2rem" }}
             />
-            <Route path="products/brand/:brandName" element={<Products />} />
-            <Route path="product-details/:id" element={<ProductDetails />} />
-            <Route path="about" element={<About />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="wishlist" element={<Wishlist />} />
-            <Route path="account/address" element={<Address />} />
-            <Route path="account/profile" element={<Profile />} />
-            <Route path="account/orders" element={<Order />} />
-            <Route path="order-details/:id" element={<OrderDetails />} />
-            <Route path="account/reviews" element={<Review />} />
-            <Route path="cart/checkout" element={<Checkout />} />
-            <Route path="faq" element={<Faq />} />
-            <Route path="users/:id/verify/:token" element={<Verification />} />
-            <Route path="users/:id/recover/:token" element={<Recovery />} />
-            <Route path="recover-account" element={<ForgotPassword />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          {/* Enable Live Chat in Deployment */}
-          <Messenger />
-          <Footer userType={userTypeData.userType} />
-          <ScrollToTop
-            smooth="true"
-            color="#f44336"
-            viewBox="0 0 256 256"
-            width="20"
-            height="20"
-            style={{ left: "2rem", right: "auto", bottom: "2rem" }}
-          />
-        </>
+          </>
+        )
       ) : (
         <>
-          {/* Admin Routes */}
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="users" element={<ManageUsers />} />
-            <Route path="orders" element={<ManageOrders />} />
-            <Route path="products" element={<ManageProducts />} />
-            <Route path="promotions" element={<ManagePromotions />} />
-            <Route path="coupons" element={<ManageCoupons />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          <ScrollToTop
-            smooth="true"
-            color="#f44336"
-            viewBox="0 0 256 256"
-            width="20"
-            height="20"
-            style={{ right: "2rem", left: "auto", bottom: "2rem" }}
-          />
+          <>
+            {/* Store Routes */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="products/category/:categoryName"
+                element={<Products />}
+              />
+              <Route
+                path="products/product/:productName"
+                element={<Products />}
+              />
+              <Route path="products/brand/:brandName" element={<Products />} />
+              <Route path="product-details/:id" element={<ProductDetails />} />
+              <Route path="about" element={<About />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="account/address" element={<Address />} />
+              <Route path="account/profile" element={<Profile />} />
+              <Route path="account/orders" element={<Order />} />
+              <Route path="order-details/:id" element={<OrderDetails />} />
+              <Route path="account/reviews" element={<Review />} />
+              <Route path="cart/checkout" element={<Checkout />} />
+              <Route path="faq" element={<Faq />} />
+              <Route
+                path="users/:id/verify/:token"
+                element={<Verification />}
+              />
+              <Route path="users/:id/recover/:token" element={<Recovery />} />
+              <Route path="recover-account" element={<ForgotPassword />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            {/* Enable Live Chat in Deployment */}
+            <Messenger />
+            <Footer userType={user ? user.userType : "customer"} />
+            <ScrollToTop
+              smooth="true"
+              color="#f44336"
+              viewBox="0 0 256 256"
+              width="20"
+              height="20"
+              style={{ left: "2rem", right: "auto", bottom: "2rem" }}
+            />
+          </>
         </>
       )}
     </>
@@ -198,7 +236,11 @@ export const App = () => {
     <>
       <Helmet>
         <style>
-          {userTypeData.userType === "customer" ? StoreCSS : AdminCSS}
+          {user
+            ? user.userType === "customer"
+              ? StoreCSS
+              : AdminCSS
+            : StoreCSS}
         </style>
       </Helmet>
       <Spinner globalSpinner="true" />

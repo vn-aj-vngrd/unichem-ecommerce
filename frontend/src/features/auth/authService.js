@@ -82,14 +82,11 @@ const getUser = async (token) => {
     },
   };
 
-  console.log(token);
-
   const response = await axios.get(
     API_URL + "getUser/" + token,
     config
   );
 
-  localStorage.clear();
   if (response.data && response.data.token) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }

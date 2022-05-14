@@ -55,7 +55,7 @@ const Details = ({ product }) => {
       Swal.fire({
         title: "Can't add to Cart",
         icon: "error",
-        text: "You may have exceed your purchase limit.",
+        text: cartMessage,
       });
     }
 
@@ -63,7 +63,7 @@ const Details = ({ product }) => {
       Swal.fire({
         title: "Can't add to Wishlist",
         icon: "error",
-        text: "Item is already in your wishlist.",
+        text: wishlistMessage,
         confirmButtonColor: "#f44336",
       });
     }
