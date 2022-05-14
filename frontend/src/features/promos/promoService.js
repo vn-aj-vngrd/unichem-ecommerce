@@ -59,7 +59,7 @@ const deletePromo = async (id, token) => {
     },
   };
 
-  const response = await axios.delete(API_URL + id.id, config);
+  const response = await axios.delete(API_URL + id, config);
 
   return response.data;
 };

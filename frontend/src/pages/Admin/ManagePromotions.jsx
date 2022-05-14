@@ -24,9 +24,15 @@ const ManagePromotions = () => {
     document.title = "Unichem Store | Promotions";
   });
 
-  const { promos, isPromoLoading, isPromoError, promoMessage, isPromoDeleted, isPromoUpdated, isPromoCreated } = useSelector(
-    (state) => state.promos
-  );
+  const {
+    promos,
+    isPromoLoading,
+    isPromoError,
+    promoMessage,
+    isPromoDeleted,
+    isPromoUpdated,
+    isPromoCreated,
+  } = useSelector((state) => state.promos);
 
   useEffect(() => {
     if (isPromoError) {
@@ -50,7 +56,14 @@ const ManagePromotions = () => {
     return () => {
       dispatch(resetPromo());
     };
-  }, [isPromoError, promoMessage, isPromoDeleted, isPromoUpdated, isPromoCreated, dispatch]);
+  }, [
+    isPromoError,
+    promoMessage,
+    isPromoDeleted,
+    isPromoUpdated,
+    isPromoCreated,
+    dispatch,
+  ]);
 
   console.log(promos);
 
@@ -78,7 +91,7 @@ const ManagePromotions = () => {
     //   promo._id,
     //   promo.promoName
     // );
-    temp.push(promo._id);
+    temp.push(promo._id, promo.promoName);
 
     promo.description.length > maxLength
       ? temp.push(promo.description.substr(0, maxLength).concat("..."))
@@ -90,7 +103,7 @@ const ManagePromotions = () => {
       moment(promo.updatedAt).format("llll"),
       moment(promo.createdAt).format("llll"),
       <ViewPromotion promo={promo} />,
-      <UpdatePromotion promo={promo} />,
+      <UpdatePromotion promo={promo} />
     );
 
     data.push(temp);
@@ -103,8 +116,7 @@ const ManagePromotions = () => {
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        dispatch(deletePromo(data[item.dataIndex][1]));
-        toast.success("Promotion deleted successfully");
+        dispatch(deletePromo(data[item.dataIndex][0]));
       });
     },
   };
