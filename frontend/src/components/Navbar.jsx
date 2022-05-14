@@ -10,6 +10,11 @@ import {
 import { getCarts, resetCart } from "../features/cart/cartSlice";
 import logo from "../assets/images/logo.svg";
 import { toast } from "react-toastify";
+import { EncryptStorage } from "encrypt-storage";
+
+export const encryptStorage = new EncryptStorage("secret-key", {
+  storageType: "sessionStorage",
+});
 
 const Navbar = ({ userType }) => {
   const navigate = useNavigate();
@@ -38,8 +43,8 @@ const Navbar = ({ userType }) => {
   let cartCount = 0;
 
   if (user) {
-    wishlistCount = localStorage.getItem("wishlistCount");
-    cartCount = localStorage.getItem("cartCount");
+    wishlistCount = encryptStorage.getItem("w-cnt");
+    cartCount = encryptStorage.getItem("c-cnt");
     username = user.name ? user.name.split(" ")[0] : "";
   }
 

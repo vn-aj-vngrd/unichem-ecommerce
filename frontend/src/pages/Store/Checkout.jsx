@@ -56,11 +56,14 @@ const Checkout = () => {
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
-    if (!localStorage.getItem("user")) {
+    if (!sessionStorage.getItem("token")) {
       navigate("/");
     }
 
-    if (localStorage.getItem("user") && localStorage.getItem("cartCount") < 1) {
+    if (
+      !sessionStorage.getItem("token") &&
+      !sessionStorage.getItem("c-cnt") < 1
+    ) {
       Swal.fire({
         title: "Failed to Checkout",
         icon: "error",
@@ -643,29 +646,29 @@ const Checkout = () => {
                                 <ul>
                                   <li className="address-header">
                                     <h6>
-                                      {
-                                        user && user.address[user.primaryAddress]
-                                          .addressName
-                                      }
+                                      {user &&
+                                        user.address[user.primaryAddress]
+                                          .addressName}
                                     </h6>
                                   </li>
                                   <li>
                                     <p>
                                       <b>Phone:</b>
-                                      {
-                                        user && user.address[user.primaryAddress]
-                                          .phoneNumber
-                                      }
+                                      {user &&
+                                        user.address[user.primaryAddress]
+                                          .phoneNumber}
                                     </p>
                                   </li>
                                   <li>
                                     <p>
                                       <b>Address:</b>
                                       {`${
-                                        user && user.address[user.primaryAddress]
+                                        user &&
+                                        user.address[user.primaryAddress]
                                           .address1
                                       } ${
-                                        user && user.address[user.primaryAddress]
+                                        user &&
+                                        user.address[user.primaryAddress]
                                           .address2
                                       }`}
                                     </p>
@@ -673,10 +676,9 @@ const Checkout = () => {
                                   <li>
                                     <p>
                                       <b>Postal Code:</b>
-                                      {
-                                        user && user.address[user.primaryAddress]
-                                          .postalCode
-                                      }
+                                      {user &&
+                                        user.address[user.primaryAddress]
+                                          .postalCode}
                                     </p>
                                   </li>
 

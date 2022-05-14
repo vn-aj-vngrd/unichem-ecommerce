@@ -1,4 +1,9 @@
 import axios from "axios";
+import { EncryptStorage } from 'encrypt-storage';
+
+export const encryptStorage = new EncryptStorage('secret-key', {
+  storageType: 'sessionStorage',
+});
 
 const API_URL = "/api/users/";
 
@@ -14,7 +19,8 @@ const login = async (userData) => {
   const response = await axios.post(API_URL + "login", userData);
 
   if (response.data && response.data.token) {
-    localStorage.setItem("user", JSON.stringify(response.data));
+    encryptStorage.setItem('token', response.data);
+    // localStorage.setItem("user", JSON.stringify(response.data));
   }
 
   return response.data;
@@ -68,7 +74,8 @@ const updateUser = async (userData, token) => {
   const response = await axios.put(API_URL + "updateUser", userData, config);
 
   if (response.data && response.data.token) {
-    localStorage.setItem("user", JSON.stringify(response.data.user));
+    encryptStorage.setItem('token', response.data);
+    // localStorage.setItem("user", JSON.stringify(response.data.user));
   }
 
   return response.data;
@@ -88,7 +95,8 @@ const getUser = async (token) => {
   );
 
   if (response.data && response.data.token) {
-    localStorage.setItem("user", JSON.stringify(response.data));
+    encryptStorage.setItem('token', response.data);
+    // localStorage.setItem("user", JSON.stringify(response.data));
   }
 
   return response.data;
@@ -122,7 +130,7 @@ const deleteUser = async (id, token) => {
 
 // Logout user
 const logout = () => {
-  localStorage.clear();
+  sessionStorage.clear();
 };
 
 // Update admin password

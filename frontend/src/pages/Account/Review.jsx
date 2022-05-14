@@ -12,7 +12,7 @@ const Review = () => {
   useEffect(() => {
     document.title = "Unichem Store | Reviews";
 
-    if (!localStorage.getItem("user")) {
+    if (!sessionStorage.getItem("token")) {
       navigate("/login");
     }
   }, [navigate]);

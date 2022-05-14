@@ -1,12 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+import { EncryptStorage } from "encrypt-storage";
+
+export const encryptStorage = new EncryptStorage("secret-key", {
+  storageType: "sessionStorage",
+});
 
 // Get user from localStorage
-const user = JSON.parse(localStorage.getItem("user"));
+// const user = JSON.parse(localStorage.getItem("user"));
+const sessionUser = encryptStorage.getItem("token");
 
 const initialState = {
-  user: user ? user : null,
-  isLoggedIn: user ? true : false,
+  user: sessionUser ? sessionUser : null,
   isError: false,
   isSuccess: false,
   isLoading: false,

@@ -22,7 +22,7 @@ const Wishlist = () => {
   useEffect(() => {
     document.title = "Unichem Store | Wishlist";
 
-    if (!localStorage.getItem("user")) {
+    if (!sessionStorage.getItem("token")) {
       navigate("/login");
     }
 

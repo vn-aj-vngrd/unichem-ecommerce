@@ -11,7 +11,7 @@ const Order = () => {
 
   useEffect(() => {
     document.title = "Unichem Store | Orders";
-    if (!localStorage.getItem("user")) {
+    if (!sessionStorage.getItem("token")) {
       navigate("/login");
     }
   }, [navigate]);

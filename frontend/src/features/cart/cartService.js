@@ -1,4 +1,9 @@
 import axios from "axios";
+import { EncryptStorage } from "encrypt-storage";
+
+export const encryptStorage = new EncryptStorage("secret-key", {
+  storageType: "sessionStorage",
+});
 
 const API_URL = "/api/carts/";
 
@@ -14,7 +19,8 @@ const setCart = async (cartData, token) => {
 
   const count = await axios.get(API_URL, config);
   if (count.data) {
-    localStorage.setItem("cartCount", JSON.stringify(count.data.length));
+    encryptStorage.setItem("c-cnt", count.data.length);
+    // localStorage.setItem("cartCount", JSON.stringify(count.data.length));
   }
 
   // console.log(response.data);
@@ -34,7 +40,8 @@ const getCarts = async (token) => {
   // console.log(response.data);
 
   if (response.data) {
-    localStorage.setItem("cartCount", JSON.stringify(response.data.length));
+    // localStorage.setItem("cartCount", JSON.stringify(response.data.length));
+    encryptStorage.setItem("c-cnt", response.data.length);
   }
 
   return response.data;
@@ -69,6 +76,7 @@ const deleteCart = async (cartId, token) => {
   const count = await axios.get(API_URL, config);
   if (count.data) {
     localStorage.setItem("cartCount", JSON.stringify(count.data.length));
+    encryptStorage.setItem("c-cnt", count.data.length);
   }
 
   return response.data;
@@ -88,7 +96,7 @@ const deleteAllCart = async (userID, token) => {
   );
   // console.log(response.data);
 
-  localStorage.setItem("cartCount", "0");
+  encryptStorage.setItem("c-cnt", 0);
 
   return response.data;
 };
