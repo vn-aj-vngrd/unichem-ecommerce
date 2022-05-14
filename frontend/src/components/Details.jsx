@@ -249,7 +249,10 @@ const Details = ({ product }) => {
                           <i className="lni lni-delivery"></i>Sold:{" "}
                           {product.market.sold}
                         </div>
-                        <Star star={1} reviews={1} />
+                        <Star
+                          star={product.market.averageRatings}
+                          reviews={product.market.reviewsCount}
+                        />
                       </div>
 
                       {product._doc.quantities[value] === 1 && (
