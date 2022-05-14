@@ -7,14 +7,15 @@ import UserProfile from "../../components/UserProfile";
 
 const Manage = () => {
   const navigate = useNavigate();
-  const { user, isLoggedIn } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.title = "Unichem Store | Profile";
-    if (!isLoggedIn) {
+
+    if (!localStorage.getItem("user")) {
       navigate("/login");
     }
-  }, [isLoggedIn, navigate]);
+  }, [navigate]);
 
   return (
     <>

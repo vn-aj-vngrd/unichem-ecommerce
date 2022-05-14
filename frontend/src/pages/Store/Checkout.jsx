@@ -26,7 +26,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoggedIn } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const { carts, isCartLoading } = useSelector((state) => state.cart);
   const { isOrderAdded, isOrderError, orderMessage } = useSelector(
     (state) => state.orders
@@ -56,8 +56,18 @@ const Checkout = () => {
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
-    if (!isLoggedIn) {
+    if (!localStorage.getItem("user")) {
       navigate("/");
+    }
+
+    if (localStorage.getItem("user") && localStorage.getItem("cartCount") < 1) {
+      Swal.fire({
+        title: "Failed to Checkout",
+        icon: "error",
+        text: "You don't have any items in your cart.",
+        confirmButtonColor: "#f44336",
+      });
+      navigate("/cart");
     }
 
     dispatch(getCarts());
@@ -139,7 +149,6 @@ const Checkout = () => {
       dispatch(resetCoupon());
     };
   }, [
-    isLoggedIn,
     coupons,
     isCouponSuccess,
     orderDiscount,
@@ -152,16 +161,6 @@ const Checkout = () => {
     couponMessage,
     dispatch,
   ]);
-
-  if (localStorage.getItem("cartCount") < 1) {
-    Swal.fire({
-      title: "Failed to Checkout",
-      icon: "error",
-      text: "You don't have any items in your cart.",
-      confirmButtonColor: "#f44336",
-    });
-    navigate("/cart");
-  }
 
   const checked = carts.reduce((count, cart) => {
     if (cart._doc.checked) {
@@ -645,7 +644,7 @@ const Checkout = () => {
                                   <li className="address-header">
                                     <h6>
                                       {
-                                        user.address[user.primaryAddress]
+                                        user && user.address[user.primaryAddress]
                                           .addressName
                                       }
                                     </h6>
@@ -654,7 +653,7 @@ const Checkout = () => {
                                     <p>
                                       <b>Phone:</b>
                                       {
-                                        user.address[user.primaryAddress]
+                                        user && user.address[user.primaryAddress]
                                           .phoneNumber
                                       }
                                     </p>
@@ -663,10 +662,10 @@ const Checkout = () => {
                                     <p>
                                       <b>Address:</b>
                                       {`${
-                                        user.address[user.primaryAddress]
+                                        user && user.address[user.primaryAddress]
                                           .address1
                                       } ${
-                                        user.address[user.primaryAddress]
+                                        user && user.address[user.primaryAddress]
                                           .address2
                                       }`}
                                     </p>
@@ -675,7 +674,7 @@ const Checkout = () => {
                                     <p>
                                       <b>Postal Code:</b>
                                       {
-                                        user.address[user.primaryAddress]
+                                        user && user.address[user.primaryAddress]
                                           .postalCode
                                       }
                                     </p>

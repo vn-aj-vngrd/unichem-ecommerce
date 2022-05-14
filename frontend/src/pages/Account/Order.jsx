@@ -7,14 +7,14 @@ import ProfilePurchase from "../../components/ProfilePurchase";
 
 const Order = () => {
   const navigate = useNavigate();
-  const { user, isLoggedIn } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.title = "Unichem Store | Orders";
-    if (!isLoggedIn) {
+    if (!localStorage.getItem("user")) {
       navigate("/login");
     }
-  }, [isLoggedIn, navigate]);
+  }, [navigate]);
 
   return (
     <>
