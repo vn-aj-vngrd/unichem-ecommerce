@@ -55,7 +55,7 @@ const ManagePromotions = () => {
   console.log(promos);
 
   const columns = [
-    "Promo Image",
+    // "Promo Image",
     "Promo ID",
     "Promo Name",
     "Description",
@@ -73,11 +73,12 @@ const ManagePromotions = () => {
     console.log(promo);
     let temp = [];
 
-    temp.push(
-      <RowImage src={promo.image} alt={promo.promoName} />,
-      promo._id,
-      promo.promoName
-    );
+    // temp.push(
+    //   <RowImage src={promo.image} alt={promo.promoName} />,
+    //   promo._id,
+    //   promo.promoName
+    // );
+    temp.push(promo._id);
 
     promo.description.length > maxLength
       ? temp.push(promo.description.substr(0, maxLength).concat("..."))

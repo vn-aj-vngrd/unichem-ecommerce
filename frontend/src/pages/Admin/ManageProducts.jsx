@@ -52,17 +52,17 @@ const ManageProducts = () => {
   }, [isProductError, productMessage, isProductDeleted, isProductUpdated, isProductCreated, dispatch]);
 
   const columns = [
-    "Product Image",
+    // "Product Image",
     "ProductID",
     "Name",
     "Brand",
     "Category",
-    "Specifications",
+    // "Specifications",
     "Types",
     "Description",
-    "Quantities",
-    "Prices",
-    "Sale Prices",
+    // "Quantities",
+    // "Prices",
+    // "Sale Prices",
     "Sale",
     "Sale Percent",
     "Featured",
@@ -78,28 +78,28 @@ const ManageProducts = () => {
     products.forEach((product) => {
       console.log(product.images);
       let temp = [];
-      temp.push(
-        <RowImage src={product._doc.images[0]} alt={product._doc.productName} />
-      );
+      // temp.push(
+      //   <RowImage src={product._doc.images[0]} alt={product._doc.productName} />
+      // );
       temp.push(product._doc._id);
       temp.push(product._doc.productName);
       temp.push(product._doc.brand);
       temp.push(product._doc.category);
-      temp.push(product._doc.specifications.toString().split(",").join(", "));
+      // temp.push(product._doc.specifications.toString().split(",").join(", "));
       temp.push(product._doc.types.toString().split(",").join(", "));
       product._doc.description.length > maxLength
         ? temp.push(product._doc.description.substr(0, maxLength).concat("..."))
         : temp.push(product._doc.description.substr(0, maxLength));
-      temp.push(product._doc.quantities.toString().split(",").join(", "));
-      temp.push(product._doc.prices.toString().split(",").join(", "));
-      let tempSalePrices = [];
-      for (let i = 0; i < product._doc.prices.length; i++) {
-        tempSalePrices.push(
-          product._doc.prices[i] -
-            (product._doc.prices[i] * product._doc.salePercent) / 100
-        );
-      }
-      temp.push(tempSalePrices.toString().split(",").join(", "));
+      // temp.push(product._doc.quantities.toString().split(",").join(", "));
+      // temp.push(product._doc.prices.toString().split(",").join(", "));
+      // let tempSalePrices = [];
+      // for (let i = 0; i < product._doc.prices.length; i++) {
+      //   tempSalePrices.push(
+      //     product._doc.prices[i] -
+      //       (product._doc.prices[i] * product._doc.salePercent) / 100
+      //   );
+      // }
+      // temp.push(tempSalePrices.toString().split(",").join(", "));
       temp.push(product._doc.isSale ? "Yes" : "No");
 
       if (product._doc.salePercent) {
