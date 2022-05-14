@@ -8,7 +8,7 @@ const UpdatePromotion = (promo) => {
 
   const {
     register,
-    control,
+    // control,
     handleSubmit,
     watch,
     formState: { errors },

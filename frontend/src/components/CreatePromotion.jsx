@@ -7,7 +7,7 @@ const CreatePromotion = () => {
 
   const {
     register,
-    control,
+    // control,
     handleSubmit,
     watch,
     formState: { errors },

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import Star from "./Star";
+// import { useNavigate } from "react-router-dom";
+// import Star from "./Star";
 import Review from "./ReviewModal";
 
 const PurchasedProduct = ({ userID, userImage, orderLines, orderStatus }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   let subtotal = 0;
   console.log(orderLines)

@@ -90,8 +90,8 @@ export const App = () => {
         draggable
         pauseOnHover
       />
+      <VerifyAuth />
       <Navbar userType={user ? user.userType : "customer"} />
-
       {user ? (
         user.userType === "customer" ? (
           <>
@@ -216,7 +216,6 @@ export const App = () => {
           </>
         </>
       )}
-      <VerifyAuth />
     </>
   ) : (
     <>
