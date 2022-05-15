@@ -37,9 +37,9 @@ const Login = () => {
         message === "A new verification link has been sent to your email."
       ) {
         Swal.fire({
-          title: "Verify your Email",
+          title: "Email Verification",
           text: message,
-          icon: "warning",
+          icon: "success",
           confirmButtonColor: "#f44336",
           confirmButtonText: "Ok",
         });
@@ -69,7 +69,16 @@ const Login = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [user, isError, isSuccess, message, navigate, dispatch, reset, resetField]);
+  }, [
+    user,
+    isError,
+    isSuccess,
+    message,
+    navigate,
+    dispatch,
+    reset,
+    resetField,
+  ]);
 
   const onSubmit = (data) => {
     dispatch(login(data));

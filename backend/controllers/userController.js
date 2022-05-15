@@ -95,7 +95,7 @@ const registerUser = asyncHandler(async (req, res) => {
         },
       },
       outro:
-        "Need help, or have questions? Just reply to this email, we'd love to help.",
+        "Need help, or have questions? Just message us in the website's live chat.",
     },
   };
 
@@ -187,7 +187,7 @@ const loginUser = asyncHandler(async (req, res) => {
             },
           },
           outro:
-            "Need help, or have questions? Just reply to this email, we'd love to help.",
+            "Need help, or have questions? Just message us in the website's live chat.",
         },
       };
 
@@ -559,7 +559,7 @@ const createRecovery = asyncHandler(async (req, res) => {
           },
         },
         outro:
-          "Need help, or have questions? Just reply to this email, we'd love to help.",
+          "Need help, or have questions? Just message us in the website's live chat.",
       },
     };
 
