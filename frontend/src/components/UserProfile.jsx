@@ -402,7 +402,7 @@ const UserProfile = () => {
                                 : "",
                             }}
                           />
-                          {errorsPassword.password && (
+                          {errorsPassword.currentPassword && (
                             <p className="error-message">
                               ⚠ {errorsPassword.currentPassword.message}
                             </p>

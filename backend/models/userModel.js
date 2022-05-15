@@ -34,6 +34,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       required: [true, "User Verification is required."],
     },
+    passwordUpdatedAt: {
+      type: Date,
+      default: Date.now(),
+    },
   },
   {
     timestamps: true,

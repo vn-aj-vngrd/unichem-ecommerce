@@ -56,6 +56,7 @@ const Checkout = () => {
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
+    resetField("couponCode");
     if (!sessionStorage.getItem("token")) {
       navigate("/");
     }
@@ -163,6 +164,7 @@ const Checkout = () => {
     orderMessage,
     couponMessage,
     dispatch,
+    resetField,
   ]);
 
   const checked = carts.reduce((count, cart) => {
@@ -231,7 +233,6 @@ const Checkout = () => {
     };
 
     dispatch(validateCoupon(couponData));
-    resetField("couponCode");
   };
 
   const onSelectPayment = (e) => {

@@ -73,8 +73,8 @@ const updateUser = async (userData, token) => {
   };
   const response = await axios.put(API_URL + "updateUser", userData, config);
 
-  if (response.data && response.data.token) {
-    encryptStorage.setItem("token", response.data);
+  if (response.data.user && response.data.user.token) {
+    encryptStorage.setItem("token", response.data.user);
   }
 
   return response.data;
@@ -97,11 +97,9 @@ const getUser = async (token) => {
   }
 
   if (response.data.cartCount) {
-
   }
 
   if (response.data.wishlistCount) {
-  
   }
 
   return response.data;

@@ -258,11 +258,14 @@ const getUser = asyncHandler(async (req, res) => {
 
   const userToken = jwt.decode(req.params.token);
 
-  console.log(userToken);
+  // console.log(userToken);
 
-  console.log(userToken.iat, moment(user.updatedAt).unix());
+  console.log(
+    "IAT: " + userToken.iat,
+    "DB: " + moment(user.passwordUpdatedAt).unix()
+  );
 
-  if (userToken.iat < moment(user.updatedAt).unix()) {
+  if (userToken.iat < moment(user.passwordUpdatedAt).unix()) {
     console.log("expired");
     res.status(400);
     throw new Error("Token expired");
@@ -335,13 +338,18 @@ const updateUser = asyncHandler(async (req, res) => {
   let isPasswordUpdated = false;
   if (req.body.currentPassword) {
     if (await bcrypt.compare(req.body.currentPassword, user.password)) {
-      // hash the password using bcrypt
+      if (await bcrypt.compare(req.body.password, user.password)) {
+        res.status(400);
+        throw new Error("Password is the same as the current one");
+      }
+
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
       isPasswordUpdated = true;
+      user.passwordUpdatedAt = Date.now();
     } else {
       res.status(400);
-      throw new Error("Current password is incorrect.");
+      throw new Error("Current password is incorrect");
     }
   }
 
@@ -355,6 +363,7 @@ const updateUser = asyncHandler(async (req, res) => {
       userType: req.body.userType,
       password: req.body.password,
       image: tempImage,
+      passwordUpdatedAt: user.passwordUpdatedAt,
     },
     {
       new: true,

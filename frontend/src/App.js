@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { getUser, resetUser, logout } from "./features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
@@ -12,7 +14,7 @@ import Spinner from "./components/Spinner";
 import Messenger from "./components/Messenger";
 import AutoScrollToTop from "./components/AutoScrollToTop";
 import ScrollToTop from "react-scroll-to-top";
-import VerifyAuth from "./components/VerifyAuth";
+// import VerifyAuth from "./components/VerifyAuth";
 
 import Home from "./pages/Store/Home";
 import Products from "./pages/Product/Products";
@@ -52,7 +54,10 @@ import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { user } = useSelector((state) => state.auth);
+  const { user, isAuthError, message } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLoading = () => {
     setIsLoading(false);
@@ -61,11 +66,24 @@ export const App = () => {
   injectStyle();
 
   useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      dispatch(getUser());
+    }
+
+    if (isAuthError) {
+      console.log(message);
+      navigate("/");
+      window.location.reload(false);
+      dispatch(logout());
+      // dispatch(resetUser());
+    }
+
     window.addEventListener("load", handleLoading);
     return () => {
       window.removeEventListener("load", handleLoading);
+      dispatch(resetUser());
     };
-  }, []);
+  }, [dispatch, isAuthError, navigate, message]);
 
   // console.log(user)
 
@@ -92,7 +110,7 @@ export const App = () => {
         draggable
         pauseOnHover
       />
-      <VerifyAuth />
+      {/* <VerifyAuth /> */}
       <Navbar userType={user ? user.userType : "customer"} />
       {user ? (
         user.userType === "customer" ? (

@@ -19,6 +19,7 @@ const Login = () => {
     register,
     handleSubmit,
     // watch,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -28,6 +29,7 @@ const Login = () => {
     document.title = "Unichem Store | Log in";
 
     if (isError) {
+      reset();
       setLoginError("");
       if (
         message ===
@@ -54,7 +56,7 @@ const Login = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch, reset]);
 
   const onSubmit = (data) => {
     dispatch(login(data));
