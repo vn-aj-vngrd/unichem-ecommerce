@@ -3,11 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, resetUser } from "../features/auth/authSlice";
-import {
-  getWishlists,
-  resetWishlist,
-} from "../features/wishlist/wishlistSlice";
-import { getCarts, resetCart } from "../features/cart/cartSlice";
 import logo from "../assets/images/logo.svg";
 import { toast } from "react-toastify";
 import { EncryptStorage } from "encrypt-storage";
@@ -25,22 +20,12 @@ const Navbar = ({ userType }) => {
   useSelector((state) => state.cart);
 
   const [input, setInput] = useState("");
-  let username = "";
 
-  useEffect(() => {
-    if (sessionStorage.getItem("token") && userType === "customer") {
-      dispatch(getWishlists());
-      dispatch(getCarts());
-
-      return () => {
-        dispatch(resetWishlist());
-        dispatch(resetCart());
-      };
-    }
-  }, [userType, dispatch]);
+  useEffect(() => {}, [user]);
 
   let wishlistCount = 0;
   let cartCount = 0;
+  let username = "";
 
   if (user && user.userType === "customer") {
     wishlistCount = encryptStorage.getItem("w-cnt");

@@ -280,6 +280,8 @@ const getUser = asyncHandler(async (req, res) => {
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
     token: req.params.token,
+        wishlistCount,
+    cartCount,
     },
     wishlistCount,
     cartCount,

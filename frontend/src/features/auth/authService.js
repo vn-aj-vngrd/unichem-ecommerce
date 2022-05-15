@@ -92,14 +92,16 @@ const getUser = async (token) => {
 
   if (response.data.user && response.data.user.token) {
     encryptStorage.setItem("token", response.data.user);
+    encryptStorage.setItem("c-cnt", response.data.cartCount);
+    encryptStorage.setItem("w-cnt", response.data.wishlistCount);
   }
 
   if (response.data.cartCount) {
-    encryptStorage.setItem("c-cnt", response.data.cartCount);
+
   }
 
   if (response.data.wishlistCount) {
-    encryptStorage.setItem("w-cnt", response.data.wishlistCount);
+  
   }
 
   return response.data;
