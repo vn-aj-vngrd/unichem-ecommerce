@@ -23,6 +23,7 @@ const initialState = {
   isAdminUpdated: false,
   isDeleteLoading: false,
   isCustomerProfileUpdated: false,
+  isCustomerAddressUpdated: false,
   isCustomerPasswordUpdated: false,
   message: "",
   users: [],
@@ -237,6 +238,7 @@ export const authSlice = createSlice({
       state.isAdminUpdated = false;
       state.isCustomerProfileUpdated = false;
       state.isCustomerPasswordUpdated = false;
+      state.isCustomerAddressUpdated = false;
       state.isAccountRecovered = false;
       state.isAccountDeleted = false;
       state.isDeleteLoading = false;
@@ -345,8 +347,12 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         if (action.payload.isPasswordUpdated) {
           state.isCustomerPasswordUpdated = true;
-        } else {
+        }
+        if (action.payload.isCustomerProfileUpdated) {
           state.isCustomerProfileUpdated = true;
+        }
+        if (action.payload.isCustomerAddressUpdated) {
+          state.isCustomerAddressUpdated = true;
         }
         state.user = action.payload.user;
       })

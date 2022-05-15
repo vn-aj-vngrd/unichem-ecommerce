@@ -18,7 +18,7 @@ const UserAddress = () => {
 
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message, isCustomerProfileUpdated } = useSelector(
+  const { user, isLoading, isError, isSuccess, message, isCustomerAddressUpdated } = useSelector(
     (state) => state.auth
   );
 
@@ -27,14 +27,14 @@ const UserAddress = () => {
       toast.error(message);
     }
 
-    if (isCustomerProfileUpdated) {
+    if (isCustomerAddressUpdated) {
       toast.success("Address updated successfully");
     }
 
     return () => {
       dispatch(resetUser());
     };
-  }, [isError, isSuccess, message, isCustomerProfileUpdated, dispatch]);
+  }, [isError, isSuccess, message, isCustomerAddressUpdated, dispatch]);
 
   // Create user address
   const onSubmit = (data) => {

@@ -309,6 +309,10 @@ const getUser = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/updateUser
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
+  let isPasswordUpdated = false;
+  let isCustomerProfileUpdated = false;
+  let isCustomerAddressUpdated = false;
+
   // Check for user
   if (!req.user) {
     res.status(401);
@@ -321,9 +325,6 @@ const updateUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User not found");
   }
-
-  // console.log(req.body);
-  // console.log(req.file);
 
   let tempImage;
   if (req.file) {
@@ -342,7 +343,6 @@ const updateUser = asyncHandler(async (req, res) => {
     tempImage = user.image;
   }
 
-  let isPasswordUpdated = false;
   if (req.body.currentPassword) {
     if (await bcrypt.compare(req.body.currentPassword, user.password)) {
       if (await bcrypt.compare(req.body.password, user.password)) {
@@ -358,6 +358,18 @@ const updateUser = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Current password is incorrect");
     }
+  }
+
+  if (req.body.name) {
+    isCustomerProfileUpdated = true;
+  }
+
+  if (
+    req.body.address ||
+    req.body.primaryAddress == 0 ||
+    req.body.primaryAddress
+  ) {
+    isCustomerAddressUpdated = true;
   }
 
   const updatedUser = await User.findByIdAndUpdate(
@@ -385,6 +397,8 @@ const updateUser = asyncHandler(async (req, res) => {
     { new: true }
   );
 
+  console.log(req.body);
+
   res.status(200).json({
     user: {
       _id: updatedUser._id,
@@ -400,6 +414,8 @@ const updateUser = asyncHandler(async (req, res) => {
       token: generateToken(updatedUser._id),
     },
     isPasswordUpdated,
+    isCustomerProfileUpdated,
+    isCustomerAddressUpdated,
   });
 });
 
