@@ -37,9 +37,9 @@ const Navbar = ({ userType }) => {
     e.preventDefault();
 
     toast.success(`See you around, ${username}!`);
+    navigate("/");
     dispatch(logout());
     dispatch(resetUser());
-    navigate("/");
   };
 
   const onSearch = (e) => {

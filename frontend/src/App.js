@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { injectStyle } from "react-toastify/dist/inject-style";
 
@@ -71,9 +71,11 @@ export const App = () => {
     }
 
     if (isAuthError) {
-      console.log(message);
+      if (message === "Not authorized") {
+        toast.error("Session has expired. Please login again.");
+      }
+
       navigate("/");
-      // window.location.reload(false);
       dispatch(logout());
       dispatch(resetUser());
     }
