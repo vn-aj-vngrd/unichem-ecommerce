@@ -20,6 +20,7 @@ const Login = () => {
     handleSubmit,
     // watch,
     reset,
+    resetField,
     formState: { errors },
   } = useForm();
 
@@ -29,7 +30,6 @@ const Login = () => {
     document.title = "Unichem Store | Log in";
 
     if (isError) {
-      reset();
       setLoginError("");
       if (
         message ===
@@ -43,8 +43,21 @@ const Login = () => {
           confirmButtonColor: "#f44336",
           confirmButtonText: "Ok",
         });
+        reset();
       } else {
         setLoginError(message);
+        if (
+          message ===
+          "Email does not exist. Please register or try again with a different email address."
+        ) {
+          reset();
+        }
+        if (
+          message ===
+          "You've entered a wrong password. You may click forgot password to reset it."
+        ) {
+          resetField("password");
+        }
       }
     }
 

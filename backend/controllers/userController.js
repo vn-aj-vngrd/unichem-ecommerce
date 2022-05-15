@@ -131,10 +131,17 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   // User does not exist and incorrect password
-  if (!user || !(await bcrypt.compare(password, user.password))) {
+  if (!user) {
     res.status(400);
     throw new Error(
-      "You've entered a wrong email or password. Please try again."
+      "Email does not exist. Please register or try again with a different email address."
+    );
+  }
+
+  if (!(await bcrypt.compare(password, user.password))) {
+    res.status(400);
+    throw new Error(
+      "You've entered a wrong password. You may click forgot password to reset it."
     );
   }
 
