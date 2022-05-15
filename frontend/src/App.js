@@ -71,7 +71,7 @@ export const App = () => {
     }
 
     if (isAuthError) {
-      if (message === "Not authorized") {
+      if (message === "Not authorized" || message === "Token expired") {
         toast.error("Session has expired. Please login again.");
       }
 

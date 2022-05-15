@@ -267,17 +267,14 @@ const getUser = asyncHandler(async (req, res) => {
 
   // console.log(userToken);
 
-  console.log(
-    "IAT: " + userToken.iat,
-    "DB: " + moment(user.passwordUpdatedAt).unix()
-  );
+  // console.log(
+  //   "IAT: " + userToken.iat,
+  //   "DB: " + moment(user.passwordUpdatedAt).unix()
+  // );
 
   if (userToken.iat < moment(user.passwordUpdatedAt).unix()) {
-    console.log("expired");
     res.status(400);
     throw new Error("Token expired");
-  } else {
-    console.log("valid");
   }
 
   if (user.userType === "customer") {
