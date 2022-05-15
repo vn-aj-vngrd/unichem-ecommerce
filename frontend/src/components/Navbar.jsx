@@ -36,10 +36,10 @@ const Navbar = ({ userType }) => {
   const onLogout = (e) => {
     e.preventDefault();
 
-    toast.success(`See you around, ${username}!`);
-    navigate("/");
     dispatch(logout());
     dispatch(resetUser());
+    navigate("/");
+    toast.success(`See you around, ${username}!`);
   };
 
   const onSearch = (e) => {

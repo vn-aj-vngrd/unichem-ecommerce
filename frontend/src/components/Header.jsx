@@ -8,9 +8,9 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const onLogout = () => {
-    navigate("/");
     dispatch(logout());
     dispatch(resetUser());
+    navigate("/");
   };
 
   return (
