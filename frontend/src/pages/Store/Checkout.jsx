@@ -58,7 +58,7 @@ const Checkout = () => {
 
     resetField("couponCode");
     if (!sessionStorage.getItem("token")) {
-      navigate("/");
+      navigate("/login");
     }
 
     if (
