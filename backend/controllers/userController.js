@@ -141,7 +141,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!(await bcrypt.compare(password, user.password))) {
     res.status(400);
     throw new Error(
-      "You've entered a wrong password. You may click forgot password to reset it."
+      "You've entered a wrong password. You may click forgot password to reset it or try again."
     );
   }
 

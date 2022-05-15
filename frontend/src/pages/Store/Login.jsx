@@ -54,7 +54,7 @@ const Login = () => {
         }
         if (
           message ===
-          "You've entered a wrong password. You may click forgot password to reset it."
+          "You've entered a wrong password. You may click forgot password to reset it or try again."
         ) {
           resetField("password");
         }
