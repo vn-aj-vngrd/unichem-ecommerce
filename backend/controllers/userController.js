@@ -256,12 +256,19 @@ const getUser = asyncHandler(async (req, res) => {
 
   const userAddress = await Address.findOne({ userID: user._id });
 
-  // const userToken = jwt.decode(req.params.token);
+  const userToken = jwt.decode(req.params.token);
 
-  // if (moment(userToken.created) < moment(user.updatedAt)) {
-  //   res.status(400);
-  //   throw new Error("Token expired");
-  // }
+  console.log(userToken);
+
+  console.log(userToken.iat, moment(user.updatedAt).unix());
+
+  if (userToken.iat < moment(user.updatedAt).unix()) {
+    console.log("expired");
+    res.status(400);
+    throw new Error("Token expired");
+  } else {
+    console.log("valid");
+  }
 
   if (user.userType === "customer") {
     wishlistCount = await Wishlist.find({ userID: user._id }).countDocuments();
@@ -270,18 +277,18 @@ const getUser = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     user: {
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    sex: user.sex,
-    birthday: user.birthday,
-    userType: user.userType,
-    image: user.image,
-    address: userAddress.address,
-    primaryAddress: userAddress.primaryAddress,
-    token: req.params.token,
-        wishlistCount,
-    cartCount,
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      sex: user.sex,
+      birthday: user.birthday,
+      userType: user.userType,
+      image: user.image,
+      address: userAddress.address,
+      primaryAddress: userAddress.primaryAddress,
+      token: req.params.token,
+      wishlistCount,
+      cartCount,
     },
     wishlistCount,
     cartCount,
@@ -609,7 +616,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
 
 // Generate JWT Token
 const generateToken = (id) => {
-  return jwt.sign({ id, created: moment() }, process.env.JWT_SECRET, {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 };
