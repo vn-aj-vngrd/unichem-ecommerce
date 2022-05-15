@@ -52,7 +52,7 @@ export const getReviews = createAsyncThunk(
 // Get user reviews from user
 export const getUserReviews = createAsyncThunk(
   "reviews/getUser",
-  async (userID, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await reviewService.getUserReviews(token);
@@ -93,7 +93,6 @@ export const deleteReview = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      console.log(false);
       return await reviewService.deleteReview(id, token);
     } catch (error) {
       const message =

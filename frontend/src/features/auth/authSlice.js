@@ -157,13 +157,11 @@ export const getUser = createAsyncThunk("auth/getUser", async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
     return await authService.getUser(token);
   } catch (error) {
-    const cartMessage =
-      (error.response &&
-        error.response.data &&
-        error.response.data.cartMessage) ||
-      error.cartMessage ||
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
       error.toString();
-    return thunkAPI.rejectWithValue(cartMessage);
+    return thunkAPI.rejectWithValue(message);
   }
 });
 
@@ -173,13 +171,11 @@ export const getUsers = createAsyncThunk("auth/getAll", async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
     return await authService.getUsers(token);
   } catch (error) {
-    const cartMessage =
-      (error.response &&
-        error.response.data &&
-        error.response.data.cartMessage) ||
-      error.cartMessage ||
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
       error.toString();
-    return thunkAPI.rejectWithValue(cartMessage);
+    return thunkAPI.rejectWithValue(message);
   }
 });
 
@@ -191,13 +187,13 @@ export const deleteUser = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await authService.deleteUser(id, token);
     } catch (error) {
-      const cartMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );

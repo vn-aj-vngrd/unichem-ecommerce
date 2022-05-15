@@ -73,9 +73,9 @@ export const App = () => {
     if (isAuthError) {
       console.log(message);
       navigate("/");
-      window.location.reload(false);
+      // window.location.reload(false);
       dispatch(logout());
-      // dispatch(resetUser());
+      dispatch(resetUser());
     }
 
     window.addEventListener("load", handleLoading);
