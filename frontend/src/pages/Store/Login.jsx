@@ -69,7 +69,7 @@ const Login = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [user, isError, isSuccess, message, navigate, dispatch, reset]);
+  }, [user, isError, isSuccess, message, navigate, dispatch, reset, resetField]);
 
   const onSubmit = (data) => {
     dispatch(login(data));
