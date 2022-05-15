@@ -256,14 +256,20 @@ const getUser = asyncHandler(async (req, res) => {
 
   const userAddress = await Address.findOne({ userID: user._id });
 
-  const userToken = jwt.decode(req.params.token);
+  // const userToken = jwt.decode(req.params.token);
 
-  if (moment(userToken.created) < moment(user.updatedAt)) {
-    res.status(400);
-    throw new Error("Token expired");
+  // if (moment(userToken.created) < moment(user.updatedAt)) {
+  //   res.status(400);
+  //   throw new Error("Token expired");
+  // }
+
+  if (user.userType === "customer") {
+    wishlistCount = await Wishlist.find({ userID: user._id }).countDocuments();
+    cartCount = await Cart.find({ userID: user._id }).countDocuments();
   }
 
   res.status(200).json({
+    user: {
     _id: user._id,
     name: user.name,
     email: user.email,
@@ -274,6 +280,9 @@ const getUser = asyncHandler(async (req, res) => {
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
     token: req.params.token,
+    },
+    wishlistCount,
+    cartCount,
   });
 });
 

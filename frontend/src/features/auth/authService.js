@@ -1,8 +1,8 @@
 import axios from "axios";
-import { EncryptStorage } from 'encrypt-storage';
+import { EncryptStorage } from "encrypt-storage";
 
-export const encryptStorage = new EncryptStorage('secret-key', {
-  storageType: 'sessionStorage',
+export const encryptStorage = new EncryptStorage("secret-key", {
+  storageType: "sessionStorage",
 });
 
 const API_URL = "/api/users/";
@@ -19,7 +19,7 @@ const login = async (userData) => {
   const response = await axios.post(API_URL + "login", userData);
 
   if (response.data && response.data.token) {
-    encryptStorage.setItem('token', response.data);
+    encryptStorage.setItem("token", response.data);
     // localStorage.setItem("user", JSON.stringify(response.data));
   }
 
@@ -74,8 +74,7 @@ const updateUser = async (userData, token) => {
   const response = await axios.put(API_URL + "updateUser", userData, config);
 
   if (response.data && response.data.token) {
-    encryptStorage.setItem('token', response.data);
-    // localStorage.setItem("user", JSON.stringify(response.data.user));
+    encryptStorage.setItem("token", response.data);
   }
 
   return response.data;
@@ -89,14 +88,18 @@ const getUser = async (token) => {
     },
   };
 
-  const response = await axios.get(
-    API_URL + "getUser/" + token,
-    config
-  );
+  const response = await axios.get(API_URL + "getUser/" + token, config);
 
-  if (response.data && response.data.token) {
-    encryptStorage.setItem('token', response.data);
-    // localStorage.setItem("user", JSON.stringify(response.data));
+  if (response.data.user && response.data.user.token) {
+    encryptStorage.setItem("token", response.data.user);
+  }
+
+  if (response.data.cartCount) {
+    encryptStorage.setItem("c-cnt", response.data.cartCount);
+  }
+
+  if (response.data.wishlistCount) {
+    encryptStorage.setItem("w-cnt", response.data.wishlistCount);
   }
 
   return response.data;

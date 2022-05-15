@@ -28,7 +28,7 @@ const Navbar = ({ userType }) => {
   let username = "";
 
   useEffect(() => {
-    if (user && user.userType === "customer") {
+    if (sessionStorage.getItem("token") && userType === "customer") {
       dispatch(getWishlists());
       dispatch(getCarts());
 
@@ -37,12 +37,12 @@ const Navbar = ({ userType }) => {
         dispatch(resetCart());
       };
     }
-  }, [user, userType, dispatch]);
+  }, [userType, dispatch]);
 
   let wishlistCount = 0;
   let cartCount = 0;
 
-  if (user) {
+  if (user && user.userType === "customer") {
     wishlistCount = encryptStorage.getItem("w-cnt");
     cartCount = encryptStorage.getItem("c-cnt");
     username = user.name ? user.name.split(" ")[0] : "";
