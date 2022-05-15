@@ -53,6 +53,7 @@ import AdminCSS from "!!raw-loader!./assets/css/Admin.css";
 // import "./assets/css/Store.css"
 
 export const App = () => {
+  const CryptoJS = require("crypto-js");
   const [isLoading, setIsLoading] = useState(true);
   const { user, isAuthError, message } = useSelector((state) => state.auth);
 
@@ -87,17 +88,20 @@ export const App = () => {
     };
   }, [dispatch, isAuthError, navigate, message]);
 
-  // console.log(user)
+  let userRole = "customer";
+  if (user && user.userType) {
+    const bytes = CryptoJS.AES.decrypt(
+      user.userType,
+      "secret-key-for-user-access"
+    );
+    userRole = bytes.toString(CryptoJS.enc.Utf8);
+  }
 
   return !isLoading ? (
     <>
       <Helmet>
         <style>
-          {user
-            ? user.userType === "customer"
-              ? StoreCSS
-              : AdminCSS
-            : StoreCSS}
+          {user ? (userRole === "customer" ? StoreCSS : AdminCSS) : StoreCSS}
         </style>
       </Helmet>
       <AutoScrollToTop />
@@ -112,10 +116,9 @@ export const App = () => {
         draggable
         pauseOnHover
       />
-      {/* <VerifyAuth /> */}
-      <Navbar userType={user ? user.userType : "customer"} />
+      <Navbar userType={user ? userRole : "customer"} />
       {user ? (
-        user.userType === "customer" ? (
+        userRole === "customer" ? (
           <>
             {/* Store Routes */}
             <Routes>
@@ -153,7 +156,7 @@ export const App = () => {
             </Routes>
             {/* Enable Live Chat in Deployment */}
             <Messenger />
-            <Footer userType={user ? user.userType : "customer"} />
+            <Footer userType="customer" />
             <ScrollToTop
               smooth="true"
               color="#f44336"
@@ -189,53 +192,48 @@ export const App = () => {
         )
       ) : (
         <>
-          <>
-            {/* Store Routes */}
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="products/category/:categoryName"
-                element={<Products />}
-              />
-              <Route
-                path="products/product/:productName"
-                element={<Products />}
-              />
-              <Route path="products/brand/:brandName" element={<Products />} />
-              <Route path="product-details/:id" element={<ProductDetails />} />
-              <Route path="about" element={<About />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<Signup />} />
-              <Route path="wishlist" element={<Wishlist />} />
-              <Route path="account/address" element={<Address />} />
-              <Route path="account/profile" element={<Profile />} />
-              <Route path="account/orders" element={<Order />} />
-              <Route path="order-details/:id" element={<OrderDetails />} />
-              <Route path="account/reviews" element={<Review />} />
-              <Route path="cart/checkout" element={<Checkout />} />
-              <Route path="faq" element={<Faq />} />
-              <Route
-                path="users/:id/verify/:token"
-                element={<Verification />}
-              />
-              <Route path="users/:id/recover/:token" element={<Recovery />} />
-              <Route path="recover-account" element={<ForgotPassword />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-            {/* Enable Live Chat in Deployment */}
-            <Messenger />
-            <Footer userType={user ? user.userType : "customer"} />
-            <ScrollToTop
-              smooth="true"
-              color="#f44336"
-              viewBox="0 0 256 256"
-              width="20"
-              height="20"
-              style={{ left: "2rem", right: "auto", bottom: "2rem" }}
+          {/* Store Routes */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="products/category/:categoryName"
+              element={<Products />}
             />
-          </>
+            <Route
+              path="products/product/:productName"
+              element={<Products />}
+            />
+            <Route path="products/brand/:brandName" element={<Products />} />
+            <Route path="product-details/:id" element={<ProductDetails />} />
+            <Route path="about" element={<About />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="account/address" element={<Address />} />
+            <Route path="account/profile" element={<Profile />} />
+            <Route path="account/orders" element={<Order />} />
+            <Route path="order-details/:id" element={<OrderDetails />} />
+            <Route path="account/reviews" element={<Review />} />
+            <Route path="cart/checkout" element={<Checkout />} />
+            <Route path="faq" element={<Faq />} />
+            <Route path="users/:id/verify/:token" element={<Verification />} />
+            <Route path="users/:id/recover/:token" element={<Recovery />} />
+            <Route path="recover-account" element={<ForgotPassword />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+          {/* Enable Live Chat in Deployment */}
+          <Messenger />
+          <Footer userType="customer" />
+          <ScrollToTop
+            smooth="true"
+            color="#f44336"
+            viewBox="0 0 256 256"
+            width="20"
+            height="20"
+            style={{ left: "2rem", right: "auto", bottom: "2rem" }}
+          />
         </>
       )}
     </>
@@ -243,11 +241,7 @@ export const App = () => {
     <>
       <Helmet>
         <style>
-          {user
-            ? user.userType === "customer"
-              ? StoreCSS
-              : AdminCSS
-            : StoreCSS}
+          {user ? (userRole === "customer" ? StoreCSS : AdminCSS) : StoreCSS}
         </style>
       </Helmet>
       <Spinner globalSpinner="true" />

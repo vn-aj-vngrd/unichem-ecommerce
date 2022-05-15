@@ -14,6 +14,7 @@ const crypto = require("crypto");
 const Mailgen = require("mailgen");
 const fs = require("fs");
 const moment = require("moment");
+const CryptoJS = require("crypto-js");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -220,7 +221,16 @@ const loginUser = asyncHandler(async (req, res) => {
     email: user.email,
     sex: user.sex,
     birthday: user.birthday,
-    userType: user.userType,
+    userType:
+      user.userType === "customer"
+        ? CryptoJS.AES.encrypt(
+            "customer",
+            "secret-key-for-user-access"
+          ).toString()
+        : CryptoJS.AES.encrypt(
+            "admin",
+            "secret-key-for-user-access"
+          ).toString(),
     image: user.image,
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
@@ -289,7 +299,16 @@ const getUser = asyncHandler(async (req, res) => {
       email: user.email,
       sex: user.sex,
       birthday: user.birthday,
-      userType: user.userType,
+      userType:
+        user.userType === "customer"
+          ? CryptoJS.AES.encrypt(
+              "customer",
+              "secret-key-for-user-access"
+            ).toString()
+          : CryptoJS.AES.encrypt(
+              "admin",
+              "secret-key-for-user-access"
+            ).toString(),
       image: user.image,
       address: userAddress.address,
       primaryAddress: userAddress.primaryAddress,
@@ -405,7 +424,16 @@ const updateUser = asyncHandler(async (req, res) => {
       birthday: updatedUser.birthday,
       userType: updatedUser.userType,
       image: updatedUser.image,
-      userType: updatedUser.userType,
+      userType:
+        user.userType === "customer"
+          ? CryptoJS.AES.encrypt(
+              "customer",
+              "secret-key-for-user-access"
+            ).toString()
+          : CryptoJS.AES.encrypt(
+              "admin",
+              "secret-key-for-user-access"
+            ).toString(),
       address: updatedAddress.address,
       primaryAddress: updatedAddress.primaryAddress,
       token: generateToken(updatedUser._id),

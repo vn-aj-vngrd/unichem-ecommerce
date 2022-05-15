@@ -13,9 +13,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner";
 import { toast } from "react-toastify";
-const moment = require("moment");
 
 const ManageOrders = () => {
+  const moment = require("moment");
   const columns = [
     "Order ID",
     "User ID",
@@ -34,8 +34,14 @@ const ManageOrders = () => {
   ];
 
   const dispatch = useDispatch();
-  const { orders, isOrderLoading, isOrderDeleted, isOrderError, orderMessage, isOrderUpdated } =
-    useSelector((state) => state.orders);
+  const {
+    orders,
+    isOrderLoading,
+    isOrderDeleted,
+    isOrderError,
+    orderMessage,
+    isOrderUpdated,
+  } = useSelector((state) => state.orders);
 
   useEffect(() => {
     document.title = "Unichem Store | Orders";

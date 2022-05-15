@@ -12,6 +12,7 @@ export const encryptStorage = new EncryptStorage("secret-key", {
 });
 
 const Navbar = ({ userType }) => {
+  const CryptoJS = require("crypto-js");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,10 +28,16 @@ const Navbar = ({ userType }) => {
   let cartCount = 0;
   let username = "";
 
-  if (user && user.userType === "customer") {
-    wishlistCount = encryptStorage.getItem("w-cnt");
-    cartCount = encryptStorage.getItem("c-cnt");
-    username = user.name ? user.name.split(" ")[0] : "";
+  if (user) {
+    const bytes = CryptoJS.AES.decrypt(
+      user.userType,
+      "secret-key-for-user-access"
+    );
+    if (bytes.toString(CryptoJS.enc.Utf8) === "customer") {
+      wishlistCount = encryptStorage.getItem("w-cnt");
+      cartCount = encryptStorage.getItem("c-cnt");
+      username = user.name ? user.name.split(" ")[0] : "";
+    }
   }
 
   const onLogout = (e) => {
