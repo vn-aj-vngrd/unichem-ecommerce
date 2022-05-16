@@ -3,8 +3,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://unichem.herokuapp.com/static/media/logo.2f2828760e344d57bf311fb1261e6c40.svg">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://unichem.herokuapp.com/">
+    <img src="https://unichem.herokuapp.com/static/media/logo.2f2828760e344d57bf311fb1261e6c40.svg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Unichem Store</h3>
