@@ -10,7 +10,7 @@
 <h3 align="center">Unichem Store</h3>
 
   <p align="center">
-    Unichem Store is an e-commerce web app created with MERN stack.
+    Unichem Store is an e-commerce web app built with MERN stack.
   </p>
 </div>
 
