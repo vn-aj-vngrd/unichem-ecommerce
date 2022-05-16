@@ -72,11 +72,14 @@ export const App = () => {
     }
 
     if (isAuthError) {
-      if (message === "Not authorized" || message === "Token expired") {
+      if (
+        message === "Not authorized" ||
+        message === "Token expired" ||
+        message === "Cannot read properties of null(reading 'token')"
+      ) {
         toast.error("Session has expired. Please login again.");
       }
 
-      console.log(message);
       navigate("/");
       dispatch(logout());
       dispatch(resetUser());
@@ -90,11 +93,13 @@ export const App = () => {
   }, [dispatch, isAuthError, navigate, message]);
 
   const getRole = (userType) => {
-    const bytes = CryptoJS.AES.decrypt(userType, "@UNICHEM-secret-key-for-user-access");
+    const bytes = CryptoJS.AES.decrypt(
+      userType,
+      "@UNICHEM-secret-key-for-user-access"
+    );
     console.log(bytes.toString(CryptoJS.enc.Utf8));
     return bytes.toString(CryptoJS.enc.Utf8);
   };
-
 
   console.log(user);
 

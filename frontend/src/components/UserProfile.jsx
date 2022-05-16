@@ -154,7 +154,7 @@ const UserProfile = () => {
                         <img
                           className="profile-information-image"
                           src={user.image}
-                          alt=""
+                          alt=" "
                         ></img>
                         <label
                           className="upload-image-label"

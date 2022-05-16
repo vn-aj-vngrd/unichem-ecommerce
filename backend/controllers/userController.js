@@ -291,7 +291,6 @@ const getUser = asyncHandler(async (req, res) => {
   // );
 
   if (userToken.iat < moment(user.passwordUpdatedAt).unix()) {
-    console.log(expired);
     res.status(400);
     throw new Error("Token expired");
   }

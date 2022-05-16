@@ -90,8 +90,6 @@ const updateUser = async (userData, token) => {
     encryptStorage.setItem("token", userData);
   }
 
-  console.log(response.data);
-
   return response.data;
 };
 
