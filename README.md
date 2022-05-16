@@ -13,7 +13,7 @@
   </p>
 </div>
 
-### Built With
+## Built With
 
 * [React.js](https://reactjs.org/)
 * [Bootstrap](https://getbootstrap.com)
@@ -36,7 +36,7 @@ This is an example of how to list things you need to use the software and how to
   Rename the .envexample to .env and add your MONGO_URI
   ```
 
-### Installation
+## Installation
 
 1. Clone the repo
 
