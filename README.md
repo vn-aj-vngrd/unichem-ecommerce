@@ -66,8 +66,8 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTRIBUTERS -->
-## Contacts
+<!-- Team -->
+## Team
 <!--  - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
  - Horeb Barriga
  - Nikolai Tumapon
