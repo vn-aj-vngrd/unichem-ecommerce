@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-
   const {
     user,
     isLoading,
@@ -20,6 +19,8 @@ const UserProfile = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -34,7 +35,7 @@ const UserProfile = () => {
     register: registerPassword,
     handleSubmit: handleSubmitPassword,
     watch,
-    reset,
+    reset: resetPassword,
     formState: { errors: errorsPassword },
   } = useForm({
     defaultValues: {
@@ -47,6 +48,9 @@ const UserProfile = () => {
   const newPassword = watch("newPassword");
 
   useEffect(() => {
+    reset(user);
+    resetPassword();
+
     if (isError) {
       toast.error(message);
     }
@@ -63,6 +67,10 @@ const UserProfile = () => {
       dispatch(resetUser());
     };
   }, [
+    user,
+    setValue,
+    reset,
+    resetPassword,
     isError,
     isCustomerProfileUpdated,
     isCustomerPasswordUpdated,
@@ -96,7 +104,6 @@ const UserProfile = () => {
     };
 
     dispatch(updateUser(userData));
-    reset();
   };
 
   const validateAge = (bday) => {

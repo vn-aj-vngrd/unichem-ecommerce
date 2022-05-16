@@ -1,5 +1,4 @@
-// import { Link } from "react-router-dom";
-import { useEffect } from "react"; // useState
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser, resetUser } from "../features/auth/authSlice";
@@ -11,16 +10,20 @@ const UserAddress = () => {
   const {
     register,
     handleSubmit,
-    // watch,
     reset,
     formState: { errors },
   } = useForm();
 
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message, isCustomerAddressUpdated } = useSelector(
-    (state) => state.auth
-  );
+  const {
+    user,
+    isLoading,
+    isError,
+    isSuccess,
+    message,
+    isCustomerAddressUpdated,
+  } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (isError) {
@@ -60,7 +63,7 @@ const UserAddress = () => {
     let newPrimaryAddress = user.primaryAddress;
 
     if (index === newPrimaryAddress) {
-      toast.error("Cannot delete a default address");
+      toast.error("Default address cannot be deleted");
       return;
     }
 
