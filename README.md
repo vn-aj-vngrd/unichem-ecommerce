@@ -22,7 +22,7 @@
 * [MongoDB](https://www.mongodb.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-<!-- GETTING STARTED -->
+
 ## Getting Started
 
 To get started, you may follow these steps.
