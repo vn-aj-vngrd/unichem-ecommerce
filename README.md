@@ -72,4 +72,4 @@ This is an example of how to list things you need to use the software and how to
  - Horeb Barriga
  - Van AJ Vangurdia 
 
-Project Link: [https://github.com/vn-aj-vngrd/unichem-ecommerce](https://github.com/vn-aj-vngrd/unichem-ecommerce)
+Project Link: [https://unichem.herokuapp.com/](https://unichem.herokuapp.com/)
