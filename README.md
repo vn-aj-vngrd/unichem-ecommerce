@@ -51,12 +51,11 @@ This is an example of how to list things you need to use the software and how to
    # Backend deps
    npm install
    ```
-  ```sh
+   ```sh
    # Frontend deps
    cd frontend
    npm install
    ```
- 
 3. Run Server
    ```js
    npm run server
