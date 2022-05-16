@@ -35,7 +35,8 @@ To get started, you may follow these steps.
 ### Usage
 
 This is an example of how to list things you need to use the software and how to install them.
-* ENV
+* Modify env
+
   ```sh
   Rename the .envexample to .env and add your MONGO_URI
   ```
@@ -43,10 +44,12 @@ This is an example of how to list things you need to use the software and how to
 ### Installation
 
 1. Clone the repo
+
    ```sh
    git clone https://github.com/vn-aj-vngrd/unichem-ecommerce.git
    ```
 2. Install NPM packages
+
    ```sh
    # Backend deps
    npm install
@@ -57,10 +60,12 @@ This is an example of how to list things you need to use the software and how to
    npm install
    ```
 3. Run Server
+
    ```js
    npm run server
    ```
 4. Run App
+
    ```js
    npm run dev
    ```
