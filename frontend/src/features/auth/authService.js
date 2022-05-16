@@ -1,5 +1,6 @@
 import axios from "axios";
 import { EncryptStorage } from "encrypt-storage";
+const CryptoJS = require("crypto-js");
 
 export const encryptStorage = new EncryptStorage("secret-key", {
   storageType: "sessionStorage",
@@ -20,7 +21,6 @@ const login = async (userData) => {
 
   if (response.data && response.data.token) {
     encryptStorage.setItem("token", response.data);
-    // localStorage.setItem("user", JSON.stringify(response.data));
   }
 
   return response.data;
@@ -92,16 +92,18 @@ const getUser = async (token) => {
 
   const response = await axios.get(API_URL + "getUser/" + token, config);
 
-  if (response.data.user && response.data.user.token) {
+  if (response.data && response.data.user && response.data.user.token) {
     encryptStorage.setItem("token", response.data.user);
-    encryptStorage.setItem("c-cnt", response.data.cartCount);
-    encryptStorage.setItem("w-cnt", response.data.wishlistCount);
-  }
 
-  if (response.data.cartCount) {
-  }
+    const bytes = CryptoJS.AES.decrypt(
+      response.data.user.userType,
+      "secret-key-for-user-access"
+    );
 
-  if (response.data.wishlistCount) {
+    if (bytes.toString(CryptoJS.enc.Utf8) === "customer") {
+      encryptStorage.setItem("c-cnt", response.data.cartCount);
+      encryptStorage.setItem("w-cnt", response.data.wishlistCount);
+    }
   }
 
   return response.data;

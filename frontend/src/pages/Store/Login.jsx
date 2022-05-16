@@ -39,7 +39,7 @@ const Login = () => {
         Swal.fire({
           title: "Email Verification",
           text: message,
-          icon: "success",
+          icon: "warning",
           confirmButtonColor: "#f44336",
           confirmButtonText: "Ok",
         });

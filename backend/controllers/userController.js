@@ -283,13 +283,18 @@ const getUser = asyncHandler(async (req, res) => {
   // );
 
   if (userToken.iat < moment(user.passwordUpdatedAt).unix()) {
+    console.log(expired);
     res.status(400);
     throw new Error("Token expired");
   }
 
+  // console.log(valid);
+
+  let wishlistCount = 0;
+  let cartCount = 0;
   if (user.userType === "customer") {
-    wishlistCount = await Wishlist.find({ userID: user._id }).countDocuments();
-    cartCount = await Cart.find({ userID: user._id }).countDocuments();
+    wishlistCount = await Wishlist.find({ userID: user._id }).count();
+    cartCount = await Cart.find({ userID: user._id }).count();
   }
 
   res.status(200).json({
@@ -313,8 +318,6 @@ const getUser = asyncHandler(async (req, res) => {
       address: userAddress.address,
       primaryAddress: userAddress.primaryAddress,
       token: req.params.token,
-      wishlistCount,
-      cartCount,
     },
     wishlistCount,
     cartCount,
@@ -392,10 +395,8 @@ const updateUser = asyncHandler(async (req, res) => {
     req.user.id,
     {
       name: req.body.name,
-      email: req.body.email,
       sex: req.body.sex,
       birthday: req.body.birthday,
-      userType: req.body.userType,
       password: req.body.password,
       image: tempImage,
       passwordUpdatedAt: user.passwordUpdatedAt,

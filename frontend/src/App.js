@@ -76,6 +76,7 @@ export const App = () => {
         toast.error("Session has expired. Please login again.");
       }
 
+      console.log("test");
       navigate("/");
       dispatch(logout());
       dispatch(resetUser());
@@ -88,20 +89,24 @@ export const App = () => {
     };
   }, [dispatch, isAuthError, navigate, message]);
 
-  let userRole = "customer";
-  if (user && user.userType) {
-    const bytes = CryptoJS.AES.decrypt(
-      user.userType,
-      "secret-key-for-user-access"
-    );
-    userRole = bytes.toString(CryptoJS.enc.Utf8);
-  }
+  const getRole = (userType) => {
+    const bytes = CryptoJS.AES.decrypt(userType, "secret-key-for-user-access");
+    console.log(bytes.toString(CryptoJS.enc.Utf8));
+    return bytes.toString(CryptoJS.enc.Utf8);
+  };
+
+  console.log(sessionStorage.getItem("token"));
+  console.log(user);
 
   return !isLoading ? (
     <>
       <Helmet>
         <style>
-          {user ? (userRole === "customer" ? StoreCSS : AdminCSS) : StoreCSS}
+          {user
+            ? getRole(user.userType) === "customer"
+              ? StoreCSS
+              : AdminCSS
+            : StoreCSS}
         </style>
       </Helmet>
       <AutoScrollToTop />
@@ -116,9 +121,9 @@ export const App = () => {
         draggable
         pauseOnHover
       />
-      <Navbar userType={user ? userRole : "customer"} />
+      <Navbar userType={user ? getRole(user.userType) : "customer"} />
       {user ? (
-        userRole === "customer" ? (
+        getRole(user.userType) === "customer" ? (
           <>
             {/* Store Routes */}
             <Routes>
@@ -241,7 +246,11 @@ export const App = () => {
     <>
       <Helmet>
         <style>
-          {user ? (userRole === "customer" ? StoreCSS : AdminCSS) : StoreCSS}
+          {user
+            ? getRole(user.userType) === "customer"
+              ? StoreCSS
+              : AdminCSS
+            : StoreCSS}
         </style>
       </Helmet>
       <Spinner globalSpinner="true" />
