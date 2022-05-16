@@ -1,6 +1,5 @@
 <div id="top"></div>
 
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://unichem.herokuapp.com/">
@@ -67,8 +66,7 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- Team -->
-## Built With
+## Team
 
  - Horeb Barriga
  - Nikolai Tumapon
