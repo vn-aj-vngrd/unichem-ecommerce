@@ -20,7 +20,6 @@
 * [Node.js](https://nodejs.org/en/)
 * [MongoDB](https://www.mongodb.com/)
 
-<p align="right">(<a href="#top">Back to top</a>)</p>
 
 ## Getting Started
 
@@ -64,8 +63,6 @@ This is an example of how to list things you need to use the software and how to
    ```js
    npm run dev
    ```
-
-<p align="right">(<a href="#top">Back to top</a>)</p>
 
 ## Team
 
