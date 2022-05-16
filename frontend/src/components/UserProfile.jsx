@@ -22,14 +22,7 @@ const UserProfile = () => {
     setValue,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: user.name,
-      birthday: user.birthday,
-      sex: user.sex,
-      email: user.email,
-    },
-  });
+  } = useForm({});
 
   const {
     register: registerPassword,
@@ -48,7 +41,13 @@ const UserProfile = () => {
   const newPassword = watch("newPassword");
 
   useEffect(() => {
-    reset(user);
+    const defaultValues = {
+      name: user.name,
+      birthday: user.birthday,
+      sex: user.sex,
+      email: user.email,
+    };
+    reset(defaultValues);
     resetPassword();
 
     if (isError) {

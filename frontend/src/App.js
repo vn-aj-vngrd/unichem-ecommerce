@@ -68,6 +68,7 @@ export const App = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
+      console.log("test");
       dispatch(getUser());
     }
 
@@ -97,11 +98,11 @@ export const App = () => {
       userType,
       "@UNICHEM-secret-key-for-user-access"
     );
-    console.log(bytes.toString(CryptoJS.enc.Utf8));
+    // console.log(bytes.toString(CryptoJS.enc.Utf8));
     return bytes.toString(CryptoJS.enc.Utf8);
   };
 
-  console.log(user);
+  // console.log(user);
 
   return !isLoading ? (
     <>

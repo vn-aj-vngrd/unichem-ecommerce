@@ -26,6 +26,7 @@ const UserAddress = () => {
   } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    reset();
     if (isError) {
       toast.error(message);
     }
@@ -37,7 +38,15 @@ const UserAddress = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [isError, isSuccess, message, isCustomerAddressUpdated, dispatch]);
+  }, [
+    user,
+    isError,
+    isSuccess,
+    message,
+    isCustomerAddressUpdated,
+    dispatch,
+    reset,
+  ]);
 
   // Create user address
   const onSubmit = (data) => {
@@ -55,7 +64,6 @@ const UserAddress = () => {
     };
 
     dispatch(updateUser(userData));
-    reset();
   };
 
   // Delete user address
@@ -117,7 +125,7 @@ const UserAddress = () => {
                         <li className="address-header">
                           <h6>
                             <i className="lni lni-map-marker"></i>{" "}
-                            {user.address[index].addressName}
+                            {address.addressName}
                           </h6>
                         </li>
                         <li>
@@ -185,7 +193,7 @@ const UserAddress = () => {
                         <li className="address-header">
                           <h6>
                             <i className="lni lni-map-marker"></i>{" "}
-                            {user.address[index].addressName}
+                            {address.addressName}
                           </h6>
                         </li>
                         <li>

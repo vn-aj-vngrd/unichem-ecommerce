@@ -11,21 +11,21 @@ const EditAddress = ({ index }) => {
     register,
     handleSubmit,
     // watch,
-    reset,
+    reset: resetAddress,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
+  } = useForm({});
+
+  useEffect(() => {
+    const defaultValues = {
       addressNameUpdate: user.address[index].addressName,
       address1Update: user.address[index].address1,
       address2Update: user.address[index].address2,
       postalCodeUpdate: user.address[index].postalCode,
       phoneNumberUpdate: user.address[index].phoneNumber,
-    },
-  });
+    };
 
-  useEffect(() => {
-    reset(user);
-  }, [user, reset]);
+    resetAddress(defaultValues);
+  }, [user, resetAddress, index]);
 
   // Update user address
   const onSubmitUpdate = (data) => {
