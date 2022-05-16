@@ -429,31 +429,36 @@ const updateUser = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  console.log(req.body);
+  const data = {
+    _id: updatedUser._id,
+    name: updatedUser.name,
+    email: updatedUser.email,
+    sex: updatedUser.sex,
+    birthday: updatedUser.birthday,
+    userType: updatedUser.userType,
+    image: updatedUser.image,
+    userType:
+      user.userType === "customer"
+        ? CryptoJS.AES.encrypt(
+            "customer",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString()
+        : CryptoJS.AES.encrypt(
+            "admin",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString(),
+    address: updatedAddress.address,
+    primaryAddress: updatedAddress.primaryAddress,
+    token: generateToken(updatedUser._id),
+  };
+
+  const userData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "@UNICHEM-secret-key-for-user-data"
+  ).toString();
 
   res.status(200).json({
-    user: {
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      sex: updatedUser.sex,
-      birthday: updatedUser.birthday,
-      userType: updatedUser.userType,
-      image: updatedUser.image,
-      userType:
-        user.userType === "customer"
-          ? CryptoJS.AES.encrypt(
-              "customer",
-              "@UNICHEM-secret-key-for-user-access"
-            ).toString()
-          : CryptoJS.AES.encrypt(
-              "admin",
-              "@UNICHEM-secret-key-for-user-access"
-            ).toString(),
-      address: updatedAddress.address,
-      primaryAddress: updatedAddress.primaryAddress,
-      token: generateToken(updatedUser._id),
-    },
+    userData,
     isPasswordUpdated,
     isCustomerProfileUpdated,
     isCustomerAddressUpdated,

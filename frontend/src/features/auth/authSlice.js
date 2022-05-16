@@ -347,6 +347,7 @@ export const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+
         if (action.payload.isPasswordUpdated) {
           state.isCustomerPasswordUpdated = true;
         }
@@ -356,7 +357,12 @@ export const authSlice = createSlice({
         if (action.payload.isCustomerAddressUpdated) {
           state.isCustomerAddressUpdated = true;
         }
-        state.user = action.payload.user;
+
+        const bytes = CryptoJS.AES.decrypt(
+          action.payload.userData,
+          "@UNICHEM-secret-key-for-user-data"
+        );
+        state.user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;

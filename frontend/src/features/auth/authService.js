@@ -80,8 +80,14 @@ const updateUser = async (userData, token) => {
   };
   const response = await axios.put(API_URL + "updateUser", userData, config);
 
-  if (response.data.user && response.data.user.token) {
-    encryptStorage.setItem("token", response.data.user);
+  if (response.data) {
+    const bytes = CryptoJS.AES.decrypt(
+      response.data.userData,
+      "@UNICHEM-secret-key-for-user-data"
+    );
+
+    const userData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    encryptStorage.setItem("token", userData);
   }
 
   console.log(response.data);
@@ -106,7 +112,6 @@ const getUser = async (token) => {
     );
 
     const userData = JSON.parse(bytes1.toString(CryptoJS.enc.Utf8));
-
     encryptStorage.setItem("token", userData);
 
     const bytes2 = CryptoJS.AES.decrypt(
