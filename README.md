@@ -27,7 +27,7 @@
 
 To get started, you may follow these steps.
 
-### Usage
+## Usage
 
 This is an example of how to list things you need to use the software and how to install them.
 * Modify env
@@ -66,9 +66,10 @@ This is an example of how to list things you need to use the software and how to
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- Team -->
 ## Built With
-<!--  - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
+
  - Horeb Barriga
  - Nikolai Tumapon
  - Roque Gelacio Jr.
