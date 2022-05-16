@@ -171,6 +171,17 @@ const updateAdmin = async (updateParams, token) => {
     config
   );
 
+  if (response.data) {
+    const bytes = CryptoJS.AES.decrypt(
+      response.data,
+      "@UNICHEM-secret-key-for-user-data"
+    );
+    encryptStorage.setItem(
+      "token",
+      JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+    );
+  }
+
   return response.data;
 };
 

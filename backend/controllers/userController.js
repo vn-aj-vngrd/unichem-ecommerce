@@ -217,7 +217,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const userAddress = await Address.findOne({ userID });
 
   const data = {
-    _id: userID,
+    _id: user._id,
     name: user.name,
     email: user.email,
     sex: user.sex,
@@ -681,6 +681,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
       user.password = req.body.password;
+      user.passwordUpdatedAt = Date.now();
       await user.save();
     } else {
       res.status(400);
@@ -688,7 +689,37 @@ const updateAdmin = asyncHandler(async (req, res) => {
     }
   }
 
-  res.status(200).json({ message: "Password updated successfully" });
+  const userID = user._id;
+  const userAddress = await Address.findOne({ userID });
+
+  const data = {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
+    userType:
+      user.userType === "customer"
+        ? CryptoJS.AES.encrypt(
+            "customer",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString()
+        : CryptoJS.AES.encrypt(
+            "admin",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString(),
+    image: user.image,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: generateToken(user._id),
+  };
+
+  const userData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "@UNICHEM-secret-key-for-user-data"
+  ).toString();
+
+  res.status(200).json(userData);
 });
 
 // Generate JWT Token

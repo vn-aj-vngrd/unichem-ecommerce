@@ -8,7 +8,6 @@ export const encryptStorage = new EncryptStorage("secret-key", {
 });
 
 // Get user from localStorage
-// const user = JSON.parse(localStorage.getItem("user"));
 const sessionUser = encryptStorage.getItem("token");
 
 const initialState = {
@@ -432,6 +431,12 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isAdminUpdated = true;
+
+        const bytes = CryptoJS.AES.decrypt(
+          action.payload,
+          "@UNICHEM-secret-key-for-user-data"
+        );
+        state.user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       })
       .addCase(updateAdmin.rejected, (state, action) => {
         state.isLoading = false;

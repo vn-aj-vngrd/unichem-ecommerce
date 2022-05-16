@@ -68,7 +68,6 @@ export const App = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      console.log("test");
       dispatch(getUser());
     }
 
