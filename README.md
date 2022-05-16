@@ -29,7 +29,8 @@ To get started, you may follow these steps.
 ## Usage
 
 This is an example of how to list things you need to use the software and how to install them.
-* Modify env
+
+  * Modify env
 
   ```sh
   Rename the .envexample to .env and add your MONGO_URI
@@ -73,4 +74,6 @@ This is an example of how to list things you need to use the software and how to
  - Roque Gelacio Jr.
  - Van AJ Vangurdia 
 
-Project Link: [https://unichem.herokuapp.com/](https://unichem.herokuapp.com/)
+## Website
+
+  Link: [https://unichem.herokuapp.com/](https://unichem.herokuapp.com/)
