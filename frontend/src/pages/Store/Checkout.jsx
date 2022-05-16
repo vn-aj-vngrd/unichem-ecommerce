@@ -57,14 +57,11 @@ const Checkout = () => {
     document.title = "Unichem Store | Cart";
 
     resetField("couponCode");
-    if (!sessionStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
       navigate("/login");
     }
 
-    if (
-      !sessionStorage.getItem("token") &&
-      !sessionStorage.getItem("c-cnt") < 1
-    ) {
+    if (!localStorage.getItem("token") && !localStorage.getItem("c-cnt") < 1) {
       Swal.fire({
         title: "Failed to Checkout",
         icon: "error",

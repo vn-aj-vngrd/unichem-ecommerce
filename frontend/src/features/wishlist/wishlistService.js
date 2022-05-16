@@ -2,7 +2,7 @@ import axios from "axios";
 import { EncryptStorage } from "encrypt-storage";
 
 export const encryptStorage = new EncryptStorage("secret-key", {
-  storageType: "sessionStorage",
+  storageType: "localStorage",
 });
 
 const API_URL = "/api/wishlists/";
@@ -76,7 +76,7 @@ const deleteAllWishlist = async (userID, token) => {
     API_URL + "deleteAll/" + userID.id,
     config
   );
-  
+
   encryptStorage.setItem("w-cnt", 0);
 
   // console.log(response.data);

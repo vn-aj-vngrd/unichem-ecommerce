@@ -2,7 +2,7 @@ import axios from "axios";
 import { EncryptStorage } from "encrypt-storage";
 
 export const encryptStorage = new EncryptStorage("secret-key", {
-  storageType: "sessionStorage",
+  storageType: "localStorage",
 });
 
 const API_URL = "/api/carts/";

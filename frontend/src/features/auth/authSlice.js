@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 import { EncryptStorage } from "encrypt-storage";
+const CryptoJS = require("crypto-js");
 
 export const encryptStorage = new EncryptStorage("secret-key", {
-  storageType: "sessionStorage",
+  storageType: "localStorage",
 });
 
 // Get user from localStorage
@@ -269,7 +270,12 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+
+        const bytes = CryptoJS.AES.decrypt(
+          action.payload,
+          "@UNICHEM-secret-key-for-user-data"
+        );
+        state.user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -364,7 +370,12 @@ export const authSlice = createSlice({
       .addCase(getUser.fulfilled, (state, action) => {
         state.isAuthLoading = false;
         state.isAuthSuccess = true;
-        state.user = action.payload.user;
+
+        const bytes = CryptoJS.AES.decrypt(
+          action.payload.userData,
+          "@UNICHEM-secret-key-for-user-data"
+        );
+        state.user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       })
       .addCase(getUser.rejected, (state, action) => {
         state.isAuthLoading = false;

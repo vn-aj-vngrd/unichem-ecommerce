@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { EncryptStorage } from "encrypt-storage";
 
 export const encryptStorage = new EncryptStorage("secret-key", {
-  storageType: "sessionStorage",
+  storageType: "localStorage",
 });
 
 const Navbar = ({ userType }) => {
@@ -31,7 +31,7 @@ const Navbar = ({ userType }) => {
   if (user) {
     const bytes = CryptoJS.AES.decrypt(
       user.userType,
-      "secret-key-for-user-access"
+      "@UNICHEM-secret-key-for-user-access"
     );
     if (bytes.toString(CryptoJS.enc.Utf8) === "customer") {
       wishlistCount = encryptStorage.getItem("w-cnt");

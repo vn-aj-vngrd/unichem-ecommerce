@@ -12,7 +12,7 @@ const Manage = () => {
   useEffect(() => {
     document.title = "Unichem Store | Profile";
 
-    if (!sessionStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
       navigate("/login");
     }
   }, [navigate]);

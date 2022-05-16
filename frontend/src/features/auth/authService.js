@@ -3,7 +3,7 @@ import { EncryptStorage } from "encrypt-storage";
 const CryptoJS = require("crypto-js");
 
 export const encryptStorage = new EncryptStorage("secret-key", {
-  storageType: "sessionStorage",
+  storageType: "localStorage",
 });
 
 const API_URL = "/api/users/";
@@ -19,8 +19,15 @@ const signup = async (userData) => {
 const login = async (userData) => {
   const response = await axios.post(API_URL + "login", userData);
 
-  if (response.data && response.data.token) {
-    encryptStorage.setItem("token", response.data);
+  if (response.data) {
+    const bytes = CryptoJS.AES.decrypt(
+      response.data,
+      "@UNICHEM-secret-key-for-user-data"
+    );
+    encryptStorage.setItem(
+      "token",
+      JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+    );
   }
 
   return response.data;
@@ -92,15 +99,22 @@ const getUser = async (token) => {
 
   const response = await axios.get(API_URL + "getUser/" + token, config);
 
-  if (response.data && response.data.user && response.data.user.token) {
-    encryptStorage.setItem("token", response.data.user);
-
-    const bytes = CryptoJS.AES.decrypt(
-      response.data.user.userType,
-      "secret-key-for-user-access"
+  if (response.data) {
+    const bytes1 = CryptoJS.AES.decrypt(
+      response.data.userData,
+      "@UNICHEM-secret-key-for-user-data"
     );
 
-    if (bytes.toString(CryptoJS.enc.Utf8) === "customer") {
+    const userData = JSON.parse(bytes1.toString(CryptoJS.enc.Utf8));
+
+    encryptStorage.setItem("token", userData);
+
+    const bytes2 = CryptoJS.AES.decrypt(
+      userData.userType,
+      "@UNICHEM-secret-key-for-user-access"
+    );
+
+    if (bytes2.toString(CryptoJS.enc.Utf8) === "customer") {
       encryptStorage.setItem("c-cnt", response.data.cartCount);
       encryptStorage.setItem("w-cnt", response.data.wishlistCount);
     }
@@ -137,7 +151,7 @@ const deleteUser = async (id, token) => {
 
 // Logout user
 const logout = () => {
-  sessionStorage.clear();
+  localStorage.clear();
 };
 
 // Update admin password

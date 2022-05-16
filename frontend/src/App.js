@@ -67,7 +67,7 @@ export const App = () => {
   injectStyle();
 
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
+    if (localStorage.getItem("token")) {
       dispatch(getUser());
     }
 
@@ -76,7 +76,7 @@ export const App = () => {
         toast.error("Session has expired. Please login again.");
       }
 
-      console.log("test");
+      console.log(message);
       navigate("/");
       dispatch(logout());
       dispatch(resetUser());
@@ -90,12 +90,12 @@ export const App = () => {
   }, [dispatch, isAuthError, navigate, message]);
 
   const getRole = (userType) => {
-    const bytes = CryptoJS.AES.decrypt(userType, "secret-key-for-user-access");
+    const bytes = CryptoJS.AES.decrypt(userType, "@UNICHEM-secret-key-for-user-access");
     console.log(bytes.toString(CryptoJS.enc.Utf8));
     return bytes.toString(CryptoJS.enc.Utf8);
   };
 
-  console.log(sessionStorage.getItem("token"));
+
   console.log(user);
 
   return !isLoading ? (

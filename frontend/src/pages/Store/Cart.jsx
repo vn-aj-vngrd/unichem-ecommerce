@@ -31,7 +31,7 @@ const Cart = () => {
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
-    if (!sessionStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
       navigate("/login");
     }
 

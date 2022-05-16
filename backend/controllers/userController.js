@@ -215,7 +215,8 @@ const loginUser = asyncHandler(async (req, res) => {
   // Authenticate
   const userID = user._id;
   const userAddress = await Address.findOne({ userID });
-  res.json({
+
+  const data = {
     _id: userID,
     name: user.name,
     email: user.email,
@@ -225,17 +226,24 @@ const loginUser = asyncHandler(async (req, res) => {
       user.userType === "customer"
         ? CryptoJS.AES.encrypt(
             "customer",
-            "secret-key-for-user-access"
+            "@UNICHEM-secret-key-for-user-access"
           ).toString()
         : CryptoJS.AES.encrypt(
             "admin",
-            "secret-key-for-user-access"
+            "@UNICHEM-secret-key-for-user-access"
           ).toString(),
     image: user.image,
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
     token: generateToken(user._id),
-  });
+  };
+
+  const userData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "@UNICHEM-secret-key-for-user-data"
+  ).toString();
+
+  res.json(userData);
 });
 
 // @desc    Get user data
@@ -297,28 +305,35 @@ const getUser = asyncHandler(async (req, res) => {
     cartCount = await Cart.find({ userID: user._id }).count();
   }
 
+  const data = {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
+    userType:
+      user.userType === "customer"
+        ? CryptoJS.AES.encrypt(
+            "customer",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString()
+        : CryptoJS.AES.encrypt(
+            "admin",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString(),
+    image: user.image,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: req.params.token,
+  };
+
+  const userData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "@UNICHEM-secret-key-for-user-data"
+  ).toString();
+
   res.status(200).json({
-    user: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      sex: user.sex,
-      birthday: user.birthday,
-      userType:
-        user.userType === "customer"
-          ? CryptoJS.AES.encrypt(
-              "customer",
-              "secret-key-for-user-access"
-            ).toString()
-          : CryptoJS.AES.encrypt(
-              "admin",
-              "secret-key-for-user-access"
-            ).toString(),
-      image: user.image,
-      address: userAddress.address,
-      primaryAddress: userAddress.primaryAddress,
-      token: req.params.token,
-    },
+    userData,
     wishlistCount,
     cartCount,
   });
@@ -429,11 +444,11 @@ const updateUser = asyncHandler(async (req, res) => {
         user.userType === "customer"
           ? CryptoJS.AES.encrypt(
               "customer",
-              "secret-key-for-user-access"
+              "@UNICHEM-secret-key-for-user-access"
             ).toString()
           : CryptoJS.AES.encrypt(
               "admin",
-              "secret-key-for-user-access"
+              "@UNICHEM-secret-key-for-user-access"
             ).toString(),
       address: updatedAddress.address,
       primaryAddress: updatedAddress.primaryAddress,

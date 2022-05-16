@@ -12,7 +12,7 @@ const OrderDetails = () => {
   useEffect(() => {
     document.title = "Unichem Store | Order Details";
 
-    if (!sessionStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
       navigate("/login");
     }
   }, [navigate]);
