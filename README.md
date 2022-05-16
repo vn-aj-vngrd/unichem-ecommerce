@@ -20,7 +20,7 @@
 * [Node.js](https://nodejs.org/en/)
 * [MongoDB](https://www.mongodb.com/)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Back to top</a>)</p>
 
 ## Getting Started
 
@@ -30,7 +30,7 @@ To get started, you may follow these steps.
 
 This is an example of how to list things you need to use the software and how to install them.
 
-  * Modify env
+* Modify env
 
   ```sh
   Rename the .envexample to .env and add your MONGO_URI
@@ -65,7 +65,7 @@ This is an example of how to list things you need to use the software and how to
    npm run dev
    ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">Back to top</a>)</p>
 
 ## Team
 
