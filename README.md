@@ -67,9 +67,11 @@ This is an example of how to list things you need to use the software and how to
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTERS -->
-## Contributers
+## Contacts
 <!--  - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
  - Horeb Barriga
+ - Nikolai Tumapon
+ - Roque Gelacio Jr.
  - Van AJ Vangurdia 
 
 Project Link: [https://unichem.herokuapp.com/](https://unichem.herokuapp.com/)
