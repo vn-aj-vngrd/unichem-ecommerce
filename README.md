@@ -61,11 +61,8 @@ This is an example of how to list things you need to use the software and how to
 
 <!-- CONTRIBUTERS -->
 ## Contributers
+<!--  - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
+ - Horeb Barriga
+ - Van AJ Vangurdia 
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+Project Link: [https://github.com/vn-aj-vngrd/unichem-ecommerce](https://github.com/vn-aj-vngrd/unichem-ecommerce)
