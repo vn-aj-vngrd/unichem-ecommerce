@@ -26,7 +26,6 @@
 * [MongoDB](https://www.mongodb.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -71,7 +70,6 @@ This is an example of how to list things you need to use the software and how to
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- Team -->
 ## Team
 <!--  - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
