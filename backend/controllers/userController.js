@@ -12,7 +12,6 @@ const Token = require("../models/tokenModel");
 const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
 const Mailgen = require("mailgen");
-const fs = require("fs");
 const moment = require("moment");
 const CryptoJS = require("crypto-js");
 const { cloudinary } = require("../util/cloudinary");
