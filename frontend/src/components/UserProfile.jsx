@@ -89,8 +89,7 @@ const UserProfile = () => {
     };
 
     let formData = new FormData();
-
-    previewFile(data.image);
+    
     formData.append("image", data.image[0]);
 
     for (var key in userData) {
@@ -106,12 +105,11 @@ const UserProfile = () => {
       currentPassword: data.currentPassword,
     };
 
-    // dispatch(updateUser(userData));
+    dispatch(updateUser(userData));
   };
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    console.log(file)
     previewFile(file);
   }
 
@@ -122,6 +120,7 @@ const UserProfile = () => {
       setPreviewSource(reader.result);
     }
   }
+
 
   const validateAge = (bday) => {
     const today = new Date();

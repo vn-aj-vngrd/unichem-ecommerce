@@ -15,6 +15,7 @@ const Mailgen = require("mailgen");
 const fs = require("fs");
 const moment = require("moment");
 const CryptoJS = require("crypto-js");
+const { cloudinary } = require("../util/cloudinary");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -43,7 +44,8 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     userType,
-    image: "\\uploads\\users\\user-placeholder.png",
+    image: "https://res.cloudinary.com/unichem/image/upload/v1652783027/users/user-placeholder_pooyoq.png",
+    cloudinaryID: "users/user-placeholder_pooyoq",
     verified: false,
   });
 
@@ -321,6 +323,7 @@ const getUser = asyncHandler(async (req, res) => {
             "@UNICHEM-secret-key-for-user-access"
           ).toString(),
     image: user.image,
+    cloudinaryID: user.cloudinaryID,
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
     token: req.params.token,
@@ -360,22 +363,25 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 
   let tempImage;
+  let tempCloudinaryID;
   if (req.file) {
-    let removeImagePath = user.image;
-    const destination = "frontend\\public";
-
-    if (
-      removeImagePath &&
-      removeImagePath !== "\\uploads\\users\\user-placeholder.png"
-    ) {
-      if (fs.existsSync(destination + removeImagePath)) {
-        fs.unlinkSync(destination + removeImagePath);
-      }
+    // find and delete existing
+    // cloudinary.api.resource(user.cloudinaryID).then(result => console.log(result))
+    if (user.cloudinaryID !== "users/user-placeholder_pooyoq") {
+      await cloudinary.uploader.destroy(user.cloudinaryID);
     }
 
-    tempImage = req.file.path.slice(destination.length);
+    // upload
+    const uploadedResponse = await cloudinary.uploader.upload(req.file.path, {
+      upload_preset: "user_setups"
+    })
+
+    // Set temp image to image url
+    tempImage = uploadedResponse.secure_url;
+    tempCloudinaryID = uploadedResponse.public_id;
   } else {
     tempImage = user.image;
+    tempCloudinaryID = user.cloudinaryID;
   }
 
   if (req.body.currentPassword) {
@@ -415,6 +421,7 @@ const updateUser = asyncHandler(async (req, res) => {
       birthday: req.body.birthday,
       password: req.body.password,
       image: tempImage,
+      cloudinaryID: tempCloudinaryID,
       passwordUpdatedAt: user.passwordUpdatedAt,
     },
     {

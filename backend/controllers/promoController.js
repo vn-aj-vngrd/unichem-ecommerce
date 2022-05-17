@@ -19,35 +19,38 @@ const getPromos = asyncHandler(async (req, res) => {
 const setPromo = asyncHandler(async (req, res) => {
   // Check for user
   if (!req.user) {
-    if (fs.existsSync(req.file.path.path)) {
-      fs.unlinkSync(req.file.path.path);
-    }
     res.status(401);
     throw new Error("User not found");
   }
 
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
-    if (fs.existsSync(req.file.path.path)) {
-      fs.unlinkSync(req.file.path.path);
-    }
     res.status(401);
     throw new Error("User not authorized");
   }
 
   if (!req.file.path) {
-    if (fs.existsSync(req.file.path.path)) {
-      fs.unlinkSync(req.file.path.path);
-    }
     res.status(401);
     throw new Error("There was a problem uploading the image");
+  }
+
+  let tempImage;
+  if (req.file) {
+    const uploadedResponse = await cloudinary.uploader.upload(req.file.path, {
+      upload_preset: "promo_setups"
+    })
+
+    // Set temp image to image url
+    tempImage = uploadedResponse.secure_url;
+    tempCloudinaryID = uploadedResponse.public_id;
   }
 
   const destination = "frontend\\public";
   const promo = await Promo.create({
     promoName: req.body.promoName,
     description: req.body.description,
-    image: req.file.path.slice(destination.length),
+    image: tempImage,
+    cloudinaryID: tempCloudinaryID,
     startDate: req.body.startDate,
     expiryDate: req.body.expiryDate,
   });
@@ -58,32 +61,36 @@ const setPromo = asyncHandler(async (req, res) => {
 const updatePromo = asyncHandler(async (req, res) => {
   const promo = await Promo.findById(req.body._id);
   if (!promo) {
-    if (fs.existsSync(req.file.path.path)) {
-      fs.unlinkSync(req.file.path.path);
-    }
     res.status(400);
     throw new Error("Promo not found");
   }
 
   // Check for user
   if (!req.user) {
-    if (fs.existsSync(req.file.path.path)) {
-      fs.unlinkSync(req.file.path.path);
-    }
     res.status(401);
     throw new Error("User not found");
   }
 
   // Check for user and admin privilege
   if (!req.user && req.user.userType !== "admin") {
-    if (fs.existsSync(req.file.path.path)) {
-      fs.unlinkSync(req.file.path.path);
-    }
     res.status(401);
     throw new Error("User not authorized.");
   }
 
   let tempImage;
+  let tempCloudinaryID;
+  if (req.file) {
+    const uploadedResponse = await cloudinary.uploader.upload(req.file.path, {
+      upload_preset: "promo_setups"
+    })
+
+    // Set temp image to image url
+    tempImage = uploadedResponse.secure_url;
+    tempCloudinaryID = uploadedResponse.public_id;
+  } else {
+    tempImage = promo.image;
+    tempCloudinaryID = promo.cloudinaryID;
+  }
 
   if (req.file) {
     let removeImagePath = promo.image;

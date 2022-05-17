@@ -23,14 +23,12 @@ app.use("/api/coupons", require("./routes/couponRoutes"));
 app.use("/api/promos", require("./routes/promoRoutes"));
 app.use("/api/reports", require("./routes/reportRoutes"));
 
-app.use(express.static('public')); 
-app.use('/uploads', express.static('uploads'));
-
+app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
 
 // Serve Frontend
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
- 
 
   app.get("*", (req, res) =>
     res.sendFile(

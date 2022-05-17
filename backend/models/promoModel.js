@@ -12,8 +12,11 @@ const promoSchema = mongoose.Schema(
     },
     image: {
       type: String,
-      trim: true,
       required: [true, "Product image is required"],
+    },
+    cloudinaryID: {
+      type: String,
+      required: [true, "Cloudinary ID is required"],
     },
     startDate: {
       type: Date,

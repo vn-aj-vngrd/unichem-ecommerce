@@ -29,6 +29,11 @@ const userSchema = mongoose.Schema(
     },
     image: {
       type: String,
+      required: [true, "Product image is required"],
+    },
+    cloudinaryID: {
+      type: String,
+      required: [true, "Cloudinary ID is required"],
     },
     verified: {
       type: Boolean,
