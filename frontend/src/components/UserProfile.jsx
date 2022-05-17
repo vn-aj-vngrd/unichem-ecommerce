@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser, resetUser } from "../features/auth/authSlice";
@@ -37,6 +37,9 @@ const UserProfile = () => {
       currentPassword: "",
     },
   });
+
+  const [ selectedFile, setSelectedFile ] = useState("");
+  const [ previewSource, setPreviewSource ] = useState("");
 
   const newPassword = watch("newPassword");
 
@@ -87,6 +90,7 @@ const UserProfile = () => {
 
     let formData = new FormData();
 
+    previewFile(data.image);
     formData.append("image", data.image[0]);
 
     for (var key in userData) {
@@ -102,8 +106,22 @@ const UserProfile = () => {
       currentPassword: data.currentPassword,
     };
 
-    dispatch(updateUser(userData));
+    // dispatch(updateUser(userData));
   };
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file)
+    previewFile(file);
+  }
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    }
+  }
 
   const validateAge = (bday) => {
     const today = new Date();
@@ -159,9 +177,14 @@ const UserProfile = () => {
                       <div className="profile-position">
                         <img
                           className="profile-information-image"
-                          src={user.image}
+                          src={previewSource ? (
+                              previewSource
+                            ) : (
+                              user.image
+                            )}
                           alt=" "
                         ></img>
+                        
                         <label
                           className="upload-image-label"
                           htmlFor="upload-photo"
@@ -174,6 +197,7 @@ const UserProfile = () => {
                           style={{
                             border: errors.image ? "1px solid #f44336" : "",
                           }}
+                          onChange={handleFileInputChange}
                           id="upload-photo"
                         />
                       </div>
