@@ -45,6 +45,10 @@ const productSchema = mongoose.Schema(
       type: Array,
       required: [true, "Product Image is required"],
     },
+    cloudinaryIDs: {
+      type: Array,
+      required: [true, "Cloudinary ID is required"],
+    },
     featured: {
       type: Boolean,
       defualt: false,

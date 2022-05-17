@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const fs = require("fs");
+const { cloudinary } = require("../util/cloudinary");
 
 const Product = require("../models/productModel");
 const Review = require("../models/reviewModel");
@@ -181,55 +182,23 @@ const getFeaturedProducts = asyncHandler(async (req, res) => {
 const setProduct = asyncHandler(async (req, res) => {
   // Check user
   if (!req.user) {
-    for (let i = 0; i < req.files.length; i++) {
-      let removeImagePath = req.files[i].path;
-      if (removeImagePath) {
-        if (fs.existsSync(removeImagePath)) {
-          fs.unlinkSync(removeImagePath);
-        }
-      }
-    }
     res.status(400);
     throw new Error("User not found");
   }
 
   // Check for user
   if (!req.user) {
-    for (let i = 0; i < req.files.length; i++) {
-      let removeImagePath = req.files[i].path;
-      if (removeImagePath) {
-        if (fs.existsSync(removeImagePath)) {
-          fs.unlinkSync(removeImagePath);
-        }
-      }
-    }
     res.status(401);
     throw new Error("User not found");
   }
 
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
-    for (let i = 0; i < req.files.length; i++) {
-      let removeImagePath = req.files[i].path;
-      if (removeImagePath) {
-        if (fs.existsSync(removeImagePath)) {
-          fs.unlinkSync(removeImagePath);
-        }
-      }
-    }
     res.status(401);
     throw new Error("User not authorized");
   }
 
   if (!req.files) {
-    for (let i = 0; i < req.files.length; i++) {
-      let removeImagePath = req.files[i].path;
-      if (removeImagePath) {
-        if (fs.existsSync(removeImagePath)) {
-          fs.unlinkSync(removeImagePath);
-        }
-      }
-    }
     res.status(401);
     throw new Error("There was a problem uploading the image");
   }
@@ -244,10 +213,16 @@ const setProduct = asyncHandler(async (req, res) => {
   }
 
   let tempFiles = [];
-  const destination = "frontend\\public";
+  let tempCloudinaryIDs = [];
   for (let i = 0; i < req.files.length; i++) {
-    console.log(req.files[i].path.slice(destination.length));
-    tempFiles.push(req.files[i].path.slice(destination.length));
+    const uploadedResponse = await cloudinary.uploader.upload(
+      req.files[i].path,
+      {
+        upload_preset: "product_setups",
+      }
+    );
+    tempFiles.push(uploadedResponse.secure_url);
+    tempCloudinaryIDs.push(uploadedResponse.public_id);
   }
 
   console.log(req.body);
@@ -274,6 +249,7 @@ const setProduct = asyncHandler(async (req, res) => {
     salePercent: req.body.salePercent,
     description: req.body.description,
     images: tempFiles,
+    cloudinaryIDs: tempCloudinaryIDs,
     featured: req.body.featured,
   });
 
@@ -299,64 +275,38 @@ const updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.body._id);
 
   if (!product) {
-    for (let i = 0; i < req.files.length; i++) {
-      let removeImagePath = req.files[i].path;
-      if (removeImagePath) {
-        if (fs.existsSync(removeImagePath)) {
-          fs.unlinkSync(removeImagePath);
-        }
-      }
-    }
     res.status(400);
     throw new Error("Product not found");
   }
 
   // Check user
   if (!req.user) {
-    for (let i = 0; i < req.files.length; i++) {
-      let removeImagePath = req.files[i].path;
-      if (removeImagePath) {
-        if (fs.existsSync(removeImagePath)) {
-          fs.unlinkSync(removeImagePath);
-        }
-      }
-    }
     res.status(400);
     throw new Error("User not found");
   }
 
   // Check if user is not an admin
   if (req.user.userType !== "admin") {
-    for (let i = 0; i < req.files.length; i++) {
-      let removeImagePath = req.files[i].path;
-      if (removeImagePath) {
-        if (fs.existsSync(removeImagePath)) {
-          fs.unlinkSync(removeImagePath);
-        }
-      }
-    }
     res.status(401);
     throw new Error("User not authorized");
   }
 
-  console.log(product.images);
   let tempFiles = [];
-  const destination = "frontend\\public";
-
+  let tempCloudinaryIDs = [];
   if (req.files.length > 0) {
     for (let i = 0; i < product.images.length; i++) {
-      let removeImagePath = product.images[i];
-      console.log(removeImagePath);
-      if (removeImagePath) {
-        if (fs.existsSync(destination + removeImagePath)) {
-          fs.unlinkSync(destination + removeImagePath);
-        }
-      }
+      await cloudinary.uploader.destroy(product.cloudinaryIDs[i]);
     }
 
     for (let i = 0; i < req.files.length; i++) {
-      console.log(req.files[i].path);
-      tempFiles.push(req.files[i].path.slice(destination.length));
+      const uploadedResponse = await cloudinary.uploader.upload(
+        req.files[i].path,
+        {
+          upload_preset: "product_setups",
+        }
+      );
+      tempFiles.push(uploadedResponse.secure_url);
+      tempCloudinaryIDs.push(uploadedResponse.public_id);
     }
   } else {
     tempFiles = product.images;
@@ -389,6 +339,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       salePercent: req.body.salePercent,
       description: req.body.description,
       images: tempFiles,
+      cloudinaryIDs: tempCloudinaryIDs,
       featured: req.body.featured,
     },
     { new: true }
@@ -420,16 +371,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  const destination = "frontend\\public";
-  if (product.images.length > 0) {
+  if (req.files.length > 0) {
     for (let i = 0; i < product.images.length; i++) {
-      let removeImagePath = product.images[i];
-      console.log(removeImagePath);
-      if (removeImagePath) {
-        if (fs.existsSync(destination + removeImagePath)) {
-          fs.unlinkSync(destination + removeImagePath);
-        }
-      }
+      await cloudinary.uploader.destroy(product.cloudinaryIDs[i]);
     }
   }
 
