@@ -1,19 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+import { EncryptStorage } from "encrypt-storage";
+const CryptoJS = require("crypto-js");
+
+export const encryptStorage = new EncryptStorage("secret-key", {
+  storageType: "localStorage",
+});
 
 // Get user from localStorage
-const user = JSON.parse(localStorage.getItem("user"));
+const sessionUser = encryptStorage.getItem("token");
 
 const initialState = {
-  user: user ? user : null,
+  user: sessionUser ? sessionUser : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
+  isAuthLoading: false,
+  isAuthError: false,
+  isAuthSuccess: false,
   isAccountRecovered: false,
   isAccountDeleted: false,
   isAdminUpdated: false,
   isDeleteLoading: false,
   isCustomerProfileUpdated: false,
+  isCustomerAddressUpdated: false,
   isCustomerPasswordUpdated: false,
   message: "",
   users: [],
@@ -142,18 +152,30 @@ export const updateUser = createAsyncThunk(
 );
 
 // Get user
+export const getUser = createAsyncThunk("auth/getUser", async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await authService.getUser(token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Get users
 export const getUsers = createAsyncThunk("auth/getAll", async (_, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user.token;
     return await authService.getUsers(token);
   } catch (error) {
-    const cartMessage =
-      (error.response &&
-        error.response.data &&
-        error.response.data.cartMessage) ||
-      error.cartMessage ||
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
       error.toString();
-    return thunkAPI.rejectWithValue(cartMessage);
+    return thunkAPI.rejectWithValue(message);
   }
 });
 
@@ -165,13 +187,13 @@ export const deleteUser = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await authService.deleteUser(id, token);
     } catch (error) {
-      const cartMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.cartMessage) ||
-        error.cartMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(cartMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -212,10 +234,14 @@ export const authSlice = createSlice({
       state.isAdminUpdated = false;
       state.isCustomerProfileUpdated = false;
       state.isCustomerPasswordUpdated = false;
+      state.isCustomerAddressUpdated = false;
       state.isAccountRecovered = false;
       state.isAccountDeleted = false;
       state.isDeleteLoading = false;
       state.users = [];
+      state.isAuthError = false;
+      state.isAuthSuccess = false;
+      state.isAuthLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -243,7 +269,12 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+
+        const bytes = CryptoJS.AES.decrypt(
+          action.payload,
+          "@UNICHEM-secret-key-for-user-data"
+        );
+        state.user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -315,17 +346,47 @@ export const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+
         if (action.payload.isPasswordUpdated) {
           state.isCustomerPasswordUpdated = true;
-        } else {
+        }
+        if (action.payload.isCustomerProfileUpdated) {
           state.isCustomerProfileUpdated = true;
         }
-        state.user = action.payload.user;
+        if (action.payload.isCustomerAddressUpdated) {
+          state.isCustomerAddressUpdated = true;
+        }
+
+        const bytes = CryptoJS.AES.decrypt(
+          action.payload.userData,
+          "@UNICHEM-secret-key-for-user-data"
+        );
+        state.user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      // Get user Case
+      .addCase(getUser.pending, (state) => {
+        state.isAuthLoading = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.isAuthLoading = false;
+        state.isAuthSuccess = true;
+
+        const bytes = CryptoJS.AES.decrypt(
+          action.payload.userData,
+          "@UNICHEM-secret-key-for-user-data"
+        );
+        state.user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.isAuthLoading = false;
+        state.isAuthError = true;
+        state.message = action.payload;
+        state.user = null;
       })
       // Get Users Case
       .addCase(getUsers.pending, (state) => {
@@ -370,6 +431,12 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isAdminUpdated = true;
+
+        const bytes = CryptoJS.AES.decrypt(
+          action.payload,
+          "@UNICHEM-secret-key-for-user-data"
+        );
+        state.user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       })
       .addCase(updateAdmin.rejected, (state, action) => {
         state.isLoading = false;

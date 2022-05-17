@@ -32,10 +32,7 @@ const ProfilePurchase = () => {
 
   useEffect(() => {
     if (isOrderError) {
-    }
-
-    if (!user) {
-      navigate("/login");
+      toast.error(orderMessage);
     }
 
     if (isOrderUpdated) {
@@ -47,7 +44,7 @@ const ProfilePurchase = () => {
     return () => {
       dispatch(resetOrder());
     };
-  }, [user, navigate, isOrderError, orderMessage, isOrderUpdated, dispatch]);
+  }, [navigate, isOrderError, orderMessage, isOrderUpdated, dispatch]);
 
   if (isOrderLoading) {
     return (

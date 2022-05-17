@@ -19,6 +19,8 @@ const Login = () => {
     register,
     handleSubmit,
     // watch,
+    reset,
+    resetField,
     formState: { errors },
   } = useForm();
 
@@ -35,14 +37,27 @@ const Login = () => {
         message === "A new verification link has been sent to your email."
       ) {
         Swal.fire({
-          title: "Verify your Email",
+          title: "Email Verification",
           text: message,
           icon: "warning",
           confirmButtonColor: "#f44336",
           confirmButtonText: "Ok",
         });
+        reset();
       } else {
         setLoginError(message);
+        if (
+          message ===
+          "Email does not exist. Please register or try again with a different email address."
+        ) {
+          reset();
+        }
+        if (
+          message ===
+          "You've entered a wrong password. You may click forgot password to reset it or try again."
+        ) {
+          resetField("password");
+        }
       }
     }
 
@@ -54,7 +69,16 @@ const Login = () => {
     return () => {
       dispatch(resetUser());
     };
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [
+    user,
+    isError,
+    isSuccess,
+    message,
+    navigate,
+    dispatch,
+    reset,
+    resetField,
+  ]);
 
   const onSubmit = (data) => {
     dispatch(login(data));

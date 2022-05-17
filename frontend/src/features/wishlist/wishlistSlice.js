@@ -18,13 +18,13 @@ export const setWishlist = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await wishlistService.setWishlist(wishlistData, token);
     } catch (error) {
-      const wishlistMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.wishlistMessage) ||
-        error.wishlistMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(wishlistMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -37,13 +37,13 @@ export const getWishlists = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await wishlistService.getWishlists(token);
     } catch (error) {
-      const wishlistMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.wishlistMessage) ||
-        error.wishlistMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(wishlistMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -56,13 +56,13 @@ export const deleteWishlist = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await wishlistService.deleteWishlist(id, token);
     } catch (error) {
-      const wishlistMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.wishlistMessage) ||
-        error.wishlistMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(wishlistMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -75,13 +75,13 @@ export const deleteAllWishlist = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await wishlistService.deleteAllWishlist(userID, token);
     } catch (error) {
-      const wishlistMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.wishlistMessage) ||
-        error.wishlistMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(wishlistMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );

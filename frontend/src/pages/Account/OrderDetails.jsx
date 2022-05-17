@@ -1,20 +1,37 @@
-import React from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import ProfileSidebar from "../../components/ProfileSidebar";
 import OrderLogInformation from "../../components/OrderLogInformation";
 
 const OrderDetails = () => {
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    document.title = "Unichem Store | Order Details";
+
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   return (
     <>
-      <Breadcrumb type="order" />
-      <div className="container main-profile-section">
-        <ProfileSidebar />
-        <div className="spacer"></div>
+      {user && (
+        <>
+          <Breadcrumb type="order" />
+          <div className="container main-profile-section">
+            <ProfileSidebar />
+            <div className="spacer"></div>
 
-        <div className="container">
-          <OrderLogInformation />
-        </div>
-      </div>
+            <div className="container">
+              <OrderLogInformation />
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

@@ -13,6 +13,8 @@ const sendEmail = require("../util/sendEmail");
 const crypto = require("crypto");
 const Mailgen = require("mailgen");
 const fs = require("fs");
+const moment = require("moment");
+const CryptoJS = require("crypto-js");
 
 // @desc    Register user
 // @route   POST /api/users/signup
@@ -93,7 +95,7 @@ const registerUser = asyncHandler(async (req, res) => {
         },
       },
       outro:
-        "Need help, or have questions? Just reply to this email, we'd love to help.",
+        "Need help, or have questions? Just message us in the website's live chat.",
     },
   };
 
@@ -130,10 +132,17 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   // User does not exist and incorrect password
-  if (!user || !(await bcrypt.compare(password, user.password))) {
+  if (!user) {
     res.status(400);
     throw new Error(
-      "You've entered a wrong email or password. Please try again."
+      "Email does not exist. Please register or try again with a different email address."
+    );
+  }
+
+  if (!(await bcrypt.compare(password, user.password))) {
+    res.status(400);
+    throw new Error(
+      "You've entered a wrong password. You may click forgot password to reset it or try again."
     );
   }
 
@@ -178,7 +187,7 @@ const loginUser = asyncHandler(async (req, res) => {
             },
           },
           outro:
-            "Need help, or have questions? Just reply to this email, we'd love to help.",
+            "Need help, or have questions? Just message us in the website's live chat.",
         },
       };
 
@@ -206,22 +215,39 @@ const loginUser = asyncHandler(async (req, res) => {
   // Authenticate
   const userID = user._id;
   const userAddress = await Address.findOne({ userID });
-  res.json({
-    _id: userID,
+
+  const data = {
+    _id: user._id,
     name: user.name,
     email: user.email,
     sex: user.sex,
     birthday: user.birthday,
-    userType: user.userType,
+    userType:
+      user.userType === "customer"
+        ? CryptoJS.AES.encrypt(
+            "customer",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString()
+        : CryptoJS.AES.encrypt(
+            "admin",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString(),
     image: user.image,
     address: userAddress.address,
     primaryAddress: userAddress.primaryAddress,
     token: generateToken(user._id),
-  });
+  };
+
+  const userData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "@UNICHEM-secret-key-for-user-data"
+  ).toString();
+
+  res.json(userData);
 });
 
 // @desc    Get user data
-// @route   GET /api/users/getUser
+// @route   GET /api/users/getUsers
 // @access  Private
 const getUsers = asyncHandler(async (req, res) => {
   if (!req.user && req.user.userType !== "admin") {
@@ -236,10 +262,90 @@ const getUsers = asyncHandler(async (req, res) => {
   res.status(200).json(users);
 });
 
+// @desc    Get user data
+// @route   GET /api/users/getUser/:id
+// @access  Private
+const getUser = asyncHandler(async (req, res) => {
+  // console.log(req.params);
+
+  if (!req.user) {
+    res.status(400);
+    throw new Error("Access Denied");
+  }
+
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const userAddress = await Address.findOne({ userID: user._id });
+
+  const userToken = jwt.decode(req.params.token);
+
+  // console.log(userToken);
+
+  // console.log(
+  //   "IAT: " + userToken.iat,
+  //   "DB: " + moment(user.passwordUpdatedAt).unix()
+  // );
+
+  if (userToken.iat < moment(user.passwordUpdatedAt).unix()) {
+    res.status(400);
+    throw new Error("Token expired");
+  }
+
+  // console.log(valid);
+
+  let wishlistCount = 0;
+  let cartCount = 0;
+  if (user.userType === "customer") {
+    wishlistCount = await Wishlist.find({ userID: user._id }).count();
+    cartCount = await Cart.find({ userID: user._id }).count();
+  }
+
+  const data = {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
+    userType:
+      user.userType === "customer"
+        ? CryptoJS.AES.encrypt(
+            "customer",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString()
+        : CryptoJS.AES.encrypt(
+            "admin",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString(),
+    image: user.image,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: req.params.token,
+  };
+
+  const userData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "@UNICHEM-secret-key-for-user-data"
+  ).toString();
+
+  res.status(200).json({
+    userData,
+    wishlistCount,
+    cartCount,
+  });
+});
+
 // @desc    Update user data
 // @route   PUT /api/users/updateUser
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
+  let isPasswordUpdated = false;
+  let isCustomerProfileUpdated = false;
+  let isCustomerAddressUpdated = false;
+
   // Check for user
   if (!req.user) {
     res.status(401);
@@ -252,9 +358,6 @@ const updateUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User not found");
   }
-
-  // console.log(req.body);
-  // console.log(req.file);
 
   let tempImage;
   if (req.file) {
@@ -275,29 +378,44 @@ const updateUser = asyncHandler(async (req, res) => {
     tempImage = user.image;
   }
 
-  let isPasswordUpdated = false;
   if (req.body.currentPassword) {
     if (await bcrypt.compare(req.body.currentPassword, user.password)) {
-      // hash the password using bcrypt
+      if (await bcrypt.compare(req.body.password, user.password)) {
+        res.status(400);
+        throw new Error("Password is the same as the current one");
+      }
+
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
       isPasswordUpdated = true;
+      user.passwordUpdatedAt = Date.now();
     } else {
       res.status(400);
-      throw new Error("Current password is incorrect.");
+      throw new Error("Current password is incorrect");
     }
+  }
+
+  if (req.body.name) {
+    isCustomerProfileUpdated = true;
+  }
+
+  if (
+    req.body.address ||
+    req.body.primaryAddress == 0 ||
+    req.body.primaryAddress
+  ) {
+    isCustomerAddressUpdated = true;
   }
 
   const updatedUser = await User.findByIdAndUpdate(
     req.user.id,
     {
       name: req.body.name,
-      email: req.body.email,
       sex: req.body.sex,
       birthday: req.body.birthday,
-      userType: req.body.userType,
       password: req.body.password,
       image: tempImage,
+      passwordUpdatedAt: user.passwordUpdatedAt,
     },
     {
       new: true,
@@ -312,21 +430,39 @@ const updateUser = asyncHandler(async (req, res) => {
     { new: true }
   );
 
+  const data = {
+    _id: updatedUser._id,
+    name: updatedUser.name,
+    email: updatedUser.email,
+    sex: updatedUser.sex,
+    birthday: updatedUser.birthday,
+    userType: updatedUser.userType,
+    image: updatedUser.image,
+    userType:
+      user.userType === "customer"
+        ? CryptoJS.AES.encrypt(
+            "customer",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString()
+        : CryptoJS.AES.encrypt(
+            "admin",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString(),
+    address: updatedAddress.address,
+    primaryAddress: updatedAddress.primaryAddress,
+    token: generateToken(updatedUser._id),
+  };
+
+  const userData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "@UNICHEM-secret-key-for-user-data"
+  ).toString();
+
   res.status(200).json({
-    user: {
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      sex: updatedUser.sex,
-      birthday: updatedUser.birthday,
-      userType: updatedUser.userType,
-      image: updatedUser.image,
-      userType: updatedUser.userType,
-      address: updatedAddress.address,
-      primaryAddress: updatedAddress.primaryAddress,
-      token: generateToken(updatedUser._id),
-    },
+    userData,
     isPasswordUpdated,
+    isCustomerProfileUpdated,
+    isCustomerAddressUpdated,
   });
 });
 
@@ -447,7 +583,7 @@ const createRecovery = asyncHandler(async (req, res) => {
           },
         },
         outro:
-          "Need help, or have questions? Just reply to this email, we'd love to help.",
+          "Need help, or have questions? Just message us in the website's live chat.",
       },
     };
 
@@ -549,6 +685,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
       user.password = req.body.password;
+      user.passwordUpdatedAt = Date.now();
       await user.save();
     } else {
       res.status(400);
@@ -556,7 +693,37 @@ const updateAdmin = asyncHandler(async (req, res) => {
     }
   }
 
-  res.status(200).json({ message: "Password updated successfully" });
+  const userID = user._id;
+  const userAddress = await Address.findOne({ userID });
+
+  const data = {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    sex: user.sex,
+    birthday: user.birthday,
+    userType:
+      user.userType === "customer"
+        ? CryptoJS.AES.encrypt(
+            "customer",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString()
+        : CryptoJS.AES.encrypt(
+            "admin",
+            "@UNICHEM-secret-key-for-user-access"
+          ).toString(),
+    image: user.image,
+    address: userAddress.address,
+    primaryAddress: userAddress.primaryAddress,
+    token: generateToken(user._id),
+  };
+
+  const userData = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "@UNICHEM-secret-key-for-user-data"
+  ).toString();
+
+  res.status(200).json(userData);
 });
 
 // Generate JWT Token
@@ -570,6 +737,7 @@ module.exports = {
   registerUser,
   loginUser,
   getUsers,
+  getUser,
   updateUser,
   deleteUser,
   verifyUser,

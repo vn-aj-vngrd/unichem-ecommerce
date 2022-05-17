@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-
   const {
     user,
     isLoading,
@@ -20,21 +19,16 @@ const UserProfile = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: user.name,
-      birthday: user.birthday,
-      sex: user.sex,
-      email: user.email,
-    },
-  });
+  } = useForm({});
 
   const {
     register: registerPassword,
     handleSubmit: handleSubmitPassword,
     watch,
-    reset,
+    reset: resetPassword,
     formState: { errors: errorsPassword },
   } = useForm({
     defaultValues: {
@@ -47,6 +41,15 @@ const UserProfile = () => {
   const newPassword = watch("newPassword");
 
   useEffect(() => {
+    const defaultValues = {
+      name: user.name,
+      birthday: user.birthday,
+      sex: user.sex,
+      email: user.email,
+    };
+    reset(defaultValues);
+    resetPassword();
+
     if (isError) {
       toast.error(message);
     }
@@ -63,6 +66,10 @@ const UserProfile = () => {
       dispatch(resetUser());
     };
   }, [
+    user,
+    setValue,
+    reset,
+    resetPassword,
     isError,
     isCustomerProfileUpdated,
     isCustomerPasswordUpdated,
@@ -96,7 +103,6 @@ const UserProfile = () => {
     };
 
     dispatch(updateUser(userData));
-    reset();
   };
 
   const validateAge = (bday) => {
@@ -154,7 +160,7 @@ const UserProfile = () => {
                         <img
                           className="profile-information-image"
                           src={user.image}
-                          alt=""
+                          alt=" "
                         ></img>
                         <label
                           className="upload-image-label"
@@ -402,7 +408,7 @@ const UserProfile = () => {
                                 : "",
                             }}
                           />
-                          {errorsPassword.password && (
+                          {errorsPassword.currentPassword && (
                             <p className="error-message">
                               ⚠ {errorsPassword.currentPassword.message}
                             </p>

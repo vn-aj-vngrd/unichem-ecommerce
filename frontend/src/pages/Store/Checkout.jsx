@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb";
 import Swal from "sweetalert2";
 import Spinner from "../../components/Spinner";
-const moment = require("moment");
 
 const Checkout = () => {
   let itemSubtotal = 0;
@@ -29,9 +28,16 @@ const Checkout = () => {
 
   const { user } = useSelector((state) => state.auth);
   const { carts, isCartLoading } = useSelector((state) => state.cart);
-  const { isOrderAdded, isOrderError } = useSelector((state) => state.orders);
-  const { coupons, couponError, isCouponSuccess, isCouponLoading } =
-    useSelector((state) => state.coupons);
+  const { isOrderAdded, isOrderError, orderMessage } = useSelector(
+    (state) => state.orders
+  );
+  const {
+    coupons,
+    couponMessage,
+    isCouponSuccess,
+    isCouponLoading,
+    isCouponError,
+  } = useSelector((state) => state.coupons);
 
   const [payment, setPayment] = useState("");
   const [orderDiscount, setOrderDiscount] = useState({
@@ -50,8 +56,19 @@ const Checkout = () => {
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
-    if (!user) {
-      navigate("/");
+    resetField("couponCode");
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+
+    if (!localStorage.getItem("token") && !localStorage.getItem("c-cnt") < 1) {
+      Swal.fire({
+        title: "Failed to Checkout",
+        icon: "error",
+        text: "You don't have any items in your cart.",
+        confirmButtonColor: "#f44336",
+      });
+      navigate("/cart");
     }
 
     dispatch(getCarts());
@@ -70,73 +87,22 @@ const Checkout = () => {
       Swal.fire({
         title: "Failed to Checkout",
         icon: "error",
-        text: "There is a problem with your order process, please try again.",
+        text: orderMessage,
       });
       navigate("/cart");
     }
 
-    if (couponError.length > 0) {
-      switch (couponError) {
-        case "notFound": {
-          Swal.fire({
-            title: "Coupon is Invalid",
-            icon: "error",
-            text: "Please input a valid coupon.",
-            confirmButtonColor: "#f44336",
-          });
-          break;
-        }
-        case "requiredAmountError": {
-          Swal.fire({
-            title: "Coupon is Invalid",
-            icon: "error",
-            text: "Sorry, the coupon requirement does not meet your order subtotal amount.",
-            confirmButtonColor: "#f44336",
-          });
-          break;
-        }
-        case "expired": {
-          Swal.fire({
-            title: "Coupon is Invalid",
-            icon: "error",
-            text: "Coupon has expired",
-            confirmButtonColor: "#f44336",
-          });
-          break;
-        }
-        case "existingCoupon": {
-          Swal.fire({
-            title: "Coupon is Invalid",
-            icon: "error",
-            text: "Sorry, you already used this coupon.",
-            confirmButtonColor: "#f44336",
-          });
-          break;
-        }
-        case "limitError": {
-          Swal.fire({
-            title: "Coupon is Invalid",
-            icon: "error",
-            text: "Sorry, the coupon has already exceeded the limit of use.",
-            confirmButtonColor: "#f44336",
-          });
-          break;
-        }
-        default: {
-          Swal.fire({
-            title: "Failed to Validate Coupon",
-            icon: "error",
-            text: "Sorry, there is an error upon coupon validation. Please try again.",
-            confirmButtonColor: "#f44336",
-          });
-          break;
-        }
-      }
+    if (isCouponError) {
+      Swal.fire({
+        title: "Failed",
+        icon: "error",
+        text: couponMessage,
+      });
     }
 
     if (isCouponSuccess) {
       Swal.fire({
-        title: "Coupon is Verified",
+        title: "Coupon Verified",
         text: coupons.description,
         icon: "success",
         confirmButtonColor: "#f44336",
@@ -184,7 +150,6 @@ const Checkout = () => {
       dispatch(resetCoupon());
     };
   }, [
-    user,
     coupons,
     isCouponSuccess,
     orderDiscount,
@@ -192,19 +157,12 @@ const Checkout = () => {
     navigate,
     isOrderAdded,
     isOrderError,
-    couponError,
+    isCouponError,
+    orderMessage,
+    couponMessage,
     dispatch,
+    resetField,
   ]);
-
-  if (localStorage.getItem("cartCount") < 1) {
-    Swal.fire({
-      title: "Failed to Checkout",
-      icon: "error",
-      text: "You don't have any items in your cart.",
-      confirmButtonColor: "#f44336",
-    });
-    navigate("/cart");
-  }
 
   const checked = carts.reduce((count, cart) => {
     if (cart._doc.checked) {
@@ -272,7 +230,6 @@ const Checkout = () => {
     };
 
     dispatch(validateCoupon(couponData));
-    resetField("couponCode");
   };
 
   const onSelectPayment = (e) => {
@@ -687,28 +644,28 @@ const Checkout = () => {
                                 <ul>
                                   <li className="address-header">
                                     <h6>
-                                      {
+                                      {user &&
                                         user.address[user.primaryAddress]
-                                          .addressName
-                                      }
+                                          .addressName}
                                     </h6>
                                   </li>
                                   <li>
                                     <p>
                                       <b>Phone:</b>
-                                      {
+                                      {user &&
                                         user.address[user.primaryAddress]
-                                          .phoneNumber
-                                      }
+                                          .phoneNumber}
                                     </p>
                                   </li>
                                   <li>
                                     <p>
                                       <b>Address:</b>
                                       {`${
+                                        user &&
                                         user.address[user.primaryAddress]
                                           .address1
                                       } ${
+                                        user &&
                                         user.address[user.primaryAddress]
                                           .address2
                                       }`}
@@ -717,10 +674,9 @@ const Checkout = () => {
                                   <li>
                                     <p>
                                       <b>Postal Code:</b>
-                                      {
+                                      {user &&
                                         user.address[user.primaryAddress]
-                                          .postalCode
-                                      }
+                                          .postalCode}
                                     </p>
                                   </li>
 

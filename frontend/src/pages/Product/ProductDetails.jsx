@@ -38,18 +38,23 @@ const ProductDetails = () => {
     <>
       <Breadcrumb type="product" />
 
-      {products.length > 0 && (
-        <>
-          <Details product={products[0]} />
-          {isProductLoading ? (
+      <>
+        {isProductLoading ? (
+          <div className="container">
             <Spinner />
-          ) : (
-            <Specifications product={products[0]} />
-          )}
-        </>
-      )}
-
-      <ReviewsSection productID={id} />
+          </div>
+        ) : (
+          <>
+            {products.length > 0 && (
+              <>
+                <Details product={products[0]} />
+                <Specifications product={products[0]} />
+                <ReviewsSection productID={id} />
+              </>
+            )}
+          </>
+        )}
+      </>
     </>
   );
 };

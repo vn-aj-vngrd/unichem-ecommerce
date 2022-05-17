@@ -16,6 +16,7 @@ import Spinner from "../../components/Spinner";
 import CartSummary from "../../components/CartSummary";
 import Quantity from "../../components/Quantity";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   let itemSubtotal = 0;
@@ -26,16 +27,16 @@ const Cart = () => {
   const { carts, isCartLoading, isCartError, cartMessage } = useSelector(
     (state) => state.cart
   );
-  const { user } = useSelector((state) => state.auth);
+
   useEffect(() => {
     document.title = "Unichem Store | Cart";
 
-    if (!user) {
+    if (!localStorage.getItem("token")) {
       navigate("/login");
     }
 
     if (isCartError) {
-      // console.log(isCartError);
+      toast.error(cartMessage);
     }
 
     dispatch(getCarts());
@@ -44,7 +45,7 @@ const Cart = () => {
       dispatch(resetWishlist());
       dispatch(resetCart());
     };
-  }, [user, navigate, isCartError, cartMessage, dispatch]);
+  }, [navigate, isCartError, cartMessage, dispatch]);
 
   const cartCount = carts.reduce((count, cart) => {
     if (cart.product.quantities[cart._doc.productType] > 0) {

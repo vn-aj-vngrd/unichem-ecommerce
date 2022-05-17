@@ -3,15 +3,16 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, resetUser } from "../features/auth/authSlice";
-import {
-  getWishlists,
-  resetWishlist,
-} from "../features/wishlist/wishlistSlice";
-import { getCarts, resetCart } from "../features/cart/cartSlice";
 import logo from "../assets/images/logo.svg";
 import { toast } from "react-toastify";
+import { EncryptStorage } from "encrypt-storage";
+
+export const encryptStorage = new EncryptStorage("secret-key", {
+  storageType: "localStorage",
+});
 
 const Navbar = ({ userType }) => {
+  const CryptoJS = require("crypto-js");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,37 +21,32 @@ const Navbar = ({ userType }) => {
   useSelector((state) => state.cart);
 
   const [input, setInput] = useState("");
-  let username = "";
 
-  useEffect(() => {
-    if (user && user.userType === "customer") {
-      dispatch(getWishlists());
-      dispatch(getCarts());
-
-      return () => {
-        dispatch(resetUser());
-        dispatch(resetWishlist());
-        dispatch(resetCart());
-      };
-    }
-  }, [user, dispatch]);
+  useEffect(() => {}, [user]);
 
   let wishlistCount = 0;
   let cartCount = 0;
+  let username = "";
 
   if (user) {
-    wishlistCount = localStorage.getItem("wishlistCount");
-    cartCount = localStorage.getItem("cartCount");
-    username = user.name.split(" ")[0];
+    const bytes = CryptoJS.AES.decrypt(
+      user.userType,
+      "@UNICHEM-secret-key-for-user-access"
+    );
+    if (bytes.toString(CryptoJS.enc.Utf8) === "customer") {
+      wishlistCount = encryptStorage.getItem("w-cnt");
+      cartCount = encryptStorage.getItem("c-cnt");
+      username = user.name ? user.name.split(" ")[0] : "";
+    }
   }
 
   const onLogout = (e) => {
     e.preventDefault();
 
-    toast.success(`See you around, ${username}!`);
     dispatch(logout());
     dispatch(resetUser());
     navigate("/");
+    toast.success(`See you around, ${username}!`);
   };
 
   const onSearch = (e) => {

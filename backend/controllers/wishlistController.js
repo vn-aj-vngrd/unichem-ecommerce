@@ -35,7 +35,7 @@ const setWishlist = asyncHandler(async (req, res) => {
 
   if (existingWishlist) {
     res.status(400);
-    throw new Error("Wishlist already exists");
+    throw new Error("Item is already in your wishlist.");
   }
 
   const newWishlist = await Wishlist.create({

@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect, useState } from "react"; //useMemo
+import { Link } from "react-router-dom"; //useNavigate
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, resetProduct } from "../features/products/productSlice";
 import Star from "./Star";
@@ -13,7 +13,7 @@ const Product = ({
   filters,
   setFilters,
 }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sortDefault, setSortDefault] = useState("none");
   const [pageNumber, setPageNumber] = useState(0);

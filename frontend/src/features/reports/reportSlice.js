@@ -17,13 +17,13 @@ export const getDashboardReport = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await reportService.getDashboardReport(token);
     } catch (error) {
-      const orderMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.orderMessage) ||
-        error.orderMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(orderMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );

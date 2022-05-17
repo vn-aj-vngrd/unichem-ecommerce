@@ -1,16 +1,16 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; //useNavigate
+import { useEffect } from "react"; //useState,
 import { useSelector, useDispatch } from "react-redux";
 import { getUserReviews, resetReview } from "../features/reviews/reviewSlice";
-import Star from "./Star";
+// import Star from "./Star";
 import Spinner from "../components/Spinner";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 import ReviewSingle from "./ReviewSingle";
 
 function ProfileReviews() {
-  const { user } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
+  // const { user } = useSelector((state) => state.auth);
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { reviews, isReviewLoading, isReviewError, reviewMessage } =

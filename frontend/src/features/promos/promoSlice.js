@@ -20,13 +20,13 @@ export const setPromo = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await promoService.setPromo(promoData, token);
     } catch (error) {
-      const promoMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.promoMessage) ||
-        error.promoMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(promoMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -38,13 +38,13 @@ export const getPromos = createAsyncThunk(
     try {
       return await promoService.getPromos();
     } catch (error) {
-      const promoMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.promoMessage) ||
-        error.promoMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(promoMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -57,13 +57,13 @@ export const updatePromo = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await promoService.updatePromo(promoData, token);
     } catch (error) {
-      const promoMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.promoMessage) ||
-        error.promoMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(promoMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -77,13 +77,13 @@ export const deletePromo = createAsyncThunk(
       console.log(false);
       return await promoService.deletePromo(id, token);
     } catch (error) {
-      const promoMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.promoMessage) ||
-        error.promoMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(promoMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -104,7 +104,7 @@ export const promoSlice = createSlice({
         state.isPromoLoading = false;
         state.isPromoSuccess = true;
         state.isPromoCreated = true;
-        state.promos = [...state.promos, action.payload]
+        state.promos = [...state.promos, action.payload];
       })
       .addCase(setPromo.rejected, (state, action) => {
         state.isPromoLoading = false;

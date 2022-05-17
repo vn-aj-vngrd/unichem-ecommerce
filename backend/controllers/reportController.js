@@ -32,6 +32,7 @@ const getDashboardReport = asyncHandler(async (req, res) => {
   const todayUsers = await User.aggregate([
     {
       $match: {
+        userType: "customer",
         createdAt: {
           $gte: moment().startOf("day").toDate(),
           $lte: moment().endOf("day").toDate(),
@@ -114,6 +115,7 @@ const getDashboardReport = asyncHandler(async (req, res) => {
   const weeklyUsers = await User.aggregate([
     {
       $match: {
+        userType: "customer",
         createdAt: {
           $gte: moment().startOf("week").toDate(),
           $lte: moment().endOf("week").toDate(),
@@ -196,6 +198,7 @@ const getDashboardReport = asyncHandler(async (req, res) => {
   const monthlyUsers = await User.aggregate([
     {
       $match: {
+        userType: "customer",
         createdAt: {
           $gte: moment().startOf("month").toDate(),
           $lte: moment().endOf("month").toDate(),
@@ -278,6 +281,7 @@ const getDashboardReport = asyncHandler(async (req, res) => {
   const yearlyUsers = await User.aggregate([
     {
       $match: {
+        userType: "customer",
         createdAt: {
           $gte: moment().startOf("year").toDate(),
           $lte: moment().endOf("year").toDate(),
@@ -350,7 +354,12 @@ const getDashboardReport = asyncHandler(async (req, res) => {
   ]);
 
   const totalUsers = await User.aggregate([
-    { $group: { _id: null, value: { $count: {} } } },
+    {
+      $match: { userType: "customer" },
+    },
+    {
+      $group: { _id: null, value: { $count: {} } },
+    },
   ]);
 
   const totalOrders = await Order.aggregate([

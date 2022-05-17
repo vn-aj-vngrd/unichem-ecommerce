@@ -99,7 +99,7 @@ const getOneProduct = asyncHandler(async (req, res) => {
     for (let k = 0; k < orderlines.length; k++) {
       const order = await Order.findById(orderlines[k].orderID);
       if (order) {
-        if (order.orderStatus === "Delivered") {
+        if (order.orderStatus === "Completed") {
           market.sold += orderlines[k].quantity;
         }
       }
@@ -156,7 +156,7 @@ const getFeaturedProducts = asyncHandler(async (req, res) => {
       for (let k = 0; k < orderlines.length; k++) {
         const order = await Order.findById(orderlines[k].orderID);
         if (order) {
-          if (order.orderStatus === "Delivered") {
+          if (order.orderStatus === "Completed") {
             market.sold += orderlines[k].quantity;
           }
         }

@@ -1,5 +1,4 @@
-// import { Link } from "react-router-dom";
-import { useEffect } from "react"; // useState
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser, resetUser } from "../features/auth/authSlice";
@@ -11,30 +10,43 @@ const UserAddress = () => {
   const {
     register,
     handleSubmit,
-    // watch,
     reset,
     formState: { errors },
   } = useForm();
 
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message, isCustomerProfileUpdated } = useSelector(
-    (state) => state.auth
-  );
+  const {
+    user,
+    isLoading,
+    isError,
+    isSuccess,
+    message,
+    isCustomerAddressUpdated,
+  } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    reset();
     if (isError) {
       toast.error(message);
     }
 
-    if (isCustomerProfileUpdated) {
+    if (isCustomerAddressUpdated) {
       toast.success("Address updated successfully");
     }
 
     return () => {
       dispatch(resetUser());
     };
-  }, [isError, isSuccess, message, isCustomerProfileUpdated, dispatch]);
+  }, [
+    user,
+    isError,
+    isSuccess,
+    message,
+    isCustomerAddressUpdated,
+    dispatch,
+    reset,
+  ]);
 
   // Create user address
   const onSubmit = (data) => {
@@ -52,7 +64,6 @@ const UserAddress = () => {
     };
 
     dispatch(updateUser(userData));
-    reset();
   };
 
   // Delete user address
@@ -60,7 +71,7 @@ const UserAddress = () => {
     let newPrimaryAddress = user.primaryAddress;
 
     if (index === newPrimaryAddress) {
-      toast.error("Cannot delete a default address");
+      toast.error("Default address cannot be deleted");
       return;
     }
 
@@ -114,7 +125,7 @@ const UserAddress = () => {
                         <li className="address-header">
                           <h6>
                             <i className="lni lni-map-marker"></i>{" "}
-                            {user.address[index].addressName}
+                            {address.addressName}
                           </h6>
                         </li>
                         <li>
@@ -182,7 +193,7 @@ const UserAddress = () => {
                         <li className="address-header">
                           <h6>
                             <i className="lni lni-map-marker"></i>{" "}
-                            {user.address[index].addressName}
+                            {address.addressName}
                           </h6>
                         </li>
                         <li>

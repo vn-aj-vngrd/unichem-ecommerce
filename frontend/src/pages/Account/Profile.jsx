@@ -11,10 +11,11 @@ const Manage = () => {
 
   useEffect(() => {
     document.title = "Unichem Store | Profile";
-    if (!user) {
+
+    if (!localStorage.getItem("token")) {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
   return (
     <>

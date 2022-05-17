@@ -53,7 +53,7 @@ const setCart = asyncHandler(async (req, res) => {
   // If cart "current quantity + req quanity" is greater than max then throw error
   if (existingCart.quantity + quantity > max) {
     res.status(400);
-    throw new Error("Product quantity exceeds maximum quantity");
+    throw new Error("You may have exceeded your purchase limit.");
   }
 
   // If cart exists then update quantity

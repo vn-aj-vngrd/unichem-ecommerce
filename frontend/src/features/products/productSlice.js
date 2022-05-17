@@ -18,10 +18,6 @@ export const setProduct = createAsyncThunk(
   "products/setProduct",
   async (productData, thunkAPI) => {
     try {
-      for (var key in productData) {
-        console.log(key, productData[key]);
-      }
-
       const token = thunkAPI.getState().auth.user.token;
       return await productService.setProduct(productData, token);
     } catch (error) {
@@ -43,13 +39,13 @@ export const getProducts = createAsyncThunk(
     try {
       return await productService.getProducts();
     } catch (error) {
-      const productMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.productMessage) ||
-        error.productMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(productMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -61,13 +57,13 @@ export const getOneProduct = createAsyncThunk(
     try {
       return await productService.getOneProduct(id);
     } catch (error) {
-      const productMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.productMessage) ||
-        error.productMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(productMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -79,13 +75,13 @@ export const getFeaturedProducts = createAsyncThunk(
     try {
       return await productService.getFeaturedProducts();
     } catch (error) {
-      const productMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.productMessage) ||
-        error.productMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(productMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -94,7 +90,7 @@ export const getFeaturedProducts = createAsyncThunk(
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async (productData, thunkAPI) => {
-    console.log("slice")
+    console.log("slice");
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await productService.updateProduct(productData, token);
@@ -118,13 +114,13 @@ export const deleteProduct = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await productService.deleteProduct(id, token);
     } catch (error) {
-      const productMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.productMessage) ||
-        error.productMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(productMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );

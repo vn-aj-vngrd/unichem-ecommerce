@@ -7,7 +7,7 @@ const UpdateCoupon = (coupon) => {
 
   const {
     register,
-    control,
+    // control,
     handleSubmit,
     watch,
     formState: { errors },

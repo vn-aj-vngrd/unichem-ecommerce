@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../features/auth/authSlice";
-
 import { useForm } from "react-hook-form";
 
 const EditAddress = ({ index }) => {
@@ -11,16 +11,21 @@ const EditAddress = ({ index }) => {
     register,
     handleSubmit,
     // watch,
+    reset: resetAddress,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
+  } = useForm({});
+
+  useEffect(() => {
+    const defaultValues = {
       addressNameUpdate: user.address[index].addressName,
       address1Update: user.address[index].address1,
       address2Update: user.address[index].address2,
       postalCodeUpdate: user.address[index].postalCode,
       phoneNumberUpdate: user.address[index].phoneNumber,
-    },
-  });
+    };
+
+    resetAddress(defaultValues);
+  }, [user, resetAddress, index]);
 
   // Update user address
   const onSubmitUpdate = (data) => {

@@ -11,6 +11,7 @@ const ForgotPassword = () => {
     register,
     handleSubmit,
     // watch,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -26,11 +27,14 @@ const ForgotPassword = () => {
   useEffect(() => {
     document.title = "Unichem Store | Forgot Password";
 
+    reset();
+
     if (isError) {
       setEmailError(message);
     }
 
     if (isSuccess) {
+      setEmailError();
       Swal.fire({
         title: "Forgot Password Link Sent",
         text: message,
@@ -38,8 +42,6 @@ const ForgotPassword = () => {
         confirmButtonColor: "#f44336",
         confirmButtonText: "Ok",
       });
-
-      // navigate("/");
     }
 
     if (user) {
@@ -47,7 +49,7 @@ const ForgotPassword = () => {
     }
 
     dispatch(resetUser());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch, reset]);
 
   const onSubmit = (data) => {
     dispatch(createRecovery(data));
@@ -76,6 +78,14 @@ const ForgotPassword = () => {
                   className="card login-form"
                   onSubmit={handleSubmit(onSubmit)}
                 >
+                  {emailError && (
+                    <div
+                      className="alert alert-danger text-center"
+                      role="alert"
+                    >
+                      <div>⚠ {emailError}</div>
+                    </div>
+                  )}
                   <div className="card-body">
                     <div className="form-group input-group">
                       <label>Email Address</label>
@@ -107,9 +117,6 @@ const ForgotPassword = () => {
                       <button className="btn" type="submit">
                         Send
                       </button>
-                    </div>
-                    <div className="text-center mt-4">
-                      {emailError && <p className="text-red">{emailError}</p>}
                     </div>
                     <p className="outer-link">
                       Don't have an account yet?{" "}

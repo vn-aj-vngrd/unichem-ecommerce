@@ -22,13 +22,13 @@ export const setOrder = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await orderService.setOrder(orderData, token);
     } catch (error) {
-      const orderMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.orderMessage) ||
-        error.orderMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(orderMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -41,13 +41,13 @@ export const getAllOrders = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await orderService.getAllOrders(token);
     } catch (error) {
-      const orderMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.orderMessage) ||
-        error.orderMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(orderMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -60,13 +60,13 @@ export const getUserOrders = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await orderService.getUserOrders(token);
     } catch (error) {
-      const orderMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.orderMessage) ||
-        error.orderMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(orderMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -79,13 +79,13 @@ export const getOneOrder = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await orderService.getOneOrder(id, token);
     } catch (error) {
-      const orderMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.orderMessage) ||
-        error.orderMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(orderMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -98,13 +98,13 @@ export const updateOrder = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await orderService.updateOrder(orderParams, token);
     } catch (error) {
-      const orderMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.orderMessage) ||
-        error.orderMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(orderMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -117,13 +117,13 @@ export const cancelOrder = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await orderService.cancelOrder(orderID, token);
     } catch (error) {
-      const orderMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.orderMessage) ||
-        error.orderMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(orderMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -136,13 +136,13 @@ export const deleteOrder = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await orderService.deleteOrder(id, token);
     } catch (error) {
-      const orderMessage =
+      const message =
         (error.response &&
           error.response.data &&
-          error.response.data.orderMessage) ||
-        error.orderMessage ||
+          error.response.data.message) ||
+        error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(orderMessage);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
