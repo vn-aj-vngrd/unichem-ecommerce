@@ -365,13 +365,11 @@ const updateUser = asyncHandler(async (req, res) => {
   let tempImage;
   let tempCloudinaryID;
   if (req.file) {
-    // find and delete existing
-    // cloudinary.api.resource(user.cloudinaryID).then(result => console.log(result))
+    // delete existing image
     if (user.cloudinaryID !== "users/user-placeholder_pooyoq") {
       await cloudinary.uploader.destroy(user.cloudinaryID);
     }
 
-    // upload
     const uploadedResponse = await cloudinary.uploader.upload(req.file.path, {
       upload_preset: "user_setups"
     })
@@ -488,6 +486,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  await cloudinary.uploader.destroy(user.cloudinaryID);
   await user.remove();
 
   await Orders.deleteMany({ userID: req.params.id });
@@ -498,12 +497,6 @@ const deleteUser = asyncHandler(async (req, res) => {
   await Cart.deleteMany({ userID: req.params.id });
   await Couponlog.findByIdAndDelete(req.params.id);
 
-  const destination = "frontend\\public";
-  if (user.image && user.image !== "\\uploads\\users\\user-placeholder.png") {
-    if (fs.existsSync(destination + user.image)) {
-      fs.unlinkSync(destination + user.image);
-    }
-  }
 
   res.status(200).json({ id: req.params.id });
 });

@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const fs = require("fs");
+const { cloudinary } = require("../util/cloudinary");
 
 const Promo = require("../models/promoModel");
 
@@ -45,7 +46,6 @@ const setPromo = asyncHandler(async (req, res) => {
     tempCloudinaryID = uploadedResponse.public_id;
   }
 
-  const destination = "frontend\\public";
   const promo = await Promo.create({
     promoName: req.body.promoName,
     description: req.body.description,
@@ -80,29 +80,19 @@ const updatePromo = asyncHandler(async (req, res) => {
   let tempImage;
   let tempCloudinaryID;
   if (req.file) {
+    // delete existing image
+    await cloudinary.uploader.destroy(promo.cloudinaryID);
+    
     const uploadedResponse = await cloudinary.uploader.upload(req.file.path, {
       upload_preset: "promo_setups"
     })
-
+    console.log(uploadedResponse)
     // Set temp image to image url
     tempImage = uploadedResponse.secure_url;
     tempCloudinaryID = uploadedResponse.public_id;
   } else {
     tempImage = promo.image;
     tempCloudinaryID = promo.cloudinaryID;
-  }
-
-  if (req.file) {
-    let removeImagePath = promo.image;
-    const destination = "frontend\\public";
-    if (removeImagePath) {
-      if (fs.existsSync(destination + removeImagePath)) {
-        fs.unlinkSync(destination + removeImagePath);
-      }
-    }
-    tempImage = req.file.path.slice(destination.length);
-  } else {
-    tempImage = promo.image;
   }
 
   const updatedPromo = await Promo.findByIdAndUpdate(
@@ -113,6 +103,7 @@ const updatePromo = asyncHandler(async (req, res) => {
       promoName: req.body.promoName,
       description: req.body.description,
       image: tempImage,
+      cloudinaryID: tempCloudinaryID,
       startDate: req.body.startDate,
       expiryDate: req.body.expiryDate,
     },
@@ -145,13 +136,7 @@ const deletePromo = asyncHandler(async (req, res) => {
     throw new Error("User not authorized.");
   }
 
-  const destination = "frontend\\public";
-  if (promo.image !== "") {
-    if (fs.existsSync(destination + promo.image)) {
-      fs.unlinkSync(destination + promo.image);
-    }
-  }
-
+  await cloudinary.uploader.destroy(promo.cloudinaryID);
   await promo.remove();
   res.status(200).json({ _id: req.params.id });
 });
