@@ -231,8 +231,8 @@ const UpdatePromotion = (promo) => {
                     <button
                       type="submit"
                       className="btn"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
+                      // data-bs-dismiss="modal"
+                      // aria-label="Close"
                     >
                       Save Changes
                     </button>

@@ -128,7 +128,7 @@ const ManageProducts = () => {
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
         // console.log(data[item.dataIndex][0]);
-        dispatch(deleteProduct(data[item.dataIndex][1]));
+        dispatch(deleteProduct(data[item.dataIndex][0]));
       });
     },
   };

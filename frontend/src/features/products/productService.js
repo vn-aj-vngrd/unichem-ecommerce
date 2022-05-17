@@ -68,7 +68,7 @@ const deleteProduct = async (id, token) => {
   };
   console.log(id.id);
 
-  const response = await axios.delete(API_URL + id.id, config);
+  const response = await axios.delete(API_URL + id, config);
 
   return response.data;
 };

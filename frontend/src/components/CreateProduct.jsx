@@ -14,7 +14,23 @@ const CreateProduct = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      specifications: [
+        {
+          specificationLabel: "",
+          specificationValue: "",
+        },
+      ],
+      types: [
+        {
+          type: "",
+          quantity: "",
+          price: "",
+        },
+      ],
+    },
+  });
 
   const {
     fields: typeFields,
@@ -40,73 +56,71 @@ const CreateProduct = () => {
 
   const onSubmit = (data) => {
     if (data.specifications.length === 0) {
-      setSpecificationEmpty(true);
+      setSpecificationEmpty((prevState) => (prevState = true));
     } else {
-      setSpecificationEmpty(false);
+      setSpecificationEmpty((prevState) => (prevState = false));
     }
 
     if (data.types.length === 0) {
-      setTypesEmpty(true);
+      setTypesEmpty((prevState) => (prevState = true));
     } else {
-      setTypesEmpty(false);
+      setTypesEmpty((prevState) => (prevState = false));
     }
 
-    if (specificationEmpty || typesEmpty) {
-      return;
+    console.log(specificationEmpty, typesEmpty);
+    if (specificationEmpty && typesEmpty) {
+      let tempSpecificationsData = [];
+
+      data.specifications.forEach((specification) => {
+        tempSpecificationsData.push(
+          specification.specificationLabel.concat(
+            ": ",
+            specification.specificationValue
+          )
+        );
+      });
+
+      let tempTypesData = [];
+      let tempQuantitiesData = [];
+      let tempPricesData = [];
+
+      data.types.forEach((type) => {
+        tempTypesData.push(type.type);
+        tempQuantitiesData.push(parseFloat(type.quantity));
+        tempPricesData.push(parseFloat(type.price));
+      });
+
+      let tempSalePercent =
+        !data.isSale || data.isSale === "false"
+          ? 0
+          : parseFloat(data.salePercent);
+
+      const productData = {
+        // images: data.images,
+        productName: data.productName,
+        brand: data.brand,
+        category: data.category,
+        specifications: tempSpecificationsData,
+        types: tempTypesData,
+        description: data.description,
+        quantities: tempQuantitiesData,
+        prices: tempPricesData,
+        isSale: data.isSale,
+        salePercent: tempSalePercent,
+        featured: data.featured,
+      };
+
+      let formData = new FormData();
+
+      for (let i = 0; i < data.images.length; i++) {
+        formData.append("images", data.images[i]);
+      }
+
+      for (var key in productData) {
+        formData.append(key, productData[key]);
+      }
+      dispatch(setProduct(formData));
     }
-
-    let tempSpecificationsData = [];
-
-    data.specifications.forEach((specification) => {
-      tempSpecificationsData.push(
-        specification.specificationLabel.concat(
-          ": ",
-          specification.specificationValue
-        )
-      );
-    });
-
-    let tempTypesData = [];
-    let tempQuantitiesData = [];
-    let tempPricesData = [];
-
-    data.types.forEach((type) => {
-      tempTypesData.push(type.type);
-      tempQuantitiesData.push(parseFloat(type.quantity));
-      tempPricesData.push(parseFloat(type.price));
-    });
-
-    let tempSalePercent =
-      !data.isSale || data.isSale === "false"
-        ? 0
-        : parseFloat(data.salePercent);
-
-    const productData = {
-      // images: data.images,
-      productName: data.productName,
-      brand: data.brand,
-      category: data.category,
-      specifications: tempSpecificationsData,
-      types: tempTypesData,
-      description: data.description,
-      quantities: tempQuantitiesData,
-      prices: tempPricesData,
-      isSale: data.isSale,
-      salePercent: tempSalePercent,
-      featured: data.featured,
-    };
-
-    let formData = new FormData();
-    
-    for (let i = 0; i < data.images.length; i++) {
-      formData.append("images", data.images[i]);
-    }
-    
-    for (var key in productData) {
-      formData.append(key, productData[key]);
-    }
-
-    dispatch(setProduct(formData));
   };
 
   return (
@@ -167,9 +181,7 @@ const CreateProduct = () => {
                             },
                           })}
                           style={{
-                            border: errors.images
-                              ? "1px solid #f44336"
-                              : "",
+                            border: errors.images ? "1px solid #f44336" : "",
                           }}
                         />
                       </div>
@@ -297,7 +309,7 @@ const CreateProduct = () => {
                       ⚠ Product Specifications are required
                     </p>
                   )}
-
+                  {console.log(errors)}
                   {specificationFields.map((specification, index) => (
                     <div
                       key={specification.id}
@@ -473,7 +485,7 @@ const CreateProduct = () => {
                           {Array.isArray(errors.types) &&
                             errors.types[index] && (
                               <p className="error-message">
-                                ⚠ {errors.types[index].quantities.message}
+                                ⚠ {errors.types[index].quantity.message}
                               </p>
                             )}
                         </div>
@@ -509,7 +521,8 @@ const CreateProduct = () => {
                           {Array.isArray(errors.types) &&
                             errors.types[index] && (
                               <p className="error-message">
-                                ⚠ {errors.types[index].prices.message}
+                                {console.log(index)}
+                                ⚠ {errors.types[index].price.message}
                               </p>
                             )}
                         </div>

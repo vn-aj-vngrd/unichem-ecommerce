@@ -30,7 +30,8 @@ const UpdateProduct = (product) => {
 
   const [specificationEmpty, setSpecificationEmpty] = useState(false);
   const [typesEmpty, setTypesEmpty] = useState(false);
-
+console.log(tempSpecifications);
+console.log(tempTypes);
   const {
     register,
     control,
@@ -497,7 +498,7 @@ const UpdateProduct = (product) => {
                           {Array.isArray(errors.types) &&
                             errors.types[index] && (
                               <p className="error-message">
-                                ⚠ {errors.types[index].quantities.message}
+                                ⚠ {errors.types[index].quantity.message}
                               </p>
                             )}
                         </div>
@@ -533,7 +534,7 @@ const UpdateProduct = (product) => {
                           {Array.isArray(errors.types) &&
                             errors.types[index] && (
                               <p className="error-message">
-                                ⚠ {errors.types[index].prices.message}
+                                ⚠ {errors.types[index].price.message}
                               </p>
                             )}
                         </div>
