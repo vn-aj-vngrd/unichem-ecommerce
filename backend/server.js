@@ -24,7 +24,6 @@ app.use("/api/promos", require("./routes/promoRoutes"));
 app.use("/api/reports", require("./routes/reportRoutes"));
 
 app.use(express.static("public"));
-app.use("/uploads", express.static("uploads"));
 
 // Serve Frontend
 if (process.env.NODE_ENV === "production") {
