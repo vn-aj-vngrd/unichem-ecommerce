@@ -218,7 +218,6 @@ export const orderSlice = createSlice({
         state.isUpdateLoding = true;
       })
       .addCase(updateOrder.fulfilled, (state, action) => {
-        state.isOrderSuccess = true;
         state.isUpdateLoding = true;
         state.isOrderUpdated = true;
         const idx = state.orders.findIndex(
@@ -227,7 +226,7 @@ export const orderSlice = createSlice({
         state.orders[idx] = action.payload;
       })
       .addCase(updateOrder.rejected, (state, action) => {
-        state.sUpdateLoding = false;
+        state.isUpdateLoding = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
       })
@@ -251,7 +250,6 @@ export const orderSlice = createSlice({
       })
       .addCase(deleteOrder.fulfilled, (state, action) => {
         state.isDeleteLoading = false;
-        state.isOrderSuccess = true;
         state.isOrderDeleted = true;
         state.orders = state.orders.filter(
           (order) => order._id !== action.payload.id

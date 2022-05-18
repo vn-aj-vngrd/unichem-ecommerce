@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateOrder } from "../features/orders/orderSlice";
@@ -7,10 +8,13 @@ const UpdateOrder = ({ order }) => {
   const {
     register,
     handleSubmit,
+    reset,
     // watch,
     // formState: { errors },
-  } = useForm({
-    defaultValues: {
+  } = useForm({});
+
+  useEffect(() => {
+    const defaultValues = {
       shippingFee: order.shippingFee,
       orderStatus: order.orderStatus,
       awaitingConfirmationDate:
@@ -57,8 +61,9 @@ const UpdateOrder = ({ order }) => {
         order.statusDates[10].date !== ""
           ? moment(order.statusDates[10].date).format("YYYY-MM-DDTHH:mm:ss")
           : "",
-    },
-  });
+    };
+    reset(defaultValues);
+  }, [order, reset]);
 
   const dispatch = useDispatch();
 
