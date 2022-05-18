@@ -5,10 +5,12 @@ import {
   cancelOrder,
   resetOrder,
 } from "../features/orders/orderSlice";
+import { resetReview } from "../features/reviews/reviewSlice";
 import { useSelector, useDispatch } from "react-redux";
 import PurchasedProduct from "./PurchasedProduct";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import Swal from "sweetalert2";
 import ReactPaginate from "react-paginate";
 
 const ProfilePurchase = () => {
@@ -16,8 +18,12 @@ const ProfilePurchase = () => {
   const dispatch = useDispatch();
   const moment = require("moment");
 
-  const { orders, isOrderLoading, isOrderError, orderMessage, isOrderUpdated } = useSelector(
+  const { orders, isOrderLoading, isOrderError, orderMessage, isOrderUpdated,  } = useSelector(
     (state) => state.orders
+  );
+  
+  const { isReviewError, isReviewLoading, reviewMessage, isReviewCreated } = useSelector(
+    (state) => state.reviews
   );
 
   const { user } = useSelector((state) => state.auth);
@@ -27,24 +33,46 @@ const ProfilePurchase = () => {
   const [pageNumber, setPageNumber] = useState(0);
 
   const handleCancelOrder = (orderID) => {
-    dispatch(cancelOrder({ orderID: orderID }));
+
+    Swal.fire({
+      title: "Are you sure you want to cancel this order?",
+      text: "Click Yes to delete, otherwise No.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) dispatch(cancelOrder({ orderID: orderID }));
+    });
+    
   };
 
   useEffect(() => {
     if (isOrderError) {
       toast.error(orderMessage);
     }
-
+    
     if (isOrderUpdated) {
       toast.success("Order updated successfully");
     }
 
+    if (isReviewError) {
+      toast.error(reviewMessage);
+    }
+
+    if (isReviewCreated) {
+      toast.success("Review created successfully");
+    }
+    
     dispatch(getUserOrders());
 
     return () => {
       dispatch(resetOrder());
+      dispatch(resetReview());
     };
-  }, [navigate, isOrderError, orderMessage, isOrderUpdated, dispatch]);
+  }, [navigate, isOrderError, orderMessage, isOrderUpdated, isReviewCreated, isReviewError, dispatch]);
 
   if (isOrderLoading) {
     return (
