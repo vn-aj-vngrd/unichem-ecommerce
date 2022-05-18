@@ -365,7 +365,7 @@ const updateUser = asyncHandler(async (req, res) => {
   let tempCloudinaryID;
   if (req.file) {
     // delete existing image
-    if (user.cloudinaryID !== "users/user-placeholder_pooyoq") {
+    if (user.cloudinaryID !== "users/user-placeholder_pooyoq" && user.cloudinaryID !== "") {
       await cloudinary.uploader.destroy(user.cloudinaryID);
     }
 
@@ -485,7 +485,10 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  await cloudinary.uploader.destroy(user.cloudinaryID);
+  if ( user.cloudinaryID !== "") {
+    await cloudinary.uploader.destroy(user.cloudinaryID);
+  }
+  
   await user.remove();
 
   await Orders.deleteMany({ userID: req.params.id });

@@ -80,7 +80,9 @@ const updatePromo = asyncHandler(async (req, res) => {
   let tempCloudinaryID;
   if (req.file) {
     // delete existing image
-    await cloudinary.uploader.destroy(promo.cloudinaryID);
+    if (promo.cloudinaryID !== "") {
+      await cloudinary.uploader.destroy(promo.cloudinaryID);
+    }
     
     const uploadedResponse = await cloudinary.uploader.upload(req.file.path, {
       upload_preset: "promo_setups"
@@ -135,7 +137,9 @@ const deletePromo = asyncHandler(async (req, res) => {
     throw new Error("User not authorized.");
   }
 
-  await cloudinary.uploader.destroy(promo.cloudinaryID);
+  if (promo.cloudinaryID !== "") {
+    await cloudinary.uploader.destroy(promo.cloudinaryID);
+  }
   await promo.remove();
   res.status(200).json({ _id: req.params.id });
 });
