@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../components/Spinner";
 import { toast } from "react-toastify";
 
+
 const ManageCoupons = () => {
   const dispatch = useDispatch();
   const moment = require("moment");
@@ -82,8 +83,8 @@ const ManageCoupons = () => {
       moment(coupon.expiryDate).format("llll").toString(),
       moment(coupon.updatedAt).format("llll").toString(),
       moment(coupon.createdAt).format("llll").toString(),
-      <UpdateCoupon coupon={coupon}/>,
       <ViewCoupon coupon={coupon}/>,
+      <UpdateCoupon coupon={coupon}/>,
       // <DeleteCoupon id={coupon._id} />,
     );
     data.push(temp);

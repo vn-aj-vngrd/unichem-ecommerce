@@ -13,6 +13,7 @@ const UpdateCoupon = (coupon) => {
     watch,
     formState: { errors },
   } = useForm({
+    mode: "all",
     defaultValues: {
       couponCode: coupon.coupon.couponCode,
       couponType: coupon.coupon.couponType,
@@ -40,6 +41,7 @@ const UpdateCoupon = (coupon) => {
 
     dispatch(updateCoupon(couponData));
   };
+  console.log(errors);
 
   return (
     <div className="button">
@@ -328,16 +330,26 @@ const UpdateCoupon = (coupon) => {
                       )}
                     </div>
                   </div>
-
                   <div className="d-grid button">
-                    <button
-                      type="submit"
-                      className="btn"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      Save Changes
-                    </button>
+                    {errors ? (
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss=""
+                        aria-label="Close"
+                      >
+                        Save Changes
+                      </button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        Save Changes
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>
