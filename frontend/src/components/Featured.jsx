@@ -12,13 +12,12 @@ const Featured = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { user } = useSelector((state) => state.auth);
   const { products, isProductLoading, isProductError, productMessage } =
     useSelector((state) => state.products);
 
   useEffect(() => {
     if (isProductError) {
-      console.log(productMessage);
+      // console.log(productMessage);
     }
 
     dispatch(getFeaturedProducts());
@@ -26,7 +25,7 @@ const Featured = () => {
     return () => {
       dispatch(resetProduct());
     };
-  }, [navigate, isProductError, productMessage, dispatch]); //user
+  }, [navigate, isProductError, productMessage, dispatch]);
 
   if (isProductLoading) {
     return <Spinner />;
@@ -36,7 +35,7 @@ const Featured = () => {
 
   return (
     <>
-      {products ? (
+      {products && products.length > 0 ? (
         <section className="trending-product">
           <div className="container">
             <div className="row">
