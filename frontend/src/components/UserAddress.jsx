@@ -5,6 +5,7 @@ import { updateUser, resetUser } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 import EditAdddress from "../components/EditAddress";
+import Swal from "sweetalert2";
 
 const UserAddress = () => {
   const {
@@ -84,7 +85,19 @@ const UserAddress = () => {
       primaryAddress: newPrimaryAddress,
     };
 
-    dispatch(updateUser(userData));
+    Swal.fire({
+      title: "Are you sure you want to delete this address?",
+      text: "Click Yes to delete, otherwise No.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) dispatch(updateUser(userData));;
+    });
+    
   };
 
   // Set default user address

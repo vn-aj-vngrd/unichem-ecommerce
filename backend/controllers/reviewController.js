@@ -53,6 +53,7 @@ const getUserReviews = asyncHandler(async (req, res) => {
 // @access  Private
 const setReview = asyncHandler(async (req, res) => {
   // Check for user
+  console.log(req.body)
   if (!req.user) {
     res.status(401);
     throw new Error("User not found");
@@ -61,20 +62,9 @@ const setReview = asyncHandler(async (req, res) => {
   const userID = req.user._id;
   const { orderLineID, productID, subject, review, rating } = req.body;
 
-  // Check if review exists
-  const reviewExists = await Review.findOne({
-    productID,
-    userID,
-  });
-
-  if (reviewExists) {
-    res.status(400);
-    throw new Error("Review already exists");
-  }
-
-  const updatedOrderLine = await OrderLine.findByIdAndUpdate(
+  const updatedOrderLine = await OrderLine.findOneAndUpdate(
     {
-      orderLineID
+      _id: orderLineID
     },
     { reviewed: true },
     { new: true }

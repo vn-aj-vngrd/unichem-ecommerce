@@ -121,6 +121,7 @@ export const reviewSlice = createSlice({
         state.isReviewLoading = false;
         state.isReviewSuccess = true;
         state.isReviewCreated = true;
+        
         // state.promos = [...state.promos, action.payload]
       })
       .addCase(setReview.rejected, (state, action) => {

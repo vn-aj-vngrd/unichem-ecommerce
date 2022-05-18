@@ -63,7 +63,7 @@ function ProfileReviews() {
                 <div className="">
                   <div className="product-info">
                     <h5 className="title">
-                      <Link to={`/product-details/${review._doc.productName}`}>
+                      <Link to={`/product-details/${review._doc._id}`}>
                         {review._doc.productName}
                       </Link>
                     </h5>

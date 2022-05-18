@@ -7,6 +7,7 @@ import {
   // resetReview,
 } from "../features/reviews/reviewSlice";
 import Star from "./Star";
+import Swal from "sweetalert2";
 
 function ReviewSingle({ reviewOne, editable }) {
   const dispatch = useDispatch();
@@ -45,7 +46,18 @@ function ReviewSingle({ reviewOne, editable }) {
   };
 
   const onClickDeleteReview = (_id) => {
-    dispatch(deleteReview(_id));
+    Swal.fire({
+      title: "Are you sure you want to delete this review?",
+      text: "Click Yes to delete, otherwise No.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#424242",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) dispatch(deleteReview(_id));
+    });
   };
 
   console.log(reviewOne);
