@@ -2349,6 +2349,10 @@ ol {
   display: block;
 }
 
+.mobile-profile-collapse:hover {
+  display: block;
+}
+
 @media (min-width: 992px) {
   .mobile-dropdown-hover {
     display: none;

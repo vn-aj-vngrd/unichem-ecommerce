@@ -326,6 +326,7 @@ const Navbar = ({ userType }) => {
                         </ul>
                       </div>
                     </div>
+
                     <div className="nav-inner ">
                       <nav className="navbar navbar-expand-lg hide-on-thin-screen">
                         <ul id="nav" className="navbar-nav">
