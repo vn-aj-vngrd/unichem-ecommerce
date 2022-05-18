@@ -11,7 +11,9 @@ const UpdateCoupon = (coupon) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "all",
+  });
 
   const startDate = watch("startDate");
   const expiryDate = watch("expiryDate");
@@ -31,7 +33,7 @@ const UpdateCoupon = (coupon) => {
     dispatch(setCoupon(couponData));
   };
 
-  console.log(errors)
+  console.log(errors);
   return (
     <div className="col-12 mt-5">
       <button
@@ -322,14 +324,18 @@ const UpdateCoupon = (coupon) => {
                   </div>
 
                   <div className="d-grid button">
-                    <button
-                      type="submit"
-                      className="btn"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      Save Changes
-                    </button>
+                    {errors ? (
+                      <button className="btn">Save Changes</button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        Save Changes
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>
