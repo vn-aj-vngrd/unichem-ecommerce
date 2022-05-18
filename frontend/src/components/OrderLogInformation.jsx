@@ -20,14 +20,12 @@ const OrderLogInformation = () => {
     (state) => state.orders
   );
 
-  console.log(orders);
-
   useEffect(() => {
     if (isOrderError) {
-      console.log(orderMessage);
+      // console.log(orderMessage);
     }
-    console.log(true);
-    if (!user) {
+
+    if (!localStorage.getItem("token")) {
       navigate("/login");
     }
 
@@ -36,7 +34,7 @@ const OrderLogInformation = () => {
     return () => {
       dispatch(resetOrder());
     };
-  }, [user, navigate, id, isOrderError, orderMessage, dispatch]);
+  }, [navigate, id, isOrderError, orderMessage, dispatch]);
 
   if (isOrderLoading) {
     return (
@@ -45,8 +43,6 @@ const OrderLogInformation = () => {
       </>
     );
   }
-
-  console.log(orders);
 
   return (
     <>
