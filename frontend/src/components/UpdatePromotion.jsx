@@ -48,7 +48,7 @@ const UpdatePromotion = (promo) => {
       formData.append(key, promoData[key]);
     }
 
-    // dispatch(updatePromo(formData));
+    dispatch(updatePromo(formData));
   };
 
   return (

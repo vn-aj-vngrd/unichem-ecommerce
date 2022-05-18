@@ -30,8 +30,8 @@ const UpdateProduct = (product) => {
 
   const [specificationEmpty, setSpecificationEmpty] = useState(false);
   const [typesEmpty, setTypesEmpty] = useState(false);
-console.log(tempSpecifications);
-console.log(tempTypes);
+  console.log(tempSpecifications);
+  console.log(tempTypes);
   const {
     register,
     control,
@@ -39,6 +39,7 @@ console.log(tempTypes);
     watch,
     formState: { errors },
   } = useForm({
+    mode: "all",
     defaultValues: {
       // images: product.product._doc.images,
       productName: product.product._doc.productName,
@@ -133,8 +134,8 @@ console.log(tempTypes);
 
     for (let i = 0; i < data.images.length; i++) {
       formData.append("images", data.images[i]);
-    } 
-    
+    }
+
     for (var key in productData) {
       formData.append(key, productData[key]);
     }
@@ -657,14 +658,18 @@ console.log(tempTypes);
                     </div>
                   </div>
                   <div className="d-grid button">
-                    <button
-                      type="submit"
-                      className="btn"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      Save Changes
-                    </button>
+                    {errors ? (
+                      <button className="btn">Save Changes</button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        Save Changes
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>
