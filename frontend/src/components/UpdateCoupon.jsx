@@ -38,10 +38,8 @@ const UpdateCoupon = (coupon) => {
       _id: coupon.coupon._id,
       ...data,
     };
-
     dispatch(updateCoupon(couponData));
   };
-  console.log(errors);
 
   return (
     <div className="button">
@@ -332,14 +330,7 @@ const UpdateCoupon = (coupon) => {
                   </div>
                   <div className="d-grid button">
                     {errors ? (
-                      <button
-                        type="submit"
-                        className="btn"
-                        data-bs-dismiss=""
-                        aria-label="Close"
-                      >
-                        Save Changes
-                      </button>
+                      <button className="btn">Save Changes</button>
                     ) : (
                       <button
                         type="submit"

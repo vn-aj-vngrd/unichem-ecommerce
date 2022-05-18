@@ -139,7 +139,7 @@ console.log(tempTypes);
       formData.append(key, productData[key]);
     }
 
-    dispatch(updateProduct(formData));
+    // dispatch(updateProduct(formData));
   };
 
   // const addProductType = () => {

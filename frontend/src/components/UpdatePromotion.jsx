@@ -13,6 +13,7 @@ const UpdatePromotion = (promo) => {
     watch,
     formState: { errors },
   } = useForm({
+    mode: "all",
     defaultValues: {
       // image: promo.promo.image,
       promoName: promo.promo.promoName,
@@ -47,7 +48,7 @@ const UpdatePromotion = (promo) => {
       formData.append(key, promoData[key]);
     }
 
-    dispatch(updatePromo(formData));
+    // dispatch(updatePromo(formData));
   };
 
   return (
@@ -228,14 +229,18 @@ const UpdatePromotion = (promo) => {
                   </div>
 
                   <div className="d-grid button">
-                    <button
-                      type="submit"
-                      className="btn"
-                      // data-bs-dismiss="modal"
-                      // aria-label="Close"
-                    >
-                      Save Changes
-                    </button>
+                    {errors ? (
+                      <button className="btn">Save Changes</button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        Save Changes
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>
