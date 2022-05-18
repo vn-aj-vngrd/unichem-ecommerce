@@ -64,7 +64,11 @@ const OrderLogInformation = () => {
                   className={
                     orders[0].orderStatus === "Awaiting Confirmation" ||
                     orders[0].orderStatus === "Awaiting Payment" ||
-                    orders[0].orderStatus === "Awaiting Fulfillment"
+                    orders[0].orderStatus === "Awaiting Fulfillment" ||
+                    orders[0].orderStatus === "Awaiting Shipment" ||
+                    orders[0].orderStatus === "Shipped" ||
+                    orders[0].orderStatus === "Awaiting Pickup" ||
+                    orders[0].orderStatus === "Completed"
                       ? "order-status-circle true"
                       : "order-status-circle"
                   }
@@ -77,9 +81,9 @@ const OrderLogInformation = () => {
                 <button
                   className={
                     orders[0].orderStatus === "Awaiting Shipment" ||
-                    orders[0].orderStatus === "Awaiting Confirmation" ||
-                    orders[0].orderStatus === "Awaiting Payment" ||
-                    orders[0].orderStatus === "Awaiting Fulfillment"
+                    orders[0].orderStatus === "Shipped" ||
+                    orders[0].orderStatus === "Awaiting Pickup" ||
+                    orders[0].orderStatus === "Completed"
                       ? "order-status-circle true"
                       : "order-status-circle"
                   }
@@ -91,12 +95,9 @@ const OrderLogInformation = () => {
               <div className="one-status">
                 <button
                   className={
-                    orders[0].orderStatus === "Awaiting Shipment" ||
                     orders[0].orderStatus === "Shipped" ||
                     orders[0].orderStatus === "Awaiting Pickup" ||
-                    orders[0].orderStatus === "Awaiting Confirmation" ||
-                    orders[0].orderStatus === "Awaiting Payment" ||
-                    orders[0].orderStatus === "Awaiting Fulfillment"
+                    orders[0].orderStatus === "Completed"
                       ? "order-status-circle true"
                       : "order-status-circle"
                   }
@@ -108,13 +109,7 @@ const OrderLogInformation = () => {
               <div className="one-status">
                 <button
                   className={
-                    orders[0].orderStatus === "Completed" ||
-                    orders[0].orderStatus === "Awaiting Shipment" ||
-                    orders[0].orderStatus === "Shipped" ||
-                    orders[0].orderStatus === "Awaiting Pickup" ||
-                    orders[0].orderStatus === "Awaiting Confirmation" ||
-                    orders[0].orderStatus === "Awaiting Payment" ||
-                    orders[0].orderStatus === "Awaiting Fulfillment"
+                    orders[0].orderStatus === "Completed"
                       ? "order-status-circle true"
                       : "order-status-circle"
                   }
