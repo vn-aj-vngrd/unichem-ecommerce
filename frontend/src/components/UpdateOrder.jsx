@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateOrder } from "../features/orders/orderSlice";
-const moment = require("moment");
+
 
 const UpdateOrder = ({ order }) => {
+  const moment = require("moment");
   const {
     register,
     handleSubmit,
