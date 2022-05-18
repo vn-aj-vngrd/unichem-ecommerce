@@ -294,7 +294,9 @@ const updateProduct = asyncHandler(async (req, res) => {
   let tempCloudinaryIDs = [];
   if (req.files.length > 0) {
     for (let i = 0; i < product.images.length; i++) {
-      await cloudinary.uploader.destroy(product.cloudinaryIDs[i]);
+      if (product.cloudinaryIDs[i] != "") {
+        await cloudinary.uploader.destroy(product.cloudinaryIDs[i]);
+      }
     }
 
     for (let i = 0; i < req.files.length; i++) {
@@ -372,7 +374,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
   if (req.files.length > 0) {
     for (let i = 0; i < product.images.length; i++) {
-      await cloudinary.uploader.destroy(product.cloudinaryIDs[i]);
+      if (product.cloudinaryIDs[i] != "") {
+        await cloudinary.uploader.destroy(product.cloudinaryIDs[i]);
+      }
     }
   }
 

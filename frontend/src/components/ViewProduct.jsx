@@ -47,7 +47,7 @@ const ViewProduct = ({ product }) => {
                 <p className="text-center">Product ID: {product._doc._id}</p>
                 <div className="mt-2">
                   <div className="mb-4">
-                    <div className="view-image-section">
+                    <div className="">
                       {/* {product._doc.images.map((image) => (
                         <div>
                           <img className="view-image" src={image} alt={image} />
@@ -74,10 +74,11 @@ const ViewProduct = ({ product }) => {
                           </SwiperSlide>
                         ))}
                       </Swiper>
+                      <br></br>
                       <div className="ms-3">
                         Name: {product._doc.productName}
                         <br />
-                        Brand: {product._doc.productName}
+                        Brand: {product._doc.brand}
                         <br />
                         Category: {product._doc.category}
                         <br />
@@ -89,7 +90,6 @@ const ViewProduct = ({ product }) => {
                     </div>
                     <br />
                     <div className="ms-3">
-                      <br />
                       <h6>Product Specifications</h6>
                       {product._doc.specifications.map(
                         (specification, index) => (

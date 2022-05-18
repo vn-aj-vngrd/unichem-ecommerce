@@ -90,7 +90,6 @@ export const getFeaturedProducts = createAsyncThunk(
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async (productData, thunkAPI) => {
-    console.log("slice");
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await productService.updateProduct(productData, token);

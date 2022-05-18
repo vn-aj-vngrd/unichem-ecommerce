@@ -24592,14 +24592,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   object-fit: cover;
 }
 
-.view-image-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 60px;
-}
-
 .mySwiper {
-  height: 108px;
-  width: 108px;
+  height: 208px;
+  width: 208px;
 }
