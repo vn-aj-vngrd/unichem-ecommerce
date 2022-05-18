@@ -87,11 +87,11 @@ const Breadcrumb = ({ type }) => {
             </>
           )}
 
-          {type === "manage" && (
+          {type === "profile" && (
             <>
               <div className="col-lg-6 col-md-6 col-12">
                 <div className="breadcrumbs-content">
-                  <h1 className="page-title">Manage Account</h1>
+                  <h1 className="page-title">My Profile</h1>
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-12">
@@ -102,7 +102,28 @@ const Breadcrumb = ({ type }) => {
                     </Link>
                   </li>
                   <li>Account</li>
-                  <li>Manage Account</li>
+                  <li>My Profile</li>
+                </ul>
+              </div>
+            </>
+          )}
+
+          {type === "address" && (
+            <>
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className="breadcrumbs-content">
+                  <h1 className="page-title">My Address</h1>
+                </div>
+              </div>
+              <div className="col-lg-6 col-md-6 col-12">
+                <ul className="breadcrumb-nav">
+                  <li>
+                    <Link to="/">
+                      <i className="lni lni-home"></i> Home
+                    </Link>
+                  </li>
+                  <li>Account</li>
+                  <li>My Address</li>
                 </ul>
               </div>
             </>

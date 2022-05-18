@@ -21,7 +21,7 @@ const Manage = () => {
     <>
       {user && (
         <>
-          <Breadcrumb type="manage" />
+          <Breadcrumb type="profile" />
           <div className="container main-profile-section mt-90">
             <ProfileSidebar />
             <div className="spacer"></div>
