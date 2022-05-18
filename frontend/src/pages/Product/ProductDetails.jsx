@@ -10,6 +10,7 @@ import Specifications from "../../components/Specifications";
 import ReviewsSection from "../../components/ReviewsSection";
 import Breadcrumb from "../../components/Breadcrumb";
 import Spinner from "../../components/Spinner";
+import PageNotFound from "../PageNotFound";
 
 const ProductDetails = () => {
   let { id } = useParams();
@@ -25,6 +26,7 @@ const ProductDetails = () => {
 
     if (isProductError) {
       // console.log(productMessage);
+      dispatch(resetProduct());
     }
 
     dispatch(getOneProduct(id));
@@ -45,11 +47,15 @@ const ProductDetails = () => {
           </div>
         ) : (
           <>
-            {products.length > 0 && (
+            {products.length > 0 ? (
               <>
                 <Details product={products[0]} />
                 <Specifications product={products[0]} />
                 <ReviewsSection productID={id} />
+              </>
+            ) : (
+              <>
+                <PageNotFound />
               </>
             )}
           </>

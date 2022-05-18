@@ -18,7 +18,7 @@ const Featured = () => {
 
   useEffect(() => {
     if (isProductError) {
-      console.log(productMessage);
+      // console.log(productMessage);
     }
 
     dispatch(getFeaturedProducts());
@@ -36,7 +36,7 @@ const Featured = () => {
 
   return (
     <>
-      {products ? (
+      {products && products.length > 0 ? (
         <section className="trending-product">
           <div className="container">
             <div className="row">
