@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateProduct } from "../features/products/productSlice";
