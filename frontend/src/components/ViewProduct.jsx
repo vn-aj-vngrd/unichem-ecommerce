@@ -101,7 +101,6 @@ const ViewProduct = ({ product }) => {
                       )}
                       <br />
                       <h6>Product Color/Types</h6>
-                      {console.log(product)}
                       {product._doc.types.map((type, index) => (
                         <div key={"color/types" + index} className="d-flex">
                           <div className="col-3">{type}</div>

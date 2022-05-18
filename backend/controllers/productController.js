@@ -311,6 +311,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     }
   } else {
     tempFiles = product.images;
+    tempCloudinaryIDs = product.cloudinaryIDs;
   }
 
   let tempQuantities = [];
@@ -372,11 +373,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  if (req.files.length > 0) {
-    for (let i = 0; i < product.images.length; i++) {
-      if (product.cloudinaryIDs[i] !== "") {
-        await cloudinary.uploader.destroy(product.cloudinaryIDs[i]);
-      }
+  for (let i = 0; i < product.images.length; i++) {
+    if (product.cloudinaryIDs[i] !== "") {
+      await cloudinary.uploader.destroy(product.cloudinaryIDs[i]);
     }
   }
 

@@ -68,60 +68,61 @@ const CreateProduct = () => {
       setTypesEmpty((prevState) => (prevState = false));
     }
 
-    console.log(specificationEmpty, typesEmpty);
-    if (specificationEmpty && typesEmpty) {
-      let tempSpecificationsData = [];
-
-      data.specifications.forEach((specification) => {
-        tempSpecificationsData.push(
-          specification.specificationLabel.concat(
-            ": ",
-            specification.specificationValue
-          )
-        );
-      });
-
-      let tempTypesData = [];
-      let tempQuantitiesData = [];
-      let tempPricesData = [];
-
-      data.types.forEach((type) => {
-        tempTypesData.push(type.type);
-        tempQuantitiesData.push(parseFloat(type.quantity));
-        tempPricesData.push(parseFloat(type.price));
-      });
-
-      let tempSalePercent =
-        !data.isSale || data.isSale === "false"
-          ? 0
-          : parseFloat(data.salePercent);
-
-      const productData = {
-        // images: data.images,
-        productName: data.productName,
-        brand: data.brand,
-        category: data.category,
-        specifications: tempSpecificationsData,
-        types: tempTypesData,
-        description: data.description,
-        quantities: tempQuantitiesData,
-        prices: tempPricesData,
-        isSale: data.isSale,
-        salePercent: tempSalePercent,
-        featured: data.featured,
-      };
-
-      let formData = new FormData();
-
-      for (let i = 0; i < data.images.length; i++) {
-        formData.append("images", data.images[i]);
-      }
-
-      for (var key in productData) {
-        formData.append(key, productData[key]);
-      }
-      dispatch(setProduct(formData));
+    if (specificationEmpty || typesEmpty) {
+      return;
     }
+
+    let tempSpecificationsData = [];
+
+    data.specifications.forEach((specification) => {
+      tempSpecificationsData.push(
+        specification.specificationLabel.concat(
+          ": ",
+          specification.specificationValue
+        )
+      );
+    });
+
+    let tempTypesData = [];
+    let tempQuantitiesData = [];
+    let tempPricesData = [];
+
+    data.types.forEach((type) => {
+      tempTypesData.push(type.type);
+      tempQuantitiesData.push(parseFloat(type.quantity));
+      tempPricesData.push(parseFloat(type.price));
+    });
+
+    let tempSalePercent =
+      !data.isSale || data.isSale === "false"
+        ? 0
+        : parseFloat(data.salePercent);
+
+    const productData = {
+      // images: data.images,
+      productName: data.productName,
+      brand: data.brand,
+      category: data.category,
+      specifications: tempSpecificationsData,
+      types: tempTypesData,
+      description: data.description,
+      quantities: tempQuantitiesData,
+      prices: tempPricesData,
+      isSale: data.isSale,
+      salePercent: tempSalePercent,
+      featured: data.featured,
+    };
+
+    let formData = new FormData();
+
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append("images", data.images[i]);
+    }
+
+    for (var key in productData) {
+      formData.append(key, productData[key]);
+    }
+    dispatch(setProduct(formData));
   };
 
   return (
@@ -165,7 +166,7 @@ const CreateProduct = () => {
                   action="#"
                   className="mt-4"
                   onSubmit={handleSubmit(onSubmit)}
-                  enctype="multipart/form-data"
+                  encType="multipart/form-data"
                 >
                   <div className="form-group">
                     <div className="form-group mb-4">
@@ -310,7 +311,6 @@ const CreateProduct = () => {
                       ⚠ Product Specifications are required
                     </p>
                   )}
-                  {console.log(errors)}
                   {specificationFields.map((specification, index) => (
                     <div
                       key={specification.id}
@@ -337,13 +337,14 @@ const CreateProduct = () => {
                                 border:
                                   Array.isArray(errors.specifications) &&
                                   errors.specifications[index]
+                                    .specificationLabel
                                     ? "1px solid #f44336"
                                     : "",
                               }}
                             />
                           </div>
                           {Array.isArray(errors.specifications) &&
-                            errors.specifications[index] && (
+                            errors.specifications[index].specificationLabel && (
                               <p className="error-message">
                                 ⚠{" "}
                                 {
@@ -375,13 +376,14 @@ const CreateProduct = () => {
                                 border:
                                   Array.isArray(errors.specifications) &&
                                   errors.specifications[index]
+                                    .specificationValue
                                     ? "1px solid #f44336"
                                     : "",
                               }}
                             />
                           </div>
                           {Array.isArray(errors.specifications) &&
-                            errors.specifications[index] && (
+                            errors.specifications[index].specificationValue && (
                               <p className="error-message">
                                 ⚠{" "}
                                 {
@@ -438,14 +440,14 @@ const CreateProduct = () => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
-                                  errors.types[index]
+                                  errors.types[index].type
                                     ? "1px solid #f44336"
                                     : "",
                               }}
                             />
                           </div>
                           {Array.isArray(errors.types) &&
-                            errors.types[index] && (
+                            errors.types[index].type && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].type.message}
                               </p>
@@ -476,7 +478,7 @@ const CreateProduct = () => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
-                                  errors.types[index]
+                                  errors.types[index].quantity
                                     ? "1px solid #f44336"
                                     : "",
                               }}
@@ -484,7 +486,7 @@ const CreateProduct = () => {
                           </div>
 
                           {Array.isArray(errors.types) &&
-                            errors.types[index] && (
+                            errors.types[index].quantity && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].quantity.message}
                               </p>
@@ -513,18 +515,18 @@ const CreateProduct = () => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
-                                  errors.types[index]
+                                  errors.types[index].price
                                     ? "1px solid #f44336"
                                     : "",
                               }}
                             />
                           </div>
-                          {Array.isArray(errors.types) && errors.types[index] && (
-                            <p className="error-message">
-                              {console.log(index)}⚠{" "}
-                              {errors.types[index].price.message}
-                            </p>
-                          )}
+                          {Array.isArray(errors.types) &&
+                            errors.types[index].price && (
+                              <p className="error-message">
+                                ⚠ {errors.types[index].price.message}
+                              </p>
+                            )}
                         </div>
                       </div>
 
@@ -583,7 +585,6 @@ const CreateProduct = () => {
                       <div className="form-group mb-4">
                         <label>Sale Percent</label>
                         <div className="input-group">
-                          {console.log(isSale)}
                           <input
                             type="number"
                             disabled={

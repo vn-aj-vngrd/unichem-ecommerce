@@ -76,7 +76,6 @@ const ManageProducts = () => {
   const maxLength = 50;
   if (products) {
     products.forEach((product) => {
-      console.log(product.images);
       let temp = [];
       // temp.push(
       //   <RowImage src={product._doc.images[0]} alt={product._doc.productName} />
@@ -127,7 +126,6 @@ const ManageProducts = () => {
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        // console.log(data[item.dataIndex][0]);
         dispatch(deleteProduct(data[item.dataIndex][0]));
       });
     },
