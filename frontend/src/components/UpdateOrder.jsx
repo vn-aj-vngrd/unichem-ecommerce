@@ -64,7 +64,7 @@ const UpdateOrder = ({ order }) => {
           : "",
     };
     reset(defaultValues);
-  }, [order, reset]);
+  }, [order, reset, moment]);
 
   const dispatch = useDispatch();
 
