@@ -15,6 +15,7 @@ const CreateProduct = () => {
     watch,
     formState: { errors },
   } = useForm({
+    mode: "all",
     defaultValues: {
       specifications: [
         {
@@ -518,13 +519,12 @@ const CreateProduct = () => {
                               }}
                             />
                           </div>
-                          {Array.isArray(errors.types) &&
-                            errors.types[index] && (
-                              <p className="error-message">
-                                {console.log(index)}
-                                ⚠ {errors.types[index].price.message}
-                              </p>
-                            )}
+                          {Array.isArray(errors.types) && errors.types[index] && (
+                            <p className="error-message">
+                              {console.log(index)}⚠{" "}
+                              {errors.types[index].price.message}
+                            </p>
+                          )}
                         </div>
                       </div>
 
@@ -652,14 +652,18 @@ const CreateProduct = () => {
                     </div>
                   </div>
                   <div className="d-grid button">
-                    <button
-                      type="submit"
-                      className="btn"
-                      // data-bs-dismiss="modal"
-                      // aria-label="Close"
-                    >
-                      Save Changes
-                    </button>
+                    {errors ? (
+                      <button className="btn">Save Changes</button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        Save Changes
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>

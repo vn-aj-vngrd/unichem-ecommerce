@@ -11,7 +11,7 @@ const CreatePromotion = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "all" });
 
   const startDate = watch("startDate");
   const expiryDate = watch("expiryDate");
@@ -216,14 +216,18 @@ const CreatePromotion = () => {
                   </div>
 
                   <div className="d-grid button">
-                    <button
-                      type="submit"
-                      className="btn"
-                      // data-bs-dismiss="modal"
-                      // aria-label="Close"
-                    >
-                      Save Changes
-                    </button>
+                    {errors ? (
+                      <button className="btn">Save Changes</button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        Save Changes
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>
