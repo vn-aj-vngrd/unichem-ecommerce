@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateCoupon } from "../features/coupons/couponSlice";
 
@@ -11,10 +12,14 @@ const UpdateCoupon = (coupon) => {
     // control,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "all",
-    defaultValues: {
+  });
+
+  useEffect(() => {
+    const defaultValues = {
       couponCode: coupon.coupon.couponCode,
       couponType: coupon.coupon.couponType,
       description: coupon.coupon.description,
@@ -27,8 +32,9 @@ const UpdateCoupon = (coupon) => {
       expiryDate: moment(coupon.coupon.expiryDate)
         .format("YYYY-MM-DD")
         .toString(),
-    },
-  });
+    };
+    reset(defaultValues);
+  }, [coupon, reset, moment]);
 
   const startDate = watch("startDate");
   const expiryDate = watch("expiryDate");
@@ -329,9 +335,7 @@ const UpdateCoupon = (coupon) => {
                     </div>
                   </div>
                   <div className="d-grid button">
-                    {errors ? (
-                      <button className="btn">Save Changes</button>
-                    ) : (
+                    {Object.keys(errors).length === 0 && (
                       <button
                         type="submit"
                         className="btn"
@@ -340,6 +344,9 @@ const UpdateCoupon = (coupon) => {
                       >
                         Save Changes
                       </button>
+                    )}
+                    {Object.keys(errors).length !== 0 && (
+                      <button className="btn">Save Changes</button>
                     )}
                   </div>
                 </form>

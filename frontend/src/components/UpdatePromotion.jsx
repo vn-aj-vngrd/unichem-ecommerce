@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updatePromo } from "../features/promos/promoSlice";
+import { useEffect } from "react";
 
 const UpdatePromotion = (promo) => {
   const moment = require("moment");
@@ -11,10 +12,14 @@ const UpdatePromotion = (promo) => {
     // control,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "all",
-    defaultValues: {
+  });
+
+  useEffect(() => {
+    const defaultValues = {
       // image: promo.promo.image,
       promoName: promo.promo.promoName,
       description: promo.promo.description,
@@ -22,8 +27,9 @@ const UpdatePromotion = (promo) => {
       expiryDate: moment(promo.promo.expiryDate)
         .format("YYYY-MM-DD")
         .toString(),
-    },
-  });
+    };
+    reset(defaultValues);
+  }, [promo, reset, moment]);
 
   const startDate = watch("startDate");
   const expiryDate = watch("expiryDate");
@@ -62,7 +68,7 @@ const UpdatePromotion = (promo) => {
         Update
       </button>
       <div
-        className="modal fade"
+        className="modal"
         id={"modal-form" + promo.promo._id}
         tabindex="-1"
         role="dialog"
@@ -227,11 +233,8 @@ const UpdatePromotion = (promo) => {
                       )}
                     </div>
                   </div>
-
                   <div className="d-grid button">
-                    {errors ? (
-                      <button className="btn">Save Changes</button>
-                    ) : (
+                    {Object.keys(errors).length === 0 && (
                       <button
                         type="submit"
                         className="btn"
@@ -240,6 +243,9 @@ const UpdatePromotion = (promo) => {
                       >
                         Save Changes
                       </button>
+                    )}
+                    {Object.keys(errors).length !== 0 && (
+                      <button className="btn">Save Changes</button>
                     )}
                   </div>
                 </form>

@@ -1,7 +1,7 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateProduct } from "../features/products/productSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const UpdateProduct = (product) => {
   let tempTypes = [];
@@ -34,10 +34,14 @@ const UpdateProduct = (product) => {
     control,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "all",
-    defaultValues: {
+  });
+
+  useEffect(() => {
+    const defaultValues = {
       // images: product.product._doc.images,
       productName: product.product._doc.productName,
       brand: product.product._doc.brand,
@@ -48,8 +52,9 @@ const UpdateProduct = (product) => {
       isSale: product.product._doc.isSale,
       salePercent: tempSalePercent,
       featured: product.product._doc.featured,
-    },
-  });
+    };
+    reset(defaultValues);
+  }, [product, reset]);
 
   const {
     fields: typeFields,
@@ -143,7 +148,6 @@ const UpdateProduct = (product) => {
   // const addProductType = () => {
   //   setProductTypes([...productTypes, ""]);
   // };
-
 
   return (
     <>
@@ -390,7 +394,8 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.specifications) &&
-                                  errors.specifications[index].specificationValue
+                                  errors.specifications[index]
+                                    .specificationValue
                                     ? "1px solid #f44336"
                                     : "",
                               }}
@@ -655,9 +660,7 @@ const UpdateProduct = (product) => {
                     </div>
                   </div>
                   <div className="d-grid button">
-                    {errors ? (
-                      <button className="btn">Save Changes</button>
-                    ) : (
+                    {Object.keys(errors).length === 0 && (
                       <button
                         type="submit"
                         className="btn"
@@ -666,6 +669,9 @@ const UpdateProduct = (product) => {
                       >
                         Save Changes
                       </button>
+                    )}
+                    {Object.keys(errors).length !== 0 && (
+                      <button className="btn">Save Changes</button>
                     )}
                   </div>
                 </form>
