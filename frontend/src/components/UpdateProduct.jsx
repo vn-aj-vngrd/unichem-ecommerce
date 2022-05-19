@@ -54,7 +54,8 @@ const UpdateProduct = (product) => {
       salePercent: tempSalePercent,
       featured: product.product._doc.featured,
     };
-  }, [product, reset])
+    reset(defaultValues);
+  }, [product, reset]);
 
   const {
     fields: typeFields,

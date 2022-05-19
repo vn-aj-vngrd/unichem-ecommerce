@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updatePromo } from "../features/promos/promoSlice";
+import { useEffect } from "react";
 
 const UpdatePromotion = (promo) => {
   const moment = require("moment");
@@ -11,10 +12,15 @@ const UpdatePromotion = (promo) => {
     // control,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "all",
-    defaultValues: {
+    
+  });
+
+  useEffect(() => {
+    const defaultValues = {
       // image: promo.promo.image,
       promoName: promo.promo.promoName,
       description: promo.promo.description,
@@ -22,8 +28,9 @@ const UpdatePromotion = (promo) => {
       expiryDate: moment(promo.promo.expiryDate)
         .format("YYYY-MM-DD")
         .toString(),
-    },
-  });
+    };
+    reset(defaultValues);
+  }, [promo, reset, moment]);
 
   const startDate = watch("startDate");
   const expiryDate = watch("expiryDate");
