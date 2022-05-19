@@ -2,18 +2,20 @@ import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setProduct } from "../features/products/productSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CreateProduct = () => {
   const [specificationEmpty, setSpecificationEmpty] = useState(false);
   const [typesEmpty, setTypesEmpty] = useState(false);
+  const [formSuccessful, setFormSuccessful] = useState(false);
 
   const {
     register,
     control,
     handleSubmit,
     watch,
-    formState: { errors },
+    reset,
+    formState: { errors, touchedFields },
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -30,8 +32,40 @@ const CreateProduct = () => {
           price: "",
         },
       ],
+      isSale: false,
+      featured: false,
     },
   });
+
+  useEffect(() => {
+    reset({
+      images: "",
+      productName: "",
+      brand: "",
+      category: "",
+      description: "",
+      specifications: [
+        {
+          specificationLabel: "",
+          specificationValue: "",
+        },
+      ],
+      types: [
+        {
+          type: "",
+          quantity: "",
+          price: "",
+        },
+      ],
+      isSale: false,
+      salePercent: "",
+      featured: false,
+    });
+
+    if (formSuccessful == true) {
+      setFormSuccessful(false);
+    }
+  }, [formSuccessful, reset]);
 
   const {
     fields: typeFields,
@@ -122,9 +156,10 @@ const CreateProduct = () => {
     for (var key in productData) {
       formData.append(key, productData[key]);
     }
-    dispatch(setProduct(formData));
-  };
 
+    dispatch(setProduct(formData));
+    setFormSuccessful(true);
+  };
   return (
     <>
       <div className="col-12 mt-5">
@@ -304,7 +339,6 @@ const CreateProduct = () => {
                   </div>
 
                   <br></br>
-                  <br></br>
                   <h5>Product Specifications</h5>
                   {specificationEmpty && (
                     <p className="error-message">
@@ -409,7 +443,6 @@ const CreateProduct = () => {
                     Add specification <i className="add-type-icon">+</i>
                   </div>
 
-                  <br></br>
                   <br></br>
                   <h5>Product Color/Types</h5>
                   {typesEmpty && (
@@ -546,7 +579,6 @@ const CreateProduct = () => {
                     Add product type <i className="add-type-icon">+</i>
                   </div>
                   <br></br>
-                  <br></br>
                   <h5>Market Status</h5>
                   <div className="product-sale-modal d-flex">
                     <div className="form-group col-6">
@@ -557,14 +589,7 @@ const CreateProduct = () => {
                             type="number"
                             className="form-select"
                             id="isSale"
-                            {...register("isSale", {
-                              required: {
-                                value: true,
-                                message: "Product sale is required.",
-                              },
-                              validate: (value) =>
-                                "" !== value || "Product sale is required",
-                            })}
+                            {...register("isSale")}
                             style={{
                               border: errors.isSale ? "1px solid #f44336" : "",
                             }}
@@ -629,14 +654,7 @@ const CreateProduct = () => {
                         <select
                           className="form-select"
                           id="featured"
-                          {...register("featured", {
-                            required: {
-                              value: true,
-                              message: "Feature product is required.",
-                            },
-                            validate: (value) =>
-                              "" !== value || "Feature product is required",
-                          })}
+                          {...register("featured")}
                           style={{
                             border: errors.featured ? "1px solid #f44336" : "",
                           }}
@@ -652,18 +670,21 @@ const CreateProduct = () => {
                       )}
                     </div>
                   </div>
+
                   <div className="d-grid button">
-                    {Object.keys(errors).length === 0 && (
-                      <button
-                        type="submit"
-                        className="btn"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        Save Changes
-                      </button>
-                    )}
-                    {Object.keys(errors).length !== 0 && (
+                    {Object.keys(touchedFields).length !== 0 &&
+                      Object.keys(errors).length === 0 && (
+                        <button
+                          type="submit"
+                          className="btn"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          Save Changes
+                        </button>
+                      )}
+                    {(Object.keys(touchedFields).length === 0 ||
+                      Object.keys(errors).length !== 0) && (
                       <button className="btn">Save Changes</button>
                     )}
                   </div>

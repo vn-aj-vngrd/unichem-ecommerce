@@ -1,19 +1,41 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setCoupon } from "../features/coupons/couponSlice";
+import { useState, useEffect } from "react";
 
-const UpdateCoupon = (coupon) => {
+const UpdateCoupon = () => {
   const dispatch = useDispatch();
+  const [formSuccessful, setFormSuccessful] = useState(false);
 
   const {
     register,
     // control,
     handleSubmit,
     watch,
-    formState: { errors },
+    reset,
+    formState: { errors, touchedFields },
   } = useForm({
     mode: "all",
   });
+
+  useEffect(() => {
+    const defaultValues = {
+      couponCode: "",
+      couponType: "",
+      description: "",
+      discount: "",
+      requiredAmount: "",
+      limit: "",
+      startDate: "",
+      expiryDate: "",
+    };
+    reset(defaultValues);
+
+    if (formSuccessful == true) {
+      setFormSuccessful(false);
+    }
+  }, [formSuccessful, reset]);
+
 
   const startDate = watch("startDate");
   const expiryDate = watch("expiryDate");
@@ -31,6 +53,7 @@ const UpdateCoupon = (coupon) => {
     };
 
     dispatch(setCoupon(couponData));
+    setFormSuccessful(true);
   };
 
   console.log(errors);
@@ -324,19 +347,21 @@ const UpdateCoupon = (coupon) => {
                   </div>
 
                   <div className="d-grid button">
-                    {Object.keys(errors).length === 0 && (
-                      <button
-                        type="submit"
-                        className="btn"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        Save Changes
-                      </button>
-                    )}
-                    {Object.keys(errors).length !== 0 && (
-                      <button className="btn">Save Changes</button>
-                    )}
+                    {(Object.keys(touchedFields).length !== 0 &&
+                      Object.keys(errors).length === 0) && (
+                        <button
+                          type="submit"
+                          className="btn"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          Save Changes
+                        </button>
+                      )}
+                    {(Object.keys(touchedFields).length === 0 ||
+                      Object.keys(errors).length !== 0) && (
+                        <button className="btn">Save Changes</button>
+                      )}
                   </div>
                 </form>
               </div>

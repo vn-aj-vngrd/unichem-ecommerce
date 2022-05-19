@@ -1,17 +1,35 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setPromo } from "../features/promos/promoSlice";
+import { useState, useEffect } from "react";
 
 const CreatePromotion = () => {
   const dispatch = useDispatch();
+  const [formSuccessful, setFormSuccessful] = useState(false);
 
   const {
     register,
     // control,
     handleSubmit,
     watch,
-    formState: { errors },
+    reset,
+    formState: { errors, touchedFields },
   } = useForm({ mode: "all" });
+
+  useEffect(() => {
+    const defaultValues = {
+      image: "",
+      promoName: "",
+      description: "",
+      startDate: "",
+      expiryDate: "",
+    };
+    reset(defaultValues);
+
+    if (formSuccessful == true) {
+      setFormSuccessful(false);
+    }
+  }, [formSuccessful, reset]);
 
   const startDate = watch("startDate");
   const expiryDate = watch("expiryDate");
@@ -31,6 +49,7 @@ const CreatePromotion = () => {
     }
 
     dispatch(setPromo(formData));
+    setFormSuccessful(true);
   };
 
   return (
@@ -216,7 +235,8 @@ const CreatePromotion = () => {
                   </div>
 
                   <div className="d-grid button">
-                    {Object.keys(errors).length === 0 && (
+                    {(Object.keys(touchedFields).length !== 0 &&
+                    Object.keys(errors).length === 0) && (
                       <button
                         type="submit"
                         className="btn"
@@ -226,7 +246,8 @@ const CreatePromotion = () => {
                         Save Changes
                       </button>
                     )}
-                    {Object.keys(errors).length !== 0 && (
+                    {(Object.keys(touchedFields).length === 0 ||
+                    Object.keys(errors).length !== 0) && (
                       <button className="btn">Save Changes</button>
                     )}
                   </div>
