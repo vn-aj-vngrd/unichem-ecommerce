@@ -66,8 +66,8 @@ const ManageProducts = () => {
     "Sale",
     "Sale Percent",
     "Featured",
-    "Updated",
     "Created",
+    "Updated",
     "",
     "",
   ];
@@ -107,8 +107,8 @@ const ManageProducts = () => {
         temp.push("0%");
       }
       temp.push(product._doc.featured ? "Yes" : "No");
-      temp.push(moment(product._doc.updatedAt).format("llll"));
       temp.push(moment(product._doc.createdAt).format("llll"));
+      temp.push(moment(product._doc.updatedAt).format("llll"));
       if (product) {
         temp.push(<ViewProduct product={product} />);
         temp.push(<UpdateProduct product={product} />);
