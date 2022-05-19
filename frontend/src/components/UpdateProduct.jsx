@@ -1,7 +1,7 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateProduct } from "../features/products/productSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const UpdateProduct = (product) => {
   let tempTypes = [];
@@ -34,10 +34,15 @@ const UpdateProduct = (product) => {
     control,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "all",
-    defaultValues: {
+    
+  });
+
+  useEffect(() => {
+    const defaultValues = {
       // images: product.product._doc.images,
       productName: product.product._doc.productName,
       brand: product.product._doc.brand,
@@ -48,8 +53,8 @@ const UpdateProduct = (product) => {
       isSale: product.product._doc.isSale,
       salePercent: tempSalePercent,
       featured: product.product._doc.featured,
-    },
-  });
+    };
+  }, [product, reset])
 
   const {
     fields: typeFields,
