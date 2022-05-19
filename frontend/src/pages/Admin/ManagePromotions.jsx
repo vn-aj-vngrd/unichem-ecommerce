@@ -83,7 +83,6 @@ const ManagePromotions = () => {
   let data = [];
   const maxLength = 50;
   promos.forEach((promo) => {
-    console.log(promo);
     let temp = [];
 
     // temp.push(

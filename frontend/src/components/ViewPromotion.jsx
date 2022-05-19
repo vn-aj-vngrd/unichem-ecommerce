@@ -45,7 +45,7 @@ const ViewPromotion = ({ promo }) => {
                     <div className="ms-3">
                       Promo Name: {promo.promoName}
                       <br />
-                      Start Date: {moment(promo.startDate).format("1111")}
+                      Start Date: {moment(promo.startDate).format("llll")}
                       <br />
                       Expiry Date: {moment(promo.expiryDate).format("llll")}
                       <br />
