@@ -38,7 +38,6 @@ const UpdateProduct = (product) => {
     formState: { errors },
   } = useForm({
     mode: "all",
-    
   });
 
   useEffect(() => {
@@ -149,7 +148,6 @@ const UpdateProduct = (product) => {
   // const addProductType = () => {
   //   setProductTypes([...productTypes, ""]);
   // };
-
 
   return (
     <>
@@ -396,7 +394,8 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.specifications) &&
-                                  errors.specifications[index].specificationValue
+                                  errors.specifications[index]
+                                    .specificationValue
                                     ? "1px solid #f44336"
                                     : "",
                               }}
@@ -661,9 +660,7 @@ const UpdateProduct = (product) => {
                     </div>
                   </div>
                   <div className="d-grid button">
-                    {errors ? (
-                      <button className="btn">Save Changes</button>
-                    ) : (
+                    {Object.keys(errors).length === 0 && (
                       <button
                         type="submit"
                         className="btn"
@@ -672,6 +669,9 @@ const UpdateProduct = (product) => {
                       >
                         Save Changes
                       </button>
+                    )}
+                    {Object.keys(errors).length !== 0 && (
+                      <button className="btn">Save Changes</button>
                     )}
                   </div>
                 </form>

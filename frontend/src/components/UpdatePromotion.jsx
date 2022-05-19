@@ -16,7 +16,6 @@ const UpdatePromotion = (promo) => {
     formState: { errors },
   } = useForm({
     mode: "all",
-    
   });
 
   useEffect(() => {
@@ -69,7 +68,7 @@ const UpdatePromotion = (promo) => {
         Update
       </button>
       <div
-        className="modal fade"
+        className="modal"
         id={"modal-form" + promo.promo._id}
         tabindex="-1"
         role="dialog"
@@ -234,11 +233,8 @@ const UpdatePromotion = (promo) => {
                       )}
                     </div>
                   </div>
-
                   <div className="d-grid button">
-                    {errors ? (
-                      <button className="btn">Save Changes</button>
-                    ) : (
+                    {Object.keys(errors).length === 0 && (
                       <button
                         type="submit"
                         className="btn"
@@ -247,6 +243,9 @@ const UpdatePromotion = (promo) => {
                       >
                         Save Changes
                       </button>
+                    )}
+                    {Object.keys(errors).length !== 0 && (
+                      <button className="btn">Save Changes</button>
                     )}
                   </div>
                 </form>
