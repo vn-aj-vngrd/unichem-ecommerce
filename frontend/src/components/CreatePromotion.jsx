@@ -216,9 +216,7 @@ const CreatePromotion = () => {
                   </div>
 
                   <div className="d-grid button">
-                    {errors ? (
-                      <button className="btn">Save Changes</button>
-                    ) : (
+                    {Object.keys(errors).length === 0 && (
                       <button
                         type="submit"
                         className="btn"
@@ -227,6 +225,9 @@ const CreatePromotion = () => {
                       >
                         Save Changes
                       </button>
+                    )}
+                    {Object.keys(errors).length !== 0 && (
+                      <button className="btn">Save Changes</button>
                     )}
                   </div>
                 </form>

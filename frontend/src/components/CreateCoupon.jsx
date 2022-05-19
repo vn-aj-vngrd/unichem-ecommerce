@@ -324,9 +324,7 @@ const UpdateCoupon = (coupon) => {
                   </div>
 
                   <div className="d-grid button">
-                    {errors ? (
-                      <button className="btn">Save Changes</button>
-                    ) : (
+                    {Object.keys(errors).length === 0 && (
                       <button
                         type="submit"
                         className="btn"
@@ -335,6 +333,9 @@ const UpdateCoupon = (coupon) => {
                       >
                         Save Changes
                       </button>
+                    )}
+                    {Object.keys(errors).length !== 0 && (
+                      <button className="btn">Save Changes</button>
                     )}
                   </div>
                 </form>
