@@ -38,7 +38,7 @@ const UserProfile = () => {
     },
   });
 
-  const [ selectedFile, setSelectedFile ] = useState("");
+  // const [ selectedFile, setSelectedFile ] = useState("");
   const [ previewSource, setPreviewSource ] = useState("");
 
   const newPassword = watch("newPassword");

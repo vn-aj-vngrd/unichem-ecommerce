@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateOrder } from "../features/orders/orderSlice";
 
-
 const UpdateOrder = ({ order }) => {
   const moment = require("moment");
   const {
@@ -11,8 +10,8 @@ const UpdateOrder = ({ order }) => {
     handleSubmit,
     reset,
     // watch,
-    // formState: { errors },
-  } = useForm({});
+    formState: { errors },
+  } = useForm({ mode: "all" });
 
   useEffect(() => {
     const defaultValues = {
@@ -222,9 +221,24 @@ const UpdateOrder = ({ order }) => {
                           type="number"
                           step=".01"
                           className="form-control"
-                          {...register("shippingFee")}
+                          {...register("shippingFee", {
+                            required: {
+                              value: true,
+                              message: "Shipping Fee is required.",
+                            },
+                          })}
+                          style={{
+                            border: errors.shippingFee
+                              ? "1px solid #f44336"
+                              : "",
+                          }}
                         />
                       </div>
+                      {errors.shippingFee && (
+                        <p className="error-message">
+                          ⚠ {errors.shippingFee.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -390,14 +404,18 @@ const UpdateOrder = ({ order }) => {
                   </div>
 
                   <div className="d-grid button">
-                    <button
-                      type="submit"
-                      className="btn"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      Save Changes
-                    </button>
+                    {Object.keys(errors).length === 0 ? (
+                      <button
+                        type="submit"
+                        className="btn"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        Save Changes
+                      </button>
+                    ) : (
+                      <button className="btn">Save Changes</button>
+                    )}
                   </div>
                 </form>
               </div>
