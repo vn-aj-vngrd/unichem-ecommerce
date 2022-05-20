@@ -6655,6 +6655,14 @@ ol {
   z-index: 2;
 }
 
+.progress-cancelled,
+.progress-declined,
+.progress-awaiting-return,
+.progress-returned
+ {
+  width: 0%;
+}
+
 .one-status .true {
   background-color: #f44336;
   /* -webkit-transition: all 0.1s ease;
