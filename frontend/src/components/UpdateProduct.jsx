@@ -191,6 +191,8 @@ const UpdateProduct = (product) => {
   //   setProductTypes([...productTypes, ""]);
   // };
 
+  console.log(errors);
+
   return (
     <>
       <div className="button">
@@ -378,6 +380,7 @@ const UpdateProduct = (product) => {
                       key={specification.id}
                       className="product-specifications-modal d-flex"
                     >
+                      {console.log(index)}
                       <div className="form-group col-6">
                         <div className="form-group mb-4">
                           <label>Label</label>
@@ -398,13 +401,16 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.specifications) &&
+                                  errors.specifications[index] &&
                                   errors.specifications[index]
+                                    .specificationLabel
                                     ? "1px solid #f44336"
                                     : "",
                               }}
                             />
                           </div>
                           {Array.isArray(errors.specifications) &&
+                            errors.specifications[index] &&
                             errors.specifications[index].specificationLabel && (
                               <p className="error-message">
                                 ⚠{" "}
@@ -436,6 +442,7 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.specifications) &&
+                                  errors.specifications[index] &&
                                   errors.specifications[index]
                                     .specificationValue
                                     ? "1px solid #f44336"
@@ -444,6 +451,7 @@ const UpdateProduct = (product) => {
                             />
                           </div>
                           {Array.isArray(errors.specifications) &&
+                            errors.specifications[index] &&
                             errors.specifications[index].specificationValue && (
                               <p className="error-message">
                                 ⚠{" "}
@@ -496,6 +504,7 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].type
                                     ? "1px solid #f44336"
                                     : "",
@@ -503,6 +512,7 @@ const UpdateProduct = (product) => {
                             />
                           </div>
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].type && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].type.message}
@@ -534,6 +544,7 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].quantity
                                     ? "1px solid #f44336"
                                     : "",
@@ -542,6 +553,7 @@ const UpdateProduct = (product) => {
                           </div>
 
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].quantity && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].quantity.message}
@@ -571,6 +583,7 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].price
                                     ? "1px solid #f44336"
                                     : "",
@@ -578,6 +591,7 @@ const UpdateProduct = (product) => {
                             />
                           </div>
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].price && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].price.message}
