@@ -4,6 +4,29 @@ import { updateProduct } from "../features/products/productSlice";
 import { useState, useEffect } from "react";
 
 const UpdateProduct = (product) => {
+  let tempTypes = [];
+  product.product._doc.types.forEach((type, index) => {
+    tempTypes.push({
+      type: type,
+      quantity: product.product._doc.quantities[index],
+      price: product.product._doc.prices[index],
+    });
+  });
+
+  let tempSpecifications = [];
+  product.product._doc.specifications.forEach((specification) => {
+    let index = specification.indexOf(": ");
+
+    tempSpecifications.push({
+      specificationLabel: specification.slice(0, index),
+      specificationValue: specification.slice(index + 2),
+    });
+  });
+
+  let tempSalePercent = product.product._doc.salePercent
+    ? product.product._doc.salePercent
+    : 0;
+
   const [specificationEmpty, setSpecificationEmpty] = useState(false);
   const [typesEmpty, setTypesEmpty] = useState(false);
   const {
@@ -15,32 +38,7 @@ const UpdateProduct = (product) => {
     formState: { errors },
   } = useForm({
     mode: "all",
-  });
-
-  useEffect(() => {
-    let tempTypes = [];
-    product.product._doc.types.forEach((type, index) => {
-      tempTypes.push({
-        type: type,
-        quantity: product.product._doc.quantities[index],
-        price: product.product._doc.prices[index],
-      });
-    });
-
-    let tempSpecifications = [];
-    product.product._doc.specifications.forEach((specification) => {
-      let index = specification.indexOf(": ");
-
-      tempSpecifications.push({
-        specificationLabel: specification.slice(0, index),
-        specificationValue: specification.slice(index + 2),
-      });
-    });
-
-    let tempSalePercent = product.product._doc.salePercent
-      ? product.product._doc.salePercent
-      : 0;
-    const defaultValues = {
+    defaultValues: {
       // images: product.product._doc.images,
       productName: product.product._doc.productName,
       brand: product.product._doc.brand,
@@ -51,8 +49,47 @@ const UpdateProduct = (product) => {
       isSale: product.product._doc.isSale,
       salePercent: tempSalePercent,
       featured: product.product._doc.featured,
+    },
+  });
+
+  useEffect(() => {
+    let resetTypes = [];
+    product.product._doc.types.forEach((type, index) => {
+      resetTypes.push({
+        type: type,
+        quantity: product.product._doc.quantities[index],
+        price: product.product._doc.prices[index],
+      });
+    });
+
+    let resetSpecifications = [];
+    product.product._doc.specifications.forEach((specification) => {
+      let index = specification.indexOf(": ");
+
+      resetSpecifications.push({
+        specificationLabel: specification.slice(0, index),
+        specificationValue: specification.slice(index + 2),
+      });
+    });
+
+    let resetSalePercent = product.product._doc.salePercent
+      ? product.product._doc.salePercent
+      : 0;
+
+    const resultValues = {
+      // images: product.product._doc.images,
+      productName: product.product._doc.productName,
+      brand: product.product._doc.brand,
+      category: product.product._doc.category,
+      description: product.product._doc.description,
+      specifications: resetSpecifications,
+      types: resetTypes,
+      isSale: product.product._doc.isSale,
+      salePercent: resetSalePercent,
+      featured: product.product._doc.featured,
     };
-    reset(defaultValues);
+
+    reset(resultValues);
   }, [product, reset]);
 
   const {
@@ -138,7 +175,13 @@ const UpdateProduct = (product) => {
     }
 
     for (var key in productData) {
-      formData.append(key, productData[key]);
+      if (Array.isArray(productData[key])) {
+        for (let k = 0; k < productData[key].length; k++) {
+          formData.append(key, productData[key][k]);
+        }
+      } else {
+        formData.append(key, productData[key]);
+      }
     }
 
     dispatch(updateProduct(formData));
