@@ -27,8 +27,6 @@ const UpdateProduct = (product) => {
     ? product.product._doc.salePercent
     : 0;
 
-  const [specificationEmpty, setSpecificationEmpty] = useState(false);
-  const [typesEmpty, setTypesEmpty] = useState(false);
   const {
     register,
     control,
@@ -111,24 +109,13 @@ const UpdateProduct = (product) => {
   });
 
   const isSale = watch("isSale");
-  // const [isSale, setisSale] = useState(isSaleWatch);
+  const types = watch("types");
+  const specifications = watch("specifications");
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    if (data.specifications.length === 0) {
-      setSpecificationEmpty(true);
-    } else {
-      setSpecificationEmpty(false);
-    }
-
-    if (data.types.length === 0) {
-      setTypesEmpty(true);
-    } else {
-      setTypesEmpty(false);
-    }
-
-    if (specificationEmpty || typesEmpty) {
+    if (types.length === 0 || specifications.length === 0) {
       return;
     }
 
@@ -369,9 +356,9 @@ const UpdateProduct = (product) => {
                   <br></br>
                   <h5>Product Specifications</h5>
                   <br></br>
-                  {specificationEmpty && (
+                  {specifications.length === 0 && (
                     <p className="error-message">
-                      ⚠ Product Specifications are required
+                      ⚠ Product types are required
                     </p>
                   )}
 
@@ -480,7 +467,11 @@ const UpdateProduct = (product) => {
 
                   <br></br>
                   <h5>Product Color/Types</h5>
-                  <br></br>
+                  {types.length === 0 && (
+                    <p className="error-message">
+                      ⚠ Product types are required
+                    </p>
+                  )}
 
                   {typeFields.map((productType, index) => (
                     <div
@@ -720,17 +711,21 @@ const UpdateProduct = (product) => {
                     </div>
                   </div>
                   <div className="d-grid button">
-                    {Object.keys(errors).length === 0 && (
-                      <button
-                        type="submit"
-                        className="btn"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        Save Changes
-                      </button>
-                    )}
-                    {Object.keys(errors).length !== 0 && (
+                    {Object.keys(errors).length === 0 &&
+                      types.length !== 0 &&
+                      specifications.length !== 0 && (
+                        <button
+                          type="submit"
+                          className="btn"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          Save Changes
+                        </button>
+                      )}
+                    {(Object.keys(errors).length !== 0 ||
+                      types.length === 0 ||
+                      specifications.length === 0) && (
                       <button className="btn">Save Changes</button>
                     )}
                   </div>

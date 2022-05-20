@@ -5,8 +5,6 @@ import { setProduct } from "../features/products/productSlice";
 import { useState, useEffect } from "react";
 
 const CreateProduct = () => {
-  const [specificationEmpty, setSpecificationEmpty] = useState(false);
-  const [typesEmpty, setTypesEmpty] = useState(false);
   const [formSuccessful, setFormSuccessful] = useState(false);
 
   const {
@@ -86,23 +84,13 @@ const CreateProduct = () => {
   });
 
   const isSale = watch("isSale");
+  const types = watch("types");
+  const specifications = watch("specifications");
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    if (data.specifications.length === 0) {
-      setSpecificationEmpty((prevState) => (prevState = true));
-    } else {
-      setSpecificationEmpty((prevState) => (prevState = false));
-    }
-
-    if (data.types.length === 0) {
-      setTypesEmpty((prevState) => (prevState = true));
-    } else {
-      setTypesEmpty((prevState) => (prevState = false));
-    }
-
-    if (specificationEmpty || typesEmpty) {
+    if (types.length === 0 || specifications.length === 0) {
       return;
     }
 
@@ -346,7 +334,7 @@ const CreateProduct = () => {
 
                   <br></br>
                   <h5>Product Specifications</h5>
-                  {specificationEmpty && (
+                  {specifications.length === 0 && (
                     <p className="error-message">
                       ⚠ Product Specifications are required
                     </p>
@@ -455,7 +443,7 @@ const CreateProduct = () => {
 
                   <br></br>
                   <h5>Product Color/Types</h5>
-                  {typesEmpty && (
+                  {types.length === 0 && (
                     <p className="error-message">
                       ⚠ Product types are required
                     </p>
@@ -689,7 +677,9 @@ const CreateProduct = () => {
 
                   <div className="d-grid button">
                     {Object.keys(touchedFields).length !== 0 &&
-                      Object.keys(errors).length === 0 && (
+                      Object.keys(errors).length === 0 &&
+                      types.length !== 0 &&
+                      specifications.length !== 0 && (
                         <button
                           type="submit"
                           className="btn"
@@ -700,7 +690,9 @@ const CreateProduct = () => {
                         </button>
                       )}
                     {(Object.keys(touchedFields).length === 0 ||
-                      Object.keys(errors).length !== 0) && (
+                      Object.keys(errors).length !== 0 ||
+                      types.length === 0 ||
+                      specifications.length === 0) && (
                       <button className="btn">Save Changes</button>
                     )}
                   </div>
