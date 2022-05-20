@@ -81,9 +81,9 @@ const Product = ({
     productName = productName.replaceAll("_", " ");
 
     allProducts = products.filter((product) => {
-      return product._doc.productName
-        .toLowerCase()
-        .includes(productName.toLowerCase());
+      return (
+        product._doc.productName.toLowerCase() === productName.toLowerCase()
+      );
     });
 
     preFilteredProducts = [...allProducts];
@@ -93,9 +93,7 @@ const Product = ({
     categoryName = categoryName.replaceAll("_", " ");
 
     allProducts = products.filter((product) => {
-      return product._doc.category
-        .toLowerCase()
-        .includes(categoryName.toLowerCase());
+      return product._doc.category.toLowerCase() === categoryName.toLowerCase();
     });
 
     preFilteredProducts = [...allProducts];
@@ -105,7 +103,7 @@ const Product = ({
     brandName = brandName.replaceAll("_", " ");
 
     allProducts = products.filter((product) => {
-      return product._doc.brand.toLowerCase().includes(brandName.toLowerCase());
+      return product._doc.brand.toLowerCase() === brandName.toLowerCase();
     });
 
     preFilteredProducts = [...allProducts];
