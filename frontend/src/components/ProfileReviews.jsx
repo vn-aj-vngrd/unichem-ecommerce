@@ -13,7 +13,7 @@ function ProfileReviews() {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { reviews, isReviewLoading, isReviewError, reviewMessage } =
+  const { reviews, isReviewLoading, isReviewError, isReviewCreated, isReviewUpdated, isReviewDeleted, reviewMessage } =
     useSelector((state) => state.reviews);
 
   useEffect(() => {
@@ -21,12 +21,25 @@ function ProfileReviews() {
       // console.log(reviewMessage);
     }
 
+    if (isReviewCreated) {
+      toast.success("Review created successfully");
+    }
+
+    if (isReviewDeleted) {
+      toast.success("Review deleted successfully");
+    }
+
+    if (isReviewUpdated) {
+      toast.success("Review updated successfully");
+    }
+
+
     dispatch(getUserReviews());
 
     return () => {
       dispatch(resetReview());
     };
-  }, [isReviewError, reviewMessage, dispatch]);
+  }, [isReviewError, reviewMessage, isReviewCreated, isReviewUpdated, isReviewDeleted, dispatch]);
 
   if (isReviewLoading) {
     return (
