@@ -56,7 +56,6 @@ const UpdateCoupon = () => {
     setFormSuccessful(true);
   };
 
-  console.log(errors);
   return (
     <div className="col-12 mt-5">
       <button
@@ -201,6 +200,10 @@ const UpdateCoupon = () => {
                             min: {
                               value: 0,
                               message: "Discount must be greater than 0.",
+                            },
+                            max: {
+                              value: 100,
+                              message: "Discount must be less than 100.",
                             },
                           })}
                           style={{
