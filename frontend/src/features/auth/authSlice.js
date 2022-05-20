@@ -21,7 +21,6 @@ const initialState = {
   isAccountRecovered: false,
   isAccountDeleted: false,
   isAdminUpdated: false,
-  isDeleteLoading: false,
   isCustomerProfileUpdated: false,
   isCustomerAddressUpdated: false,
   isCustomerPasswordUpdated: false,
@@ -404,18 +403,17 @@ export const authSlice = createSlice({
       })
       // Delete User Case
       .addCase(deleteUser.pending, (state) => {
-        state.isDeleteLoading = true;
+        state.isLoading = true;
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
-        state.isDeleteLoading = false;
-        state.isSuccess = true;
+        state.isLoading = false;
         state.isAccountDeleted = true;
         state.users = state.users.filter(
           (user) => user._id !== action.payload.id
         );
       })
       .addCase(deleteUser.rejected, (state, action) => {
-        state.isDeleteLoading = false;
+        state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
