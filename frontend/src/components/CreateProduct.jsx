@@ -5,8 +5,6 @@ import { setProduct } from "../features/products/productSlice";
 import { useState, useEffect } from "react";
 
 const CreateProduct = () => {
-  const [specificationEmpty, setSpecificationEmpty] = useState(false);
-  const [typesEmpty, setTypesEmpty] = useState(false);
   const [formSuccessful, setFormSuccessful] = useState(false);
 
   const {
@@ -86,23 +84,13 @@ const CreateProduct = () => {
   });
 
   const isSale = watch("isSale");
+  const types = watch("types");
+  const specifications = watch("specifications");
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    if (data.specifications.length === 0) {
-      setSpecificationEmpty((prevState) => (prevState = true));
-    } else {
-      setSpecificationEmpty((prevState) => (prevState = false));
-    }
-
-    if (data.types.length === 0) {
-      setTypesEmpty((prevState) => (prevState = true));
-    } else {
-      setTypesEmpty((prevState) => (prevState = false));
-    }
-
-    if (specificationEmpty || typesEmpty) {
+    if (types.length === 0 || specifications.length === 0) {
       return;
     }
 
@@ -346,7 +334,7 @@ const CreateProduct = () => {
 
                   <br></br>
                   <h5>Product Specifications</h5>
-                  {specificationEmpty && (
+                  {specifications.length === 0 && (
                     <p className="error-message">
                       ⚠ Product Specifications are required
                     </p>
@@ -376,6 +364,7 @@ const CreateProduct = () => {
                               style={{
                                 border:
                                   Array.isArray(errors.specifications) &&
+                                  errors.specifications[index] &&
                                   errors.specifications[index]
                                     .specificationLabel
                                     ? "1px solid #f44336"
@@ -384,6 +373,7 @@ const CreateProduct = () => {
                             />
                           </div>
                           {Array.isArray(errors.specifications) &&
+                            errors.specifications[index] &&
                             errors.specifications[index].specificationLabel && (
                               <p className="error-message">
                                 ⚠{" "}
@@ -415,6 +405,7 @@ const CreateProduct = () => {
                               style={{
                                 border:
                                   Array.isArray(errors.specifications) &&
+                                  errors.specifications[index] &&
                                   errors.specifications[index]
                                     .specificationValue
                                     ? "1px solid #f44336"
@@ -423,6 +414,7 @@ const CreateProduct = () => {
                             />
                           </div>
                           {Array.isArray(errors.specifications) &&
+                            errors.specifications[index] &&
                             errors.specifications[index].specificationValue && (
                               <p className="error-message">
                                 ⚠{" "}
@@ -451,7 +443,7 @@ const CreateProduct = () => {
 
                   <br></br>
                   <h5>Product Color/Types</h5>
-                  {typesEmpty && (
+                  {types.length === 0 && (
                     <p className="error-message">
                       ⚠ Product types are required
                     </p>
@@ -479,6 +471,7 @@ const CreateProduct = () => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].type
                                     ? "1px solid #f44336"
                                     : "",
@@ -486,6 +479,7 @@ const CreateProduct = () => {
                             />
                           </div>
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].type && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].type.message}
@@ -517,6 +511,7 @@ const CreateProduct = () => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].quantity
                                     ? "1px solid #f44336"
                                     : "",
@@ -525,6 +520,7 @@ const CreateProduct = () => {
                           </div>
 
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].quantity && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].quantity.message}
@@ -554,6 +550,7 @@ const CreateProduct = () => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].price
                                     ? "1px solid #f44336"
                                     : "",
@@ -561,6 +558,7 @@ const CreateProduct = () => {
                             />
                           </div>
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].price && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].price.message}
@@ -679,7 +677,9 @@ const CreateProduct = () => {
 
                   <div className="d-grid button">
                     {Object.keys(touchedFields).length !== 0 &&
-                      Object.keys(errors).length === 0 && (
+                      Object.keys(errors).length === 0 &&
+                      types.length !== 0 &&
+                      specifications.length !== 0 && (
                         <button
                           type="submit"
                           className="btn"
@@ -690,7 +690,9 @@ const CreateProduct = () => {
                         </button>
                       )}
                     {(Object.keys(touchedFields).length === 0 ||
-                      Object.keys(errors).length !== 0) && (
+                      Object.keys(errors).length !== 0 ||
+                      types.length === 0 ||
+                      specifications.length === 0) && (
                       <button className="btn">Save Changes</button>
                     )}
                   </div>

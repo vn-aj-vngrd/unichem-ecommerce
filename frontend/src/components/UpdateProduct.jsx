@@ -4,8 +4,29 @@ import { updateProduct } from "../features/products/productSlice";
 import { useState, useEffect } from "react";
 
 const UpdateProduct = (product) => {
-  const [specificationEmpty, setSpecificationEmpty] = useState(false);
-  const [typesEmpty, setTypesEmpty] = useState(false);
+  let tempTypes = [];
+  product.product._doc.types.forEach((type, index) => {
+    tempTypes.push({
+      type: type,
+      quantity: product.product._doc.quantities[index],
+      price: product.product._doc.prices[index],
+    });
+  });
+
+  let tempSpecifications = [];
+  product.product._doc.specifications.forEach((specification) => {
+    let index = specification.indexOf(": ");
+
+    tempSpecifications.push({
+      specificationLabel: specification.slice(0, index),
+      specificationValue: specification.slice(index + 2),
+    });
+  });
+
+  let tempSalePercent = product.product._doc.salePercent
+    ? product.product._doc.salePercent
+    : 0;
+
   const {
     register,
     control,
@@ -15,32 +36,7 @@ const UpdateProduct = (product) => {
     formState: { errors },
   } = useForm({
     mode: "all",
-  });
-
-  useEffect(() => {
-    let tempTypes = [];
-    product.product._doc.types.forEach((type, index) => {
-      tempTypes.push({
-        type: type,
-        quantity: product.product._doc.quantities[index],
-        price: product.product._doc.prices[index],
-      });
-    });
-
-    let tempSpecifications = [];
-    product.product._doc.specifications.forEach((specification) => {
-      let index = specification.indexOf(": ");
-
-      tempSpecifications.push({
-        specificationLabel: specification.slice(0, index),
-        specificationValue: specification.slice(index + 2),
-      });
-    });
-
-    let tempSalePercent = product.product._doc.salePercent
-      ? product.product._doc.salePercent
-      : 0;
-    const defaultValues = {
+    defaultValues: {
       // images: product.product._doc.images,
       productName: product.product._doc.productName,
       brand: product.product._doc.brand,
@@ -51,8 +47,47 @@ const UpdateProduct = (product) => {
       isSale: product.product._doc.isSale,
       salePercent: tempSalePercent,
       featured: product.product._doc.featured,
+    },
+  });
+
+  useEffect(() => {
+    let resetTypes = [];
+    product.product._doc.types.forEach((type, index) => {
+      resetTypes.push({
+        type: type,
+        quantity: product.product._doc.quantities[index],
+        price: product.product._doc.prices[index],
+      });
+    });
+
+    let resetSpecifications = [];
+    product.product._doc.specifications.forEach((specification) => {
+      let index = specification.indexOf(": ");
+
+      resetSpecifications.push({
+        specificationLabel: specification.slice(0, index),
+        specificationValue: specification.slice(index + 2),
+      });
+    });
+
+    let resetSalePercent = product.product._doc.salePercent
+      ? product.product._doc.salePercent
+      : 0;
+
+    const resultValues = {
+      // images: product.product._doc.images,
+      productName: product.product._doc.productName,
+      brand: product.product._doc.brand,
+      category: product.product._doc.category,
+      description: product.product._doc.description,
+      specifications: resetSpecifications,
+      types: resetTypes,
+      isSale: product.product._doc.isSale,
+      salePercent: resetSalePercent,
+      featured: product.product._doc.featured,
     };
-    reset(defaultValues);
+
+    reset(resultValues);
   }, [product, reset]);
 
   const {
@@ -74,24 +109,13 @@ const UpdateProduct = (product) => {
   });
 
   const isSale = watch("isSale");
-  // const [isSale, setisSale] = useState(isSaleWatch);
+  const types = watch("types");
+  const specifications = watch("specifications");
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    if (data.specifications.length === 0) {
-      setSpecificationEmpty(true);
-    } else {
-      setSpecificationEmpty(false);
-    }
-
-    if (data.types.length === 0) {
-      setTypesEmpty(true);
-    } else {
-      setTypesEmpty(false);
-    }
-
-    if (specificationEmpty || typesEmpty) {
+    if (types.length === 0 || specifications.length === 0) {
       return;
     }
 
@@ -138,7 +162,13 @@ const UpdateProduct = (product) => {
     }
 
     for (var key in productData) {
-      formData.append(key, productData[key]);
+      if (Array.isArray(productData[key])) {
+        for (let k = 0; k < productData[key].length; k++) {
+          formData.append(key, productData[key][k]);
+        }
+      } else {
+        formData.append(key, productData[key]);
+      }
     }
 
     dispatch(updateProduct(formData));
@@ -147,6 +177,8 @@ const UpdateProduct = (product) => {
   // const addProductType = () => {
   //   setProductTypes([...productTypes, ""]);
   // };
+
+  console.log(errors);
 
   return (
     <>
@@ -324,9 +356,9 @@ const UpdateProduct = (product) => {
                   <br></br>
                   <h5>Product Specifications</h5>
                   <br></br>
-                  {specificationEmpty && (
+                  {specifications.length === 0 && (
                     <p className="error-message">
-                      ⚠ Product Specifications are required
+                      ⚠ Product types are required
                     </p>
                   )}
 
@@ -335,6 +367,7 @@ const UpdateProduct = (product) => {
                       key={specification.id}
                       className="product-specifications-modal d-flex"
                     >
+                      {console.log(index)}
                       <div className="form-group col-6">
                         <div className="form-group mb-4">
                           <label>Label</label>
@@ -355,13 +388,16 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.specifications) &&
+                                  errors.specifications[index] &&
                                   errors.specifications[index]
+                                    .specificationLabel
                                     ? "1px solid #f44336"
                                     : "",
                               }}
                             />
                           </div>
                           {Array.isArray(errors.specifications) &&
+                            errors.specifications[index] &&
                             errors.specifications[index].specificationLabel && (
                               <p className="error-message">
                                 ⚠{" "}
@@ -393,6 +429,7 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.specifications) &&
+                                  errors.specifications[index] &&
                                   errors.specifications[index]
                                     .specificationValue
                                     ? "1px solid #f44336"
@@ -401,6 +438,7 @@ const UpdateProduct = (product) => {
                             />
                           </div>
                           {Array.isArray(errors.specifications) &&
+                            errors.specifications[index] &&
                             errors.specifications[index].specificationValue && (
                               <p className="error-message">
                                 ⚠{" "}
@@ -429,7 +467,11 @@ const UpdateProduct = (product) => {
 
                   <br></br>
                   <h5>Product Color/Types</h5>
-                  <br></br>
+                  {types.length === 0 && (
+                    <p className="error-message">
+                      ⚠ Product types are required
+                    </p>
+                  )}
 
                   {typeFields.map((productType, index) => (
                     <div
@@ -453,6 +495,7 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].type
                                     ? "1px solid #f44336"
                                     : "",
@@ -460,6 +503,7 @@ const UpdateProduct = (product) => {
                             />
                           </div>
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].type && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].type.message}
@@ -491,6 +535,7 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].quantity
                                     ? "1px solid #f44336"
                                     : "",
@@ -499,6 +544,7 @@ const UpdateProduct = (product) => {
                           </div>
 
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].quantity && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].quantity.message}
@@ -528,6 +574,7 @@ const UpdateProduct = (product) => {
                               style={{
                                 border:
                                   Array.isArray(errors.types) &&
+                                  errors.types[index] &&
                                   errors.types[index].price
                                     ? "1px solid #f44336"
                                     : "",
@@ -535,6 +582,7 @@ const UpdateProduct = (product) => {
                             />
                           </div>
                           {Array.isArray(errors.types) &&
+                            errors.types[index] &&
                             errors.types[index].price && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].price.message}
@@ -610,7 +658,11 @@ const UpdateProduct = (product) => {
                               },
                               min: {
                                 value: 0,
-                                message: "Sale Percent is invalid",
+                                message: "Sale Percent must be greater than 0",
+                              },
+                              max: {
+                                value: 100,
+                                message: "Sale Percent must be less than 100",
                               },
                             })}
                             style={{
@@ -659,17 +711,21 @@ const UpdateProduct = (product) => {
                     </div>
                   </div>
                   <div className="d-grid button">
-                    {Object.keys(errors).length === 0 && (
-                      <button
-                        type="submit"
-                        className="btn"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        Save Changes
-                      </button>
-                    )}
-                    {Object.keys(errors).length !== 0 && (
+                    {Object.keys(errors).length === 0 &&
+                      types.length !== 0 &&
+                      specifications.length !== 0 && (
+                        <button
+                          type="submit"
+                          className="btn"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          Save Changes
+                        </button>
+                      )}
+                    {(Object.keys(errors).length !== 0 ||
+                      types.length === 0 ||
+                      specifications.length === 0) && (
                       <button className="btn">Save Changes</button>
                     )}
                   </div>
