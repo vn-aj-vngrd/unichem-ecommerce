@@ -215,7 +215,7 @@ export const orderSlice = createSlice({
         state.isOrderLoading = true;
       })
       .addCase(updateOrder.fulfilled, (state, action) => {
-        state.isOrderLoading = true;
+        state.isOrderLoading = false;
         state.isOrderUpdated = true;
         const idx = state.orders.findIndex(
           (order) => order._id === action.payload._id
