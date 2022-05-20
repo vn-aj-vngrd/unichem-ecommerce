@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { getOneOrder, resetOrder } from "../features/orders/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,7 +21,6 @@ const OrderLogInformation = () => {
   );
 
   useEffect(() => {
-
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
