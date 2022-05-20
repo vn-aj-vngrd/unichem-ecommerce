@@ -667,7 +667,11 @@ const UpdateProduct = (product) => {
                               },
                               min: {
                                 value: 0,
-                                message: "Sale Percent is invalid",
+                                message: "Sale Percent must be greater than 0",
+                              },
+                              max: {
+                                value: 100,
+                                message: "Sale Percent must be less than 100",
                               },
                             })}
                             style={{
