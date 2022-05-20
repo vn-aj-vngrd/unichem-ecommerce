@@ -499,7 +499,6 @@ const deleteUser = asyncHandler(async (req, res) => {
   await Cart.deleteMany({ userID: req.params.id });
   await Couponlog.findByIdAndDelete(req.params.id);
 
-
   res.status(200).json({ id: req.params.id });
 });
 
