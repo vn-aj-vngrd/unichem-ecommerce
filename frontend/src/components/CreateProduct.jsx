@@ -123,8 +123,8 @@ const CreateProduct = () => {
 
     data.types.forEach((type) => {
       tempTypesData.push(type.type);
-      tempQuantitiesData.push(parseFloat(type.quantity));
-      tempPricesData.push(parseFloat(type.price));
+      tempQuantitiesData.push(type.quantity);
+      tempPricesData.push(type.price);
     });
 
     let tempSalePercent =
@@ -154,7 +154,13 @@ const CreateProduct = () => {
     }
 
     for (var key in productData) {
-      formData.append(key, productData[key]);
+      if (Array.isArray(productData[key])) {
+        for (let k = 0; k < productData[key].length; k++) {
+          formData.append(key, productData[key][k]);
+        }
+      } else {
+        formData.append(key, productData[key]);
+      }
     }
 
     dispatch(setProduct(formData));

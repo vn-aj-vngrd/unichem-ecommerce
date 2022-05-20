@@ -87,7 +87,6 @@ const updatePromo = asyncHandler(async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(req.file.path, {
       upload_preset: "promo_setups"
     })
-    console.log(uploadedResponse)
     // Set temp image to image url
     tempImage = uploadedResponse.secure_url;
     tempCloudinaryID = uploadedResponse.public_id;

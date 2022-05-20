@@ -224,16 +224,11 @@ const setProduct = asyncHandler(async (req, res) => {
     tempCloudinaryIDs.push(uploadedResponse.public_id);
   }
 
-  console.log(req.body);
   let tempQuantities = [];
-  req.body.quantities.split(",").forEach((quantity) => {
-    tempQuantities.push(parseFloat(quantity));
-  });
+  tempQuantities.push(parseFloat(req.body.quantities));
 
   let tempPrices = [];
-  req.body.prices.split(",").forEach((price) => {
-    tempPrices.push(parseFloat(price));
-  });
+  tempPrices.push(parseFloat(req.body.prices));
 
   const product = await Product.create({
     productName: req.body.productName,
@@ -263,7 +258,6 @@ const setProduct = asyncHandler(async (req, res) => {
     _doc: product,
   };
 
-  console.log(retData);
   res.status(200).json(retData);
 });
 

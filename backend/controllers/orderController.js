@@ -30,7 +30,6 @@ const setOrder = asyncHandler(async (req, res) => {
     paymentMethod: req.body.order.paymentMethod,
   });
 
-  // console.log(req.body.orderlines);
 
   // Create Orderline
   let newOrderline = [];
@@ -173,7 +172,6 @@ const getOneOrder = asyncHandler(async (req, res) => {
     res.status(200).json({});
   }
 
-  // console.log(orderOne)
   const orderLine = await Orderline.find({ orderID: req.params.id });
 
   const temp = {
@@ -193,7 +191,6 @@ const getOneOrder = asyncHandler(async (req, res) => {
   let retData = [];
   retData.push(temp);
 
-  // console.log(retData);
   res.status(200).json(retData);
 });
 
@@ -308,7 +305,6 @@ const cancelOrder = asyncHandler(async (req, res) => {
   let retData = [];
   for (let i = 0; i < Orders.length; i++) {
     let orderID = Orders[i]._id;
-    // console.log(orderID);
     let orderLine = await Orderline.find({ orderID: orderID });
     let temp = {
       _id: Orders[i]._id,

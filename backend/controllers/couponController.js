@@ -76,7 +76,6 @@ const validateCoupon = asyncHandler(async (req, res) => {
 // @route   POST /api/coupons
 // @access  Private
 const setCoupon = asyncHandler(async (req, res) => {
-  console.log(req.body);
   // Check for user
   if (!req.user) {
     res.status(401);

@@ -31,11 +31,9 @@ const getReviews = asyncHandler(async (req, res) => {
 // @access  Private
 const getUserReviews = asyncHandler(async (req, res) => {
   const userID = req.user._id;
-  // console.log(userID)
   const reviews = await Review.find({ userID: userID }).sort({
     createdAt: "desc",
   });
-  // console.log(true)
 
   let retData = [];
   for (let i = 0; i < reviews.length; i++) {
@@ -53,7 +51,6 @@ const getUserReviews = asyncHandler(async (req, res) => {
 // @access  Private
 const setReview = asyncHandler(async (req, res) => {
   // Check for user
-  console.log(req.body)
   if (!req.user) {
     res.status(401);
     throw new Error("User not found");
@@ -97,9 +94,6 @@ const updateReview = asyncHandler(async (req, res) => {
     userID,
   });
 
-  // console.log(userID);
-  // console.log(productID);
-
   // Check for review
   if (!reviewExists) {
     res.status(400);
@@ -122,8 +116,6 @@ const updateReview = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  console.log(updateReview);
-
   res.status(200).json(updatedReview);
 });
 
@@ -131,7 +123,6 @@ const updateReview = asyncHandler(async (req, res) => {
 // @route   DELETE /api/Reviews/:id
 // @access  Private
 const deleteReview = asyncHandler(async (req, res) => {
-  console.log(req.params);
   const review = await Review.findById(req.params.id);
   // Check for review
   if (!review) {
