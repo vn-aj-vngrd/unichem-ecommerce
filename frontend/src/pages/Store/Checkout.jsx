@@ -949,7 +949,9 @@ const Checkout = () => {
                       <h5 className="title"> </h5>
                       <p align="justify">
                         Note: Please take note that a shipping fee is added
-                        after the confirmation of your order.
+                        after the confirmation of your order. If you avail a
+                        coupon for shipping discount, your shipping charges will
+                        be automatically deducted from your order total.
                       </p>
                     </div>
                   </div>
