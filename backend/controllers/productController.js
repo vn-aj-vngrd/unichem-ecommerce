@@ -225,10 +225,14 @@ const setProduct = asyncHandler(async (req, res) => {
   }
 
   let tempQuantities = [];
-  tempQuantities.push(parseFloat(req.body.quantities));
+  req.body.quantities.forEach((quantity) => {
+    tempQuantities.push(parseFloat(quantity));
+  })
 
   let tempPrices = [];
-  tempPrices.push(parseFloat(req.body.prices));
+  req.body.prices.forEach((price) => {
+    tempPrices.push(parseFloat(price));
+  })
 
   const product = await Product.create({
     productName: req.body.productName,
