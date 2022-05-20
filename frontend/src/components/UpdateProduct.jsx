@@ -270,9 +270,9 @@ const UpdateProduct = (product) => {
                     <div className="form-group mb-4">
                       <label>Brand</label>
                       <div className="input-group">
-                        <input
-                          className="form-control"
+                        <select
                           type="text"
+                          className="form-select"
                           id="brand"
                           {...register("brand", {
                             required: {
@@ -283,7 +283,18 @@ const UpdateProduct = (product) => {
                           style={{
                             border: errors.brand ? "1px solid #f44336" : "",
                           }}
-                        />
+                        >
+                          <option value="">Select option</option>
+                          <option value="Loctite">Loctite</option>
+                          <option value="3M">3M</option>
+                          <option value="Phoenix Lubricants">
+                            Phoenix Lubricants
+                          </option>
+                          <option value="Polymer Cleaning">
+                            Polymer Cleaning
+                          </option>
+                          <option value="Chemicals">Chemicals</option>
+                        </select>
                       </div>
                       {errors.brand && (
                         <p className="error-message">
@@ -296,9 +307,9 @@ const UpdateProduct = (product) => {
                     <div className="form-group mb-4">
                       <label>Category</label>
                       <div className="input-group">
-                        <input
+                        <select
                           type="text"
-                          className="form-control"
+                          className="form-select"
                           id="category"
                           {...register("category", {
                             required: {
@@ -309,7 +320,25 @@ const UpdateProduct = (product) => {
                           style={{
                             border: errors.category ? "1px solid #f44336" : "",
                           }}
-                        />
+                        >
+                          <option value="">Select option</option>
+                          <option value="Adhesives">Adhesives</option>
+                          <option value="Car Tints">Car Tints</option>
+                          <option value="Construction">Construction</option>
+                          <option value="Epoxies">Epoxies</option>
+                          <option value="Foam Sealants">Foam Sealants</option>
+                          <option value="Housekeeping">Housekeeping</option>
+                          <option value="Industrial Oils">
+                            Industrial Oils
+                          </option>
+                          <option value="Kitchen">Kitchen</option>
+                          <option value="Laundry">Laundry</option>
+                          <option value="Restroom">Restroom</option>
+                          <option value="Sealants">Sealants</option>
+                          <option value="Tapes">Tapes</option>
+                          <option value="Threadlockers">Threadlockers</option>
+                          <option value="Window Films">Window Films</option>
+                        </select>
                       </div>
                       {errors.category && (
                         <p className="error-message">
