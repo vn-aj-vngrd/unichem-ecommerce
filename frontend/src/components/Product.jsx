@@ -109,7 +109,7 @@ const Product = ({
     preFilteredProducts = [...allProducts];
   }
 
-  console.log(allProducts);
+  // console.log(allProducts);
   // Price Range Filters
   if (filters.minRange || filters.maxRange) {
     if (isFiltered) {

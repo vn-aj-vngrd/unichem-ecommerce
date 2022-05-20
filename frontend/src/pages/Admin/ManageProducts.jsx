@@ -29,7 +29,9 @@ const ManageProducts = () => {
     isProductUpdated,
     isProductCreated,
   } = useSelector((state) => state.products);
-  console.log(products)
+
+  // console.log(products)
+  
   useEffect(() => {
     document.title = "Unichem Store | Products";
 
