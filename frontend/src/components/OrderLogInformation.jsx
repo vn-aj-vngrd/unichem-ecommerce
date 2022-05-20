@@ -288,18 +288,17 @@ const OrderLogInformation = () => {
                     <div className="price d-flex justify-content-end align-items-center">
                       <div className="">Order Total:</div>
                       <div className="spacer"></div>
-                      <h4 className="unichem-text-color">
+                      <h4 className="order-total unichem-text-color">
                         ₱ {orders[0].totalPrice}
                       </h4>
                     </div>
-                    <br></br>
-                    <div className="purchase-options">
+                    {/* <div className="purchase-options">
                       <div className="d-flex justify-content-end button">
                         <Link to="/product-details" className="btn">
                           Buy Again
                         </Link>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
