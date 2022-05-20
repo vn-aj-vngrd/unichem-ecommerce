@@ -290,10 +290,9 @@ const UpdateProduct = (product) => {
                           <option value="Phoenix Lubricants">
                             Phoenix Lubricants
                           </option>
-                          <option value="Polymer Cleaning">
-                            Polymer Cleaning
+                          <option value="Polymer Cleaning Chemicals">
+                            Polymer Cleaning Chemicals
                           </option>
-                          <option value="Chemicals">Chemicals</option>
                         </select>
                       </div>
                       {errors.brand && (
