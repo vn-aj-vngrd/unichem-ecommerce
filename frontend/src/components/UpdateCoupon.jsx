@@ -191,6 +191,10 @@ const UpdateCoupon = (coupon) => {
                               value: 0,
                               message: "Discount must be greater than 0.",
                             },
+                            max: {
+                              value: 100,
+                              message: "Discount must be lesser than 100.",
+                            },
                           })}
                           style={{
                             border: errors.discount ? "1px solid #f44336" : "",
