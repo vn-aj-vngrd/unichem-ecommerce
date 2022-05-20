@@ -7,9 +7,9 @@ import { getUsers, deleteUser, resetUser } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner";
 import { toast } from "react-toastify";
-const moment = require("moment");
 
 const ManageUsers = () => {
+  const moment = require("moment");
   const columns = [
     "User ID",
     "Name",
