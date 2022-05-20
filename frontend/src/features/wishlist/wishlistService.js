@@ -19,7 +19,6 @@ const setWishlist = async (wishlistData, token) => {
 
   const count = await axios.get(API_URL, config);
   if (count.data) {
-    // localStorage.setItem("wishlistCount", JSON.stringify(count.data.length));
     encryptStorage.setItem("w-cnt", count.data.length);
   }
 
@@ -35,10 +34,8 @@ const getWishlists = async (token) => {
   };
 
   const response = await axios.get(API_URL, config);
-  // console.log(response.data);
 
   if (response.data) {
-    // localStorage.setItem("wishlistCount", JSON.stringify(response.data.length));
     encryptStorage.setItem("w-cnt", response.data.length);
   }
 
@@ -57,7 +54,6 @@ const deleteWishlist = async (wishlistId, token) => {
 
   const count = await axios.get(API_URL, config);
   if (count.data) {
-    // localStorage.setItem("wishlistCount", JSON.stringify(count.data.length));
     encryptStorage.setItem("w-cnt", count.data.length);
   }
 
@@ -78,8 +74,6 @@ const deleteAllWishlist = async (userID, token) => {
   );
 
   encryptStorage.setItem("w-cnt", 0);
-
-  // console.log(response.data);
 
   return response.data;
 };

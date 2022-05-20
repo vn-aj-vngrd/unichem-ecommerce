@@ -1,13 +1,8 @@
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-// import Star from "./Star";
 import Review from "./ReviewModal";
 
 const PurchasedProduct = ({ userID, userImage, orderLines, orderStatus }) => {
-  // const navigate = useNavigate();
-
   let subtotal = 0;
-  console.log(orderLines)
   return (
     <div>
       {orderLines.map((orderLine) => (
@@ -47,7 +42,6 @@ const PurchasedProduct = ({ userID, userImage, orderLines, orderStatus }) => {
                 </h4>
 
                 <div className="">Type / Color: {orderLine.productType}</div>
-                {/* <div className="d-flex align-items-center justify-content-between"></div> */}
                 <div className=" price d-flex justify-content-between">
                   <div className="">Quantity: {orderLine.quantity}pcs</div>
                   <div hidden>

@@ -26,9 +26,6 @@ const Dashboard = () => {
     };
   }, [dispatch]);
 
-  // console.log(watch("chartMode"));
-  // console.log(report);
-
   let data = {
     labels: null,
     datasets: [

@@ -22,7 +22,7 @@ const ProfilePurchase = () => {
     (state) => state.orders
   );
   
-  const { isReviewError, isReviewLoading, reviewMessage, isReviewCreated } = useSelector(
+  const { isReviewError, reviewMessage, isReviewCreated } = useSelector(
     (state) => state.reviews
   );
 
@@ -72,7 +72,7 @@ const ProfilePurchase = () => {
       dispatch(resetOrder());
       dispatch(resetReview());
     };
-  }, [navigate, isOrderError, orderMessage, isOrderUpdated, isReviewCreated, isReviewError, dispatch]);
+  }, [navigate, isOrderError, orderMessage, isOrderUpdated, isReviewCreated, isReviewError, reviewMessage, dispatch]);
 
   if (isOrderLoading) {
     return (
@@ -186,55 +186,6 @@ const ProfilePurchase = () => {
             <option>Returned</option>
           </select>
         </div>
-        {/* <div className="order-status">
-          <div className="order-status-progress">
-            <div className="order-status-progress-bar progress-packed"></div>
-          </div>
-          <div className="one-status">
-            <button
-              onClick={(e) => {
-                setOrderStatus("processing");
-              }}
-              className="btn order-status-circle true"
-            >
-              <i className="lni lni-cogs"></i>
-            </button>
-            <p>Processing</p>
-          </div>
-          <div className="one-status">
-            <button
-              onClick={(e) => {
-                setOrderStatus("packed");
-              }}
-              className="btn order-status-circle true"
-            >
-              <i className="lni lni-archive"></i>
-            </button>
-            <p>Packed</p>
-          </div>
-          <div className="one-status">
-            <button
-              onClick={(e) => {
-                setOrderStatus("shipped");
-              }}
-              className="btn order-status-circle"
-            >
-              <i className="lni lni-ship"></i>
-            </button>
-            <p>Shipped</p>
-          </div>
-          <div className="one-status">
-            <button
-              onClick={(e) => {
-                setOrderStatus("delivered");
-              }}
-              className="btn order-status-circle"
-            >
-              <i className="lni lni-checkmark"></i>
-            </button>
-            <p>Delivered</p>
-          </div>
-        </div> */}
       </div>
 
       <div className="product">
@@ -293,9 +244,6 @@ const ProfilePurchase = () => {
                           </button>
                         )}
 
-                        {/* <Link to={`/product-details/${}`} className="btn">
-                          Buy Again
-                        </Link> */}
                       </div>
                     </div>
                   </div>

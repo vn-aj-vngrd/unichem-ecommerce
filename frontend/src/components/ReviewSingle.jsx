@@ -60,8 +60,6 @@ function ReviewSingle({ reviewOne, editable }) {
     });
   };
 
-  console.log(reviewOne);
-
   return (
     <>
       {reviewOne && reviewOne.user && (

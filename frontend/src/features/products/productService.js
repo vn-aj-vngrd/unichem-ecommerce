@@ -9,9 +9,7 @@ const setProduct = async (productData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  for (var key in productData) {
-    console.log(key, productData[key]);
-  }
+ 
   const response = await axios.post(API_URL, productData, config);
 
   return response.data;
@@ -20,7 +18,6 @@ const setProduct = async (productData, token) => {
 // Get all products
 const getProducts = async () => {
   const response = await axios.get(API_URL);
-  // console.log(response.data);
 
   return response.data;
 };
@@ -28,7 +25,6 @@ const getProducts = async () => {
 // Get specific product
 const getOneProduct = async (id) => {
   const response = await axios.get(API_URL + "getOneProduct/" + id);
-  // console.log(response.data);
 
   return response.data;
 };
@@ -36,7 +32,6 @@ const getOneProduct = async (id) => {
 // Get specific product
 const getFeaturedProducts = async () => {
   const response = await axios.get(API_URL + "getFeaturedProducts");
-  // console.log(response.data);
 
   return response.data;
 };
@@ -53,7 +48,7 @@ const updateProduct = async (productData, token) => {
     productData,
     config
   );
-  // console.log(response.data);
+  // console.lg(response.data);
 
   return response.data;
 };
@@ -65,7 +60,6 @@ const deleteProduct = async (id, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  console.log(id.id);
 
   const response = await axios.delete(API_URL + id, config);
 

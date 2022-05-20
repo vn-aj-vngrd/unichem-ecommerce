@@ -103,14 +103,11 @@ const ManageCoupons = () => {
     data.push(temp);
   });
 
-  console.log(data);
-
   const options = {
     filterType: "checkbox",
     elevation: 0,
     onRowsDelete: (rowsDeleted) => {
       rowsDeleted.data.forEach((item) => {
-        // console.log(data[item.dataIndex][0]);
         dispatch(deleteCoupon(data[item.dataIndex][0]));
       });
     },

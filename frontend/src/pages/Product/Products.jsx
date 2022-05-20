@@ -43,11 +43,6 @@ const Products = () => {
     }));
   };
 
-  // console.log(minRange);
-  // console.log(maxRange);
-
-  // console.log(filters.rating);
-
   return (
     <div>
       <div className="container main-product-section">
