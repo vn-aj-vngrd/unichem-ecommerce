@@ -14,7 +14,7 @@ function ProfileReviews() {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { reviews, isReviewLoading, isReviewError, isReviewCreated, isReviewUpdated, isReviewDeleted, reviewMessage } =
+  const { reviews, isReviewLoading, isReviewError, isReviewCreated, isReviewUpdated, isReviewDeleted, isUpdateReviewLoading, reviewMessage } =
     useSelector((state) => state.reviews);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function ProfileReviews() {
     };
   }, [isReviewError, reviewMessage, isReviewCreated, isReviewUpdated, isReviewDeleted, dispatch]);
 
-  if (isReviewLoading) {
+  if (isReviewLoading || isUpdateReviewLoading) {
     return (
       <>
         <Spinner />

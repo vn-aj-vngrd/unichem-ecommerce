@@ -10,6 +10,7 @@ const initialState = {
   isReviewDeleted: false,
   isReviewUpdated: false,
   reviewMessage: "",
+  isUpdateReviewLoading: false,
 };
 
 // Set  review
@@ -162,7 +163,7 @@ export const reviewSlice = createSlice({
         state.isReviewLoading = true;
       })
       .addCase(updateReview.fulfilled, (state, action) => {
-        state.isReviewLoading = false;
+        state.isUpdateReviewLoading = false;
         state.isReviewSuccess = true;
         state.isReviewUpdated = true;
         const idx = state.reviews.findIndex(

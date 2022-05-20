@@ -26,7 +26,7 @@ const CreatePromotion = () => {
     };
     reset(defaultValues);
 
-    if (formSuccessful == true) {
+    if (formSuccessful === true) {
       setFormSuccessful(false);
     }
   }, [formSuccessful, reset]);

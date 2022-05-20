@@ -4,29 +4,6 @@ import { updateProduct } from "../features/products/productSlice";
 import { useState, useEffect } from "react";
 
 const UpdateProduct = (product) => {
-  let tempTypes = [];
-  product.product._doc.types.forEach((type, index) => {
-    tempTypes.push({
-      type: type,
-      quantity: product.product._doc.quantities[index],
-      price: product.product._doc.prices[index],
-    });
-  });
-
-  let tempSpecifications = [];
-  product.product._doc.specifications.forEach((specification) => {
-    let index = specification.indexOf(": ");
-
-    tempSpecifications.push({
-      specificationLabel: specification.slice(0, index),
-      specificationValue: specification.slice(index + 2),
-    });
-  });
-
-  let tempSalePercent = product.product._doc.salePercent
-    ? product.product._doc.salePercent
-    : 0;
-
   const [specificationEmpty, setSpecificationEmpty] = useState(false);
   const [typesEmpty, setTypesEmpty] = useState(false);
   const {
@@ -41,6 +18,28 @@ const UpdateProduct = (product) => {
   });
 
   useEffect(() => {
+    let tempTypes = [];
+    product.product._doc.types.forEach((type, index) => {
+      tempTypes.push({
+        type: type,
+        quantity: product.product._doc.quantities[index],
+        price: product.product._doc.prices[index],
+      });
+    });
+
+    let tempSpecifications = [];
+    product.product._doc.specifications.forEach((specification) => {
+      let index = specification.indexOf(": ");
+
+      tempSpecifications.push({
+        specificationLabel: specification.slice(0, index),
+        specificationValue: specification.slice(index + 2),
+      });
+    });
+
+    let tempSalePercent = product.product._doc.salePercent
+      ? product.product._doc.salePercent
+      : 0;
     const defaultValues = {
       // images: product.product._doc.images,
       productName: product.product._doc.productName,
