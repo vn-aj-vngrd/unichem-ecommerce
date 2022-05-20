@@ -25,7 +25,7 @@ const Categories = () => {
                   <Link to="/products/category/threadlockers">Threadlockers</Link>
                 </li>
                 <li>
-                  <Link to="/products/category/form_sealants">Foam Sealants</Link>
+                  <Link to="/products/category/foam_sealants">Foam Sealants</Link>
                 </li>
                 <li>
                   <Link to="/products/category/sealants">Sealants</Link>
