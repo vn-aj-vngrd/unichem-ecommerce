@@ -6,7 +6,7 @@ import SectionTitle from "../../components/SectionTitle";
 import CreateProduct from "../../components/CreateProduct";
 import UpdateProduct from "../../components/UpdateProduct";
 import ViewProduct from "../../components/ViewProduct";
-// import RowImage from "../../components/RowImage";
+
 import {
   getProducts,
   resetProduct,
@@ -20,19 +20,24 @@ const ManageProducts = () => {
   const dispatch = useDispatch();
   const moment = require("moment");
 
-  const { products, isProductLoading, isProductError, productMessage, isProductDeleted, isProductUpdated, isProductCreated } =
-    useSelector((state) => state.products);
+  const {
+    products,
+    isProductLoading,
+    isProductError,
+    productMessage,
+    isProductDeleted,
+    isProductUpdated,
+    isProductCreated,
+  } = useSelector((state) => state.products);
 
   useEffect(() => {
     document.title = "Unichem Store | Products";
-  });
 
-  useEffect(() => {
+    dispatch(getProducts());
+
     if (isProductError) {
       toast.error(productMessage);
     }
-
-    dispatch(getProducts());
 
     if (isProductCreated) {
       toast.success("Product created successfully");
@@ -49,20 +54,22 @@ const ManageProducts = () => {
     return () => {
       dispatch(resetProduct());
     };
-  }, [isProductError, productMessage, isProductDeleted, isProductUpdated, isProductCreated, dispatch]);
+  }, [
+    isProductError,
+    productMessage,
+    isProductDeleted,
+    isProductUpdated,
+    isProductCreated,
+    dispatch,
+  ]);
 
   const columns = [
-    // "Product Image",
-    "ProductID",
+    "Product ID",
     "Name",
     "Brand",
     "Category",
-    // "Specifications",
     "Types",
     "Description",
-    // "Quantities",
-    // "Prices",
-    // "Sale Prices",
     "Sale",
     "Sale Percent",
     "Featured",
@@ -77,28 +84,14 @@ const ManageProducts = () => {
   if (products) {
     products.forEach((product) => {
       let temp = [];
-      // temp.push(
-      //   <RowImage src={product._doc.images[0]} alt={product._doc.productName} />
-      // );
       temp.push(product._doc._id);
       temp.push(product._doc.productName);
       temp.push(product._doc.brand);
       temp.push(product._doc.category);
-      // temp.push(product._doc.specifications.toString().split(",").join(", "));
       temp.push(product._doc.types.toString().split(",").join(", "));
       product._doc.description.length > maxLength
         ? temp.push(product._doc.description.substr(0, maxLength).concat("..."))
         : temp.push(product._doc.description.substr(0, maxLength));
-      // temp.push(product._doc.quantities.toString().split(",").join(", "));
-      // temp.push(product._doc.prices.toString().split(",").join(", "));
-      // let tempSalePrices = [];
-      // for (let i = 0; i < product._doc.prices.length; i++) {
-      //   tempSalePrices.push(
-      //     product._doc.prices[i] -
-      //       (product._doc.prices[i] * product._doc.salePercent) / 100
-      //   );
-      // }
-      // temp.push(tempSalePrices.toString().split(",").join(", "));
       temp.push(product._doc.isSale ? "Yes" : "No");
 
       if (product._doc.salePercent) {
@@ -113,10 +106,6 @@ const ManageProducts = () => {
         temp.push(<ViewProduct product={product} />);
         temp.push(<UpdateProduct product={product} />);
       }
-
-      // if (product) {
-      //   temp.push(<DeleteProduct id={product._doc._id} />);
-      // }
       data.push(temp);
     });
   }

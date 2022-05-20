@@ -7,8 +7,8 @@ const initialState = {
   isPromoSuccess: false,
   isPromoLoading: false,
   isPromoCreated: false,
-  isPromoDeleted: false,
   isPromoUpdated: false,
+  isPromoDeleted: false,
   promoMessage: "",
 };
 

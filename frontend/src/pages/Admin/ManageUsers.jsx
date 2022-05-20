@@ -11,7 +11,7 @@ const moment = require("moment");
 
 const ManageUsers = () => {
   const columns = [
-    "ID",
+    "User ID",
     "Name",
     "Email",
     "Sex",

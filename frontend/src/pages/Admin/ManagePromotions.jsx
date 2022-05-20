@@ -11,7 +11,6 @@ import SectionTitle from "../../components/SectionTitle";
 import CreatePromotion from "../../components/CreatePromotion";
 import UpdatePromotion from "../../components/UpdatePromotion";
 import ViewPromotion from "../../components/ViewPromotion";
-// import RowImage from "../../components/RowImage";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner";
@@ -35,11 +34,11 @@ const ManagePromotions = () => {
   } = useSelector((state) => state.promos);
 
   useEffect(() => {
+    dispatch(getPromos());
+
     if (isPromoError) {
       toast.error(promoMessage);
     }
-
-    dispatch(getPromos());
 
     if (isPromoCreated) {
       toast.success("Promotion created successfully");
@@ -68,7 +67,6 @@ const ManagePromotions = () => {
   console.log(promos);
 
   const columns = [
-    // "Promo Image",
     "Promo ID",
     "Promo Name",
     "Description",
@@ -85,11 +83,6 @@ const ManagePromotions = () => {
   promos.forEach((promo) => {
     let temp = [];
 
-    // temp.push(
-    //   <RowImage src={promo.image} alt={promo.promoName} />,
-    //   promo._id,
-    //   promo.promoName
-    // );
     temp.push(promo._id, promo.promoName);
 
     promo.description.length > maxLength

@@ -9,8 +9,6 @@ const initialState = {
   isOrderAdded: false,
   isOrderUpdated: false,
   isOrderDeleted: false,
-  isDeleteLoading: false,
-  isUpdateLoding: false,
   orderMessage: "",
 };
 
@@ -197,7 +195,6 @@ export const orderSlice = createSlice({
         state.isOrderLoading = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
-        state.isOrders = true;
       })
       // Get One Order Case
       .addCase(getOneOrder.pending, (state) => {
@@ -215,10 +212,10 @@ export const orderSlice = createSlice({
       })
       // Update Order Case
       .addCase(updateOrder.pending, (state) => {
-        state.isUpdateLoding = true;
+        state.isOrderLoading = true;
       })
       .addCase(updateOrder.fulfilled, (state, action) => {
-        state.isUpdateLoding = true;
+        state.isOrderLoading = true;
         state.isOrderUpdated = true;
         const idx = state.orders.findIndex(
           (order) => order._id === action.payload._id
@@ -226,7 +223,7 @@ export const orderSlice = createSlice({
         state.orders[idx] = action.payload;
       })
       .addCase(updateOrder.rejected, (state, action) => {
-        state.isUpdateLoding = false;
+        state.isOrderLoading = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
       })
@@ -246,17 +243,17 @@ export const orderSlice = createSlice({
       })
       // Delete Order Case
       .addCase(deleteOrder.pending, (state) => {
-        state.isDeleteLoading = true;
+        state.isOrderLoading = true;
       })
       .addCase(deleteOrder.fulfilled, (state, action) => {
-        state.isDeleteLoading = false;
+        state.isOrderLoading = false;
         state.isOrderDeleted = true;
         state.orders = state.orders.filter(
           (order) => order._id !== action.payload.id
         );
       })
       .addCase(deleteOrder.rejected, (state, action) => {
-        state.isDeleteLoading = false;
+        state.isOrderLoading = false;
         state.isOrderError = true;
         state.orderMessage = action.payload;
       });

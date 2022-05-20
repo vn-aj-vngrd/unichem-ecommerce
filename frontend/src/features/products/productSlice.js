@@ -6,10 +6,9 @@ const initialState = {
   isProductError: false,
   isProductSuccess: false,
   isProductLoading: false,
-  isProductAdded: false,
-  isProductDeleted: false,
   isProductCreated: false,
   isProductUpdated: false,
+  isProductDeleted: false,
   productMessage: "",
 };
 
@@ -137,7 +136,6 @@ export const productSlice = createSlice({
       })
       .addCase(setProduct.fulfilled, (state, action) => {
         state.isProductLoading = false;
-        state.isProductSuccess = true;
         state.isProductCreated = true;
         state.products = [...state.products, action.payload];
       })
@@ -193,9 +191,7 @@ export const productSlice = createSlice({
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.isProductLoading = false;
-        state.isProductSuccess = true;
         state.isProductUpdated = true;
-        // state.products = {...state.products, action.payload};
         const idx = state.products.findIndex(
           (obj) => obj._doc._id === action.payload._id
         );
@@ -212,7 +208,6 @@ export const productSlice = createSlice({
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.isProductLoading = false;
-        state.isProductSuccess = true;
         state.isProductDeleted = true;
         state.products = state.products.filter(
           (product) => product._doc._id !== action.payload._id

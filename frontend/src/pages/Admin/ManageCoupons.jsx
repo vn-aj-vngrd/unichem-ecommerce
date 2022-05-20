@@ -15,25 +15,31 @@ import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../components/Spinner";
 import { toast } from "react-toastify";
 
-
 const ManageCoupons = () => {
   const dispatch = useDispatch();
   const moment = require("moment");
 
-  const { coupons, isCouponLoading, isCouponError, couponMessage, isCouponDeleted, isCouponUpdated, isCouponCreated } =
-    useSelector((state) => state.coupons);
+  const {
+    coupons,
+    isCouponLoading,
+    isCouponError,
+    couponMessage,
+    isCouponDeleted,
+    isCouponUpdated,
+    isCouponCreated,
+  } = useSelector((state) => state.coupons);
 
   useEffect(() => {
     document.title = "Unichem Store | Coupons";
   });
 
   useEffect(() => {
+    dispatch(getCoupons());
+
     if (isCouponError) {
       toast.error(couponMessage);
     }
 
-    dispatch(getCoupons());
-    
     if (isCouponCreated) {
       toast.success("Coupon created successfully");
     }
@@ -49,7 +55,14 @@ const ManageCoupons = () => {
     return () => {
       dispatch(resetCoupon());
     };
-  }, [isCouponError, couponMessage, isCouponCreated, isCouponDeleted, isCouponUpdated, dispatch]);
+  }, [
+    isCouponError,
+    couponMessage,
+    isCouponCreated,
+    isCouponDeleted,
+    isCouponUpdated,
+    dispatch,
+  ]);
 
   const columns = [
     "Coupon ID",
@@ -83,8 +96,8 @@ const ManageCoupons = () => {
       moment(coupon.expiryDate).format("llll").toString(),
       moment(coupon.updatedAt).format("llll").toString(),
       moment(coupon.createdAt).format("llll").toString(),
-      <ViewCoupon coupon={coupon}/>,
-      <UpdateCoupon coupon={coupon}/>,
+      <ViewCoupon coupon={coupon} />,
+      <UpdateCoupon coupon={coupon} />
       // <DeleteCoupon id={coupon._id} />,
     );
     data.push(temp);

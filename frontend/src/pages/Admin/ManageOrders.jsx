@@ -28,7 +28,7 @@ const ManageOrders = () => {
     "Order Status",
     "Order Date",
     "Completed Date",
-    "Updated At",
+    "Updated",
     "",
     "",
   ];
