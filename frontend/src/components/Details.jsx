@@ -283,12 +283,12 @@ const Details = ({ product }) => {
                         <h4 className="text-red">
                           ₱ {salesPrice.toFixed(2)}
                           <del className="h6 text-grey ps-1">
-                            ₱{product._doc.prices[value].toFixed(2)}
+                            ₱{product._doc.prices[value] && product._doc.prices[value].toFixed(2)}
                           </del>
                         </h4>
                       ) : (
                         <h4 className="text-red">
-                          ₱{product._doc.prices[value].toFixed(2)}
+                          ₱{product._doc.prices[value] && product._doc.prices[value].toFixed(2)}
                         </h4>
                       )}
 

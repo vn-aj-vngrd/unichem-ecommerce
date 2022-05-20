@@ -112,12 +112,13 @@ const ViewProduct = ({ product }) => {
                               <div className="col-3">
                                 <del>
                                   {"PHP " +
-                                    product._doc.prices[index].toFixed(2)}
+                                    product._doc.prices[index] && product._doc.prices[index].toFixed(2)}
                                 </del>
                               </div>
                               <div className="col-3">
                                 {"PHP " +
                                   (
+                                    product._doc.prices[index] &&
                                     product._doc.prices[index] -
                                     (product._doc.prices[index] *
                                       product._doc.salePercent) /
