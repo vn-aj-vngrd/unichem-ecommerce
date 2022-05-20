@@ -93,7 +93,7 @@ const ReviewsSection = ({ productID }) => {
     pagesVisited + reviewsPerPage
   );
 
-  console.log(reviews);
+  // console.log(reviews);
   return (
     <div className="product-details">
       <div className="container product-details-info">
@@ -156,7 +156,7 @@ const ReviewsSection = ({ productID }) => {
                         <ReviewSingle
                           reviewOne={review}
                           editable={
-                            user._id === review._doc.userID ? true : false
+                            user && user._id === review._doc.userID ? true : false
                           }
                         />
                       }
