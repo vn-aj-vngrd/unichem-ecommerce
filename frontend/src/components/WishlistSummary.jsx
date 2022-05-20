@@ -44,7 +44,6 @@ const WishlistSummary = ({ wishlists, count }) => {
         dispatch(setCart(cartData));
       }
 
-      // console.log(cartData);
     });
 
     Swal.fire({

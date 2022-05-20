@@ -5,6 +5,7 @@ import { getProducts, resetProduct } from "../features/products/productSlice";
 import Star from "./Star";
 import Spinner from "./Spinner";
 import ReactPaginate from "react-paginate";
+import { toast } from "react-toastify";
 
 const Product = ({
   productName,
@@ -27,7 +28,7 @@ const Product = ({
 
   useEffect(() => {
     if (isProductError) {
-      // console.log(productMessage);
+      toast.error(productMessage);
     }
 
     dispatch(getProducts());
@@ -78,7 +79,6 @@ const Product = ({
 
   if (productName) {
     productName = productName.replaceAll("_", " ");
-    // console.log(productName);
 
     allProducts = products.filter((product) => {
       return product._doc.productName
@@ -91,7 +91,6 @@ const Product = ({
 
   if (categoryName) {
     categoryName = categoryName.replaceAll("_", " ");
-    // console.log(categoryName);
 
     allProducts = products.filter((product) => {
       return product._doc.category
@@ -104,7 +103,6 @@ const Product = ({
 
   if (brandName) {
     brandName = brandName.replaceAll("_", " ");
-    // console.log(brandName);
 
     allProducts = products.filter((product) => {
       return product._doc.brand.toLowerCase().includes(brandName.toLowerCase());
@@ -192,18 +190,6 @@ const Product = ({
     }
   }
 
-  // Sort
-
-  // {
-  //   label: "High - Low Sales",
-  //   value: "highLowSales",
-  // },
-  // {
-  //   label: "Low - High Sales",
-  //   value: "lowHighSales",
-  // },
-
-  // console.log(allProducts);
   if (allProducts) {
     switch (sortDefault) {
       case "lowHighSales":

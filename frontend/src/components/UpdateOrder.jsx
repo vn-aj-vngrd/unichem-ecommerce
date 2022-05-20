@@ -173,7 +173,6 @@ const UpdateOrder = ({ order }) => {
       orderStatus: data.orderStatus,
       statusDates,
     };
-    // console.log(orderParams);
     dispatch(updateOrder(orderParams));
   };
 

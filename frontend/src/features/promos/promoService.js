@@ -18,7 +18,6 @@ const setPromo = async (promoData, token) => {
 // Get all promos
 const getPromos = async () => {
   const response = await axios.get(API_URL);
-  // console.log(response.data);
 
   return response.data;
 };
@@ -31,25 +30,9 @@ const updatePromo = async (promoData, token) => {
     },
   };
   const response = await axios.put(API_URL + "updatePromo", promoData, config);
-  // console.log(response.data);
 
   return response.data;
 };
-
-
-// // Get specific product
-// const updatePromo = async (id, token) => {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-
-//   const response = await axios.update(API_URL + id, config);
-//   // console.log(response.data);
-
-//   return response.data;
-// };
 
 // Delete product
 const deletePromo = async (id, token) => {

@@ -25,7 +25,6 @@ const ProductDetails = () => {
     document.title = "Unichem Store | Product Details";
 
     if (isProductError) {
-      // console.log(productMessage);
       dispatch(resetProduct());
     }
 

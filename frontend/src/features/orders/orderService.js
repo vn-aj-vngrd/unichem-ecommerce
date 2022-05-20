@@ -9,9 +9,7 @@ const setOrder = async (orderData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  // console.log(orderData);
   const response = await axios.post(API_URL, orderData, config);
-  // console.log(response.data);
 
   return response.data;
 };
@@ -51,7 +49,6 @@ const getOneOrder = async (id, token) => {
   };
 
   const response = await axios.get(API_URL + "getOneOrder/" + id, config);
-  // console.log(response);
 
   return response.data;
 };
@@ -64,13 +61,11 @@ const updateOrder = async (orderParams, token) => {
     },
   };
 
-  // console.log(orderParams);
   const response = await axios.put(
     API_URL + `updateOrder/${orderParams.id}`,
     orderParams,
     config
   );
-  // console.log(response.data);
 
   return response.data;
 };
@@ -84,7 +79,6 @@ const cancelOrder = async (orderID, token) => {
   };
 
   const response = await axios.put(API_URL + "cancelOrder", orderID, config);
-  // console.log(response.data);
 
   return response.data;
 };

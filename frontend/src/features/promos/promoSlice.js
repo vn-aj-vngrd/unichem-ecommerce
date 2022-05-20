@@ -74,7 +74,6 @@ export const deletePromo = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      console.log(false);
       return await promoService.deletePromo(id, token);
     } catch (error) {
       const message =

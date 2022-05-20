@@ -21,9 +21,6 @@ const OrderLogInformation = () => {
   );
 
   useEffect(() => {
-    if (isOrderError) {
-      // console.log(orderMessage);
-    }
 
     if (!localStorage.getItem("token")) {
       navigate("/login");

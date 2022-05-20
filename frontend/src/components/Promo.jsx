@@ -4,6 +4,7 @@ import { getPromos, resetPromo } from "../features/promos/promoSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Spinner from "../components/Spinner";
 
+import { toast } from "react-toastify";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -21,7 +22,7 @@ const Hero = () => {
 
   useEffect(() => {
     if (isPromoError) {
-      console.log(promoMessage);
+      toast.error(promoMessage);
     }
 
     dispatch(getPromos());

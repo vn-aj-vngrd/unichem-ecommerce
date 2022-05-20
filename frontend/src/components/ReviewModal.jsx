@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setReview } from "../features/reviews/reviewSlice";
 import { useState } from "react";
-// import { toast } from "react-toastify";
 
 const ReviewModal = ({
   userID,
@@ -18,8 +17,6 @@ const ReviewModal = ({
 
   const [starRating, setStarRating] = useState(0);
   const { review } = formData;
-
-  // console.log(starRating);
 
   const onChangeReview = (e) => {
     setFormData((prevState) => ({

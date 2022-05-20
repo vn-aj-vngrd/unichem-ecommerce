@@ -50,7 +50,6 @@ const UpdatePromotion = (promo) => {
     }
 
     for (var key in promoData) {
-      console.log(key, promoData[key]);
       formData.append(key, promoData[key]);
     }
 

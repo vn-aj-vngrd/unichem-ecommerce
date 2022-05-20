@@ -1,7 +1,7 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateProduct } from "../features/products/productSlice";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const UpdateProduct = (product) => {
   let tempTypes = [];
@@ -173,12 +173,6 @@ const UpdateProduct = (product) => {
 
     dispatch(updateProduct(formData));
   };
-
-  // const addProductType = () => {
-  //   setProductTypes([...productTypes, ""]);
-  // };
-
-  console.log(errors);
 
   return (
     <>
@@ -367,7 +361,6 @@ const UpdateProduct = (product) => {
                       key={specification.id}
                       className="product-specifications-modal d-flex"
                     >
-                      {console.log(index)}
                       <div className="form-group col-6">
                         <div className="form-group mb-4">
                           <label>Label</label>

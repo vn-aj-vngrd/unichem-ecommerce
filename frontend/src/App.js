@@ -97,11 +97,8 @@ export const App = () => {
       userType,
       "@UNICHEM-secret-key-for-user-access"
     );
-    // console.log(bytes.toString(CryptoJS.enc.Utf8));
     return bytes.toString(CryptoJS.enc.Utf8);
   };
-
-  // console.log(user);
 
   return !isLoading ? (
     <>

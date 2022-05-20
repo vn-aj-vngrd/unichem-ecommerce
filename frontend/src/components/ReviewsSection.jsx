@@ -93,7 +93,6 @@ const ReviewsSection = ({ productID }) => {
     pagesVisited + reviewsPerPage
   );
 
-  // console.log(reviews);
   return (
     <div className="product-details">
       <div className="container product-details-info">

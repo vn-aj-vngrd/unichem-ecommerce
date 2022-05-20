@@ -1,5 +1,4 @@
 const ViewOrder = ({ order }) => {
-  // console.log(order);
   return (
     <>
       <div className="button">

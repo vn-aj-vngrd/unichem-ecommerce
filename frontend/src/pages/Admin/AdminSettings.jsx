@@ -49,7 +49,6 @@ const AdminSettings = () => {
       password: data.newPassword,
     };
 
-    // console.log(orderParams);
     dispatch(updateAdmin(orderParams));
   };
 

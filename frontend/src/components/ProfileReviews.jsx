@@ -19,7 +19,7 @@ function ProfileReviews() {
 
   useEffect(() => {
     if (isReviewError) {
-      // console.log(reviewMessage);
+      toast.error(reviewMessage);
     }
 
     if (isReviewCreated) {
@@ -51,8 +51,6 @@ function ProfileReviews() {
   }
 
   let allReviews = JSON.parse(JSON.stringify(reviews));
-
-  // console.log(allReviews);
 
   return (
     <div className="profile-information-column">

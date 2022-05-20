@@ -64,8 +64,6 @@ const ManagePromotions = () => {
     dispatch,
   ]);
 
-  console.log(promos);
-
   const columns = [
     "Promo ID",
     "Promo Name",
@@ -101,7 +99,6 @@ const ManagePromotions = () => {
     data.push(temp);
   });
 
-  console.log(data);
 
   const options = {
     filterType: "checkbox",

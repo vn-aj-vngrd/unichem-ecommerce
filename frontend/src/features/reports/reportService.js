@@ -11,7 +11,6 @@ const getDashboardReport = async (token) => {
   };
 
   const response = await axios.get(API_URL + "getDashboardReport", config);
-  // console.log(response.data);
 
   return response.data;
 };
