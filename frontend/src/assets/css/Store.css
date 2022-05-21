@@ -2618,6 +2618,10 @@ ol {
   padding: 20px;
   line-height: 26px;
   background-color: #fff;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .single-product .product-info .category {

@@ -384,14 +384,16 @@ const Product = ({
                           </div>
                         </div>
                         <div className="product-info">
-                          <span className="category">
-                            <i className="lni lni-package category-icon"></i>{" "}
-                            {product._doc.category}
-                          </span>
-                          <div className="title">
-                            <h5 className="product-name">
-                              {product._doc.productName}
-                            </h5>
+                          <div>
+                            <span className="category">
+                              <i className="lni lni-package category-icon"></i>{" "}
+                              {product._doc.category}
+                            </span>
+                            <div className="title">
+                              <h5 className="product-name">
+                                {product._doc.productName.slice(0,40)}
+                              </h5>
+                            </div>
                           </div>
                           <Star
                             star={product.market.averageRatings}
