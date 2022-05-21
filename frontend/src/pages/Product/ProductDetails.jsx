@@ -37,25 +37,23 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Breadcrumb type="product" />
-
       <>
         {isProductLoading ? (
           <div className="container">
+            <Breadcrumb type="product" />
             <Spinner />
           </div>
         ) : (
           <>
             {products.length > 0 ? (
               <>
+                <Breadcrumb type="product" />
                 <Details product={products[0]} />
                 <Specifications product={products[0]} />
                 <ReviewsSection productID={id} />
               </>
             ) : (
-              <>
-                <PageNotFound />
-              </>
+              <PageNotFound />
             )}
           </>
         )}
