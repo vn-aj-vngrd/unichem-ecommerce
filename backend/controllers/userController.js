@@ -43,7 +43,8 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     userType,
-    image: "https://res.cloudinary.com/unichem/image/upload/v1652783027/users/user-placeholder_pooyoq.png",
+    image:
+      "https://res.cloudinary.com/unichem/image/upload/v1652783027/users/user-placeholder_pooyoq.png",
     cloudinaryID: "users/user-placeholder_pooyoq",
     verified: false,
   });
@@ -365,13 +366,16 @@ const updateUser = asyncHandler(async (req, res) => {
   let tempCloudinaryID;
   if (req.file) {
     // delete existing image
-    if (user.cloudinaryID !== "users/user-placeholder_pooyoq" && user.cloudinaryID !== "") {
+    if (
+      user.cloudinaryID !== "users/user-placeholder_pooyoq" &&
+      user.cloudinaryID !== ""
+    ) {
       await cloudinary.uploader.destroy(user.cloudinaryID);
     }
 
     const uploadedResponse = await cloudinary.uploader.upload(req.file.path, {
-      upload_preset: "user_setups"
-    })
+      upload_preset: "user_setups",
+    });
 
     // Set temp image to image url
     tempImage = uploadedResponse.secure_url;
@@ -485,10 +489,10 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  if ( user.cloudinaryID !== "") {
+  if (user.cloudinaryID !== "") {
     await cloudinary.uploader.destroy(user.cloudinaryID);
   }
-  
+
   await user.remove();
 
   await Orders.deleteMany({ userID: req.params.id });
@@ -510,7 +514,7 @@ const verifyUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(400);
-    throw new Error("Invalid Email Verification Link");
+    throw new Error("User not Found, Invalid Email Verification Link");
   }
 
   const verification = await Token.findOne({
@@ -521,7 +525,7 @@ const verifyUser = asyncHandler(async (req, res) => {
 
   if (!verification) {
     res.status(400);
-    throw new Error("Invalid Email Verification Link");
+    throw new Error("Token not Found, Invalid Email Verification Link");
   }
 
   await User.updateOne({ _id: user._id }, { verified: true });

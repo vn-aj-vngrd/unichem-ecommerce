@@ -29,7 +29,12 @@ const Verification = () => {
   }, [param, isSuccess, call, navigate, dispatch]);
 
   if (isLoading) {
-    return <Spinner globalSpinner="true" />;
+    return (
+      <>
+        <div className="empty-container-md"></div>
+        <Spinner globalSpinner="true" />
+      </>
+    );
   }
 
   return (
