@@ -94,7 +94,7 @@ const ViewProduct = ({ product }) => {
                       {product._doc.specifications.map(
                         (specification, index) => (
                           <div key={"specifications" + index}>
-                            {specification}asdasd
+                            {specification}
                             <br></br>
                           </div>
                         )
