@@ -38,7 +38,6 @@ const ProductDetails = () => {
   return (
     <>
       <Breadcrumb type="product" />
-
       <>
         {isProductLoading ? (
           <div className="container">
@@ -53,9 +52,9 @@ const ProductDetails = () => {
                 <ReviewsSection productID={id} />
               </>
             ) : (
-              <>
+              <div className="not-found">
                 <PageNotFound />
-              </>
+              </div>
             )}
           </>
         )}
