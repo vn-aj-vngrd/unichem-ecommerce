@@ -225,14 +225,22 @@ const setProduct = asyncHandler(async (req, res) => {
   }
 
   let tempQuantities = [];
-  req.body.quantities.forEach((quantity) => {
-    tempQuantities.push(parseFloat(quantity));
-  })
+  if (Array.isArray(req.body.quantities)) {
+    req.body.quantities.forEach((quantity) => {
+      tempQuantities.push(parseFloat(quantity));
+    })
+  } else {
+    tempQuantities.push(parseFloat(req.body.quantities));
+  }
 
   let tempPrices = [];
-  req.body.prices.forEach((price) => {
-    tempPrices.push(parseFloat(price));
-  })
+  if (Array.isArray(req.body.prices)) {
+    req.body.prices.forEach((price) => {
+      tempPrices.push(parseFloat(price));
+    })  
+  } else {
+    tempPrices.push(parseFloat(req.body.prices));
+  }
 
   const product = await Product.create({
     productName: req.body.productName,
@@ -313,14 +321,23 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 
   let tempQuantities = [];
-  req.body.quantities.split(",").forEach((quantity) => {
-    tempQuantities.push(parseFloat(quantity));
-  });
+  if (Array.isArray(req.body.quantities)) {
+    req.body.quantities.forEach((quantity) => {
+      tempQuantities.push(parseFloat(quantity));
+    })
+  } else {
+    tempQuantities.push(parseFloat(req.body.quantities));
+  }
 
   let tempPrices = [];
-  req.body.prices.split(",").forEach((price) => {
-    tempPrices.push(parseFloat(price));
-  });
+  if (Array.isArray(req.body.prices)) {
+    req.body.prices.forEach((price) => {
+      tempPrices.push(parseFloat(price));
+    })  
+  } else {
+    tempPrices.push(parseFloat(req.body.prices));
+  }
+
 
   const updatedProduct = await Product.findByIdAndUpdate(
     {
