@@ -15,7 +15,7 @@ const ReviewModal = ({
     review: "",
   });
 
-  const [starRating, setStarRating] = useState(0);
+  const [starRating, setStarRating] = useState(1);
   const { review } = formData;
 
   const onChangeReview = (e) => {
@@ -143,6 +143,11 @@ const ReviewModal = ({
                               id="star-review-5"
                               onClick={() => setStarRating(5)}
                             ></li>
+                            {starRating === 1 && (<h6 className="rating-label rating-label-gray">Very Poor</h6>)}
+                            {starRating === 2 && (<h6 className="rating-label rating-label-gray">Poor</h6>)}
+                            {starRating === 3 && (<h6 className="rating-label rating-label-gray">Neutral</h6>)}
+                            {starRating === 4 && (<h6 className="rating-label rating-label-yellow">Satisfactory</h6>)}
+                            {starRating === 5 && (<h6 className="rating-label rating-label-yellow">Delightful</h6>)}
                           </div>
                         </div>
                       </div>

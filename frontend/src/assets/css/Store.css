@@ -6447,6 +6447,20 @@ ol {
 	Reviews CSS 
 ========================================*/
 
+.rating-label {
+  margin-left: 15px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.rating-label-gray {
+  color: #8a8a8a !important;
+}
+
+.rating-label-yellow {
+  color: #ffbb00 !important;
+}
+
 .review-row {
   margin-bottom: 30px;
 }
