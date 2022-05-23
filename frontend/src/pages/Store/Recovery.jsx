@@ -27,7 +27,7 @@ const Verification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, isSuccess, message, isAccountRecovered, isError } =
+  const { isLoading, isValidRecovery, message, isAccountRecovered, isError } =
     useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Verification = () => {
       setCall(true);
     }
 
-    if (isSuccess) {
+    if (isValidRecovery) {
       setValidUrl(true);
     }
 
@@ -63,7 +63,7 @@ const Verification = () => {
     }
   }, [
     param,
-    isSuccess,
+    isValidRecovery,
     isError,
     isAccountRecovered,
     call,
