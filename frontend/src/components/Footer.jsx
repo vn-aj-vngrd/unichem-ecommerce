@@ -51,16 +51,20 @@ const Footer = ({ userType }) => {
                       <h3>Products</h3>
                       <ul>
                         <li>
-                          <Link to="/products">Loctite</Link>
+                          <Link to="/products/brand/loctite">Loctite</Link>
                         </li>
                         <li>
-                          <Link to="/products">3M</Link>
+                          <Link to="/products/brand/3m">3M</Link>
                         </li>
                         <li>
-                          <Link to="/products">Phoenix Lubricants</Link>
+                          <Link to="/products/brand/phoenix_lubricants">
+                            Phoenix Lubricants
+                          </Link>
                         </li>
                         <li>
-                          <Link to="/products">Polymer Cleaning Materials</Link>
+                          <Link to="/products/brand/polymer_cleaning_chemicals">
+                            Polymer Cleaning Materials
+                          </Link>
                         </li>
                       </ul>
                     </div>
@@ -132,7 +136,7 @@ const Footer = ({ userType }) => {
                 © {new Date().getFullYear()} |{" "}
                 <span className="current-year"></span>
                 <Link className="text-primary fw-normal" to="/">
-                  Unichem 
+                  Unichem
                 </Link>
               </p>
             </div>
