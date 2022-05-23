@@ -44,7 +44,7 @@ const Product = ({
     },
     {
       label: "Low - High Sales",
-      value: "highLowSales",
+      value: "lowHighSales",
     },
     {
       label: "A - Z Order",
@@ -108,7 +108,7 @@ const Product = ({
     preFilteredProducts = [...allProducts];
   }
 
-  // console.log(allProducts);
+  // console
   // Price Range Filters
   if (filters.minRange || filters.maxRange) {
     if (isFiltered) {
