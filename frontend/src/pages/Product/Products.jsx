@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Product from "../../components/Product";
@@ -12,11 +12,20 @@ const Products = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
   const minRange = watch("minRange");
   const maxRange = watch("maxRange");
+
+  useEffect(() => {
+    const defaultValues = {
+      minRange: "",
+      maxRange: "",
+    };
+    reset(defaultValues);
+  }, [reset]);
 
   const [filters, setFilters] = useState({
     range: false,
@@ -38,6 +47,7 @@ const Products = () => {
       minRange: data.minRange,
       maxRange: data.maxRange,
     }));
+    reset();
   };
 
   return (
