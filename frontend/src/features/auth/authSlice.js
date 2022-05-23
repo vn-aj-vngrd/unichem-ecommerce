@@ -201,7 +201,7 @@ export const deleteUser = createAsyncThunk(
 
 // Logout user
 export const logout = createAsyncThunk("auth/logout", async () => {
-  await authService.logout();
+  authService.logout();
 });
 
 // Update admin password
