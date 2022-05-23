@@ -69,7 +69,6 @@ const Product = ({
   const pagesVisited = pageNumber * productsPerPage;
 
   // Pagination
-  let preFilteredProducts = JSON.parse(JSON.stringify(products));
   let allProducts = JSON.parse(JSON.stringify(products));
 
   const changePage = ({ selected }) => {
@@ -84,8 +83,6 @@ const Product = ({
         product._doc.productName.toLowerCase() === productName.toLowerCase()
       );
     });
-
-    preFilteredProducts = [...allProducts];
   }
 
   if (categoryName) {
@@ -94,8 +91,6 @@ const Product = ({
     allProducts = products.filter((product) => {
       return product._doc.category.toLowerCase() === categoryName.toLowerCase();
     });
-
-    preFilteredProducts = [...allProducts];
   }
 
   if (brandName) {
@@ -104,88 +99,46 @@ const Product = ({
     allProducts = products.filter((product) => {
       return product._doc.brand.toLowerCase() === brandName.toLowerCase();
     });
-
-    preFilteredProducts = [...allProducts];
   }
 
   // Price Range Filters
   if (filters.minRange || filters.maxRange) {
-    // if (isFiltered) {
-    //   allProducts = allProducts.concat(
-    //     preFilteredProducts.filter((product) => {
-    //       return (
-    //         product._doc.prices[0] -
-    //           product._doc.prices[0] * (product._doc.salePercent / 100) >=
-    //           filters.minRange &&
-    //         product._doc.prices[0] -
-    //           product._doc.prices[0] * (product._doc.salePercent / 100) <=
-    //           filters.maxRange
-    //       );
-    //     })
-    //   );
-    // } else {
-      allProducts = allProducts.filter((product) => {
-        return (
-          product._doc.prices[0] -
-            product._doc.prices[0] * (product._doc.salePercent / 100) >=
-            filters.minRange &&
-          product._doc.prices[0] -
-            product._doc.prices[0] * (product._doc.salePercent / 100) <=
-            filters.maxRange
-        );
-      });
-      isFiltered = true;
-    // }
+    allProducts = allProducts.filter((product) => {
+      return (
+        product._doc.prices[0] -
+          product._doc.prices[0] * (product._doc.salePercent / 100) >=
+          filters.minRange &&
+        product._doc.prices[0] -
+          product._doc.prices[0] * (product._doc.salePercent / 100) <=
+          filters.maxRange
+      );
+    });
+    isFiltered = true;
   }
 
   // Rating Filters
   if (filters.rating !== 0) {
-    // if (isFiltered) {
-    //   allProducts = allProducts.concat(
-    //     preFilteredProducts.filter((product) => {
-    //       return product.market.averageRatings >= filters.rating;
-    //     })
-    //   );
-    // } else {
-      allProducts = allProducts.filter((product) => {
-        return product.market.averageRatings >= filters.rating;
-      });
-      isFiltered = true;
-    // }
+    allProducts = allProducts.filter((product) => {
+      return product.market.averageRatings >= filters.rating;
+    });
+    isFiltered = true;
   }
 
-  console.log(isFiltered)
+  console.log(isFiltered);
   //Ready Stock Filters
   if (filters.readyStock) {
-    // if (isFiltered) {
-    //   allProducts = allProducts.concat(
-    //     preFilteredProducts.filter((product) => {
-    //       return !product._doc.quantities.includes(0);
-    //     })
-    //   );
-    // } else {
-      allProducts = allProducts.filter((product) => {
-        return !product._doc.quantities.includes(0);
-      });
-      isFiltered = true;
-    // }
+    allProducts = allProducts.filter((product) => {
+      return !product._doc.quantities.includes(0);
+    });
+    isFiltered = true;
   }
 
   //With Discount Filters
   if (filters.withDiscount) {
-    // console.log("discount filter")
-    // if (isFiltered) {
-    //   allProducts = allProducts.concat(
-    //     preFilteredProducts.filter((product) => {
-    //       return product._doc.salePercent > 0;
-    //     })
-    //   );
-    // } else {
-      allProducts = allProducts.filter((product) => {
-        return product._doc.salePercent > 0;
-      });
-      isFiltered = true;
-    // }
+    allProducts = allProducts.filter((product) => {
+      return product._doc.salePercent > 0;
+    });
+    isFiltered = true;
   }
 
   if (allProducts) {
