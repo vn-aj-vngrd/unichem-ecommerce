@@ -62,7 +62,9 @@ const Login = () => {
     }
 
     if (isSuccess || user) {
-      toast.success(`Welcome to Unichem Store, ${user.name.split(" ")[0]}!`);
+      toast.success(
+        `Welcome to Unichem Store, ${user ? user.name.split(" ")[0] : ""}!`
+      );
       navigate("/");
     }
 

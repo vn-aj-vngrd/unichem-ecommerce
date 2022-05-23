@@ -26,6 +26,8 @@ const initialState = {
   isCustomerPasswordUpdated: false,
   message: "",
   users: [],
+  isVerified: false,
+  isValidRecovery: false,
 };
 
 // Register user
@@ -241,6 +243,8 @@ export const authSlice = createSlice({
       state.isAuthError = false;
       state.isAuthSuccess = false;
       state.isAuthLoading = false;
+      state.isVerified = false;
+      state.isValidRecovery = false;
     },
   },
   extraReducers: (builder) => {
@@ -287,7 +291,7 @@ export const authSlice = createSlice({
       })
       .addCase(verifyUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isVerified = true;
       })
       .addCase(verifyUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -314,7 +318,7 @@ export const authSlice = createSlice({
       })
       .addCase(validateRecovery.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isValidRecovery = true;
         state.message = action.payload.message;
       })
       .addCase(validateRecovery.rejected, (state, action) => {

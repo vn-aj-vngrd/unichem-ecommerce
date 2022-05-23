@@ -14,7 +14,7 @@ const Verification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, isSuccess, isError, message } = useSelector((state) => state.auth);
+  const { isLoading, isVerified, isError, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.title = "Unichem Store | Email Verification";
@@ -24,7 +24,7 @@ const Verification = () => {
       setCall(true);
     }
 
-    if (isSuccess) {
+    if (isVerified) {
       setValidUrl(true);
     }
 
@@ -37,7 +37,7 @@ const Verification = () => {
       });
       navigate("/login");
     }
-  }, [param, isError, message, isSuccess, call, navigate, dispatch]);
+  }, [param, isError, message, isVerified, call, navigate, dispatch]);
 
   if (isLoading) {
     return (
