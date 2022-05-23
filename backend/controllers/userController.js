@@ -44,7 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password: hashedPassword,
     userType,
     image:
-      "https://res.cloudinary.com/unichem/image/upload/v1652783027/users/user-placeholder_pooyoq.png",
+      "https://res.cloudinary.com/unichem/image/upload/v1653299202/users/user-placeholder_pooyoq.png",
     cloudinaryID: "users/user-placeholder_pooyoq",
     verified: false,
   });
@@ -489,7 +489,10 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  if (user.cloudinaryID !== "") {
+  if (
+    user.cloudinaryID !== "users/user-placeholder_pooyoq" &&
+    user.cloudinaryID !== ""
+  ) {
     await cloudinary.uploader.destroy(user.cloudinaryID);
   }
 
