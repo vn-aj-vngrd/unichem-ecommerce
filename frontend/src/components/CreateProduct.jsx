@@ -721,7 +721,7 @@ const CreateProduct = () => {
                       Object.keys(errors).length !== 0 ||
                       types.length === 0 ||
                       specifications.length === 0) && (
-                      <button className="btn">Save Changes</button>
+                      <button className="btn">Create Product</button>
                     )}
                   </div>
                 </form>

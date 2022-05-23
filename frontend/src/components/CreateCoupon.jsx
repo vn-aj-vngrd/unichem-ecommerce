@@ -363,7 +363,7 @@ const UpdateCoupon = () => {
                       )}
                     {(Object.keys(touchedFields).length === 0 ||
                       Object.keys(errors).length !== 0) && (
-                        <button className="btn">Save Changes</button>
+                        <button className="btn">Create Coupon</button>
                       )}
                   </div>
                 </form>
