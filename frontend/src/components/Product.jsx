@@ -108,24 +108,23 @@ const Product = ({
     preFilteredProducts = [...allProducts];
   }
 
-  // console
   // Price Range Filters
   if (filters.minRange || filters.maxRange) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return (
-            product._doc.prices[0] -
-              product._doc.prices[0] * (product._doc.salePercent / 100) >=
-              filters.minRange &&
-            product._doc.prices[0] -
-              product._doc.prices[0] * (product._doc.salePercent / 100) <=
-              filters.maxRange
-          );
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
+    // if (isFiltered) {
+    //   allProducts = allProducts.concat(
+    //     preFilteredProducts.filter((product) => {
+    //       return (
+    //         product._doc.prices[0] -
+    //           product._doc.prices[0] * (product._doc.salePercent / 100) >=
+    //           filters.minRange &&
+    //         product._doc.prices[0] -
+    //           product._doc.prices[0] * (product._doc.salePercent / 100) <=
+    //           filters.maxRange
+    //       );
+    //     })
+    //   );
+    // } else {
+      allProducts = allProducts.filter((product) => {
         return (
           product._doc.prices[0] -
             product._doc.prices[0] * (product._doc.salePercent / 100) >=
@@ -136,61 +135,64 @@ const Product = ({
         );
       });
       isFiltered = true;
-    }
+    // }
   }
 
   // Rating Filters
   if (filters.rating !== 0) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product.market.averageRatings >= filters.rating;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
+    // if (isFiltered) {
+    //   allProducts = allProducts.concat(
+    //     preFilteredProducts.filter((product) => {
+    //       return product.market.averageRatings >= filters.rating;
+    //     })
+    //   );
+    // } else {
+      allProducts = allProducts.filter((product) => {
         return product.market.averageRatings >= filters.rating;
       });
       isFiltered = true;
-    }
+    // }
   }
 
+  console.log(isFiltered)
   //Ready Stock Filters
   if (filters.readyStock) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return !product._doc.quantities.includes(0);
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
+    // if (isFiltered) {
+    //   allProducts = allProducts.concat(
+    //     preFilteredProducts.filter((product) => {
+    //       return !product._doc.quantities.includes(0);
+    //     })
+    //   );
+    // } else {
+      allProducts = allProducts.filter((product) => {
         return !product._doc.quantities.includes(0);
       });
       isFiltered = true;
-    }
+    // }
   }
 
   //With Discount Filters
   if (filters.withDiscount) {
-    if (isFiltered) {
-      allProducts = allProducts.concat(
-        preFilteredProducts.filter((product) => {
-          return product._doc.salePercent > 0;
-        })
-      );
-    } else {
-      allProducts = preFilteredProducts.filter((product) => {
+    // console.log("discount filter")
+    // if (isFiltered) {
+    //   allProducts = allProducts.concat(
+    //     preFilteredProducts.filter((product) => {
+    //       return product._doc.salePercent > 0;
+    //     })
+    //   );
+    // } else {
+      allProducts = allProducts.filter((product) => {
         return product._doc.salePercent > 0;
       });
       isFiltered = true;
-    }
+    // }
   }
 
   if (allProducts) {
     switch (sortDefault) {
       case "lowHighSales":
-        allProducts.sort((a, b) => b.market.sold - a.market.sold);
+        allProducts.sort((a, b) => a.market.sold - b.market.sold);
+
         break;
       case "ascendingOrder":
         allProducts.sort((a, b) =>
@@ -223,7 +225,8 @@ const Product = ({
         );
         break;
       default:
-        allProducts.sort((a, b) => a.market.sold - b.market.sold);
+        allProducts.sort((a, b) => b.market.sold - a.market.sold);
+
         break;
     }
   }
