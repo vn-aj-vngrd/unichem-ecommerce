@@ -50,7 +50,7 @@ const ViewCoupon = ({ coupon }) => {
                       <br />
                       Limit: {coupon.limit}
                       <br />
-                      Start Date: {moment(coupon.startDate).format("1111")}
+                      Start Date: {moment(coupon.startDate).format("llll")}
                       <br />
                       Expiry Date: {moment(coupon.expiryDate).format("llll")}
                       <br />
