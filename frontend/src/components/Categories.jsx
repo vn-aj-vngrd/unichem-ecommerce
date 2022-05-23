@@ -31,7 +31,7 @@ const Categories = () => {
                   <Link to="/products/category/sealants">Sealants</Link>
                 </li>
                 <li>
-                  <Link to="/products/category/expoxies">Epoxies</Link>
+                  <Link to="/products/category/epoxies">Epoxies</Link>
                 </li>
               </ul>
             </div>

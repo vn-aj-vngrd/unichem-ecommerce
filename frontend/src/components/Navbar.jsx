@@ -206,13 +206,13 @@ const Navbar = ({ userType }) => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products/category/cart_tints">
+                            <Link to="/products/category/car_tints">
                               Car Tints
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link to="/products/category/construction">
-                              Construction
+                            <Link to="/products/category/construction_adhesives">
+                              Construction Adhesives
                             </Link>
                           </li>
                           <li className="nav-item">
