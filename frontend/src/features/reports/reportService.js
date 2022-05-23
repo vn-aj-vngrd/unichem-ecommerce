@@ -15,8 +15,22 @@ const getDashboardReport = async (token) => {
   return response.data;
 };
 
+// Get Low Level products
+const getLowLevelProducts = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL + "getLowLevelProducts", config);
+
+  return response.data;
+};
+
 const reportService = {
   getDashboardReport,
+  getLowLevelProducts,
 };
 
 export default reportService;

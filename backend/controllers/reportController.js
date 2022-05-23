@@ -558,6 +558,36 @@ const getDashboardReport = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    GET Low Level Products
+// @route   GET /api/reports/getLowLevelProducts
+// @access  Private
+const getLowLevelProducts = asyncHandler(async (req, res) => {
+  // Check for user
+  if (!req.user && req.user.userType !== "admin") {
+    res.status(401);
+    throw new Error("Access Denied");
+  }
+
+  // Get products with minStock
+  const products = await Product.find();
+
+  let lowLevelProducts = [];
+  for (let i = 0; i < products.length; i++) {
+    for (let j = 0; j < products[i].quantities.length; j++) {
+      if (products[i].quantities[j] <= products[i].minStock) {
+        const product = {
+          productName: products[i].productName,
+          quantity: products[i].quantities[j],
+        };
+        lowLevelProducts.push(product);
+      }
+    }
+  }
+
+  res.status(200).json(lowLevelProducts);
+});
+
 module.exports = {
   getDashboardReport,
+  getLowLevelProducts,
 };

@@ -49,6 +49,10 @@ const productSchema = mongoose.Schema(
       type: Array,
       required: [true, "Cloudinary ID is required"],
     },
+    minStock: {
+      type: Array,
+      required: [true, "Low Level is required"],
+    },
     featured: {
       type: Boolean,
       defualt: false,
