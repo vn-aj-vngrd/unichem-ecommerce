@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { verifyUser } from "../../features/auth/authSlice";
-import PageNotFound from "../PageNotFound";
+// import PageNotFound from "../PageNotFound";
 import Spinner from "../../components/Spinner";
+import Swal from "sweetalert2";
 
 const Verification = () => {
   const [call, setCall] = useState(false);
@@ -13,7 +14,7 @@ const Verification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, isSuccess } = useSelector((state) => state.auth);
+  const { isLoading, isSuccess, isError, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.title = "Unichem Store | Email Verification";
@@ -26,7 +27,17 @@ const Verification = () => {
     if (isSuccess) {
       setValidUrl(true);
     }
-  }, [param, isSuccess, call, navigate, dispatch]);
+
+    if (isError) {
+      Swal.fire({
+        title: "Something went wrong!",
+        text: message,
+        icon: "error",
+        confirmButtonColor: "#f44336",
+      });
+      navigate("/login");
+    }
+  }, [param, isError, message, isSuccess, call, navigate, dispatch]);
 
   if (isLoading) {
     return (
@@ -67,7 +78,7 @@ const Verification = () => {
         </div>
       ) : (
         <>
-          <PageNotFound />
+          {/* <PageNotFound /> */}
         </>
       )}
     </>

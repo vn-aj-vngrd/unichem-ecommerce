@@ -6,7 +6,7 @@ import {
   validateRecovery,
   recoverAccount,
 } from "../../features/auth/authSlice";
-import PageNotFound from "../PageNotFound";
+// import PageNotFound from "../PageNotFound";
 import Spinner from "../../components/Spinner";
 import Swal from "sweetalert2";
 
@@ -171,7 +171,7 @@ const Verification = () => {
         </div>
       ) : (
         <>
-          <PageNotFound />
+          {/* <PageNotFound /> */}
         </>
       )}
     </>

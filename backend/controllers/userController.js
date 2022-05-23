@@ -514,7 +514,7 @@ const verifyUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(400);
-    throw new Error("User not Found, Invalid Email Verification Link");
+    throw new Error("Invalid Verification Link");
   }
 
   const verification = await Token.findOne({
@@ -525,7 +525,7 @@ const verifyUser = asyncHandler(async (req, res) => {
 
   if (!verification) {
     res.status(400);
-    throw new Error("Token not Found, Invalid Email Verification Link");
+    throw new Error("Invalid Verification Link");
   }
 
   await User.updateOne({ _id: user._id }, { verified: true });
@@ -622,7 +622,7 @@ const validateRecovery = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(400);
-    throw new Error("Invalid User Recovery Link, User Not Found");
+    throw new Error("Invalid Recovery Link");
   }
 
   const verification = await Token.findOne({
@@ -632,7 +632,7 @@ const validateRecovery = asyncHandler(async (req, res) => {
   });
   if (!verification) {
     res.status(400);
-    throw new Error("Invalid User Recovery Link, Token Not Found");
+    throw new Error("Invalid Recovery Link");
   }
 
   res.status(200).json({ message: "Email verified successfully" });
@@ -645,7 +645,7 @@ const recoverAccount = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     res.status(400);
-    throw new Error("Invalid User Recovery Link, User Not Found");
+    throw new Error("Invalid Recovery Link");
   }
 
   const verification = await Token.findOne({
@@ -655,7 +655,7 @@ const recoverAccount = asyncHandler(async (req, res) => {
   });
   if (!verification) {
     res.status(400);
-    throw new Error("Invalid User Recovery Link, Token Not Found");
+    throw new Error("Invalid Recovery Link");
   }
 
   // hash the password using bcrypt
