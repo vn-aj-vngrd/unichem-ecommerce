@@ -173,7 +173,7 @@ const Product = ({
         allProducts.sort(
           (a, b) =>
             b._doc.prices[0] -
-            b._doc.prices[0] * b._doc.salePercent -
+            (b._doc.prices[0] * b._doc.salePercent) / 100 -
             (a._doc.prices[0] - a._doc.prices[0] * a._doc.salePercent)
         );
         break;
@@ -183,7 +183,6 @@ const Product = ({
         break;
     }
   }
-
   const pageCount = Math.ceil(allProducts.length / productsPerPage);
   allProducts = allProducts.slice(pagesVisited, pagesVisited + productsPerPage);
   let salesPrice = 0;
