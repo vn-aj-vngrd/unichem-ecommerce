@@ -3,6 +3,10 @@ import productService from "./productService";
 
 const initialState = {
   products: [],
+  featuredProducts: [],
+  isFeaturedProductLoading: false,
+  isFeaturedProductSuccess: false,
+  isFeaturedProductError: false,
   isProductError: false,
   isProductSuccess: false,
   isProductLoading: false,
@@ -10,6 +14,7 @@ const initialState = {
   isProductUpdated: false,
   isProductDeleted: false,
   productMessage: "",
+  featuredProductMessage: "",
 };
 
 // Create new product
@@ -173,17 +178,17 @@ export const productSlice = createSlice({
       })
 
       .addCase(getFeaturedProducts.pending, (state) => {
-        state.isProductLoading = true;
+        state.isFeaturedProductLoading = true;
       })
       .addCase(getFeaturedProducts.fulfilled, (state, action) => {
-        state.isProductLoading = false;
-        state.isProductSuccess = true;
-        state.products = action.payload;
+        state.isFeaturedProductLoading = false;
+        state.isFeaturedProductSuccess = true;
+        state.featuredProducts = action.payload;
       })
       .addCase(getFeaturedProducts.rejected, (state, action) => {
-        state.isProductLoading = false;
-        state.isProductError = true;
-        state.productMessage = action.payload;
+        state.isFeaturedProductLoading = false;
+        state.isFeaturedProductError = true;
+        state.featuredProductMessage = action.payload;
       })
 
       .addCase(updateProduct.pending, (state) => {
