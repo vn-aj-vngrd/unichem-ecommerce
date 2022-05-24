@@ -17592,9 +17592,9 @@ fieldset:disabled .btn {
 .navbar .navbar-nav .dropdown .dropdown-menu {
   top: 100%;
 }
-.navbar .navbar-nav .dropdown .dropdown-menu span {
+/* .navbar .navbar-nav .dropdown .dropdown-menu span {
   width: 30px;
-}
+} */
 .navbar .navbar-nav .dropdown .dropdown-item {
   font-size: 0.875rem;
 }
@@ -17699,9 +17699,9 @@ fieldset:disabled .btn {
 .dropdown-menu {
   top: 100%;
 }
-.dropdown-menu span {
+/* .dropdown-menu span {
   width: 30px;
-}
+} */
 .navbar-transparent {
   background-color: transparent;
   border: 0;

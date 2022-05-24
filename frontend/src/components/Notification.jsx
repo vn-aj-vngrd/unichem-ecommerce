@@ -43,6 +43,7 @@ const Notification = () => {
           <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
         </svg>
       </a>
+
       <div className="dropdown-menu dropdown-menu-lg dropdown-menu-center mt-2 py-0">
         <div className="list-group list-group-flush">
           <div className="text-center text-primary fw-bold border-bottom border-light py-3">
@@ -93,9 +94,15 @@ const Notification = () => {
                             }`}
                           >
                             <span className="text-black">Status: {""}</span>
-                            {product.quantity === 0
-                              ? "Out of stock"
-                              : "Low stock"}{" "}
+                            {product.quantity === 0 ? (
+                              <span className="badge bg-danger">
+                                Out of stock
+                              </span>
+                            ) : (
+                              <span className="badge bg-warning">
+                                Low Stock
+                              </span>
+                            )}
                           </p>
                         </div>
                       </div>
