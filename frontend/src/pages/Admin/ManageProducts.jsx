@@ -31,7 +31,7 @@ const ManageProducts = () => {
   } = useSelector((state) => state.products);
 
   // console.log(products)
-  
+
   useEffect(() => {
     document.title = "Unichem Store | Products";
 
@@ -74,7 +74,7 @@ const ManageProducts = () => {
     // "Description",
     "Sale",
     "Sale Percent",
-    "Featured",
+    "Stock Status",
     "Created",
     "Updated",
     "",
@@ -82,6 +82,8 @@ const ManageProducts = () => {
   ];
 
   let data = [];
+  let stockStatus;
+  let i;
   // const maxLength = 50;
   if (products) {
     products.forEach((product) => {
@@ -101,9 +103,28 @@ const ManageProducts = () => {
       } else {
         temp.push("0%");
       }
-      temp.push(product._doc.featured ? "Yes" : "No");
+
+      for (i = 0; i < product._doc.minStock.length; i++) {
+        if (product._doc.quantities[i] === 0) {
+          stockStatus = "severe-stock";
+        } else if (product._doc.quantities[i] < product._doc.minStock[i]) {
+          stockStatus = "low-stock";
+        } else {
+          stockStatus = "good-stock";
+        }
+      }
+
+      if (stockStatus === "severe-stock") {
+        temp.push(<div className={stockStatus}>Severe</div>);
+      } else if (stockStatus === "low-stock") {
+        temp.push(<div className={stockStatus}>Low Stock</div>);
+      } else {
+        temp.push(<div className={stockStatus}>Good</div>);
+      }
+
       temp.push(moment(product._doc.createdAt).format("llll"));
       temp.push(moment(product._doc.updatedAt).format("llll"));
+
       if (product) {
         temp.push(<ViewProduct product={product} />);
         temp.push(<UpdateProduct product={product} />);

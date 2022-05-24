@@ -9,6 +9,7 @@ const UpdateProduct = (product) => {
     tempTypes.push({
       type: type,
       quantity: product.product._doc.quantities[index],
+      minStock: product.product._doc.minStock[index],
       price: product.product._doc.prices[index],
     });
   });
@@ -56,6 +57,7 @@ const UpdateProduct = (product) => {
       resetTypes.push({
         type: type,
         quantity: product.product._doc.quantities[index],
+        minStock: product.product._doc.minStock[index],
         price: product.product._doc.prices[index],
       });
     });
@@ -132,11 +134,13 @@ const UpdateProduct = (product) => {
 
     let tempTypesData = [];
     let tempQuantitiesData = [];
+    let tempMinStocksData = [];
     let tempPricesData = [];
 
     data.types.forEach((type) => {
       tempTypesData.push(type.type);
       tempQuantitiesData.push(parseFloat(type.quantity));
+      tempMinStocksData.push(parseFloat(type.minStock));
       tempPricesData.push(parseFloat(type.price));
     });
 
@@ -150,6 +154,7 @@ const UpdateProduct = (product) => {
       types: tempTypesData,
       description: data.description,
       quantities: tempQuantitiesData,
+      minStocks: tempMinStocksData,
       prices: tempPricesData,
       isSale: data.isSale,
       featured: data.featured,
@@ -569,6 +574,47 @@ const UpdateProduct = (product) => {
                             errors.types[index].quantity && (
                               <p className="error-message">
                                 ⚠ {errors.types[index].quantity.message}
+                              </p>
+                            )}
+                        </div>
+                      </div>
+
+                      <div className="form-group col">
+                        <div className="form-group mb-4">
+                          <label>Min Stock</label>
+                          <div className="input-group">
+                            <input
+                              type="number"
+                              className="form-control"
+                              id="types"
+                              step="any"
+                              {...register(`types[${index}].minStock`, {
+                                required: {
+                                  value: true,
+                                  message: "Product minimum stock is required.",
+                                },
+                                min: {
+                                  value: 0,
+                                  message:
+                                    "Product minimum stock must be greater than 0.",
+                                },
+                              })}
+                              style={{
+                                border:
+                                  Array.isArray(errors.types) &&
+                                  errors.types[index] &&
+                                  errors.types[index].minStock
+                                    ? "1px solid #f44336"
+                                    : "",
+                              }}
+                            />
+                          </div>
+
+                          {Array.isArray(errors.types) &&
+                            errors.types[index] &&
+                            errors.types[index].minStock && (
+                              <p className="error-message">
+                                ⚠ {errors.types[index].minStock.message}
                               </p>
                             )}
                         </div>

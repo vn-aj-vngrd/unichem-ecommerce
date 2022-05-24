@@ -228,16 +228,25 @@ const setProduct = asyncHandler(async (req, res) => {
   if (Array.isArray(req.body.quantities)) {
     req.body.quantities.forEach((quantity) => {
       tempQuantities.push(parseFloat(quantity));
-    })
+    });
   } else {
     tempQuantities.push(parseFloat(req.body.quantities));
+  }
+
+  let tempMinStocks = [];
+  if (Array.isArray(req.body.minStocks)) {
+    req.body.minStocks.forEach((minStock) => {
+      tempMinStocks.push(parseFloat(minStock));
+    });
+  } else {
+    tempMinStocks.push(parseFloat(req.body.minStocks));
   }
 
   let tempPrices = [];
   if (Array.isArray(req.body.prices)) {
     req.body.prices.forEach((price) => {
       tempPrices.push(parseFloat(price));
-    })  
+    });
   } else {
     tempPrices.push(parseFloat(req.body.prices));
   }
@@ -249,6 +258,7 @@ const setProduct = asyncHandler(async (req, res) => {
     types: req.body.types,
     specifications: req.body.specifications,
     quantities: tempQuantities,
+    minStock: tempMinStocks,
     prices: tempPrices,
     // salePrices: req.body.salePrices,
     isSale: req.body.isSale,
@@ -324,20 +334,28 @@ const updateProduct = asyncHandler(async (req, res) => {
   if (Array.isArray(req.body.quantities)) {
     req.body.quantities.forEach((quantity) => {
       tempQuantities.push(parseFloat(quantity));
-    })
+    });
   } else {
     tempQuantities.push(parseFloat(req.body.quantities));
+  }
+
+  let tempMinStocks = [];
+  if (Array.isArray(req.body.minStocks)) {
+    req.body.minStocks.forEach((minStock) => {
+      tempMinStocks.push(parseFloat(minStock));
+    });
+  } else {
+    tempMinStocks.push(parseFloat(req.body.minStocks));
   }
 
   let tempPrices = [];
   if (Array.isArray(req.body.prices)) {
     req.body.prices.forEach((price) => {
       tempPrices.push(parseFloat(price));
-    })  
+    });
   } else {
     tempPrices.push(parseFloat(req.body.prices));
   }
-
 
   const updatedProduct = await Product.findByIdAndUpdate(
     {
@@ -350,6 +368,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       types: req.body.types,
       specifications: req.body.specifications,
       quantities: tempQuantities,
+      minStock: tempMinStocks,
       prices: tempPrices,
       // salePrices: req.body.salePrices,
       isSale: req.body.isSale,

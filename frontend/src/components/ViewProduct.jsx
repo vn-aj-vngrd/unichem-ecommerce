@@ -30,7 +30,10 @@ const ViewProduct = ({ product }) => {
         aria-labelledby="modal-form"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered" role="document">
+        <div
+          className="modal-dialog modal-lg modal-dialog-centered"
+          role="document"
+        >
           <div className="modal-content">
             <div className="modal-body p-0">
               <div className="card p-3 p-lg-4">
@@ -102,33 +105,45 @@ const ViewProduct = ({ product }) => {
                       <br />
                       <h6>Product Color/Types</h6>
                       {product._doc.types.map((type, index) => (
-                        <div key={"color/types" + index} className="d-flex">
-                          <div className="col-3">{type}</div>
-                          <div className="col-3">
+                        <div
+                          key={"color/types" + index}
+                          className="d-flex align-center"
+                        >
+                          <div className="col">{type}</div>
+                          <div className="col-3 d-flex align-center">
                             {product._doc.quantities[index] + " pcs"}
+                            {product._doc.quantities[index] <
+                              product._doc.minStock[index] &&
+                              product._doc.quantities[index] > 0 && (
+                                <i className="lni lni-warning low-stock-lni"></i>
+                              )}
+
+                            {product._doc.quantities[index] === 0 && (
+                              <i className="lni lni-warning severe-stock-lni"></i>
+                            )}
                           </div>
                           {product._doc.isSale === true ? (
                             <>
-                              <div className="col-3">
+                              <div className="col-2">
                                 <del>
-                                  {"PHP " +
-                                    product._doc.prices[index] && product._doc.prices[index].toFixed(2)}
+                                  {"PHP " + product._doc.prices[index] &&
+                                    product._doc.prices[index].toFixed(2)}
                                 </del>
                               </div>
-                              <div className="col-3">
+                              <div className="col-2">
                                 {"PHP " +
                                   (
                                     product._doc.prices[index] &&
                                     product._doc.prices[index] -
-                                    (product._doc.prices[index] *
-                                      product._doc.salePercent) /
-                                      100
+                                      (product._doc.prices[index] *
+                                        product._doc.salePercent) /
+                                        100
                                   ).toFixed(2)}
                               </div>
                             </>
                           ) : (
                             <>
-                              <div className="col-6">
+                              <div className="col-2">
                                 {"PHP " + product._doc.prices[index]}
                               </div>
                             </>
