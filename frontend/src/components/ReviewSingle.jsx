@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 function ReviewSingle({ reviewOne, editable }) {
   const dispatch = useDispatch();
   const moment = require("moment");
-  const [starRating, setStarRating] = useState(0);
+  const [starRating, setStarRating] = useState(reviewOne._doc.rating);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     review: reviewOne._doc.review,
@@ -132,6 +132,11 @@ function ReviewSingle({ reviewOne, editable }) {
                       id="star-review-5"
                       onClick={() => setStarRating(5)}
                     ></li>
+                    {starRating === 1 && (<h6 className="rating-label rating-label-gray">Very Poor</h6>)}
+                            {starRating === 2 && (<h6 className="rating-label rating-label-gray">Poor</h6>)}
+                            {starRating === 3 && (<h6 className="rating-label rating-label-gray">Neutral</h6>)}
+                            {starRating === 4 && (<h6 className="rating-label rating-label-yellow">Satisfactory</h6>)}
+                            {starRating === 5 && (<h6 className="rating-label rating-label-yellow">Delightful</h6>)}
                   </div>
                 </div>
               </div>
