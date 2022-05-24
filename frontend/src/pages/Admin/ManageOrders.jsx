@@ -12,6 +12,7 @@ import {
 } from "../../features/orders/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner";
+import OrderBadge from "../../components/OrderBadge";
 import { toast } from "react-toastify";
 
 const ManageOrders = () => {
@@ -19,16 +20,12 @@ const ManageOrders = () => {
   const columns = [
     "Order ID",
     "User ID",
-    "Shipping Discount",
-    "Order Discount",
-    "Shipping Fee",
-    "Subtotal",
     "Total Price",
     "Payment Method",
-    "Order Status",
     "Order Date",
     "Completed Date",
     "Updated",
+    "Order Status",
     "",
     "",
   ];
@@ -71,18 +68,14 @@ const ManageOrders = () => {
       data.push([
         order._id,
         order.userID,
-        order.shippingDiscount + "%",
-        order.orderDiscount + "%",
-        "PHP " + order.shippingFee.toFixed(2),
-        "PHP " + order.subtotal.toFixed(2),
         "PHP " + order.totalPrice.toFixed(2),
         order.paymentMethod,
-        order.orderStatus,
         moment(order.createdAt).format("llll"),
         order.statusDates[6].date
           ? moment(order.statusDates[6].date).format("llll")
-          : "N/A",
+          : "Not Available",
         moment(order.updatedAt).format("llll"),
+        <OrderBadge status={order.orderStatus.toString()} />,
         <ViewOrder order={order} />,
         <UpdateOrder order={order} />,
       ]);

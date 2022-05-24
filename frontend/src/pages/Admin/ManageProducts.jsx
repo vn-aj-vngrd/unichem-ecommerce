@@ -69,7 +69,7 @@ const ManageProducts = () => {
     "Brand",
     "Sale",
     "Sale Percent",
-    "Status",
+    "Stock Status",
     "Created",
     "Updated",
     "",

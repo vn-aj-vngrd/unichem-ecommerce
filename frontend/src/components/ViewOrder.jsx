@@ -31,10 +31,9 @@ const ViewOrder = ({ order }) => {
                   aria-label="Close"
                 />
                 <div className="text-center text-md-center mb-2 mt-md-0">
-                  <h1 className="mb-0 h4">Product Information</h1>
+                  <div className="mb-0 h5">Order Information</div>
                 </div>
 
-                <p className="text-center">Order ID: {order._id}</p>
                 <div className="mt-2">
                   {order.orderLine &&
                     order.orderLine.map((orderline, index) => (
@@ -43,7 +42,11 @@ const ViewOrder = ({ order }) => {
                         className="d-flex justify-content-center align-items-center mb-4"
                       >
                         <div className="w-25">
-                          <img src={orderline.image} className="view-image" alt="#" />
+                          <img
+                            src={orderline.image}
+                            className="view-image"
+                            alt="#"
+                          />
                         </div>
                         <div className="ms-3">
                           ID: {orderline.orderID}
@@ -56,6 +59,24 @@ const ViewOrder = ({ order }) => {
                         </div>
                       </div>
                     ))}
+                </div>
+                <hr />
+                <div className="container">
+                  <div className="fw-bold text-center h5 mb-3">
+                    Order Summary
+                  </div>
+
+                  <div>
+                    Order ID: {order._id}
+                    <br />
+                    Shipping Discount: {order.shippingDiscount + "%"}
+                    <br />
+                    Order Discount: {order.orderDiscount + "%"}
+                    <br />
+                    Shipping Fee: Php {order.shippingFee.toFixed(2)}
+                    <br />
+                    Subtotal: Php {order.subtotal.toFixed(2)}
+                  </div>
                 </div>
               </div>
             </div>
