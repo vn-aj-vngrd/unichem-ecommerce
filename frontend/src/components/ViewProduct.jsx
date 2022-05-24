@@ -59,7 +59,7 @@ const ViewProduct = ({ product }) => {
                       <Swiper
                         spaceBetween={30}
                         centeredSlides={true}
-                        navigation={true}
+                        navigation={false}
                         autoplay={{
                           delay: 5500,
                           disableOnInteraction: false,

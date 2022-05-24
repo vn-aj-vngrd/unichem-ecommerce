@@ -67,38 +67,43 @@ const ManagePromotions = () => {
   const columns = [
     "Promo ID",
     "Promo Name",
-    "Description",
     "Start Date",
     "Expiry Date",
-    "Updated At",
-    "Created At",
+    "Status",
+    "Created",
+    "Updated",
     "",
     "",
   ];
 
   let data = [];
-  const maxLength = 50;
+
   promos.forEach((promo) => {
     let temp = [];
+    temp.push(
+      promo._id,
+      promo.promoName,
+      moment(promo.startDate).format("llll"),
+      moment(promo.expiryDate).format("llll")
+    );
 
-    temp.push(promo._id, promo.promoName);
-
-    promo.description.length > maxLength
-      ? temp.push(promo.description.substr(0, maxLength).concat("..."))
-      : temp.push(promo.description.substr(0, maxLength));
+    if (moment() < moment(promo.startDate)) {
+      temp.push(<span class="badge bg-warning">Not Active</span>);
+    } else if (moment() > moment(promo.expiryDate)) {
+      temp.push(<span class="badge bg-danger">Expired</span>);
+    } else {
+      temp.push(<span class="badge bg-success">Active</span>);
+    }
 
     temp.push(
-      moment(promo.startDate).format("llll"),
-      moment(promo.expiryDate).format("llll"),
-      moment(promo.updatedAt).format("llll"),
       moment(promo.createdAt).format("llll"),
+      moment(promo.updatedAt).format("llll"),
       <ViewPromotion promo={promo} />,
       <UpdatePromotion promo={promo} />
     );
 
     data.push(temp);
   });
-
 
   const options = {
     filterType: "checkbox",

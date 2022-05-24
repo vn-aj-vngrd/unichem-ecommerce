@@ -30,8 +30,6 @@ const ManageProducts = () => {
     isProductCreated,
   } = useSelector((state) => state.products);
 
-  // console.log(products)
-
   useEffect(() => {
     document.title = "Unichem Store | Products";
 
@@ -69,12 +67,9 @@ const ManageProducts = () => {
     "Product ID",
     "Name",
     "Brand",
-    // "Category",
-    // "Types",
-    // "Description",
     "Sale",
     "Sale Percent",
-    "Stock Status",
+    "Status",
     "Created",
     "Updated",
     "",
@@ -82,20 +77,14 @@ const ManageProducts = () => {
   ];
 
   let data = [];
-  let stockStatus;
-  let i;
-  // const maxLength = 50;
+
   if (products) {
     products.forEach((product) => {
       let temp = [];
       temp.push(product._doc._id);
       temp.push(product._doc.productName);
       temp.push(product._doc.brand);
-      // temp.push(product._doc.category);
-      // temp.push(product._doc.types.toString().split(",").join(", "));
-      // product._doc.description.length > maxLength
-      //   ? temp.push(product._doc.description.substr(0, maxLength).concat("..."))
-      //   : temp.push(product._doc.description.substr(0, maxLength));
+
       temp.push(product._doc.isSale ? "Yes" : "No");
 
       if (product._doc.salePercent) {
@@ -104,7 +93,8 @@ const ManageProducts = () => {
         temp.push("0%");
       }
 
-      for (i = 0; i < product._doc.minStock.length; i++) {
+      let stockStatus;
+      for (let i = 0; i < product._doc.minStock.length; i++) {
         if (product._doc.quantities[i] === 0) {
           stockStatus = "severe-stock";
         } else if (product._doc.quantities[i] < product._doc.minStock[i]) {
@@ -115,11 +105,11 @@ const ManageProducts = () => {
       }
 
       if (stockStatus === "severe-stock") {
-        temp.push(<div className={stockStatus}>Severe</div>);
+        temp.push(<span class="badge bg-danger">Out of Stock</span>);
       } else if (stockStatus === "low-stock") {
-        temp.push(<div className={stockStatus}>Low Stock</div>);
+        temp.push(<span class="badge bg-secondary">Low Stock</span>);
       } else {
-        temp.push(<div className={stockStatus}>Good</div>);
+        temp.push(<span class="badge bg-success">Optimal</span>);
       }
 
       temp.push(moment(product._doc.createdAt).format("llll"));

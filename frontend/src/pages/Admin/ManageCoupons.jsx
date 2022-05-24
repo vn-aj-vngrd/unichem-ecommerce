@@ -68,37 +68,36 @@ const ManageCoupons = () => {
     "Coupon ID",
     "Coupon Code",
     "Coupon Type",
-    // "Description",
-    "Discount",
-    "Required Amount",
-    "Limit",
-    "Start Date",
-    "Expiry Date",
-    "Updated At",
-    "Created At",
+    "Status",
+    "Created",
+    "Updated",
     "",
     "",
   ];
 
   let data = [];
-  // const maxLength = 50;
+
   coupons.forEach((coupon) => {
     let temp = [];
-    temp.push(coupon._id, coupon.couponCode, coupon.couponType);
-    // coupon.description.length > maxLength
-    //   ? temp.push(coupon.description.substr(0, maxLength).concat("..."))
-    //   : temp.push(coupon.description.substr(0, maxLength));
     temp.push(
-      coupon.discount.toString().concat("%"),
-      coupon.requiredAmount,
-      coupon.limit,
-      moment(coupon.startDate).format("llll").toString(),
-      moment(coupon.expiryDate).format("llll").toString(),
-      moment(coupon.updatedAt).format("llll").toString(),
+      coupon._id,
+      coupon.couponCode,
+      coupon.couponType
+    );
+
+    if (moment() < moment(coupon.startDate)) {
+      temp.push(<span class="badge bg-warning">Not Active</span>);
+    } else if (moment() > moment(coupon.expiryDate)) {
+      temp.push(<span class="badge bg-danger">Expired</span>);
+    } else {
+      temp.push(<span class="badge bg-success">Active</span>);
+    }
+
+    temp.push(
       moment(coupon.createdAt).format("llll").toString(),
+      moment(coupon.updatedAt).format("llll").toString(),
       <ViewCoupon coupon={coupon} />,
       <UpdateCoupon coupon={coupon} />
-      // <DeleteCoupon id={coupon._id} />,
     );
     data.push(temp);
   });
