@@ -100,7 +100,7 @@ const Notification = () => {
                               </span>
                             ) : (
                               <span className="badge bg-warning">
-                                Low
+                                Low Stock
                               </span>
                             )}
                           </p>
