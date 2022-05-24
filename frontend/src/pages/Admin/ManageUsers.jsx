@@ -62,7 +62,11 @@ const ManageUsers = () => {
           alt=""
           className="avatar rounded-circle border-gray-100"
         />,
-        user.verified ? "Yes" : "No",
+        user.verified ? (
+          <span className="badge bg-success">Yes</span>
+        ) : (
+          <span className="badge bg-danger">No</span>
+        ),
         moment(user.createdAt).format("llll"),
         moment(user.updatedAt).format("llll"),
       ]);
