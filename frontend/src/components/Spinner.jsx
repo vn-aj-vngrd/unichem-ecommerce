@@ -9,7 +9,7 @@ const override = css`
   border-color: #f44336;
 `;
 
-const Spinner = ({ globalSpinner }) => {
+const Spinner = ({ globalSpinner, notifSpinner }) => {
   if (globalSpinner !== undefined && globalSpinner === "true") {
     return (
       <div className="loading">
@@ -19,10 +19,17 @@ const Spinner = ({ globalSpinner }) => {
     );
   }
 
+  if (notifSpinner !== undefined && notifSpinner === "true") {
+    return (
+      <div className="spinner-container">
+        <PuffLoader color="#f44336" loading={true} css={override} size={30} />
+      </div>
+    );
+  }
+
   return (
     <div className="spinner-container">
-      <BeatLoader color="#f44336" loading={true} css={override} size={13} title="Loading..." />
-      
+      <BeatLoader color="#f44336" loading={true} css={override} size={13} />
     </div>
   );
 };

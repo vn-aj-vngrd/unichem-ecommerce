@@ -69,9 +69,9 @@ const ManageProducts = () => {
     "Product ID",
     "Name",
     "Brand",
-    "Category",
-    "Types",
-    "Description",
+    // "Category",
+    // "Types",
+    // "Description",
     "Sale",
     "Sale Percent",
     "Featured",
@@ -82,18 +82,18 @@ const ManageProducts = () => {
   ];
 
   let data = [];
-  const maxLength = 50;
+  // const maxLength = 50;
   if (products) {
     products.forEach((product) => {
       let temp = [];
       temp.push(product._doc._id);
       temp.push(product._doc.productName);
       temp.push(product._doc.brand);
-      temp.push(product._doc.category);
-      temp.push(product._doc.types.toString().split(",").join(", "));
-      product._doc.description.length > maxLength
-        ? temp.push(product._doc.description.substr(0, maxLength).concat("..."))
-        : temp.push(product._doc.description.substr(0, maxLength));
+      // temp.push(product._doc.category);
+      // temp.push(product._doc.types.toString().split(",").join(", "));
+      // product._doc.description.length > maxLength
+      //   ? temp.push(product._doc.description.substr(0, maxLength).concat("..."))
+      //   : temp.push(product._doc.description.substr(0, maxLength));
       temp.push(product._doc.isSale ? "Yes" : "No");
 
       if (product._doc.salePercent) {

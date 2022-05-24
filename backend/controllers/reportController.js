@@ -574,9 +574,10 @@ const getLowLevelProducts = asyncHandler(async (req, res) => {
   let lowLevelProducts = [];
   for (let i = 0; i < products.length; i++) {
     for (let j = 0; j < products[i].quantities.length; j++) {
-      if (products[i].quantities[j] <= products[i].minStock) {
+      if (products[i].quantities[j] <= products[i].minStock[j]) {
         const product = {
           productName: products[i].productName,
+          productType: products[i].types[j],
           quantity: products[i].quantities[j],
         };
         lowLevelProducts.push(product);

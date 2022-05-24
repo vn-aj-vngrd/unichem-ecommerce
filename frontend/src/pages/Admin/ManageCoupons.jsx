@@ -68,7 +68,7 @@ const ManageCoupons = () => {
     "Coupon ID",
     "Coupon Code",
     "Coupon Type",
-    "Description",
+    // "Description",
     "Discount",
     "Required Amount",
     "Limit",
@@ -81,13 +81,13 @@ const ManageCoupons = () => {
   ];
 
   let data = [];
-  const maxLength = 50;
+  // const maxLength = 50;
   coupons.forEach((coupon) => {
     let temp = [];
     temp.push(coupon._id, coupon.couponCode, coupon.couponType);
-    coupon.description.length > maxLength
-      ? temp.push(coupon.description.substr(0, maxLength).concat("..."))
-      : temp.push(coupon.description.substr(0, maxLength));
+    // coupon.description.length > maxLength
+    //   ? temp.push(coupon.description.substr(0, maxLength).concat("..."))
+    //   : temp.push(coupon.description.substr(0, maxLength));
     temp.push(
       coupon.discount.toString().concat("%"),
       coupon.requiredAmount,

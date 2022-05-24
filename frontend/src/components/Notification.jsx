@@ -13,13 +13,15 @@ const Notification = () => {
     (state) => state.reports
   );
 
+  const { products } = useSelector((state) => state.products);
+
   useEffect(() => {
     dispatch(getLowLevelProducts());
 
     return () => {
       dispatch(resetReport());
     };
-  }, [dispatch, lowLevelmessage]);
+  }, [dispatch, lowLevelmessage, products]);
 
   return (
     <div>
@@ -48,7 +50,7 @@ const Notification = () => {
           </div>
           {isLowLevelLoading ? (
             <div className="container">
-              <Spinner />
+              <Spinner notifSpinner="true" />
             </div>
           ) : (
             <>
@@ -65,12 +67,11 @@ const Notification = () => {
                         <div className="col ps-0 ms-2">
                           <div className="d-flex justify-content-between align-items-center">
                             <div>
-                              <h4 className="h6 mb-0 text-small">
-                                {product.productName &&
-                                product.productName.length > 20
-                                  ? product.productName.substring(0, 37) + "..."
+                              <p className="mb-0 text-small">
+                                {product.productName.length > 20
+                                  ? product.productName.substring(0, 30) + "..."
                                   : product.productName}
-                              </h4>
+                              </p>
                             </div>
                             {/* <div className="text-end">
                               <button className="close">
@@ -78,17 +79,28 @@ const Notification = () => {
                               </button>
                             </div> */}
                           </div>
-                          {/* <small>2 hrs ago</small> */}
+
+                          <p className="font-small  mt-1 mb-0">
+                            Type:{" "}
+                            {product.productType.length > 20
+                              ? product.productType.substring(0, 30) + "..."
+                              : product.productType}
+                          </p>
+
+                          <p className="font-small  mt-1 mb-0">
+                            Current Stock: {product.quantity}
+                          </p>
                           <p
                             className={`font-small mt-1 mb-0 ${
-                              product.quantity && product.quantity === 0
+                              product.quantity === 0
                                 ? "text-danger"
                                 : "text-warning"
                             }`}
                           >
-                            {product.quantity && product.quantity === 0
+                            <span className="text-black">Status: {""}</span>
+                            {product.quantity === 0
                               ? "Out of stock"
-                              : "Low stock"}
+                              : "Low stock"}{" "}
                           </p>
                         </div>
                       </div>
