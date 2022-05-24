@@ -18,9 +18,9 @@ const ManageUsers = () => {
     "Birthday",
     "Role",
     "Profile",
+    "Created Date",
+    "Updated Date",
     "Verified",
-    "Created",
-    "Updated",
   ];
 
   const dispatch = useDispatch();
@@ -62,13 +62,13 @@ const ManageUsers = () => {
           alt=""
           className="avatar rounded-circle border-gray-100"
         />,
+        moment(user.createdAt).format("llll"),
+        moment(user.updatedAt).format("llll"),
         user.verified ? (
           <span className="badge bg-success">Yes</span>
         ) : (
           <span className="badge bg-danger">No</span>
         ),
-        moment(user.createdAt).format("llll"),
-        moment(user.updatedAt).format("llll"),
       ]);
     });
   }

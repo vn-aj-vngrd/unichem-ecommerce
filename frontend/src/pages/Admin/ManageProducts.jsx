@@ -69,9 +69,9 @@ const ManageProducts = () => {
     "Brand",
     "Sale",
     "Sale Percent",
+    "Created Date",
+    "Updated Date",
     "Stock Status",
-    "Created",
-    "Updated",
     "",
     "",
   ];
@@ -93,6 +93,9 @@ const ManageProducts = () => {
         temp.push("0%");
       }
 
+      temp.push(moment(product._doc.createdAt).format("llll"));
+      temp.push(moment(product._doc.updatedAt).format("llll"));
+
       let stockStatus;
       for (let i = 0; i < product._doc.minStock.length; i++) {
         if (product._doc.quantities[i] === 0) {
@@ -111,9 +114,6 @@ const ManageProducts = () => {
       } else {
         temp.push(<span class="badge bg-success">Optimal</span>);
       }
-
-      temp.push(moment(product._doc.createdAt).format("llll"));
-      temp.push(moment(product._doc.updatedAt).format("llll"));
 
       if (product) {
         temp.push(<ViewProduct product={product} />);

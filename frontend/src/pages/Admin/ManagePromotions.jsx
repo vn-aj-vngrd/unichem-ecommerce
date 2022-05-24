@@ -69,9 +69,9 @@ const ManagePromotions = () => {
     "Promo Name",
     "Start Date",
     "Expiry Date",
-    "Status",
-    "Created",
-    "Updated",
+    "Created Date",
+    "Updated Date",
+    "Promo Status",
     "",
     "",
   ];
@@ -84,7 +84,9 @@ const ManagePromotions = () => {
       promo._id,
       promo.promoName,
       moment(promo.startDate).format("llll"),
-      moment(promo.expiryDate).format("llll")
+      moment(promo.expiryDate).format("llll"),
+      moment(promo.createdAt).format("llll"),
+      moment(promo.updatedAt).format("llll")
     );
 
     if (moment() < moment(promo.startDate)) {
@@ -96,8 +98,6 @@ const ManagePromotions = () => {
     }
 
     temp.push(
-      moment(promo.createdAt).format("llll"),
-      moment(promo.updatedAt).format("llll"),
       <ViewPromotion promo={promo} />,
       <UpdatePromotion promo={promo} />
     );

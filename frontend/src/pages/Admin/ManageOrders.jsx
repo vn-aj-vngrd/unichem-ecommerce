@@ -24,7 +24,7 @@ const ManageOrders = () => {
     "Payment Method",
     "Order Date",
     "Completed Date",
-    "Updated",
+    "Updated Date",
     "Order Status",
     "",
     "",

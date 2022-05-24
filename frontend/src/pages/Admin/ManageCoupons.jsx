@@ -68,9 +68,9 @@ const ManageCoupons = () => {
     "Coupon ID",
     "Coupon Code",
     "Coupon Type",
-    "Status",
-    "Created",
-    "Updated",
+    "Created Date",
+    "Updated Date",
+    "Coupon Status",
     "",
     "",
   ];
@@ -82,7 +82,9 @@ const ManageCoupons = () => {
     temp.push(
       coupon._id,
       coupon.couponCode,
-      coupon.couponType
+      coupon.couponType,
+      moment(coupon.createdAt).format("llll").toString(),
+      moment(coupon.updatedAt).format("llll").toString()
     );
 
     if (moment() < moment(coupon.startDate)) {
@@ -93,12 +95,7 @@ const ManageCoupons = () => {
       temp.push(<span class="badge bg-success">Active</span>);
     }
 
-    temp.push(
-      moment(coupon.createdAt).format("llll").toString(),
-      moment(coupon.updatedAt).format("llll").toString(),
-      <ViewCoupon coupon={coupon} />,
-      <UpdateCoupon coupon={coupon} />
-    );
+    temp.push(<ViewCoupon coupon={coupon} />, <UpdateCoupon coupon={coupon} />);
     data.push(temp);
   });
 
